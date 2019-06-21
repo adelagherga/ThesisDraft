@@ -112,7 +112,7 @@ f(x_1, \dots, x_n) = 0.
 \end{equation}
 There are several different approaches for doing so, arising from three basic problems concerning Diophantine equations. The first such problem is to determine whether or not \eqref{Introduction:Diophantine} has any solutions at all. Indeed, one of the most famous theorems in mathematics, FermatÕs Last Theorem, proven by Wiles in 1995, states that for $f(x,y,z) = x^n + y^n - z^n$, where $n \geq 3$, there are no solutions in the positive integers $x,y,z$. Qualitative questions of this type are often studied using algebraic methods.
 
-Suppose now that \eqref{Introduction:Diophantine} is solvable, that is, has at least one solution. The second basic problem is to determine whether the number of solutions is finite or infinite. For example, consider the Thue equation, 
+Suppose now that \eqref{Introduction:Diophantine} is solvable, that is, has at least one solution. The second basic problem is to determine whether the number of solutions is finite or infinite. For example, consider the \textit{Thue equation}, 
 \begin{equation}\label{Introduction:Thue}
 f(x,y) = m,
 \end{equation}
@@ -143,17 +143,17 @@ Shortly following Thue's result, Goormaghtigh conjectured that the only non-triv
 \end{equation}
 satisfying $x > y > 1$ and $n,m > 2$ are
 \[31 = \frac{2^{5}-1}{2-1} = \frac{5^{3}-1}{5-1} \quad \text{ and } \quad 8191 = \frac{2^{13}-1}{2-1}=\frac{90^{3}-1}{90-1}.\]
-These correspond to the known solutions $(x,y,m,n)=(2,5,5,3)$ and $(2,90,13,3)$ to what is nowadays termed {\it Goormaghtigh's equation}. The Diophantine equation \eqref{Introduction:Goormaghtigh} asks for integers having all of their digits equal to one with respect to two distinct bases, yet whether it has finitely many solutions is still unknown. However, when the exponents $m$ and $n$ are fixed, it was proven by Davenport, Lewis, and Schinzel ([REF]) that \eqref{Introduction:Goormaghtigh} has only finitely many solutions. Unfortunately, their result rests on Siegel's aforementioned finiteness theorem, and is therefore ineffective. 
+These correspond to the known solutions $(x,y,m,n)=(2,5,5,3)$ and $(2,90,13,3)$ to what is nowadays termed {\it Goormaghtigh's equation}. The Diophantine equation \eqref{Introduction:Goormaghtigh} asks for integers having all digits equal to one with respect to two distinct bases, yet whether it has finitely many solutions is still unknown. By fixing the exponents $m$ and $n$ however, Davenport, Lewis, and Schinzel ([REF]) were able to prove that \eqref{Introduction:Goormaghtigh} has only finitely many solutions. Unfortunately, this result rests on Siegel's aforementioned finiteness theorem, and is therefore ineffective. 
 
 In 1933, Mahler [\textcolor{red}{REF}] published a paper on the investigation of the Diophantine equation
 \[f(x,y) = p_1^{z_1}\cdots p_v^{z_v}, \quad (x,y) = 1,\]
-in which $S= \{p_1, \dots, p_v\}$ denote a fixed set of prime numbers, $x,y,z_i \geq 0$, $i = 1, \dots, v$ are unknown integers, and $f(x,y)$ is an integral irreducible binary form of degree $n \geq 3$. Generalizing the classical result of Thue, Mahler proved that this equation has only finitely many solutions. Unfortunately, like Thue, Mahler's argument was also ineffective. 
+in which $S= \{p_1, \dots, p_v\}$ denote a fixed set of prime numbers, $x,y,z_i \geq 0$, $i = 1, \dots, v$ are unknown integers, and $f(x,y)$ is an integral irreducible binary form of degree $n \geq 3$. Generalizing the classical result of Thue, Mahler proved that this equation has only finitely many solutions. Unfortunately, like Thue, Mahler's argument is also ineffective. 
 
-This leads us to the third basic problem regarding Diophantine equations and the main focus of this thesis: given a solvable Diophantine equation, determine all of its solutions. For instance, until long after Thue's work, no method was known for the construction of bounds for the number of solutions of a Thue equation in terms of the parameters of the equation. Only in 1968 was such a method introduced by Baker [REF], based on his theory of bounds for linear forms in the logarithms of algebraic numbers. Generalizing Baker's ground-breaking result to the $p$-adic case, Sprind\u zuk and Vinogradov [CITE] and Coates [CITE] proved that the solutions of any Thue-Mahler equation,
+This leads us to the third basic problem regarding Diophantine equations and the main focus of this thesis: given a solvable Diophantine equation, determine all of its solutions. Until long after Thue's work, no method was known for the construction of bounds for the number of solutions of a Thue equation in terms of the parameters of the equation. Only in 1968 was such a method introduced by Baker [REF], based on his theory of bounds for linear forms in the logarithms of algebraic numbers. Generalizing Baker's ground-breaking result to the $p$-adic case, Sprind\u zuk and Vinogradov [CITE] and Coates [CITE] proved that the solutions of any \textit{Thue-Mahler equation},
 \begin{equation}\label{Introduction:ThueMahler}
 f(x,y) = Ap_1^{z_1}\cdots p_v^{z_v}, \quad (x,y) = 1,
 \end{equation}
-where $A$ is a fixed integer, could, at least in principal, be effectively determined.  The first practical method for solving the general Thue-Mahler equation over $\mathbb{Z}$ is attributed to Tzanakis and de Weger [CITE], whose ideas were inspired in part by the method of Agrawal, Coates, Hunt, and van der Poorten [CITE] in their work to solve the specific Thue-Mahler equation
+where $A$ is a fixed integer, could, at least in principal, be effectively determined.  The first practical method for solving the general Thue-Mahler equation \eqref{Introduction:ThueMahler} over $\mathbb{Z}$ is attributed to Tzanakis and de Weger [CITE], whose ideas were inspired in part by the method of Agrawal, Coates, Hunt, and van der Poorten [CITE] in their work to solve the specific Thue-Mahler equation
 \[x^3 - x^2y + xy^2 + y^3 = \pm 11^{z_1}.\]
 
 As for Goormaghtigh's equation, when $m$ and $n$ are fixed and 
@@ -166,7 +166,7 @@ Davenport, Lewis, and Schinzel ([REF]) were able to replace Siegel's result by a
 
 \subsection{Statement of the results}
 
-Among the novel contributions of this thesis, we (\textcolor{red}{sort of}) prove that, in fact, under assumption \eqref{Introduction:GoormaghtighCondition}, equation \eqref{Introduction:Goormaghtight} has at most finitely many solutions which may be found effectively, even if we fix only a single exponent. 
+Among the novel contributions of this thesis, we (\textcolor{red}{sort of}) prove that, in fact, under assumption \eqref{Introduction:GoormaghtighCondition}, equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions which may be found effectively, even if we fix only a single exponent. 
 
 \begin{theorem}\label{IntroductionTheorem:Goormaghtigh1}
 If there is a solution in integers $x,y, n$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, satisfying \eqref{Introduction:GoormaghtighCondition}, then
@@ -176,12 +176,14 @@ x <  (3d)^{4n/d} \leq  36^n.
 In particular, if $n$ is fixed, there is an effectively computable constant $c=c(n)$ such that
 $\max \{ x, y, m \} < c$.
 \end{theorem}
-We note that the latter conclusion here follows immediately from \eqref{IntroductionTheorem:Goormaghtigh1Eq}, in conjunction with, for example, work of Baker ([REF]). The constants present in our upper bound \eqref{IntroductionTheorem:Goormaghtigh1Eq} may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation \eqref{IntroductionTheorem:Goormaghtigh1}, subject to condition \eqref{Introduction:GoormaghtighCondition}, for small fixed values of $n$.
+We note that the latter conclusion here follows immediately from \eqref{IntroductionTheorem:Goormaghtigh1Eq}, in conjunction with, for example, work of Baker ([REF]). The constants present in our upper bound \eqref{IntroductionTheorem:Goormaghtigh1Eq} may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation \eqref{Introduction:Goormaghtigh}, subject to condition \eqref{Introduction:GoormaghtighCondition}, for small fixed values of $n$.
 
 \begin{theorem} \label{IntroductionTheorem:Goormaghtigh2Eq}
-If there is a solution in integers $x,y$ and $m$ to equation \eqref{IntroductionTheorem:Goormaghtigh1Eq}, with $n \in \{ 3, 4, 5 \}$ and satisfying \eqref{Introduction:GoormaghtighCondition}, then
+If there is a solution in integers $x,y$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, with $n \in \{ 3, 4, 5 \}$ and satisfying \eqref{Introduction:GoormaghtighCondition}, then
 \[(x,y,m,n) = (2,5,5,3)  \; \mbox{ and } \; (2,90,13,3).\]
 \end{theorem}
+
+The 
 
 Essentially half of the current paper is concerned with developing Diophantine approximation machinery for the case $n=5$ in Theorem \ref{main-thm2}. Here, ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. The new ideas introduced here are explored more fully in the general setting of {\it Thue-Mahler} equations in the forthcoming paper  \cite{GhKaMaSi}. These are polynomial-exponential equations of the form $F(x,y)=p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ where $F$ is a binary form of degree three or greater and $p_1, \ldots, p_k$ are fixed rational primes. Here, we take this opportunity to specialize these refinements to the case of Ramanujan-Nagell equations, and to introduce some further sharpenings which enable us to complete the proof of Theorem \ref{main-thm2}.
 
