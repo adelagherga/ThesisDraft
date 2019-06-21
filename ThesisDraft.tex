@@ -155,6 +155,7 @@ f(x,y) = Ap_1^{z_1}\cdots p_v^{z_v}, \quad (x,y) = 1,
 \end{equation}
 where $A$ is a fixed integer, could, at least in principal, be effectively determined.  The first practical method for solving the general Thue-Mahler equation \eqref{Introduction:ThueMahler} over $\mathbb{Z}$ is attributed to Tzanakis and de Weger [CITE], whose ideas were inspired in part by the method of Agrawal, Coates, Hunt, and van der Poorten [CITE] in their work to solve the specific Thue-Mahler equation
 \[x^3 - x^2y + xy^2 + y^3 = \pm 11^{z_1}.\]
+Using optimized bounds arising from the theory of linear forms in logarithms, a refined, automated version of this explicit method has since been implemented by Hambrook as a MAGMA package. 
 
 As for Goormaghtigh's equation, when $m$ and $n$ are fixed and 
 \begin{equation}\label{Introduction:GoormaghtighCondition}
@@ -166,9 +167,9 @@ Davenport, Lewis, and Schinzel ([REF]) were able to replace Siegel's result by a
 
 \subsection{Statement of the results}
 
-Among the novel contributions of this thesis, we (\textcolor{red}{sort of}) prove that, in fact, under assumption \eqref{Introduction:GoormaghtighCondition}, equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions which may be found effectively, even if we fix only a single exponent. 
+The novel contributions of this thesis concern the development and implementation of efficient algorithms to determine all solutions of certain Goormaghtigh equations and Thue-Mahler equations. In particular, we follow [REF: BeGhKr] to prove that, in fact, under assumption \eqref{Introduction:GoormaghtighCondition}, equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions which may be found effectively, even if we fix only a single exponent. \\
 
-\begin{theorem}\label{IntroductionTheorem:Goormaghtigh1}
+\begin{theorem}[BeGhKr]\label{IntroductionTheorem:Goormaghtigh1}
 If there is a solution in integers $x,y, n$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, satisfying \eqref{Introduction:GoormaghtighCondition}, then
 \begin{equation} \label{IntroductionTheorem:Goormaghtigh1Eq}
 x <  (3d)^{4n/d} \leq  36^n.
@@ -176,20 +177,43 @@ x <  (3d)^{4n/d} \leq  36^n.
 In particular, if $n$ is fixed, there is an effectively computable constant $c=c(n)$ such that
 $\max \{ x, y, m \} < c$.
 \end{theorem}
-We note that the latter conclusion here follows immediately from \eqref{IntroductionTheorem:Goormaghtigh1Eq}, in conjunction with, for example, work of Baker ([REF]). The constants present in our upper bound \eqref{IntroductionTheorem:Goormaghtigh1Eq} may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation \eqref{Introduction:Goormaghtigh}, subject to condition \eqref{Introduction:GoormaghtighCondition}, for small fixed values of $n$.
+We note that the latter conclusion here follows immediately from \eqref{IntroductionTheorem:Goormaghtigh1Eq}, in conjunction with, for example, work of Baker ([REF]). The constants present in our upper bound \eqref{IntroductionTheorem:Goormaghtigh1Eq} may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation \eqref{Introduction:Goormaghtigh}, subject to condition \eqref{Introduction:GoormaghtighCondition}, for small fixed values of $n$. \\
 
-\begin{theorem} \label{IntroductionTheorem:Goormaghtigh2Eq}
+\begin{theorem}[BeGhKr] \label{IntroductionTheorem:Goormaghtigh2Eq}
 If there is a solution in integers $x,y$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, with $n \in \{ 3, 4, 5 \}$ and satisfying \eqref{Introduction:GoormaghtighCondition}, then
 \[(x,y,m,n) = (2,5,5,3)  \; \mbox{ and } \; (2,90,13,3).\]
 \end{theorem}
 
-The 
+In the case $n = 5$ of Theorem \eqref{IntroductionTheorem:Goormaghtigh2Eq} ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. Instead, we sharpen the existing techniques of [TdW] and [Hambrook] for solving Thue-Mahler equations and specialize them to this problem. 
 
-Essentially half of the current paper is concerned with developing Diophantine approximation machinery for the case $n=5$ in Theorem \ref{main-thm2}. Here, ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. The new ideas introduced here are explored more fully in the general setting of {\it Thue-Mahler} equations in the forthcoming paper  \cite{GhKaMaSi}. These are polynomial-exponential equations of the form $F(x,y)=p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ where $F$ is a binary form of degree three or greater and $p_1, \ldots, p_k$ are fixed rational primes. Here, we take this opportunity to specialize these refinements to the case of Ramanujan-Nagell equations, and to introduce some further sharpenings which enable us to complete the proof of Theorem \ref{main-thm2}.
+A direct consequence and primary motivation for developing an efficient Thue-Mahler algorithm is the computation of elliptic curves over $\mathbb{Q}$. Let $S$ be a finite set of rational primes. In $1963$, Shafarevich [CITE] proved that there are at most finitely many $\mathbb{Q}$-isomorphism classes of elliptic curves defined over $\mathbb{Q}$ having good reduction outside $S$. The first effective proof of this statement was provided by Coates [CITE] in 1970 for the case $K = \mathbb{Q}$ and $S = \{2,3\}$ using bounds for linear forms in $p$-adic and complex logarithms. Early attempts to make these results explicit for fixed sets of small primes overlap with the arguments of [COATES], in that they reduce the problem to that of solving a number of degree $3$ Thue-Mahler equations of the form
+\[F(x,y) = au,\]
+where $u$ is an integer whose prime factors all lie in $S$. 
 
-%We observe that, in case $n=3$, Theorem \ref{main-thm2} was obtained earlier by Yuan \cite{Yu} (see also He \cite{He}).  The techniques employed in both \cite{He} and \cite{Yu}, however, depend essentially upon the fact that $n=3$ (whereby $n-1=2$ and one can appeal to specialized techniques from the theory of quadratic fields) and cannot apparently be generalized to other values of $n$.
-%
-%The title of this paper reflects the fact that the machinery of Pad\'e approximation to binomial functions has been applied to the problem of solving equation (\ref{eq-main}) in earlier work of Bugeaud and Shorey \cite{BuSh}. We will employ these tools  here rather differently.
+In the $1950$'s and $1960$'s, Taniyama and Weil asked whether all elliptic curves over $\mathbb{Q}$ of a given conductor $N$ are related to modular functions. While this conjecture is now known as the Modularity Theorem, until its proof in $2001$ \cite{Breuil}, attempts to verify it sparked a large effort to tabulate all elliptic curves over $\mathbb{Q}$ of given conductor $N$. In 1966, Ogg (\cite{Ogg1}, \cite{Ogg2}) determined all elliptic curves defined over $\mathbb{Q}$ with conductor of the form $2^a$. Coghlan, in his dissertation \cite{Coghlan}, studied the curves of conductor $2^a3^b$ independently of Ogg, while Setzer \cite{Setzer} computed all $\mathbb{Q}$-isomorphism classes of elliptic curves of conductor $p$ for certain small primes $p$. Each of these examples corresponds, via the [BR] approach, to cases with reducible forms. The first analysis on irreducible forms in \eqref{Eq:tmEquation} was carried out by Agrawal, Coates, Hunt and van der Poorten \cite{Agrawal}, who determined all elliptic curves of conductor $11$ defined over $\mathbb{Q}$ to verify the (then) conjecture of Taniyama-Weil.
+
+There are very few, if any, subsequent attempts in the literature to find elliptic curves of given conductor via Thue-Mahler equations. Instead, many of the approaches involve a completely different method to the problem, using modular forms. This method relies upon the Modularity Theorem of Breuil, Conrad, Diamond and Taylor \cite{Breuil}, which was still a conjecture (under various guises) when these ideas were first implemented. Much of the success of this approach can be attributed to Cremona (see e.g. \cite{Cremona1}, \cite{Cremona2}) and his collaborators, who have devoted decades of work to it. In fact, using this method, all elliptic curves over $\mathbb{Q}$ of conductor $N$ have been determined for values of $N$ as follows
+\begin{itemize} \itemsep0em
+\item Antwerp IV ($1972$): $N \leq 200$
+\item Tingley ($1975$): $N \leq 320$
+\item Cremona ($1988$): $N \leq 600$
+\item Cremona ($1990$): $N \leq 1000$
+\item Cremona ($1997$): $N \leq 5077$
+\item Cremona ($2001$): $N \leq 10000$
+\item Cremona ($2005$): $N \leq 130000$
+\item Cremona ($2014$): $N \leq 350000$
+\item Cremona ($2015$): $N \leq 364000$
+\item Cremona ($2016$): $N \leq 390000$.
+\end{itemize}
+
+In this thesis, we follow [BeGhRe] wherein we return to techniques based upon solving Thue-Mahler equations, using a number of results from classical invariant theory. In particular, we illustrate the connection between elliptic curves over $\mathbb{Q}$ and cubic forms and subsequently describe an effective algorithm for determining all elliptic curves over $\mathbb{Q}$ having good reduction outside $S$. This result can be summarized as follows. If we wish to find an elliptic curves $E$ of conductor $N = p_1^{a_1}\cdots p_v^{a_v}$ for some $a_i \in \mathbb{N}$, by Theorem 1 of [BeGhRe], there exists an integral binary cubic form $F$ of discriminant $N_0 \mid 12 N$ and relatively prime integers $u,v$ satisfying
+\[F(u,v) = w_0u^3 + w_1u^2v + w_2uv^2 + w_3v^3 = 2^{\alpha_1}3^{\beta_1}\prod_{p|N_0}p^{\kappa_p}\]
+for some $\alpha_1, \beta_1, \kappa_p$. Then $E$ is isomorphic over $\mathbb{Q}$ to the elliptic curve $E_{\mathcal{D}}$, where $E_{\mathcal{D}}$ is determined by the form $F$ and $(u,v)$. It is worth noting that Theorem 1 of [BeGhRe] very explicitly describes how to generate $E_{\mathcal{D}}$; once a solution $(u,v)$ to the Thue-Mahler equation $F$ is known, a quick computation of the Hessian and Jacobian discriminant of $F$ evaluated at $(u,v)$ yields the coefficients of $E_{\mathcal{D}}$. Using this theorem, all $E/\mathbb{Q}$ of conductor $N$ may be computed by generating all of the relevant binary cubic forms, solving the corresponding Thue-Mahler equations, and outputting the elliptic curves that arise. The first and last steps are straightforward. Indeed, Bennett and Rechnitzer describe an efficient algorithm for carrying out the first step. In fact, they having carried out a one-time computation of all irreducible forms that can arise in Theorem 1 of absolute discriminant bounded by $10^{10}$. The bulk of the work is therefore concentrated in step 2, solving a large number of degree 3 Thue-Mahler equations. 
+
+In this thesis, we apply our refined Thue-Mahler implementation to compute elliptic curves over $\mathbb{Q}$ via this technique. The primary aim of our modified algorithm is to generate all elliptic curves over $\mathbb{Q}$ of conductor $N < 10^6$. Unfortunately, despite many refinements, [Hambrook's] MAGMA implementation of a Thue-Mahler solver encounters a multitude of bottlenecks which often yield unavoidable timing and memory problems, even when parallelization is considered. In its current state, the Hambrook algorithm is inefficient for this task, and in many cases, simply unusable due to its memory requirements. The main novel contribution of this thesis is therefore the efficient resolution of an arbitrary Thue-Mahler equation and the implementation of this algorithm as a MAGMA package. This work is based on ideas of Matshke, von Kanel [CITE], and Siksek and is summarized in the following steps.
+
+
+
 
 
 % OLD INTRO
@@ -205,9 +229,9 @@ Essentially half of the current paper is concerned with developing Diophantine a
 %Generalizing Baker's result to the $p$-adic case, Sprind\u zuk and Vinogradov [CITE] and Coates [CITE] proved that the solutions of any Thue-Mahler equation could, at least in principal, be effectively determined. The first practical method for solving the general Thue-Mahler equation over $\mathbb{Z}$ is attributed to Tzanakis and de Weger [CITE], whose ideas were inspired in part by the method of Agrawal, Coates, Hunt, and van der Poorten [CITE] in their work to solve the specific Thue-Mahler equation
 %\[x^3 - x^2y + xy^2 + y^3 = \pm 11^{z_1}.\]
 
-In 2011, using optimized bounds arising from the theory of linear forms in logarithms, Hambrook [CITE] implemented a refined, automated version of the explicit method of [TdW] as a MAGMA package. Similar to [TdW], this algorithm begins by reducing the problem to one of solving a collection of finitely many $S$-unit equations in a certain algebraic number field $K$. Of course, by an $S$-unit, we mean an integer whose prime factors all lie in $S$. For each such equation, a very large upper bound on the solutions is generated using the theory of linear forms in logarithms. This bound is then reduced via Diophantine approximation techniques. Finally, the algorithm searches below this reduced bound using a combination of clever sieves and brute force. 
-
-Unfortunately, despite Hambrook's refinements, this algorithm encounters a multitude of bottlenecks which often yield unavoidable timing and memory problems, even when parallelization is considered. As we will outline shortly, one of our primary aims in this thesis is to solve a very large number of Thue-Mahler equations. In its current state, the Hambrook algorithm is inefficient for this task, and in many cases, simply unusable due to its memory requirements. The main novel contribution of this thesis is therefore the efficient resolution of an arbitrary Thue-Mahler equation and the implementation of this algorithm as a MAGMA package. This work is based on ideas of Matshke, von Kanel [CITE], and Siksek and is summarized in the following steps.
+%In 2011, using optimized bounds arising from the theory of linear forms in logarithms, Hambrook [CITE] implemented a refined, automated version of the explicit method of [TdW] as a MAGMA package. Similar to [TdW], this algorithm begins by reducing the problem to one of solving a collection of finitely many $S$-unit equations in a certain algebraic number field $K$. Of course, by an $S$-unit, we mean an integer whose prime factors all lie in $S$. For each such equation, a very large upper bound on the solutions is generated using the theory of linear forms in logarithms. This bound is then reduced via Diophantine approximation techniques. Finally, the algorithm searches below this reduced bound using a combination of clever sieves and brute force. 
+%
+%Unfortunately, despite Hambrook's refinements, this algorithm encounters a multitude of bottlenecks which often yield unavoidable timing and memory problems, even when parallelization is considered. As we will outline shortly, one of our primary aims in this thesis is to solve a very large number of Thue-Mahler equations. In its current state, the Hambrook algorithm is inefficient for this task, and in many cases, simply unusable due to its memory requirements. The main novel contribution of this thesis is therefore the efficient resolution of an arbitrary Thue-Mahler equation and the implementation of this algorithm as a MAGMA package. This work is based on ideas of Matshke, von Kanel [CITE], and Siksek and is summarized in the following steps.
 
 \textbf{Step 1.}
 Following [TdW] and [Hambrook], we reduce the problem of solving the given Thue-Mahler equation to the problem of solving a collection of finitely many $S$-unit equations in a certain algebraic number field $K$. These are equations of the form
@@ -236,32 +260,6 @@ We use a sieving procedure to find all the solutions of the Diophantine equation
 Having performed Steps 2-5 for each $S$-unit equation in our collection, we now know all the solutions of each such equation, and we use this knowledge to determine all the solutions of the Thue-Mahler equation. 
 
 [TIMING IMPROVEMENT EXAMPLES]. 
-
-A direct consequence and primary motivation for developing an efficient Thue-Mahler algorithm is the computation of elliptic curves over $\mathbb{Q}$. Let $S$ be a finite set of rational primes. In $1963$, Shafarevich [CITE] proved that there are at most finitely many $\mathbb{Q}$-isomorphism classes of elliptic curves defined over $\mathbb{Q}$ having good reduction outside $S$. The first effective proof of this statement was provided by Coates [CITE] in 1970 for the case $K = \mathbb{Q}$ and $S = \{2,3\}$ using bounds for linear forms in $p$-adic and complex logarithms. Early attempts to make these results explicit for fixed sets of small primes overlap with the arguments of [COATES], in that they reduce the problem to that of solving a number of degree $3$ Thue-Mahler equations of the form
-\[F(x,y) = au,\]
-where $u$ is an integer whose prime factors all lie in $S$. 
-
-In the $1950$'s and $1960$'s, Taniyama and Weil asked whether all elliptic curves over $\mathbb{Q}$ of a given conductor $N$ are related to modular functions. While this conjecture is now known as the Modularity Theorem, until its proof in $2001$ \cite{Breuil}, attempts to verify it sparked a large effort to tabulate all elliptic curves over $\mathbb{Q}$ of given conductor $N$. In 1966, Ogg (\cite{Ogg1}, \cite{Ogg2}) determined all elliptic curves defined over $\mathbb{Q}$ with conductor of the form $2^a$. Coghlan, in his dissertation \cite{Coghlan}, studied the curves of conductor $2^a3^b$ independently of Ogg, while Setzer \cite{Setzer} computed all $\mathbb{Q}$-isomorphism classes of elliptic curves of conductor $p$ for certain small primes $p$. Each of these examples corresponds, via the [BR] approach, to cases with reducible forms. The first analysis on irreducible forms in \eqref{Eq:tmEquation} was carried out by Agrawal, Coates, Hunt and van der Poorten \cite{Agrawal}, who determined all elliptic curves of conductor $11$ defined over $\mathbb{Q}$ to verify the (then) conjecture of Taniyama-Weil.
-
-There are very few, if any, subsequent attempts in the literature to find elliptic curves of given conductor via Thue-Mahler equations. Instead, many of the approaches involve a completely different method to the problem, using modular forms. This method relies upon the Modularity Theorem of Breuil, Conrad, Diamond and Taylor \cite{Breuil}, which was still a conjecture (under various guises) when these ideas were first implemented. Much of the success of this approach can be attributed to Cremona (see e.g. \cite{Cremona1}, \cite{Cremona2}) and his collaborators, who have devoted decades of work to it. In fact, using this method, all elliptic curves over $\mathbb{Q}$ of conductor $N$ have been determined for values of $N$ as follows
-\begin{itemize} \itemsep0em
-\item Antwerp IV ($1972$): $N \leq 200$
-\item Tingley ($1975$): $N \leq 320$
-\item Cremona ($1988$): $N \leq 600$
-\item Cremona ($1990$): $N \leq 1000$
-\item Cremona ($1997$): $N \leq 5077$
-\item Cremona ($2001$): $N \leq 10000$
-\item Cremona ($2005$): $N \leq 130000$
-\item Cremona ($2014$): $N \leq 350000$
-\item Cremona ($2015$): $N \leq 364000$
-\item Cremona ($2016$): $N \leq 390000$.
-\end{itemize}
-
-In [CITE] Bennett-Rechnitzer return to techniques based upon solving Thue-Mahler equations, using a number of results from classical invariant theory. In particular, they illustrate the connection between elliptic curves over $\mathbb{Q}$ and cubic forms and subsequently describe an effective algorithm for determining all elliptic curves over $\mathbb{Q}$ having good reduction outside $S$. This result can be summarized as follows. If we wish to find an elliptic curves $E$ of conductor $N = p_1^{a_1}\cdots p_v^{a_v}$ for some $a_i \in \mathbb{N}$, by Theorem 1 of [BeGhRe], there exists an integral binary cubic form $F$ of discriminant $N_0 \mid 12 N$ and relatively prime integers $u,v$ satisfying
-\[F(u,v) = w_0u^3 + w_1u^2v + w_2uv^2 + w_3v^3 = 2^{\alpha_1}3^{\beta_1}\prod_{p|N_0}p^{\kappa_p}\]
-for some $\alpha_1, \beta_1, \kappa_p$. Then $E$ is isomorphic over $\mathbb{Q}$ to the elliptic curve $E_{\mathcal{D}}$, where $E_{\mathcal{D}}$ is determined by the form $F$ and $(u,v)$. It is worth noting that Theorem 1 of [BeGhRe] very explicitly describes how to generate $E_{\mathcal{D}}$; once a solution $(u,v)$ to the Thue-Mahler equation $F$ is known, a quick computation of the Hessian and Jacobian discriminant of $F$ evaluated at $(u,v)$ yields the coefficients of $E_{\mathcal{D}}$. Using this theorem, all $E/\mathbb{Q}$ of conductor $N$ may be computed by generating all of the relevant binary cubic forms, solving the corresponding Thue-Mahler equations, and outputting the elliptic curves that arise. The first and last steps are straightforward. Indeed, Bennett and Rechnitzer describe an efficient algorithm for carrying out the first step. In fact, they having carried out a one-time computation of all irreducible forms that can arise in Theorem 1 of absolute discriminant bounded by $10^10$. One then solves the corresponding Thue-Mahler equations and outputs the elliptic curves that arise. The bulk of the work is therefore concentrated in step 2, solving a large number of degree 3 Thue-Mahler equations. 
-
-In this thesis, we apply our refined Thue-Mahler implementation to compute elliptic curves over $\mathbb{Q}$ via this technique. The primary aim of our modified algorithm is to generate all elliptic curves over $\mathbb{Q}$ of conductor $N < 10^6$. In this process, we encounter many reducible Thue-Mahler forms, which require a similar, though markedly simpler algorithm than our Thue-Mahler solver.  
 
 %
 %\textbf{Intro To do}
