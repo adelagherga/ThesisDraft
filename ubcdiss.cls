@@ -211,7 +211,7 @@
     \emph{missing submission month}}
 
 \newcommand{\subtitle}[1]{\renewcommand{\@subtitle}{#1}}
-\newcommand{\previousdegree}[1]{\@addto{@previousdegrees}{#1\par}}
+\newcommand{\previousdegree}[1]{\@addto{@previousdegrees}{#1\\}}
 \newcommand{\degreetitle}[1]{\renewcommand{\@degreetitle}{#1}}
 \newcommand{\institution}[1]{\renewcommand{\@institution}{#1}}
 \newcommand{\faculty}[1]{\renewcommand{\f@culty}{#1}}

@@ -1,30 +1,20 @@
 \select@language {english}
-\contentsline {chapter}{Abstract}{iii}{chapter*.1}
-\contentsline {chapter}{Lay Summary}{iv}{chapter*.2}
-\contentsline {chapter}{Preface}{v}{chapter*.3}
-\contentsline {chapter}{Contents}{vi}{chapter*.4}
+\contentsline {chapter}{Abstract}{ii}{chapter*.1}
+\contentsline {chapter}{Lay Summary}{iii}{chapter*.2}
+\contentsline {chapter}{Preface}{iv}{chapter*.3}
+\contentsline {chapter}{Contents}{v}{chapter*.4}
 \contentsline {chapter}{List of Tables}{vii}{chapter*.5}
 \contentsline {chapter}{List of Figures}{viii}{chapter*.6}
 \contentsline {chapter}{Glossary}{ix}{chapter*.7}
 \contentsline {chapter}{Acknowledgments}{x}{chapter*.8}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {subsection}{\numberline {1.0.1}Statement of the results}{7}{subsection.1.0.1}
-\contentsline {section}{\numberline {1.1}Suggested Thesis Organization}{13}{section.1.1}
-\contentsline {section}{\numberline {1.2}Making Cross-References}{14}{section.1.2}
-\contentsline {section}{\numberline {1.3}Managing Bibliographies with BibT\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor \@m {}}{14}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}Describing References}{15}{subsection.1.3.1}
-\contentsline {subsection}{\numberline {1.3.2}Citing References}{16}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {1.3.3}Formatting Cited References}{16}{subsection.1.3.3}
-\contentsline {section}{\numberline {1.4}Typesetting Tables}{17}{section.1.4}
-\contentsline {section}{\numberline {1.5}Figures, Graphics, and Special Characters}{18}{section.1.5}
-\contentsline {section}{\numberline {1.6}Special Characters and Symbols}{19}{section.1.6}
-\contentsline {subsection}{\numberline {1.6.1}The \texttt {geometry} Package}{20}{subsection.1.6.1}
-\contentsline {subsection}{\numberline {1.6.2}Changing Page Layout Values By Hand}{20}{subsection.1.6.2}
-\contentsline {subsection}{\numberline {1.6.3}Making Temporary Changes to Page Layout}{21}{subsection.1.6.3}
-\contentsline {section}{\numberline {1.7}Keeping Track of Versions with Revision Control}{21}{section.1.7}
-\contentsline {section}{\numberline {1.8}Recommended Packages}{22}{section.1.8}
-\contentsline {subsection}{\numberline {1.8.1}Typesetting}{22}{subsection.1.8.1}
-\contentsline {subsection}{\numberline {1.8.2}Figures, Tables, and Document Extracts}{23}{subsection.1.8.2}
-\contentsline {subsection}{\numberline {1.8.3}Bibliography Related Packages}{23}{subsection.1.8.3}
-\contentsline {section}{\numberline {1.9}Moving On}{24}{section.1.9}
-\contentsline {chapter}{\numberline {A}Supporting Materials}{25}{appendix.A}
+\contentsline {section}{\numberline {1.1}Statement of the results}{7}{section.1.1}
+\contentsline {chapter}{\numberline {2}Preliminaries}{14}{chapter.2}
+\contentsline {section}{\numberline {2.1}Algebraic number theory}{14}{section.2.1}
+\contentsline {section}{\numberline {2.2}$p$-adic valuations}{17}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Lattices: LLL and the Fincke-Pohst algorithm}{23}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Translated Lattices}{33}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Refinements}{36}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Preliminaries: Elliptic Curves}{38}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Preliminaries: Cubic Forms}{39}{subsection.2.2.5}
+\contentsline {chapter}{\numberline {A}Supporting Materials}{41}{appendix.A}
