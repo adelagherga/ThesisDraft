@@ -2,29 +2,77 @@
 % dissertations.  None of the macros defined here are necessary beyond
 % for the template documentation, so feel free to change, remove, and add
 % your own definitions.
-%
+
 % We recommend that you define macros to separate the semantics
 % of the things you write from how they are presented.  For example,
 % you'll see definitions below for a macro \file{}: by using
 % \file{} consistently in the text, we can change how filenames
 % are typeset simply by changing the definition of \file{} in
 % this file.
-% 
+
 %% The following is a directive for TeXShop to indicate the main file
 %%!TEX root = diss.tex
+
+% relevant packages
+\usepackage[parfill]{parskip} 	% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs }
+\usepackage{amsthm}
+\usepackage{epstopdf}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[all]{xy}
+\usepackage[english]{babel}
+\usepackage{setspace}
+
+% relevant environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{properties}[theorem]{Properties}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{definition}
+\newtheorem{Algorithm}[theorem]{Algorithm}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% math operators
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Gal}{Gal}
+\newcommand{\eps}{\varepsilon}
 
 \newcommand{\NA}{\textsc{n/a}}	% for "not applicable"
 \newcommand{\eg}{e.g.,\ }	% proper form of examples (\eg a, b, c)
 \newcommand{\ie}{i.e.,\ }	% proper form for that is (\ie a, b, c)
 \newcommand{\etal}{\emph{et al}}
 
-% Some useful macros for typesetting terms.
+% macros for typesetting terms.
 \newcommand{\file}[1]{\texttt{#1}}
 \newcommand{\class}[1]{\texttt{#1}}
 \newcommand{\latexpackage}[1]{\href{http://www.ctan.org/macros/latex/contrib/#1}{\texttt{#1}}}
 \newcommand{\latexmiscpackage}[1]{\href{http://www.ctan.org/macros/latex/contrib/misc/#1.sty}{\texttt{#1}}}
 \newcommand{\env}[1]{\texttt{#1}}
 \newcommand{\BibTeX}{Bib\TeX}
+
+% draft edit commands
+\usepackage{soul}
+\newcommand{\aaron}[1]{\textcolor{purple}{\footnotesize #1}}
+\newcommand{\strike}[1]{\textcolor{red}{\st{#1}}}
+% The following definition will also output a warning to the console
+\newcommand{\edit}[1]{\typeout{**EDIT** #1}{\textcolor{blue}{#1}}}
+
 
 % Define a command \doi{} to typeset a digital object identifier (DOI).
 % Note: if the following definition raise an error, then you likely
@@ -40,22 +88,5 @@
 % #1: the URL
 % #2: the anchoring text
 \newcommand{\webref}[2]{\href{#1}{#2}\footnote{\url{#1}}}
-
-% epigraph is a nice environment for typesetting quotations
-\makeatletter
-\newenvironment{epigraph}{%
-	\begin{flushright}
-	\begin{minipage}{\columnwidth-0.75in}
-	\begin{flushright}
-	\@ifundefined{singlespacing}{}{\singlespacing}%
-    }{
-	\end{flushright}
-	\end{minipage}
-	\end{flushright}}
-\makeatother
-
-% \FIXME{} is a useful macro for noting things needing to be changed.
-% The following definition will also output a warning to the console
-\newcommand{\FIXME}[1]{\typeout{**FIXME** #1}\textbf{[FIXME: #1]}}
 
 % END

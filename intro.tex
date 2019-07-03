@@ -4,43 +4,264 @@
 \chapter{Introduction}
 \label{ch:Introduction}
 
-\begin{epigraph}
-    \emph{If I have seen farther it is by standing on the shoulders of
-    Giants.} ---~Sir Isaac Newton (1855)
-\end{epigraph}
+\aaron{
+i mean, the beginning is the part you're not comfortable writing, right? the longer it went on, the better it flowed. at that point you're quoting and weaving results you know well, referencing the little mental web you have woven. it seems cohesive, but also i don't understand it. 
+the beginning bit seems thrown together Ñ like Mike told you to include bits about DEs and so you begrudgingly injected something ?? 
+like the very very beginning bit
+anyway, i'll e-mail you back the tex file and the pdf. 
+i know you're not asking for this advice but it's coming from ozgur and yaniv and they are very smart and i trust them lots:}
 
-This document provides a quick set of instructions for using the
-\class{ubcdiss} class to write a dissertation in \LaTeX. 
-Unfortunately this document cannot provide an introduction to using
-\LaTeX.  The classic reference for learning \LaTeX\ is
-\citeauthor{lamport-1994-ladps}'s
-book~\cite{lamport-1994-ladps}.  There are also many freely-available
-tutorials online;
-\webref{http://www.andy-roberts.net/misc/latex/}{Andy Roberts' online
-    \LaTeX\ tutorials}
-seems to be excellent.
-The source code for this docment, however, is intended to serve as
-an example for creating a \LaTeX\ version of your dissertation.
+\aaron{
+\begin{enumerate}
+\item be very careful about whether you're using colloquial language, and how it might be interpreted. e.g. be careful not to insult people's work, and try to not to flip flop on how hand wavey you are being. I think I have a couple of notes in the file pertaining to each of these points
+\item when citing work, either use the author names every time or don't. don't mix and match unless appropriate. why would you deny some the respect of appearing in your work, but not others? 
+\item if you're going to write notes to yourself in your thesis/papers, you must have a way of ensuring that you'll see them later before you send it off. caps lock is not sufficient and yaniv and ozgur can provide examples if you need. I included a little \edit{} command for you so that you can just Cmd+F (or C-s ?? ) for all appearances of \edit in the .tex file if you use it. Has the added advantage of making PDF text blue so that everyone reading too knows that it doesn't belong. 
+\end{enumerate}}
 
-We start by discussing organizational issues, such as splitting
-your dissertation into multiple files, in
-\autoref{sec:SuggestedThesisOrganization}.
-We then cover the ease of managing cross-references in \LaTeX\ in
-\autoref{sec:CrossReferences}.
-We cover managing and using bibliographies with \BibTeX\ in
-\autoref{sec:BibTeX}. 
-We briefly describe typesetting attractive tables in
-\autoref{sec:TypesettingTables}.
-We briefly describe including external figures in
-\autoref{sec:Graphics}, and using special characters and symbols
-in \autoref{sec:SpecialSymbols}.
-As it is often useful to track different versions of your dissertation,
-we discuss revision control further in
-\autoref{sec:DissertationRevisionControl}. 
-We conclude with pointers to additional sources of information in
-\autoref{sec:Conclusions}.
+\aaron{
+also my disclaimer for edits: 
+1. for some reason my brain is tired today;
+2. I don't know the culture of your field nor some of the very elementary things you're presenting
+3. Because of 1, I tried to communicate what I wanted to say using the best language I could, but may not have always succeeded at clarity/intent/approachability ?? 
+So basically, remember that it's possible that my edits deserve to be treated with a grain of salt. ??}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\aaron{This start feels outside the realm of where you're going --- it seems at once abrupt and off-topic. It would be nice to have an introductory sentence or two to get the reader on track before discussing the ``required background'' material.}
+A Diophantine equation is a polynomial equation in several variables defined over the integers. The term \textit{Diophantine} refers to the Greek mathematician Diophantus of Alexandria, who studied such equations in the 3rd century A.D.  \aaron{why the history lesson? maybe you could use this as one way of motivating/introducing DEs: ``look at these things. look how long they've been studied. here's why, and here are the ways people study them. \ldots or something\ldots}
+
+\aaron{remove separate paragraph if it's the same thought --- $f$ is a DE right? If so, then these next lines are providing additional information to what was given above, not starting a new thread.}
+Let $f(x_1, \dots, x_n)$ be a polynomial with integer coefficients. We wish to study the set of solutions $(x_1, \dots, x_n) \in \mathbb{Z}^n$ to the equation
+\begin{equation}\label{Introduction:Diophantine}
+f(x_1, \dots, x_n) = 0.
+\end{equation}
+There are several different approaches for doing so, arising from three basic
+problems concerning Diophantine equations. The first such problem is to
+determine whether \strike{or not} \eqref{Introduction:Diophantine} has any
+solutions \strike{at all} \aaron{(too colloquial imo)}. Indeed, one of the most
+famous theorems in mathematics, Fermat's Last Theorem, proven by Wiles in 1995,
+states that for $f(x,y,z) = x^n + y^n - z^n$, where $n \geq 3$, there are no
+solutions in the positive integers $x,y,z$ \aaron{(there are so many commas in this sentence. You can remove at least 2 of 7 by splicing and/or rearranging)}. Qualitative questions of this type
+are often studied using algebraic methods.
+
+Suppose now that \eqref{Introduction:Diophantine} is solvable, that is, has at least one solution. The second basic problem is to determine whether the number of solutions is finite or infinite. For example, consider the \textit{Thue equation}, 
+\begin{equation}\label{Introduction:Thue}
+f(x,y) = a,
+\end{equation}
+where $f(x,y)$ is an integral binary form of degree $n \geq 3$ \aaron{(feels
+  like you really jump into the language here. you spelled out what a DE was,
+  but now assume the reader knows the definition of an integral binary
+  form. Personally, I knew the former but the latter reads like domain-specific
+  jargon to me)} and $a$ is a fixed nonzero rational integer. In 1909, Thue
+[\textcolor{red}{REF}] proved that this equation has only finitely many
+solutions. This result followed from a sharpening of Liouville's inequality, an
+observation that algebraic numbers do not admit very strong approximation by
+rational numbers. That is, if $\alpha$ is a real algebraic number of degree
+$n \geq 2$ and $p,q$ are integers, Liouville's ([\textcolor{red}{REF}])
+observation states that
+\begin{equation}\label{Introduction:Liouville}
+\left|\alpha - \frac{p}{q}\right| > \frac{c_1}{q^{n}},
+\end{equation}
+where $c_1 >0 $ is a value depending explicitly on $\alpha$. The finitude of the number of solutions to \eqref{Introduction:Thue} follows directly from a sharpening of \eqref{Introduction:Liouville} of the type
+\begin{equation}\label{Introduction:Sharpening}
+\left|\alpha - \frac{p}{q}\right| > \frac{\lambda(q)}{q^{n}}, \quad \lambda(q) \to \infty.
+\end{equation}
+\aaron{what is the limit $\lambda \to \infty$ with respect to?}  Indeed, if
+$\alpha$ is a real root of $f(x,1)$ and $\alpha^{(i)}$, $i = 1, \dots, n$ are
+its conjugates, it follows from \eqref{Introduction:Thue} that
+\[\prod_{i=1}^n\left|\alpha^{(i)}-\frac{x}{y}\right| = \frac{a}{|a_0||y|^n}\]
+where $a_0$ is the leading coefficient of the polynomial $f(x,1)$. If the Thue equation has integer solutions with arbitrarily large $|y|$, the product $\prod_{i=1}^n|\alpha^{(i)}-x/y|$ must take arbitrarily small values for solutions $x,y$ of \eqref{Introduction:Thue}. As all the $\alpha^{(i)}$ are different, $x/y$ must be correspondingly close to one of the real numbers $\alpha^{(i)}$, say $\alpha$. Thus we obtain
+\[\left|\alpha - \frac{x}{y}\right| < \frac{c_2}{|y|^n}\]
+where $c_2$ depends only on $a_0$, $n$, and the conjugates $\alpha^{(i)}$. Comparison of this inequality with 
+\eqref{Introduction:Sharpening} shows that $|y|$ cannot be arbitrarily large, and so the number of solutions of the Thue equation is finite. Using this argument, an explicit bound can be constructed on the solutions of \eqref{Introduction:Thue} provided that an effective \aaron{(descriptive? explicit? tight? tractable?)} inequality \eqref{Introduction:Sharpening} is known. The sharpening of the Liouville inequality however, especially in effective form, proved to be very difficult. \aaron{REF? also ``very difficult'' seems a subjective qualification; is that okay for your audience?}
+
+In [\textcolor{red}{REF:THUE}], Thue published a proof that 
+\[\left|\alpha - \frac{p}{q}\right| < \frac{1}{q^{\frac{n}{2} + 1 + \varepsilon}}\]
+has only finitely many solutions in integers $p,q > 0$ for all algebraic
+numbers $\alpha$ of degree $n \geq 3$ and any $\varepsilon > 0$. In essence, he
+obtained the inequality \eqref{Introduction:Sharpening} with
+$\lambda(q) = c_3q^{\frac{1}{2}n - 1 - \varepsilon}$ \aaron{this function does
+  not match the one appearing above in displaymath. is that supposed to be the
+  case? might have something to do with the $<$ not matching the $>$ in
+  \eqref{Introduction:Sharpening}? it is not clear to me, but hopefully it will
+  be to typical reader}, where $c_3 > 0$ depends on $\alpha$ and $\varepsilon$,
+thereby confirming that all Thue equations have only finitely many
+solutions. Unfortunately, Thue's arguments do not allow one to find the
+explicit dependence of $c_3$ on $\alpha$ and $\varepsilon$, and so the bound
+for the number of solutions of the Thue equation cannot be given in explicit
+form either. That is, Thue's proof is ineffective, meaning that it
+  provides no means to \strike{actually} find the solutions to \eqref{Introduction:Thue}. \aaron{I feel like I would dance more carefully around calling someone's proof ineffective.}
+
+Nonetheless, the investigation of Thue's equation and its generalizations was central to the development of the theory of Diophantine equations in the early 20th century when it was discovered that many Diophantine equations in two unknowns could be reduced to it. In particular, the thorough development and enrichment of Thue's method led Siegel to his theorem on the finitude of the number of integral points on an algebraic curve of genus greater than zero \aaron{[REF?]}. However, as Siegel's result relies on Thue's rational approximation to algebraic numbers, it too is ineffective \aaron{in the above sense}. 
+
+Shortly following Thue's result, Goormaghtigh conjectured that the only non-trivial integer solutions of the exponential Diophantine equation
+\begin{equation} \label{Introduction:Goormaghtigh}
+\frac{x^m-1}{x-1} = \frac{y^n-1}{y-1}
+\end{equation}
+satisfying $x > y > 1$ and $n,m > 2$ are
+\[31 = \frac{2^{5}-1}{2-1} = \frac{5^{3}-1}{5-1} \quad \text{ and } \quad 8191 = \frac{2^{13}-1}{2-1}=\frac{90^{3}-1}{90-1}.\]
+These correspond to the known solutions $(x,y,m,n)=(2,5,5,3)$ and $(2,90,13,3)$ to what is nowadays termed {\it Goormaghtigh's equation}. The Diophantine equation \eqref{Introduction:Goormaghtigh} asks for integers having all digits equal to one with respect to two distinct bases, yet whether it has finitely many solutions is still unknown. By fixing the exponents $m$ and $n$ however, Davenport, Lewis, and Schinzel ([REF]) were able to prove that \eqref{Introduction:Goormaghtigh} has only finitely many solutions. Unfortunately, this result rests on Siegel's aforementioned finiteness theorem, and is therefore ineffective. 
+
+In 1933, Mahler [\textcolor{red}{REF}] published a paper on the investigation of the Diophantine equation
+\[f(x,y) = p_1^{z_1}\cdots p_v^{z_v}, \quad (x,y) = 1,\] in which
+$S= \{p_1, \dots, p_v\}$ denote\aaron{s} a fixed set of prime numbers,
+$x,y,z_i \geq 0$, $i = 1, \dots, v$ are unknown integers, and $f(x,y)$ is an
+integral irreducible binary form of degree $n \geq 3$. Generalizing the
+classical result of Thue, Mahler proved that this equation has only finitely
+many solutions. Unfortunately, like Thue, Mahler's argument is also
+ineffective \aaron{each time I read this, I believe more strongly that a different word should be used to describe their work. ineffective seems like an attack, and a broad stroke that misses the precise critique you're looking to discuss}.
+
+This leads us to the third basic problem regarding Diophantine equations and the main focus of this thesis: given a solvable Diophantine equation, determine all of its solutions. Until long after Thue's work, no method was known for the construction of bounds for the number of solutions of a Thue equation in terms of the parameters of the equation. Only in 1968 was such a method introduced by Baker [REF], based on his theory of bounds for linear forms in the logarithms of algebraic numbers. Generalizing Baker's ground-breaking result to the $p$-adic case, Sprind\u zuk and Vinogradov [CITE] and Coates [CITE] proved that the solutions of any \textit{Thue-Mahler equation},
+\begin{equation}\label{Introduction:ThueMahler}
+f(x,y) = ap_1^{z_1}\cdots p_v^{z_v}, \quad (x,y) = 1,
+\end{equation}
+where $a$ is a fixed integer, could, at least in principal, be effectively determined.  The first practical method for solving the general Thue-Mahler equation \eqref{Introduction:ThueMahler} over $\mathbb{Z}$ is attributed to Tzanakis and de Weger [CITE], whose ideas were inspired in part by the method of Agrawal, Coates, Hunt, and van der Poorten [CITE] in their work to solve the specific Thue-Mahler equation
+\[x^3 - x^2y + xy^2 + y^3 = \pm 11^{z_1}.\]
+Using optimized bounds arising from the theory of linear forms in logarithms, a refined, automated version of this explicit method has since been implemented by Hambrook as a MAGMA package \aaron{[REF?]}. 
+
+As for Goormaghtigh's equation, when $m$ and $n$ are fixed and 
+\begin{equation}\label{Introduction:GoormaghtighCondition}
+\gcd(m-1,n-1) > 1,
+\end{equation}
+Davenport, Lewis, and Schinzel ([REF]) were able to replace Siegel's result by an effective argument due to Runge. This result was improved by Nesterenko and Shorey ([REF]) and Bugeaud and Shorey ([REF]) using Baker's theory of linear forms in logarithms. In either case, in order to deduce effectively computable bounds \aaron{(I like this use of effectively)} upon the polynomial variables $x$ and $y$, one must impose the constraints upon $m$ and $n$ that either $m=n+1$, or that the assumption \eqref{Introduction:GoormaghtighCondition} holds. In the extensive literature on this problem, there are a number of striking results that go well beyond what we have mentioned here. By way of example, work of Balasubramanian and Shorey ([REF]) shows that equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions if we fix only the set of prime divisors of $x$ and $y$, while Bugeaud and Shorey ([REF]) prove an analogous finiteness result, under the additional assumption of \eqref{Introduction:GoormaghtighCondition}, provided the quotient $(m-1)/(n-1)$ is bounded above. Additional results on special cases of equation \eqref{Introduction:Goormaghtigh} are available in, for example, \cite{HeTo}, \cite{Le1}, \cite{Le2} and \cite{Le3}.  An excellent overview of results on this problem  can be found in the survey of Shorey \cite{ShoSur}.
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Statement of the results}
+
+The novel contributions of this thesis concern the development and implementation of efficient algorithms to determine all solutions of certain Goormaghtigh equations and Thue-Mahler equations. In particular, we follow [REF: BeGhKr] to prove that, in fact, under assumption \eqref{Introduction:GoormaghtighCondition}, equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions which may be found effectively, even if we fix only a single exponent. \\
+
+\begin{theorem}[BeGhKr]\label{IntroductionTheorem:Goormaghtigh1}
+If there is a solution in integers $x,y, n$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, satisfying \eqref{Introduction:GoormaghtighCondition}, then
+\begin{equation} \label{IntroductionTheorem:Goormaghtigh1Eq}
+x <  (3d)^{4n/d} \leq  36^n.
+\end{equation}
+In particular, if $n$ is fixed, there is an effectively computable constant $c=c(n)$ such that
+$\max \{ x, y, m \} < c$.
+\end{theorem}
+We note that the latter conclusion here follows immediately from \eqref{IntroductionTheorem:Goormaghtigh1Eq}, in conjunction with, for example, work of Baker ([REF]). The constants present in our upper bound \eqref{IntroductionTheorem:Goormaghtigh1Eq} may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation \eqref{Introduction:Goormaghtigh}, subject to condition \eqref{Introduction:GoormaghtighCondition}, for small fixed values of $n$. \\
+
+\begin{theorem}[BeGhKr] \label{IntroductionTheorem:Goormaghtigh2Eq}
+If there is a solution in integers $x,y$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, with $n \in \{ 3, 4, 5 \}$ and satisfying \eqref{Introduction:GoormaghtighCondition}, then
+\[(x,y,m,n) = (2,5,5,3)  \; \mbox{ and } \; (2,90,13,3).\]
+\end{theorem}
+
+In the case $n = 5$ of Theorem \eqref{IntroductionTheorem:Goormaghtigh2Eq} ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. Instead, we sharpen the existing techniques of [TdW] and [Hambrook] for solving Thue-Mahler equations and specialize them to this problem. 
+
+A direct consequence and primary motivation for developing an efficient Thue-Mahler algorithm is the computation of elliptic curves over $\mathbb{Q}$. Let $S$ be a finite set of rational primes. In $1963$, Shafarevich [CITE] proved that there are at most finitely many $\mathbb{Q}$-isomorphism classes of elliptic curves defined over $\mathbb{Q}$ having good reduction outside $S$. The first effective proof of this statement was provided by Coates [CITE] in 1970 for the case $K = \mathbb{Q}$ and $S = \{2,3\}$ using bounds for linear forms in $p$-adic and complex logarithms. Early attempts to make these results explicit for fixed sets of small primes overlap with the arguments of [COATES], in that they reduce the problem to that of solving a number of degree $3$ Thue-Mahler equations of the form
+\[F(x,y) = au,\]
+where $u$ is an integer whose prime factors all lie in $S$. 
+
+In the $1950$'s and $1960$'s, Taniyama and Weil asked whether all elliptic curves over $\mathbb{Q}$ of a given conductor $N$ are related to modular functions. While this conjecture is now known as the Modularity Theorem, until its proof in $2001$ \cite{Breuil}, attempts to verify it sparked a large effort to tabulate all elliptic curves over $\mathbb{Q}$ of given conductor $N$. In 1966, Ogg (\cite{Ogg1}, \cite{Ogg2}) determined all elliptic curves defined over $\mathbb{Q}$ with conductor of the form $2^a$. Coghlan, in his dissertation \cite{Coghlan}, studied the curves of conductor $2^a3^b$ independently of Ogg, while Setzer \cite{Setzer} computed all $\mathbb{Q}$-isomorphism classes of elliptic curves of conductor $p$ for certain small primes $p$. Each of these examples corresponds, via the [BR] approach, to cases with reducible forms. The first analysis on irreducible forms in \eqref{Eq:tmEquation} was carried out by Agrawal, Coates, Hunt and van der Poorten \cite{Agrawal}, who determined all elliptic curves of conductor $11$ defined over $\mathbb{Q}$ to verify the (then) conjecture of Taniyama-Weil.
+
+There are very few, if any, subsequent attempts in the literature to find elliptic curves of given conductor via Thue-Mahler equations. Instead, many of the approaches involve a completely different method to the problem, using modular forms. This method relies upon the Modularity Theorem of Breuil, Conrad, Diamond and Taylor \cite{Breuil}, which was still a conjecture (under various guises) when these ideas were first implemented. Much of the success of this approach can be attributed to Cremona (see e.g. \cite{Cremona1}, \cite{Cremona2}) and his collaborators, who have devoted decades of work to it. In fact, using this method, all elliptic curves over $\mathbb{Q}$ of conductor $N$ have been determined for values of $N$ as follows
+\begin{itemize} \itemsep0em
+\item Antwerp IV ($1972$): $N \leq 200$
+\item Tingley ($1975$): $N \leq 320$
+\item Cremona ($1988$): $N \leq 600$
+\item Cremona ($1990$): $N \leq 1000$
+\item Cremona ($1997$): $N \leq 5077$
+\item Cremona ($2001$): $N \leq 10000$
+\item Cremona ($2005$): $N \leq 130000$
+\item Cremona ($2014$): $N \leq 350000$
+\item Cremona ($2015$): $N \leq 364000$
+\item Cremona ($2016$): $N \leq 390000$.
+\end{itemize}
+
+In this thesis, we follow [BeGhRe] wherein we return to techniques based upon solving Thue-Mahler equations, using a number of results from classical invariant theory. In particular, we illustrate the connection between elliptic curves over $\mathbb{Q}$ and cubic forms and subsequently describe an effective algorithm for determining all elliptic curves over $\mathbb{Q}$ having good reduction outside $S$. This result can be summarized as follows. If we wish to find an elliptic curves $E$ of conductor $N = p_1^{a_1}\cdots p_v^{a_v}$ for some $a_i \in \mathbb{N}$, by Theorem 1 of [BeGhRe], there exists an integral binary cubic form $F$ of discriminant $N_0 \mid 12 N$ and relatively prime integers $u,v$ satisfying
+\[F(u,v) = w_0u^3 + w_1u^2v + w_2uv^2 + w_3v^3 = 2^{\alpha_1}3^{\beta_1}\prod_{p|N_0}p^{\kappa_p}\]
+for some $\alpha_1, \beta_1, \kappa_p$. Then $E$ is isomorphic over $\mathbb{Q}$ to the elliptic curve $E_{\mathcal{D}}$, where $E_{\mathcal{D}}$ is determined by the form $F$ and $(u,v)$. It is worth noting that Theorem 1 of [BeGhRe] very explicitly describes how to generate $E_{\mathcal{D}}$; once a solution $(u,v)$ to the Thue-Mahler equation $F$ is known, a quick computation of the Hessian and Jacobian discriminant of $F$ evaluated at $(u,v)$ yields the coefficients of $E_{\mathcal{D}}$. Using this theorem, all $E/\mathbb{Q}$ of conductor $N$ may be computed by generating all of the relevant binary cubic forms, solving the corresponding Thue-Mahler equations, and outputting the elliptic curves that arise. The first and last steps of this process are straightforward. Indeed, Bennett and Rechnitzer describe an efficient algorithm for carrying out the first step \aaron{REF}. In fact, they having carried out a one-time computation of all irreducible forms that can arise in Theorem 1 of absolute discriminant bounded by $10^{10}$. The bulk of the work is therefore concentrated in step 2, solving a large number of degree 3 Thue-Mahler equations. 
+
+Unfortunately, despite many refinements, [Hambrook's] MAGMA implementation of a Thue-Mahler solver encounters a multitude of bottlenecks which often yield unavoidable timing and memory problems, even when parallelization is considered. As our aim is to use the results of [BeGhRe] to generate all elliptic curves over $\mathbb{Q}$ of conductor $N < 10^6$, in its current state, the Hambrook algorithm is inefficient for this task, and in many cases, simply unusable due to its memory requirements. The main novel contribution of this thesis is therefore the efficient resolution of an arbitrary degree $3$ Thue-Mahler equation and the implementation of this algorithm as a MAGMA package. This work is based on ideas of Matshke, von Kanel [CITE], and Siksek and is summarized in the following steps.
+
+
+
+% OLD INTRO
+
+%A Thue-Mahler equation is a Diophantine equation of the form
+%\begin{equation} \label{Eq:tmEquation}
+%F(x,y) = ap_1^{z_1}\cdots p_v^{z_v},
+%\end{equation}
+%where
+%\[F(x,y) = f_0x^n + f_1x^{n-1}y + \cdots + f_{n-1}xy^{n-1} + f_ny^n\]
+%is an irreducible binary form of degree at least $3$, $a$ is a nonzero integer, and $p_1, \dots, p_v$ are rational primes. The number of solutions in relatively prime integers $x$ and $y$ is known to be finite via the work of Mahler [CITE]. Though this proof is ineffective, it generalizes a classical result of Thue [CITE], who had proved an analogous statement for equations of the form $F(x,y) = a$. In the mid-1960's, Baker [CITE] proved his ground-breaking results on effective lower bounds for linear forms in logarithms of algebraic numbers. 
+%
+%Generalizing Baker's result to the $p$-adic case, Sprind\u zuk and Vinogradov [CITE] and Coates [CITE] proved that the solutions of any Thue-Mahler equation could, at least in principal, be effectively determined. The first practical method for solving the general Thue-Mahler equation over $\mathbb{Z}$ is attributed to Tzanakis and de Weger [CITE], whose ideas were inspired in part by the method of Agrawal, Coates, Hunt, and van der Poorten [CITE] in their work to solve the specific Thue-Mahler equation
+%\[x^3 - x^2y + xy^2 + y^3 = \pm 11^{z_1}.\]
+
+%In 2011, using optimized bounds arising from the theory of linear forms in logarithms, Hambrook [CITE] implemented a refined, automated version of the explicit method of [TdW] as a MAGMA package. Similar to [TdW], this algorithm begins by reducing the problem to one of solving a collection of finitely many $S$-unit equations in a certain algebraic number field $K$. Of course, by an $S$-unit, we mean an integer whose prime factors all lie in $S$. For each such equation, a very large upper bound on the solutions is generated using the theory of linear forms in logarithms. This bound is then reduced via Diophantine approximation techniques. Finally, the algorithm searches below this reduced bound using a combination of clever sieves and brute force. 
+%
+%Unfortunately, despite Hambrook's refinements, this algorithm encounters a multitude of bottlenecks which often yield unavoidable timing and memory problems, even when parallelization is considered. As we will outline shortly, one of our primary aims in this thesis is to solve a very large number of Thue-Mahler equations. In its current state, the Hambrook algorithm is inefficient for this task, and in many cases, simply unusable due to its memory requirements. The main novel contribution of this thesis is therefore the efficient resolution of an arbitrary Thue-Mahler equation and the implementation of this algorithm as a MAGMA package. This work is based on ideas of Matshke, von Kanel [CITE], and Siksek and is summarized in the following steps.
+
+\textbf{Step 1.}
+Following [TdW] and [Hambrook], we reduce the problem of solving the given Thue-Mahler equation to the problem of solving a collection of finitely many $S$-unit equations in a certain algebraic number field $K$. These are equations of the form
+\begin{equation}\label{Introduction:SUnit}
+\mu_0 y - \lambda_0 x = 1
+\end{equation}
+for some $\mu_0, \lambda_0 \in K$ and unknowns $x,y$. The collection of forms is such that if we know the solutions of each equation in the collection, then we can easily derive all of the solutions of the Thue-Mahler equation. This reduction is performed in two steps. First, \eqref{Introduction:ThueMahler} is reduced to a finite number of ideal equations over $K$. Here, we employ new results by Siksek [Cite?] to significantly reduce the number of ideal equations to consider. Next, we reduce each ideal equation to a number of certain $S$-unit equations \eqref{Introduction:SUnit} via a finite number of principalization tests. The method of [TdW] reduces \eqref{Introduction:ThueMahler} to $(m/2) h^v$ $S$-unit equations, where $m$ is the number of roots of unity of $K$, $h$ is the class number, and $v$ is the number of rational primes $p_1, \dots, p_v$. The method of Siksek that we employ gives only $m/2$ $S$-unit equations. The principle computational work here consists of computing an integral basis, a system of fundamental units, and a splitting field of $K$, as well as computing the class group of $K$ and the factorizations of the primes $p_1,\dots,p_v$ into prime ideals in the ring of integers of $K$. 
+
+The remaining steps are performed for each of the $S$-unit equations in our collection. 
+
+\textbf{Step 2.}
+In place of the logarithmic sieves used in [TdW] to derive a large upper bound, we work with the global logarithmic Weil height
+\[h: \mathbb{G}_m(\overline{\mathbb{Q}}) \to \mathbb{R}_{\geq 0}.\]
+For a given \eqref{Introduction:SUnit}, we show that the height $h(1/x)$ admits a decomposition into local heights at each place of $K$ appearing in the $S$-unit equation. Using [CITE : Matshke, von Kanel], we generate a very large upper bound on the height $h(1/x)$, and subsequently, on the local heights. This step is a straightforward computation, whereas the analogous step in Hambrook and TdW is a complex and lengthy derivation which involves factoring rational primes into prime ideals in a splitting field of $K$ and computing heights of certain elements of the splitting field. 
+
+\textbf{Step 3.}
+For each place of $K$ appearing in \eqref{Introduction:SUnit}, we drastically reduce the upper bounds derived in Step 2 by using computational Diophantine approximation techniques applied to the intersection of a certain ellipsoid and translated lattice. This technique involves using the Finke-Pohst algorithm to enumerate all short vectors in the intersection. Here, working with the Weil height $h(1/x)$ has the advantage that it leads to ellipsoids whose volumes are smaller than the ellipsoids implicitly used in [TdW] by a factor of $\sim r^{r/2}$ for $r$ the number of places of $K$ appearing in our $S$-unit equation. In this way, we reduce the number of short vectors appearing from the Fincke-Pohst algorithm, and consequently reduce our running time and memory requirements. 
+
+\textbf{Step 4.}
+Samir's sieve - this may not be done in time as we only just received Samir's writeup and explanation as pertaining to Thue-Mahler equations.
+
+\textbf{Step 5.}
+Finally, we use a sieving procedure to find all the solutions of the Diophantine equation that live in the box defined by the bounds derived in the previous steps. To carry out this step, we run through all the possible solutions in the box and ÔsieveÕ out the vast majority of non-solutions. This is done via certain low-cost congruence tests. The candidate solutions passing this test are then verified directly against \eqref{Introduction:SUnit}. Though we expect the bounds defining the box to be small, there can still be a very large number of possible solutions to check, especially if the number of rational primes involved in the Thue-Mahler equation is large. The computations performed on each individual candidate solution are relatively simple, but the sheer number of candidates often makes this step the computational bottleneck of the entire algorithm. 
+
+\textbf{Step 6.}
+Having performed Steps 2-5 for each $S$-unit equation in our collection, we now have all the solutions of each such equation, and we use this knowledge to determine all the solutions of the Thue-Mahler equation. 
+
+The reader will notice several parallels between this refined algorithm and the aforementioned Goormaghtigh equation solver in the case $n=5$. In particular, both algorithms share the same setup and refinements of the [TdW] and [Hambrook] solver. For \eqref{Introduction:Goormaghtigh}, however, we are left to solve
+\[f(y) = x^m,\]
+a Thue-Mahler-like equation of degree $4$ in explicit values of $x$ and unknown integers $y$ and $m$. In this case, we are permitted simplifications which allow us to omit the Fincke-Pohst algorithm and final congruence sieves. Instead, for each $x$, we rely on only a few iterations of the LLL algorithm to reduce our initial bound on the exponents before entering a naive search to complete our computation. Of course, this algorithm can be refined further for efficiency, however, in the context of [BeGhKr], such improvements are not needed. 
+
+The outline of this thesis is as follows. ADD
+
+
+
+
+%This document provides a quick set of instructions for using the
+%\class{ubcdiss} class to write a dissertation in \LaTeX. 
+%Unfortunately this document cannot provide an introduction to using
+%\LaTeX.  The classic reference for learning \LaTeX\ is
+%\citeauthor{lamport-1994-ladps}'s
+%book~\cite{lamport-1994-ladps}.  There are also many freely-available
+%tutorials online;
+%\webref{http://www.andy-roberts.net/misc/latex/}{Andy Roberts' online
+%    \LaTeX\ tutorials}
+%seems to be excellent.
+%The source code for this docment, however, is intended to serve as
+%an example for creating a \LaTeX\ version of your dissertation.
+%
+%We start by discussing organizational issues, such as splitting
+%your dissertation into multiple files, in
+%\autoref{sec:SuggestedThesisOrganization}.
+%We then cover the ease of managing cross-references in \LaTeX\ in
+%\autoref{sec:CrossReferences}.
+%We cover managing and using bibliographies with \BibTeX\ in
+%\autoref{sec:BibTeX}. 
+%We briefly describe typesetting attractive tables in
+%\autoref{sec:TypesettingTables}.
+%We briefly describe including external figures in
+%\autoref{sec:Graphics}, and using special characters and symbols
+%in \autoref{sec:SpecialSymbols}.
+%As it is often useful to track different versions of your dissertation,
+%we discuss revision control further in
+%\autoref{sec:DissertationRevisionControl}. 
+%We conclude with pointers to additional sources of information in
+%\autoref{sec:Conclusions}.
+
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Suggested Thesis Organization}
 \label{sec:SuggestedThesisOrganization}
 
@@ -75,7 +296,7 @@ web references with a footnoted \acs{URL} (\verb+\webref{url}{text}+),
 as well as definitions specific to this documentation
 (\verb+\latexpackage{}+).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Making Cross-References}
 \label{sec:CrossReferences}
 
@@ -119,7 +340,7 @@ of \emph{thing}, search \file{diss.tex} and the \latexpackage{hyperref}
 documentation for \texttt{autorefname}.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Managing Bibliographies with \BibTeX}
 \label{sec:BibTeX}
 
@@ -243,7 +464,7 @@ and inline (\latexpackage{bibentry}).
 Those who wish to exert maximum control over their bibliography
 style should see the amazing \latexpackage{custom-bib} package.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Typesetting Tables}
 \label{sec:TypesettingTables}
 
@@ -291,7 +512,7 @@ See the \latexpackage{booktabs} documentation for advice in dealing with
 special cases, such as subheading rules, introducing extra space
 for divisions, and interior rules.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Figures, Graphics, and Special Characters}
 \label{sec:Graphics}
 
@@ -379,8 +600,7 @@ of symbols and accented characters is available at:
 \end{tabular}
 \end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Changing Page Widths and Heights}
+%--------------------------------------------------------------------------------------------------------------------------------------------%\section{Changing Page Widths and Heights}
 
 The \class{ubcdiss} class is based on the standard \LaTeX\ \class{book}
 class~\cite{lamport-1994-ladps} that selects a line-width to carry
@@ -449,7 +669,7 @@ environment that does just this.  For example:
 \end{lstlisting}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Keeping Track of Versions with Revision Control}
 \label{sec:DissertationRevisionControl}
 
@@ -477,7 +697,7 @@ for Windows users.  You should consult your local geek.
 A simpler alternative strategy is to create a GoogleMail account
 and periodically mail yourself zipped copies of your dissertation.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Recommended Packages}
 
 The real strength to \LaTeX\ is found in the myriad of free add-on
@@ -563,7 +783,7 @@ dissertation.
 \end{description}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Moving On}
 \label{sec:Conclusions}
 
