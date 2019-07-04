@@ -1,0 +1,802 @@
+%% The following is a directive for TeXShop to indicate the main file
+%%!TEX root = diss.tex
+
+\chapter{Algorithms for Thue-Mahler Equations}
+\label{ch:AlgorithmsForTM}
+
+\begin{enumerate}
+\item Lattices \autoref{sec:Lattices}
+\item Setup with Lemmata from Samir
+\item LLL [DONE - roughly]
+\item Fincke-Pohst with changes from Benjamin [DONE- roughly]
+\item linear forms in logs
+\end{enumerate}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+
+
+\section{The Thue-Mahler Equation}
+
+Let $a \in \mathbb{Z}$ be nonzero, let $S=\{p_1,\dotsc,p_v\}$ be a set of rational primes, and let $F \in \mathbb{Z}[X,Y]$ be irreducible and homogeneous of degree $n \geq 3$. We consider the classical Thue--Mahler equation
+\begin{equation} \label{Eq:TM1}
+F(X,Y) = a p_1^{Z_1}\cdots p_v^{Z_v}, \quad (X,Y) \in \mathbb{Z}^2,
+\end{equation}
+where
+\[F(X,Y) = c_0 X^n + c_1 X^{n-1}Y + \cdots + c_{n-1}XY^{n-1} + c_nY^n.\]
+and $\gcd(X,Y)=1$. 
+
+We would like to enumerate the set of solutions $\{X,Y, Z_1, \dots, Z_v\}$ of \eqref{Eq:TM1}, where $Z_i \geq 0$ for $i = 1, \dots, v$. Solutions to this equation having $(X,Y) = 1$ and $n = 3$ correspond to elliptic curves with good reduction outside of $\{p_1, \dots, p_v\}$. The algorithm of Tzanakis, de Weger generates solutions $(X,Y)$ in the case 
+\[(X,Y) = 1, \quad (a, p_1, \dots, p_v) = 1, \quad (Y,c_0) = 1.\]
+To implement this algorithm for our specific application, we modify our Thue-Mahler equation so that we are reduced to the case where
+\[(X,Y) = 1, \quad (a, p_1, \dots, p_v) = 1, \quad c_0 = 1.\]
+The solutions corresponding to these conditions are then converted back into solutions of the original Thue-Mahler equation. The remainder of this section outlines these modifications. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Reducing to $(a, p_1, \dots, p_v) = 1$ and $c_0 = 1$}
+Our binary form $F$ is irreducible by assumption and thus at least one of the coefficients $c_0$ and $c_n$ is nonzero. Hence, we can always transform the given Thue--Mahler equation~\eqref{Eq:TM1} to one with $c_0 \neq 0$ by interchanging $x$ and $y$ and by renaming the coefficients $c_i$ appropriately. This shows that  we always may and do assume that $c_0\neq 0$ in order to solve \eqref{Eq:TM1}.
+
+\begin{question}
+Do we need to do this? If one of $c_0$ or $c_n$ is $0$, then $F$ is reducible. 
+\end{question}
+
+Let $q_1, \dots, q_{w}$ denote the distinct prime divisors of $a$ such that $q_i \notin \{p_1, \dots, p_v\}$ for $i = 1, \dots, w$, and write 
+\[a =  \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)},\]
+for some integers $b_i >0$ where $(q_1, \dots, q_w, p_1, \dots, p_v) = 1$. Let $(X,Y,Z_1, \dots, Z_v)$ denote a solution of the Thue-Mahler equation in question and let $Y = d\overline{Y}$, $c_0 = d\overline{c_0}$, where $d = (c_0,Y)$. Then our equation becomes
+\[\begin{split}
+F(X,Y) 	& = c_0 X^n + c_1 X^{n-1}Y+ \cdots + c_{n-1}XY^{n-1} + c_nY^n \\
+		& = d \overline{c_0} X^n + c_1 X^{n-1}(d\overline{Y})+ \cdots + c_{n-1}X(d\overline{Y})^{n-1} + 			c_n(d\overline{Y})^n \\
+		& = d\left(\overline{c_0} X^n + c_1 X^{n-1}\overline{Y} + \cdots + c_{n-1}Xd^{n-2}
+			\overline{Y}^{n-1} + c_nd^{n-1}\overline{Y}^n\right) \\
+	 	& = ap_1^{Z_1}\dots p_v^{Z_v}\\
+		& = \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)} \cdot p_1^{Z_1} \dots p_v^{Z_v} \\
+		& = \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a) + Z_i}.
+\end{split}\] 
+Henct $d$ divides $\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a) + Z_i}$. Hence
+\[d = (c_0,Y) = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i},\]
+for some non-negative integers $s_1, \dots, s_w, t_1, \dots, t_v$ such that 
+\[s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\} \quad \text{ and } \quad 
+	t_i \leq \min\{\ord_{p_i}(a) + Z_i, \ord_{p_i}(c_0)\}.\] 
+
+Let $\mathcal D$ be the set of all positive rational integers $m$  dividing $c_0$ such that $\ord_p(m)\leq \ord_p(a)$ for each rational prime $p\notin S$. In other words, 
+\[\mathcal{D}:= \left\{ m \in \mathbb{Z}_{>0} \ : \ m \mid c_0 \text{ and } \ord_p(m)\leq \ord_p(a) \text{ for all } 					p\notin S \right\}.\]
+In the above notation, $\mathcal{D}$ is the set of all such possible values $d = (c_0,Y)$. That is, given $d$ such that 
+\[d = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i},\]
+as above, then clearly $d \mid c_0$ by construction. In other words, since
+\[\ord_{q_i}(d) = s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\} \leq \ord_{q_i}(c_0)\]
+and
+\[\ord_{p_i}(d) = t_i \leq \min\{\ord_{p_i}(a) + Z_i, \ord_{p_i}(c_0)\} \leq \ord_{p_i}(c_0),\] 
+for all $q_i \in \{q_1, \dots, q_w\}$ and all $p_i \in S$, we have $d \mid c_0$. 
+
+In addition, for all $p \notin S$, the statement $\ord_p(d)\leq \ord_p(a)$ is nontrivial only for those primes for which $p \mid d$ or $p \mid a$. We observe that the set of primes $p \notin S$ such that $p \mid d$ is $\{q_1, \dots, q_w\}$, which is precisely the set of primes $p \notin S$ such that $p \mid a$. Now, 
+\[\ord_{q_i}(d) = s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\} \leq \ord_{q_i}(a).\]
+If $p \notin S$ and $p \notin \{q_1, \dots, q_w\}$, then
+\[0 = \ord_{p}(d) = \ord_p\left(\prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i}\right) \leq \ord_{p}(a) = 
+\ord_p\left(\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}\right) = 0.\]
+Hence $d \mid c_0$ such that $\ord_p(d)\leq \ord_p(a)$ for all $p \notin S$, and so $d \in \mathcal{D}$. 
+
+Conversely, suppose $d \in \mathcal{D}$ so that $d \mid c_0$. Since 
+\[a =  \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)},\]
+and $\ord_p(d)\leq \ord_p(a)$ for all $p \notin S$, then the right-hand side of
+\[\ord_{p}(d) \leq \ord_{p}(a) = 
+\ord_p\left(\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}\right)\]
+is non-zero only for the primes $\{q_1, \dots, q_w\}$. That is, 
+\[\ord_p(d) = 0\]
+for all $p \notin \{q_1, \dots, q_w\}$ and for $i \in \{1, \dots, w\}$
+\[\ord_{q_i}(d) \leq \ord_{q_i}(a) = b_i.\]
+In other words, the only prime factors appearing in $d$ outside of $S$ are those among $\{q_1, \dots, q_w\}$. That is, 
+\[d = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i},\]
+for some integers $t_i$, and $s_i$ such that $s_i \leq \ord_{q_i}(a) = b_i$. Of course, since $d \mid c_0$, we must necessarily have 
+\[s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\}.\]
+Similarly, for $t_i$, as $d \mid c_0$, we must have
+\[t_i \leq \ord_{q_i}(c_0)\}.\]
+It follows that these sets are identical. 
+
+For any $d\in \mathcal D$, we define the rational numbers 
+\[u = c_0^{n-1}/d^n \quad \textnormal{and}\quad c = \sgn(ua)\prod_{p\notin S} p^{\ord_p(ua)}.\]
+Suppose $(X,Y)$ is a solution of \eqref{Eq:TM1} with $(X,Y) = 1$ and $(c_0,Y) = d$. Then, multiplying by $u$ yields
+\[\begin{split}
+uF(X,Y)		& = \frac{c_0^{n-1}}{d^{n}}F(X,Y) \\	
+			& = \frac{c_0^{n}}{d^{n}}X^n + \frac{c_0^{n-1}}{d^{n}}c_1 X^{n-1}Y + \cdots + 								\frac{c_0^{n-1}}{d^{n}}c_{n-1}XY^{n-1} + \frac{c_0^{n-1}}{d^{n}}c_nY^n \\
+			& = ua \prod_{i = 1}^v p_i^{Z_i}\\
+			& = \frac{c_0^{n-1}}{d^n} \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}
+				\prod_{i = 1}^v p_i^{Z_i}\\
+			& = \left(\frac{c_0}{d}\right)^{n-1}\frac{\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v 
+				p_i^{\ord_{p_i}(a)}\prod_{i = 1}^v p_i^{Z_i}}{d}. 
+\end{split}\]
+From above, we know that 
+\[d = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i},\]
+with 
+\[s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\} \quad \text{ and } \quad t_i \leq \ord_{q_i}(c_0)\}.\]
+Hence 
+\[\frac{\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}\prod_{i = 1}^v p_i^{Z_i}}{d} = 
+\frac{\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}\prod_{i = 1}^v p_i^{Z_i}}{\prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i}}.\]
+
+Indeed $d \mid a \prod_{i = 1}^v p_i^{z_i}$. Of course, $d \mid c_0$ by definition so that the above equation is an integer equation. Now
+\[\begin{split}
+uF(X,Y)		& = u a \prod_{i = 1}^v p_i^{Z_i}\\
+			& = \left(\prod_{p \notin S} p^{\ord_p(u)}\prod_{p \in S} p^{\ord_{p}(u)}\right)\cdot
+				\left(\prod_{p \notin S} p^{\ord_p(a)}\prod_{p \in S} p^{\ord_{p}(a)}\right)\cdot
+				\prod_{i = 1}^v p_i^{Z_i} \\
+			& = \prod_{p \notin S} p^{\ord_p(u) + \ord_p(a)} 
+				\prod_{p \in S}p^{Z_i + \ord_p(u) + \ord_p(a)} \\
+			& = \prod_{p \notin S} p^{\ord_p(ua)} 
+				\prod_{p \in S}p^{Z_i + \ord_p(ua)},
+\end{split}\]
+and it follows that 
+\[uF(X,Y) = c\prod_{p \in S}p^{Z_i + \ord_p(ua)}.\]
+
+On using that $d\in \mathcal D$, we see that the rational number $c$ is in fact an integer which is coprime to $S$. 
+
+Now, suppose that $(X,Y, Z_1, \dots, Z_v)$ is a solution of \eqref{Eq:TM1} and let $d=\gcd(c_0,Y)$. That is, $d \in \mathcal D$. Let  
+\[x=\tfrac{c_0X}{d},\quad y=\tfrac{Y}{d} \quad \textnormal{and}\quad z_i = \ord_p(u) + \ord_p(a) + Z_i\]
+for all $i \in \{1, \dots, v\}$, and let
+\[C_i = c_ic_0^{i-1} \quad \text{ for } i = 1, \dots, n.\]
+By definition of $d$, we note that $x,y \in \mathbb{Z}$. 
+
+Under this definition,  
+\[X = \frac{dx}{c_0},\quad Y=dy,\]
+and
+\[\begin{split}
+uF(X,Y) 	& = \frac{c_0^{n}}{d^{n}}X^n + \frac{c_0^{n-1}}{d^{n}}c_1 X^{n-1}Y + \cdots + 							\frac{c_0^{n-1}}{d^{n}}c_{n-1}XY^{n-1} + \frac{c_0^{n-1}}{d^{n}}c_nY^n \\
+		& = \frac{c_0^{n}}{d^{n}}\left(\frac{dx}{c_0}\right)^n + \frac{c_0^{n-1}}{d^{n}}c_1 							\left(\frac{dx}{c_0}\right)^{n-1}(dy) + \cdots + \frac{c_0^{n-1}}{d^{n}}c_{n-1}
+			\left(\frac{dx}{c_0}\right)(dy)^{n-1} + \frac{c_0^{n-1}}{d^{n}}c_n(dy)^n \\
+		& = x^n + c_1 x^{n-1}y + \dots + c_0^{n-2}c_{n-1}xy^{n-1} + c_0^{n-1}c_ny^n \\
+		& = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n \\
+		& = c \prod_{p \in S}p^{ \ord_p(u) + \ord_p(a) + Z_i} \\
+		& = c \prod_{p \in S}p^{z_i}.
+		\end{split}\]
+Let $f(x,y) = uF(X,Y)$ so that 
+\begin{equation}\label{Eq:TM2}
+f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n = c p_1^{z_1} \cdots p_v^{z_v}.
+\end{equation}
+
+Since there are only finitely many choices for $d = \gcd(c_0, Y)$, it follows that there are only finitely many choices for $\{c,u,d\}$. Then, solving \eqref{Eq:TM1} is equivalent to solving the finitely many equations \eqref{Eq:TM2} for each choice of $c,u,d$.  For each such choice, the solution $\{x,y,z_1, \dots, z_v\}$ is related to $\{X,Y, Z_1, \dots, Z_v\}$ via
+\[X = \frac{dx}{c_0},\quad Y=dy \quad \text{ and } \quad Z_i = z_i - \ord_p(u) - \ord_p(a).\]
+We note that for any choice of $c,u,d$, the left-hand side of \eqref{Eq:TM2} is the same. Thus, to solve \eqref{Eq:TM2}, we need only to enumerate over every possible $c$. Now, if $\mathcal{C}$ denotes the set of all $\{c,u,d\}$ and $d_1, d_2 \in \mathcal{D}$, we may have $\{c,u_1, d_1\}, \{c,u_2, d_2\} \in \mathcal{C}$. That is, $d_1, d_2$ may share the same value of $c$, reiterating that we need only solve \eqref{Eq:TM2} for each distinct $c$. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\section{The Relevant Algebraic Number Field}
+Now, for each $c$, we solve
+\[f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n = c p_1^{z_1} \cdots p_v^{z_v}.\]
+Here, 
+\[\gcd(x,y) = 1 \quad \text{ and } \quad \gcd(c,p_1, \dots, p_v) = 1.\]
+In our case, $n = 3$ and so
+\[f(x,y) = x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 = c p_1^{z_1} \cdots p_v^{z_v}.\]
+
+Following the Thue-Mahler solver algorithm, put
+\[g(t) = F(t,1) = t^3 + C_1t^2 + C_2t + C_3\]
+and note that $g(t)$ is irreducible in $\mathbb{Z}[t]$. Let $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$. Then \eqref{Eq:TM2} is equivalent to solving finitely many equations of the form
+\begin{equation} \label{Eq:norm}
+N_{K/\mathbb{Q}}(x-y\theta) = cp_1^{z_1}\dots p_v^{z_v}
+\end{equation}
+for each distinct value of $c$. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\section{Decomposition of Primes}
+
+Let $p_i$ be any rational prime and let 
+\[(p_i)\mathcal{O}_K = \prod_{j = 1}^{m_i} \mathfrak{p}_{ij}^{e_{ij}}\]
+be the factorization of $p_i$ into prime ideals in the ring of integers $\mathcal{O}_K$ of $K$. Let $f_{ij}$ be the residue degree of $\mathfrak{p}_{ij}$ over $p_i$. We have $\deg(g_i(t)) = e_{ij}f_{ij}$.
+
+Let
+\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
+be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
+
+Then, since $N(\mathfrak{p}_{ij}) = p_i^{f_{ij}}$, \eqref{Eq:norm} leads to finitely many ideal equations of the form
+\begin{equation} \label{Eq:ideals}
+(x-y\theta)\mathcal{O}_K = \mathfrak{a} \prod_{j = 1}^{m_1} \mathfrak{p}_{1j}^{z_{1j}} \cdots \prod_{j = 1}^{m_v} \mathfrak{p}_{vj}^{z_{vj}}
+\end{equation}
+where $\mathfrak{a}$ is an ideal of norm $|c|$ (for each choice of $c$) and the $z_{ij}$ are unknown integers related to $z_i$ by $\sum_{j = 1}^{m_i} f_{ij}z_{ij} = z_i $. Thus
+\[Z_i = z_i - \ord_p{u} - \ord_p(a) =  \sum_{j = 1}^{m_i} f_{ij}z_{ij} -  \ord_p{u} - \ord_p(a).\]
+
+Our first task is to cut down the number of variables appearing in \eqref{Eq:ideals}. We will do this by showing that only a few prime ideals can divide $(x-y\theta)\mathcal{O}_K$ to a large power. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\section{An Alternative to the Prime Ideal Removing Lemma}
+
+In this section, we establish some key results that will allow us to cut down the number of prime ideals that can appear to a large power in the factorization of $(x-y\theta)\mathcal{O}_K$. It is of particular importance to note that we do not appeal to the Prime Ideal Removing Lemma of Tzanakis, de Weger here and instead apply the following results of Siksek. 
+
+Let $p \in \{p_1, \dots, p_v\}$. We will produce two finite lists $L_p$ and $M_p$. The list $L_p$
+consists of certain ideals $\mathfrak{b}$ supported at the prime ideals above $p$. The list $M_p$ consists of certain pairs $(\mathfrak{b},\mathfrak{p})$ where $\mathfrak{b}$ is supported at the prime ideals above $p$, and $\mathfrak{p} \mid p$ is a prime ideal satisfying $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$. We want the lists to satisfy the following property. If $(x,y)$ is a solution to \eqref{Eq:TM2} then
+\begin{enumerate}
+\item[(i)] either there is some $\mathfrak{b} \in L_p$
+such that
+\begin{equation}\label{Eq:case1}
+\mathfrak{b} \mid (x-y\theta )\mathcal{O}_K, \qquad \text{$(x-y\theta)\mathcal{O}_K/\mathfrak{b}$ is coprime to $(p)\mathcal{O}_K$};
+\end{equation}
+\item[(ii)] or there is a pair $(\mathfrak{b},\mathfrak{p}) \in M_p$ and a non-negative integer $v_p$ such that
+\begin{equation}\label{Eq:case2}
+(\mathfrak{b} \cdot \mathfrak{p}^{v_p}) \mid (x-y\theta)\mathcal{O}_K, \qquad \text{$(x-y\theta)\mathcal{O}_K/(\mathfrak{b} \cdot \mathfrak{p}^{v_p})$ is coprime to $(p)\mathcal{O}_K$}.
+\end{equation}
+\end{enumerate}
+
+To generate the lists $M_p$, $L_p$ we consider two `affine patches': $p \nmid y$ and $p \mid y$. As motivation for the method we first state and prove two lemmas.
+
+\begin{lemma} \label{Lem:main}[Siksek]
+Let $(x,y)$ be a solution of \eqref{Eq:TM2} with $p \nmid y$, let $t$ be a positive integer, and suppose $x/y \equiv u \pmod{p^t}$, where $u \in \{0,1,2,\dotsc,p^{t}-1\}$. If $\mathfrak{q} \mid p$, then
+\[\ord_{\mathfrak{q}}(x-y\theta)\ge \min\{\ord_{\mathfrak{q}}(u-\theta), t \cdot e(\mathfrak{q}/p)\}.\]
+Moreover, if $\ord_{\mathfrak{q}}(u-\theta) < t \cdot e(\mathfrak{q}/p)$,
+then
+\[\ord_\mathfrak{q}(x-y\theta) = \ord_{\mathfrak{q}}(u-\theta).\]
+\end{lemma}
+
+\begin{lemma} \label{Lem:main2}[Siksek]
+Let $(x,y)$ be a solution of \eqref{Eq:TM2} with $p \mid y$ (and thus $p \nmid x$), let $t$ be a positive integer, and suppose $y/x \equiv u \pmod{p^t}$, where $u \in \{0,1,2,\dotsc,p^{t}-1\}$. If $\mathfrak{q} \mid p$, then
+\[\ord_{\mathfrak{q}}(x-y\theta)\ge \min\{\ord_{\mathfrak{q}}(1-\theta u), t \cdot e(\mathfrak{q}/p)\}.\]
+Moreover, if $\ord_{\mathfrak{q}}(1-\theta u) < t \cdot e(\mathfrak{q}/p)$,
+then
+\[\ord_\mathfrak{q}(x-y\theta) = \ord_{\mathfrak{q}}(1 - \theta u).\]
+\end{lemma}
+
+\begin{proof}[Proof of Lemmas~\ref{Lem:main} and \ref{Lem:main2}]
+Suppose $p \nmid y$. Thus $\mathfrak{q} \nmid y$ and hence $\ord_{\mathfrak{q}}(x-y\theta) = \ord_{\mathfrak{q}}(x/y - \theta)$. 
+Since
+\[x/y-\theta = u - \theta + x/y - u,\]
+we have
+\[\begin{array}{ll}
+\ord_\mathfrak{q}(x/y-\theta)	& = \ord_{\mathfrak{q}}(u - \theta + x/y - u) \\
+						& \geq \min\{\ord_{\mathfrak{q}}(u - \theta), \ord_{\mathfrak{q}}(x/y - u)\}. 
+\end{array}\]
+But 
+\[\ord_{\mathfrak{q}}(x/y-u) \geq \ord_{\mathfrak{q}}(p^t) =t \cdot e(\mathfrak{q}/p)\]
+by assumption, %Thus $\ord_\fq(x-\theta)=\ord_\fq(u-\theta)$,
+completing the proof of Lemma~\ref{Lem:main}. The proof of Lemma~\ref{Lem:main2} is similar. 
+\end{proof}
+
+The following algorithm computes the lists $L_p$ and $M_p$ that come from the first patch $p \nmid y$. We denote these respectively by $\mathcal{L}_p$ and $\mathcal{M}_p$. 
+
+\begin{Algorithm}\label{alg1}
+To compute
+$\mathcal{L}_p$ and $\mathcal{M}_p$.
+
+\begin{enumerate}
+\item[Step (a)] Let 
+\[\mathcal{L}_p \leftarrow \emptyset, \qquad \mathcal{M}_p \leftarrow \emptyset,\]
+\[ t \leftarrow 1, \quad \mathcal{U} \leftarrow \{w : w \in \{0,1,\dots,p-1\} \}.\]
+
+\item[Step (b)] Let
+\[\mathcal{U}^\prime \leftarrow \emptyset.\]
+Loop through the elements $u \in \mathcal{U}$. Let 
+\[\mathcal{P}_u= \{\mathfrak{q} \mid p \ : \ \ord_{\mathfrak{q}}(u-\theta) \geq t \cdot e(\mathfrak{q}/p)\},\]
+and
+\[ \mathfrak{b}_u 	= \prod_{\mathfrak{q} \mid p} \mathfrak{q}^{\min\{\ord_\mathfrak{q}(u-\theta), t \cdot e(\mathfrak{q}/p)\}} 
+				= (u-\theta) \mathcal{O}_K+p^t \mathcal{O}_K.\]
+\begin{enumerate}
+\item[(i)] If $\mathcal{P}_u = \emptyset$ then
+\[\mathcal{L}_p \leftarrow \mathcal{L}_p \cup \{\mathfrak{b}_u\}.\]
+
+\item[(ii)] Else if $\mathcal{P}_u = \{\mathfrak{p}\}$ with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and there is at least one $\mathbb{Z}_p$-root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$, then
+\[\mathcal{M}_p \leftarrow \mathcal{M}_p \cup \{ (\mathfrak{b}_u,\mathfrak{p})\}.\]
+
+\item[(iii)] Else 
+\[\mathcal{U}^\prime \leftarrow \mathcal{U} \cup \{ u+p^{t+1}w : w \in \{0,\dots,p-1\} \}.\]
+\end{enumerate}
+
+\item[Step (c)] If $\mathcal{U}^\prime \ne \emptyset$ then let
+\[t \leftarrow t+1, \qquad \mathcal{U} \leftarrow \mathcal{U}^{\prime},\]
+and return to Step (b). Else output $\mathcal{L}_p$, $\mathcal{M}_p$.
+\end{enumerate}
+\end{Algorithm}
+\
+
+\begin{lemma}
+Algorithm~\ref{alg1} terminates.
+\end{lemma}
+
+\begin{proof}
+Suppose otherwise. Write $t_0=1$ and $t_i=t_0+i$ for $i=1,2,3,\dots$. Then there is an infinite sequence of congruence classes $u_i \pmod{p^{t_i}}$ such that ${u_{i+1} \equiv u_i \pmod{p^{t_i}}}$, and such that the $u_i$ fail the hypotheses of both (i) and (ii). In particular, $\mathcal{P}_{u_i}$ is non-empty. By the pigeon-hole principle, some $\mathfrak{p}$ appears in infinitely many of the $\mathcal{P}_{u_i}$. Thus $\ord_{\mathfrak{p}}(u_i-\theta) \ge t_i\cdot e(\mathfrak{p}/p)$ infinitely often. However, the sequence $\{u_i\}$ converges to some $\alpha \in \mathbb{Z}_p$. Thus $\alpha=\theta$ in $\mathcal{O}_\mathfrak{p}$. This forces $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and $\alpha$ to be a $\mathbb{Z}_p$-root of $g(t)$. In particular, $\mathfrak{p}$ corresponds to the factor $(t-\alpha)$ in the $p$-adic factorisation of $g(t)$. There can be at most one such $\mathfrak{p}$, and so $\mathcal{P}_{u_i}=\{\mathfrak{p}\}$. In particular, the hypotheses of (ii) are satisfied and we have a contradiction.
+\end{proof}
+
+\begin{lemma}\label{Lem:alg1correct}
+Let $p \in \{p_1, \dots, p_v\}$ and let $\mathcal{L}_p$, $\mathcal{M}_p$ be as given by Algorithm~\ref{alg1}. Let $(x,y)$ be a solution to \eqref{Eq:TM2}. Then
+\begin{itemize}
+\item either there is some $\mathfrak{b} \in \mathcal{L}_p$ such that \eqref{Eq:case1} is satisfied; 
+\item or there is some $(\mathfrak{b},\mathfrak{p}) \in \mathcal{M}_p$, with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and integer $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+Let 
+\[t_0 = 1, \qquad \mathcal{U}_0=\{w \; :\;  w \in \{0,1,\dots,p-1\}\}.\]
+These are the initial values for $t$ and $\mathcal{U}$ in the algorithm. Then $x/y \equiv u_0 \pmod{p^{t_0}}$ for some $u_0 \in \mathcal{U}_0$. Write $\mathcal{U}_i$ for the value of $\mathcal{U}$ after $i$ iterations of the algorithm, and let $t_i=t_0+i$. As the algorithm terminates, $\mathcal{U}_i = \emptyset$ for sufficiently large $i$. In particular, there is some $i$ such that $x/y \equiv u_i \pmod{p^{t_i}}$ where $u_i \in \mathcal{U}_i$, but there is no element in $\mathcal{U}_{i+1}$ congruent to $x/y$ modulo $p^{t_{i+1}}$. Thus $u_i$ must satisfy the hypotheses of either (i) or (ii). Write $u=u_i$ and $t=t_i$ so that $x/y \equiv u \pmod{p^t}$. By Lemma~\ref{Lem:main}, we have $\mathfrak{b}_u \mid (x-y\theta) \mathcal{O}_K$. Moreover, by that lemma and the definition of $\mathcal{P}_u$, if $\mathfrak{q} \notin \mathcal{P}_u$ then $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is not divisible by $\mathfrak{q}$. 
+
+Suppose first that the hypothesis of (i) is satisfied: $\mathcal{P}_u = \emptyset$. The algorithm adds $\mathfrak{b}_u$ to the set $\mathcal{L}_p$, and by the above we know that \eqref{Eq:case1} is satisfied, proving the lemma in this case.
+
+Suppose next that the hypothesis of (ii) is satisfied: $\mathcal{P}_u=\{\mathfrak{p}\}$ where $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$ and there is a unique $\mathbb{Z}_p$ root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$. The algorithm adds $(\mathfrak{b}_u,\mathfrak{p})$ to the set $\mathcal{M}_p$, and by the above, $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is an integral ideal, not divisible by any prime $\mathfrak{q} \mid p$, $\mathfrak{q} \ne \mathfrak{p}$. Thus there is some positive $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied, proving the lemma in this case.
+\end{proof}
+
+\begin{Algorithm}\label{alg2}
+To compute $L_p$ and $M_p$.
+
+\begin{enumerate}
+\item[Step (a)] Let 
+\[ L_p \leftarrow \mathcal{L}_p, \qquad M_p \leftarrow \mathcal{M}_p,\]
+where $\mathcal{L}_p$, $\mathcal{M}_p$ are computed by Algorithm~\ref{alg1}.
+
+\item[Step (b)] Let
+\[ t \leftarrow 2, \qquad \mathcal{U} \leftarrow \{pw \; : \; w \in \{0,1,\dots,p-1\} \}.\]
+
+\item[Step (c)] Let
+\[ \mathcal{U}^{\prime} \leftarrow \emptyset.\]
+Loop through the elements $u \in \mathcal{U}$. Let 
+\[\mathcal{P}_u=\{\mathfrak{q} \mid p \; : \; \ord_{\mathfrak{q}}(1-u\theta ) \ge t \cdot e(\mathfrak{q}/p)\},\]
+and
+\[ \mathfrak{b}_u=\prod_{\mathfrak{q} \mid p} \mathfrak{q}^{\min\{\ord_{\mathfrak{q}}(1-u\theta ), t \cdot e(\mathfrak{q}/p)\}} =(1-u\theta) \mathcal{O}_K+p^t \mathcal{O}_K.\]
+
+\begin{enumerate}
+\item[(i)] If $\mathcal{P}_u=\emptyset$  
+%$\ord_p(\Norm(u-\theta)) \ge (n-1) c_0$ 
+then
+\[L_p \leftarrow L_p \cup \{\mathfrak{b}_u\}.\]
+%\item[(ii)] Else if $\cP_u=\{\fp\}$ with
+%$e(\fp/p)=f(\fp/p)=1$, 
+%and
+%$\ord_p(\Norm(u-\theta)) \ge (n-1) c_0$,
+%and there is at least on $\Z_p$-root $\alpha$ of 
+%$f$ satisfying $\alpha \equiv u \pmod{p^t}$,
+%then
+%\[
+%\cM_p \leftarrow \cM_p \cup \{ (\fb_u,\fp)\}.
+%\]
+\item[(iii)] Else 
+\[\mathcal{U}^\prime \leftarrow \mathcal{U}^\prime \cup \{ u+p^{t+1}w : w \in \{0,\dotsc,p-1\} \}.\]
+\end{enumerate}
+
+\item[Step (d)] If $\mathcal{U}^\prime \ne \emptyset$ then let
+\[t \leftarrow t+1, \qquad \mathcal{U} \leftarrow \mathcal{U}^\prime,\]
+and return to Step (c). Else output $L_p$, $M_p$.
+\end{enumerate}
+%\noindent \textbf{Output:} $\cL_p$, $\cM_p$.
+\end{Algorithm}
+
+\begin{lemma}
+Algorithm~\ref{alg2} terminates. 
+\end{lemma}
+
+\begin{proof}
+Suppose that the algorithm does not terminate. Let $t_0=2$ and $t_i=t_0+i$. Then there is an infinite sequence $\{u_i\}$ such that $u_{i+1} \equiv u_i \pmod{t_i}$ and so that $\mathcal{P}_{u_i} \ne \emptyset$. Moreover, $p \mid u_0$. Let $\alpha$ be the limit of $\{u_i\}$ in $\mathbb{Z}_p$. By the pigeon-hole principle there is some $\mathfrak{q} \mid p$ appearing in infinitely many $\mathcal{P}_{u_i}$, and so $\ord_{\mathfrak{q}}(1 -u_i \theta) \ge t_i \cdot e(\mathfrak{q}/p)$. Thus $1-\alpha \theta=0$ in $K_{\mathfrak{q}}$. But as $p \mid u_0$, we have $\ord_p(\alpha) \ge 1$, and so $\ord_{\mathfrak{q}}(\theta)<0$. This contradicts the fact that $\theta$ is an algebraic integer. Therefore the algorithm does terminate.
+\end{proof}
+
+\begin{lemma}\label{Lem:alg2correct}
+Let $p \in \{p_1, \dots, p_v\}$ and let $L_p$, $M_p$ be as given by Algorithm~\ref{alg2}. Let $(x,y)$ be a solution to \eqref{Eq:TM2}. Then
+\begin{itemize}
+\item either there is some $\mathfrak{b} \in \mathcal{L}_p$ such that \eqref{Eq:case1} is satisfied; 
+\item or there is some $(\mathfrak{b},\mathfrak{p}) \in \mathcal{M}_p$, with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and integer $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+Now let $(x,y)$ be a solution to \eqref{Eq:TM2}. In view of Lemma~\ref{Lem:alg1correct} we may suppose $p \mid y$. Then $\ord_{\mathfrak{q}}(x-y\theta)=\ord_{\mathfrak{q}}(1 - y/x \theta)$. The rest of the proof is similar to the proof of Lemma~\ref{Lem:alg1correct}.
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Refinements}
+
+\begin{itemize}
+\item If some $\mathfrak{b}$ is contained $L_p$, and some $(\mathfrak{b}^\prime,\mathfrak{p})$ is contained in $M_p$, with $\mathfrak{b}^\prime \mid \mathfrak{b}$ and $\mathfrak{b}/\mathfrak{b}^\prime=\mathfrak{p}^w$
+for some $w \ge 0$, then we may delete $\mathfrak{b}$ from $L_p$ and the conclusion to Lemma~\ref{Lem:alg2correct} continues to hold.
+\item If some $(\mathfrak{b},\mathfrak{p})$, $(\mathfrak{b}^\prime,\mathfrak{p})$ are contained in $M_p$, with $\mathfrak{b}^{\prime} \mid \mathfrak{b}$, and $\mathfrak{b}/\mathfrak{b}^{\prime}=\mathfrak{p}^w$ for some $w \geq 0$, then we may delete $(\mathfrak{b},\mathfrak{p})$ from $M_p$ and the conclusion to Lemma~\ref{Lem:alg2correct} continues to hold.
+\item After the above two refinements, we reduced the redundancy in the sets $M_p$ and $L_p$ similar to Kyle Hambrook's redundancy removal.
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\section{Factorization of the Thue-Mahler Equation}
+
+After applying Algorithm~\ref{alg1} and Algorithm~\ref{alg2}, we are reduced to solving finitely many equations of the form
+\begin{equation}\label{Eq:TMfactored}
+(x-y\theta)\mathcal{O}_K=\mathfrak{a} \mathfrak{p}_1^{u_1}\cdots \mathfrak{p}_{\nu}^{u_{\nu}}
+\end{equation}
+in integer variables $x,y,u_1, \dots, u_{\nu}$ with $u_i \geq 0$ for $i = 1, \dots, \nu$, where $0 \leq \nu \leq v$. Here
+\begin{itemize}
+\item $\mathfrak{p}_i$ is a prime ideal of $\mathcal{O}_K$ arising from Algorithm~\ref{alg1} and Algorithm~\ref{alg2} applied to $p_i \in \{p_1, \dots, p_v\}$, such that $(\mathfrak{b_i}, \mathfrak{p}_i) \in M_{p_i}$ for some ideal $\mathfrak{b}_i$. 
+\item $\mathfrak{a}$ is an ideal of $\mathcal{O}_K$ of norm $|c|\cdot p_1^{t_1} \cdots p_v^{t_v}$ such that
+$u_i + t_i =  z_i$. Note that if $M_{p_i} = \emptyset$ for some $i$ (necessarily $i \in \{{\nu} + 1, \dots, v\}$) we take $u_i = 0$. 
+\end{itemize}
+
+For each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_{\nu}$, we reduce this equation to a number of so-called ``$S$-unit equations''. In the worst case scenario, the method in Tzanakis-de Weger reduces this to $h^v$ such equations, where $h$ is the class number of $K$. The method of Siksek, described below, gives only $m/2$ $S$-unit equations, where $m$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). 
+
+Let 
+\[\phi : \mathbb{Z}^v \rightarrow \text{Cl}(K), \qquad (n_1,\dots ,n_{\nu}) \mapsto [\mathfrak{p}_1]^{n_1}\cdots [\mathfrak{p}_{\nu}]^{n_{\nu}}.\]
+We can compute the image and kernel of this map in \texttt{Magma}. Note that if \eqref{Eq:TMfactored} has a solution $\mathbf{u}=(u_1,\dots, u_{\nu})$ then, by \eqref{Eq:TMfactored},
+\[\phi(\mathbf{u})=[\mathfrak{a}]^{-1}.\]
+In particular, if $[\mathfrak{a}]^{-1}$ does not belong to the image of $\phi$ then \eqref{Eq:TMfactored} has no solutions. We therefore suppose that $[\mathfrak{a}]^{-1}$ belongs to the image, and compute a preimage $\mathbf{r}=(r_1,\dotsc,r_{\nu})$ using \texttt{Magma}. Then $\mathbf{u}-\mathbf{r}$ belongs to the kernel of $\phi$. The kernel is a subgroup of $\mathbb{Z}^v$ of rank $\nu$. Let $\mathbf{a}_1,\dots,\mathbf{a}_{\nu}$ be a basis for the kernel and let 
+\[\mathbf{u}-\mathbf{r}=n_1 \mathbf{a}_1+\cdots + n_{\nu} \mathbf{a}_{\nu}\]
+where the $n_i \in \mathbb{Z}$. Here, we adopt the notation
+\[\mathbf{a}_i = (a_{1i}, \dots, a_{\nu i}),\]
+and we let $A$ be the matrix with columns $\mathbf{a}_1,\dots,\mathbf{a}_{\nu}$. Hence the $(i,j)^{\text{th}}$ entry of $A$ is $a_{ij}$, the $i^{\text{th}}$ entry of the vector $\mathbf{a}_j$. Then $\mathbf{u}= A\mathbf{n}+\mathbf{r}$ where $\mathbf{n} = (n_1,\dots,n_{\nu})$.
+%The important thing for us is that $A$ is invertible. In fact its determinant is (up to sign) equal to $\#\img(\phi)$ and so divides the class number. As $A$ is invertible, there are positive constants $C_1$, $C_2$ such that
+%\[
+% H(\mathbf{n}) \le C_1 H(\mm), \mathbb{Q}uad H(\mm) \le C_2 H(\mathbf{n}).
+%\]
+For $\mathbf{a}_i=(a_{1i},\dotsc,a_{\nu i}) \in \mathbb{Z}^{\nu}$ we adopt the notation 
+\[\tilde{\mathfrak{p}}^\mathbf{a} :=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_{\nu}^{a_{\nu i}}.\]
+Let
+\[\mathfrak{c}_1= \tilde{\mathfrak{p}}^{\mathbf{a}_1},\dotsc,\mathfrak{c}_{\nu}= \tilde{\mathfrak{p}}^{\mathbf{a}_{\nu}}.\]
+Then we can rewrite \eqref{Eq:TMfactored} as
+\[\begin{array}{ll}
+(x-y\theta) \mathcal{O}_K 
+	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
+	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_{\nu} \mathbf{a}_{\nu}}\\
+	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.
+\end{array}\]
+
+Now
+\[[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}] 
+	= [\mathfrak{a}] \cdot [\mathfrak{p}_1]^{r_1}\cdots [\mathfrak{p}_{\nu}]^{r_{\nu}} 
+	= [\mathfrak{a}]\cdot \phi(r_1,\dotsc,r_{\nu})=[1]\]
+as $\phi(r_1,\dotsc,r_{\nu})=[\mathfrak{a}]^{-1}$ by construction. Thus 
+\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K\]
+for some $\alpha \in K^*$. We note that some of the $r_i$ might be negative so we don't expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $\alpha$ into our $p$-adic fields. In those instances, the precision on our $\theta^{(i)}$ may not be high enough, and as a result, $\alpha$ may be mapped to $0$. Increasing the precision is not ideal at this point, as it would require us to recompute a fair amount of data and so is computationally inefficient. Instead, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. (Having already computed the class group, computing the class number is not costly.)
+
+Now, 
+\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \phi(\mathbf{a}_j) = [1]\]
+as the $\mathbf{a}_j$ are a basis for the kernel of $\phi$. Thus for all $j \in \{1, \dots, {\nu}\}$, there are $\gamma_j \in K^*$ such that $\mathfrak{c}_j=\gamma_j \mathcal{O}_K$. 
+
+Thus we have rewritten \eqref{Eq:TMfactored} as
+\begin{equation}\label{Eq:TMprincipal}
+(x-y\theta) \mathcal{O}_K=\alpha \cdot \gamma_1^{n_1} \cdots \gamma_{\nu}^{n_{\nu}} \mathcal{O}_K
+\end{equation}
+for unknown integers $(n_1, \dots, n_{\nu})$. 
+Note that the number of cases has not increased. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$ then we have a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain one corresponding equation \eqref{Eq:TMprincipal}.
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Refinements}
+In most cases, the method described above is far more efficient than that of Tzanakis-de Weger, however, computing the class group may still be a costly computation. For some values of $x$, it may happen that computing the class group will take longer than directly checking each potential ideal equation. This case arises when. In such cases, we proceed as follows.
+
+For $i = 1, \dots, {\nu}$ let $h_i$ be the smallest positive integer for which $\mathfrak{p}_i^{h_i}$ is principal and let 
+$s_i$ be a positive integer satisfying $0 \leq s_i < h_i$. Let
+\[\mathbf{a}_i = (a_{1i}, \dots, a_{{\nu}i}).\]
+where $a_{ii} = h_i$ and $a_{ji} = 0$ for $j \neq i$. We let $A$ be the matrix with columns $\mathbf{a}_1, \dots, \mathbf{a}_{\nu}$. Hence $A$ is a diagonal matrix with $h_i$ along the diagonal. For every possible combination of the $s_i$, we set $\mathbf{r} = (s_1, \dots, s_{\nu})$. Now, if \eqref{Eq:TMfactored} has a solution $\mathbf{u} = (u_1, \dots, u_{\nu})$, it necessarily must be of the form $\mathbf{u} = A\mathbf{n} + \mathbf{r}$, where $\mathbf{n} = (n_1, \dots, n_{\nu})$. 
+
+Using the above notation, we write
+\[\mathfrak{c}_i = \tilde{\mathfrak{p}}^{\mathbf{a}_i}=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_{\nu}^{a_{{\nu}i}} = \mathfrak{p}_i^{h_i}.\]
+Thus, we can write \eqref{Eq:TMfactored} as
+\[\begin{array}{ll}
+(x-y\theta) \mathcal{O}_K 
+	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
+	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_{\nu} \mathbf{a}_{\nu}}\\
+	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.
+\end{array}\]
+Now, by definition of $h_j$, there exist $\gamma_j \in K^*$ such that 
+\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \mathfrak{p}_j^{h_j} = \gamma_j \mathcal{O}_K.\]
+for all $j \in \{1, \dots, {\nu}\}$.
+
+Now, for each choice of $\mathbf{r}$, if $\mathbf{u}$ is a solution, we must necessarily have
+\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K.\]
+Hence, we iterate through every possible $\mathbf{r}$, and store those cases for which this occurs. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+At this point, regardless of which method was used to compute $A$ and $\mathbf{r}$, we note that the ideal generated by $\alpha$ has norm
+\[|c|\cdot p_1^{t_1 + r_1} \cdots p_{\nu}^{t_{\nu} + r_{\nu}}p_{\nu +1}^{t_{\nu +1}} \cdots p_v^{t_v}.\]
+Now the $n_i$ are related to the $z_i$ via
+\[z_i = u_i + t_i = \sum_{j = 1}^{\nu}n_ja_{ij} + r_i + t_i.\]
+Hence
+\[Z_i = z_i - \ord_p(u) - \ord_p(a) = \sum_{j = 1}^{\nu}n_ja_{ij} + r_i + t_i - \ord_p(u) - \ord_p(a) \]
+Here, we note that $u_i = r_i = 0$ for all $i \in \{\nu + 1, \dots, v\}$. 
+
+
+Fix a complete set of fundamental units of $\mathcal{O}_K: \varepsilon_1, \dots, \varepsilon_r$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. Then
+\begin{equation} \label{Eq:main2}
+x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
+\end{equation}
+with unknowns $a_i \in \mathbb{Z}$, $n_i \in \mathbb{Z}_{\geq 0}$, and $\zeta$ in the set $T$ of roots of unity in $\mathcal{O}_K$. Since $T$ is also finite, we will treat $\zeta$ as another parameter. Since $K$ is a degree $3$ extension of $\mathbb{Q}$, we either have $3$ real embeddings of $K$ into $\mathbb{C}$ (hence $s = 3$, $t = 0$ and $r = s+ t -1 = 3 + 0 -1 = 2$), or there is one real embedding of $K$ into $\mathbb{C}$ and a pair of complex conjugate embeddings of $K$ into $\mathbb{C}$ (hence $s = 1$, $t = 1$, and $r = s +t -1 = 1 + 1 -1 = 1$). 
+That is, we have either  
+\begin{equation} \label{Eq:main3}
+x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
+\quad \text{ or } \quad 
+x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \varepsilon_2^{a_2}\cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
+\end{equation}
+
+To summarize, our original problem of solving \eqref{Eq:TM1} has been reduced to the problem of solving finitely many equations of the form \eqref{Eq:main3} for the variables 
+\[x,y, a_1, n_1, \dots, n_{\nu} \quad \text{ or } \quad x,y, a_1,a_2, n_1, \dots, n_{\nu} .\] 
+
+From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate the variables $x,y$ and set ourselves up to bound the exponents $a_1,n_1, \dots, n_{\nu}$, respectively $a_1,a_2,n_1, \dots, n_{\nu}$. We note here that generating the class group can be a timely computation. However, if we follow the method of Tzanakis-de Weger, we may be left with $h^{\nu}$ $S$-unit equations, all of which we would need to apply the principal ideal test to. That is to say, computing the class group is a faster operation than the alternative provided by Tzanakis-de Weger. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\section{The $S$-Unit Equation}
+
+Let $p \in \{p_1, \dots, p_v, \infty\}$. Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \theta^{(2)}, \theta^{(3)}$. Let $i_0, j, k \in \{1,2,3\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. From the Siegel identity
+\[\left(\theta^{(i_0)} - \theta^{(j)}\right)\left(x-y\theta^{(k)}\right) + \left(\theta^{(j)} - \theta^{(k)}\right)\left(x-y\theta^{(i_0)}\right) + \left(\theta^{(k)} - \theta^{(i_0)}\right)\left(x-y\theta^{(j)}\right) = 0,\]
+applying these embeddings to $\beta = x-y\theta$ yields
+\begin{equation}\label{Eq:Sunit}
+\lambda = \delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i} - 1 = \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i},
+\end{equation}
+where
+\[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
+are constants and $r = 1$ or $r = 2$. 
+
+Note that $\delta_1$ and $\delta_2$ are constants, in the sense that they do not rely on 
+\[x, y, a_1, \dots, a_r,n_1, \dots, n_{\nu}.\]
+
+
+
+
+
+\subsection{Lattices: LLL and the Fincke-Pohst algorithm}
+\edit{references for this are the two books living in the $x+y=z$ folder on the desktop}
+
+\textbf{Lattices}
+An $n$-dimensional lattice is a discrete subgroup of $\mathbb{R}^n$ of the form
+\[\Gamma = \left\{ \sum_{i=1}^n x_i \mathbf{c}_i \ : \ x_i \in \mathbb{Z} \right\},\]
+where $\mathbf{c}_1, \dots, \mathbf{c_n}$ are vectors forming a basis for $\mathbb{R}^n$. We say that the vectors $\mathbf{c}_1, \dots, \mathbf{c_n}$ form a \textit{basis} for $\Gamma$, or that they generate $\Gamma$. Let $B$ denote the matrix whose columns are the vectors $\mathbf{c}_1, \dots, \mathbf{c_n}$. Any lattice element $\mathbf{v}$ may be expressed as $\mathbf{v} = B\mathbf{x}$ for some $\mathbf{x} \in \mathbb{Z}^n$. 
+
+A \textit{bilinear form} on a lattice $\Gamma$ is a function $\Phi: \Gamma \times \Gamma \to \mathbb{Z}$ satisying
+\begin{enumerate}
+\item $\Phi(\mathbf{u}, \mathbf{v}+\mathbf{w}) = \Phi(\mathbf{u},\mathbf{v}) + \Phi(\mathbf{u},\mathbf{w})$
+\item $\Phi(\mathbf{u}+\mathbf{v}, \mathbf{w}) = \Phi(\mathbf{u},\mathbf{w}) + \Phi(\mathbf{v},\mathbf{w})$
+\item $\Phi(a\mathbf{u}, \mathbf{w}) = a\Phi(\mathbf{u},\mathbf{w})$
+\item $\Phi(\mathbf{u}, a\mathbf{w}) = a\Phi(\mathbf{u},\mathbf{w})$
+\end{enumerate}
+for all $\mathbf{u}, \mathbf{v}$, and $\mathbf{w}$ in $\Gamma$ and any $a \in \mathbb{R}$. 
+
+In particular, given a basis we can define a specific bilinear form on our lattice $\Gamma$ as part of its structure. In the case of integral lattices, we have $\Phi: \Gamma \times \Gamma \to \mathbb{Z}$. This form describes a kind of distance between elements $\mathbf{x}$ and $\mathbf{y}$ of the lattice defined by $\Phi(\mathbf{x},\mathbf{y})$. 
+
+A \textit{quadratic form} is a homogeneous polynomial of degree $2$. A form $Q$ is called positive definite if $Q(\mathbf{x})$ is strictly positive for any nonzero $\mathbf{x}$. A lattice is called \textit{positive definite} if its quadratic form is positive definite. 
+
+A bilinear form has an associated quadratic form $Q: \Gamma \to \mathbb{Z}$ which is simply defined by $Q(\mathbf{x}) = \Phi(\mathbf{x}, \mathbf{x})$. The bilinear forms (and their associated quadratic forms) that we will be using come from the usual inner product on vectors in $\mathbb{R}^n$, also known as the dot product $\mathbf{u}\cdot \mathbf{v}$ for $\mathbf{u},\mathbf{v} \in \Gamma$, and multiplication with the basis matrix for coordinate vectors. That is, if $\mathbf{u} = B\mathbf{x}$ and $\mathbf{v} = B\mathbf{y}$ for a basis $B$, we have $\Phi(\mathbf{x},\mathbf{y}) = \mathbf{x}^TB^TB\mathbf{y}$. 
+
+If $\mathbf{v} = B\mathbf{x}$, the \textit{norm} of the vector $\mathbf{v} \in \Gamma$ is defined by the quadratic form. We will be using the inner product $\mathbf{v} \cdot \mathbf{v}$. The norm of the coordinate vector $\mathbf{x}$ is then 
+\[\mathbf{v}^T\mathbf{v} = (B\mathbf{x})^T(B\mathbf{x}) = \mathbf{x}^TB^TB\mathbf{x}.\]
+Notice that this is also $\mathbf{x}^TA\mathbf{x}$ where $B^TB = A$. Here, $A$ is an example of the Gram matrix of $\Gamma$. The \textit{Gram matrix} of a lattice with basis $B$ with respect to a bilinear form $\Phi$ is defined to be the matrix A with entries $a_{ij} = \Phi(\mathbf{b}_i,\mathbf{b}_j)$.
+
+The bilinear form on L can be written with respect to either embedded or coordinate vectors. Using another basis to express the lattice elements is possible, and sometimes preferable. But the Gram matrix is specific to the bilinear form on the lattice, and should not change when operating on embedded vectors. If it is operating on coordinate vectors, the change of basis must be accounted for.
+
+If $A$ and $B$ are invertible $n \times n$ real matrices, then the lattice generated by the columns of $A$ is equal to the lattice generated by the columns of $B$ if and only if there is a unimodular matrix $U$ such that $AU = B$. 
+
+\textbf{LLL}
+\edit{Intro-ish: taken from Cohen p103
+Among al1 the Z bases of a lattice L, some are better than others. The ones whose elements are the shortest (for the corresponding norm associated to the quadratic form q) are called reduced. Since the bases al1 have the same determinant, to be reduced implies also that a basis is not too far from being orthogonal.
+The notion of reduced basis is quite old, and in fact in some sense one can even define an optimal notion of reduced basis. The problem with this is that no really satisfactory algorithm is known to find such a basis in a reasonable time, except in dimension 2 (Algorithm 1.3.14), and quite recently in dimension 3 from the work of B. VallŽe [Val].
+A real breakthrough came in 1982when A. K. Lenstra, H. W. Lenstra and L. Lovkz succeeded in giving a new notion of reduction (what is now called
+                                          2.6 Lattice Reduction Algorithms 85
+     LLL-reduction) and simultaneously a reduction algorithm which is determin- istic and polynomial time (see [LLL]).This has proved invaluable.}
+
+Let $\Gamma$ be a lattice with $\mathbf{c}_1, \dots, \mathbf{c}_n$. Define the vectors $\mathbf{c}_i^*$ for $i = 1, \dots, n$ and real numbers $\mu_{ij}$ ($1\leq j < i \leq n$) inductively by
+\[\mathbf{c}_i^* = \mathbf{c}_i - \sum_{j=1}^{i-1}\mu_{ij}\mathbf{c}_j^*, \quad \mu_{ij} = \frac{\langle\mathbf{c}_i,\mathbf{c}_j^*\rangle}{\langle\mathbf{c}_j,\mathbf{c}_j^*\rangle}\]
+(This is just the Gram-Scmidt process). The basis $\mathbb{c}_1,\dots, \mathbb{c}_n$ is called \textit{LLL-reduced} it
+\[|\mu_{ij}| \leq \frac{1}{2} \quad \text{ for } 1\leq j < i \leq n, \]
+\[\frac{3}{4}|\mathbb{c}_{i-1}^*|^2 \leq |\mathbb{c}_i^* + \mu_{ii-1}\mathbb{c}_{i-1}^*|^2 \quad \text{ for } 1 <i \leq n.\]
+
+These properties implies that an LLL-reduced basis is approximately orthogonal, and that, generically, its constituent vectors are roughly of the same length. Every $n$-dimensional lattice has an LLL-reduced basis and such a basis can be computed very quickly using the so-called LLL algorithm (\edit{ref}). The LLL algorithm takes as input an arbitrary basis for a lattice and outputs an LLL-reduced basis for the lattice. The algorithm is typically modified to additionally output a unimodular matrix $U$ such that $B = AU$, where $A$ is the matrix whose column-vectors are the input basis and $B$ is the matrix whose column-vectors are the LLL-reduced output basis. Several versions of this algorirhm are implemented in MAGMA, including de Weger's exact integer version. (\edit{ref}).
+
+For $\Gamma$ an $n$-dimensional lattice and $\mathbf{y}$ a vector in $\mathbb{R}^n$, we define
+\[l(\Gamma,\mathbf{y}) = \min_{\mathbf{x} \in \Gamma \backslash\{\mathbf{y}\}} |\mathbf{x} - \mathbf{y}|.\]
+The most important property of an LLL-reduced basis for us is the following lemma.
+\begin{lemma}
+\edit{lemma 18.1}
+\end{lemma}
+\edit{refs of where this lemma can be found - Cohen, for 1}
+Note that the assumption in lemma \edit{cite} is equivalent to $\mathbf{y} \notin \Gamma$. 
+
+\edit{Cohen:}  We see that the vector bl in a reduced basis is, in a very precise sense, not too far from being the shortest non-zero vector of L. In fact, it often is the shortest, and when it is not, one can, most of the time, work with bl instead of the actual shortest vector. As has already been mentioned, what makes al1these notions and theorems so valuable is that there is a very simple and efficient algorithm to find a reduced basis in a lattice. We now describe this algorithm in its simplest form.
+
+\textbf{Fincke-Pohst}
+
+We show how to modify the Fincke-Pohst algorithm to output short vectors in a translated lattice. That is, we compute the set of vectors $x$ such that 
+\[(x-c)^tB^tB(x-c) \leq C\]
+where $c$ is some vector over $\mathbb{Q}$ which represents the translation of our lattice. 
+
+
+We begin with the usual Fincke-Pohst method for 
+\[x^tB^tBx \leq C.\]
+We call a vector $\mathbf{v}$ \textit{small} if its norm $\Phi(\mathbf{v}, \mathbf{v})$ is less than a constant $C$. This clearly depends on the basis which is given, and can vary depending on the choice of basis. If a particular basis is not specified, it is assumed to be the matrix $B$ which defines the Gram matrix $A = B^tB$. This is equivalent to solving the inequality $\Phi(\mathbf{y}, \mathbf{y}) \leq C$ where $\Phi(\mathbf{y}, \mathbf{y}) = \mathbf{y}^t\mathbf{y}$ denotes the norm of the vector computed with respect to the lattice. Let $B$ denote the matrix whose columns are the basis vectors of the lattice $\mathcal{L}$. As an element of the lattice, $\mathbf{y} = B\mathbf{x}$ for some coordinate vector $\mathbf{x} \in \mathbb{Z}^n$. So our inequality becomes
+\[\Phi(\mathbf{y}, \mathbf{y}) = \mathbf{y}^t\mathbf{y} = \mathbf{x}^tB^tB\mathbf{x} \leq C.\] 
+We consider the quadratic form $Q(\mathbf{x}) = \mathbf{x}^t B^t B\mathbf{x}$ and solve $Q(\mathbf{x}) \leq C$.
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection*{Quadratic Completion}
+
+To solve our inequality, it helps to first rearrange the terms of our quadratic form. This reformulation is called the quadratic completion or quadratic complementation. Here we assume the lattice is positive definite. That is, every nonzero element has a positive norm. With this, we can find the Cholesky decomposition $A = LL^t$, where $L$ is a lower triangular matrix. Equivalently, we can express this as $A = R^t R$, where $R$ is an upper triangular matrix. Since Fincke-Pohst uses upper triangular matrices, this is what we will use. The formulas below will reflect this. We now express $Q$ as:
+\[ Q(\mathbf{x}) = \sum_{i=1}^m q_{ii}\left( x_i + \sum_{j=i+1}^m q_{ij}x_j\right)^2.\]
+
+Our coefficients $q_{ij}$ are defined from $R$ and stored in a matrix for convenience.
+\[q_{ij} =
+\begin{cases}
+\frac{r_{ij}}{r_{ii}} & \text{ if } i < j\\
+r_{ii}^2 & \text{ if } i = j
+\end{cases}.\]
+Since $R$ is upper triangular, the matrix $Q = [q_{ij}]$ will be as well.
+
+To obtain the upper triangular matrix $R$ from our matrix $A$, we compute the diagonal and non-diagonal entries as follows:
+\[r_{ii} = \sqrt{ a_{ii} - \sum_{k = 1}^{i-1}r_{ki}^2}\]
+\[r_{ij} = \frac{1}{r_{ii}}\left( a_{ij} - \sum_{k = 1}^{j-1}r_{ki}r_{kj}\right).\]
+
+Using these, we can reformulate the construction of the coefficients of $Q$ to use values from $A$. We will soon see how it is possible to do away with using the Cholesky decomposition entirely.
+\[q_{ii} = a_{ii} - \sum_{k = 1}^{i-1}r_{ki}^2\]
+\[q_{ij} = \frac{1}{r_{ii}^2}\left( a_{ij} - \sum_{k = 1}^{j-1}r_{ki}r_{kj}\right).\]
+By putting this construction in terms of the coefficients of Q only, we arrive at the following
+\[q_{ii} = a_{ii} - \sum_{k = 1}^{i-1}q_{ki}^2q_{kk}\]
+\[q_{ij} = \frac{1}{q_{ii}}\left( a_{ij} - \sum_{k = 1}^{j-1}q_{ki}q_{kj}q_{kk}\right).\]
+
+We can then calculate these coefficients, starting with $q_{11}$ and calculating $q_{1j}$ for $1 \leq j \leq m$. Then we continue by calculating $q_{22}$ and $q_{2j}$ for $2 \leq j \leq m$. We proceed by first always calculating the diagonal entry $q_{ii}$ and then $q_{ij}$ for $i \leq j \leq m$ until we reach $q_{mm}$.
+In practice, this is how we compute the coefficients for our form. However, it is equally possible to first compute the Cholesky Decomposition using available methods, and then computing the entries of $Q$ from this. In fact, we do exactly this, by first computing the Cholesky decomposition.
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection*{The usual Fincke-Pohst way to bound $x_i$}
+
+Since the sum $Q(x)$ is less than $C$, the individual term $q_{mm}x_m^2$ must also be less than $C$.
+\begin{align*}
+\sum_{i=1}^m q_{ii}\left( x_i + \sum_{j=i+1}^m q_{ij}x_j\right)^2	& \leq C \\
+q_{mm}x_m^2 & \leq C\\\
+x_m^2 & \leq \frac{C}{q_{mm}}.
+\end{align*}
+In fact, $x_m$ is bounded above by $\sqrt{C/q_{mm}}$ and below by $-\sqrt{C/q_{mm}}$. 
+
+This illustrates the first step in establishing bounds on a specific entry $x_i$. Adding more terms from the outer sum to this sequence, a pattern emerges.
+\begin{align*}
+q_{mm}x_m^2 & \leq C\\
+q_{m-1, m-1}\left(x_{m-1} + q_{m-1,m}x_m\right)^2 & \leq C - q_{mm}x_m^2\\
+q_{m-2, m-2}\left(x_{m-2} + \sum_{j = m-1}^m q_{m-2,j}x_j\right)^2 & \leq C - q_{mm}x_m^2 - q_{m-1, m-1}\left(x_{m-1} + q_{m-1,m}x_m\right)^2\\
+\end{align*}
+
+Let
+\[U_k = \sum_{j = k+1}^m q_{kj}x_j\]
+so that we can rewrite $Q(\mathbf{x})$ as 
+\[Q(\mathbf{x}) = \sum_{i=1}^m q_{ii}\left( x_i + \sum_{j=i+1}^m q_{ij}x_j\right)^2 = \sum_{i=1}^m q_{ii}\left( x_i + U_i\right)^2\]
+In general, 
+\[q_{kk}(x_k + U_k)^2 \leq C - \sum_{i = k+1}^m q_{ii}(x_i + U_i)^2.\]
+Let $T_k$ denote the bound on the right-hand side. That is
+\[T_k = C - \sum_{i = k+1}^m q_{ii}(x_i + U_i)^2,\]
+so that $T_m = C$, $T_{m-1} = C - q_{mm}x_m^2$ and 
+\[T_{m-2} = C - q_{mm}x_m^2 - q_{m-1, m-1}\left(x_{m-1} + q_{m-1,m}x_m\right)^2.\]
+
+We set $T_m$ as $C$ and find each subsequent $T_k$ by subtracting the next term from the outer summand:
+\[T_k = C - \sum_{i = k+1}^m q_{ii}(x_i + U_i)^2,\]
+\[T_k = T_{k+1} - q_{k+1,k+1}(x_{k+1} + U_{k+1})^2.\]
+Now, we have an upper bound for each summand. 
+\[q_{kk}(x_k + U_k)^2 \leq T_k.\]
+Using this, we can estimate upper and lower bounds for each $x_k$ in the coordinate vector $\mathbf{x}$. We start by computing the last entries of $\mathbf{x}$ and their bounds first. Assuming that the last several entries of $\mathbf{x}$ have been assigned, upper and lower bounds on $x_k$ can be determined. Now that we have established a bound on a term in the outer sum, we can determine bounds on the specific entry $x_k$. Take the above equation, and solve for $x_k$. Take the above equation and solve for $x_k$:
+\begin{align*}
+(x_k + U_k)^2	& \leq T_k/q_{kk}\\
+	x_k + U_k	& \leq \sqrt{T_k/q_{kk}}\\
+	x_k 		& \leq \sqrt{T_k/q_{kk}} - U_k.
+\end{align*}
+Similarly, we have a lower bound:
+\[x_k \geq - \sqrt{T_k/q_{kk}} - U_k.\]
+Since $x_k$ must be an integer, we can restrict our bounds further. Let $t_k = \sqrt{T_k/q_{kk}}$. 
+\[UB_k = \lfloor t_k - U_k \rfloor\]
+\[LB_k = \lceil-t_k - U_k\rceil\]
+Here $UB_k$ is the upper bound on $x_k$ and $LB_k$ is the lower bound on $x_k$. 
+\[LB_x \leq x_k \leq UB_k.\]
+
+To enumerate all of the vectors $\mathbf{x}$ such that $Q(\mathbf{x}) \leq C$, begin with the last entry $x_m$ (letting all other $x_j = 0$). Determine the upper and lower bounds $UB_m$ and $LB_m$ by first calculating $t_m = \sqrt{T_m/q_{mm}}$. We define $U_m = 0$, and by definition remember that $T_m = C$.
+
+For each entry $x_i$, starting with $x_m$ and going down to $x_1$, we initialize the value to be $x_i = LB_i$. After the value is initialized, we begin to increment the values of all the entries, adding 1 to each entry until we either reach the last index (in which case we have found a solution) or we exceed the upper bound on a particular entry (we will need to readjust the previously assigned entries). If at any time the lower bound exceeds the upper bound for a given entry, it will become immediately apparent when the value for that entry is initialized. We must then backtrack to our previous entries (that is, entries with a higher index). If we reach x1 without exceeding the upper bounds for any entry, then we have found a complete vector $\mathbf{x}$ which satisfies $Q(\mathbf{x}) \leq C$.
+
+We will know we have found all the short vectors when we reach the zero vector. This is because we start by assigning each value $x_i$ its lower bound, which is calculated with respect to the values $x_{i+1}, \dots, x_n$. We increase $x_i$ incrementally, until it exceeds the corresponding calculated upper bound. When this happens we revisit $x_{i+1}$, increasing its value. Since $x_{i+1}$ was originally assigned its own lower bound, it starts off as a negative integer and increases steadily until it reaches $0$. Likewise, the other values will start off negative at each iteration and slowly increase in value. It is only when all entries are $0$ that the algorithm terminates. When we add each vector, we also add the vector with entries $-x_i$ for each $i$. In this we capture all the small vectors without having to check positive values for $x_n$.
+
+Before beginning the search, first find the coefficients of the quadratic form expressed as above. Initialize $T_k,U_k,UB_k$ and $x_k$ to be $0$ for all $k$. Begin with $i = m$ and $T_i = C$ as the value bounding our vectors.
+
+It is noted in the Fincke-Pohst paper that if we label the columns of $R$ by $\mathbf{r}_i$ (from the Cholesky decomposition $\mathbf{x}^tR^tR\mathbf{x}$) and the rows of $R^{-1}$ by $\mathbf{r}'_i$, then we see that 
+\[x_i^2 = \left( \mathbf{r}'^t_i \left( \sum_{k=1}^m x_k \mathbf{r}_k\right) \right)^2 \leq \mathbf{r}'^t_i \mathbf{r}_i (\mathbf{x}^tR^tR\mathbf{x}) \leq \| \mathbf{r}'_i \|^2C.\]
+
+So it may behoove us to reduce the rows of $R^{-1}$ in order to reduce our search space. Furthermore, it helps to put the smallest basis vectors first, so reordering the columns may also be beneficial.
+
+Express this reduction with a unimodular matrix $V^{-1}$ so that $R_1^{-1} = V^{-1}R^{-1}$. Then reorder the columns of $R_1$ with a permutation matrix $P$. Since $R_1 = RV$, we then have that $R_2 = (RV)P$.
+
+Then $R_2^{-1} = P^{-1}V^{-1}R^{-1}$. If we find a solution to the inequality $\mathbf{y}^tR_2^tR_2\mathbf{y}\leq C$, we can recover a solution to our original inequality by $\mathbf{x} = VP\mathbf{y}$. Since $R^{-1}_2 =P^{-1}V^{-1}R^{-1}$, we know that $R_2 = RVP$. 
+
+\begin{align*}
+\mathbf{y}^tR_2^tR_2\mathbf{y} & \leq C\\
+\mathbf{y}^t(P^tV^tR^t)(RVP)\mathbf{y} & \leq C\\
+(\mathbf{y}^tP^tV^t)R^tR(VP\mathbf{y}) & \leq C\\
+(VP\mathbf{y})^tR^tR(VP\mathbf{y}) & \leq C\\
+\mathbf{x}^tR^tR\mathbf{x} &\leq C.
+\end{align*}
+
+This improves the search time by giving us a nicer quadratic form to work with. Once we find solutions to the inequality given by $Q_2(\mathbf{y}) = \mathbf{y}^tR_2^tR_2\mathbf{y} \leq C$, it is a simple matter of translating them into solutions of our original inequality.
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Translated Lattices}
+We now explain how to apply Fincke-Pohst to the case
+\[(x-c)^tB^tB(x-c) \leq C.\]
+In place of the usual reduction listed above, we use MAGMA's built-in LLLGram function on the symmetric positive-definite matrix $A = B^tB$. Here, since $A$ is symmetric and positive-definite, it can be written as $A = R^tR$ for some upper triangular matrix $R$ (via Cholesky Decomposition).The function LLLGram, with input $A$, computes a matrix $G$ which is the Gram matrix corresponding to a LLL-reduced form of the matrix $R$. This function returns three values:
+\begin{itemize}
+\item A LLL-reduced Gram matrix $G$ of the Gram matrix $A$;
+\item A unimodular matrix $U$ in the matrix ring over $\mathbb{Z}$ whose degree is the number of rows of $A$ such that $G=U^tAU$ (technically it returns $G=UAU^t$, but we change this here to simplify our computations later);
+\item The rank of $A$ (which equals the dimension of the lattice generated by $R$).
+\end{itemize}
+
+Thus
+\[(U^{-1})^tGU^{-1} = A\]
+and we have
+\begin{align*}
+(x-c)^tB^tB(x-c) & \leq C\\
+(x-c)^tA(x-c) & \leq C\\
+(x-c)^t(U^{-1})^tGU^{-1}(x-c) \leq C\\
+\left(U^{-1}(x-c)\right)^tG \left(U^{-1}(x-c)\right) \leq C\\
+\left(y-d\right)^tG \left(y-d\right) \leq C
+\end{align*}
+where
+\[y = U^{-1}x \quad \text{ and } \quad d = U^{-1}c.\]
+Now, we are in position to enumerate the short vectors $y$ satisfying 
+\[\left(y-d\right)^tG \left(y-d\right) \leq C.\]
+We retrieve our solutions $x$ via $x = Uy$.
+
+As before, we generate the matrix $Q$ such that 
+\[ Q(\mathbf{x}) = \sum_{i=1}^m q_{ii}\left( y_i - d_i + \sum_{j=i+1}^m q_{ij}(y_j - d_j)\right)^2.\]
+
+Since the sum $Q(x)$ is less than $C$, the individual term $q_{mm}(y_m - d_m)^2$ must also be less than $C$.
+\begin{align*}
+\sum_{i=1}^m q_{ii}\left( y_i - d_i + \sum_{j=i+1}^m q_{ij}(y_j - d_j)\right)^2	 & \leq C \\
+q_{mm}(y_m - d_m)^2 & \leq C.
+\end{align*}
+Here, in place of the usual method of bounding $y_m - d_m$ by $\sqrt{C/q_{mm}}$ and $-\sqrt{C/q_{mm}}$, we instead let $y_m$ vary between $-\lfloor(-d_m)\rfloor$ and $-\lceil(-d_m)\rceil$. In this way, we simply need to verify that, for these choices of $y_m$, the equivalence
+\[q_{mm}(y_m - d_m)^2 \leq C\]
+is satisfied. If it is, we store this value of $y_m$, otherwise we let $y_m = y_m + 1$. This illustrates the first step in establishing bounds on a specific entry $y_i$. Adding more terms from the outer sum to this sequence, a pattern emerges.
+
+Let
+\[U_i = -d_i + \sum_{j = i+1}^m q_{ij}(y_j - d_j)\]
+so that we can rewrite $Q(\mathbf{x})$ as 
+\[ Q(\mathbf{x}) = \sum_{i=1}^m q_{ii}\left( y_i - d_i + \sum_{j=i+1}^m q_{ij}(y_j - d_j)\right)^2 = \sum_{i=1}^m q_{ii}\left( y_i + U_i\right)^2\]
+In general, 
+\[q_{kk}(y_k + U_k)^2 \leq C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2.\]
+Let $T_k$ denote the bound on the right-hand side. That is
+\[T_k = C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2,\]
+so that $T_m = C$, $T_{m-1} = C - q_{mm}(y_m - d_m)^2$ and 
+\[T_{m-2} = C - q_{mm}(y_m - d_m)^2 - q_{m-1, m-1}\left(y_{m-1} - d_{m-1} + q_{m-1,m}(y_m-d_m)\right)^2.\]
+
+We set $T_m$ as $C$ and find each subsequent $T_k$ by subtracting the next term from the outer summand:
+\[T_k = C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2,\]
+\[T_k = T_{k+1} - q_{k+1,k+1}(y_{k+1} + U_{k+1})^2.\]
+Now, we have an upper bound for each summand. 
+\[q_{kk}(y_k + U_k)^2 \leq T_k.\]
+Using this, we can estimate upper and lower bounds for each $y_k$ in the coordinate vector $\mathbf{y}$. We start by computing the last entries of $\mathbf{y}$ and their bounds first. Assuming that the last several entries of $\mathbf{y}$ have been assigned, upper and lower bounds on $y_k$ can be determined. Now that we have established a bound on a term in the outer sum, we can determine bounds on the specific entry $y_k$. The following diagram illustrates the scenario. In the usual Fincke-Pohst algorithm, we take the above equation and solve for $y_k$:
+\begin{align*}
+(y_k + U_k)^2	& \leq T_k/q_{kk}\\
+	y_k + U_k	& \leq \sqrt{T_k/q_{kk}}\\
+	y_k 		& \leq \sqrt{T_k/q_{kk}} - U_k.
+\end{align*}
+Similarly, we have a lower bound:
+\[y_k \geq - \sqrt{T_k/q_{kk}} - U_k.\]
+Since $x_k$ must be an integer, we can restrict our bounds further. Let $t_k = \sqrt{T_k/q_{kk}}$. 
+\[UB_k = \lfloor t_k - U_k \rfloor\]
+\[LB_k = \lceil-t_k - U_k\rceil\]
+Here $UB_k$ is the upper bound on $y_k$ and $LB_k$ is the lower bound on $y_k$. 
+\[LB_k \leq y_k \leq UB_k.\]
+
+\subsection{Refinements}
+We note here that computing $LB_k$ and $UB_k$ is highly inefficient as it often requires high precision to accurately compute $\sqrt{T_k/q_{kk}}$. Instead, we adopt the following bounds, as per Matshke's algorithm. To help justify this process, we refer to the following diagram
+
+\begin{center}
+\begin{tikzpicture}[scale=6]
+\draw[thick] (0.8,0.05)--(0.8,-0.05) node[anchor=north] {$\lfloor \sqrt{T_k/q_{kk}} - U_k \rfloor$};
+\draw[thick] (-0.8,0.05)--(-0.8,-0.05) node[anchor=north]{$\lceil -\sqrt{T_k/q_{kk}} - U_k \rceil$};
+\draw[thick] (0.4,0.05)--(0.4,-0.05) node[anchor=north] {-$\lfloor U_k \rfloor$};
+\draw[thick] (-0.4,0.05)--(-0.4,-0.05) node[anchor=north]{-$\lceil U_k \rceil$};
+\draw[thick] (-1,0)--(1,0);
+\end{tikzpicture}
+\end{center}
+
+As stated above, 
+\[\lceil -\sqrt{T_k/q_{kk}} - U_k \rceil= LB_k \leq y_k \leq UB_k = \lfloor \sqrt{T_k/q_{kk}} - U_k \rfloor.\]
+In our old implementation for non-translated lattices, we set each $y_k = LB_k$ and increased each term until we reached the zero (centre) vector. Here since the centre vector is non-zero, we instead set each $y_k = -\lceil U_k \rceil$ and increase each $y_k$ successively until $y_k > \lfloor \sqrt{T_k/q_{kk}} - U_k \rfloor$. This is equivalent to the above computation and generates only half of the vectors, assuming symmetry. This symmetry can only be applied if the centre vector is defined over $\mathbb{Z}$, otherwise we must compute all vectors. To do (we can also break symmetry and compute all vectors in the $\mathbb{Z}$ case), we also set $y_k = \lceil U_k \rceil - 1$ and successively decrease this term until $y_k <\lceil -\sqrt{T_k/q_{kk}} - U_k \rceil$.
+
+Of course, in this refinement, we want to avoid computing $\sqrt{T_k/q_{kk}}$, and so instead of verifying whether $y_k > \lfloor \sqrt{T_k/q_{kk}} - U_k \rfloor$ or $y_k <\lceil -\sqrt{T_k/q_{kk}} - U_k \rceil$, we compute $q_{kk}(y_k + U_k)^2$ in each case and verify whether
+\[q_{kk}(y_k + U_k)^2 \leq C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2\]
+holds. In the first round, if this does not hold and if $y_k < -\lfloor U_k \rfloor$, we continue to iterate $y_k = y_k + 1$, otherwise we simply iterate $y_k = y_k + 1$. Once this equivalence does not hold and $y_k \geq -\lfloor U_k \rfloor$, we stop this loop. We then reset $y_k = \lceil U_k \rceil - 1$ and search in the other direction, by successively subtracting $1$ if 
+\[q_{kk}(y_k + U_k)^2 \leq C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2\]
+holds. We stop searching in this direction only once this equivalence does not hold.  
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\endinput
+
+Any text after an \endinput is ignored.
+You could put scraps here or things in progress.
