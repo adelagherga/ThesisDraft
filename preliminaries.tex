@@ -6,7 +6,8 @@
 
 \begin{enumerate}
 \item algebraic number theory background [edited once] \autoref{sec:AlgebraicNumberTheory}.
-\item $p$-adics [DONE - rough] \autoref{sec:pAdicValuations}
+\item $p$-adics valuations [edited once] \autoref{sec:pAdicValuations}
+\item $p$-adic logs \autoref{sec:pAdicLogarithms}
 \item Setup with Lemmata from Samir
 \item LLL [DONE - roughly]
 \item Fincke-Pohst with changes from Benjamin [DONE- roughly]
@@ -23,8 +24,8 @@
 \edit{In this section we recall some basic results from algebraic number theory that we use throughout the remaining chapters. We refer to \edit{Marcus} and \edit{Neukirch} for full details. Establish notation. The background for the material presented in this chapter is taken primarily from \edit{Marcus} and \edit{Neukirch}, and the material presented in \edit{}Section 2.2 can be found in [5]}
 
 Let $K$ be a finite algebraic extension of $\mathbb{Q}$ of degree $n = [K:\mathbb{Q}]$. There are $n$ embeddings $\sigma: K \to \mathbb{C}$. These embeddings can be described by writing $K = \mathbb{Q}(\theta)$ for some $\theta \in \mathbb{C}$ and observing that $\theta$ can be sent to any one of its conjugates. 
-Let $s$ denote the number of real embeddings of $K$ and let $t$ denote the number of conjugate pairs of complex embeddings of $K$, where $n = s + 2t$. By Dirichlet's Unit Theorem, the group of units of $K$ is the direct product of a finite cyclic group consisting of the roots of unity in $K$ and a free abelian group of rank $r = s + t -1$. Equivalently, there exists a system of $r$ independent units, $\eps_1, \dots, \eps_r$ such that the group of units of $K$ is given by 
-\[\left\{\zeta \cdot \eps_1^{a_1}\cdots \eps_r^{a_r} \ | \ \zeta \text{ a root of unity }, a_i \in \mathbb{Z} \text{ for } i = 1, \dots, r\right\}.\]
+Let $s$ denote the number of real embeddings of $K$ and let $t$ denote the number of conjugate pairs of complex embeddings of $K$, where $n = s + 2t$. By Dirichlet's Unit Theorem, the group of units of $K$ is the direct product of a finite cyclic group consisting of the roots of unity in $K$ and a free abelian group of rank $r = s + t -1$. Equivalently, there exists a system of $r$ independent units $\eps_1, \dots, \eps_r$ such that the group of units of $K$ is given by 
+\[\left\{\zeta \cdot \eps_1^{a_1}\cdots \eps_r^{a_r} \ | \ \zeta \text{ a root of unity}, a_i \in \mathbb{Z} \text{ for } i = 1, \dots, r\right\}.\]
 Any set of independent units that generate the torsion-free part of the unit group is called a system of \textit{fundamental units}. 
 
 An element $\alpha \in K$ is called an \textit{algebraic integer} if its minimal polynomial over $\mathbb{Z}$ is monic. The set of algebraic integers in $K$ forms a ring, denoted $\mathcal{O}_K$. We refer to this ring as the \textit{ring of integers} or \textit{number ring} corresponding to the number field $K$. For any $\alpha \in K$, we define the \textit{norm} of $\alpha$ as 
@@ -38,11 +39,11 @@ Let $L$ be a finite field extension of $K$ with ring of integers $\mathcal{O}_L$
 The ramification index and inertial degree are multiplicative in a tower of fields. In particular, if $\mathfrak{P}$ lies over $\mathfrak{p}$ which lies over the rational prime $p$, then
 \[e({\mathfrak{P}}|p) = e({\mathfrak{P}}|\mathfrak{p})e({\mathfrak{p}}|p) \quad \text{ and } \quad f({\mathfrak{P}}|p) = f({\mathfrak{P}}|\mathfrak{p})f({\mathfrak{p}}|p).\]
 Let $\mathfrak{P}_1, \dots, \mathfrak{P}_m$ be the primes of $\mathcal{O}_L$ lying over a prime ideal $\mathfrak{p}$ of $\mathcal{O}_K$. Denote by $e({\mathfrak{P}}_1|\mathfrak{p}),\dots, e({\mathfrak{P}}_m|\mathfrak{p})$ and $f({\mathfrak{P}}_1|\mathfrak{p}), \dots, f({\mathfrak{P}}_m|\mathfrak{p})$ the corresponding ramification indices and inertial degrees. Then
-\[\sum_{i=1}^r e({\mathfrak{P}}_i|\mathfrak{p})f({\mathfrak{P}}_i|\mathfrak{p}) = [L:K].\]
+\[\sum_{i=1}^m e({\mathfrak{P}}_i|\mathfrak{p})f({\mathfrak{P}}_i|\mathfrak{p}) = [L:K].\]
 
-If $L$ is normal over $K$ and $\mathfrak{P}_i$ and $\mathfrak{P}_j$ are two prime ideals lying over $\mathfrak{p}$, then $e({\mathfrak{P}}_i|\mathfrak{p}) = e({\mathfrak{P}}_j|\mathfrak{p})$ and $f({\mathfrak{P}}_i|\mathfrak{p}) = f({\mathfrak{P}}_j|\mathfrak{p})$. In this case, $\mathfrak{p}$ factors into
-\[\mathfrak{p}\mathcal{O}_L = \left( \mathfrak{P}_1 \cdots \mathfrak{P}_m\right)^e,\]
-in $\mathcal{O}_L$, where the $\mathfrak{P}_i$ are distinct prime ideals all having the same ramification degree $e$ and inertial degree $f$ over $\mathfrak{p}$. Moreover, it follows that 
+If $L$ is normal over $K$ and $\mathfrak{P}_i$ and $\mathfrak{P}_j$ are two prime ideals lying over $\mathfrak{p}$, then $e({\mathfrak{P}}_i|\mathfrak{p}) = e({\mathfrak{P}}_j|\mathfrak{p})$ and $f({\mathfrak{P}}_i|\mathfrak{p}) = f({\mathfrak{P}}_j|\mathfrak{p})$. In this case, $\mathfrak{p}$ factors as
+\[\mathfrak{p}\mathcal{O}_L = \left( \mathfrak{P}_1 \cdots \mathfrak{P}_m\right)^e\]
+in $\mathcal{O}_L$, where the $\mathfrak{P}_i$ are distinct prime ideals all having the same ramification degree $e$ and inertial degree $f$ over $\mathfrak{p}$. It follows that 
 \[mef = [L:K].\]
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
@@ -55,73 +56,54 @@ In this section we give a concise exposition of $p$-adic valuations.
 Everything in this document is based off of ``Elementary and analytic theory of algebraic numbers'' by W. Narkiewicz.
 Throughout this thesis, we denote the algebraic closure of $\mathbb{Q}_p$ by $\overline{\mathbb{Q}}_p$. The completion of $\overline{\mathbb{Q}}_p$ with respect to the absolute value of $\overline{\mathbb{Q}}_p$ is denoted by $\mathbb{C}_p$.}
 
-Let $g(t)$ be an irreducible polynomial in $\mathbb{Q}[t]$ of degree $n$ and let $K = \mathbb{Q}(\theta)$, where $g(\theta) = 0$. A homomorphism $v: K^* \to \mathbb{R}_{\geq 0}$ of the multiplicative group of $K$ into the group of positive real numbers is called a \textit{valuation} if it satisfies the condition
+Let $K$ be an arbitrary number field. A homomorphism $v: K^* \to \mathbb{R}_{\geq 0}$ of the multiplicative group of $K$ into the group of positive real numbers is called a \textit{valuation} if it satisfies the condition
 \[v(x+y) \leq v(x) + v(y).\]
-By setting $v(0) = 0$, we extend $v$ to the whole field $K$. If
+This definition may be extended to all of $K$ by setting $v(0) = 0$. If
 \[v(x+y) \leq \max(v(x),v(y))\]
 holds for all $x,y \in K$, then $v$ is called a \textit{non-Archimedean valuation}. All remaining valuations on $K$ are called \textit{Archimedean}. 
 
-Every valuation $v(x)$ induces a metric in $K$ via $d(x,y) = v(x-y)$. Under this identification, the additive and multiplicative groups of $K$ become topological groups, and moreover, $K$ becomes a topological field. We say that two valuations are \textit{equivalent} if they define the same topology. A \textit{place} of a number field $K$ is an equivalence class of absolute values on $K$.
+Every valuation $v$ induces on $K$ the structure of a metric topological space which may or may not be complete. We say that two valuations are \textit{equivalent} if they define the same topology and we call an equivalence class of absolute values a \textit{place} of $K$. It is an elementary result of topology that every metric space may be embedded in a complete metric space, and this can be done in an essentially unique way. For the field $K$, the resulting complete metric space may be given a field structure. Equivalently, there exists a field $L$ with a valuation $w$ such that $L$ is complete in the topology induced by $w$. The field $K$ is contained in $L$ and the valuations $v$ and $w$ coincide in $K$. Moreover, the completion $L$ of $K$ is unique up to topological isomorphism.
 
-For any non-zero prime ideal $\mathfrak{p}$ of $\mathcal{O}_K$, let $\ord_{\mathfrak{p}}(\mathfrak{a})$ denote the exact power to which $\mathfrak{p}$ divides the ideal $\mathfrak{a}$. For fractional ideals $\mathfrak{a}$ this number can of course be negative. For $\alpha \in K$, we write $\ord_{\mathfrak{p}}(\alpha)$ for $\ord_{\mathfrak{p}}\left((\alpha)\mathcal{O}_K\right)$. Every prime ideal defines a discrete non-Archimedean valuation on $K$ via
+For any non-zero prime ideal $\mathfrak{p}$ of $\mathcal{O}_K$, let $\ord_{\mathfrak{p}}(\mathfrak{a})$ denote the exact power to which $\mathfrak{p}$ divides the ideal $\mathfrak{a}$. For fractional ideals $\mathfrak{a}$ this number may be negative. For $\alpha \in K$, we write $\ord_{\mathfrak{p}}(\alpha)$ for $\ord_{\mathfrak{p}}\left((\alpha)\mathcal{O}_K\right)$. Every prime ideal defines a discrete non-Archimedean valuation on $K$ via
 \[v(x):= \left(\frac{1}{N_{K/\mathbb{Q}}(\mathfrak{p})}\right)^{\ord_{\mathfrak{p}}(x)}.\]
-Moreover, every embedding of $K$ into the complex field defines an Archimedean valuation. Conversely, every discrete valuation on $K$ arises in this way by a prime ideal of $\mathcal{O}_K$, while every Archimedean valuation of $K$ is equivalent to $|\sigma(x)|$, where $\sigma$ is an embedding of $K$ into $\mathbb{C}$. Valuations defined by different prime ideals are non-equivalent, and two valuations defined by different embeddings of $K$ into $\mathbb{C}$ are equivalent if and only if those embeddings are complex conjugated. 
+Furthermore, every embedding of $K$ into the complex field defines an Archimedean valuation. Conversely, every discrete valuation on $K$ arises in this way by a prime ideal of $\mathcal{O}_K$, while every Archimedean valuation of $K$ is equivalent to $|\sigma(x)|$, where $\sigma$ is an embedding of $K$ into $\mathbb{C}$. Valuations defined by different prime ideals are non-equivalent, and two valuations defined by different embeddings of $K$ into $\mathbb{C}$ are equivalent if and only if those embeddings are complex conjugated. The topology induced in $K$ by a prime ideal $\mathfrak{p}$ of $\mathcal{O}_K$ is called the \textit{$\mathfrak{p}$-adic topology}. The completion of $K$ under this valuation is denoted by $K_{\mathfrak{p}}$ or $K_v$ and called the \textit{$\mathfrak{p}$-adic field}. Let $V$ be the set of all valuations of an algebraic number field $K$. Then for every non-zero element $\alpha \in K$ we have 
+\[\prod_{v \in V} v(\alpha) = 1.\]
 
-The topology induced in $K$ by a prime ideal $\mathfrak{p}$ of $\mathcal{O}_K$ is called the \textit{$\mathfrak{p}$-adic topology}. In the ring $\mathbb{Q}$, the prime ideals are generated by the rational primes $p$, and the resulting topology in the field $\mathbb{Q}$ of rational numbers is called the \textit{$p$-adic topology}. In particular, if $v(x)$ is a non-trivial valuation of $\mathbb{Q}$, then either $v(x)$ is equivalent to the ordinary absolute value $|x|$, or it is equivalent to one of the $p$-adic valuations induced by rational primes.  
+In the ring of integers of $\mathbb{Q}$, the prime ideals are generated by the rational primes $p$, and the resulting topology in the field $\mathbb{Q}$ is called the \textit{$p$-adic topology}. The completion of $\mathbb{Q}$ under this valuation is denoted by $\mathbb{Q}_p$. If $v(x)$ is a non-trivial valuation of $\mathbb{Q}$, then either $v(x)$ is equivalent to the ordinary absolute value $|x|$, or it is equivalent to one of the $p$-adic valuations induced by rational primes. Analogous to $\ord_{\mathfrak{p}}$, for any prime $p$ we define the $p$-adic order of $x \in \mathbb{Q}$ as the largest exponent of $p$ dividing $x$. Then, the $p$-adic valuation $v$ is defined as
+\[v(x) = p^{-\ord_p(x)}.\]
+If $K_{\mathfrak{p}}$ is a $\mathfrak{p}$-adic field, it is necessarily a finite extension of a certain $\mathbb{Q}_p$. 
 
-Let $V$ be the set of all valuations of an algebraic number field $K$. Then for every non-zero element $a\in K$ we have 
-\[\prod_{v \in V} v(a) = 1.\]
+Consider now $K/\mathbb{Q}$ where $n = [K:\mathbb{Q}]$ and let $g(t)$ denote the minimal polynomial of $K$ over $\mathbb{Q}$. Suppose $p$ is a rational prime and let $g(t) = g_1(t) \cdots g_m(t)$ be the decomposition of $g(t)$ into irreducible polynomials $g_i(t) \in \mathbb{Q}_p[t]$ of degree $n_i = \deg g_i(t)$. The prime ideals in $K$ dividing $p$ are in one-to-one correspondence with $g_1(t), \dots, g_m(t)$. More precisely, we have in $K$ the following decomposition of $(p)\mathcal{O}_K$
+\[(p)\mathcal{O}_K = \mathfrak{p}_1^{e(\mathfrak{p}_1|p)} \cdots \mathfrak{p}_m^{e(\mathfrak{p}_m|p)},\]
+with $\mathfrak{p}_1, \dots, \mathfrak{p}_m$ distinct prime ideals and ramification indices $e(\mathfrak{p}_1 | p), \dots, e(\mathfrak{p}_m | p) \in \mathbb{N}$. For $i = 1, \dots, m$ the inertial degree of $\mathfrak{p}_i$ is denoted by $f(\mathfrak{p}_i|p)$. Then $n_i = e(\mathfrak{p}_i | p)f(\mathfrak{p}_i | p)$ and $K_{\mathfrak{p}_i} \simeq \mathbb{Q}_p(\theta_i)$, where $g(\theta_i) = 0$. 
 
-There are one-to-one correspondences between each of the following four sets of objects:
-\begin{enumerate}
-\item the prime ideals in (the ring of integers of) $K$ that divide $p$.
-\item The irreducible polynomial factors of $g(t)$ in $\mathbb{Q}_p[t]$.
-\item The classes of conjugate embeddings of $K$ into the algebraic closure $\overline{\mathbb{Q}_p}$ of $\mathbb{Q}_p$. 
-\item The extensions of the $p$-adic valuation $\ord_p$ on $\mathbb{Q}$ to $K$.
-\end{enumerate}
+By $\overline{\mathbb{Q}_p}$ we denote the algebraic closure of $\mathbb{Q}_p$. There are $n$ embeddings of $K$ into $\overline{\mathbb{Q}_p}$, and each one fixes $\mathbb{Q}$ and maps $\theta$ to a root of $g$ in $\overline{\mathbb{Q}_p}$. Let $\theta_i^{(1)}, \dots, \theta_i^{(n_i)}$ denote the roots of $g_i(t)$ in $\overline{\mathbb{Q}_p}$. For $i = 1, \dots, m$ and $j = 1, \dots, n_i$, let $\sigma_{ij}$ be the embedding of $K$ into $\mathbb{Q}_p(\theta_i^{(j)})$ defined by $\theta \mapsto \theta_i^{(j)}$. The $m$ classes of conjugate embeddings are $\{\sigma_{i1}, \dots, \sigma_{in_i}\}$ for $i = 1, \dots, m$. Note that $\sigma_{ij}$ coincides with the embedding $K \hookrightarrow K_{\mathfrak{p}_i} \simeq \mathbb{Q}_p(\theta_i) \simeq \mathbb{Q}_p(\theta_i^{(j)})$. 
 
-In what follows, we will describe the important features of these correspondences. Note that two embeddings of $K$ into $\overline{\mathbb{Q}_p}$ are called \textit{conjugate} if they map $\theta$ to the roots of hte same irreducible polynomial in $\mathbb{Q}_p[t]$. Note also that what we call a $p$-adic valuation is sometimes called a $p$-adic order. 
-
-Let 
-\[(p)\mathcal{O}_K = \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_m^{e_m}\]
-\edit{change notation of the $e_i$}
-be the decomposition of $(p)\mathcal{O}_K$ into prime ideals of $\mathcal{O}_K$, with inertial degree $f_i$ for $\mathfrak{p}_i$ over $p$. Let $K_{\mathfrak{p}_i}$ denote the completion of $K$ with respect to $\ord_{\mathfrak{p}_i}$. Let
-\[g(t) = g_1(t) \cdots g_m(t)\]
-be the decomposition of $g(t)$ into irreducible polynomials in $\mathbb{Q}_p[t]$. For each $i \in \{1, \dots, m\}$, let $n_i = \deg g_i(t)$. The correspondence between $\mathfrak{p}_i$ and $g_i(t)$ is such that $n_i = e_if_i$ and $K_{\mathfrak{p}_i} \simeq \mathbb{Q}_p(\theta_i)$, where $g_i(\theta_i) = 0$. 
-
-There are $n$ embeddings of $K$ into $\overline{\mathbb{Q}_p}$, and each one fixes $\mathbb{Q}$ and maps $\theta$ to a root of $g$ in $\overline{\mathbb{Q}_p}$. Let $\theta_i^{(1)}, \dots, \theta_i^{(n_i)}$ denote the roots of $g_i(t)$ in $\overline{\mathbb{Q}_p}$. For $i = 1, \dots, m$ and $j = 1, \dots, n_i$, let $\sigma_{ij}$ be the embedding of $K$ into $\mathbb{Q}_p(\theta_i^{(j)})$ defined by $\theta \mapsto \theta_i^{(j)}$. The $m$ classes of conjugate embeddings are $\{\sigma_{i1}, \dots, \sigma_{in_i}\}$ for $i = 1, \dots, m$. Note that $\sigma_{ij}$ coincides with the embedding $K \hookrightarrow K_{\mathfrak{p}_i} \simeq \mathbb{Q}(\theta_i) \simeq \mathbb{Q}_p\left(\theta_i^{(j)}\right)$. 
-
-For any finite extension $L$ of $\mathbb{Q}_p$, the $p$-adic valuation of $\mathbb{Q}_p$ extends uniquely to $L$ as 
+For any finite extension $L$ of $\mathbb{Q}_p$, the $p$-adic valuation $v$ of $\mathbb{Q}_p$ extends uniquely to $L$ as 
+\[v(x) = |N_{L/\mathbb{Q}_p}(x)|^{1/[L:\mathbb{Q}_p]}.\]
+Here, we define the $p$-adic order of $x \in L$ by
 \[\ord_p(x) = \frac{1}{[L:\mathbb{Q}_p]}\ord_p(N_{L/\mathbb{Q}_p}(x)).\]
-This definition is independent of the field $L$ containing $x$. So, since each element of $\overline{\mathbb{Q}_p}$ is by definition contained in some finite extension of $\mathbb{Q}_p$, this definition can be used to define the $p$-adic valuation of any $x \in \overline{\mathbb{Q}_p}$. Every finite extension of $\mathbb{Q}_p$ is complete with respect to $\ord_p$, but $\overline{\mathbb{Q}_p}$ is not. The completion of $\overline{\mathbb{Q}_p}$ with respect to $\ord_p$ is denoted by $\mathbb{C}_p$. Note that the formulas
-\[\ord_p(xy) = \ord_p(x) + \ord_p(y), \quad \ord_p(x+y) \geq \min \{\ord_p(x), \ord_p(y)\}\]
-still hold when $x,y \in \mathbb{C}_p$. It is convenient to record here that an element $x\in \mathbb{C}_p$ having $\ord_p(x) = 0$ is called a $p$-adic \textit{unit}. 
+This definition is independent of the field $L$ containing $x$. So, since each element of $\overline{\mathbb{Q}_p}$ is by definition contained in some finite extension of $\mathbb{Q}_p$, this definition can be used to define the $p$-adic valuation $v$ of any $x \in \overline{\mathbb{Q}_p}$. Every finite extension of $\mathbb{Q}_p$ is complete with respect to $v$, but $\overline{\mathbb{Q}_p}$ is not. The completion of $\overline{\mathbb{Q}_p}$ with respect to $v$ is denoted by $\mathbb{C}_p$. 
 
 The $m$ extensions of the $p$-adic valuation on $\mathbb{Q}$ to $K$ are just multiples of the $\mathfrak{p}_i$-adic valuation on $K$:
 \[\ord_p(x) = \frac{1}{e_i}\ord_{\mathfrak{p}_i}(x) \quad \text{ for } i = 1, \dots, m.\]
 We also view these extensions as arising from various embeddings of $K$ into $\overline{\mathbb{Q}_p}$. Indeed, the extension to $\mathbb{Q}_p(\theta_i^{(j)})$ of the $p$-adic valuation on $\mathbb{Q}_p$ induces a $p$-adic valuation on $K$ via the embedding $\sigma_{ij}$ as 
+\[v(x) = |N_{K_{\mathfrak{p}_i}/\mathbb{Q}_p}(\sigma_{ij}(x))|^{1/n_i}.\]
+Here, as before, $n_i = \deg g_i(t) = [K_{\mathfrak{p}_i} : \mathbb{Q}_p]$. Furthermore, 
 \[\ord_p(x) = \ord_p(\sigma_{ij}(x)),\]
 and we have
-\[\ord_p(\sigma_{ij}(x)) =  \frac{1}{e_i}\ord_{\mathfrak{p}_i}(x) \quad \text{ for } i = 1, \dots, m, j = 1, \dots, n_i.\]
+\[\ord_p(\sigma_{ij}(x)) =  \frac{1}{e_i}\ord_{\mathfrak{p}_i}(x) \quad \text{ for } i = 1, \dots, m,\ j = 1, \dots, n_i.\]
 
-\textbf{Weil height}
+%---------------------------------------------------------------------------------------------------------------------------------------------%
 
-Let $k$ be a number field and at each place $v$ of $k$, let $k_v$ denote the completion of $k$ at $v$. Then
-\[\sum_{v|p} [k_v:\mathbb{Q}_v] = [k:\mathbb{Q}]\]
-for all places $p$ of $\mathbb{Q}$. We will use two normalized absolute values $| \ |_v$ and $\| \ \|_v$ on $k$ which we now define. If $v|\infty$, then $\| \ \|_v$ restricted to $\mathbb{Q}$ is the usual Archimedean absolute value; if $v|p$ for a rational prime $p$, then $\| \ \|_v$ restricted to $\mathbb{Q}$ is the usual $p$-adic absolute value. We then set
-\[ | \ |_v = \| \ \|_v^{[k_v:\mathbb{Q}_v]/[k:\mathbb{Q}]}.\]
-The \textit{logarithmic Weil height} $h: \overline{\mathbb{Q}} \to [0,\infty)$ is now defined as follows. Given $\alpha \in \overline{\mathbb{Q}}$, select any number field $k$ containing $\alpha$, and let 
-\[h(\alpha) = \frac{1}{[k:\mathbb{Q}]}\sum_v \log^+|\alpha|_v,\]
-the sum being taken over all places $v$ of $k$. The height does not depend on the choice of $k$ containing $\alpha$. We note that if $\alpha$ is an algebraic unit, then $|\alpha|_v = 1$ for all finite places $v$, and therefore $h(\alpha)$ can be taken over the infinite places only. 
-In particular, if $\alpha \in \mathbb{Q}$, then with $\alpha = p/q$ for $p,q \in \mathbb{Z}$ with $\gcd(p,q) = 1$, we have $h(\alpha) = \log\max\{|p|,|q|\}$ and if $\alpha \in \mathbb{Z}$ then $h(\alpha) = \log|\alpha|$. \edit{check this}. 
+\section{$p$-adic logarithms}
+\label{sec:pAdicLogarithms}
 
-\textbf{The $p$-adic logarithm}
 Every non-zero $\alpha \in \mathbb{Q}_p$ has a $p$-adic expansion
 \[\alpha = \sum_{i=k}^{\infty} u_ip^i\]
 where $k = \ord_p(\alpha)$ and the $p$-adic digits $u_i$ are in $\{0, \dots, p-1\}$ with $u_k \neq 0$. If $\ord_p(\alpha) \geq 0$ then $\alpha$ is called a $p$-adic \textit{integer}. The set of $p$-adic integers is denoted $\mathbb{Z}_p$. A $p$-adic \textit{unit} is an $\alpha \in \mathbb{Q}_p$ with $\ord_p(\alpha) = 0$. For any $p$-adic integer $\alpha$ and $\mu \in \mathbb{N}_0$ there exists a unique rational integer $\alpha^{(\mu)} = \sum_{i=0}^{\mu-1}u_ip^i$ such that 
 \[\ord_p(\alpha-\alpha^{(\mu)}) \geq \mu, \quad \text{ and } \quad 0 \leq \alpha^{(\mu)} \leq p^{\mu} - 1.\]
-For $\ord_p(\alpha) \geq k$ we also write $\alpha \equiv 0 \mod{p^k}$. The $p$-adic norm is defined by
-\[|\alpha|_p = p^{-\ord_p(\alpha)}.\]
+For $\ord_p(\alpha) \geq k$ we also write $\alpha \equiv 0 \mod{p^k}$. 
 
 We have seen how to define $\ord_{\mathfrak{p}}$ and $\ord_p$ on algebraic extensions of $\mathbb{Q}$. For any $z \in \mathbb{C}_p$ with $\ord_p(z-1) > 0$, we can also define the $p$-adic logarithm of $z$ by
 \[\log_p(z) = -\sum_{i=1}^{\infty} \frac{(1-z)^i}{i}.\]
@@ -158,6 +140,22 @@ Let $z_1, \dots, z_m \in \overline{\mathbb{Q}_p}$ be $p$-adic units and let $b_1
 then 
 \[\ord_p(b_1\log_p{z_1} + \cdots + b_m \log_p{z_m}) = \ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1).\]
 \end{lemma}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+
+
+\section{The Weil height}
+\label{sec:WeilHeight}
+
+Let $k$ be a number field and at each place $v$ of $k$, let $k_v$ denote the completion of $k$ at $v$. Then
+\[\sum_{v|p} [k_v:\mathbb{Q}_v] = [k:\mathbb{Q}]\]
+for all places $p$ of $\mathbb{Q}$. We will use two normalized absolute values $| \ |_v$ and $\| \ \|_v$ on $k$ which we now define. If $v|\infty$, then $\| \ \|_v$ restricted to $\mathbb{Q}$ is the usual Archimedean absolute value; if $v|p$ for a rational prime $p$, then $\| \ \|_v$ restricted to $\mathbb{Q}$ is the usual $p$-adic absolute value. We then set
+\[ | \ |_v = \| \ \|_v^{[k_v:\mathbb{Q}_v]/[k:\mathbb{Q}]}.\]
+The \textit{logarithmic Weil height} $h: \overline{\mathbb{Q}} \to [0,\infty)$ is now defined as follows. Given $\alpha \in \overline{\mathbb{Q}}$, select any number field $k$ containing $\alpha$, and let 
+\[h(\alpha) = \frac{1}{[k:\mathbb{Q}]}\sum_v \log^+|\alpha|_v,\]
+the sum being taken over all places $v$ of $k$. The height does not depend on the choice of $k$ containing $\alpha$. We note that if $\alpha$ is an algebraic unit, then $|\alpha|_v = 1$ for all finite places $v$, and therefore $h(\alpha)$ can be taken over the infinite places only. 
+In particular, if $\alpha \in \mathbb{Q}$, then with $\alpha = p/q$ for $p,q \in \mathbb{Z}$ with $\gcd(p,q) = 1$, we have $h(\alpha) = \log\max\{|p|,|q|\}$ and if $\alpha \in \mathbb{Z}$ then $h(\alpha) = \log|\alpha|$. \edit{check this}. 
 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
