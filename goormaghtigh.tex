@@ -1,0 +1,2067 @@
+%% The following is a directive for TeXShop to indicate the main file
+%%!TEX root = diss.tex
+
+\chapter{Goormaghtigh Equations}
+\label{ch:GEs} 
+
+
+
+%------------------------------------------
+\section{Introduction} \label{intro}
+%------------------------------------------
+\edit{label}
+More than a century ago, Ratat \cite{Ra} and Goormaghtigh \cite{Go} observed the identities
+$$
+31 = \frac{2^5-1}{2-1} = \frac{5^3-1}{5-1} \; \; \mbox{ and } \; \; 8191 = \frac{2^{13}-1}{2-1} = \frac{90^3-1}{90-1}.
+$$
+These correspond to the known solutions $(x,y,m,n)=(2,5,5,3)$ and $(2,90,13,3)$
+to what is nowadays termed {\it Goormaghtigh's equation}
+\begin{equation} \label{eq-main}
+\frac{x^m-1}{x-1} = \frac{y^n-1}{y-1}, \; \; y>x>1, \; m > n > 2.
+\end{equation}
+This is a classical example of a {\it polynomial-exponential equation} and shares a number of common characteristics with other frequently-studied Diophantine equations of this type, such as those of 
+Catalan
+\begin{equation} \label{Cat}
+x^m-y^n=1, \; \; x, y, m, n > 1,
+\end{equation}
+and 
+Nagell-Ljunggren 
+\begin{equation} \label{NL}
+\frac{x^m-1}{x-1} = y^n, \; \; x, y, n >1, \; m > 2.
+\end{equation}
+In a certain sense, however, equation (\ref{eq-main}) appears to be rather harder to treat than (\ref{Cat}) or (\ref{NL}). Techniques from Diophantine approximation (specifically, bounds for linear forms in complex and $p$-adic logarithms) have been applied by Tijdeman \cite{Ti} to show that equation (\ref{Cat}) has at most finitely many solutions in the four variables $x,y, m$ and $n$ (a result subsequently sharpened by Mih{\u{a}}ilescu \cite{Mih} via a different method to solve (\ref{Cat}) completely). Similarly, Shorey and Tijdeman \cite{ShTi} showed that equation (\ref{NL}) has at most finitely many solutions if any one of the variables $x, y$ or $m$ is fixed (though we do not have a like result for fixed odd $n$; the case where $n$ is even was resolved earlier by Nagell \cite{Nag} and Ljunggren \cite{Lju}). In the case of equation (\ref{eq-main}), on the other hand, to obtain finiteness results with current technology, we apparently need to assume that two of the variables $x, y, m$ and $n$ are fixed (see \cite{BaSh} for references). In addition, if the two variables fixed are the exponents $m$ and $n$, then in order to deduce effectively computable bounds upon the polynomial variables $x$ and $y$, via either Runge's method (Davenport, Lewis and Schinzel \cite{DaLeSc}) or from bounds upon linear forms in logarithms (see e.g. Nesterenko and Shorey \cite{NeSh}, and Bugeaud and Shorey \cite{BuSh}), we require constraints upon $m$ and $n$, that either $m=n+1$, or that
+ \begin{equation} \label{condition}
+ \gcd (m-1,n-1) = d > 1.
+ \end{equation}
+ In the extensive literature on this problem, there are a number of striking results that go well beyond what we have mentioned here. By way of example, work of Balasubramanian and 
+ Shorey \cite{BaSh} shows that equation (\ref{eq-main}) has at most finitely many solutions if we fix only the set of prime divisors of $x$ and $y$, while Bugeaud and Shorey \cite{BuSh} prove an analogous finiteness result, under the additional assumption of (\ref{condition}), provided the quotient $(m-1)/(n-1)$ is bounded above. Additional results on special cases of equation (\ref{eq-main}) are available in, for example, \cite{HeTo}, \cite{Le1}, \cite{Le2} and \cite{Le3}.  An excellent overview of results on this problem  can be found in the survey of Shorey \cite{ShoSur}.
+ 
+In this paper, we prove that, in fact, under assumption (\ref{condition}), equation (\ref{eq-main}) has at most finitely many solutions which may be found effectively, even if we fix only a single exponent.
+\begin{theorem} \label{main-thm}
+If there is a solution in integers $x,y, n$ and $m$ to equation (\ref{eq-main}), satisfying (\ref{condition}), then
+\begin{equation} \label{hive}
+x <  (3d)^{4n/d} \leq  36^n.
+\end{equation}
+In particular, if $n$ is fixed, there is an effectively computable constant $c=c(n)$ such that
+$\max \{ x, y, m \} < c$.
+\end{theorem}
+We note that the latter conclusion here follows immediately from (\ref{hive}), in conjunction with, for example, work of Baker \cite{Bak}.
+The constants present in our upper bound (\ref{hive}) may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation (\ref{eq-main}), subject to condition (\ref{condition}),  for small fixed values of $n$.
+
+\begin{theorem} \label{main-thm2}
+If there is a solution in integers $x,y$ and $m$ to equation (\ref{eq-main}), with $n \in \{ 3, 4, 5 \}$ and satisfying (\ref{condition}), then
+$$
+(x,y,m,n) = (2,5,5,3)  \; \mbox{ and } \; (2,90,13,3).
+$$
+\end{theorem}
+
+Essentially half of the current paper is concerned with developing Diophantine approximation machinery for the case $n=5$ in Theorem \ref{main-thm2}. Here, ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. The new ideas introduced here are explored more fully in the general setting of {\it Thue-Mahler} equations in the forthcoming paper  \cite{GhKaMaSi}. These are polynomial-exponential equations of the form $F(x,y)=p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ where $F$ is a binary form of degree three or greater and $p_1, \ldots, p_k$ are fixed rational primes. Here, we take this opportunity to specialize these refinements to the case of Ramanujan-Nagell equations, and to introduce some further sharpenings which enable us to complete the proof of Theorem \ref{main-thm2}.
+
+We observe that, in case $n=3$, Theorem \ref{main-thm2} was obtained earlier by Yuan \cite{Yu} (see also He \cite{He}).  The techniques employed in both \cite{He} and \cite{Yu}, however, depend essentially upon the fact that $n=3$ (whereby $n-1=2$ and one can appeal to specialized techniques from the theory of quadratic fields) and cannot apparently be generalized to other values of $n$.
+
+The title of this paper reflects the fact that the machinery of Pad\'e approximation to binomial functions has been applied to the problem of solving equation (\ref{eq-main}) in earlier work of Bugeaud and Shorey \cite{BuSh}. We will employ these tools  here rather differently.
+
+The outline of this paper is as follows. In Section \ref{proof}, we derive ``good'' rational approximations to certain algebraic numbers associated to solutions of (\ref{eq-main}). Section \ref{Pade} contains relevant details about Pad\'e approximation to the binomial function. In Sections \ref{sec-main-thm} and \ref{sec-main-thm2}, we find the proofs of Theorems \ref{main-thm} and \ref{main-thm2}, respectively. In the latter case, to treat small fixed values of $n$ and $x$ in equation (\ref{eq-main}), we appeal to a variety of techniques from computational Diophantine approximation. Most interestingly, in case $n=5$, we sharpen existing techniques for solving  Thue-Mahler equations, and specialize them to our problem. We note that this section may essentially be read independently of the rest of the paper. For each $x$, we restrict the problem to that of solving a number of related $S$-unit equations, where $S$ is the set of primes dividing $x$. We then generate a large upper bound on the exponents of these equations using bounds for linear forms in logarithms, both Archimedean and non-Archimedean. Finally, unlike traditional examples of Thue-Mahler equations, where extensive use of geometric and $p$-adic reduction techniques are typically required, using only a few iterations of the LLL algorithm, we reduce this bound significantly, after which we apply a naive search to complete our computation. We will, in fact, employ  two quite different algorithms for solving Thue-Mahler equations, one for which we must compute the class group of a number field and one which avoids this computation altogether. For a given value of $x$, one of these versions may be significantly faster than the other; we list some timings for examples to illustrate this difference. 
+
+%--------------------------------------------------------------
+\section{Rational approximations} \label{proof}
+%--------------------------------------------------------------
+
+In what follows, we will always assume that $x, y, m$ and $n$ are integers satisfying (\ref{eq-main}) with (\ref{condition}), and write
+\begin{equation} \label{m0n0}
+ m-1 = d m_0 \; \; \mbox{ and } \; \; n-1 = d n_0.
+ \end{equation}
+ We note, for future use, that  an appeal to Th\'eor\`eme II of Karanicoloff \cite{Ka} (which, in our notation, states that the only solution to (\ref{eq-main}) with $n_0=1$ and $m_0=2$ in (\ref{m0n0}) is given by $(x,y,m,n) = (2,5,5,3)$) allows us to suppose that either $(x,y,m,n) = (2,5,5,3)$, or that  $m_0 \geq 3$ and $n_0 \geq 1$.
+
+Our starting point, as in, for example, \cite{BuSh} and \cite{NeSh}, is the observation that the existence of a solution to (\ref{eq-main}) with (\ref{condition}) implies a number of unusually good rational approximations to certain irrational algebraic numbers. One such approximation arises from rewriting (\ref{eq-main}) as 
+$$
+x \, \frac{x^{d m_0}}{x-1} - y \, \frac{y^{d n_0}}{y-1} = \frac{1}{x-1} - \frac{1}{y-1},
+$$
+whereby
+\begin{equation} \label{good}
+\left| \sqrt[d]{\frac{y(x-1)}{x(y-1)}} - \frac{x^{m_0}}{y^{n_0}} \right| < \frac{1}{y^{d n_0}}.
+\end{equation}
+The latter inequality was used, in conjunction with lower bounds for linear forms in logarithms (in \cite{NeSh}) and with machinery based upon Pad\'e approximation to binomial functions (in \cite{BuSh}), to derive a number of strong restrictions upon $x, y$ and $d$ satisfying equation (\ref{eq-main}).
+
+Our argument will be somewhat different, as we consider instead a rational approximation to 
+$\sqrt[d]{(x-1)/x}$ that is, on the surface, much less impressive than that to $\sqrt[d]{\frac{y(x-1)}{x(y-1)}}$ afforded by (\ref{good}). The key additional idea is that we are able to take advantage of the arithmetic structure of our approximations  to obtain very strong lower bounds for how well they can approximate $\sqrt[d]{(x-1)/x}$. This argument has its genesis in work of Beukers \cite{Beu1}, \cite{Beu2}.
+
+For the remainder of this section, we will always assume that $x \geq 40$. From
+ $$
+ \frac{y^n-1}{y-1} = y^{dn_0} \left( 1 + \frac{1}{y} +  \cdots + \frac{1}{y^{dn_0}} \right) \mbox{ and }  \frac{x^m-1}{x-1} = x^{dm_0} \left( 1 + \frac{1}{x} + \cdots + \frac{1}{x^{dm_0}} \right) ,
+ $$
+ we thus have
+ $$
+y^{dn_0}  <  \frac{y^n-1}{y-1} =  \frac{x^m-1}{x-1}  < \frac{x}{x-1} \,   x^{dm_0}
+$$
+and
+$$
+\frac{y}{y-1} \, x^{dm_0} \leq \frac{x+1}{x}  \, x^{dm_0} <  \frac{x^m-1}{x-1}  =  \frac{y^n-1}{y-1} 
+< \frac{y}{y-1} \, y^{dn_0},
+$$
+so that 
+\begin{equation} \label{goop}
+x^{m_0} < y^{n_0} <\left( \frac{x}{x-1} \right)^{1/d} \, x^{m_0} \leq \sqrt{40/39} \, x^{m_0} < 1.013 \, x^{m_0}.
+\end{equation}
+
+
+We will rewrite  (\ref{eq-main})
+ as 
+ $$
+ x^{d m_0} -  \frac{(x-1)}{x} \;   \sum_{j=0}^{dn_0} y^j = \frac{1}{x}.
+ $$
+ From this equation, we will show that $\sqrt[d]{(x-1)/x}$ is well approximated by a rational number whose numerator is divisible by $x^{m_0}$.
+ 
+If we define, as in Nesterenko and Shorey \cite{NeSh},  $A_k (d)$ via
+% $$
+% \left( 1 + \frac{1}{X} + \cdots + \frac{1}{X^{\mu-1}} \right)^{1/d} = \sum_{k=0}^\infty \frac{A_k (\mu,d)}{ X^{k}}
+% $$
+% and
+ $$
+  \left( 1 - \frac{1}{X} \right)^{-1/d} = \sum_{k=0}^\infty A_k (d) \, X^{-k} = \sum_{k=0}^\infty
+  \frac{d^{-1} ( d^{-1}+1) \cdots (d^{-1} + k-1)}{k!} \, X^{-k},
+ $$
+ then we can write 
+ $$
+ \sum_{j=0}^{dn_0} y^j = \left( \sum_{k = 0}^{n_0} A_k (d) y^{n_0-k} \right)^d + \sum_{j=0}^{(d-1)n_0-1} B_j(d) y^j.
+ $$
+Here, the $B_j$ are positive, monotone increasing in $j$, and satisfy
+ $$
+ B_{(d-1)n_0-1} (d) = \frac{n}{n_0+1} A_{n_0} (d),
+ $$
+ while, for the $A_k(d)$, we have the inequalities
+ $$
+ \frac{d+1}{k d^2} \leq A_k (d) \leq  \frac{d+1}{2 d^2},
+ $$
+valid  provided $k \geq 2$ (see displayed equation (14) of \cite{NeSh}). 
+%Note that
+% $$
+% A_{k+1} (d) = \frac{d^{-1}+k}{1+k} \, A_k (d).
+ %$$
+ 
+ We thus have
+\begin{equation} \label{careful}
+ x^{d m_0} -  \frac{(x-1)}{x} \; \left( \sum_{k = 0}^{n_0} A_k (d) y^{n_0-k} \right)^d = \frac{1}{x} + \frac{x-1}{x} \, \sum_{j=0}^{(d-1)n_0-1} B_j(d) y^j
+ \end{equation}
+ and so
+ \begin{equation} \label{careful-upper}
+ 0 <  x^{d m_0} -  \frac{(x-1)}{x} \; \left( \sum_{k = 0}^{n_0} A_k (d) y^{n_0-k} \right)^d <  \frac{(dn_0+1)(d+1)}{2 (n_0+1) d^2} \, \frac{y}{y-1} \, y^{(d-1) n_0-1}.
+ \end{equation}
+ Since
+ $$
+ \frac{(dn_0+1)(d+1)}{2 (n_0+1) d^2} < \frac{d+1}{2d} \leq \frac{3}{4},
+ $$
+from the fact that $n_0 \geq 1$ and $d \geq 2$, and since $y > x \geq 40$, we may conclude that
+  \begin{equation} \label{careful-upper2}
+ 0 <  x^{d m_0} -  \frac{(x-1)}{x} \; \left( \sum_{k = 0}^{n_0} A_k (d) y^{n_0-k} \right)^d < 0.769 \, y^{(d-1) n_0-1}.
+ \end{equation}
+ Applying the Mean Value Theorem,
+  \begin{equation} \label{careful-upper3}
+ 0 <   x^{m_0} -  \sqrt[d]{\frac{x-1}{x}} \, \sum_{k = 0}^{n_0} A_k (d) y^{n_0-k}  <  0.769 \,  \frac{y^{(d-1) n_0-1}}{d Y^{d-1}},
+  \end{equation}
+  where $Y$ lies in the interval
+  $$
+  \left( \sqrt[d]{\frac{x-1}{x}} \, \sum_{k = 0}^{n_0} A_k (d) y^{n_0-k}, x^{m_0} \right).
+  $$
+ We thus have
+ $$
+ Y^{d-1} >  \left( \frac{x-1}{x} \right)^{(d-1)/d} \, y^{(d-1) n_0}
+ $$
+ and so, from (\ref{careful-upper3}) and the fact that $d \geq 2$ and $x \geq 40$, 
+   \begin{equation} \label{careful-upper4}
+ 0 <   x^{m_0} -  \sqrt[d]{\frac{x-1}{x}} \, \sum_{k = 0}^{n_0} A_k (d) y^{n_0-k}  <  \frac{0.779}{d y}.
+  \end{equation}
+  
+Let us define
+ $$
+ C(k,d) = d^k \prod_{p \mid d} p^{\mbox{ord}_p (k!)},
+ $$
+ where by $\mbox{ord}_p(z)$ we mean the largest power of $p$ that divides a nonzero integer $z$. Here,
+ $k$  and $d$ positive integers with $d \geq 2$. Then we have
+$$
+C(k,d) =  d^k \prod_{p \mid d} p^{\left[ \frac{k}{p} \right] + \left[ \frac{k}{p^2} \right] + \cdots}
+$$
+and hence it follows that
+\begin{equation} \label{C-upper}
+C(k,d) < \left( d \,  \prod_{p \mid d} p^{1/(p-1)} \right)^k.
+\end{equation}
+Further (see displayed equation (18) of Nesterenko and Shorey \cite{NeSh}), and critically for our purposes, $C(k,d) A_k (d)$ is an integer. Multiplying equation (\ref{careful}) by $C(n_0,d)$ and setting 
+\begin{equation} \label{P-Q-def}
+ P = C(n_0,d) \,  x^{m_0} \; \; \mbox{ and } \; \; Q = C(n_0,d) \,  \sum_{k = 0}^{n_0} A_k (d) y^{n_0-k},
+\end{equation}
+ then $P$ and $Q$ are integers  and, defining
+\begin{equation} \label{ep-def}
+\epsilon = P - \sqrt[d]{\frac{x-1}{x}} Q,
+\end{equation}
+ we thus have, from (\ref{careful-upper4}), that the following result holds.
+ \begin{proposition} \label{upper-ep}
+ Suppose that $(x,y,m,n)$ is a solution in integers to equation (\ref{eq-main}), with (\ref{condition}) and $x \geq 40$. If we define $\epsilon$ via (\ref{ep-def}),  then
+\begin{equation} \label{start}
+0 < \epsilon < \frac{0.779 \, C(n_0,d)}{dy}.
+\end{equation}
+ \end{proposition}
+ 
+Our next goal will be to construct a second linear form $\delta$, in $1$ and $\sqrt[d]{(x-1)/x}$, with the property that a particular linear combination of $\epsilon$ and $\delta$ is a (relatively large) nonzero integer, a fact we will use to derive a lower bound on $\epsilon$. This argument, which will employ off-diagonal Pad\'e approximants to the binomial function $\sqrt[d]{1+z}$, follows work of Beukers \cite{Beu1}, \cite{Beu2}.
+
+To apply Proposition \ref{upper-ep} and for our future arguments, we will have use of bounds upon the quantity $C(k,d)$. 
+ \begin{proposition} \label{Cee}
+If $k$ is a positive integer, then
+$$
+2^k \leq C(k,2) < 4^k
+$$
+and
+$$
+d^k \leq C(k,d) < (2 d \log d)^k,
+$$
+for $d > 2$.
+\end{proposition}
+We will postpone the proof of this result until Section \ref{Cee-proof}; the upper bound here for large $d$ may be sharpened somewhat, but this is unimportant for our purposes.
+
+%---------------------------------------------------------
+\section{Pad\'e approximants} \label{Pade}
+%--------------------------------------------------------
+
+
+In this section, we will define Pad\'e approximants to $(1+z)^{1/d}$, for $d \geq 2$.
+Suppose that $m_1$ and $m_2$ are nonnegative integers, and set
+$$
+I_{m_1,m_2}(z) = \frac{1}{2 \pi i} \, \int_{\gamma} ~
+\frac{(1+zv)^{m_2}(1+zv)^{1/d}}{v^{m_1+1} (1-v)^{m_2+1}} \, dv,
+$$
+where $\gamma$ is a closed, counter-clockwise contour, containing $v=0$ and $v=1$. Applying Cauchy's residue theorem, we may write $I_{m_1,m_2}(z)$ as $R_0+R_1$, where
+$$
+R_i = \mbox{Res}_{v=i} \left( \frac{(1+zv)^{m_2}(1+zv)^{1/d}}{v^{m_1+1} (1-v)^{m_2+1}} \right). 
+$$
+Now
+$$
+R_0=
+\frac{1}{m_1!} \, \lim_{v \rightarrow 0} \frac{d^{m_1}}{dv^{m_1}} \, \frac{(1+zv)^{m_2}(1+zv)^{1/d}}{(1-v)^{m_2+1}} = P_{m_1,m_2} (z) 
+$$
+and
+$$
+R_1=
+\frac{1}{m_2!} \, \lim_{v \rightarrow 1} \frac{d^{m_2}}{dv^{m_2}} \, \frac{(1+zv)^{m_2}(1+zv)^{1/d}}{v^{m_1+1}} =  - Q_{m_1,m_2} (z) \, (1+z)^{1/d},
+$$
+where
+\begin{equation}  
+P_{m_1,m_2} (z) = \sum_{k=0}^{m_1} \binom{m_2 + 1/d}{k} \binom{m_1+m_2-k}{m_2} z^k
+\end{equation}
+and
+\begin{equation} \label{queu}
+Q_{m_1,m_2} (z) = \sum_{k=0}^{m_2} \binom{m_1 - 1/d}{k} \binom{m_1+m_2-k}{m_1} z^k.
+\end{equation}
+Note that there are typographical errors in the analogous statement given in displayed equation (2.3) of \cite{BaBe}.
+We take $z=-1/x$. Arguing as in the proof of Lemma 4.1 of \cite{BaBe}, we find that
+\begin{equation} \label{del0}
+|I_{m_1,m_2}(-1/x)| = \frac{\sin (\pi/d)}{\pi \,  x^{m_1+m_2+1}} \;  \int^{1}_{0} ~
+\frac{v^{m_2+1/d} (1-v)^{m_1-1/d} dv}{(1-(1-v)/x)^{m_2+1}}.
+\end{equation}
+Upon multiplying the identity
+$$
+P_{m_1, m_2}(-1/x)-Q_{m_1, m_2}(-1/x)   \sqrt[d]{\frac{x-1}{x}} =I_{m_1,m_2}(-1/x) 
+$$
+through by $x^{m_2} C(m_2,d)$,
+and setting
+$$
+\delta = C_0 P_1 -  \sqrt[d]{\frac{x-1}{x}} \; Q_1,
+$$
+where we write $m_0=m_2-m_1$,
+$$
+C_0 = x^{m_0} C(m_2,d)/C(m_1,d), \; \; P_1 = x^{m_1} C(m_1,d) P_{m_1,m_2}(-1/x)
+$$
+and
+\begin{equation} \label{Q1-def}
+Q_1=x^{m_2} C(m_2,d) Q_{m_1,m_2}(-1/x),
+\end{equation}
+it follows, from Lemma 3.1 of Chudnovsky \cite{Chud},
+that $C_0, P_1$ and $Q_1$ are integers. Further, from (\ref{del0}), 
+\begin{equation} \label{del}
+|\delta| = \frac{\sin (\pi/d) \, C(m_2,d)}{\pi \,  x^{m_1+1}} \;  \int^{1}_{0} ~
+\frac{v^{m_2+1/d} (1-v)^{m_1-1/d} dv}{(1-(1-v)/x)^{m_2+1}}.
+\end{equation}
+
+%Then (see e.g. ), we have that
+%\begin{equation} \label{aye}
+% P_{m_1,m_2} (z) - \left( 1+z \right)^{1/d} \; Q_{m_1,m_2} (z) = z^{m_1+m_2+1} \, E_{m_1,m_2} (z),
+%\end{equation}
+%where 
+%\begin{equation} \label{frump}
+%E_{m_1,m_2} (z) =   \frac{(-1)^{m_2} \, \Gamma (m_2+(d+1)/d)}{\Gamma(-m_1+1/d) \Gamma(m_1+m_2+2)}  F(m_1 + (d-1)/d,m_2+1, m_1+m_2+2,-z),
+%\end{equation}
+%for $F$ the hypergeometric function given by
+%$$
+%F(a,b,c,-z) = 1 - \frac{a \cdot b}{1 \cdot c} z + \frac{a \cdot (a+1) \cdot b \cdot (b+1)}{1 \cdot 2 \cdot c \cdot (c+1)} z^2 - \cdots.
+%$$
+
+Recall that $P$ and $Q$ are defined as in (\ref{P-Q-def}). Here and henceforth, we will assume that 
+\begin{equation} \label{sturdy}
+m_2-m_1=m_0. 
+\end{equation}
+We have
+\begin{lemma} \label{pumpkin}
+If  $m_1$ and $m_2$ are nonnegative integers satisfying (\ref{sturdy}),  then it follows that $PQ_1 \neq C_0 P_1 Q$.
+\end{lemma}
+
+\begin{proof}
+Let $p$ be a prime with $p \mid d$. 
+Then
+$$
+\mbox{ord}_p (P) = n_0 \, \mbox{ord}_p (d)  + \mbox{ord}_p (n_0!) + m_0 \, \mbox{ord}_p (x),
+$$
+$$
+\mbox{ord}_p (P_1) = \mbox{ord}_p (Q_1) = \mbox{ord}_p (Q) = 0
+$$
+and
+$$
+\mbox{ord}_p (C_0) = m_0 \, \mbox{ord}_p (d)  + \mbox{ord}_p (m_2!)  - \mbox{ord}_p (m_1!) + m_0 \, \mbox{ord}_p (x).
+$$
+Since $m_2 - m_1 = m_0 > n_0$, 
+we have
+$$
+\mbox{ord}_p \left( \frac{C_0P_1 Q}{P Q_1} \right) = (m_0-n_0)  \, \mbox{ord}_p (d)  + \mbox{ord}_p \left( \frac{m_2!}{m_1! n_0!} \right) > 0
+$$
+so that 
+$$
+\mbox{ord}_p (P Q_1 - C_0 P_1 Q) = \mbox{ord}_p (P Q_1) = n_0 \, \mbox{ord}_p (d)  + \mbox{ord}_p (n_0!) + m_0 \, \mbox{ord}_p (x)
+$$
+and, in particular, $P Q_1 - C_0 P_1 Q \neq 0$.
+
+\end{proof}
+
+%Appealing twice to  (\ref{aye}) and  (\ref{frump}) with, in the second instance,  $m_2$ replaced by $m_2+1$, and eliminating $(1+z)^{1/q}$,  we find that $P_{m_1,m_2+1}(z)Q_{m_1,m_2}(z)-P_{m_1,m_2}(z)Q_{m_1,m_2+1}(z)$ is a polynomial of degree $m_1+m_2+1$ with a zero at $z=0$ of order $m_1+m_2+1$ (and hence monomial). It follows that we may write
+%\begin{equation} \label{zero}
+%P_{m_1,m_2+1}(z)Q_{m_1,m_2}(z)-P_{m_1,m_2}(z)Q_{m_1,m_2+1}(z) = c z^{m_1+m_2+1},
+%\end{equation}
+%with, a short calculation reveals, $c \neq 0$.
+
+It follows from Lemma \ref{pumpkin}
+and its proof  that $P Q_1 - C_0 P_1 Q$ is a nonzero integer multiple of 
+$C(n_0,d) \, x^{m_0}$, so that, from the definitions of $\epsilon$ and $\delta$, 
+\begin{equation} \label{key}
+|\epsilon Q_1 - \delta Q| = |P Q_1 - C_0 P_1 Q| \geq  C(n_0,d) \, x^{m_0}.
+\end{equation}
+
+Now 
+$$
+Q = C(n_0,d) \,  \sum_{k = 0}^{n_0} A_k (d) y^{n_0-k} < \frac{y}{y-1} \, C(n_0,d) \, y^{n_0} \leq 1.025 \, C(n_0,d) \, y^{n_0},
+$$
+since $y > x \geq 40$, and hence,
+from (\ref{goop}), 
+\begin{equation} \label{Q-upper}
+Q < 1.039  \, C(n_0,d) \, x^{m_0}.
+\end{equation}
+
+Combining (\ref{goop}), (\ref{start}), (\ref{key}) and (\ref{Q-upper}), we thus have
+ \begin{proposition} \label{upper-cool}
+ Suppose that $(x,y,m,n)$ is a solution in integers to equation (\ref{eq-main}), with (\ref{condition}) and $x \geq 40$. If $m_0, n_0$ and $d$ are defined as in (\ref{m0n0}), and $m_1$ and $m_2$ are nonnegative integers satisfying (\ref{sturdy}), then for $Q_1$ and $|\delta|$ as given  in (\ref{Q1-def}) and (\ref{del}), we may conclude that
+ \begin{equation} \label{imp}
+  |Q_1| > 1.28 \, d \, (1-1.039 |\delta|) \, x^{m_0+m_0/n_0}.
+\end{equation}
+ \end{proposition}
+
+In the other direction, we will deduce two upper bounds upon $|Q_1|$; we will use one or the other depending on whether or not $m_1$ is ``large'', relative to $x$. The first result is valid for all choices of $x$.
+\begin{proposition} \label{shazam2}
+If $m_1, m_2$ and $x$ are integers with $m_2 > m_1 \geq 1$ and $x \geq 2$, define $\alpha = m_2/m_1$ and $|\delta|$ as in (\ref{del}).
+Then
+\begin{equation} \label{munchkin}
+|Q_1| < \sqrt[d]{\frac{x}{x-1}} \; \left( \frac{(\alpha+1)^2}{\alpha} \, (e \, (\alpha + 1))^{m_1}  \, x^{m_2} \, C(m_2,d)
++ |\delta| \right).
+\end{equation}
+\end{proposition}
+
+
+If $x \geq m_1$, we will have use of the following slightly sharper bound.
+ \begin{proposition} \label{shazam}
+If $m_1$ and $m_2$ are integers with $m_2 > m_1 \geq 0$ and $x \geq \frac{m_1m_2}{m_1+m_2}$, then
+$$
+|Q_1| < \frac{x}{x-1} \, \binom{m_1+m_2}{m_1}  \, C(m_2,d) \, x^{m_2}.
+$$
+\end{proposition}
+
+\begin{proof}[Proof of Proposition \ref{shazam2}]
+Let us write $\alpha = m_2/m_1>1$
+and define
+\begin{equation} \label{arrr}
+r (\alpha,  u) =
+\frac{1}{2u} \left( (\alpha + 1) - (\alpha - 1) u - \sqrt{\left((\alpha + 1) - (\alpha - 1) u \right)^2 - 4 u} \right),
+\end{equation}
+and
+\begin{equation} \label{emm}
+M(\alpha,x) =  \frac{(1-r(\alpha,1/x)/x)^{\alpha}}{(1-r(\alpha,1/x))^{\alpha} r(\alpha,1/x)}.
+\end{equation}
+
+Via the Mean Value Theorem, 
+\begin{equation} \label{upper-al}
+ \frac{1}{\alpha +1}  < r(\alpha,1/x) < \frac{x}{(x-1)(\alpha +1)}
+\end{equation}
+and so, from calculus,
+\begin{equation} \label{upper-emm}
+M(\alpha,x) < \left( \frac{(x-1) \, (\alpha+1)-1}{(x-1) (\alpha +1)-x} \right)^\alpha \cdot (\alpha+1) < e \, (\alpha +1)
+\end{equation}
+and
+\begin{equation} \label{M-lower}
+M(\alpha,x) > \left( 1 + \frac{x-1}{x \alpha} \right)^\alpha \, \left( \frac{x-1}{x} \right) \; (\alpha+1).
+\end{equation}
+
+Arguing as in the proof of Lemma 3.1 of \cite{BaBe}, we find that 
+$$
+|C_0 P_1| \leq \frac{\left( 1-r(\alpha,1/x)/x \right)^{1/d}}{r(\alpha, 1/x) (1 - r(\alpha,1/x))} \, M(\alpha,x)^{m_1} \, x^{m_2} \, C(m_2,d),
+$$
+whereby inequalities (\ref{upper-al}) and  (\ref{upper-emm}) imply that
+$$
+|C_0 P_1| < \frac{(\alpha+1)^2}{\alpha} \, (e \, (\alpha + 1))^{m_1}  \, x^{m_2} \, C(m_2,d).
+$$
+Since $C_0 P_1 = \sqrt[d]{\frac{x-1}{x}} \; Q_1 + \delta$, we conclude as desired.
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{shazam}]
+To bound $Q_1$ from above, we begin by noting that
+\begin{equation} \label{naslund}
+x^{m_2} \left| Q_{m_1,m_2} (-1/x) \right| = \left| \sum_{k=0}^{m_2} \binom{m_1 - 1/d}{k} \binom{m_1+m_2-k}{m_1} (-1)^k x^{m_2-k} \right|.
+\end{equation}
+Defining
+$$
+f (k) = \binom{m_1 - 1/d}{k} \binom{m_1+m_2-k}{m_1},
+$$
+it follows that, for $0 \leq k \leq m_2-1$,
+$$
+f (k+1)/f(k) = \frac{(m_1 -1/d-k)(m_2-k)}{(k+1)(m_1+m_2-k)}.
+$$
+If $k \leq m_1-1$, we thus have that
+\begin{equation} \label{bound1}
+0 < f (k+1)/f(k) < \frac{(m_1 -k)(m_2-k)}{(k+1)(m_1+m_2-k)} \leq \frac{m_1m_2}{m_1+m_2}.
+\end{equation}
+If instead $k \geq m_1$, 
+\begin{equation} \label{bound2}
+\frac{(m_1 -k-1)(m_2-k)}{(k+1)(m_1+m_2-k)}  < f (k+1)/f(k) < 0.
+\end{equation}
+It follows via calculus, in this case, that
+$$
+|f(k+1)/f(k)| < \frac{(m_2-m_1+1)^2}{(m_2+m_1+1)^2}.
+$$
+We thus have that $x^{m_2} \left| Q_{m_1,m_2} (-1/x) \right|$ is bounded above by
+$$
+ \binom{m_1+m_2}{m_1}  x^{m_2} +  \left| \binom{m_1 - 1/d}{m_1} \right| \binom{m_2}{m_1}  \sum_{k=m_1+1}^{m_2}  x^{m_2-k}
+$$
+which implies the desired result. 
+\end{proof}
+
+
+%------------------------------------------------------
+\section{Proof of Theorem \ref{main-thm} } \label{sec-main-thm}
+%------------------------------------------------------
+
+To prove Theorem \ref{main-thm}, we will work with Pad\'e approximants to $(1+z)^{1/d}$, as in Section \ref{Pade},  of degrees $m_1$ and $m_2$ where we choose
+\begin{equation} \label{choice}
+m_1 = \left[ \frac{m_0}{2 n_0} \right] \; \; \mbox{ and } \; \; m_2 = m_0 + \left[ \frac{m_0}{2 n_0} \right],
+\end{equation}
+for $m_0, n_0$ and $d$ as given in (\ref{m0n0}). Here $[x]$ denotes the greatest integer less than or equal to $x$.
+Let us assume further that $x \geq (3d)^{4n/d} \geq 6^6$. 
+We will make somewhat different choices later, when we prove Theorem \ref{main-thm2}. 
+
+Our strategy will be as follows. We begin by showing that 
+ $\delta$ as given in (\ref{del}) satisfies $|\delta| < \frac{1}{1.039}$, so that the lower bound upon $|Q_1|$ in Proposition \ref{upper-cool} is nontrivial. From there, we will appeal to Proposition \ref{shazam2}  to contradict Proposition \ref{upper-cool}.
+ 
+%----------------------------------
+\subsection{Bounding $\delta$}
+%----------------------------------
+
+From the aforementioned Th\'eor\`eme II of Karanicoloff \cite{Ka}, we may suppose that $m_0 \geq 3$ and hence, arguing crudely, since $m_2 \geq m_0 \geq 3$ and $m_1 \geq 0$, we have
+$$
+ \int^{1}_{0} ~
+\frac{v^{m_2+1/d} (1-v)^{m_1-1/d} dv}{(1-(1-v)/x)^{m_2+1}} < 1
+$$
+and hence, from (\ref{del}), 
+\begin{equation} \label{frog}
+|\delta| < \frac{\sin (\pi/d) \, C(m_2,d)}{\pi \,  x^{m_1+1}} \leq \frac{C(m_2,d)}{\pi \,  x^{m_1+1}}.
+\end{equation}
+ 
+From (\ref{choice}),  $m_1+1 > \frac{m_0}{2 n_0}$ and so, the  assumption that $x \geq (3d)^{4n/d}$ yields the inequality 
+$$
+x^{m_1+1} >  (3d)^{2 m_0}. 
+$$
+Applying Proposition \ref{Cee}, if $d=2$, it follows from $m_1 \leq \frac{m_0}{2n_0}$ that 
+$$
+|\delta| <  \frac{1}{\pi} \, 4^{m_1} \, 3^{-2m_0} \leq \frac{8}{729 \pi} < 0.01,
+$$
+since $m_0 \geq 3$ and $n_0 \geq 1$.
+Similarly, if $d \geq 3$, 
+$$
+|\delta| <  \frac{(2 d \log d)^{m_0+m_1}}{(3d)^{2m_0}} \leq \frac{(2 d \log d)^{m_0+\frac{m_0}{2n_0}}}{(3d)^{2m_0}}
+= \left( \frac{(2 d \log d)^{1+\frac{1}{2n_0}}}{9d^{2}} \right)^{m_0} < 0.01,
+$$
+again from $m_0 \geq 3$ and $n_0 \geq 1$.
+Appealing to Proposition \ref{upper-cool}, we thus have, in either case,
+\begin{equation} \label{moving}
+ |Q_1| > 1.25 \, d \, x^{m_0+m_0/n_0}.
+\end{equation}
+
+
+%-------------------------------------------------------------
+\subsection{Applying Proposition \ref{shazam2}}
+%-------------------------------------------------------------
+
+We will next apply Proposition \ref{shazam2} to deduce an upper bound upon $|Q_1|$. To use this result, we must first separately treat the case when $m_1=0$. In this situation, 
+Proposition \ref{shazam} implies that
+$$
+|Q_1| < \frac{x}{x-1}   \, C(m_0,d) \, x^{m_0}.
+$$
+Inequality (\ref{moving}) and $x \geq (3d)^{4n/d} > (3d)^{4n_0}$ thus lead to the inequalities 
+$$
+C(m_0,d) > d \, x^{m_0/n_0} > (3d)^{4 m_0},
+$$
+contradicting Proposition \ref{Cee} in all cases.
+
+Assuming now that $m_1 \geq 1$, combining  Proposition \ref{shazam2} with (\ref{moving}), $d \geq 2$ and the fact that $\alpha = 1+m_0/m_1 \geq 3$, implies that
+$$
+x^{\frac{m_0}{n_0} - m_1} <  \alpha \, C(m_2,d) \, (e \, (\alpha+1))^{m_1}.
+$$
+Since $m_1 \leq m_0/2n_0$, $x \geq (3d)^{4n/d} > (3d)^{4n_0}$ and $\alpha = 1+m_0/m_1$, it follows that
+$$
+(3d)^{2m_0} < (1 + m_0/m_1) \,  C(m_0+m_1,d) \,   (e \, (2 + m_0/m_1))^{m_1}
+$$
+and so
+\begin{equation} \label{fish}
+9 d^2 < (1 + m_0/m_1)^{1/m_0}  \,  C(m_0+m_1,d)^{1/m_0} \,   (e \, (2 + m_0/m_1))^{m_1/m_0}.
+\end{equation}
+If $d=2$, Proposition \ref{Cee} yields
+\begin{equation} \label{fleece}
+36 < (1 + m_0/m_1)^{1/m_0}  \,  4^{1+m_1/m_0} \,   (e \, (2 + m_0/m_1))^{m_1/m_0},
+\end{equation}
+contradicting  the fact that $m_0 \geq \max \{ 3, 2m_1 \}$.
+
+If $d \geq 3$, (\ref{fish}) and Proposition \ref{Cee}  lead to the inequality
+$$
+9 d^2 < (1 + m_0/m_1)^{1/m_0}  \,  (2 d \log d)^{1+m_1/m_0} \,   (e \, (2 + m_0/m_1))^{m_1/m_0},
+$$
+whence
+\begin{equation} \label{bluff}
+2.744 < \frac{9 \sqrt{d}}{2 \sqrt{2} (\log d)^{3/2}} < (1 + m_0/m_1)^{1/m_0}  \,  (e \, (2 + m_0/m_1))^{m_1/m_0}.
+\end{equation}
+If $n_0 \geq 3$, then $m_0 \geq 6 m_1$ and hence 
+$$
+(1 + m_0/m_1)^{1/m_0}  \,  (e \, (2 + m_0/m_1))^{m_1/m_0} < 2.4,
+$$
+a contradiction, while, from the second inequality in (\ref{bluff}), we find that  $d \leq 1112$ or $d \leq 64$, if $n_0=1$ or $n_0=2$, respectively. 
+
+For these remaining values, we will argue somewhat more carefully. From (\ref{C-upper}) and (\ref{fish}), 
+\begin{equation} \label{flag}
+9 d^2 < (1 + m_0/m_1)^{1/m_0}  \,  \left( d \,  \prod_{p \mid d} p^{1/(p-1)} \right)^{1+m_1/m_0} \,   (e \, (2 + m_0/m_1))^{m_1/m_0}.
+\end{equation}
+If $n_0=2$ (so that $m_0 \geq 4 m_1$), we thus have
+$$
+d^{3/4} <  0.34 \, \left( \prod_{p \mid d} p^{1/(p-1)} \right)^{5/4},
+$$
+and hence, for $3 \leq d \leq 64$, a contradiction. Similarly, if $n_0=1$, we have from $m_0 \geq 3$ that either $(m_0,m_1)=(3,1)$ or $m_0 \geq 4$. In the first case,
+$$
+d^{2/3} <  0.43 \, \left( \prod_{p \mid d} p^{1/(p-1)} \right)^{4/3},
+$$
+contradicting the fact that $d \leq 1112$. If $m_0 \geq 4$ (so that $m_1 \geq 2$), then (\ref{flag}) implies the inequality
+$$
+d^{1/2} <  \frac{e^{1/2} \cdot 2 \cdot 3^{1/2m_1}}{9}  \, \left( \prod_{p \mid d} p^{1/(p-1)} \right)^{3/2}
+$$
+and hence, after a short computation and using that $d \le 1112$, either $d=6$, $m_0=2m_1$ and $m_1 \leq 15$, or $d=30$ and $(m_0,m_1)=(4,2)$.
+In this last case, 
+$$
+x^6 Q_{2,6} (-1/x) = \sum_{k=0}^{6} \binom{2 - 1/30}{k} \binom{8-k}{2} (-x)^{6-k}
+$$
+and so $x^6 Q_{2,6} (-1/x)$ is equal to 
+$$
+28 x^6-\frac{413}{10} x^5+ \frac{1711}{120} x^4+ \frac{1711}{16200} x^3+\frac{53041}{3240000} x^2+\frac{3235501}{972000000} x + \frac{294430591}{524880000000}
+< 28 x^6,
+$$
+since $x \geq 6^6$. 
+From $C(6,30)=52488000000$, we have that
+$$
+|Q_1| < 1.47 \cdot 10^{13} \, x^6.
+$$
+On the other hand,  (\ref{moving}) implies that $|Q_1| > 37.5 \cdot x^8$, so that $x < 6.3 \cdot 10^5$,
+contradicting $x \geq (3d)^{4n/d} > 90^{4}$.
+
+For $d=6$, $2 \leq m_1 \leq 15$ and $m_0=2m_1$, we argue in a similar fashion, explicitly computing $Q_{m_1,m_2} (z)$ and finding that
+$$
+|Q_1| < \kappa_{m_1} x^{3m_1},
+$$
+where
+$$
+\begin{array}{cc|cc|cc}
+m_1 & \kappa_{m_1} & m_1 & \kappa_{m_1}  &  m_1 & \kappa_{m_1} \\ \hline
+2 & 1.89 \cdot 10^8 & 7 & 1.35 \cdot 10^{32} & 12 & 1.60 \cdot 10^{57}  \\
+3 & 2.30 \cdot 10^{13} & 8 & 1.24 \cdot 10^{37} &  13 & 1.89 \cdot 10^{61} \\ 
+4 & 9.86 \cdot 10^{17} & 9 & 1.29 \cdot 10^{42} & 14 & 1.79 \cdot 10^{66}  \\ 
+5 & 1.09 \cdot 10^{22} & 10 & 6.02 \cdot 10^{46}  & 15 & 1.28 \cdot 10^{71} \\
+6 & 5.88 \cdot 10^{27} & 11 &  1.13 \cdot 10^{52} & &  \\
+\end{array}
+$$
+With (\ref{moving}), we thus have
+$$
+x^{m_1} <  \frac{2}{15} \, \kappa_{m_1},
+$$
+and so
+$$
+x < \left( \frac{2}{15} \, \kappa_{m_1} \right)^{1/m_1} < 5.5 \cdot 10^4,
+$$
+contradicting our assumption that $x \geq 18^{2n/3} \geq 18^{14/3} > 7.2 \cdot 10^5$. This completes the proof of Theorem \ref{main-thm}.
+
+
+%------------------------------------------------------
+\section{Proof of Theorem \ref{main-thm2} for $x$ of moderate size }  \label{sec-main-thm2}
+%------------------------------------------------------
+
+As can be observed from the proof of Theorem \ref{main-thm}, the upper bound $x <  (3d)^{4n/d}$ may, for fixed values of $n$ (and hence $d$), be improved with a somewhat more careful argument. By way of example, for small choices of $n$, we may derive bounds of the shape $x < x_0(n)$, provided we assume that $m \geq m_0 (n)$ for effectively computable $m_0$, where we have
+$$
+\begin{array}{cc|cc|cc|cc} \hline
+n & x_0(n) & n & x_0(n) & n & x_0(n) & n & x_0(n) \\ \hline
+3 & 38 & 5 & 676 & 7 & 11647 & 9 & 195712 \\
+4 & 80  & 6 & 230 & 8 & 492 & 10 &  72043. \\
+\end{array}
+$$
+To prove Theorem \ref{main-thm2}, we will begin by deducing slightly weaker versions of these bounds, for $n \in \{ 3, 4, 5 \}$, where the corresponding values $m_0$ are amenable to explicit computation. Our arguments will closely resemble those of the preceding section, with slightly different choices of $m_1$ and $m_2$, and with a certain amount of additional care. Note that, from Theorem \ref{main-thm}, we may assume that we are in one of the following cases
+\begin{enumerate}
+\item $n=3, \; d=2, \;  n_0=1, \; 2 \leq x \leq 46655$,
+\item $n=4, \; d=3, \; n_0=1, \; 2 \leq x \leq 122826$,
+\item $n=5, \; d=2, \; n_0=2, \; 2 \leq x \leq 60466175$,
+\item $n=5, \; d=4, \; n_0=1, \; 2 \leq x \leq 248831$.
+\end{enumerate}
+Initially, we will suppose that $x \geq 40$ and, in all cases, that $m_1$ and $m_2$ are nonnegative integers satisfying (\ref{sturdy}). We will always, in fact, choose $m_1$ positive. Again setting $m_2=\alpha m_1$, 
+via calculus, we may bound the integral $\int^{1}_{0} ~
+\frac{v^{m_2+1/d} (1-v)^{m_1-1/d} dv}{(1-(1-v)/x)^{m_2+1}}$ in (\ref{del}) by
+$$
+\left( \max_{v \in [0,1]} \frac{v^{(\alpha+1)/d}}{ \left( 1 - (1-v)/x \right)^{(\alpha+d)/d}} \right) 
+\; M(\alpha,x)^{1/d-m_1} < M(\alpha,x)^{1/d-m_1}.
+$$
+From (\ref{del}), it thus follows that
+\begin{equation} \label{del-upper}
+|\delta| < \frac{\sin (\pi/d) \, C(m_2,d)}{\pi \,  x^{m_1+1}} \;  M(\alpha,x)^{1/d-m_1}.
+\end{equation}
+
+
+%-------------------------------------------------------------------------------
+\subsection{Case (1) : $n=3, \; d=2, \;  n_0=1, \; x \geq 40$}
+%-------------------------------------------------------------------------------
+
+In this case, we will take
+$$
+m_1 = \Big\lceil \frac{2m_0}{7} \Big\rceil \; \; \mbox{ and } \; \; m_2 = m_0+  \Big\lceil \frac{2m_0}{7} \Big\rceil,
+$$
+where by $\lceil x \rceil$ we mean the least integer that is $\geq x$, so that $m_1 \geq 2 m_2/9$, i.e. $\alpha \leq 9/2$. 
+From (\ref{del-upper}) and   Proposition \ref{Cee}, 
+$$
+|\delta| < \frac{M(\alpha,x)^{1/2}}{\pi x} \; \left( \frac{4^{\alpha} }{x \, M(\alpha,x)} \right)^{m_1}.
+$$
+Appealing to (\ref{M-lower}), since $x \geq 40$ and $\alpha \leq 9/2$, it follows that 
+$$
+\frac{4^{\alpha} }{x \, M(\alpha,x)} \leq \frac{4^{\alpha} }{\left( 1 + \frac{39}{40 \alpha} \right)^\alpha \, 39 \; (\alpha+1)} < 1,
+$$
+whence, from (\ref{upper-emm}), 
+$$
+|\delta| < \frac{M(\alpha,x)^{1/2}}{\pi x} < \frac{(e \, (\alpha+1))^{1/2}}{\pi x}  < 0.031.
+$$
+We may therefore apply Proposition \ref{upper-cool} to conclude that
+\begin{equation} \label{fly}
+ |Q_1| > 2.477 \, x^{2m_0}.
+\end{equation}
+From (\ref{munchkin}), Proposition \ref{Cee}, $\alpha \leq 9/2$ and $x \geq 40$, we have
+$$
+|Q_1| < 6.81  \cdot 14.951^{m_1}  \, (4x)^{m_0+m_1} 
+$$
+and so
+\begin{equation} \label{kite}
+x < \left( 2.75 \cdot 14.951^{m_1}  \, 4^{m_0+m_1} \right)^{\frac{1}{m_0-m_1}}.
+\end{equation}
+We may check that $m_0 > 3.4 m_1$ (so that $\alpha > 4.4$) whenever $m_0 \geq 96$ and hence, since the right hand side of (\ref{kite}) is monotone decreasing in $m_0$, may conclude that $x < 40$, a contradiction. 
+
+For $m_0 \leq 95$, we note that
+$$
+\frac{m_1m_2}{m_1+m_2} \leq m_1 = \Big\lceil \frac{2m_0}{7} \Big\rceil \leq   \Big\lceil \frac{2 \cdot 95}{7} \Big\rceil = 28 < x
+$$
+and hence may
+appeal to Proposition \ref{shazam}.
+It follows from (\ref{fly}) and $x \geq 40$ that
+$$
+x < \left( \frac{C(m_2,2)}{2.415} \, \binom{m_1+m_2}{m_1} \right)^{\frac{1}{m_0-m_1}}.
+$$
+A short computation leads to the conclusion that $x < 40$, unless $m_0 =4$ (in which case $x \leq 108$) or $m_0=18$ (whence $x \leq 40$). In the last case, we therefore have $x=40$ and $m=37$, and we may easily check that there are no corresponding solutions to equation (\ref{eq-main}).
+ If $m_0=4$ (so that $m=9$) and $40 \leq x \leq 108$, there are, similarly, no solutions to (\ref{eq-main}) with $n=3$. 
+
+%--------------------------------------------------------------------------------
+\subsection{Case (2) : $n=4, \; d=3, \;  n_0=1, \; x \geq 85$}
+%-------------------------------------------------------------------------------
+
+We argue similarly in this case, choosing
+$$
+m_1 = \Big\lceil \frac{m_0}{3.23} \Big\rceil \; \; \mbox{ and } \; \; m_2 = m_0+  \Big\lceil \frac{m_0}{3.23} \Big\rceil,
+$$
+so that $\alpha \leq 4.23$.
+From (\ref{del-upper}) and   Proposition \ref{Cee}, 
+$$
+|\delta| < \frac{\sqrt{3} \, M(\alpha,x)^{1/3}}{2 \, \pi x} \; \left( \frac{3^{3\alpha/2} }{x \, M(\alpha,x)} \right)^{m_1}.
+$$
+Applying (\ref{M-lower}), $x \geq 85$ and $\alpha \leq 4.23$, 
+$$
+ \frac{3^{3\alpha/2} }{x \, M(\alpha,x)} \leq \frac{3^{3\alpha/2} }{\left( 1 + \frac{84}{85 \alpha} \right)^\alpha \, 84 \; (\alpha+1)} < 1
+$$
+and so 
+$$
+|\delta| < \frac{\sqrt{3} \, M(\alpha,x)^{1/3}}{2 \, \pi x}  < 
+\frac{\sqrt{3} \,(e \, (\alpha+1))^{1/3}}{2 \,\pi x}  < 0.008.
+$$
+Proposition \ref{upper-cool} thus implies 
+\begin{equation} \label{fowl}
+|Q_1| > 3.808 \, x^{2 m_0}
+\end{equation}
+while (\ref{munchkin}), Proposition \ref{Cee}, $\alpha \leq 4.23$ and $x \geq 85$ give
+$$
+|Q_1| < 6.5 \cdot 14.217^{m_1}  \, (3 \sqrt{3} \, x)^{m_0+m_1}.
+$$
+ It follows that
+\begin{equation} \label{kite3}
+x < \left( 1.707 \cdot 14.217^{m_1}  \, (3 \sqrt{3})^{m_0+m_1} \right)^{\frac{1}{m_0-m_1}}.
+\end{equation}
+ We may check that $m_0 \geq 3.14 m_1$, for all $m_0 \geq 98$ (and $m_1 \geq 31$) and hence, for these $m_0$, we have $\alpha \geq 4.14$ and so
+ $$
+ x < 1.707^{1/67} \cdot 14.217^{1/2.14} \cdot (3 \sqrt{3})^{4.14/2.14},
+ $$
+ which contradicts $x \geq 85$.
+ 
+ For $m_0 \leq 97$, we again find that
+ $$
+\frac{m_1m_2}{m_1+m_2} \leq m_1 = \Big\lceil \frac{m_0}{3.23} \Big\rceil \leq   \Big\lceil \frac{97}{3.23} \Big\rceil = 31 < x
+$$
+ and hence, from Proposition \ref{shazam}, (\ref{fowl}) and $x \geq 85$, 
+$$
+x < \left( \frac{C(m_2, 3)}{3.763} \, \binom{m_1+m_2}{m_1} \right)^{\frac{1}{m_0-m_1}},
+$$
+contradicting $x \geq 85$, unless we have $m_0=4$ and $x \leq 220$, or $m_0=7$ and $x \leq 138$, or $m_0=10$ and $x \leq 99$, or $m_0=13$ and $x \leq 110$,
+or $m_0=20$ and $x \leq 87$. In each case, we may verify that there are no solutions to equation (\ref{eq-main}). By way of example, if $m_0=4$, then $m=13$ and a short computation reveals that, for $85 \leq x \leq 220$, there are no corresponding solutions to (\ref{eq-main}).
+
+ 
+%--------------------------------------------------------------------------------
+\subsection{Case (3) : $n=5, \; d=2, \;  n_0=2, \; x \geq 720$}
+%-------------------------------------------------------------------------------
+
+In this case, we will take
+$$
+m_1 = \Big\lceil \frac{m_0}{5.906} \Big\rceil \; \; \mbox{ and } \; \; m_2 = m_0+  \Big\lceil \frac{m_0}{5.906} \Big\rceil,
+$$
+so that $\alpha \leq 6.906$. 
+From (\ref{del-upper}) and   Proposition \ref{Cee}, 
+$$
+|\delta| < \frac{M(\alpha,x)^{1/2}}{\pi x} \; \left( \frac{4^{\alpha} }{x \, M(\alpha,x)} \right)^{m_1}.
+$$
+Appealing to ({\ref{M-lower}), since $x \geq 720$ and $\alpha \leq 6.906$, it follows that 
+$$
+\frac{4^{\alpha} }{x \, M(\alpha,x)} \leq \frac{4^{\alpha} }{\left( 1 + \frac{719}{720 \alpha} \right)^\alpha \, 719 \; (\alpha+1)} < 1,
+$$
+whence, from (\ref{upper-emm}), 
+$$
+|\delta| < \frac{M(\alpha,x)^{1/2}}{\pi x} < \frac{(e \, (\alpha+1))^{1/2}}{\pi x}  < 0.003.
+$$
+We may therefore apply Proposition \ref{upper-cool} to conclude that
+\begin{equation}\label{fowl511}
+ |Q_1| > 2.552 \, x^{\frac{3}{2}m_0}.
+\end{equation}
+On the other hand, from (\ref{munchkin}), Proposition \ref{Cee}, $\alpha \leq 6.906$ and $x \geq 720$ we have
+$$
+|Q_1| < 9.058 \cdot 21.491^{m_1}  \, (4x)^{m_0+m_1}.
+$$
+ It follows that
+\[
+x < \left( 3.550 \cdot 21.491^{m_1}  \, 4^{m_0+m_1} \right)^{\frac{2}{m_0-2m_1}}.
+\]
+ We may check that $m_0>5.809 m_1$ (so that $\alpha>6.809$), for all $m_0 \geq 332$ and hence, for these $m_0$, we have 
+ $$
+ x < 3.550^{1/108} \cdot 21.491^{2/3.809} \cdot 4^{2+6/3.809}
+ $$
+ which contradicts  $x \geq 720$. For $m_0\leq 331$, 
+$$
+\frac{m_1m_2}{m_1+m_2} \leq m_1 = \Big\lceil \frac{m_0}{5.906} \Big\rceil \leq   \Big\lceil \frac{331}{5.906} \Big\rceil= 57 < x
+$$
+ and hence Proposition \ref{shazam}, (\ref{fowl511}) and $x \geq 720$ imply that
+$$
+x < \left( \frac{C(m_2, 2)}{2.548} \, \binom{m_1+m_2}{m_1} \right)^{\frac{2}{m_0-2m_1}},
+$$
+contradicting $x \geq 720$, unless  we have $m_0$ and $720 \leq x \leq x_0$ as follows :
+$$
+\begin{array}{cc|cc|cc|cc|cc} 
+m_0 & x_0 & m_0 & x_0 & m_0 & x_0 & m_0 & x_0 & m_0 & x_0\\ \hline
+3 & 63090 & 12 & 2780 & 19 & 992 & 31 & 834 & 54 & 836 \\
+6 & 578712 & 13 & 2531 & 20 & 909 & 36 & 859 & 55 & 723 \\
+7 & 12601 & 14 & 1177 & 24 & 1101 & 37 & 777 & 65 & 765\\
+8 & 2605 & 15 & 755 & 25 & 847 & 42 & 849 & 71 & 768\\
+9 & 762 & 18 & 1667 & 30 & 1103 & 48 & 767 & 83 & 734\\
+\end{array}
+$$
+Since we are assuming that $m_0$ is odd, because $\gcd(m-1, n-1)=2$,  this table reduces to the following:
+
+$$
+\begin{array}{cc|cc|cc|cc|cc} 
+m_0 & x_0 & m_0 & x_0 & m_0 & x_0 & m_0 & x_0 & m_0 & x_0\\ \hline
+3 & 63090 & 13 & 2531 & 25 & 847 & 55 & 723 & 83 & 734\\
+7 & 12601 & 15 & 755 & 31 & 834 & 65 & 765\\
+9 & 762 & 19 & 992 & 37 & 777 & 71 & 768\\
+
+\end{array}
+$$
+
+ 
+For these remaining triples $(x,n,m)=(x,5,2m_0+1)$, with $720 \leq x \leq x_0$, just as in the cases $n=3$ and $n=4$, we reach a contradiction  upon explicitly verifying that there are no integers $y$ satisfying equation~\eqref{eq-main}. 
+
+%--------------------------------------------------------------------------------
+\subsection{Case (4) : $n=5, \; d=4, \;  n_0=1, \; x \geq 300$}
+%-------------------------------------------------------------------------------
+
+In this case, we will take
+$$
+m_1 = \Big\lceil \frac{m_0}{2.93} \Big\rceil \; \; \mbox{ and } \; \; m_2 = m_0+  \Big\lceil \frac{m_0}{2.93} \Big\rceil,
+$$
+so that $\alpha \leq 3.93$. 
+From (\ref{del-upper}) and   Proposition \ref{Cee}, 
+$$
+|\delta| < \frac{\sqrt{2}M(\alpha,x)^{1/4}}{2\pi x} \; \left( \frac{8^{\alpha} }{x \, M(\alpha,x)} \right)^{m_1}.
+$$
+Appealing to (\ref{M-lower}), since $x \geq 300$ and $\alpha \leq 3.93$, it follows that 
+$$
+\frac{8^{\alpha} }{x \, M(\alpha,x)} \leq \frac{8^{\alpha} }{\left( 1 + \frac{299}{300 \alpha} \right)^\alpha \, 299 \; (\alpha+1)} < 1,
+$$
+whence, from (\ref{upper-emm}), 
+$$
+|\delta| < \frac{\sqrt{2}M(\alpha,x)^{1/4}}{2\pi x} < \frac{\sqrt{2}(e \, (\alpha+1))^{1/4}}{2\pi x}  < 0.002.
+$$
+We may therefore apply Proposition \ref{upper-cool} to conclude that
+\begin{equation} \label{cliff2}
+ |Q_1| > 5.109 \, x^{2m_0}.
+\end{equation}
+On the other hand, from (\ref{munchkin}), Proposition \ref{Cee}, $\alpha \leq 3.93$ and $x \geq 300$ we have
+$$
+|Q_1| < 6.19 \cdot 13.402^{m_1}  \, (8x)^{m_0+m_1}.
+$$
+ It follows that
+\[
+x < \left(1.212 \cdot 13.402^{m_1}  \, 8^{m_0+m_1} \right)^{\frac{1}{m_0-m_1}}.
+\]
+ We may check that $m_0 \geq 2.87 m_1$ (so that $\alpha\geq 3.87$) for all $m_0 \geq 133$ (and hence for $m_1\geq 46$) and hence, for these $m_0$, we have 
+ $$
+ x < 1.212^{1/87} \cdot 13.402^{1/1.87} \cdot 8^{3.87/1.87}
+ $$
+ which contradicts  $x\geq 300$. 
+ 
+For $m_0 \leq 132$, 
+$$
+\frac{m_1m_2}{m_1+m_2} \leq m_1 = \Big\lceil \frac{m_0}{2.93} \Big\rceil \leq   \Big\lceil \frac{132}{2.93} \Big\rceil = 46 < x
+$$
+ and hence Proposition \ref{shazam}, (\ref{cliff2}) and $x \geq 300$ imply that
+$$
+x < \left( \frac{C(m_2, 4)}{5.091} \, \binom{m_1+m_2}{m_1} \right)^{\frac{1}{m_0-m_1}}.
+$$
+ A short computation leads to the conclusion that $x<300$ for all $m_0\leq 132$, unless we have $m_0$ and $x \leq x_0$ as follows :
+ 
+ $$
+\begin{array}{cc|cc|cc} 
+m_0 & x_0 & m_0 & x_0 & m_0 & x_0 \\ \hline
+3 & 33791 & 7 & 350 & 15 & 343 \\
+4 & 600 & 9 & 502 & 18 & 315 \\
+6 & 1131 &12 & 434 & & \\
+\end{array}
+$$
+In the remaining cases, we again reach a contradiction  upon explicitly verifying that there are no integers $y$ satisfying equation~\eqref{eq-main} (assuming thereby $x\geq 300$). 
+
+%------------------------------------------------------
+ \subsection{Treating the remaining small values of $x$ for $n \in \{ 3, 4 \}$}
+%-----------------------------------------------------
+
+To deal with the remaining pairs $(x,n)$ for $n \in \{ 3, 4, 5 \}$, we can, in each case, reduce the problem to finding ``integral points'' on particular models of genus one curves. Such a reduction is not apparently available for larger values of $n$. In case $n \in \{ 3, 4 \}$, this approach enables us to complete the proof of Theorem \ref{main-thm2}. When $n=5$ (where we are left to treat values $2 \leq x < 720$), the resulting computations are much more involved. To complete them, we must work rather harder; we postpone the details to the next section.
+
+%------------------------------------------------------
+ \subsubsection{Small values of $x$ for $n=3$}
+%-----------------------------------------------------
+
+To complete the proof of Theorem \ref{main-thm2} for $n=3$, it remains to solve equation (\ref{eq-main}) with $2 \leq x \leq 39$.
+In this case,  (\ref{eq-main}) becomes
+\begin{equation} \label{eq-three}
+y^2+y+1 = \frac{x^m-1}{x-1},
+\end{equation}
+whereby
+$$
+\left( 4 (x-1)^2 (2y+1) \right)^2 = 64 (x-1)^3  x^m - 16 (3x+1)(x-1)^3.
+$$
+Writing $m = 3 \kappa + \delta$ for $\kappa \in \mathbb{Z}$ and $\delta \in \{ 0, 1, 2 \}$, we thus have
+\begin{equation} \label{Mordell}
+Y^2 = X^3 - k,
+\end{equation}
+for 
+$$
+X = 4 (x-1) x^{\kappa+\delta}, \; \; Y = 4 (x-1)^2 (2y+1) x^\delta \; \mbox{ and } \; k = 16 (3x+1)(x-1)^3 x^{2 \delta}.
+$$
+
+We solve equation (\ref{Mordell}) for the values of $k$ arising from $2 \leq x \leq 39$ and $0 \leq \delta \leq 2$ rather quickly using Magma's {\it IntegralPoints} routine (see \cite{magma}). The only solutions we find with the property that $4 (x-1) x^2 \mid X$ are those coming from trivial solutions corresponding to $m =2$, together with $(x,\delta,X,|Y|)$ equal to one of
+$$
+\begin{array}{c}
+(2,1,128,1448), (2,2,32,176), (5,2,800,22400), (8,2,3584,213248),  \\
+(19,2,389880,243441072), (26,2,11897600,41038270000) \mbox{ or } \\
+(27,2,227448,108416880). \\
+\end{array}
+$$
+Of these, only  $(x,\delta,X,|Y|)=(2,1,128,1448)$ and $(2,2,32,176)$ have the property that $X= 4 (x-1) x^{t}$ for $t$ an integer, corresponding to  the solutions $(x,y,m)=(2,90,13)$ and $(2,5,5)$ to equation (\ref{eq-three}), respectively.
+
+
+%------------------------------------------------------
+ \subsubsection{Small values of $x$ for $n=4$}
+%-----------------------------------------------------
+
+ If $n=4$ and we write $m=2 \kappa + \delta$, for $\kappa \in\mathbb{Z}$ and $\delta \in \{ 0, 1 \}$, then (\ref{eq-main}) becomes
+ $$
+ x^\delta (x^\kappa)^2 = (x-1) ( y^3+y^2+y+1) + 1,
+ $$
+ whereby
+ $$
+ Y^2 = X^3 + x^\delta (x-1)X^2 + x^{2 \delta} (x-1)^2 X + x^{1+3 \delta} \, (x-1)^2,
+ $$
+for
+ $$
+ X=(x-1) x^\delta y \; \; \mbox{ and } \; \;  Y=(x-1) \, x^{\kappa+2 \delta}.
+ $$
+ Once again applying Magma's {\it IntegralPoints} routine, we find that the only points for $2 \leq x \leq 84$ and $\delta \in \{0, 1 \}$, and having $(x-1) x^2 \mid Y$ correspond to either trivial solutions to (\ref{eq-main}) with either $y=0$ or $m=4$, or have $\delta=1$ and  $(x,X,|Y|)$ among
+ $$
+ \begin{array}{c}
+ (4,48,384), (9,648,17496), (16,3840,245760), (21,1680,79380), \\
+(21,465360,317599380), (25,15000,1875000), (36,45360,9797760), \\
+(41,33620,6320560), (49,115248,39530064), (64,258048,132120576), \\
+(65,10400,1352000), (81,524880,382637520). \\
+\end{array}
+ $$
+None of these triples lead to nontrivial solutions to (\ref{eq-main}) with $n=4$.
+ 
+ %------------------------------------------------------
+ \section{Small values of $x$ for $n=5$} \label{TM}
+%-----------------------------------------------------
+ 
+ In case $n=5$, solving equation (\ref{eq-main}) can, for a fixed choice of $x$, also be reduced to a question of finding integral points on a particular model of a genus $1$ curve.
+ Generally, for $m$ odd, say $m= 2 \kappa+1$, we can rewrite  (\ref{eq-main}) as
+ $$
+ x \left( x^{\kappa} \right)^2 = (x-1) \left( y^4+y^3+y^2+y+1 \right) + 1,
+ $$
+ so that 
+ $$
+ \left( x^{\kappa+1} \right)^2 = (x^2-x) \left( y^4+y^3+y^2+y \right) + x^2.
+ $$
+ Applying Magma's {\it IntegralQuarticPoints} routine, 
+ %$([x^2-x,x^2-x,x^2-x,x^2-x,x^2])$, 
+ we may find solutions to the more general Diophantine equation
+ \begin{equation} \label{quartic}
+ Y^2 = (x^2-x) \left( y^4+y^3+y^2+y \right) + x^2;
+ \end{equation}
+ note that we always have, for each $x$, solutions $(y,Y) = (0, \pm x), (-1, \pm x)$ and $(x, \pm x^3)$. 
+ 
+ Unfortunately, it does not appear that this approach is computationally efficient enough to solve equation (\ref{quartic}) in a reasonable time for all values of $x$ with  $2 \leq x < 720$ (though it does work somewhat quickly for $2 \leq x \leq 59$ and various other $x < 720$). The elliptic curve defined by (\ref{quartic}) has, in each case, rank at least $2$ (the solutions corresponding to $(y,Y) = (0, x)$ and $(-1, x)$ are independent non-torsion points). Magma's {\it IntegralQuarticPoints} routine is based on bounds for  linear forms in elliptic logarithms and hence requires detailed knowledge of the generators of the Mordell-Weil group. Thus, when the rank is much larger than $2$, Magma's   {\it IntegralQuarticPoints} routine can, in practice, work very slowly. This is the case, for example, when $x=60$ (where the corresponding elliptic curve has rank $5$ over $\mathbb{Q}$).  
+
+ 
+%Unfortunately, it does not appear that this approach is computationally efficient enough to solve equation (\ref{quartic}) in a reasonable time for all values of $x$ with  $2 \leq x < 720$ (though it does work somewhat quickly for $2 \leq x \leq 59$ and various other $x < 720$). The elliptic curve defined by (\ref{quartic}) has, in each case, rank at least $2$ (the solutions corresponding to $(y,Y) = (0, x)$ and $(-1, x)$ are independent non-torsion points). When the rank is much larger than this, Magma's   {\it IntegralQuarticPoints} routine (which is based on bounds for  linear forms in elliptic logarithms and hence requires detailed knowledge of the generators of the Mordell-Weil group) can, in practice, work very slowly. This is the case, for example, when $x=60$ (where the corresponding elliptic curve has rank $5$ over $\mathbb{Q}$). 
+ 
+%    For $2 \leq x \leq 100$, we find additional solutions with $(x, y,|Y|)$ among
+% $$
+% \begin{array}{c}
+% (3, -28, 1887), (4, 32, 3604), (5,-7, 205), (5,-3, 35), (5,-2, 15), (5,2, 25), (14,6, 532), \\
+%  (14, 7,  714), (15,5,405), (15,9,1245),  (20, 4, 360),   (20, 15, 4540),  (25, 1, 55),  \\
+%(25, 132, 428425), (27,-3,207), (40,2,220), (45,-8,2685), (45,7,2355), \\
+ %  (49,-2,161), (64,-3,496), (72,-5,1632),
+%  \end{array}
+% $$
+% (actually, this computation is still running and seems to be having trouble with $x=45, 62, 78, 86$ -- possible rank problem).
+ 
+% Done for the following values of $x$ (if one trusts magma, stuck on $x=60$) :
+ %$$
+% 2 \leq x \leq 59, \; 61 \leq x  \leq  100.
+% $$
+ 
+ Instead, we will argue somewhat differently. We write (\ref{eq-main}) as
+ 
+ \begin{equation} \label{TM-start}
+ F_x(y,1) = x^m,
+ \end{equation}
+ where
+ $$
+ F_x(y,z) = (x-1)(y^4 + y^3z + y^2z^2 + yz^3) + xz^4.
+ $$
+ For fixed $x$, $F_x(y,z)$ is a homogeneous quartic form and so equation (\ref{TM-start}) is a special case of the \textit{Thue-Mahler} equation, i.e. an equation of the form
+ \begin{equation} \label{TM-normal}
+ F(y,z) = a p_1^{Z_1}\cdots p_v^{Z_v},
+ \end{equation}
+ where $F$ is an irreducible binary form of degree at least $3$, $a \in \mathbb{Z}$, the $p_i$ are distinct rational primes and the 
+ integers $y, z, Z_1, \dots, Z_v$ with $Z_i \geq 0$ for $i = 1, \dots, v$ are variables. 
+
+Now, if $x = p_1^{\alpha_1}\cdots p_v^{\alpha_v}$ is the prime factorization of $x$, then equation (\ref{TM-start}) becomes 
+\begin{equation}\label{Eq:main}
+F_x(y,1) =  p_1^{Z_1}\dots p_v^{Z_v}
+\end{equation}
+where $Z_i = m\alpha_i$. 
+
+To find all solutions to this equation, we will use linear forms in $p$-adic logarithms to generate a very large upper bound on $m$. Then, applying several instances of the LLL lattice basis reduction algorithm, we will reduce the bound on $m$ until it is sufficiently small enough that we may perform a brute force search efficiently. The remainder of this section is devoted to the details of this approach.
+
+%----------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{The relevant algebraic number field}
+%----------------------------------------------------------------------------------------------------------------------------------------------
+
+Here and henceforth, write, for concision, $F(y)=F_x(y,1)$ and, following arguments of Tzanakis and de Weger 
+\cite{TW3} for solving  Thue-Mahler equations, put
+$$
+g(t) = (x-1)^3F\left(\frac{t}{x-1}\right) = t^4 + (x-1)t^3 + (x-1)^2t^2 + (x-1)^3t + x(x-1)^3.
+$$
+Note that $g(t)$ is irreducible in $\mathbb{Z}[t]$. Writing $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$, it follows that
+ \eqref{Eq:main} is equivalent to
+\begin{equation} \label{Eq:norm}
+N_{K/\mathbb{Q}}((x-1)y-\theta) =  (x-1)^{3}p_1^{Z_1}\dots p_v^{Z_v}.
+\end{equation}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Decomposition of primes}
+
+If $p_i$ is any rational prime, let 
+\[(p_i)\mathcal{O}_K = \prod_{j = 1}^{m_i} \mathfrak{p}_{ij}^{e(\mathfrak{p}_{ij}|p_i)}\]
+be the factorization of $p_i$ into prime ideals in the ring of integers $\mathcal{O}_K$ of $K$ where $e(\mathfrak{p}_{ij}|p_i)$ and $f(\mathfrak{p}_{ij}|p_i)$ denote the ramification index and residue degree of $\mathfrak{p}_{ij}$ respectively.
+
+Then, since $N(\mathfrak{p}_{ij}) = p_i^{f(\mathfrak{p}_{ij}|p_i)}$, equation \eqref{Eq:norm} leads to finitely many ideal equations of the form
+\begin{equation} \label{Eq:ideals}
+((x-1)y-\theta)\mathcal{O}_K = \mathfrak{a} \prod_{j = 1}^{m_1} \mathfrak{p}_{1j}^{z_{1j}} \cdots \prod_{j = 1}^{m_v} \mathfrak{p}_{vj}^{z_{vj}}
+\end{equation}
+where $\mathfrak{a}$ is an ideal of norm $(x-1)^3$ and the $z_{ij}$ are unknown integers related to $m$ by $\sum_{j = 1}^{m_i} f(\mathfrak{p}_{ij}|p_i)z_{ij} = Z_i = m \alpha_i$. 
+
+Our first task is to cut down the number of variables appearing in \eqref{Eq:ideals}. We will do this by showing that only a few prime ideals can divide $((x-1)y-\theta)\mathcal{O}_K$ to a large power. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{An alternative to the Prime Ideal Removing Lemma}
+
+In this subsection, we will establish some key results that will allow us to reduce  the number of prime ideals that can appear to a large power in the factorization of $((x-1)y-\theta)\mathcal{O}_K$. It is of particular importance to note that we do not appeal to the Prime Ideal Removing Lemma of Tzanakis and de Weger (Lemma 5.1 of \cite{TW3}) here. Instead, we will appeal to arguments from \cite{GhKaMaSi}. The reason for this choice is that the latter is a typically much more computationally efficient, leading to significantly fewer subcases than Lemma 5.1 of \cite{TW3}.
+
+Let $p \in \{p_1, \dots, p_v\}$. We will produce two finite lists $L_p$ and $M_p$, the first
+consisting of certain ideals $\mathfrak{b}$ supported at the prime ideals above $p$. The list $M_p$ will consist of certain pairs $(\mathfrak{b},\mathfrak{p})$ where $\mathfrak{b}$ is supported at the prime ideals above $p$, and $\mathfrak{p} \mid p$ is a prime ideal satisfying $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$. We want the lists to satisfy the following property. If $y$ is a solution to \eqref{Eq:main} then
+\begin{enumerate}
+\item[(i)] either there is some $\mathfrak{b} \in L_p$
+such that
+\begin{equation}\label{Eq:case1}
+\mathfrak{b} \mid ((x-1) y- \theta )\mathcal{O}_K, \; \;  \text{$((x-1) y-\theta)\mathcal{O}_K/\mathfrak{b}$ is coprime to $(p)\mathcal{O}_K$};
+\end{equation}
+\item[(ii)] or there is a pair $(\mathfrak{b},\mathfrak{p}) \in M_p$ and a non-negative integer $v_p$ such that
+\begin{equation}\label{Eq:case2}
+(\mathfrak{b} \cdot \mathfrak{p}^{v_p}) \mid ((x-1) y- \theta)\mathcal{O}_K, \; \text{$((x-1) y-\theta)\mathcal{O}_K/(\mathfrak{b} \cdot \mathfrak{p}^{v_p})$ is coprime to $(p)\mathcal{O}_K$}.
+\end{equation}
+\end{enumerate}
+
+To compute $L_p$ and $M_p$, we use the following result of \cite{GhKaMaSi}.
+
+%The relevance of $L_p$ and $M_p$ stems from the following result.
+
+\begin{lemma} \label{Lem:main}
+Let $p \in \{p_1, \dots, p_v\}$. Let $y$ be a solution of \eqref{Eq:main}, $t$  a positive integer, and suppose that $(x-1)y \equiv u \pmod{p^t}$, where $u \in \{0,1,2,\dotsc,p^{t}-1\}$. If $\mathfrak{q} \mid p$, then
+\[\ord_{\mathfrak{q}}((x-1)y-\theta)\ge \min\{\ord_{\mathfrak{q}}(u-\theta), t \cdot e(\mathfrak{q}/p)\},\]
+where $e(\mathfrak{q}|p)$ denotes the ramification degree of $\mathfrak{q}$. 
+Moreover, if $\ord_{\mathfrak{q}}(u-\theta) < t \cdot e(\mathfrak{q}/p)$,
+then
+\[\ord_\mathfrak{q}((x-1)y-\theta) = \ord_{\mathfrak{q}}(u-\theta).\]
+\end{lemma}
+
+%\begin{proof}[Proof of Lemma~\ref{Lem:main}]
+%See \cite{GhKaMaSi}.
+%Since
+%\[(x-1)X-\theta = u - \theta + (x-1)X - u,\]
+%we have
+%\[\begin{array}{ll}
+%\ord_\mathfrak{q}((x-1)X-\theta)	& = \ord_{\mathfrak{q}}(u - \theta + (x-1)X - u) \\
+%						& \geq \min\{\ord_{\mathfrak{q}}(u - \theta), \ord_{\mathfrak{q}}((x-1)X - u)\}. 
+%\end{array}\]
+%But 
+%\[\ord_{\mathfrak{q}}((x-1)X-u) \geq \ord_{\mathfrak{q}}(p^t) =t \cdot e(\mathfrak{q}/p)\]
+%by assumption, %Thus $\ord_\fq(x-\theta)=\ord_\fq(u-\theta)$,
+%completing the proof of Lemma~\ref{Lem:main}.
+%\end{proof}
+
+%The following algorithm computes the lists $L_p$ and $M_p$. 
+%
+%\begin{Algorithm}\label{alg1}
+%To compute
+%$L_p$ and $M_p$.
+%
+%\begin{enumerate}
+%\item[Step (a)] Let 
+%\[L_p \leftarrow \emptyset, \qquad M_p \leftarrow \emptyset,\]
+%\[ t \leftarrow \ord_p(x-1)+1, \qquad \mathcal{U} \leftarrow \{(x-1) w : w \in \{0,1,\dots,p-1\} \}.\]
+%
+%\item[Step (b)] Let
+%\[\mathcal{U}^\prime \leftarrow \emptyset.\]
+%Loop through the elements $u \in \mathcal{U}$. Let 
+%\[\mathcal{P}_u= \{\mathfrak{q} \mid p \ : \ \ord_{\mathfrak{q}}(u-\theta) \geq t \cdot e(\mathfrak{q}/p)\},\]
+%and
+%\[ \mathfrak{b}_u 	= \prod_{\mathfrak{q} \mid p} \mathfrak{q}^{\min\{\ord_\mathfrak{q}(u-\theta), t \cdot e(\mathfrak{q}/p)\}} 
+%				= (u-\theta) \mathcal{O}_K+p^t \mathcal{O}_K.\]
+%\begin{enumerate}
+%\item[(i)] If $\mathcal{P}_u = \emptyset$ then
+%\[L_p \leftarrow L_p \cup \{\mathfrak{b}_u\}.\]
+%
+%\item[(ii)] Else if $\mathcal{P}_u = \{\mathfrak{p}\}$ with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and there is at least one $\mathbb{Z}_p$-root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$, then
+%\[M_p \leftarrow M_p \cup \{ (\mathfrak{b}_u,\mathfrak{p})\}.\]
+%
+%\item[(iii)] Else 
+%\[\mathcal{U}^\prime \leftarrow \mathcal{U} \cup \{ u+p^{t+1}w : w \in \{0,\dots,p-1\} \}.\]
+%\end{enumerate}
+%
+%\item[Step (c)] If $\mathcal{U}^\prime \ne \emptyset$ then let
+%\[t \leftarrow t+1, \qquad \mathcal{U} \leftarrow \mathcal{U}^{\prime},\]
+%and return to Step (b). Else output $L_p$, $M_p$.
+%\end{enumerate}
+%\end{Algorithm}
+%\
+%
+%\begin{lemma}
+%Algorithm~\ref{alg1} terminates.
+%\end{lemma}
+%
+%\begin{proof}
+%Suppose otherwise. Write $t_0=\ord_{p}(x-1)+1$ and $t_i=t_0+i$ for $i=1,2,3,\dots$. Then there is an infinite sequence of congruence classes $u_i \pmod{p^{t_i}}$ such that ${u_{i+1} \equiv u_i \pmod{p^{t_i}}}$, and such that the $u_i$ fail the hypotheses of both (i) and (ii). In particular, $\mathcal{P}_{u_i}$ is non-empty. By the pigeon-hole principle, some $\mathfrak{p}$ appears in infinitely many of the $\mathcal{P}_{u_i}$. Thus $\ord_{\mathfrak{p}}(u_i-\theta) \ge t_i\cdot e(\mathfrak{p}/p)$ infinitely often. However, the sequence $\{u_i\}$ converges to some $\alpha \in \mathbb{Z}_p$. Thus $\alpha=\theta$ in $\mathcal{O}_\mathfrak{p}$. This forces $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and $\alpha$ to be a $\mathbb{Z}_p$-root of $g(t)$. In particular, $\mathfrak{p}$ corresponds to the factor $(t-\alpha)$ in the $p$-adic factorisation of $g(t)$. There can be at most one such $\mathfrak{p}$, and so $\mathcal{P}_{u_i}=\{\mathfrak{p}\}$. In particular, the hypotheses of (ii) are satisfied and we have a contradiction.
+%\end{proof}
+%
+%\begin{lemma}\label{Lem:alg1correct}
+%Let $p \in \{p_1, \dots, p_v\}$ and let $L_p$, $M_p$ be as given by Algorithm~\ref{alg1}. Let $X$ be a solution to \eqref{Eq:main}. Then
+%\begin{itemize}
+%\item either there is some $\mathfrak{b} \in L_p$ such that \eqref{Eq:case1} is satisfied; 
+%\item or there is some $(\mathfrak{b},\mathfrak{p}) \in M_p$, with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and integer $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied.
+%\end{itemize}
+%\end{lemma}
+%
+%\begin{proof}
+%Let 
+%\[t_0 = \ord_p(x-1)+1, \qquad \mathcal{U}_0=\{(x-1) w \; :\;  w \in \{0,1,\dots,p-1\}\}.\]
+%These are the initial values for $t$ and $\mathcal{U}$ in the algorithm. Then $(x-1)X \equiv u_0 \pmod{p^{t_0}}$ for some $u_0 \in \mathcal{U}_0$. Write $\mathcal{U}_i$ for the value of $\mathcal{U}$ after $i$ iterations of the algorithm, and let $t_i=t_0+i$. As the algorithm terminates, $\mathcal{U}_i = \emptyset$ for sufficiently large $i$. In particular, there is some $i$ such that $(x-1)X \equiv u_i \pmod{p^{t_i}}$ where $u_i \in \mathcal{U}_i$, but there is no element in $\mathcal{U}_{i+1}$ congruent to $(x-1)X$ modulo $p^{t_{i+1}}$. Thus $u_i$ must satisfy the hypotheses of either (i) or (ii). Write $u=u_i$ and $t=t_i$ so that $(x-1)X \equiv u \pmod{p^t}$. By Lemma~\ref{Lem:main}, we have $\mathfrak{b}_u \mid ((x-1) X-\theta) \mathcal{O}_K$. Moreover, by that lemma and the definition of $\mathcal{P}_u$, if $\mathfrak{q} \notin \mathcal{P}_u$ then $((x-1)X-\theta)\mathcal{O}_K/\mathfrak{b}_u$ is not divisible by $\mathfrak{q}$. 
+%
+%Suppose first that the hypothesis of (i) is satisfied: $\mathcal{P}_u = \emptyset$. The algorithm adds $\mathfrak{b}_u$ to the set $L_p$, and by the above we know that \eqref{Eq:case1} is satified, proving the lemma in this case.
+%
+%Suppose next that the hypothesis of (ii) is satisfied: $\mathcal{P}_u=\{\mathfrak{p}\}$ where $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$ and there is a unique $\mathbb{Z}_p$ root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$. The algorithm adds $(\mathfrak{b}_u,\mathfrak{p})$ to the set $M_p$, and by the above, $((x-1) X- \theta)\mathcal{O}_K/\mathfrak{b}_u$ is an integral ideal, not divisible by any prime $\mathfrak{q} \mid p$, $\mathfrak{q} \ne \mathfrak{p}$. Thus there is some positive $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied, proving the lemma in this case.
+%\end{proof}
+
+%%---------------------------------------------------------------------------------------------------------------------------------------------%
+%\subsubsection{Refinements}
+%
+%If some $\mathfrak{b}$ is contained $L_p$, and some $(\mathfrak{b}^\prime,\mathfrak{p})$ is contained in $M_p$, with $\mathfrak{b}^\prime \mid \mathfrak{b}$ and $\mathfrak{b}/\mathfrak{b}^\prime=\mathfrak{p}^w$
+%for some $w \ge 0$, then we may delete $\mathfrak{b}$ from $L_p$ and the conclusion of Lemma~\ref{Lem:alg1correct} continues to hold.
+%
+%If some $(\mathfrak{b},\mathfrak{p})$, $(\mathfrak{b}^\prime,\mathfrak{p})$ are contained in $M_p$, with $\mathfrak{b}^{\prime} \mid \mathfrak{b}$, and $\mathfrak{b}/\mathfrak{b}^{\prime}=\mathfrak{p}^w$ for some $w \geq 0$, then we may delete $(\mathfrak{b},\mathfrak{p})$ from $M_p$ and the conclusion of Lemma~\ref{Lem:alg1correct} continues to hold.
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Factorization of the Thue-Mahler equation}
+
+After applying Lemma~\ref{Lem:main}, we are reduced to solving finitely many equations of the form
+\begin{equation}\label{Eq:TMfactored}
+((x-1) y- \theta)\mathcal{O}_K=\mathfrak{a} \mathfrak{p}_1^{u_1}\cdots \mathfrak{p}_v^{u_v}
+\end{equation}
+in integer variables $y,u_1, \dots, u_v$ with $u_i \geq 0$ for $i = 1, \dots, v$. Here
+\begin{itemize}
+\item $\mathfrak{p}_i$ is a prime ideal of $\mathcal{O}_K$ arising from Lemma~\ref{Lem:main} applied to $p_i \in \{p_1, \dots, p_v\}$, such that $(\mathfrak{b_i}, \mathfrak{p}_i) \in M_{p_i}$ for some ideal $\mathfrak{b}_i$. Note that if $M_{p_i} = \emptyset$ for $p_i$, we take $\mathfrak{p}_i = (1)\mathcal{O}_K$. 
+\item $\mathfrak{a}$ is an ideal of $\mathcal{O}_K$ of norm $(x-1)^3\cdot p_1^{t_1} \cdots p_v^{t_v}$ such that
+$u_i + t_i =  Z_i = m\alpha_i$.
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\begin{remark}\label{rem:uv}
+Unlike in \cite{TW3} and \cite{GhKaMaSi}, if, after applying Lemma~\ref{Lem:main}, we are in the situation that $u_i = 0$ for some $i$ in $\{1, \dots, v\}$, it follows that
+\[m = \frac{Z_i}{\alpha_i } =  \frac{u_i + t_i}{\alpha_i } = \frac{t_i}{\alpha_i }.\]
+We iterate this computation over all $i \in \{1, \dots, v\}$ such that $u_i = 0$ and take the smallest $m$ as our bound. For all of the values of $x$ that we are interested in, this bound on $m$ is small enough that we may go directly to the final brute force search for solutions.
+\end{remark}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+Following Remark \ref{rem:uv}, for the remainder of this paper, we assume that $u_i \neq 0$ for all $i = 1, \dots, v$. Now, for each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_v$, we reduce this equation to a number of so-called ``$S$-unit equations''. In the worst case scenario, the method in \cite{TW3} would reduce to $h^v$ such equations, where $h$ is the class number of $K$. This becomes computationally inefficient when the class number is large since, as we will see in the next section, we will need to apply a principal ideal test to each such case. Instead of this, we apply the method of \cite{GhKaMaSi}, which gives only $\kappa/2$ $S$-unit equations, where $\kappa$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). We now describe this second method. 
+
+Let 
+\[\phi : \mathbb{Z}^v \rightarrow \text{Cl}(K), \qquad (n_1,\dots ,n_v) \mapsto [\mathfrak{p}_1]^{n_1}\cdots [\mathfrak{p}_v]^{n_v}.\]
+We can compute the image and kernel of this map in \texttt{Magma}. Note that if \eqref{Eq:TMfactored} has a solution $\mathbf{u}=(u_1,\dots, u_v)$ then in particular,
+\[\phi(\mathbf{u})=[\mathfrak{a}]^{-1}.\]
+In other words, if $[\mathfrak{a}]^{-1}$ does not belong to the image of $\phi$ then \eqref{Eq:TMfactored} has no solutions. We therefore suppose that $[\mathfrak{a}]^{-1}$ belongs to the image, and compute a preimage $\mathbf{r}=(r_1,\dotsc,r_v)$ using \texttt{Magma}. Then $\mathbf{u}-\mathbf{r}$ belongs to the kernel of $\phi$. The kernel is a subgroup of $\mathbb{Z}^v$ of rank $v$. Let $\mathbf{a}_1,\dots,\mathbf{a}_v$ be a basis for the kernel and let 
+\[\mathbf{u}-\mathbf{r}=n_1 \mathbf{a}_1+\cdots + n_v \mathbf{a}_v\]
+where the $n_i \in \mathbb{Z}$. Here, we adopt the notation
+\[\mathbf{a}_i = (a_{1i}, \dots, a_{vi}),\]
+and we let $A$ be the matrix with columns $\mathbf{a}_1,\dots,\mathbf{a}_v$. Hence the $(i,j)^{\text{th}}$ entry of $A$ is $a_{ij}$, the $i^{\text{th}}$ entry of the vector $\mathbf{a}_j$. Then $\mathbf{u}= A\mathbf{n}+\mathbf{r}$ where $\mathbf{n} = (n_1,\dots,n_v)$.
+%The important thing for us is that $A$ is invertible. In fact its determinant is (up to sign) equal to $\#\img(\phi)$ and so divides the class number. As $A$ is invertible, there are positive constants $C_1$, $C_2$ such that
+%\[
+% H(\mathbf{n}) \le C_1 H(\mm), \qquad H(\mm) \le C_2 H(\mathbf{n}).
+%\]
+For $\mathbf{a}_i=(a_{1i},\dotsc,a_{vi}) \in \mathbb{Z}^v$ we adopt the notation 
+\[\tilde{\mathfrak{p}}^\mathbf{a} :=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_v^{a_{vi}}.\]
+Let
+\[\mathfrak{c}_1= \tilde{\mathfrak{p}}^{\mathbf{a}_1},\dotsc,\mathfrak{c}_v= \tilde{\mathfrak{p}}^{\mathbf{a}_v}.\]
+Then we can rewrite \eqref{Eq:TMfactored} as
+\[\begin{array}{ll}
+((x-1) y-\theta) \mathcal{O}_K 
+	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
+	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_v \mathbf{a}_v}\\
+	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_v^{n_v}.
+\end{array}\]
+
+Now
+\[[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}] 
+	= [\mathfrak{a}] \cdot [\mathfrak{p}_1]^{r_1}\cdots [\mathfrak{p}_v]^{r_v} 
+	= [\mathfrak{a}]\cdot \phi(r_1,\dotsc,r_v)=[1]\]
+as $\phi(r_1,\dotsc,r_v)=[\mathfrak{a}]^{-1}$ by construction. Thus 
+\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K\]
+for some $\alpha \in K^*$. We note that some of the $r_i$ might be negative so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $K$ into certain $p$-adic fields of given precision. In those instances, the precision on our $p$-adic fields may not be high enough, and as a result, some non-zero elements of $K$ may be erroneously mapped to $0$. To avoid this, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. 
+Now, 
+\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \phi(\mathbf{a}_j) = [1]\]
+as the $\mathbf{a}_j$ are a basis for the kernel of $\phi$. Thus for all $j \in \{1, \dots, v\}$, there are $\gamma_j \in K^*$ such that $\mathfrak{c}_j=\gamma_j \mathcal{O}_K$. 
+
+Thus we have rewritten \eqref{Eq:TMfactored} as
+\begin{equation}\label{Eq:TMprincipal}
+((x-1) y- \theta) \mathcal{O}_K=\alpha \cdot \gamma_1^{n_1} \cdots \gamma_v^{n_v} \mathcal{O}_K
+\end{equation}
+for unknown integers $(n_1, \dots, n_v)$. 
+Note that the number of cases has not increased. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$ then we have a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain one corresponding equation \eqref{Eq:TMprincipal}.
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{Factorization of the Thue-Mahler equation: an alternate approach}
+
+In many cases, the method described above is far more efficient than that of Tzanakis-de Weger \cite{TW3}. However, there are values of $x$ where computing the class group may prove very costly. In fact, for these values of $x$, it may happen that class group computations  take longer than directly running a  principal ideal test on each ideal equation. In such cases, we return to the method of \cite{TW3}, which we now describe. 
+
+For $i = 1, \dots, v$ let $h_i$ be the smallest positive integer for which $\mathfrak{p}_i^{h_i}$ is principal and let 
+$s_i$ be a positive integer satisfying $0 \leq s_i < h_i$. Let
+\[\mathbf{a}_i = (a_{1i}, \dots, a_{vi}).\]
+where $a_{ii} = h_i$ and $a_{ji} = 0$ for $j \neq i$. We let $A$ be the matrix with columns $\mathbf{a}_1, \dots, \mathbf{a}_v$; $A$ is a diagonal matrix with $h_i$ along the diagonal. For every possible combination of the $s_i$, we set $\mathbf{r} = (s_1, \dots, s_v)$. Now, if \eqref{Eq:TMfactored} has a solution $\mathbf{u} = (u_1, \dots, u_v)$, it necessarily must be of the form $\mathbf{u} = A\mathbf{n} + \mathbf{r}$, where $\mathbf{n} = (n_1, \dots, n_v)$. 
+
+Using the above notation, we write
+$$
+\mathfrak{c}_i = \tilde{\mathfrak{p}}^{\mathbf{a}_i}=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_v^{a_{vi}} = \mathfrak{p}_i^{h_i}
+$$
+and hence can rewrite \eqref{Eq:TMfactored} as
+\[\begin{array}{ll}
+((x-1) y-\theta) \mathcal{O}_K 
+	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
+	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_v \mathbf{a}_v}\\
+	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_v^{n_v}.
+\end{array}\]
+Now, by definition of $h_j$, there exist $\gamma_j \in K^*$ such that 
+\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \mathfrak{p}_j^{h_j} = \gamma_j \mathcal{O}_K,\]
+for all $j \in \{1, \dots, v\}$. For each choice of $\mathbf{r}$, if $\mathbf{u}$ is a solution, we must necessarily have
+\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K.\]
+Hence, we iterate through every possible $\mathbf{r}$, and store those cases for which $\mathfrak{a}\tilde{\mathfrak{p}}^{\mathbf{r}}$ is principal. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{The $S$-unit equation}
+
+At this point, regardless of which method was used to compute $A$ and $\mathbf{r}$, we note that the ideal generated by $\alpha$ has norm
+\[(x-1)^3\cdot p_1^{t_1 + r_1} \cdots p_v^{t_v + r_v}.\]
+The $n_i$ are related to $m$ via
+\[m \alpha_i = Z_i = u_i + t_i = \sum_{j = 1}^{v}n_ja_{ij} + r_i + t_i.\]
+The remainder of this paper loosely follows the arguments of \cite{TW3}, with certain modifications designed to improve our timing efficiency. 
+
+Fix a complete set of fundamental units of $\mathcal{O}_K: \varepsilon_1, \dots, \varepsilon_r$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. Then
+\begin{equation} \label{Eq:main2}
+(x-1)y - \theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\gamma_1^{n_1}\cdots \gamma_v^{n_v}
+\end{equation}
+with unknowns $a_i \in \mathbb{Z}$, $n_i \in \mathbb{Z}_{\geq 0}$, and $\zeta$ in the set $T$ of roots of unity in $\mathcal{O}_K$. Since $T$ is also finite, we will treat $\zeta$ as another parameter. More precisely, a quick computation in Mathematica shows that  
+\[g(t) = t^4 + (x-1)t^3 + (x-1)^2t^2 + (x-1)^3t + x(x-1)^3\]
+has only complex roots for $x \geq 2$. It follows that we have no real embeddings of $K$ into $\mathbb{R}$, two pairs of complex conjugate embeddings, and hence only one fundamental unit, $\varepsilon_1$. That is, 
+\begin{equation} \label{Eq:main3}
+(x-1)y - \theta = \alpha \zeta \varepsilon_1^{a_1} \cdot \gamma_1^{n_1}\cdots \gamma_v^{n_v}.
+\end{equation}
+
+To summarize, our original problem of solving \eqref{Eq:main} has been reduced to the problem of solving finitely many equations of the form \eqref{Eq:main3} for the variables 
+\[y, a_1, n_1, \dots, n_v.\] 
+
+From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate the variable $y$ and set ourselves the task of bounding the exponents $a_1, n_1, \dots, n_v$. 
+
+In particular, let $p \in \{p_1, \dots, p_v, \infty\}$. Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \dots, \theta^{(4)}$. Let $i_0, j, k \in \{1, \dots, 4\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. Applying these embeddings to $\beta = (x-1)y - \theta$ yields
+\begin{equation}\label{Eq:Sunit}
+\lambda = \delta_1 \left( \frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}\right)^{a_1}\prod_{i = 1}^v \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i} - 1 = \delta_2 \left( \frac{\varepsilon_1^{(i_0)}}{\varepsilon_1^{(j)}}\right)^{a_1} \prod_{i = 1}^v \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i},
+\end{equation}
+where
+\[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
+are constants. 
+
+Note that $\delta_1$ and $\delta_2$ are constants, in the sense that they do not depend upon $y,a_1,n_1, \dots, n_v.$
+
+We now restrict our attention to those $p \in \{p_1, \dots, p_v\}$ and study the $p$-adic valuations of the numbers appearing in \eqref{Eq:Sunit}. Recall that $z \in \mathbb{C}_p$ having $\ord_p(z) = 0$ is called a $p$-adic unit. 
+
+Let $l \in \{1, \dots, v\}$ and consider the prime $p = p_l$. Part (ii) of the Corollary of Lemma 7.2 of \cite{TW3} tells us that $\frac{\varepsilon_1^{(i_0)}}{\varepsilon_1^{(j)}}$ and $\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}$ are $p_l$-adic units. 
+
+From now on we make the following choice for the index $i_0$. Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l[t]) = 1$. We choose $i_0 \in \{1, \dots, 4\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. The indices of $j,k$ are fixed, but arbitrary. 
+
+\begin{lemma} \label{Lem:units} \
+\begin{enumerate}
+\item[(i)] Let $i \in \{1, \dots, v\}$. Then $\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}$ are $p_l$-adic units. 
+\item[(ii)] Let $i \in \{1, \dots, v\}$. Then $\ord_{p_l}\left(\frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right) = a_{li}$, where $\mathbf{a_i} = (a_{1i}, \dots, a_{vi})$. 
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Consider the factorization of $g(t)$ in $\mathbb{Q}_{p_l}[t]: g(t) = g_1(t) \cdots g_m(t)$ and note that $\theta^{(j)}$ is a root of some $g_h(t) \neq g_l(t)$. Let $\mathfrak{p}_h$ be the corresponding prime ideal above $p_l$ and $e_h$ be its ramification index. Then $\mathfrak{p} \neq \mathfrak{p}_l$ and since 
+\[(\gamma_i)\mathcal{O}_K = \mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}},\]
+we have 
+\[\ord_{p_l}(\gamma_i^{(j)}) = \frac{1}{e_h}\ord_{\mathfrak{p}_h}(\gamma_i) = 0.\]
+An analogous argument gives $\ord_{p_l}(\gamma_i^{(k)}) = 0$. On the other hand, 
+\[\ord_{p_l}(\gamma_i^{(i_0)}) = \frac{1}{e_l}\ord_{\mathfrak{p}_l}(\gamma_i) = \ord_{\mathfrak{p}_l}(\mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}}) = a_{li}.\]
+
+\end{proof}
+
+The next lemma deals with a special case in which the $n_l$ can be computed directly. This lemma is analogous to Lemma 7.3 of \cite{TW3}. 
+
+Recall the constants
+\[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
+of \eqref{Eq:Sunit}.
+\begin{lemma}\label{Lem:del1}
+Let $l \in \{1, \dots, v\}$. If $\ord_{p_l}(\delta_1) \neq 0$, then 
+\[ \sum_{i = 1}^v n_ia_{li} = \min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2).\]
+\end{lemma}
+
+\begin{proof}
+Apply the Corollary of Lemma $7.2$ of \cite{TW3} and Lemma~\ref{Lem:units} to both expressions of $\lambda$ in \eqref{Eq:Sunit}. On the one hand, we obtain that $\ord_{p_l}(\lambda) = \min\{\ord_{p_l}(\delta_1), 0\}$, and on the other hand, 
+\[\begin{split}
+\ord_{p_l}(\lambda)
+& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^v \ord_{p_l}\left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\\
+& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^v n_ia_{li}.
+\end{split}\]
+\end{proof}
+
+If this bound holds, it follows that
+\[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} = \frac{\min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2) + r_l + t_l}{\alpha_l}. \]
+We iterate this computation over all $i \in \{1, \dots, v \}$ for which Lemma \ref{Lem:del1} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple brute force search. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{A small upper bound for $\sum_{j = 1}^v n_ja_{ij}$ in a special case} \label{subsec:smallbound}
+
+Let $l \in \{1, \dots v\}$. In this section, we identify conditions in which $n_l$ can be bounded by a small explicit constant. We may assume that $\ord_{p_l}(\delta_1) = 0$, since otherwise a reasonable bound is afforded by Lemma \ref{Lem:del1}. 
+
+We first recall the following result on the $p_l$-adic logarithm:
+
+\begin{lemma}\label{Lem:padic}
+Let $z_1, \dots, z_m \in \overline{\mathbb{Q}}_p$ be $p$-adic units and let $b_1, \dots, b_m \in \mathbb{Z}$. If
+\[\ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) > \frac{1}{p-1}\]
+then
+\[\ord_p(b_1\log_p z_1 + \cdots + b_m \log_p z_m) = \ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) \]
+\end{lemma}
+
+We introduce the following notation
+\[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, v\},\]
+and
+\[ b_{v+2} = a_1.\]
+Put
+\[\alpha_1 = \log_{p_l} \delta_1, \quad \alpha_{1+i} = \log_{p_l}\left( \frac{\gamma_i^{(k)}}{\gamma_i^{(l)}}\right)  \ \text{ for } i \in \{1, \dots, v\},\]
+and
+\[\alpha_{v+2} = \log_{p_l}\left( \frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(l)}}\right).\]
+Define
+\[\Lambda_l = \sum_{i = 1}^{v+2} b_i\alpha_i.\]
+
+Let $L$ be a finite extension of $\mathbb{Q}_{p_l}$ containing $\delta_1$, $\frac{\gamma_i^{(k)}}{\gamma_i^{(l)}}$ (for $i = 1, \dots, v$), and $ \frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(l)}}$. Since finite $p$-adic fields are complete, $\alpha_i \in L$ for $i = 1, \dots, v+2$ as well. Choose $\phi \in \overline{\mathbb{Q}_{p_l}}$ such that $L = \mathbb{Q}_{p_l}(\phi)$ and $\ord_{p_l}(\phi) > 0 $. Let $G(t)$ be the minimal polynomial of $\phi$ over $\mathbb{Q}_{p_l}$ and let $s$ be its degree. For $i = 1, \dots, v+2$ write
+\[\alpha_i = \sum_{h = 1}^s \alpha_{ih}\phi^{h - 1}, \quad \alpha_{ih} \in \mathbb{Q}_{p_l}.\]
+Then
+\begin{equation} \label{Eq:lambdalh}
+\Lambda_l = \sum_{h = 1}^s \Lambda_{lh}\phi^{h-1},
+\end{equation}
+with
+\[\Lambda_{lh} = \sum_{i = 1}^{v+2} b_i \alpha_{ih}\]
+for $h = 1, \dots, s$. 
+
+\begin{lemma}\label{Lem:discG}
+For every $h \in \{1, \dots, s\}$, we have
+\[\ord_{p_l}(\Lambda_{lh}) > \ord_{p_l}(\Lambda_l) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
+\end{lemma}
+
+\begin{proof}
+Taking the images of \eqref{Eq:lambdalh} under conjugation $\phi \mapsto \phi^{(h)}$ ($h = 1, \dots, s$) gives
+\[\begin{bmatrix}
+\Lambda_l^{(1)} \\
+\vdots \\
+\Lambda_l^{(s)}	\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 		& \phi^{(1)} 	& \cdots 	& \phi^{(1)s-1}\\
+\vdots 	& \vdots 		& 		& \vdots \\
+1 		& \phi^{(s)} 	& \cdots  	& \phi^{(s)s-1}\\
+\end{bmatrix}
+\begin{bmatrix}
+\Lambda_{l1}\\
+\vdots \\
+\Lambda_{ls}\\
+\end{bmatrix}\]
+The $s \times s$ matrix $(\phi^{(h)i-1})$ above is invertible, with inverse
+\[\frac{1}{\displaystyle \prod_{1\leq j<k\leq s} (\phi^{(k)} - \phi^{(j)})}
+\begin{bmatrix}
+\gamma_{11} 	& \cdots 	& \gamma_{1s}\\
+\vdots 		& 		& \vdots\\
+\gamma_{s1} 	& \cdots 	& \gamma_{ss}\\
+\end{bmatrix},\]
+where $\gamma_{jk}$ is a polynomial in the entries of $(\phi^{(h)i-1})$ having integer coefficients. Since $\ord_{p_l}(\phi) > 0$ and since $\ord_{p_l}(\phi^{(h)}) = \ord_{p_l}(\phi)$ for all $h = 1, \dots, s$, it follows that $\ord_{p_l}(\gamma_{jk}) > 0 $ for every $\gamma_{jk}$. Therefore, since 
+\[\Lambda_{lh} = \frac{1}{\displaystyle \prod_{1\leq j<k\leq s}(\phi^{(k)} - \phi^{(j)})}\sum_{i = 1}^s \gamma_{hi}\Lambda_l^{(i)},\]
+we have 
+\[\begin{split}
+\ord_{p_l}(\Lambda_{lh}) 
+	& = \min_{1 \leq i \leq s} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)})\right\} -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
+	& \geq \min_{1 \leq i \leq s} \ord_{p_l}(\Lambda_l^{(i)}) +  \min_{1 \leq i \leq s} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
+	& = \ord_{p_l}\Lambda_l + \min_{1 \leq i \leq s} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))
+\end{split}\]
+for every $h \in \{1, \dots, s\}$. 
+%\min_{1 \leq i \leq s} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)}) -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\right\}\]
+\end{proof}
+
+\begin{lemma} \label{Lem:Lambda}
+If 
+\[\sum_{i = 1}^v n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2),\]
+then
+\[\ord_{p_l}(\Lambda_l) = \sum_{i = 1}^v n_{i}a_{li} + \ord_{p_l}(\delta_2).\]
+\end{lemma}
+
+\begin{proof}
+Immediate from Lemma~\ref{Lem:padic}.
+\end{proof}
+
+\begin{lemma} \label{Lem:specialcase} \
+\begin{enumerate}
+\item[(i)] If $\ord_{p_l}(\alpha_1) < \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_i)$, then
+\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor,  \bigg \lceil\displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2) \bigg \rceil - 1 \right\}\]
+
+\item[(ii)] For all $h \in \{1, \dots, s\}$, if $\ord_{p_l}(\alpha_{1h}) < \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})$, then
+\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor, \bigg \lceil \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + \nu_l \bigg \rceil - 1\right\},\]
+where 
+\[\nu_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\]
+\end{enumerate}
+\end{lemma}
+
+Similar to Lemma \ref{Lem:del1}, if Lemma \ref{Lem:specialcase} holds for $p_l$ giving
+\[\sum_{i = 1}^v n_i a_{li} \leq B_l\]
+for some bound $B_l$ as in the lemma, it follows that
+\[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} \leq \frac{B_l + r_l + t_l}{\alpha_l}. \]
+Again, we iterate this computation over all $l \in \{1, \dots, v \}$ for which Lemma \ref{Lem:specialcase} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple naive search. 
+
+\begin{proof} \
+\begin{enumerate}
+\item[(i)] We prove the contrapositive. Suppose
+\[\sum_{i = 1}^v n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
+and
+\[\sum_{i = 1}^v n_i a_{li}  \geq \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2).\]
+Observe that
+\[\begin{split}
+\ord_{p_l}(\alpha_{1}) 	
+	& = \ord_{p_l}\left( \Lambda_{l} - \sum_{i = 2}^{v+2}b_i\alpha_{i}\right) \\
+	& \geq \min\left\{ \ord_{p_l}(\Lambda_{l}), \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{i})\right\}.
+\end{split}\]
+Therefore, it suffices to show that 
+\[\ord_{p_l}(\Lambda_{l}) \geq \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{i}).\]
+By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2)$, from which the result follows. 
+
+\item[(ii)] Similar to the proof of (i).
+%\item[(ii)] We prove the contrapositive. Let $h \in \{1, \dots, s\}$ and suppose
+%\[\sum_{i = 1}^v n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
+%and
+%\[\sum_{i = 1}^v n_i a_{li}  \geq \nu_l + \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih}) - \ord_{p_l}(\delta_2).\]
+%Observe that 
+%\[\begin{split}
+%\ord_{p_l}(\alpha_{1h}) 	
+%	& = \ord_{p_l}\left( \Lambda_{lh} - \sum_{i = 2}^{v+2}b_i\alpha_{ih}\right) \\
+%	& \geq \min\left\{ \ord_{p_l}(\Lambda_{lh}), \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{ih})\right\}
+%\end{split}\]
+%Therefore, it suffices to show that 
+%\[\ord_{p_l}(\Lambda_{lh}) \geq \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{ih}).\]
+%By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2)$. Combining this with Lemma~\ref{Lem:discG} yields
+%\[\ord_{p_l}(\Lambda_{lh}) \geq \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2) - \nu_l.\]
+%The results now follow from our second assumption. 
+\end{enumerate}
+\end{proof}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Bounding the $\sum_{j = 1}^v n_ja_{ij}$}
+
+At this point, similar to \cite{TW3}, a very large upper bound for 
+\[\left(|a_1|, \sum_{j = 1}^v n_ja_{1j}, \dots, \sum_{j = 1}^v n_ja_{vj}\right)\]
+is derived using the theory of linear forms in logarithms. In practice, however, this requires that we compute the absolute logarithmic height of all terms of our so-called $S$-unit equation, \eqref{Eq:Sunit}. More often than not, this proves to be a computational bottleneck, and is best avoided whenever possible. In particular, the approach of Tzanakis and de Weger \cite{TW3}  requires the computation of the absolute logarithmic height of each algebraic number in the product of \eqref{Eq:Sunit}. Unfortunately, in many such instances, the fundamental units may be very large, with each coefficient having over $10^5$ digits in their representation. Similarly, the generators of our principal ideals may also be very large, making elementary operations on them (such as division) a very time-consuming process. In the particular instance of $x = 60$, by way of example, each coefficient of $\alpha$ has in excess of 20,000 digits. As a result of this, computing the absolute logarithmic height of these elements, a process which must be done for each choice of parameters $\zeta, \mathfrak{a}, \mathfrak{p}_1, \dots, \mathfrak{p}_v,$ is  computationally painful. Instead of this approach, we appeal to results of Bugeaud and Gy\H{o}ry  \cite{BugeaudGyory} to generate a (very large) upper bound for these quantities, which, while not sharp, will nevertheless prove adequate for our purposes. Following the notation of \cite{BugeaudGyory}, we now describe this bound.  
+
+Arguing as in \cite{BugeaudGyory}, put $Z_i = 4U_i + V_i$ with $U_i, V_i \in \mathbb{Z}$, $0 \leq V_i < 4$ for $i = 1, \dots, v$ and let $R_K$ and $h_K$ be the regulator and class number of $K$, respectively. Let $T$ be the set of all extensions to $K$ of the places of $\{p_1, \dots, p_v\}$. Let $P$ denote $\max\{p_1, \dots, p_v\}$, and let $R_T$ denote the $T$-regulator of $K$. Further, let $H$ be an upper bound for the maximum absolute value of the coefficients of $F$, namely $H = |x| = x$. Let $B = 3$, let $\log^*{a}$ denote $\max(\log(a), 1)$, and let
+\[C_8 = \text{exp}\left\{c_{24}P^N R_T (\log^*R_T)\left(\frac{\log^*(PR_T)}{\log^*P}\right)(R_{K} + vh_{K} + \log(HB'))\right\},\]
+where $N = 24$, $B' \leq BHP^{4v} = 2xP^{4v}$, and 
+\[\begin{array}{cc}
+c_{24}  & = 3^{v+1 +25}(v+1)^{5(v+1) +12} N^{3(v+1)+16} \\
+	& = 3^{v + 26}(v+1)^{5v+17}N^{3v + 19}.
+\end{array}\]
+Then, \cite{BugeaudGyory} shows that $p_i^{U_i} \leq C_8$. Now, ${\log^*(PR_T)/\log^*P \leq 2\log^*R_T}$, so that 
+\[C_8 \leq \text{exp}\left\{c_{24}P^N R_T 2(\log^*R_T)^2(R_{K} + vh_{K} + \log(HB'))\right\}.\] 
+Lastly, we have, by \cite{BugeaudGyory} $R_T \leq R_Kh_K(4\log^*P)^{4v}$. We note that the fundamental units of $K$ may be very large, and so computing the regulator of $K$ can be a very costly computation. To avoid this, we simply appeal to the upper bound of \cite{BugeaudGyory}, namely
+\[R_K < \frac{|\text{Disc}(K)|^{1/2}(\log|\text{Disc}(K)|)^{3}}{3!h_K}.\]
+
+Now we have all of the components necessary to explicitly compute an upper bound on $C_8$, denoted $C_9$ in \cite{BugeaudGyory}, from which it follows that
+\[U_i \leq \frac{\log(C_9)}{\log{p_i}}\]
+and hence
+\[m\alpha_i = Z_i = 4U_i + V_i < \frac{4\log(C_9)}{\log(p_i)} + V_i < \frac{4\log(C_9)}{\log(p_i)} + 4.\] 
+We thus obtain the inequality  
+\[m < \frac{4\log(C_9)}{\alpha_i\log(p_i)} + \frac{4}{\alpha_i} = C_{10};\]
+we compute this for all $p_i \in \{1, \dots, v\}$ and select the smallest value of $C_{10}$ as our bound on $m$. 
+ 
+From \eqref{Eq:main3}, it follows that
+\[0 \leq \sum_{j=1}^v n_ja_{ij} = m\alpha_i - r_i - t_i \leq C_{10}\alpha_i - r_i - t_i.\]
+At this point, converting this bound to a bound on $m$ would yield far too large of an exponent to apply our brute force search. Instead, we must argue somewhat more carefully. 
+Note that 
+\[||\mathbf{n}||_{\infty} = ||A^{-1}(\mathbf{u} - \mathbf{r})||_{\infty} \leq ||\mathbf{u} - \mathbf{r}||_{\infty}||A^{-1}||_{\infty},\]
+and so
+\[\max_{1 \leq i \leq v}|n_i| \leq ||A^{-1}||_{\infty}\max_{1 \leq i\leq v}\sum_{j = 1}^v n_j a_{ij}
+\leq ||A^{-1}||_{\infty} \max_{1 \leq i\leq v}(C_{10}\alpha_i - r_i - t_i) = C_{11}.\]
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{A bound for $|a_1|$}
+
+In this subsection, we establish an upper bound for $|a_1|$ by considering two cases separately. Our argument is based loosely on \cite{TW3} but differs substantially in order to accommodate our new $S$-unit equation, which, unlike in \cite{TW3}, may now have negative exponents, $n_i$. In this subsection, $\theta^{(1)}, \dots, \theta^{(4)}$ will denote the roots of $g(t)$ in $\mathbb{C}$. We order the roots of $g(t)$ in $\mathbb{C}$ so that
+\[\theta^{(1)} = \overline{\theta^{3}} \quad \text{ and } \quad \theta^{(2)} = \overline{\theta^{4}} \in \mathbb{C}.\]
+
+
+
+Put
+\[C_{12} = \left|\log \frac{(x-1)^3}{\displaystyle \min_{1\leq i \leq 4} |\alpha^{(i)}\zeta^{(i)}|} + C_{10} \log{x}\right|\]
+and 
+\[C_{13} = \sum_{j = 1}^v \max_{1\leq i \leq 4} |\log|\gamma_j^{(i)}||\]
+
+%\[{c_8'} = \log \frac{p^{r_1 + t_1} \cdots p^{r_v + t_v}}{\displaystyle \min_{1\leq i \leq n} |\alpha^{(i)}\zeta^{(i)}|}, 
+%\quad \quad
+%{c_9'} = \log \frac{p_1^{\sum_{j = 1}^v a_{j1}} \cdots p_v^{\sum_{j = 1}^va_{jv}}}{\displaystyle \min_{1\leq i \leq n} |\gamma_1^{(i)} \cdots \gamma_v^{(i)}|},\]
+%\[{c_8''} = \log {\displaystyle \max_{1\leq i \leq n} |\alpha^{(i)}\zeta^{(i)}|}, 
+%\quad \quad
+%{c_9''} = \log {\displaystyle \max_{1\leq i \leq n} |\gamma_1^{(i)} \cdots \gamma_v^{(i)}|}.\]
+
+Set 
+\[C_{14} = \min \left( |\log|\varepsilon_1^{(1)}||, |\log|\varepsilon_1^{(2)}||\right)\]
+and let $C_{15}$ be any number satisfying $0 < C_{15} < \frac{C_{14}}{3}$.
+So we have 
+\[C_{14} - C_{15} > C_{14} - 3C_{15} > 0.\]
+
+\begin{lemma}
+If $\displaystyle \min_{1\leq i \leq 4}|(x-1)y-\theta^{(i)}| > e^{-C_{15}|a_1|}$, we have
+\[|a_1|<  \frac{C_{12} + C_{11}C_{13}}{C_{14} - 3C_{15}} .\]
+\end{lemma}
+
+\begin{proof}
+Let $k \in \{1,2\}$ be an index such that 
+\[C_{14} = \min \left( |\log|\varepsilon_1^{(1)}||, |\log|\varepsilon_1^{(2)}||\right) = |\log|\varepsilon_1^{(k)}||. \]
+By \eqref{Eq:norm}, 
+\[|\beta^{(k)}| \cdot \prod_{i \neq k}|\beta^{(i)}| = (x-1)^3\cdot p_1^{Z_1}\cdots p_v^{Z_v}, \]
+therefore
+\[|(x-1)y-\theta^{(k)}| = |\beta^{(k)}| < (x-1)^3\cdot x^{C_{10}} \cdot e^{3C_{15}|a_1|}.\]
+%Here,
+%\[Z_i = m\alpha_i \leq C_{10}\alpha_i.\]
+%and so
+%\[|(x-1)X - \theta^{(k)}| = |\beta^{(k)}| < |(x-1)^3|x^{C_{10}} e^{(n-1)c_{11}|a_1|}.\]
+Now, 
+\[|\varepsilon_1^{(k)a_1}|
+= \frac{|(x-1)y-\theta^{(k)}|}{|\alpha^{(k)}\zeta^{(k)}||\gamma_1^{(k)}|^{n_1}\cdots |\gamma_v^{(k)}|^{n_v}}
+< \frac{(x-1)^3\cdot x^{C_{10}} \cdot e^{3C_{15}|a_1|}}{\displaystyle \min_{1\leq i \leq 4}|\alpha^{(i)}\zeta^{(i)}| 		\cdot |\gamma_1^{(k)}|^{n_1}\cdots |\gamma_v^{(k)}|^{n_v}}\]
+from which it follows that
+\[\log|\varepsilon_1^{(k)a_1}| 
+< \log{\frac{(x-1)^3}{\displaystyle \min_{1\leq i \leq 4}|\alpha^{(i)}\zeta^{(i)}|}} +  C_{10}\log{x} + 3C_{15}|a_1|- \sum_{j = 1}^v n_j \log|\gamma_j^{(k)}|.\]
+Taking absolute values yields
+\[|a_1|C_{14} = |a_1| |\log|\varepsilon_1^{(k)}| < C_{12} + 3C_{15}|a_1| + \sum_{j = 1}^v |n_j|\log{\gamma_j^{(k)}|}|.\]
+Now
+\[\begin{split}
+|a_1| 
+& < \frac{C_{12} +\displaystyle\sum_{j = 1}^v |n_j||\log|\gamma_j^{(k)}||}{C_{14} - 3C_{15}}\\
+& < \frac{C_{12} +C_{11}\displaystyle\sum_{j = 1}^v |\log|\gamma_j^{(k)}||}{C_{14} - 3C_{15}}\\
+& < \frac{C_{12} +C_{11}C_{13}}{C_{14} - 3C_{15}}.\\
+\end{split}\]
+
+%
+%\[|\varepsilon_1^{(k)a_1}| = e^{Ac_{10}} \quad \text{ or } \quad |\varepsilon_1^{(k)a_1}| = e^{-Ac_{10}},\]
+%where $A = |a_1|$. 
+%
+%Now, 
+%\[|(x-1)X - \theta^{(k)}| = p_1^{Z_1}\cdots p_v^{Z_v}\prod_{i \neq k} |(x-1)X-\theta^{(i)}|^{-1}<
+%p_1^{Z_1}\cdots p_v^{Z_v} e^{(n-1)c_{11}A}.\]
+%So $|\varepsilon_1^{(k)a_1}| = e^{Ac_{10}}$ implies
+%\[\begin{split}
+% e^{Ac_{10}} = |\varepsilon_1^{(k)a_1}|	
+%	& = \frac{|(x-1)X-\theta^{(k)}|}{|\alpha^{(k)}\zeta^{(k)}||\gamma_1^{(k)}|^{n_1}\cdots |\gamma_1^{(k)}|^{n_v}}\\	& < \frac{p_1^{Z_1}\cdots p_v^{Z_v} e^{(n-1)c_{11}A}}{|\alpha^{(k)}\zeta^{(k)}||\gamma_1^{(k)}|^{n_1}\cdots |\gamma_1^{(k)}|^{n_v}}\\
+%	& = \frac{p_1^{r_1 + t_1}\cdots p_v^{r_v + t_v} e^{(n-1)c_{11}A}}{|\alpha^{(k)}\zeta^{(k)}|}\cdot
+%		\frac{p_1^{\sum_{j=1}^vn_ja_{j1}}\cdots p_v^{\sum_{j=1}^vn_ja_{jv}}}{|\gamma_1^{(k)}|^{n_1}\cdots |\gamma_1^{(k)}|^{n_v}}\\
+%	& \leq \frac{p_1^{r_1 + t_1}\cdots p_v^{r_v + t_v} e^{(n-1)c_{11}A}}{\displaystyle \min_{1\leq i \leq n}|\alpha^{(i)}\zeta^{(i)}|}\cdot
+%		\left(\frac{p_1^{a_{11}}\cdots p_v^{a_{v1}}}{|\gamma_1^{(k)}|}\right)^{n_1} \cdots
+%		\left(\frac{p_1^{a_{v1}}\cdots p_v^{a_{vv}}}{|\gamma_v^{(k)}|}\right)^{n_v} \\
+%	& \leq \frac{p_1^{r_1 + t_1}\cdots p_v^{r_v + t_v} e^{(n-1)c_{11}A}}{\displaystyle \min_{1\leq i \leq n}|\alpha^{(i)}\zeta^{(i)}|}\cdot
+%		\left(\frac{p_1^{a_{11}}\cdots p_v^{a_{v1}}}{|\gamma_1^{(k)}|} \cdots
+%		\frac{p_1^{a_{v1}}\cdots p_v^{a_{vv}}}{|\gamma_v^{(k)}|}\right)^{N} \\
+%	& \leq \frac{p_1^{r_1 + t_1}\cdots p_v^{r_v + t_v} e^{(n-1)c_{11}A}}{\displaystyle \min_{1\leq i \leq n}|\alpha^{(i)}\zeta^{(i)}|}\cdot
+%		\left(\frac{p_1^{\sum_{j = 1}^v a_{j1}} \cdots p_v^{\sum_{j = 1}^va_{jv}}}{\displaystyle \min_{1\leq i \leq n} |\gamma_1^{(i)} \cdots \gamma_v^{(i)}|}\right)^N \\
+%	& = \text{exp}(c_8 + c_9N + (n-1)c_{11}A).
+%\end{split}\]
+%Note that we used the fact that the matrix $A$ is positive to assert that for each $i \in \{1, \dots, v\}$,
+%\[n_i \leq \sum_{j = 1}^v n_ja_{jl} < N.\]
+%From here, we deduce that
+%\[A < \frac{c_8 + c_9N}{c_{10}-(n-1)c_{11}}.\]
+%
+%Conversely, if $|\varepsilon_1^{(k)a_1}| = e^{-Ac_{10}}$, we have
+%\[\begin{split}
+% e^{-Ac_{10}} = |\varepsilon_1^{(k)a_1}|	
+%	& = \frac{|(x-1)X-\theta^{(k)}|}{|\alpha^{(k)}\zeta^{(k)}||\gamma_1^{(k)}|^{n_1}\cdots |\gamma_1^{(k)}|^{n_v}}\\	& \geq \frac{e^{-c11A}}{|\alpha^{(k)}\zeta^{(k)}||\gamma_1^{(k)}|^{n_1}\cdots |\gamma_1^{(k)}|^{n_v}}\\
+%	& \geq \frac{e^{-c_{11}A}}{\displaystyle \max_{1\leq i \leq n}|\alpha^{(i)}\zeta^{(i)}|\displaystyle \max_{1\leq i \leq n} |\gamma_1^{(i)} \cdots \gamma_v^{(i)}|^N}\\
+%	& = \text{exp}(-c_{11}A - c_8'' -c_9''N),
+%\end{split}\]
+%from which it follows that 
+%\[A < \frac{c_8'' + c_9''}{c_{10} -c_{11}}.\]
+\end{proof}
+
+%\noindent \textbf{Remark.} To avoid computing 
+%\[|\log|\gamma_1^{(i)} \cdots \gamma_v^{(i)}||,\]
+%we could just as well compute
+%\[|\gamma_1^{(i)} \cdots \gamma_v^{(i)}| - 1\]
+%if $|\gamma_1^{(i)} \cdots \gamma_v^{(i)}| > 1$, and 
+%\[\frac{1}{|\gamma_1^{(i)} \cdots \gamma_v^{(i)}|}-1\]
+%if $|\gamma_1^{(i)} \cdots \gamma_v^{(i)}| < 1$.
+
+Now, put 
+$$
+C_{16} = \left\lfloor{-\frac{1}{C_{15}} \log \min_{1 \leq j \leq t} |\text{Im} (\theta^{(j)})|}\right\rfloor.
+$$
+\begin{lemma}
+If $\displaystyle \min_{1\leq i\leq n}|(x-1)y-\theta^{(i)}| \leq e^{-C_{15}|a_1|}$, then 
+\[|a_1| \leq C_{16}.\]
+\end{lemma}
+
+\begin{proof}
+\[e^{-C_{15}|a_1|} \geq |(x-1)y-\theta^{(i)}| \geq |\text{Im}(\theta^{(i)})| \geq \min_{1 \leq j \leq t} |\text{Im} (\theta^{(j)})|,\]
+hence $|a_1| \leq C_{16}$.
+\end{proof}
+
+It follows that 
+\[|a_1| \leq \max\left\{\frac{C_{12} + C_{11}C_{13}}{C_{14} - 3C_{15}}, C_{16}\right\}.\] 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{The reduction strategy} 
+
+The upper bounds on 
+\[\left(|a_1|, \sum_{j = 1}^v n_ja_{1j}, \dots, \sum_{j = 1}^v n_ja_{vj}\right)\]
+are expected to be very large. Enumeration of the solutions by a naive search at this stage would be prohibitively expensive computationally. Instead, following the methods of \cite{TW3}, we reduce the above bound considerably by applying the LLL-algorithm to approximation lattices associated to the linear forms in logarithms obtained from \eqref{Eq:Sunit}. 
+
+In the standard algorithm for Thue-Mahler equations, this procedure is applied repeatedly to the real/complex and $p$-adic linear forms in logarithms until no further improvement on the bound is possible. The search space for solutions below this reduced bound can then be narrowed further using the Fincke-Pohst algorithm applied to the real/complex and $p$-adic linear forms in logarithms. Lastly, a sieving process and final enumeration of possibilities determines all solutions of the Thue-Mahler equation. In our situation however, after obtaining the above bounds, we apply the LLL algorithm for the $p$-adic linear forms in logarithms only. 
+
+In each step, we let $N_l$ denote the current best upper bound on $\sum_{j = 1}^v n_ja_{lj}$, let $A_0$ denote the current best upper bound on $|a_1|$, and let $M$ denote the current best upper bound on $m$. We will use the notation 
+\[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, v\},\]
+and
+\[ b_{v+2} = a_1\]
+of Section \ref{subsec:smallbound} frequently. It will therefore be convenient to let $B_l$ denote the current best upper bound for $|b_l|$ for $l = 1, \dots, v+2$. Then
+\[B_1 = 1 \quad \text{ and } \quad B_{v+2} = A_0.\]
+For $l = 1, \dots, v$, using that
+\[ \sum_{j = 1}^v n_ja_{lj} < N_l, \quad \text{ for } l = 1, \dots, v,\]
+we compute
+\[|n_l| \leq \max_{1 \leq i \leq v}|n_i| \leq ||A^{-1}||_{\infty}\max_{1 \leq i\leq v}\sum_{j = 1}^v n_j a_{ij}
+\leq ||A^{-1}||_{\infty} \max_{1 \leq i\leq v}(N_i) = B_{l+1}.\]
+
+For each $l \in \{1, \dots, v\}$, our expectation is that the LLL algorithm will reduce the upper bound $N_l$ to roughly $\log{N_l}$. Note that we expect the original upper bounds to be of size $10^{120}$ and hence a single application of our $p_l$-adic reduction procedure should yield a new bound $N_l$ that is hopefully much smaller than $3000$. Then we would have
+$$
+m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} < \frac{N_l+ r_l + t_l}{\alpha_l} = M < 3000
+$$
+at which point we could simply search naively (i.e. by brute force)  for all solutions arising from this $S$-unit equation. Of course, if this does not occur, we use our new upper bound on $m$, $M$, to reduce the bounds $N_1, \dots, N_{l-1}, N_{l+1}, \dots, N_v$ via
+\[\sum_{j=1}^v n_ja_{ij} = m\alpha_i - r_i - t_i \leq M\alpha_i - r_i - t_i = N_i.\]
+We then repeat this procedure with $p_{l+1}$ until $M < 3000$. We note that for all $x$ with $2 \leq x \leq 719$, the bound $m < 3000$ is, in each case, attained in $1$ or $2$ iterations of LLL.
+
+Note also that if a bound on $\sum_{j = 1}^v n_ja_{ij}$ is obtained via Lemma~\ref{Lem:specialcase}, then we similarly compute the bound $M$ on $m$ and enter the final search. We may do so because this bound always furnishes a bound on $m$ that is smaller than $3000$ for $x$ with $2 \leq x \leq 719$. 
+
+Lastly, rather than testing each possible tuple $(|a_1|,|n_1|, \dots, |n_v|)$ as in \cite{TW3}, our brute force search simply checks for solutions of \eqref{TM-start} using the smallest bound obtained on $m$. Because of this, we may omit the reduction procedures on the real/complex linear forms in logarithms, and furthermore, we need only to reduce the bounds on $\sum_{j = 1}^v n_ja_{ij}$ so that $M < 3000$. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{The $p_l$-adic reduction procedure}
+
+In this section, we set some notation and give some preliminaries for the $p_l$-adic reduction procedures. Consider a fixed index $l \in \{1, \dots, v\}$. Following Section \ref{subsec:smallbound}, we have
+\[\ord_{p_l}(\alpha_1) \geq \min_{2\leq i\leq v+2} \ord_{p_l}(\alpha_i) \quad \text{ and } \quad \ord_{p_l}(\alpha_{1h}) \geq \min_{2\leq i\leq v+2}(\alpha_{ih}) \quad h = (1, \dots, s).\]
+
+Let $I$ be the set of all indices $i' \in \{2, \dots, v+2\}$ for which
+\[\ord_{p_l}(\alpha_{i'}) = \min_{2\leq i\leq v+2} \ord_{p_l}(\alpha_i).\]
+We will identify two cases, the \textit{special case} and the \textit{general case}. The special case occurs when there is some index $i' \in I$ such that $\alpha_i/\alpha_{i'} \in \mathbb{Q}_{p_l}$ for $i = 1, \dots, v+2$. The general case is when there is no such index. 
+
+In the special case, let $\hat{i}$ be an arbitrary index in $I$ for which $\alpha_i/\alpha_{\hat{i}} \in \mathbb{Q}_{p_l}$ for every $i = 1, \dots, v+2$. We further define
+\[\beta_i = - \frac{\alpha_i}{\alpha_{\hat{i}}} \quad i = 1, \dots, v+2,\]
+and 
+\[\Lambda'_l = \frac{1}{\alpha_{\hat{i}}}\Lambda_l = \sum_{i = 1}^{v+2} b_i(-\beta_i).\]
+
+In the general case, we fix an $h \in \{1, \dots, s\}$ arbitrarily. Then we let $\hat{i}$ be an index in $\{2, \dots, v+2\}$ such that 
+\[ \ord_{p_l}(\alpha_{\hat{i}h}) = \min_{2\leq i\leq v+2}(\alpha_{ih}),\]
+and define
+\[\beta_i = - \frac{\alpha_{ih}}{\alpha_{\hat{i}h}} \quad i = 1, \dots, v+2,\]
+and 
+\[\Lambda'_l = \frac{1}{\alpha_{\hat{i}h}}\Lambda_{lh} = \sum_{i = 1}^{v+2} b_i(-\beta_i).\]
+Now in both cases we have $\beta_i \in \mathbb{Z}_{p_l}$ for $i = 1, \dots, v+2$. 
+
+\begin{lemma} \label{Lem:19.1}
+Suppose
+\[\sum_{i = 1}^v n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2).\]
+In the special case, we have 
+\[\ord_{p_l}(\Lambda_l') = \sum_{i = 1}^v n_{i}a_{li} + d_l\]
+with
+\[d_l = \ord_{p_l}(\delta_2) - \ord_{p_l}(\alpha_{\hat{i}}).\]
+In the general case we have
+\[\ord_{p_l}(\Lambda_{l}') \geq \sum_{i = 1}^v n_{i}a_{li} + d_l\]
+with 
+\[d_l = \ord_{p_l}(\delta_2) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))) - \ord_{p_l}(\alpha_{\hat{i}h}).\]
+\end{lemma}
+
+\begin{proof}
+Immediate from Lemma \ref{Lem:discG} and Lemma \ref{Lem:Lambda}. 
+\end{proof}
+
+We now describe the $p_l$-adic reduction procedure. Let $\mu, W_2, \dots, W_{v+2}$ denote positive integers. These are parameters that we will need to balance in order to obtain a good reduction for the upper bound of 
+$\sum_{i = 1}^v n_{i}a_{li}$. We will discuss how to choose these parameters later in this section. For each $x \in \mathbb{Z}_{p_l}$, let $x^{\{\mu\}}$ denote the unique rational integer in $[0,p_l^{\mu} - 1]$ such that $\ord_{p_l}(x - x^{\mu}) \geq \mu$ (ie. $x \equiv x^{\{\mu\}} \pmod{p_l^{\mu}}$). Let $\Gamma_{\mu}$ be the $(v+1)$-dimensional lattice generated by the column vectors of the matrix
+\[A_{\mu} = 
+\begin{pmatrix}
+W_2 & 		&				&				&		&	&	\\
+	& \ddots	& 				&				& 0		& 	&	\\
+	&		& W_{\hat{i} - 1}	&				&		&	&	\\
+	& 		& 				& W_{\hat{i} + 1}	&		&	&	\\	
+	& 0		& 				& 				&\ddots	&	&	\\
+W_{\hat{i}}\beta_2^{\{\mu\}}& \cdots & W_{\hat{i}}\beta_{\hat{i} - 1}^{\{\mu\}} & W_{\hat{i}}\beta_{\hat{i} + 1}^{\{\mu\}}& \cdots &W_{\hat{i}}\beta_{v+2}^{\{\mu\}}& W_{\hat{i}}p_l^{\mu}\\	
+\end{pmatrix}.\]
+Put
+\[ \lambda = \frac{1}{p_l^{\mu}} \sum_{i = 1}^{v+2} b_i\left(-\beta_i^{\{\mu\}}\right)\]
+and
+\[\mathbf{y} = 
+\begin{pmatrix}
+0 \\
+\vdots \\
+0 \\
+-W_{\hat{i}}\beta_1^{\mu}
+\end{pmatrix}
+\in \mathbb{Z}^{v+1}.\]
+Of course, we must compute the $\beta_i$ to $p_l$-adic precision at least $\mu$ in order to avoid errors here. We observe that $\mathbf{y} \in \Gamma_{\mu}$ if and only if $\mathbf{y}= \mathbf{0}$. To see that this is true, note that $\mathbf{y} \in \Gamma_{\mu}$ means there are integers $z_1, \dots, z_{v+1}$ such that $\mathbf{y}=A_{\mu}[z_1, \dots, z_{v+1}]^{T}$. The last equation of this equivalence forces $z_1 = \dots = z_{v} = 0$ and $-\beta_1^{\{\mu\}} = z_{v+1}p_l^{m}$. Since $\beta_1^{\{\mu\}} \in [0, p_l^m - 1]$, we must then have $z_{v+1} = 0$ also. Hence $\mathbf{y} = \mathbf{0}$. 
+
+Put
+\[Q = \sum_{i = 2}^{v+2} W_i^2 B_i^2.\]
+
+\begin{lemma} \label{lem:LLL}
+If $\ell(\Gamma_{\mu},\mathbf{y}) > Q^{1/2}$ then
+\[\sum_{i = 1}^v n_{i}a_{li} \leq \max\left\{ \frac{1}{p_l-1} - \ord_{p_l}(\delta_2), \mu - d_l - 1,0\right\}\]
+\end{lemma}
+
+\begin{proof}
+We prove the contrapositive. Assume 
+\[\sum_{i = 1}^v n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2), \quad \sum_{i = 1}^v n_{i}a_{li} > \mu - d_l 
+\quad \text{ and } \quad \sum_{i = 1}^v n_{i}a_{li} > 0.\]
+Consider the vector
+\[\mathbf{x} = A_{\mu}
+\begin{pmatrix}
+b_2\\
+\vdots\\
+b_{\hat{i}-1}\\
+b_{\hat{i}+1}\\
+\vdots\\
+b_{v+2}\\
+\lambda
+\end{pmatrix}
+= 
+\begin{pmatrix}
+W_2b_2\\
+\vdots\\
+W_{\hat{i}-1}b_{\hat{i}-1}\\
+W_{\hat{i}+1}b_{\hat{i}+1}\\
+\vdots\\
+W_{v+2}b_{v+2}\\
+-W_{\hat{i}}b_{\hat{i}}
+\end{pmatrix}
++ \mathbf{y}.\]
+By Lemma~\ref{Lem:19.1},  
+\[\ord_{p_l}\left( \sum_{i=1}^{v+2}b_i(-\beta_i)\right) = \ord_{p_l}(\Lambda_l') \geq\sum_{i = 1}^v n_{i}a_{li} + d_l \geq \mu.\]
+Since $\ord_{p_l}(\beta_i^{\{\mu\}} - \beta_i) \geq \mu$ for $i = 1, \dots, v+2$, it follows that
+\[\ord_{p_l}\left( \sum_{i=1}^{v+2}b_i(-\beta_i^{\{\mu\}})\right) \geq \mu,\]
+so that $\lambda \in \mathbb{Z}$. Hence $\mathbf{x} \in \Gamma_{\mu}$. Now $\sum_{i = 1}^v n_{i}a_{li} > 0$ so that there exists some $i$ such that $n_ia_{li} \neq 0$, and in particular, $b_{1+i} = n_i \neq 0$. Thus we cannot have $\mathbf{x} = \mathbf{y}$. Therefore, 
+\[\ell(\Gamma_{\mu}, \mathbf{y})^2 \leq |\mathbf{x} - \mathbf{y}|^2 = \sum_{i = 2}^{v+2}W_i^2 b_i^2
+\leq  \sum_{i = 2}^{v+2}W_i^2 |b_i|^2 \leq  \sum_{i = 2}^{v+2}W_i^2 B_i^2 = Q.\]
+\end{proof}
+
+The reduction procedure works as follows. Taking $A_{\mu}$ as input, we first compute an LLL-reduced basis for $\Gamma_{\mu}$. Then, we find a lower bound for $\ell(\Gamma_{\mu}, \mathbf{y})$. If the lower bound is not greater than $Q^{1/2}$ so that Lemma \ref{lem:LLL} does not give a new upper bound, we increase $\mu$ and try the procedure again. If we find that several increases of $\mu$ have failed to yield a new upper bound $N_l$ and that the value of $\mu$ has become significantly larger than it was initially, we move onto the next $l \in \{1, \dots, v\}$.
+
+If the lower bound is greater than $Q^{1/2}$, Lemma \ref{lem:LLL} gives a new upper bound $N_l$ for $\sum_{i = 1}^v n_{i}a_{li}$ and hence for $m$
+\[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} < \frac{N_l+ r_l + t_l}{\alpha_l} = M.\]
+If $M < 3000$, we exit the algorithm and enter the brute force search. Otherwise, we update the bounds $N_1, \dots, N_{l-1}, N_{l+1}, \dots, N_v$ via
+\[\sum_{j=1}^v n_ja_{ij} = m\alpha_i - r_i - t_i \leq M\alpha_i - r_i - t_i = N_i.\]
+Then using 
+\[|n_l| \leq \max_{1 \leq i \leq v}|n_i| \leq ||A^{-1}||_{\infty}\max_{1 \leq i\leq v}\sum_{j = 1}^v n_j a_{ij}
+\leq ||A^{-1}||_{\infty} \max_{1 \leq i\leq v}(N_i) = B_{l+1}.\]
+we update the $B_i$ and repeat the above procedure until $M < 3000$ or until no further improvement can be made on the $B_i$, in which case we move onto the next $l \in \{1, \dots, v\}$.
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Computational conclusions}
+
+Bottlenecks for this computation are generating the class group, generating the ring of integers of the splitting field of $K$ (this is entirely because of a Magma issue and cannot be avoided) and generating the unit group. 
+
+%(it may be possible to avoid generating the unit group, however, at least according to Mike Jacobson, using the map from $\mathbb{Z}^v$ to the class group, though it's not so clear that we can still do all the computations that we will need to do using this approach. For the time being, we use Magma's IndependentUnits function for this.)
+
+
+%
+%Now, we use LLL to reduce this bound. Each time we do so, we compute $m$, choose the lowest possible value, and then update all $n_i$. We repeat this process until $m < 1000$, after which point we just enter a brute force search. 
+%
+%
+%
+%
+%\texbf{Old TM Writeup}
+%
+%To solve these equations, we will argue as in Tzanakis and de Weger \cite{TW3}. Other than to establish notation, we will, for the most part, restrict ourselves to commenting about where our approach to solving the special equation (\ref{TM-start}) differs from that used to treat a more general Thue-Mahler equation. Fix $x$ with $2 \leq x < 750$.
+%Let $\xi$ be a root of $F_x(y,1)=0$ and put $K = \mathbb{Q}(\xi)$. Now \eqref{Eq:main} is equivalent to
+%\begin{equation}
+%(x-1)N_{K/\mathbb{Q}}(y-\xi) =  p_1^{\alpha_1}\dots p_v^{\alpha_v}.
+%\end{equation}
+%Put $\tilde{y} = (x-1)y$ and $\theta = (x-1)\xi$ so that \eqref{Eq:main} is equivalent to
+%\begin{equation} \label{Eq:norm}
+%N_{K/\mathbb{Q}}(\tilde{y}-\theta) =  (x-1)^{3}p_1^{\alpha_1}\dots p_v^{\alpha_v}.
+%\end{equation}
+%Note that $K = \mathbb{Q}(\theta)$, $[K:\mathbb{Q}] = 4$ and the minimal polynomial $g(t)$ of $\theta$ is monic, i.e.
+%\[g(t) = t^4 + (x-1)t^3 + (x-1)^2t^2 + (x-1)^3t + x(x-1)^3,\]
+%so that $\theta$ is an algebraic integer. 
+%
+%For each $i$, let 
+%\[(p_i) = \prod_{j = 1}^{m_i} \mathfrak{p}_{ij}^{e_{ij}}\]
+%be the factorization of $p_i$ into prime ideals in the ring of integers $\mathcal{O}_K$ of $K$, and let $f_{ij}$ be the residue degree of $\mathfrak{p}_{ij}$ over $p_i$. Then, since $N(\mathfrak{p}_{ij}) = p_i^{f_{ij}}$, \eqref{Eq:norm} implies finitely many ideal equations of the form
+%\begin{equation} \label{Eq:ideals}
+%(\tilde{y}-\theta) = \mathfrak{a} \prod_{j = 1}^{m_1} \mathfrak{p}_{1j}^{e_{1j}} \cdots \prod_{j = 1}^{m_v} \mathfrak{p}_{vj}^{e_{vj}}
+%\end{equation}
+%where $\mathfrak{a}$ is an ideal of norm $|(x-1)^3|$ and the $z_{ij}$ are unknown integers related to $m$ by $\sum_{j = 1}^{m_i} f_{ij}z_{ij} = \alpha_i = ma_i$. 
+%
+%By applying the Prime Ideal Removing Lemma (Lemma 1 of Tzanakis and de Weger \cite{TW3}), the task of solving the finite set of equations represented by \eqref{Eq:ideals} is reduced to solving the set of equations of the form
+%\begin{equation} \label{Eq:PIRL}
+%(\tilde{y}-\theta) = \mathfrak{a}\mathfrak{b} \mathfrak{p}_1^{u_1} \cdots \mathfrak{p}_v^{u_v}
+%\end{equation}
+%in integer variables $x,u_1, \dots, u_v$ with $u_i \geq 0$ for $i = 1, \dots, v$. Here
+%\begin{itemize}
+%\item $\mathfrak{a}$ is an ideal of $\mathcal{O}_K$ of norm $|(x-1)^3|$.
+%\item $\mathfrak{p}_i$ is a prime ideal $\mathcal{O}_K$ above $p_i$ with ramification index and residue degree both equal to 1. Note that such an ideal must exist since $g(t)$ always has a linear factor over $\mathbb{Q}_{p_i}[t]$.
+%\item $\mathfrak{b}$ is an ideal of $\mathcal{O}_K$ whose prime ideal factors are those that divide one of the $p_i$, but are not equal to one of the $\mathfrak{p}_i$
+%\item $u_i + \ord_{p_i}(N(\mathfrak{b})) = \alpha_i = ma_i$.
+%\end{itemize}
+%
+%Consider a particular instance of \eqref{Eq:PIRL}, i.e. fix choices for $\mathfrak{a}, \mathfrak{b}, \mathfrak{p}_1, \dots, \mathfrak{p}_v$. Fix a complete set of fundamental units of $\mathcal{O}_K: \varepsilon_1, \dots, \varepsilon_r$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. For $i = 1, \dots, v$ let $h_i$ be the smallest positive integer for which $\mathfrak{p}_i^{h_i}$ is principal and let $\pi_i \in \mathcal{O}_K$ be a generator for $\mathfrak{p}_i^{h_i}$. Then
+%\[(\tilde{y}-\theta) = \mathfrak{a}\mathfrak{b} \mathfrak{p}_1^{s_1} \cdots \mathfrak{p}_v^{s_v}(\pi_1^{n_1})\cdots (\pi_v^{n_v})\]
+%where the unknown integers $s_1, \dots, s_v, n_1, \dots, n_v$ satisfy 
+%\[u_i = h_in_i + s_i, \quad n_i \geq 0, \quad 0 \leq s_i < h_i.\]
+%
+%Since the $s_i$ vary in a finite set, we treat them as parameters. Now fix values for $s_1, \dots, s_v$. The ideal $\mathfrak{a}\mathfrak{b} \mathfrak{p}_1^{s_1} \cdots \mathfrak{p}_v^{s_v}$ is necessarily principal, and we fix $\alpha \in \mathcal{O}_K$ such that 
+%\[(\alpha) = \mathfrak{a}\mathfrak{b} \mathfrak{p}_1^{s_1} \cdots \mathfrak{p}_v^{s_v}.\]
+%This is an equality of principal ideals and since generators of principal ideals are determined only up to multiplication by units, we are led to the equation
+%\begin{equation} \label{Eq:main2}
+%\tilde{y} - \theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\pi_1^{n_1}\cdots \pi_v^{n_v}
+%\end{equation}
+%with unknowns $a_i \in \mathbb{Z}$, $n_i \in \mathbb{Z}_{\geq 0}$, and $\zeta$ in the set $T$ of roots of unity in $\mathcal{O}_K$. Since $T$ is also finite, we will treat $\zeta$ as another parameter. 
+%
+%To summarize, our original problem of solving \eqref{Eq:main} has been reduced to the problem of solving finitely many equations of the form \eqref{Eq:main2} for the variables 
+%$$
+%\tilde{y},a_1, \dots, a_r, n_1, \dots, n_v. 
+%$$
+%Since the $\pi_i$ are determined by the $\mathfrak{p}_i$, and since $\alpha$ is a fixed ideal generator, the parameters in \eqref{Eq:main2} are $\zeta, \mathfrak{a}, \mathfrak{b}, \mathfrak{p}_1, \dots, \mathfrak{p}_v, s_1, \dots, s_v$. We must solve \eqref{Eq:main2} for each combination of possible values of these parameters. Note that each solution $(y, \alpha_1, \dots, \alpha_v)$ of \eqref{Eq:main} corresponds to a solution $(\tilde{y}, a_1, \dots, a_r, n_1, \dots, n_v)$. 
+%
+%From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate the variable $
+%\tilde{y}$ and set ourselves up to bound the exponents $a_1, \dots, a_r, n_1, \dots, n_v$ where
+%\begin{equation} \label{Eq:main3}
+%ma_i = \alpha_i = n_ih_i + s_i + t_i,
+%\end{equation}
+%and $t_i = \ord_{p_i}(N(\mathfrak{b}))$.
+%
+%Let $p \in \{p_1, \dots, p_v, \infty\}$. Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \dots, \theta^{(n)}$. Let $i_0, j, k \in \{1, \dots, 4\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. Applying these embeddings to $\beta = \tilde{y} - \theta$ yields
+%\begin{equation} \label{Eq:SUnit}
+%\lambda = \delta_1 \prod_{i = 1}^v \left( \frac{\pi_i^{(k)}}{\pi_i^{(j)}}\right)^{n_i} \prod_{i = 1}^r \left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i} - 1 = \delta_2  \prod_{i = 1}^v \left( \frac{\pi_i^{(i_0)}}{\pi_i^{(j)}}\right)^{n_i} \prod_{i = 1}^r \left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i},
+%\end{equation}
+%where
+%\[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}}{\alpha^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}}{\alpha^{(j)}}\]
+%are constants. 
+%
+%\end{theorem}
+%Let $l \in \{1, \dots, v\}$. If $\ord_{p_l} \neq 0$, then 
+%\[n_l = \frac{1}{h_l}(\min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2)).\]
+%\end{lemma}
+%In this case, it follows from \eqref{Eq:main3} that
+%\[m = \frac{n_l h_l + s_l + t_l}{a_l}\]
+%so that this $S$-unit equation is solved completely once we test whether this value of $m$ yields a solution of \eqref{Eq:main}. If not, we proceed as follows. 
+%
+%At this point, following \cite{TW3}, a very large upper bound for ${(a_1, \dots, a_r, n_1, \dots, n_v)}$ is derived using the theory of linear forms in logarithms. However, in practice this requires that we compute the absolute logarithmic height of all terms of our so-called $S$-unit equation, \eqref{Eq:SUnit}. More often than not, this is a computational bottleneck, and so it is best to avoid it overall. In particular, Tzanakis-de Weger's approach requires that we compute the absolute logarithmic height of each algebraic number in the product of \eqref{Eq:SUnit}. Unfortunately, in many such instances, the fundamental units may be very large, with each coefficient having over $100,000$ digits in their representation. Similarly, the generators of our principal ideals may also be very large, making elementary operations on them (such as division) a very time-consuming process. In one particular instance of $x = 60$, for example, each coefficient of $\alpha$ was found to have over $20,000$ digits. As a result of this, computing the absolute logarithmic height of these elements, a process which must be done for each choice of parameters $\zeta, \mathfrak{a}, \mathfrak{b}, \mathfrak{p}_1, \dots, \mathfrak{p}_v, s_1, \dots, s_v$, is a computational bottleneck which is best avoided altogether. Instead of this approach, we appeal to \cite{BugeaudGyory} to generate a much larger upper bound. Largely following the notation of \cite{BugeaudGyory}, we now describe this bound.  
+%
+%Put $\alpha_i = 4\mu_i + \nu_i$ with $\mu_i, \nu_i \in \mathbb{Z}$, $0 \leq \nu_i < 4$ for $i = 1, \dots, v$ and let $R_K$ and $h_K$ be the regulator and class number of $K$, respectively. Let $T$ be the set of all extensions to $K$ of the places in $\{p_1, \dots, p_v\}$. Let $P$ denote $\max\{p_1, \dots, p_v\}$, and let $R_T$ denote the $T$-regulator of $K$. Further, let $H$ be an upper bound for the maximum absolute value of the coefficients of $F$; that is, let $H = \max\{3, x\}$. In the notation of \cite{BugeaudGyory}, let $\log^*(a)$ denote $\max(\log(a), 1)$ and let
+%\[C_8 = \text{exp}\left\{c_{24}P^{24} R_T (\log^*R_T)\left(\frac{\log^*(PR_T)}{\log^*P}\right)(R_{K} + vh_{K} + \log(HB'))\right\},\]
+%where $B' \leq 3HP^{4v} = 3\max\{3,x\}P^{4v}$ and 
+%\[c_{24} = 3^{v + 26}\cdot (v+1)^{5v+17}\cdot 24^{3v + 19}.\]
+%From \cite{BugeaudGyory}, we now have $p_i^{\mu_i} \leq C_8$. Additionally, it is shown in \cite{BugeaudGyory} that 
+%\[\frac{\log^*(PR_T)}{\log^*P} \leq 2\log^*R_T,\] 
+%so that 
+%\[C_8 \leq \text{exp}\left\{2c_{24}P^{24} R_T (\log^*R_T)^2(R_{K} + vh_{K} + \log(HB'))\right\}.\] 
+%Lastly, by \cite{BugeaudGyory}, we have that $R_T \leq R_Kh_K(4\log^*P)^{4v}$, where $R_K$ is easily calculated in Magma. In some instances, $h_K$ may be computationally costly, and so instead we simply appeal to the upper bound of \cite{BugeaudGyory}, namely
+%\[h_K < \frac{|\text{Disc}(K)|^{1/2}(\log|\text{Disc}(K)|)^{3}}{3!R_M}.\]
+%
+%Now we have all of the components necessary to explicitly compute an upper bound on $C_8$, denoted $C_9$, from which it follows that
+%\[\mu_i \leq \frac{\log(C_9)}{\log{p_i}}\]
+%and hence
+%\[ma_i = \alpha_i = 4\mu_i + \nu_i < \frac{4\log(C_9)}{\log(p_i)} + \nu_i < \frac{4\log(C_9)}{\log(p_i)} + 4.\] 
+%We thus have  
+%\[m < \frac{4\log(C_9)}{a_v\log(p_i)} + \frac{4}{a_v} = C_{10}\]
+%where $a_v$ denotes the exponent on the largest prime $P$ of $\{p_1, \dots, p_v\}$. 
+%From \eqref{Eq:main3}, it follows that
+%\begin{equation} \label{Eq:nBound}
+%n_i = \frac{ma_i - s_i - t_i}{h_i} \leq \frac{C_{10}a_i - s_i - t_i}{h_i}.
+%\end{equation}
+%
+%Now, returning to the method of \cite{TW3}, for each $n_i$ where $i = 1, \dots v$, we reduce the above bound considerably by applying the LLL-algorithm to approximation lattices associated to the linear forms in logarithms obtained from \eqref{Eq:SUnit}. In the standard algorithm for Thue-Mahler equations, this procedure is applied repeatedly to the real/complex and $p$-adic linear forms in logarithms until no further improvement in the bound is possible. The solutions below this reduced bound can then be reduced further using the Fincke-Pohst algorithm applied to the real/complex and $p$-adic linear forms in logarithms. Finally, a sieving process and final enumeration of possibilities determines all solutions of the Thue-Mahler equation.
+%
+%Unlike in \cite{TW3}, after obtaining the bound \eqref{Eq:nBound} on each $n_i$, we apply the LLL algorithm for the $p$-adic linear forms in logarithms only. With each iteration of this technique, we obtain a new upper bound on, say $n_i$, from which we compute the new upper bound on $m$. From this single iteration, we then use \eqref{Eq:main3} to generate new upper bounds on the remaining $n_1, \dots, n_{i-1}, n_{i+1}, \dots, n_v$. We repeat this process until $m < 1000$, after which point we simply enter a brute force search. In the rare cases where this does not occur, we implement the Fincke-Pohst technique of the Thue-Mahler solver for $p$-adic linear forms, again reducing the $n_i$ simultaneously until $m < 1000$. We note that for all $x \in [2,750]$, the bound $m < 1000$ is always attained by this stage. [CAN MAKE THIS FASTER ACTUALLY (ie. change 1000 to 3000)- WILL EDIT ONCE IMPLEMENTED]
+%
+%Lastly, rather than testing each possible tuple $(a_1, \dots, a_r, n_1, \dots, n_v)$ as in \cite{TW3}, our brute force search simply checks for solutions of \eqref{TM-start} using the smallest bound obtained on $m$. Because of this, we may omit the reduction procedures on the real/complex linear forms in logarithms, and furthermore, we need only to reduce the bounds on $(n_1, \dots, n_v)$ so that $m < 1000$. In fact, this final computation is fast enough that we may even use $m < 3000$ as our cutoff. 
+
+An implementation of this algorithm is available at
+\begin{center}
+\url{http://www.nt.math.ubc.ca/BeGhKr/GESolverCode}.
+\end{center}
+
+As before, we have, for each $x$, solutions $(x,y,m) = (x,-1,1), (x,0,1),$ and $(x,x,5)$. For $x$ with $2 \leq x \leq 719$, we find additional solutions $(x,y,m)$ among 
+$$
+\begin{array}{c}
+(4,1,2), (5,2,3), (10,-2,2), (10,-6,4), (30,2,2), (60,-3,2), \\
+(120, 3,2), (204,-4,2), (340, 4,2), (520,-5,2).\\
+\end{array}
+$$
+
+Altogether, this computation took 3 weeks on a $16$-core 2013 vintage MacPro, with the case $x=710$ being the most time-consuming, taking roughly $5$ days and $16$ hours on a single core. This is the better timing attained for this value of $x$ from our two approaches, computed using the class group to generate the $S$-unit equations. The most time-consuming job when computing the class group was $x = 719$, which took $10$ days and $8$ hours. However, using our alternate code, the better timing for $x = 719$ was only $2$ hours. Without computing the class group, the most time-consuming process was $x = 654$, which took $2$ days and $7$ hours. However, this is the faster timing that was attained for this value of $x$, as computing the class group took roughly $4$ days and $8$ hours. 
+
+We list below some timings for our computation. These times are listed in seconds, with the second column indicating the algorithm requiring the computation of the class group, and the third column indicating the time taken by the algorithm which avoids the class group. In implementing these two algorithms, we terminated the latter algorithm if the program ran longer than its class group counterpart took. From these timings, it is clear that it is not always easy to predict which algorithm will prove faster. 
+
+\[\begin{array}{c | c| c|c}
+x & \text{Timing with } Cl(K) & \text{Timing without } Cl(K) & \text{Solutions} \\ \hline \hline
+689 & 647.269 	& \text{Terminated} & [ -1, 1 ],[ 0, 1 ],[ 689, 5 ]  \\
+690  & 215306.420 & \text{Terminated} & [ -1, 1 ],[ 0, 1 ],[ 690, 5 ] \\
+691  & 456194.210 &   1821.049 & [ -1, 1 ],[ 0, 1 ],[ 691, 5 ] \\
+692  & 152385.640 & \text{Terminated} & [ -1, 1 ],[ 0, 1 ],[ 692, 5 ] \\
+693  & 36922.540  &    1908.230  & [ -1, 1 ],[ 0, 1 ],[ 693, 5 ]  \\
+694  & 8288.190     & \text{Terminated}    &   [ -1, 1 ],[ 0, 1 ],[ 694, 5 ]   \\
+695  & 362453.820  &   9786.649  &  [ -1, 1 ],[ 0, 1 ],[ 695, 5 ]  \\
+696  & 76273.470 & \text{Terminated}  &    [ -1, 1 ],[ 0, 1 ],[ 696, 5 ] \\
+697  & 14537.219  &    725.340  & [ -1, 1 ],[ 0, 1 ],[ 697, 5 ]  \\
+698  & 451700.650 &    2708.920 &    [ -1, 1 ],[ 0, 1 ],[ 698, 5 ] \\
+\end{array}\]
+ 
+Full computational details are available at
+\begin{center}
+\url{http://www.nt.math.ubc.ca/BeGhKr/GESolverData},
+\end{center}
+including the timings obtained for each value of $x$, under both iterations of the algorithm. 
+
+This completes the proof of Theorem \ref{main-thm2}.
+
+
+%-------------------------------------------------------------------------------------------------------------
+\section{Bounding $C(k,d)$ : the proof of Proposition \ref{Cee}} \label{Cee-proof}
+%-------------------------------------------------------------------------------------------------------------
+
+
+To complete the proof of Proposition \ref{Cee}, from (\ref{C-upper}), it remains to show that $\prod_{p \mid d} p^{1/(p-1)}  < 2 \log d$, provided $d > 2$. 
+We verify this by explicit calculation for all $d \leq d_0 = 10^5$. 
+
+Since $\log p/ (p-1)$ is decreasing in $p$, if we denote by $\omega (d)$ the number of distinct prime divisors of $d$, we have
+\begin{equation} \label{ome}
+\sum_{p\mid d} \frac{\log p}{p-1} \leq \sum_{p \leq p_{\omega (d)}} \frac{\log p}{p-1},
+\end{equation}
+where $p_k$ denotes the $k$th smallest prime. Since we have
+$$
+ \sum_{p \leq p_{10}} \frac{\log p}{p-1} < \log (2 \log (d_0)),
+ $$
+ we may thus suppose that $\omega (d) \geq 11$, whereby 
+ $$
+ d \geq d_1 = 2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 \cdot 19 \cdot 23 \cdot 29 \cdot 31 = 200560490130.
+$$
+The fact that
+$$
+ \sum_{p \leq p_{21}} \frac{\log p}{p-1} < \log (2 \log (d_1))
+ $$
+ thus implies that $\omega (d) \geq 22$ and
+ $$
+ d \geq d_2 = \prod_{1 \leq i \leq 22} p_i > 3 \cdot 10^{30}.
+ $$
+ We iterate this argument, finding that
+ $$
+ \sum_{p \leq p_{\kappa (j)}} \frac{\log p}{p-1} < \log (2 \log (d_j)),
+ $$
+ so that 
+ $$
+ d \geq d_{j+1} = \prod_{1 \leq i \leq \kappa (j) + 1} p_i,
+ $$
+for $j=0, 1, 2, 3, 4$ and $5$, where
+ $$
+ \kappa (0)=10, \; \kappa (1) = 21, \; \kappa (2) = 50, \, \kappa (3) = 130, \; \kappa (4) = 361 \mbox{ and } \kappa (5) = 1055.
+ $$
+We thus have that $\omega (d) \geq 1056$ and 
+$$
+d \geq \prod_{1 \leq i \leq 1056} p_i > e^{8316}.
+$$
+We may thus apply Th\'eor\`eme 12 of  of Robin \cite{Ro} to conclude that
+$$
+\omega (d) \leq \frac{\log d}{\log \log d} + 1.4573 \, \frac{\log d}{(\log \log d)^2}  <  \frac{7 \, \log d}{6 \, \log \log d},
+$$
+while the Corollary to Theorem 3 of Rosser-Schoenfeld yields 
+$$
+p_n < n (\log n + \log \log n) < \frac{10}{9} n \log n.
+$$
+
+It follows that
+$$
+p_{\omega (d)} < \frac{35}{27} \, \frac{\log d}{\log \log d} \log \left(  \frac{7 \, \log d}{6 \, \log \log d} \right) <  \frac{35}{27} \, \log d.
+$$
+
+
+By  Theorem 6 of Rosser-Schoenfeld, we have
+\begin{equation} \label{RoSc}
+\sum_{p < x} \frac{\log p}{p} < \log x - 1.33258 + \frac{1}{2 \log x},
+\end{equation}
+for all $x \geq 319$. Also, if $j \geq 2$,
+\begin{equation} \label{inty}
+\int_k^\infty \frac{\log u}{u^j} du = \frac{(j-1) \log (k) +1}{(j-1)^2 k^{j-1}}.
+\end{equation}
+For $2 \leq j \leq 10$, we have
+$$
+ \sum_{p < x} \frac{\log p}{p^j} <  \sum_{p < 10^6} \frac{\log p}{p^j} +  \sum_{p > 10^6} \frac{\log p}{p^j} <  \sum_{p < 10^6} \frac{\log p}{p^j}
+ + \int_{10^6}^\infty \frac{\log u}{u^j} du,
+ $$
+ whereby
+ \begin{equation} \label{little}
+ \sum_{p < x} \frac{\log p}{p^j} <  \sum_{p < 10^6} \frac{\log p}{p^j} + \frac{(j-1) \log (10^6) +1}{(j-1)^2 10^{6(j-1)}}.
+ \end{equation}
+ By explicit computation, from (\ref{little}), we find that
+ \begin{equation} \label{quip}
+ \sum_{j=2}^{10}  \sum_{p < x} \frac{\log p}{p^j} < 0.755,
+ \end{equation}
+while, from (\ref{inty}), 
+ \begin{equation} \label{quip2}
+ \sum_{j \geq 11}  \sum_{p < x} \frac{\log p}{p^j} <  \sum_{j \geq 11}   \frac{(j-1) \log (2) +1}{(j-1)^2 2^{j-1}} < \sum_{j \geq 11} \frac{1}{(j-1)2^{j-1}}.
+ \end{equation}
+Evaluating this last sum explicitly, it follows that 
+$$
+\sum_{j \geq 2} \sum_{p < x} \frac{\log p}{p^j} < 0.755 + \log (2)- \frac{447047}{645120} < 0.756,
+$$
+whereby, from (\ref{RoSc}), if $x \geq 319$, 
+$$
+\sum_{p <  x} \frac{\log p}{p-1} < \log x - 0.489.
+$$
+
+Applying this last inequality with $x = \frac{35}{27} \log d > \frac{35}{27} \cdot 8316 = 10780$, we conclude from our earlier arguments that
+$$
+\sum_{p\mid d} \frac{\log p}{p-1} < \log \log d.
+$$
+This completes the  proof of Proposition \ref{Cee}.
+
+
+%-------------------------------------------------------------------------------------------------------------
+\section{Concluding remarks} \label{conclude}
+%-------------------------------------------------------------------------------------------------------------
+
+The techniques employed in this paper may be used, with very minor modifications, to treat equation (\ref{eq-main}), subject to condition (\ref{condition}), with the variables $x$ and $y$ integers (rather than just positive integers). Since 
+$$
+\frac{(-a-1)^3-1}{(-a-1)-1} = \frac{a^3-1}{a-1},
+$$
+in addition to the known solutions $(x,y,m,n)=(2,5,5,3)$ and $(2,90,13,3)$ to (\ref{eq-main}),
+we also find  $(x,y,m,n)=(2,-6,5,3)$ and $(2,-91,13,3)$, where we have assumed that $|y|>|x|>1$.
+Beyond these, a short computer search uncovers only three more integer tuples $(x,y,m,n)$ satisfying
+$$
+\frac{x^m-1}{x-1} = \frac{y^n-1}{y-1}, \; \; m > n \geq 3, \; \; |y| > |x| >1,
+$$
+namely
+$$
+(x,y,m,n)=(-2,-7,7,3), (-2,6,7,3) \mbox{ and }  (-6,10,5,4).
+$$
+Perhaps there are no others; we can prove this to be the case if, for example, $n=3$, subject to (\ref{condition}). This result was obtained earlier as Corollary 4.1 of Yuan \cite{Yu0}, though the statement there overlooks the solutions $(x,y,m,n)= (-2,6,7,3), (2,-6,5,3)$ and $(2,-91,13,3)$.
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\endinput
+
+Any text after an \endinput is ignored.
+You could put scraps here or things in progress.

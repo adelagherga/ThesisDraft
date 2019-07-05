@@ -158,7 +158,7 @@ completing the proof of Lemma~\ref{lem:AffinePatch1}. The proof of Lemma~\ref{le
 
 The following algorithm computes the lists $L_p$ and $M_p$ that come from the first patch $p \nmid y$. We denote these respectively by $\mathcal{L}_p$ and $\mathcal{M}_p$. 
 
-\begin{Algorithm} \label{alg:AffinePatch1}
+\begin{algorithm} \label{alg:AffinePatch1}
 To compute
 $\mathcal{L}_p$ and $\mathcal{M}_p$:
 
@@ -189,7 +189,7 @@ and
 \[t \leftarrow t+1, \qquad \mathcal{U} \leftarrow \mathcal{U}^{\prime},\]
 and return to Step (b). Else output $\mathcal{L}_p$, $\mathcal{M}_p$.
 \end{enumerate}
-\end{Algorithm}
+\end{algorithm}
 
 \begin{lemma}
 Algorithm~\ref{alg:AffinePatch1} terminates.
@@ -213,11 +213,12 @@ Let
 These are the initial values for $t$ and $\mathcal{U}$ in the algorithm. Then $x/y \equiv u_0 \pmod{p^{t_0}}$ for some $u_0 \in \mathcal{U}_0$. Write $\mathcal{U}_i$ for the value of $\mathcal{U}$ after $i$ iterations of the algorithm  and let $t_i=t_0+i$. As the algorithm terminates, $\mathcal{U}_i = \emptyset$ for sufficiently large $i$. Hence, there is some $i$ such that $x/y \equiv u_i \mod{p^{t_i}}$ where $u_i \in \mathcal{U}_i$, but there is no element in $\mathcal{U}_{i+1}$ congruent to $x/y$ modulo $p^{t_{i+1}}$. In other words, $u_i$ must satisfy the hypotheses of either (i) or (ii). Write $u=u_i$ and $t=t_i$ for $x/y \equiv u \pmod{p^t}$. By Lemma~\ref{lem:AffinePatch1}, we have $\mathfrak{b}_u \mid (x-y\theta) \mathcal{O}_K$. Moreover, by that lemma and the definition of $\mathcal{P}_u$, if $\mathfrak{q} \notin \mathcal{P}_u$ then $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is not divisible by $\mathfrak{q}$. 
 
 Suppose first that the hypothesis of (i) is satisfied: $\mathcal{P}_u = \emptyset$. The algorithm adds $\mathfrak{b}_u$ to the set $\mathcal{L}_p$. By the above remarks, we know that \eqref{eq:Lp} is satisfied, proving the lemma in this case.
+\edit{edited up to here}
 
 Suppose next that the hypothesis of (ii) is satisfied: $\mathcal{P}_u=\{\mathfrak{p}\}$ where $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$ and there is a unique $\mathbb{Z}_p$ root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$. The algorithm adds $(\mathfrak{b}_u,\mathfrak{p})$ to the set $\mathcal{M}_p$, and by the above, $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is an integral ideal, not divisible by any prime $\mathfrak{q} \mid p$, $\mathfrak{q} \ne \mathfrak{p}$. Thus there is some positive $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied, proving the lemma in this case.
 \end{proof}
 
-\begin{Algorithm}\label{alg2}
+\begin{algorithm}\label{alg2}
 To compute $L_p$ and $M_p$.
 
 \begin{enumerate}
@@ -259,7 +260,7 @@ then
 and return to Step (c). Else output $L_p$, $M_p$.
 \end{enumerate}
 %\noindent \textbf{Output:} $\cL_p$, $\cM_p$.
-\end{Algorithm}
+\end{algorithm}
 
 \begin{lemma}
 Algorithm~\ref{alg2} terminates. 
