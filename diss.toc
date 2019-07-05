@@ -22,11 +22,13 @@
 \contentsline {section}{\numberline {3.3}The prime ideal removing lemma}{31}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Computational remarks and refinements}{36}{subsection.3.3.1}
 \contentsline {section}{\numberline {3.4}Factorization of the Thue-Mahler equation}{37}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Refinements}{40}{subsection.3.4.1}
-\contentsline {section}{\numberline {3.5}The $S$-Unit Equation}{42}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Lattices: LLL and the Fincke-Pohst algorithm}{43}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Translated Lattices}{53}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Refinements}{56}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.4.1}Avoiding the class group $\Cl (K)$}{38}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Using the class group $\Cl (K)$}{39}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Refinements}{41}{subsection.3.4.3}
+\contentsline {section}{\numberline {3.5}The $S$-Unit Equation}{43}{section.3.5}
+\contentsline {section}{\numberline {3.6}Lattices: LLL and the Fincke-Pohst algorithm}{44}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Translated Lattices}{53}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Refinements}{57}{subsection.3.6.2}
 \contentsline {chapter}{\numberline {4}Goormaghtigh Equations}{59}{chapter.4}
 \contentsline {section}{\numberline {4.1}Introduction}{59}{section.4.1}
 \contentsline {section}{\numberline {4.2}Rational approximations}{63}{section.4.2}

@@ -304,19 +304,55 @@ for some $w \ge 0$, then we may delete $\mathfrak{b}$ from $L_p$. In doing so, t
 \section{Factorization of the Thue-Mahler equation}
 \label{sec:FactorizationTM}
 
-After applying Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePatch2}, we are reduced to solving finitely many equations of the form
+After applying Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePatch2}, we are reduced to solving finitely many ideal equations of the form
 \begin{equation}\label{eq:TMfactored}
 (x-y\theta)\mathcal{O}_K=\mathfrak{a} \mathfrak{p}_1^{u_1}\cdots \mathfrak{p}_{\nu}^{u_{\nu}}
 \end{equation}
-in integer variables $x,y,u_1, \dots, u_{\nu}$ with $u_i \geq 0$ for $i = 1, \dots, \nu$, where ${0 \leq \nu \leq v}$. Here
+in integer variables $x,y,u_1, \dots, u_{\nu}$ with $u_i \geq 0$ for $i = 1, \dots, \nu$, where ${0 \leq \nu \leq v}$. For $i \in \{\nu+1, \dots, v\}$, we have 
+
+Here
 \begin{itemize}
-\item $\mathfrak{p}_i$ is a prime ideal of $\mathcal{O}_K$ arising from Algorithm~\ref{alg1} and Algorithm~\ref{alg2} applied to $p_i \in \{p_1, \dots, p_v\}$, such that $(\mathfrak{b_i}, \mathfrak{p}_i) \in M_{p_i}$ for some ideal $\mathfrak{b}_i$. 
+\item for $i \in \{1, \dots, \nu\}$, $\mathfrak{p}_i$ is a prime ideal of $\mathcal{O}_K$ arising from Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePatch2} applied to $p \in \{p_1, \dots, p_v\}$, such that $(\mathfrak{b}, \mathfrak{p}_i) \in M_p$ for some ideal $\mathfrak{b}$;
+\item for $i \in \{\nu+1, \dots, v\}$, the corresponding rational prime $p_i \in S$ yields $M_{p_i} = \emptyset$, in which case we set $u_i = 0$;
 \item $\mathfrak{a}$ is an ideal of $\mathcal{O}_K$ of norm $|c|\cdot p_1^{t_1} \cdots p_v^{t_v}$ such that
-$u_i + t_i =  z_i$. Note that if $M_{p_i} = \emptyset$ for some $i$ (necessarily $i \in \{{\nu} + 1, \dots, v\}$) we take $u_i = 0$. 
+$u_i + t_i =  z_i$. 
 \end{itemize}
 
-For each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_{\nu}$, we reduce this equation to a number of so-called ``$S$-unit equations''. In the worst case scenario, the method in Tzanakis-de Weger reduces this to $h^v$ such equations, where $h$ is the class number of $K$. The method of Siksek, described below, gives only $m/2$ $S$-unit equations, where $m$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). 
+For each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_{\nu}$, we reduce equation~\eqref{eq:TMfactored} to a number of so-called ``$S$-unit equations''. We present two different algorithms for doing so and outline the advantages and disadvantages of each. In practicality, we do not know a priori which of these two options is more efficient. Instead, we implement and use both algorithms simultaneously and selecting the most computationally efficient option as it appear. 
 
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Avoiding the class group $\Cl(K)$}
+\label{subsec:FactorizationTMwithoutOK}
+
+For $i = 1, \dots, {\nu}$ let $h_i$ be the smallest positive integer for which $\mathfrak{p}_i^{h_i}$ is principal and let 
+$s_i$ be a positive integer satisfying $0 \leq s_i < h_i$. Let
+\[\mathbf{a}_i = (a_{1i}, \dots, a_{{\nu}i}).\]
+where $a_{ii} = h_i$ and $a_{ji} = 0$ for $j \neq i$. We let $A$ be the matrix with columns $\mathbf{a}_1, \dots, \mathbf{a}_{\nu}$. Hence $A$ is a $\nu \times \nu$ diagonal matrix over $\mathbb{Z}$ with diagonal entries $h_i$. Now, if \eqref{eq:TMfactored} has a solution $\mathbf{u} = (u_1, \dots, u_{\nu})$, it necessarily must be of the form $\mathbf{u} = A\mathbf{n} + \mathbf{r}$, where $\mathbf{n} = (n_1, \dots, n_{\nu})$ and $\mathbf{r} = (s_1, \dots, s_{\nu})$. The vector $\mathbf{n}$ is comprised of integers $n_i$ which we solve for. The vector $\mathbf{r}$ is comprised of the values $s_i$ satisfying $0 \leq s_i < h_i$ for $i = 1, \dots, \nu$. 
+
+Using the above notation, we let
+\[\mathfrak{c}_i = \tilde{\mathfrak{p}}^{\mathbf{a}_i}=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_{\nu}^{a_{{\nu}i}} = \mathfrak{p}_i^{h_i} \]
+for all $i \in \{1, \dots, {\nu}\}$.
+
+Thus, we can write \eqref{eq:TMfactored} as
+\[\begin{array}{ll}
+(x-y\theta) \mathcal{O}_K 
+	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
+	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_{\nu} \mathbf{a}_{\nu}}\\
+	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.
+\end{array}\]
+
+By definition of $h_i$, each $i \in \{1, \dots, {\nu}\}$ yields an element $\gamma_i \in K^*$ such that 
+\[\mathfrak{c}_i = (\gamma_i) \mathcal{O}_K.\]
+Furthermore, if $\mathbf{u}$ is a solution of \eqref{eq:TMfactored} with corresponding vectors $\mathbf{n}, \mathbf{r}$, there exists some $\alpha \in K^*$ such that 
+\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}= (\alpha)\mathcal{O}_K.\]
+
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Using the class group $\Cl(K)$}
+\label{subsec:FactorizationTMwithOK}
+
+\edit{define the class group in the preliminaries section}
 Let 
 \[\phi : \mathbb{Z}^v \rightarrow \text{Cl}(K), \qquad (n_1,\dots ,n_{\nu}) \mapsto [\mathfrak{p}_1]^{n_1}\cdots [\mathfrak{p}_{\nu}]^{n_{\nu}}.\]
 We can compute the image and kernel of this map in \texttt{Magma}. Note that if \eqref{Eq:TMfactored} has a solution $\mathbf{u}=(u_1,\dots, u_{\nu})$ then, by \eqref{Eq:TMfactored},
@@ -364,33 +400,14 @@ Note that the number of cases has not increased. If $[\mathbf{a}]^{-1}$ is not i
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 \subsection{Refinements}
 
-Let
-\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
-be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
+
+In the worst case scenario, the method in Tzanakis-de Weger reduces this to $h^v$ such equations, where $h$ is the class number of $K$. The method of Siksek, described below, gives only $m/2$ $S$-unit equations, where $m$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). 
+
 
 In most cases, the method described above is far more efficient than that of Tzanakis-de Weger, however, computing the class group may still be a costly computation. For some values of $x$, it may happen that computing the class group will take longer than directly checking each potential ideal equation. This case arises when. In such cases, we proceed as follows.
 
-For $i = 1, \dots, {\nu}$ let $h_i$ be the smallest positive integer for which $\mathfrak{p}_i^{h_i}$ is principal and let 
-$s_i$ be a positive integer satisfying $0 \leq s_i < h_i$. Let
-\[\mathbf{a}_i = (a_{1i}, \dots, a_{{\nu}i}).\]
-where $a_{ii} = h_i$ and $a_{ji} = 0$ for $j \neq i$. We let $A$ be the matrix with columns $\mathbf{a}_1, \dots, \mathbf{a}_{\nu}$. Hence $A$ is a diagonal matrix with $h_i$ along the diagonal. For every possible combination of the $s_i$, we set $\mathbf{r} = (s_1, \dots, s_{\nu})$. Now, if \eqref{Eq:TMfactored} has a solution $\mathbf{u} = (u_1, \dots, u_{\nu})$, it necessarily must be of the form $\mathbf{u} = A\mathbf{n} + \mathbf{r}$, where $\mathbf{n} = (n_1, \dots, n_{\nu})$. 
-
-Using the above notation, we write
-\[\mathfrak{c}_i = \tilde{\mathfrak{p}}^{\mathbf{a}_i}=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_{\nu}^{a_{{\nu}i}} = \mathfrak{p}_i^{h_i}.\]
-Thus, we can write \eqref{Eq:TMfactored} as
-\[\begin{array}{ll}
-(x-y\theta) \mathcal{O}_K 
-	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
-	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_{\nu} \mathbf{a}_{\nu}}\\
-	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.
-\end{array}\]
-Now, by definition of $h_j$, there exist $\gamma_j \in K^*$ such that 
-\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \mathfrak{p}_j^{h_j} = \gamma_j \mathcal{O}_K.\]
-for all $j \in \{1, \dots, {\nu}\}$.
-
-Now, for each choice of $\mathbf{r}$, if $\mathbf{u}$ is a solution, we must necessarily have
-\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K.\]
 Hence, we iterate through every possible $\mathbf{r}$, and store those cases for which this occurs. 
+
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
@@ -425,6 +442,11 @@ From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate th
 
 \section{The $S$-Unit Equation}
 
+Let
+\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
+be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
+
+
 Let $p \in \{p_1, \dots, p_v, \infty\}$. Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \theta^{(2)}, \theta^{(3)}$. Let $i_0, j, k \in \{1,2,3\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. From the Siegel identity
 \[\left(\theta^{(i_0)} - \theta^{(j)}\right)\left(x-y\theta^{(k)}\right) + \left(\theta^{(j)} - \theta^{(k)}\right)\left(x-y\theta^{(i_0)}\right) + \left(\theta^{(k)} - \theta^{(i_0)}\right)\left(x-y\theta^{(j)}\right) = 0,\]
 applying these embeddings to $\beta = x-y\theta$ yields
@@ -442,7 +464,7 @@ Note that $\delta_1$ and $\delta_2$ are constants, in the sense that they do not
 
 
 
-\subsection{Lattices: LLL and the Fincke-Pohst algorithm}
+\section{Lattices: LLL and the Fincke-Pohst algorithm}
 \edit{references for this are the two books living in the $x+y=z$ folder on the desktop}
 
 \textbf{Lattices}
