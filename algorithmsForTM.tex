@@ -14,7 +14,8 @@
 \item linear forms in logs
 \end{enumerate}
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 
 \section{First steps}
 \label{sec:FirstSteps}
@@ -75,7 +76,8 @@ Since there are only finitely many choices for $d = \gcd(c_0, Y)$, there are onl
 
 Lastly, we observe that the polynomial $f(x,y)$ of \eqref{eq:ThueMahler2} remains the same for any choice of $\{c_d,u_d,d\}$. Thus, to solve the family of equations \eqref{eq:ThueMahler2}, we need only to enumerate over every possible $c_d$. Now, if $\mathcal{C}$ denotes the set of all $\{c_d,u_d,d\}$ and $d_1, d_2 \in \mathcal{D}$, we may have $\{c_{d_1},u_{d_1}, d_1\}, \{c_{d_2},u_{d_2}, d_2\} \in \mathcal{C}$ where $c_{d_1} = c_{d_2}$. That is, $d_1, d_2$ may yield the same value of $c_d$, reiterating that we need only solve \eqref{eq:ThueMahler2} for each distinct $c_d$. 
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 
 \section{The relevant algebraic number field}
 \label{sec:RelevantAlgNumField}
@@ -105,7 +107,8 @@ for $i \in \{1, \dots, v\}$.
 
 Our first task is to cut down the number of variables appearing in \eqref{eq:idealTM}. We will do this by showing that only a few prime ideals can divide $(x-y\theta)\mathcal{O}_K$ to a large power. 
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 
 \section{The prime ideal removing lemma}
 \label{sec:PIRL}
@@ -114,13 +117,13 @@ In this section, we establish some key results that will allow us to cut down th
 
 Let $p \in \{p_1, \dots, p_v\}$. We will produce the following two finite lists $L_p$ and $M_p$. The list $L_p$ will
 consist of certain ideals $\mathfrak{b}$ of $\mathcal{O}_K$ supported at the prime ideals above $p$. The list $M_p$ will consist of certain pairs $(\mathfrak{b},\mathfrak{p})$ where $\mathfrak{b}$ is supported at the prime ideals above $p$ and $\mathfrak{p}$ is a prime ideal lying over $p$ satisfying $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$. These lists will satisfy the following property: if $(x,y,z_1,\dots,z_v)$ is a solution to the Thue-Mahler equation \eqref{eq:ThueMahler3} then
-\begin{enumerate}
-\item[(i)] either there is some $\mathfrak{b} \in L_p$
+\begin{enumerate}[(i)]
+\item either there is some $\mathfrak{b} \in L_p$
 such that
 \begin{equation} \label{eq:Lp}
 \mathfrak{b} \mid (x-y\theta )\mathcal{O}_K, \qquad \text{$(x-y\theta)\mathcal{O}_K/\mathfrak{b}$ is coprime to $(p)\mathcal{O}_K$};
 \end{equation}
-\item[(ii)] or there is a pair $(\mathfrak{b},\mathfrak{p}) \in M_p$ and a non-negative integer $v_p$ such that
+\item or there is a pair $(\mathfrak{b},\mathfrak{p}) \in M_p$ and a non-negative integer $v_p$ such that
 \begin{equation} \label{eq:Mp}
 (\mathfrak{b} \mathfrak{p}^{v_p}) \mid (x-y\theta)\mathcal{O}_K, \qquad \text{$(x-y\theta)\mathcal{O}_K/(\mathfrak{b} \mathfrak{p}^{v_p})$ is coprime to $(p)\mathcal{O}_K$}.
 \end{equation}
@@ -162,32 +165,29 @@ The following algorithm computes the lists $L_p$ and $M_p$ that come from the fi
 To compute
 $\mathcal{L}_p$ and $\mathcal{M}_p$:
 
-\begin{enumerate}
-\item[Step (a)] Let 
+\begin{enumerate}[Step (1)]
+\item Let 
 \[\mathcal{L}_p \leftarrow \emptyset, \qquad \mathcal{M}_p \leftarrow \emptyset,\]
 \[ t \leftarrow 1, \quad \mathcal{U} \leftarrow \{w : w \in \{0,1,\dots,p-1\} \}.\]
-
-\item[Step (b)] Let
+\item Let
 \[\mathcal{U}^\prime \leftarrow \emptyset.\]
 Loop through the elements $u \in \mathcal{U}$. Let 
-\[\mathcal{P}_u= \{\mathfrak{q} \text{ lying above } p \ : \ \ord_{\mathfrak{q}}(u-\theta) \geq t \cdot e(\mathfrak{q}|p)\},\]
+\[\mathcal{P}_u= \{\mathfrak{q} \text{ lying above } p \ : \ \ord_{\mathfrak{q}}(u-\theta) \geq t \cdot e(\mathfrak{q}|p)\}\]
 and
 \[ \mathfrak{b}_u 	= \prod_{\mathfrak{q} \mid p} \mathfrak{q}^{\min\{\ord_\mathfrak{q}(u-\theta), t \cdot e(\mathfrak{q}|p)\}} 
 				= (u-\theta) \mathcal{O}_K+p^t \mathcal{O}_K.\]
-\begin{enumerate}
-\item[(i)] If $\mathcal{P}_u = \emptyset$ then
+\begin{enumerate}[(i)]
+\item If $\mathcal{P}_u = \emptyset$ then
 \[\mathcal{L}_p \leftarrow \mathcal{L}_p \cup \{\mathfrak{b}_u\}.\]
-
-\item[(ii)] Else if $\mathcal{P}_u = \{\mathfrak{p}\}$ with $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$ and there is at least one $\mathbb{Z}_p$-root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$, then
+\item Else if $\mathcal{P}_u = \{\mathfrak{p}\}$ with $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$ and there is at least one $\mathbb{Z}_p$-root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$, then
 \[\mathcal{M}_p \leftarrow \mathcal{M}_p \cup \{ (\mathfrak{b}_u,\mathfrak{p})\}.\]
-
-\item[(iii)] Else 
+\item Else 
 \[\mathcal{U}^\prime \leftarrow \mathcal{U} \cup \{ u+p^{t}w : w \in \{0,\dots,p-1\} \}.\]
 \end{enumerate}
 
-\item[Step (c)] If $\mathcal{U}^\prime \ne \emptyset$ then let
+\item If $\mathcal{U}^\prime \ne \emptyset$ then let
 \[t \leftarrow t+1, \qquad \mathcal{U} \leftarrow \mathcal{U}^{\prime},\]
-and return to Step (b). Else output $\mathcal{L}_p$, $\mathcal{M}_p$.
+and return to Step (2). Else output $\mathcal{L}_p$, $\mathcal{M}_p$.
 \end{enumerate}
 \end{algorithm}
 
@@ -196,48 +196,47 @@ Algorithm~\ref{alg:AffinePatch1} terminates.
 \end{lemma}
 
 \begin{proof}
-Suppose otherwise. Write $t_0=1$ and $t_i=t_0+i$ for $i=1,2,3,\dots$. Then there is an infinite sequence of congruence classes $u_i \mod{p^{t_i}}$ such that ${u_{i+1} \equiv u_i \mod{p^{t_i}}}$, and such that the $u_i$ fail the hypotheses of both (i) and (ii). This means that $\mathcal{P}_{u_i}$ is non-empty for every $i \in \mathbb{N}_{>0}$. By the pigeon-hole principle, some prime ideal $\mathfrak{p}$ of $\mathcal{O}_K$ appears in infinitely many of the $\mathcal{P}_{u_i}$. Thus ${\ord_{\mathfrak{p}}(u_i-\theta) \ge t_i\cdot e(\mathfrak{p}|p)}$ infinitely often. However, the sequence $\{u_i\}_{i=1}^{\infty}$ converges to some $\alpha \in \mathbb{Z}_p$ so that $\alpha=\theta$ in \edit{$\mathcal{O}_\mathfrak{p}$}. This forces $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$ and $\alpha$ to be a $\mathbb{Z}_p$-root of $g(t)$. In this case, $\mathfrak{p}$ corresponds to the factor $(t-\alpha)$ in the $p$-adic factorisation of $g(t)$. There can be at most one such $\mathfrak{p}$, forcing $\mathcal{P}_{u_i}=\{\mathfrak{p}\}$ for all $i$. In particular, the hypothesis of (ii) are satisfied and we reach a contradiction.
+Suppose otherwise. Write $t_0=1$ and $t_i=t_0+i$ for $i=1,2,3,\dots$. Then there is an infinite sequence of congruence classes $u_i \mod{p^{t_i}}$ such that ${u_{i+1} \equiv u_i \mod{p^{t_i}}}$, and such that the $u_i$ fail the hypotheses of both (i) and (ii). This means that $\mathcal{P}_{u_i}$ is non-empty for every $i \in \mathbb{N}_{>0}$. By the pigeon-hole principle, some prime ideal $\mathfrak{p}$ of $\mathcal{O}_K$ appears in infinitely many of the $\mathcal{P}_{u_i}$. Thus ${\ord_{\mathfrak{p}}(u_i-\theta) \ge t_i\cdot e(\mathfrak{p}|p)}$ infinitely often. However, the sequence $\{u_i\}_{i=1}^{\infty}$ converges to some $\alpha \in \mathbb{Z}_p$ so that $\alpha=\theta$ in $K_\mathfrak{p}$. This forces $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$ and $\alpha$ to be a $\mathbb{Z}_p$-root of $g(t)$. In this case, $\mathfrak{p}$ corresponds to the factor $(t-\alpha)$ in the $p$-adic factorisation of $g(t)$. There can be at most one such $\mathfrak{p}$, forcing $\mathcal{P}_{u_i}=\{\mathfrak{p}\}$ for all $i$. In particular, the hypothesis of (ii) are satisfied and we reach a contradiction.
 \end{proof}
 
 \begin{lemma}\label{lem:AffinePatch1Check}
 Let $p \in \{p_1, \dots, p_v\}$ and let $\mathcal{L}_p$, $\mathcal{M}_p$ be as given by Algorithm~\ref{alg:AffinePatch1}. Let $(x,y,z_1,\dots, z_v)$ be a solution to \eqref{eq:ThueMahler3}. Then
 \begin{itemize}
 \item either there is some $\mathfrak{b} \in \mathcal{L}_p$ such that \eqref{eq:Lp} is satisfied; 
-\item or there is some $(\mathfrak{b},\mathfrak{p}) \in \mathcal{M}_p$, with $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$, and integer $v_p \geq 0$ such that \eqref{eq:Mp} is satisfied.
+\item or there is some $(\mathfrak{b},\mathfrak{p}) \in \mathcal{M}_p$ with $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$ and integer $v_p \geq 0$ such that \eqref{eq:Mp} is satisfied.
 \end{itemize}
 \end{lemma}
 
 \begin{proof}
 Let 
-\[t_0 = 1, \qquad \mathcal{U}_0=\{w \; :\;  w \in \{0,1,\dots,p-1\}\}.\]
-These are the initial values for $t$ and $\mathcal{U}$ in the algorithm. Then $x/y \equiv u_0 \pmod{p^{t_0}}$ for some $u_0 \in \mathcal{U}_0$. Write $\mathcal{U}_i$ for the value of $\mathcal{U}$ after $i$ iterations of the algorithm  and let $t_i=t_0+i$. As the algorithm terminates, $\mathcal{U}_i = \emptyset$ for sufficiently large $i$. Hence, there is some $i$ such that $x/y \equiv u_i \mod{p^{t_i}}$ where $u_i \in \mathcal{U}_i$, but there is no element in $\mathcal{U}_{i+1}$ congruent to $x/y$ modulo $p^{t_{i+1}}$. In other words, $u_i$ must satisfy the hypotheses of either (i) or (ii). Write $u=u_i$ and $t=t_i$ for $x/y \equiv u \pmod{p^t}$. By Lemma~\ref{lem:AffinePatch1}, we have $\mathfrak{b}_u \mid (x-y\theta) \mathcal{O}_K$. Moreover, by that lemma and the definition of $\mathcal{P}_u$, if $\mathfrak{q} \notin \mathcal{P}_u$ then $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is not divisible by $\mathfrak{q}$. 
+\[t_0 = 1 \quad \text{ and } \quad \mathcal{U}_0=\{w \; :\;  w \in \{0,1,\dots,p-1\}\}\]
+be the initial values for $t$ and $\mathcal{U}$ in the algorithm. Then $x/y \equiv u_0 \pmod{p^{t_0}}$ for some $u_0 \in \mathcal{U}_0$. Write $\mathcal{U}_i$ for the value of $\mathcal{U}$ after $i$ iterations of the algorithm  and let $t_i=t_0+i$. As the algorithm terminates, $\mathcal{U}_i = \emptyset$ for some sufficiently large $i$. Hence there is some $i$ such that $x/y \equiv u_i \mod{p^{t_i}}$ where $u_i \in \mathcal{U}_i$, but there is no element in $\mathcal{U}_{i+1}$ congruent to $x/y$ modulo $p^{t_{i+1}}$. In other words, $u_i$ must satisfy the hypotheses of either step (i) or (ii) of algorithm~\ref{alg:AffinePatch1}. Write $u=u_i$ and $t=t_i$ for $x/y \equiv u \mod{p^t}$ and consider the ideal $\mathfrak{b}_u$ generated in this step. By Lemma~\ref{lem:AffinePatch1}, $\mathfrak{b}_u$ divides $(x-y\theta) \mathcal{O}_K$. Furthermore, by definition of $\mathcal{P}_u$, if $\mathfrak{q}$ is a prime ideal of $\mathcal{O}_K$ not contained in $\mathcal{P}_u$, then $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is not divisible by $\mathfrak{q}$. 
 
-Suppose first that the hypothesis of (i) is satisfied: $\mathcal{P}_u = \emptyset$. The algorithm adds $\mathfrak{b}_u$ to the set $\mathcal{L}_p$. By the above remarks, we know that \eqref{eq:Lp} is satisfied, proving the lemma in this case.
-\edit{edited up to here}
+Suppose first that the hypothesis of (i) is satisfied: $\mathcal{P}_u = \emptyset$. The algorithm adds $\mathfrak{b}_u$ to the set $\mathcal{L}_p$, with the above remarks ensuring that \eqref{eq:Lp} is satisfied.
 
-Suppose next that the hypothesis of (ii) is satisfied: $\mathcal{P}_u=\{\mathfrak{p}\}$ where $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$ and there is a unique $\mathbb{Z}_p$ root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$. The algorithm adds $(\mathfrak{b}_u,\mathfrak{p})$ to the set $\mathcal{M}_p$, and by the above, $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is an integral ideal, not divisible by any prime $\mathfrak{q} \mid p$, $\mathfrak{q} \ne \mathfrak{p}$. Thus there is some positive $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied, proving the lemma in this case.
+Suppose next that the hypothesis of (ii) is satisfied: $\mathcal{P}_u=\{\mathfrak{p}\}$ where ${e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1}$ and there is a unique $\mathbb{Z}_p$ root $\alpha$ of $g(t)$ such that $\alpha \equiv u \mod{p^t}$. The algorithm adds $(\mathfrak{b}_u,\mathfrak{p})$ to the set $\mathcal{M}_p$. By the above, $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is an integral ideal, not divisible by any prime ideal $\mathfrak{q} \neq \mathfrak{p}$ lying over $p$. Thus there is some positive integer $v_p \geq 0$ such that \eqref{eq:Mp} is satisfied, concluding the proof. 
 \end{proof}
 
-\begin{algorithm}\label{alg2}
+Having computed the lists arising from the affine patch $p \nmid y$, we initialize $L_p$ and $M_p$ as $\mathcal{L}_p$ and $\mathcal{M}_p$, respectively, and append to these lists the elements from the second patch, $p \mid y$, using the following algorithm.  
+
+\begin{algorithm}\label{alg:AffinePatch2}
 To compute $L_p$ and $M_p$.
 
-\begin{enumerate}
-\item[Step (a)] Let 
+\begin{enumerate}[Step (1)]
+\item Let 
 \[ L_p \leftarrow \mathcal{L}_p, \qquad M_p \leftarrow \mathcal{M}_p,\]
-where $\mathcal{L}_p$, $\mathcal{M}_p$ are computed by Algorithm~\ref{alg1}.
-
-\item[Step (b)] Let
+where $\mathcal{L}_p$, $\mathcal{M}_p$ are computed by Algorithm~\ref{alg:AffinePatch1}.
+\item Let
 \[ t \leftarrow 2, \qquad \mathcal{U} \leftarrow \{pw \; : \; w \in \{0,1,\dots,p-1\} \}.\]
-
-\item[Step (c)] Let
+\item Let
 \[ \mathcal{U}^{\prime} \leftarrow \emptyset.\]
 Loop through the elements $u \in \mathcal{U}$. Let 
-\[\mathcal{P}_u=\{\mathfrak{q} \mid p \; : \; \ord_{\mathfrak{q}}(1-u\theta ) \ge t \cdot e(\mathfrak{q}/p)\},\]
+\[\mathcal{P}_u=\{\mathfrak{q} \text{ lying above } p \ : \ \ord_{\mathfrak{q}}(1-u\theta ) \ge t \cdot e(\mathfrak{q}|p)\},\]
 and
-\[ \mathfrak{b}_u=\prod_{\mathfrak{q} \mid p} \mathfrak{q}^{\min\{\ord_{\mathfrak{q}}(1-u\theta ), t \cdot e(\mathfrak{q}/p)\}} =(1-u\theta) \mathcal{O}_K+p^t \mathcal{O}_K.\]
+\[ \mathfrak{b}_u=\prod_{\mathfrak{q} \mid p} \mathfrak{q}^{\min\{\ord_{\mathfrak{q}}(1-u\theta ), t \cdot e(\mathfrak{q}|p)\}} =(1-u\theta) \mathcal{O}_K+p^t \mathcal{O}_K.\]
 
-\begin{enumerate}
-\item[(i)] If $\mathcal{P}_u=\emptyset$  
+\begin{enumerate}[(i)]
+\item If $\mathcal{P}_u=\emptyset$  
 %$\ord_p(\Norm(u-\theta)) \ge (n-1) c_0$ 
 then
 \[L_p \leftarrow L_p \cup \{\mathfrak{b}_u\}.\]
@@ -251,61 +250,65 @@ then
 %\[
 %\cM_p \leftarrow \cM_p \cup \{ (\fb_u,\fp)\}.
 %\]
-\item[(iii)] Else 
-\[\mathcal{U}^\prime \leftarrow \mathcal{U}^\prime \cup \{ u+p^{t+1}w : w \in \{0,\dotsc,p-1\} \}.\]
+\item Else 
+\[\mathcal{U}^\prime \leftarrow \mathcal{U}^\prime \cup \{ u+p^{t}w : w \in \{0,\dotsc,p-1\} \}.\]
 \end{enumerate}
 
-\item[Step (d)] If $\mathcal{U}^\prime \ne \emptyset$ then let
+\item If $\mathcal{U}^\prime \ne \emptyset$ then let
 \[t \leftarrow t+1, \qquad \mathcal{U} \leftarrow \mathcal{U}^\prime,\]
-and return to Step (c). Else output $L_p$, $M_p$.
+and return to Step (3). Else output $L_p$, $M_p$.
 \end{enumerate}
 %\noindent \textbf{Output:} $\cL_p$, $\cM_p$.
 \end{algorithm}
 
-\begin{lemma}
-Algorithm~\ref{alg2} terminates. 
+\begin{lemma} 
+Algorithm~\ref{alg:AffinePatch2} terminates. 
 \end{lemma}
 
 \begin{proof}
-Suppose that the algorithm does not terminate. Let $t_0=2$ and $t_i=t_0+i$. Then there is an infinite sequence $\{u_i\}$ such that $u_{i+1} \equiv u_i \pmod{t_i}$ and so that $\mathcal{P}_{u_i} \ne \emptyset$. Moreover, $p \mid u_0$. Let $\alpha$ be the limit of $\{u_i\}$ in $\mathbb{Z}_p$. By the pigeon-hole principle there is some $\mathfrak{q} \mid p$ appearing in infinitely many $\mathcal{P}_{u_i}$, and so $\ord_{\mathfrak{q}}(1 -u_i \theta) \ge t_i \cdot e(\mathfrak{q}/p)$. Thus $1-\alpha \theta=0$ in $K_{\mathfrak{q}}$. But as $p \mid u_0$, we have $\ord_p(\alpha) \ge 1$, and so $\ord_{\mathfrak{q}}(\theta)<0$. This contradicts the fact that $\theta$ is an algebraic integer. Therefore the algorithm does terminate.
+Suppose that the algorithm does not terminate. Let $t_0=2$ and $t_i=t_0+i$ for $i \in \mathbb{N}$. Then there is an infinite sequence of congruence classes $\{u_i\}_{i = 0}^{\infty}$ and corresponding sets $\{\mathcal{P}_{u_i}\}_{i=0}^{\infty}$ such that $u_{i+1} \equiv u_i \mod{t_i}$ and $\mathcal{P}_{u_i} \ne \emptyset$ for all $i$. Moreover, $p \mid u_0$. Let $\alpha$ be the limit of $\{u_i\}_{i=0}^{\infty}$ in $\mathbb{Z}_p$. By the pigeon-hole principle, there is some ideal $\mathfrak{q}$ in $\mathcal{O}_K$ above $p$ which appears in infinitely many sets $\mathcal{P}_{u_i}$. It follows that $\ord_{\mathfrak{q}}(1 -u_i \theta) \ge t_i \cdot e(\mathfrak{q}|p)$ and thus $1-\alpha \theta=0$ in $K_{\mathfrak{q}}$. But as $p \mid u_0$, we have $\ord_p(\alpha) \ge 1$, and so $\ord_{\mathfrak{q}}(\theta)<0$. This contradicts the fact that $\theta$ is an algebraic integer. Therefore the algorithm must terminate.
 \end{proof}
 
-\begin{lemma}\label{Lem:alg2correct}
-Let $p \in \{p_1, \dots, p_v\}$ and let $L_p$, $M_p$ be as given by Algorithm~\ref{alg2}. Let $(x,y)$ be a solution to \eqref{Eq:TM2}. Then
+\begin{lemma}\label{lem:AffinePatch2Check}
+Let $p \in \{p_1, \dots, p_v\}$ and let $L_p$, $M_p$ be as given by Algorithm~\ref{alg:AffinePatch2}. Let $(x,y,z_1,\dots, z_v)$ be a solution to \eqref{eq:ThueMahler3}. Then
 \begin{itemize}
-\item either there is some $\mathfrak{b} \in \mathcal{L}_p$ such that \eqref{Eq:case1} is satisfied; 
-\item or there is some $(\mathfrak{b},\mathfrak{p}) \in \mathcal{M}_p$, with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and integer $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied.
+\item either there is some $\mathfrak{b} \in L_p$ such that \eqref{eq:Lp} is satisfied; 
+\item or there is some $(\mathfrak{b},\mathfrak{p}) \in M_p$ with $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$ and integer $v_p \geq 0$ such that \eqref{eq:Mp} is satisfied.
 \end{itemize}
 \end{lemma}
 
 \begin{proof}
-Now let $(x,y)$ be a solution to \eqref{Eq:TM2}. In view of Lemma~\ref{Lem:alg1correct} we may suppose $p \mid y$. Then $\ord_{\mathfrak{q}}(x-y\theta)=\ord_{\mathfrak{q}}(1 - y/x \theta)$. The rest of the proof is similar to the proof of Lemma~\ref{Lem:alg1correct}.
+Let $(x,y,z_1,\dots, z_v)$ be a solution to \eqref{eq:ThueMahler3}. In view of Lemma~\ref{lem:AffinePatch1Check} we may suppose $p \mid y$. Then $\ord_{\mathfrak{q}}(x) = 0$ and $\ord_{\mathfrak{q}}(x-y\theta)=\ord_{\mathfrak{q}}(1 - (y/x) \theta)$ for any prime ideal $\mathfrak{q}$ lying over $p$. The remainder of the proof is analogous to the proof of Lemma~\ref{lem:AffinePatch1Check}.
 \end{proof}
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{Refinements}
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 
+\subsection{Computational remarks and refinements}
+\label{subsec:PIRLRemarks}
+
+In implementing Algorithms~\ref{alg:AffinePatch1} and \ref{alg:AffinePatch2}, we reduce the number of prime ideals appearing in the factorization of $(x-y\theta)\mathcal{O}_K$ to a large power. The Prime Ideal Removing Lemma, as originally stated in \edit{Tzanakis, deWeger and used in Hambrook} outlines a similar process by comparing the valuations of $(x-y\theta)\mathcal{O}_K$ at two prime ideals $\mathfrak{p}_1$ and $\mathfrak{p}_2$ above $p$. Of course if $\mathfrak{p}_1 \mid (x-y\theta)\mathcal{O}_K$, we restrict the possible values for $x$ and $y$ modulo $p$. However any choice of $x$ and $y$ modulo $p$ affects the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$. In the present refinement outlined by Lemma~\ref{lem:AffinePatch1} and Lemma~\ref{lem:AffinePatch2}, we instead study the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$ simultaneously. This presents us with considerably less ideal equations of the form \ref{eq:idealTM} to resolve. \edit{In particular, we outline some examples in the following table.}
+
+Moreover, this variant of the Prime Ideal Removing Lemma permits the following additional refinements:
 \begin{itemize}
-\item If some $\mathfrak{b}$ is contained $L_p$, and some $(\mathfrak{b}^\prime,\mathfrak{p})$ is contained in $M_p$, with $\mathfrak{b}^\prime \mid \mathfrak{b}$ and $\mathfrak{b}/\mathfrak{b}^\prime=\mathfrak{p}^w$
-for some $w \ge 0$, then we may delete $\mathfrak{b}$ from $L_p$ and the conclusion to Lemma~\ref{Lem:alg2correct} continues to hold.
-\item If some $(\mathfrak{b},\mathfrak{p})$, $(\mathfrak{b}^\prime,\mathfrak{p})$ are contained in $M_p$, with $\mathfrak{b}^{\prime} \mid \mathfrak{b}$, and $\mathfrak{b}/\mathfrak{b}^{\prime}=\mathfrak{p}^w$ for some $w \geq 0$, then we may delete $(\mathfrak{b},\mathfrak{p})$ from $M_p$ and the conclusion to Lemma~\ref{Lem:alg2correct} continues to hold.
-\item After the above two refinements, we reduced the redundancy in the sets $M_p$ and $L_p$ similar to Kyle Hambrook's redundancy removal.
+\item Let $\mathfrak{b} \in L_p$. If there exists a pair $(\mathfrak{b}^\prime,\mathfrak{p}) \in M_p$ with $\mathfrak{b}^\prime \mid \mathfrak{b}$ and $\mathfrak{b}/\mathfrak{b}^\prime=\mathfrak{p}^w$
+for some $w \ge 0$, then we may delete $\mathfrak{b}$ from $L_p$. In doing so, the conclusion to Lemma~\ref{lem:AffinePatch2Check} continues to hold.
+\item Suppose $(\mathfrak{b},\mathfrak{p})$, $(\mathfrak{b}^\prime,\mathfrak{p}) \in M_p$ with $\mathfrak{b}^{\prime} \mid \mathfrak{b}$, and $\mathfrak{b}/\mathfrak{b}^{\prime}=\mathfrak{p}^w$ for some ${w \geq 0}$. Then, we may delete $(\mathfrak{b},\mathfrak{p})$ from $M_p$ without affecting the conclusion to Lemma~\ref{lem:AffinePatch2Check}. 
+\item \edit{After the above two refinements, we reduced the redundancy in the sets $M_p$ and $L_p$ similar to Kyle Hambrook's redundancy removal.}
 \end{itemize}
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\section{Factorization of the Thue-Mahler Equation}
+\edit{ Add test examples, restructure subsection, table format?}
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-Let
-\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
-be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 
-After applying Algorithm~\ref{alg1} and Algorithm~\ref{alg2}, we are reduced to solving finitely many equations of the form
-\begin{equation}\label{Eq:TMfactored}
+\section{Factorization of the Thue-Mahler equation}
+\label{sec:FactorizationTM}
+
+After applying Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePatch2}, we are reduced to solving finitely many equations of the form
+\begin{equation}\label{eq:TMfactored}
 (x-y\theta)\mathcal{O}_K=\mathfrak{a} \mathfrak{p}_1^{u_1}\cdots \mathfrak{p}_{\nu}^{u_{\nu}}
 \end{equation}
-in integer variables $x,y,u_1, \dots, u_{\nu}$ with $u_i \geq 0$ for $i = 1, \dots, \nu$, where $0 \leq \nu \leq v$. Here
+in integer variables $x,y,u_1, \dots, u_{\nu}$ with $u_i \geq 0$ for $i = 1, \dots, \nu$, where ${0 \leq \nu \leq v}$. Here
 \begin{itemize}
 \item $\mathfrak{p}_i$ is a prime ideal of $\mathcal{O}_K$ arising from Algorithm~\ref{alg1} and Algorithm~\ref{alg2} applied to $p_i \in \{p_1, \dots, p_v\}$, such that $(\mathfrak{b_i}, \mathfrak{p}_i) \in M_{p_i}$ for some ideal $\mathfrak{b}_i$. 
 \item $\mathfrak{a}$ is an ideal of $\mathcal{O}_K$ of norm $|c|\cdot p_1^{t_1} \cdots p_v^{t_v}$ such that
@@ -360,6 +363,11 @@ Note that the number of cases has not increased. If $[\mathbf{a}]^{-1}$ is not i
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 \subsection{Refinements}
+
+Let
+\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
+be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
+
 In most cases, the method described above is far more efficient than that of Tzanakis-de Weger, however, computing the class group may still be a costly computation. For some values of $x$, it may happen that computing the class group will take longer than directly checking each potential ideal equation. This case arises when. In such cases, we proceed as follows.
 
 For $i = 1, \dots, {\nu}$ let $h_i$ be the smallest positive integer for which $\mathfrak{p}_i^{h_i}$ is principal and let 
@@ -703,7 +711,7 @@ holds. In the first round, if this does not hold and if $y_k < -\lfloor U_k \rfl
 \[q_{kk}(y_k + U_k)^2 \leq C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2\]
 holds. We stop searching in this direction only once this equivalence does not hold.  
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 
 \endinput
 

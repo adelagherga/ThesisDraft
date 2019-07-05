@@ -20,123 +20,121 @@
 \contentsline {section}{\numberline {3.1}First steps}{26}{section.3.1}
 \contentsline {section}{\numberline {3.2}The relevant algebraic number field}{30}{section.3.2}
 \contentsline {section}{\numberline {3.3}The prime ideal removing lemma}{31}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Refinements}{36}{subsection.3.3.1}
-\contentsline {section}{\numberline {3.4}Factorization of the Thue-Mahler Equation}{37}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Refinements}{39}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.3.1}Computational remarks and refinements}{36}{subsection.3.3.1}
+\contentsline {section}{\numberline {3.4}Factorization of the Thue-Mahler equation}{37}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Refinements}{40}{subsection.3.4.1}
 \contentsline {section}{\numberline {3.5}The $S$-Unit Equation}{42}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Lattices: LLL and the Fincke-Pohst algorithm}{42}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Translated Lattices}{52}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.1}Lattices: LLL and the Fincke-Pohst algorithm}{43}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Translated Lattices}{53}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}Refinements}{56}{subsection.3.5.3}
-\contentsline {chapter}{\numberline {4}Goormaghtigh Equations}{58}{chapter.4}
-\contentsline {section}{\numberline {4.1}Introduction}{58}{section.4.1}
-\contentsline {section}{\numberline {4.2}Rational approximations}{62}{section.4.2}
-\contentsline {section}{\numberline {4.3}Pad\'e approximants}{66}{section.4.3}
-\contentsline {section}{\numberline {4.4}Proof of Theorem \ref {main-thm} }{72}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Bounding $\delta $}{72}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Applying Proposition \ref {shazam2}}{73}{subsection.4.4.2}
-\contentsline {section}{\numberline {4.5}Proof of Theorem \ref {main-thm2} for $x$ of moderate size }{76}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Case (1) : $n=3, \tmspace +\thickmuskip {.2777em} d=2, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 40$}{77}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}Case (2) : $n=4, \tmspace +\thickmuskip {.2777em} d=3, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 85$}{79}{subsection.4.5.2}
-\contentsline {subsection}{\numberline {4.5.3}Case (3) : $n=5, \tmspace +\thickmuskip {.2777em} d=2, \tmspace +\thickmuskip {.2777em} n_0=2, \tmspace +\thickmuskip {.2777em} x \geq 720$}{80}{subsection.4.5.3}
-\contentsline {subsection}{\numberline {4.5.4}Case (4) : $n=5, \tmspace +\thickmuskip {.2777em} d=4, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 300$}{82}{subsection.4.5.4}
-\contentsline {subsection}{\numberline {4.5.5}Treating the remaining small values of $x$ for $n \in \{ 3, 4 \}$}{84}{subsection.4.5.5}
-\contentsline {subsubsection}{Small values of $x$ for $n=3$}{84}{subsubsection*.9}
-\contentsline {subsubsection}{Small values of $x$ for $n=4$}{85}{subsubsection*.10}
-\contentsline {section}{\numberline {4.6}Small values of $x$ for $n=5$}{86}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}The relevant algebraic number field}{88}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}Decomposition of primes}{88}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}An alternative to the Prime Ideal Removing Lemma}{89}{subsection.4.6.3}
-\contentsline {subsection}{\numberline {4.6.4}Factorization of the Thue-Mahler equation}{90}{subsection.4.6.4}
-\contentsline {subsection}{\numberline {4.6.5}Factorization of the Thue-Mahler equation: an alternate approach}{93}{subsection.4.6.5}
-\contentsline {subsection}{\numberline {4.6.6}The $S$-unit equation}{94}{subsection.4.6.6}
-\contentsline {subsection}{\numberline {4.6.7}A small upper bound for $\DOTSB \sum@ \slimits@ _{j = 1}^v n_ja_{ij}$ in a special case}{97}{subsection.4.6.7}
-\contentsline {subsection}{\numberline {4.6.8}Bounding the $\DOTSB \sum@ \slimits@ _{j = 1}^v n_ja_{ij}$}{102}{subsection.4.6.8}
-\contentsline {subsection}{\numberline {4.6.9}A bound for $|a_1|$}{104}{subsection.4.6.9}
-\contentsline {subsection}{\numberline {4.6.10}The reduction strategy}{107}{subsection.4.6.10}
-\contentsline {subsection}{\numberline {4.6.11}The $p_l$-adic reduction procedure}{109}{subsection.4.6.11}
-\contentsline {subsection}{\numberline {4.6.12}Computational conclusions}{114}{subsection.4.6.12}
-\contentsline {section}{\numberline {4.7}Bounding $C(k,d)$ : the proof of Proposition \ref {Cee}}{115}{section.4.7}
-\contentsline {section}{\numberline {4.8}Concluding remarks}{118}{section.4.8}
-\contentsline {chapter}{\numberline {5}Computing Elliptic Curves over $\mathbb {Q}$}{120}{chapter.5}
-\contentsline {section}{\numberline {5.1}Introduction}{120}{section.5.1}
-\contentsline {section}{\numberline {5.2}Elliptic curves}{123}{section.5.2}
-\contentsline {section}{\numberline {5.3}Cubic forms : the main theorem and algorithm}{124}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Remarks}{129}{subsection.5.3.1}
-\contentsline {subsubsection}{Historical comments}{129}{subsubsection*.14}
-\contentsline {subsubsection}{$2$-division fields and reducible forms}{130}{subsubsection*.15}
-\contentsline {subsubsection}{Imprimitive forms}{130}{subsubsection*.16}
-\contentsline {subsubsection}{Possible twists}{131}{subsubsection*.17}
-\contentsline {subsubsection}{Necessity, but not sufficiency}{131}{subsubsection*.18}
-\contentsline {subsubsection}{Special binary cubic forms}{132}{subsubsection*.19}
-\contentsline {subsubsection}{The case $j_E = 0$}{132}{subsubsection*.20}
-\contentsline {subsection}{\numberline {5.3.2}The algorithm}{133}{subsection.5.3.2}
-\contentsline {section}{\numberline {5.4}Proof of Theorem \ref {fisk}}{135}{section.5.4}
-\contentsline {section}{\numberline {5.5}Finding representative forms}{144}{section.5.5}
-\contentsline {subsection}{\numberline {5.5.1}Irreducible Forms}{145}{subsection.5.5.1}
-\contentsline {subsection}{\numberline {5.5.2}Reducible forms}{145}{subsection.5.5.2}
-\contentsline {subsection}{\numberline {5.5.3}Computing forms of fixed discriminant}{147}{subsection.5.5.3}
-\contentsline {subsection}{\numberline {5.5.4}$\unhbox \voidb@x \hbox {GL}_2(\mathbb {Z})$ vs $\unhbox \voidb@x \hbox {SL}_2(\mathbb {Z})$}{148}{subsection.5.5.4}
-\contentsline {section}{\numberline {5.6}Examples}{148}{section.5.6}
-\contentsline {subsection}{\numberline {5.6.1}Cases without irreducible forms}{149}{subsection.5.6.1}
-\contentsline {subsubsection}{Conductor $2655632887 = 31 \cdot 9007 \cdot 9511$}{150}{subsubsection*.23}
-\contentsline {subsubsection}{Conductor $3305354359 = 41 \cdot 409 \cdot 439 \cdot 449$}{151}{subsubsection*.24}
-\contentsline {subsection}{\numberline {5.6.2}Cases with fixed conductor (and corresponding irreducible forms)}{151}{subsection.5.6.2}
-\contentsline {subsubsection}{Conductor $399993 = 3 \cdot 11 \cdot 17 \cdot 23 \cdot 31$}{151}{subsubsection*.25}
-\contentsline {subsubsection}{Conductor $10^6-1$}{155}{subsubsection*.26}
-\contentsline {subsubsection}{Conductor $10^9-1$}{159}{subsubsection*.27}
-\contentsline {subsection}{\numberline {5.6.3}Curves with good reduction outside $\{ 2, 3, 23 \}$ : an example of Koutsianis and of von Kanel and Matchke}{161}{subsection.5.6.3}
-\contentsline {subsection}{\numberline {5.6.4}Curves with good reduction outside $\{ 2, 3, 5, 7, 11 \}$ : an example of von Kanel and Matschke}{163}{subsection.5.6.4}
-\contentsline {section}{\numberline {5.7}Good reduction outside a single prime}{164}{section.5.7}
-\contentsline {subsection}{\numberline {5.7.1}Conductor $N=p$}{165}{subsection.5.7.1}
-\contentsline {subsection}{\numberline {5.7.2}Conductor $N=p^2$}{166}{subsection.5.7.2}
-\contentsline {subsection}{\numberline {5.7.3}Reducible forms}{168}{subsection.5.7.3}
-\contentsline {subsection}{\numberline {5.7.4}Irreducible forms : conductor $p$}{169}{subsection.5.7.4}
-\contentsline {subsection}{\numberline {5.7.5}Irreducible forms : conductor $p^2$}{170}{subsection.5.7.5}
-\contentsline {subsubsection}{Elliptic curves of discriminant $\pm p^3$}{170}{subsubsection*.29}
-\contentsline {subsubsection}{A (conjecturally infinite) family of forms and solutions}{171}{subsubsection*.30}
-\contentsline {subsubsection}{Elliptic curves of discriminant $p^2$ and $p^4$}{173}{subsubsection*.31}
-\contentsline {subsubsection}{Elliptic curves of discriminant $-p^2$ and $-p^4$}{175}{subsubsection*.32}
-\contentsline {section}{\numberline {5.8}Computational details}{177}{section.5.8}
-\contentsline {subsection}{\numberline {5.8.1}Generating the required forms}{177}{subsection.5.8.1}
-\contentsline {subsection}{\numberline {5.8.2}Complete solution of Thue equations : conductor $p$}{179}{subsection.5.8.2}
-\contentsline {subsection}{\numberline {5.8.3}Non-exhaustive, heuristic solution of Thue equations}{180}{subsection.5.8.3}
-\contentsline {subsection}{\numberline {5.8.4}Conversion to curves}{181}{subsection.5.8.4}
-\contentsline {subsection}{\numberline {5.8.5}Conductor $p^2$}{181}{subsection.5.8.5}
-\contentsline {subsubsection}{Twisting conductor $p$}{182}{subsubsection*.33}
-\contentsline {subsubsection}{Solving $F(x,y)=8p$ with $F$ of discriminant $\pm 4p$}{182}{subsubsection*.34}
-\contentsline {subsubsection}{Solving $F(x,y) \in \{ 8, 8p \}$ with $F$ of discriminant $\pm 4p^2$}{183}{subsubsection*.35}
-\contentsline {section}{\numberline {5.9}Data}{183}{section.5.9}
-\contentsline {subsection}{\numberline {5.9.1}Previous work}{183}{subsection.5.9.1}
-\contentsline {subsection}{\numberline {5.9.2}Counts : conductor $p$}{184}{subsection.5.9.2}
-\contentsline {subsection}{\numberline {5.9.3}Counts : conductor $p^2$}{185}{subsection.5.9.3}
-\contentsline {subsection}{\numberline {5.9.4}Thue equations}{186}{subsection.5.9.4}
-\contentsline {subsection}{\numberline {5.9.5}Elliptic curves with the same prime conductor}{188}{subsection.5.9.5}
-\contentsline {subsection}{\numberline {5.9.6}Rank and discriminant records}{189}{subsection.5.9.6}
-\contentsline {section}{\numberline {5.10}Completeness of our data}{191}{section.5.10}
-\contentsline {section}{\numberline {5.11}Concluding remarks}{199}{section.5.11}
-\contentsline {chapter}{\numberline {6}Towards Efficient Resolution of Thue-Mahler Equations}{200}{chapter.6}
-\contentsline {subsection}{\numberline {6.0.1}Reducing to $(a, p_1, \dots , p_v) = 1$ and $c_0 = 1$}{201}{subsection.6.0.1}
-\contentsline {section}{\numberline {6.1}The Relevant Algebraic Number Field}{207}{section.6.1}
-\contentsline {section}{\numberline {6.2}Decomposition of Primes}{207}{section.6.2}
-\contentsline {section}{\numberline {6.3}An Alternative to the Prime Ideal Removing Lemma}{208}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Refinements}{214}{subsection.6.3.1}
-\contentsline {section}{\numberline {6.4}Factorization of the Thue-Mahler Equation}{214}{section.6.4}
-\contentsline {subsection}{\numberline {6.4.1}Refinements}{217}{subsection.6.4.1}
-\contentsline {section}{\numberline {6.5}The $S$-Unit Equation}{219}{section.6.5}
-\contentsline {section}{\numberline {6.6}Specializing to Degree $3$}{220}{section.6.6}
-\contentsline {section}{\numberline {6.7}Initial Heights}{223}{section.6.7}
-\contentsline {subsection}{\numberline {6.7.1}Decomposition of the Weil height.}{224}{subsection.6.7.1}
-\contentsline {subsection}{\numberline {6.7.2}Initial height bounds}{238}{subsection.6.7.2}
-\contentsline {subsection}{\numberline {6.7.3}Coverings of $\Sigma $}{245}{subsection.6.7.3}
-\contentsline {subsubsection}{Refined coverings}{247}{subsubsection*.36}
-\contentsline {subsection}{\numberline {6.7.4}Controlling the exponents in terms of the Weil Height}{247}{subsection.6.7.4}
-\contentsline {subsubsection}{Bounding $\{n_1, \dots , n_{\nu }\}$}{247}{subsubsection*.37}
-\contentsline {subsubsection}{Bounding $\{a_1, \dots , a_{r}\}$}{248}{subsubsection*.38}
-\contentsline {subsection}{\numberline {6.7.5}Archimedean ellipsoid: real case, $r = 2$.}{272}{subsection.6.7.5}
-\contentsline {subsection}{\numberline {6.7.6}Archimedean sieve: Real case, $r = 2$}{290}{subsection.6.7.6}
-\contentsline {subsection}{\numberline {6.7.7}Archimedean Real Case Summary}{294}{subsection.6.7.7}
-\contentsline {section}{\numberline {6.8}Non-Archimedean Case}{297}{section.6.8}
-\contentsline {subsection}{\numberline {6.8.1}Non-Archimedean sieve}{297}{subsection.6.8.1}
-\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{298}{subsubsection*.39}
-\contentsline {subsection}{\numberline {6.8.2}Non-Archimedean ellipsoid.}{315}{subsection.6.8.2}
-\contentsline {chapter}{\numberline {A}Supporting Materials}{321}{appendix.A}
+\contentsline {chapter}{\numberline {4}Goormaghtigh Equations}{59}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introduction}{59}{section.4.1}
+\contentsline {section}{\numberline {4.2}Rational approximations}{63}{section.4.2}
+\contentsline {section}{\numberline {4.3}Pad\'e approximants}{67}{section.4.3}
+\contentsline {section}{\numberline {4.4}Proof of Theorem \ref {main-thm} }{73}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Bounding $\delta $}{73}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Applying Proposition \ref {shazam2}}{74}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}Proof of Theorem \ref {main-thm2} for $x$ of moderate size }{77}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Case (1) : $n=3, \tmspace +\thickmuskip {.2777em} d=2, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 40$}{78}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Case (2) : $n=4, \tmspace +\thickmuskip {.2777em} d=3, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 85$}{80}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Case (3) : $n=5, \tmspace +\thickmuskip {.2777em} d=2, \tmspace +\thickmuskip {.2777em} n_0=2, \tmspace +\thickmuskip {.2777em} x \geq 720$}{81}{subsection.4.5.3}
+\contentsline {subsection}{\numberline {4.5.4}Case (4) : $n=5, \tmspace +\thickmuskip {.2777em} d=4, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 300$}{83}{subsection.4.5.4}
+\contentsline {subsection}{\numberline {4.5.5}Treating the remaining small values of $x$ for $n \in \{ 3, 4 \}$}{85}{subsection.4.5.5}
+\contentsline {subsubsection}{Small values of $x$ for $n=3$}{85}{subsubsection*.9}
+\contentsline {subsubsection}{Small values of $x$ for $n=4$}{86}{subsubsection*.10}
+\contentsline {section}{\numberline {4.6}Small values of $x$ for $n=5$}{87}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}The relevant algebraic number field}{89}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Decomposition of primes}{89}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}An alternative to the Prime Ideal Removing Lemma}{90}{subsection.4.6.3}
+\contentsline {subsection}{\numberline {4.6.4}Factorization of the Thue-Mahler equation}{91}{subsection.4.6.4}
+\contentsline {subsection}{\numberline {4.6.5}Factorization of the Thue-Mahler equation: an alternate approach}{94}{subsection.4.6.5}
+\contentsline {subsection}{\numberline {4.6.6}The $S$-unit equation}{95}{subsection.4.6.6}
+\contentsline {subsection}{\numberline {4.6.7}A small upper bound for $\DOTSB \sum@ \slimits@ _{j = 1}^v n_ja_{ij}$ in a special case}{98}{subsection.4.6.7}
+\contentsline {subsection}{\numberline {4.6.8}Bounding the $\DOTSB \sum@ \slimits@ _{j = 1}^v n_ja_{ij}$}{103}{subsection.4.6.8}
+\contentsline {subsection}{\numberline {4.6.9}A bound for $|a_1|$}{105}{subsection.4.6.9}
+\contentsline {subsection}{\numberline {4.6.10}The reduction strategy}{108}{subsection.4.6.10}
+\contentsline {subsection}{\numberline {4.6.11}The $p_l$-adic reduction procedure}{110}{subsection.4.6.11}
+\contentsline {subsection}{\numberline {4.6.12}Computational conclusions}{115}{subsection.4.6.12}
+\contentsline {section}{\numberline {4.7}Bounding $C(k,d)$ : the proof of Proposition \ref {Cee}}{116}{section.4.7}
+\contentsline {section}{\numberline {4.8}Concluding remarks}{119}{section.4.8}
+\contentsline {chapter}{\numberline {5}Computing Elliptic Curves over $\mathbb {Q}$}{121}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introduction}{121}{section.5.1}
+\contentsline {section}{\numberline {5.2}Elliptic curves}{124}{section.5.2}
+\contentsline {section}{\numberline {5.3}Cubic forms : the main theorem and algorithm}{125}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Remarks}{130}{subsection.5.3.1}
+\contentsline {subsubsection}{Historical comments}{130}{subsubsection*.14}
+\contentsline {subsubsection}{$2$-division fields and reducible forms}{131}{subsubsection*.15}
+\contentsline {subsubsection}{Imprimitive forms}{131}{subsubsection*.16}
+\contentsline {subsubsection}{Possible twists}{132}{subsubsection*.17}
+\contentsline {subsubsection}{Necessity, but not sufficiency}{132}{subsubsection*.18}
+\contentsline {subsubsection}{Special binary cubic forms}{133}{subsubsection*.19}
+\contentsline {subsubsection}{The case $j_E = 0$}{133}{subsubsection*.20}
+\contentsline {subsection}{\numberline {5.3.2}The algorithm}{134}{subsection.5.3.2}
+\contentsline {section}{\numberline {5.4}Proof of Theorem \ref {fisk}}{136}{section.5.4}
+\contentsline {section}{\numberline {5.5}Finding representative forms}{145}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Irreducible Forms}{146}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Reducible forms}{146}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.3}Computing forms of fixed discriminant}{148}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.5.4}$\unhbox \voidb@x \hbox {GL}_2(\mathbb {Z})$ vs $\unhbox \voidb@x \hbox {SL}_2(\mathbb {Z})$}{149}{subsection.5.5.4}
+\contentsline {section}{\numberline {5.6}Examples}{149}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Cases without irreducible forms}{150}{subsection.5.6.1}
+\contentsline {subsubsection}{Conductor $2655632887 = 31 \cdot 9007 \cdot 9511$}{151}{subsubsection*.23}
+\contentsline {subsubsection}{Conductor $3305354359 = 41 \cdot 409 \cdot 439 \cdot 449$}{152}{subsubsection*.24}
+\contentsline {subsection}{\numberline {5.6.2}Cases with fixed conductor (and corresponding irreducible forms)}{152}{subsection.5.6.2}
+\contentsline {subsubsection}{Conductor $399993 = 3 \cdot 11 \cdot 17 \cdot 23 \cdot 31$}{152}{subsubsection*.25}
+\contentsline {subsubsection}{Conductor $10^6-1$}{156}{subsubsection*.26}
+\contentsline {subsubsection}{Conductor $10^9-1$}{160}{subsubsection*.27}
+\contentsline {subsection}{\numberline {5.6.3}Curves with good reduction outside $\{ 2, 3, 23 \}$ : an example of Koutsianis and of von Kanel and Matchke}{162}{subsection.5.6.3}
+\contentsline {subsection}{\numberline {5.6.4}Curves with good reduction outside $\{ 2, 3, 5, 7, 11 \}$ : an example of von Kanel and Matschke}{164}{subsection.5.6.4}
+\contentsline {section}{\numberline {5.7}Good reduction outside a single prime}{165}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Conductor $N=p$}{166}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.2}Conductor $N=p^2$}{167}{subsection.5.7.2}
+\contentsline {subsection}{\numberline {5.7.3}Reducible forms}{169}{subsection.5.7.3}
+\contentsline {subsection}{\numberline {5.7.4}Irreducible forms : conductor $p$}{170}{subsection.5.7.4}
+\contentsline {subsection}{\numberline {5.7.5}Irreducible forms : conductor $p^2$}{171}{subsection.5.7.5}
+\contentsline {subsubsection}{Elliptic curves of discriminant $\pm p^3$}{171}{subsubsection*.29}
+\contentsline {subsubsection}{A (conjecturally infinite) family of forms and solutions}{172}{subsubsection*.30}
+\contentsline {subsubsection}{Elliptic curves of discriminant $p^2$ and $p^4$}{174}{subsubsection*.31}
+\contentsline {subsubsection}{Elliptic curves of discriminant $-p^2$ and $-p^4$}{176}{subsubsection*.32}
+\contentsline {section}{\numberline {5.8}Computational details}{178}{section.5.8}
+\contentsline {subsection}{\numberline {5.8.1}Generating the required forms}{178}{subsection.5.8.1}
+\contentsline {subsection}{\numberline {5.8.2}Complete solution of Thue equations : conductor $p$}{180}{subsection.5.8.2}
+\contentsline {subsection}{\numberline {5.8.3}Non-exhaustive, heuristic solution of Thue equations}{181}{subsection.5.8.3}
+\contentsline {subsection}{\numberline {5.8.4}Conversion to curves}{182}{subsection.5.8.4}
+\contentsline {subsection}{\numberline {5.8.5}Conductor $p^2$}{182}{subsection.5.8.5}
+\contentsline {subsubsection}{Twisting conductor $p$}{183}{subsubsection*.33}
+\contentsline {subsubsection}{Solving $F(x,y)=8p$ with $F$ of discriminant $\pm 4p$}{183}{subsubsection*.34}
+\contentsline {subsubsection}{Solving $F(x,y) \in \{ 8, 8p \}$ with $F$ of discriminant $\pm 4p^2$}{184}{subsubsection*.35}
+\contentsline {section}{\numberline {5.9}Data}{184}{section.5.9}
+\contentsline {subsection}{\numberline {5.9.1}Previous work}{184}{subsection.5.9.1}
+\contentsline {subsection}{\numberline {5.9.2}Counts : conductor $p$}{185}{subsection.5.9.2}
+\contentsline {subsection}{\numberline {5.9.3}Counts : conductor $p^2$}{186}{subsection.5.9.3}
+\contentsline {subsection}{\numberline {5.9.4}Thue equations}{187}{subsection.5.9.4}
+\contentsline {subsection}{\numberline {5.9.5}Elliptic curves with the same prime conductor}{189}{subsection.5.9.5}
+\contentsline {subsection}{\numberline {5.9.6}Rank and discriminant records}{190}{subsection.5.9.6}
+\contentsline {section}{\numberline {5.10}Completeness of our data}{192}{section.5.10}
+\contentsline {section}{\numberline {5.11}Concluding remarks}{200}{section.5.11}
+\contentsline {chapter}{\numberline {6}Towards Efficient Resolution of Thue-Mahler Equations}{201}{chapter.6}
+\contentsline {subsection}{\numberline {6.0.1}Reducing to $(a, p_1, \dots , p_v) = 1$ and $c_0 = 1$}{202}{subsection.6.0.1}
+\contentsline {section}{\numberline {6.1}The Relevant Algebraic Number Field}{202}{section.6.1}
+\contentsline {section}{\numberline {6.2}Decomposition of Primes}{203}{section.6.2}
+\contentsline {section}{\numberline {6.3}Factorization of the Thue-Mahler Equation}{204}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Refinements}{206}{subsection.6.3.1}
+\contentsline {section}{\numberline {6.4}The $S$-Unit Equation}{209}{section.6.4}
+\contentsline {section}{\numberline {6.5}Specializing to Degree $3$}{209}{section.6.5}
+\contentsline {section}{\numberline {6.6}Initial Heights}{213}{section.6.6}
+\contentsline {subsection}{\numberline {6.6.1}Decomposition of the Weil height.}{214}{subsection.6.6.1}
+\contentsline {subsection}{\numberline {6.6.2}Initial height bounds}{227}{subsection.6.6.2}
+\contentsline {subsection}{\numberline {6.6.3}Coverings of $\Sigma $}{234}{subsection.6.6.3}
+\contentsline {subsubsection}{Refined coverings}{236}{subsubsection*.36}
+\contentsline {subsection}{\numberline {6.6.4}Controlling the exponents in terms of the Weil Height}{236}{subsection.6.6.4}
+\contentsline {subsubsection}{Bounding $\{n_1, \dots , n_{\nu }\}$}{236}{subsubsection*.37}
+\contentsline {subsubsection}{Bounding $\{a_1, \dots , a_{r}\}$}{237}{subsubsection*.38}
+\contentsline {subsection}{\numberline {6.6.5}Archimedean ellipsoid: real case, $r = 2$.}{261}{subsection.6.6.5}
+\contentsline {subsection}{\numberline {6.6.6}Archimedean sieve: Real case, $r = 2$}{279}{subsection.6.6.6}
+\contentsline {subsection}{\numberline {6.6.7}Archimedean Real Case Summary}{283}{subsection.6.6.7}
+\contentsline {section}{\numberline {6.7}Non-Archimedean Case}{286}{section.6.7}
+\contentsline {subsection}{\numberline {6.7.1}Non-Archimedean sieve}{286}{subsection.6.7.1}
+\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{287}{subsubsection*.39}
+\contentsline {subsection}{\numberline {6.7.2}Non-Archimedean ellipsoid.}{304}{subsection.6.7.2}
+\contentsline {chapter}{\numberline {A}Supporting Materials}{310}{appendix.A}
