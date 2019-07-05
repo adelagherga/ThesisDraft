@@ -110,60 +110,57 @@ Our first task is to cut down the number of variables appearing in \eqref{eq:ide
 \section{The prime ideal removing lemma}
 \label{sec:PIRL}
 
-In this section, we establish some key results that will allow us to cut down the number of prime ideals that can appear to a large power in the factorization of $(x-y\theta)\mathcal{O}_K$. It is of particular importance to note that we do not appeal to the Prime Ideal Removing Lemma of Tzanakis, de Weger here and instead apply the following results of Siksek. 
+In this section, we establish some key results that will allow us to cut down the number of prime ideals that can appear to a large power in the factorization of $(x-y\theta)\mathcal{O}_K$. It is of particular importance to note that we do not appeal to the Prime Ideal Removing Lemma of Tzanakis, de Weger \edit{ref and Hambrook} here and instead apply the following results of \edit{cite new paper}
 
-Let $p \in \{p_1, \dots, p_v\}$. We will produce two finite lists $L_p$ and $M_p$. The list $L_p$
-consists of certain ideals $\mathfrak{b}$ supported at the prime ideals above $p$. The list $M_p$ consists of certain pairs $(\mathfrak{b},\mathfrak{p})$ where $\mathfrak{b}$ is supported at the prime ideals above $p$, and $\mathfrak{p} \mid p$ is a prime ideal satisfying $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$. We want the lists to satisfy the following property. If $(x,y)$ is a solution to \eqref{Eq:TM2} then
+Let $p \in \{p_1, \dots, p_v\}$. We will produce the following two finite lists $L_p$ and $M_p$. The list $L_p$ will
+consist of certain ideals $\mathfrak{b}$ of $\mathcal{O}_K$ supported at the prime ideals above $p$. The list $M_p$ will consist of certain pairs $(\mathfrak{b},\mathfrak{p})$ where $\mathfrak{b}$ is supported at the prime ideals above $p$ and $\mathfrak{p}$ is a prime ideal lying over $p$ satisfying $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$. These lists will satisfy the following property: if $(x,y,z_1,\dots,z_v)$ is a solution to the Thue-Mahler equation \eqref{eq:ThueMahler3} then
 \begin{enumerate}
 \item[(i)] either there is some $\mathfrak{b} \in L_p$
 such that
-\begin{equation}\label{Eq:case1}
+\begin{equation} \label{eq:Lp}
 \mathfrak{b} \mid (x-y\theta )\mathcal{O}_K, \qquad \text{$(x-y\theta)\mathcal{O}_K/\mathfrak{b}$ is coprime to $(p)\mathcal{O}_K$};
 \end{equation}
 \item[(ii)] or there is a pair $(\mathfrak{b},\mathfrak{p}) \in M_p$ and a non-negative integer $v_p$ such that
-\begin{equation}\label{Eq:case2}
-(\mathfrak{b} \cdot \mathfrak{p}^{v_p}) \mid (x-y\theta)\mathcal{O}_K, \qquad \text{$(x-y\theta)\mathcal{O}_K/(\mathfrak{b} \cdot \mathfrak{p}^{v_p})$ is coprime to $(p)\mathcal{O}_K$}.
+\begin{equation} \label{eq:Mp}
+(\mathfrak{b} \mathfrak{p}^{v_p}) \mid (x-y\theta)\mathcal{O}_K, \qquad \text{$(x-y\theta)\mathcal{O}_K/(\mathfrak{b} \mathfrak{p}^{v_p})$ is coprime to $(p)\mathcal{O}_K$}.
 \end{equation}
 \end{enumerate}
 
-To generate the lists $M_p$, $L_p$ we consider two `affine patches': $p \nmid y$ and $p \mid y$. As motivation for the method we first state and prove two lemmas.
+To generate the lists $M_p$, $L_p$ we consider two affine patches, $p \nmid y$ and $p \mid y$. We begin with the following lemmata.
 
-\begin{lemma} \label{Lem:main}[Siksek]
-Let $(x,y)$ be a solution of \eqref{Eq:TM2} with $p \nmid y$, let $t$ be a positive integer, and suppose $x/y \equiv u \pmod{p^t}$, where $u \in \{0,1,2,\dotsc,p^{t}-1\}$. If $\mathfrak{q} \mid p$, then
-\[\ord_{\mathfrak{q}}(x-y\theta)\ge \min\{\ord_{\mathfrak{q}}(u-\theta), t \cdot e(\mathfrak{q}/p)\}.\]
-Moreover, if $\ord_{\mathfrak{q}}(u-\theta) < t \cdot e(\mathfrak{q}/p)$,
-then
+\begin{lemma} \label{lem:AffinePatch1}\edit{[Siksek]}
+Let $(x,y,z_1, \dots, z_v)$ be a solution of \eqref{eq:ThueMahler3} with $p \nmid y$, let $t$ be a positive integer, and suppose $x/y \equiv u \pmod{p^t}$, where ${u \in \{0,1,2,\dotsc,p^{t}-1\}}$. If $\mathfrak{q}$ is a prime ideal of $\mathcal{O}_K$ lying over $p$, then
+\[\ord_{\mathfrak{q}}(x-y\theta)\ge \min\{\ord_{\mathfrak{q}}(u-\theta), t \cdot e(\mathfrak{q}|p)\}.\]
+Moreover, if $\ord_{\mathfrak{q}}(u-\theta) < t \cdot e(\mathfrak{q}|p)$, then
 \[\ord_\mathfrak{q}(x-y\theta) = \ord_{\mathfrak{q}}(u-\theta).\]
 \end{lemma}
 
-\begin{lemma} \label{Lem:main2}[Siksek]
-Let $(x,y)$ be a solution of \eqref{Eq:TM2} with $p \mid y$ (and thus $p \nmid x$), let $t$ be a positive integer, and suppose $y/x \equiv u \pmod{p^t}$, where $u \in \{0,1,2,\dotsc,p^{t}-1\}$. If $\mathfrak{q} \mid p$, then
-\[\ord_{\mathfrak{q}}(x-y\theta)\ge \min\{\ord_{\mathfrak{q}}(1-\theta u), t \cdot e(\mathfrak{q}/p)\}.\]
-Moreover, if $\ord_{\mathfrak{q}}(1-\theta u) < t \cdot e(\mathfrak{q}/p)$,
-then
+\begin{lemma} \label{lem:AffinePatch2} \edit{[Siksek]}
+Let $(x,y,z_1, \dots, z_v)$ be a solution of \eqref{eq:ThueMahler3} with $p \mid y$ (and thus $p \nmid x$), let $t$ be a positive integer, and suppose $y/x \equiv u \pmod{p^t}$, where $u \in \{0,1,2,\dotsc,p^{t}-1\}$. If $\mathfrak{q}$ is a prime ideal of $\mathcal{O}_K$ lying over $p$, then
+\[\ord_{\mathfrak{q}}(x-y\theta)\ge \min\{\ord_{\mathfrak{q}}(1-\theta u), t \cdot e(\mathfrak{q}|p)\}.\]
+Moreover, if $\ord_{\mathfrak{q}}(1-\theta u) < t \cdot e(\mathfrak{q}|p)$, then
 \[\ord_\mathfrak{q}(x-y\theta) = \ord_{\mathfrak{q}}(1 - \theta u).\]
 \end{lemma}
 
-\begin{proof}[Proof of Lemmas~\ref{Lem:main} and \ref{Lem:main2}]
-Suppose $p \nmid y$. Thus $\mathfrak{q} \nmid y$ and hence $\ord_{\mathfrak{q}}(x-y\theta) = \ord_{\mathfrak{q}}(x/y - \theta)$. 
-Since
-\[x/y-\theta = u - \theta + x/y - u,\]
-we have
+\begin{proof}[Proof of Lemmas~\ref{lem:AffinePatch1} and \ref{lem:AffinePatch2}]
+Suppose $p \nmid y$. Thus $\ord_{\mathfrak{q}}(y) = 0$ and hence 
+\[\ord_{\mathfrak{q}}(x-y\theta) = \ord_{\mathfrak{q}}(x/y - \theta).\]
+Since $x/y-\theta = u - \theta + x/y - u,$ we have
 \[\begin{array}{ll}
 \ord_\mathfrak{q}(x/y-\theta)	& = \ord_{\mathfrak{q}}(u - \theta + x/y - u) \\
 						& \geq \min\{\ord_{\mathfrak{q}}(u - \theta), \ord_{\mathfrak{q}}(x/y - u)\}. 
 \end{array}\]
-But 
-\[\ord_{\mathfrak{q}}(x/y-u) \geq \ord_{\mathfrak{q}}(p^t) =t \cdot e(\mathfrak{q}/p)\]
-by assumption, %Thus $\ord_\fq(x-\theta)=\ord_\fq(u-\theta)$,
-completing the proof of Lemma~\ref{Lem:main}. The proof of Lemma~\ref{Lem:main2} is similar. 
+By assumption, 
+\[\ord_{\mathfrak{q}}(x/y-u) \geq \ord_{\mathfrak{q}}(p^t) = t \cdot e(\mathfrak{q}|p),\]
+ %Thus $\ord_\fq(x-\theta)=\ord_\fq(u-\theta)$,
+completing the proof of Lemma~\ref{lem:AffinePatch1}. The proof of Lemma~\ref{lem:AffinePatch2} is similar. 
 \end{proof}
 
 The following algorithm computes the lists $L_p$ and $M_p$ that come from the first patch $p \nmid y$. We denote these respectively by $\mathcal{L}_p$ and $\mathcal{M}_p$. 
 
-\begin{Algorithm}\label{alg1}
+\begin{Algorithm} \label{alg:AffinePatch1}
 To compute
-$\mathcal{L}_p$ and $\mathcal{M}_p$.
+$\mathcal{L}_p$ and $\mathcal{M}_p$:
 
 \begin{enumerate}
 \item[Step (a)] Let 
@@ -173,19 +170,19 @@ $\mathcal{L}_p$ and $\mathcal{M}_p$.
 \item[Step (b)] Let
 \[\mathcal{U}^\prime \leftarrow \emptyset.\]
 Loop through the elements $u \in \mathcal{U}$. Let 
-\[\mathcal{P}_u= \{\mathfrak{q} \mid p \ : \ \ord_{\mathfrak{q}}(u-\theta) \geq t \cdot e(\mathfrak{q}/p)\},\]
+\[\mathcal{P}_u= \{\mathfrak{q} \text{ lying above } p \ : \ \ord_{\mathfrak{q}}(u-\theta) \geq t \cdot e(\mathfrak{q}|p)\},\]
 and
-\[ \mathfrak{b}_u 	= \prod_{\mathfrak{q} \mid p} \mathfrak{q}^{\min\{\ord_\mathfrak{q}(u-\theta), t \cdot e(\mathfrak{q}/p)\}} 
+\[ \mathfrak{b}_u 	= \prod_{\mathfrak{q} \mid p} \mathfrak{q}^{\min\{\ord_\mathfrak{q}(u-\theta), t \cdot e(\mathfrak{q}|p)\}} 
 				= (u-\theta) \mathcal{O}_K+p^t \mathcal{O}_K.\]
 \begin{enumerate}
 \item[(i)] If $\mathcal{P}_u = \emptyset$ then
 \[\mathcal{L}_p \leftarrow \mathcal{L}_p \cup \{\mathfrak{b}_u\}.\]
 
-\item[(ii)] Else if $\mathcal{P}_u = \{\mathfrak{p}\}$ with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and there is at least one $\mathbb{Z}_p$-root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$, then
+\item[(ii)] Else if $\mathcal{P}_u = \{\mathfrak{p}\}$ with $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$ and there is at least one $\mathbb{Z}_p$-root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$, then
 \[\mathcal{M}_p \leftarrow \mathcal{M}_p \cup \{ (\mathfrak{b}_u,\mathfrak{p})\}.\]
 
 \item[(iii)] Else 
-\[\mathcal{U}^\prime \leftarrow \mathcal{U} \cup \{ u+p^{t+1}w : w \in \{0,\dots,p-1\} \}.\]
+\[\mathcal{U}^\prime \leftarrow \mathcal{U} \cup \{ u+p^{t}w : w \in \{0,\dots,p-1\} \}.\]
 \end{enumerate}
 
 \item[Step (c)] If $\mathcal{U}^\prime \ne \emptyset$ then let
@@ -193,30 +190,29 @@ and
 and return to Step (b). Else output $\mathcal{L}_p$, $\mathcal{M}_p$.
 \end{enumerate}
 \end{Algorithm}
-\
 
 \begin{lemma}
-Algorithm~\ref{alg1} terminates.
+Algorithm~\ref{alg:AffinePatch1} terminates.
 \end{lemma}
 
 \begin{proof}
-Suppose otherwise. Write $t_0=1$ and $t_i=t_0+i$ for $i=1,2,3,\dots$. Then there is an infinite sequence of congruence classes $u_i \pmod{p^{t_i}}$ such that ${u_{i+1} \equiv u_i \pmod{p^{t_i}}}$, and such that the $u_i$ fail the hypotheses of both (i) and (ii). In particular, $\mathcal{P}_{u_i}$ is non-empty. By the pigeon-hole principle, some $\mathfrak{p}$ appears in infinitely many of the $\mathcal{P}_{u_i}$. Thus $\ord_{\mathfrak{p}}(u_i-\theta) \ge t_i\cdot e(\mathfrak{p}/p)$ infinitely often. However, the sequence $\{u_i\}$ converges to some $\alpha \in \mathbb{Z}_p$. Thus $\alpha=\theta$ in $\mathcal{O}_\mathfrak{p}$. This forces $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and $\alpha$ to be a $\mathbb{Z}_p$-root of $g(t)$. In particular, $\mathfrak{p}$ corresponds to the factor $(t-\alpha)$ in the $p$-adic factorisation of $g(t)$. There can be at most one such $\mathfrak{p}$, and so $\mathcal{P}_{u_i}=\{\mathfrak{p}\}$. In particular, the hypotheses of (ii) are satisfied and we have a contradiction.
+Suppose otherwise. Write $t_0=1$ and $t_i=t_0+i$ for $i=1,2,3,\dots$. Then there is an infinite sequence of congruence classes $u_i \mod{p^{t_i}}$ such that ${u_{i+1} \equiv u_i \mod{p^{t_i}}}$, and such that the $u_i$ fail the hypotheses of both (i) and (ii). This means that $\mathcal{P}_{u_i}$ is non-empty for every $i \in \mathbb{N}_{>0}$. By the pigeon-hole principle, some prime ideal $\mathfrak{p}$ of $\mathcal{O}_K$ appears in infinitely many of the $\mathcal{P}_{u_i}$. Thus ${\ord_{\mathfrak{p}}(u_i-\theta) \ge t_i\cdot e(\mathfrak{p}|p)}$ infinitely often. However, the sequence $\{u_i\}_{i=1}^{\infty}$ converges to some $\alpha \in \mathbb{Z}_p$ so that $\alpha=\theta$ in \edit{$\mathcal{O}_\mathfrak{p}$}. This forces $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$ and $\alpha$ to be a $\mathbb{Z}_p$-root of $g(t)$. In this case, $\mathfrak{p}$ corresponds to the factor $(t-\alpha)$ in the $p$-adic factorisation of $g(t)$. There can be at most one such $\mathfrak{p}$, forcing $\mathcal{P}_{u_i}=\{\mathfrak{p}\}$ for all $i$. In particular, the hypothesis of (ii) are satisfied and we reach a contradiction.
 \end{proof}
 
-\begin{lemma}\label{Lem:alg1correct}
-Let $p \in \{p_1, \dots, p_v\}$ and let $\mathcal{L}_p$, $\mathcal{M}_p$ be as given by Algorithm~\ref{alg1}. Let $(x,y)$ be a solution to \eqref{Eq:TM2}. Then
+\begin{lemma}\label{lem:AffinePatch1Check}
+Let $p \in \{p_1, \dots, p_v\}$ and let $\mathcal{L}_p$, $\mathcal{M}_p$ be as given by Algorithm~\ref{alg:AffinePatch1}. Let $(x,y,z_1,\dots, z_v)$ be a solution to \eqref{eq:ThueMahler3}. Then
 \begin{itemize}
-\item either there is some $\mathfrak{b} \in \mathcal{L}_p$ such that \eqref{Eq:case1} is satisfied; 
-\item or there is some $(\mathfrak{b},\mathfrak{p}) \in \mathcal{M}_p$, with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and integer $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied.
+\item either there is some $\mathfrak{b} \in \mathcal{L}_p$ such that \eqref{eq:Lp} is satisfied; 
+\item or there is some $(\mathfrak{b},\mathfrak{p}) \in \mathcal{M}_p$, with $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$, and integer $v_p \geq 0$ such that \eqref{eq:Mp} is satisfied.
 \end{itemize}
 \end{lemma}
 
 \begin{proof}
 Let 
 \[t_0 = 1, \qquad \mathcal{U}_0=\{w \; :\;  w \in \{0,1,\dots,p-1\}\}.\]
-These are the initial values for $t$ and $\mathcal{U}$ in the algorithm. Then $x/y \equiv u_0 \pmod{p^{t_0}}$ for some $u_0 \in \mathcal{U}_0$. Write $\mathcal{U}_i$ for the value of $\mathcal{U}$ after $i$ iterations of the algorithm, and let $t_i=t_0+i$. As the algorithm terminates, $\mathcal{U}_i = \emptyset$ for sufficiently large $i$. In particular, there is some $i$ such that $x/y \equiv u_i \pmod{p^{t_i}}$ where $u_i \in \mathcal{U}_i$, but there is no element in $\mathcal{U}_{i+1}$ congruent to $x/y$ modulo $p^{t_{i+1}}$. Thus $u_i$ must satisfy the hypotheses of either (i) or (ii). Write $u=u_i$ and $t=t_i$ so that $x/y \equiv u \pmod{p^t}$. By Lemma~\ref{Lem:main}, we have $\mathfrak{b}_u \mid (x-y\theta) \mathcal{O}_K$. Moreover, by that lemma and the definition of $\mathcal{P}_u$, if $\mathfrak{q} \notin \mathcal{P}_u$ then $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is not divisible by $\mathfrak{q}$. 
+These are the initial values for $t$ and $\mathcal{U}$ in the algorithm. Then $x/y \equiv u_0 \pmod{p^{t_0}}$ for some $u_0 \in \mathcal{U}_0$. Write $\mathcal{U}_i$ for the value of $\mathcal{U}$ after $i$ iterations of the algorithm  and let $t_i=t_0+i$. As the algorithm terminates, $\mathcal{U}_i = \emptyset$ for sufficiently large $i$. Hence, there is some $i$ such that $x/y \equiv u_i \mod{p^{t_i}}$ where $u_i \in \mathcal{U}_i$, but there is no element in $\mathcal{U}_{i+1}$ congruent to $x/y$ modulo $p^{t_{i+1}}$. In other words, $u_i$ must satisfy the hypotheses of either (i) or (ii). Write $u=u_i$ and $t=t_i$ for $x/y \equiv u \pmod{p^t}$. By Lemma~\ref{lem:AffinePatch1}, we have $\mathfrak{b}_u \mid (x-y\theta) \mathcal{O}_K$. Moreover, by that lemma and the definition of $\mathcal{P}_u$, if $\mathfrak{q} \notin \mathcal{P}_u$ then $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is not divisible by $\mathfrak{q}$. 
 
-Suppose first that the hypothesis of (i) is satisfied: $\mathcal{P}_u = \emptyset$. The algorithm adds $\mathfrak{b}_u$ to the set $\mathcal{L}_p$, and by the above we know that \eqref{Eq:case1} is satisfied, proving the lemma in this case.
+Suppose first that the hypothesis of (i) is satisfied: $\mathcal{P}_u = \emptyset$. The algorithm adds $\mathfrak{b}_u$ to the set $\mathcal{L}_p$. By the above remarks, we know that \eqref{eq:Lp} is satisfied, proving the lemma in this case.
 
 Suppose next that the hypothesis of (ii) is satisfied: $\mathcal{P}_u=\{\mathfrak{p}\}$ where $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$ and there is a unique $\mathbb{Z}_p$ root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$. The algorithm adds $(\mathfrak{b}_u,\mathfrak{p})$ to the set $\mathcal{M}_p$, and by the above, $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is an integral ideal, not divisible by any prime $\mathfrak{q} \mid p$, $\mathfrak{q} \ne \mathfrak{p}$. Thus there is some positive $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied, proving the lemma in this case.
 \end{proof}

@@ -21,7 +21,7 @@
 \contentsline {section}{\numberline {3.2}The relevant algebraic number field}{30}{section.3.2}
 \contentsline {section}{\numberline {3.3}The prime ideal removing lemma}{31}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Refinements}{36}{subsection.3.3.1}
-\contentsline {section}{\numberline {3.4}Factorization of the Thue-Mahler Equation}{36}{section.3.4}
+\contentsline {section}{\numberline {3.4}Factorization of the Thue-Mahler Equation}{37}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Refinements}{39}{subsection.3.4.1}
 \contentsline {section}{\numberline {3.5}The $S$-Unit Equation}{42}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Lattices: LLL and the Fincke-Pohst algorithm}{42}{subsection.3.5.1}
