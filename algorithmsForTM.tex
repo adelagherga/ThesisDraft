@@ -5,6 +5,8 @@
 \label{ch:AlgorithmsForTM}
 
 \begin{enumerate}
+\item First Steps \autoref{sec:FirstSteps}
+\item rel number field \autoref{sec:RelevantAlgNumField}
 \item Lattices \autoref{sec:Lattices}
 \item Setup with Lemmata from Samir
 \item LLL [DONE - roughly]
@@ -14,194 +16,99 @@
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
+\section{First steps}
+\label{sec:FirstSteps}
 
-
-\section{The Thue-Mahler Equation}
-
-Let $a \in \mathbb{Z}$ be nonzero, let $S=\{p_1,\dotsc,p_v\}$ be a set of rational primes, and let $F \in \mathbb{Z}[X,Y]$ be irreducible and homogeneous of degree $n \geq 3$. We consider the classical Thue--Mahler equation
-\begin{equation} \label{Eq:TM1}
-F(X,Y) = a p_1^{Z_1}\cdots p_v^{Z_v}, \quad (X,Y) \in \mathbb{Z}^2,
+Fix a nonzero integer $c$ and let $S=\{p_1,\dotsc,p_v\}$ be a set of rational primes. Let
+\[F(X,Y) = c_0 X^n + c_1 X^{n-1}Y + \cdots + c_{n-1}XY^{n-1} + c_nY^n\]
+be an irreducible binary form over $\mathbb{Z}$ of degree $n \geq 3$. We want to solve the Thue--Mahler equation
+\begin{equation} \label{eq:ThueMahler}
+F(X,Y) = c p_1^{Z_1}\cdots p_v^{Z_v}
 \end{equation}
-where
-\[F(X,Y) = c_0 X^n + c_1 X^{n-1}Y + \cdots + c_{n-1}XY^{n-1} + c_nY^n.\]
-and $\gcd(X,Y)=1$. 
+for unknowns $X,Y, Z_1, \dots, Z_v$ with $\gcd(X,Y) = 1$ and $Z_i \geq 0$ for $i = 1,\dots, v$. To do so, we first reduce \eqref{eq:ThueMahler} to the special case where $c_0 = 1$ and $\gcd(c,p_i) = 1$ for $i = 1, \dots, v$. 
 
-We would like to enumerate the set of solutions $\{X,Y, Z_1, \dots, Z_v\}$ of \eqref{Eq:TM1}, where $Z_i \geq 0$ for $i = 1, \dots, v$. Solutions to this equation having $(X,Y) = 1$ and $n = 3$ correspond to elliptic curves with good reduction outside of $\{p_1, \dots, p_v\}$. The algorithm of Tzanakis, de Weger generates solutions $(X,Y)$ in the case 
-\[(X,Y) = 1, \quad (a, p_1, \dots, p_v) = 1, \quad (Y,c_0) = 1.\]
-To implement this algorithm for our specific application, we modify our Thue-Mahler equation so that we are reduced to the case where
-\[(X,Y) = 1, \quad (a, p_1, \dots, p_v) = 1, \quad c_0 = 1.\]
-The solutions corresponding to these conditions are then converted back into solutions of the original Thue-Mahler equation. The remainder of this section outlines these modifications. 
+As $F$ is irreducible by assumption, at least one of the coefficients $c_0$ and $c_n$ is nonzero. Hence, we may transform the given Thue--Mahler equation to one with $c_0 \neq 0$ by interchanging $X$ and $Y$ and by renaming the coefficients $c_i$ appropriately. In particular, solving \eqref{eq:ThueMahler} is equivalent to solving 
+\[ c_0' \overline{X}^n + c_1' \overline{X}^{n-1}\overline{Y} + \cdots + c_{n-1}'\overline{X}\overline{Y}^{n-1} + c_n'\overline{Y}^n = c p_1^{Z_1}\cdots p_v^{Z_v},\]
+where $c_i' = c_{n-1}$ for $i = 0, \dots, n$, $\overline{X} = Y$, and $\overline{Y} = X$. 
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\subsection{Reducing to $(a, p_1, \dots, p_v) = 1$ and $c_0 = 1$}
-Our binary form $F$ is irreducible by assumption and thus at least one of the coefficients $c_0$ and $c_n$ is nonzero. Hence, we can always transform the given Thue--Mahler equation~\eqref{Eq:TM1} to one with $c_0 \neq 0$ by interchanging $x$ and $y$ and by renaming the coefficients $c_i$ appropriately. This shows that  we always may and do assume that $c_0\neq 0$ in order to solve \eqref{Eq:TM1}.
-
-\begin{question}
-Do we need to do this? If one of $c_0$ or $c_n$ is $0$, then $F$ is reducible. 
-\end{question}
-
-Let $q_1, \dots, q_{w}$ denote the distinct prime divisors of $a$ such that $q_i \notin \{p_1, \dots, p_v\}$ for $i = 1, \dots, w$, and write 
-\[a =  \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)},\]
-for some integers $b_i >0$ where $(q_1, \dots, q_w, p_1, \dots, p_v) = 1$. Let $(X,Y,Z_1, \dots, Z_v)$ denote a solution of the Thue-Mahler equation in question and let $Y = d\overline{Y}$, $c_0 = d\overline{c_0}$, where $d = (c_0,Y)$. Then our equation becomes
-\[\begin{split}
-F(X,Y) 	& = c_0 X^n + c_1 X^{n-1}Y+ \cdots + c_{n-1}XY^{n-1} + c_nY^n \\
-		& = d \overline{c_0} X^n + c_1 X^{n-1}(d\overline{Y})+ \cdots + c_{n-1}X(d\overline{Y})^{n-1} + 			c_n(d\overline{Y})^n \\
-		& = d\left(\overline{c_0} X^n + c_1 X^{n-1}\overline{Y} + \cdots + c_{n-1}Xd^{n-2}
-			\overline{Y}^{n-1} + c_nd^{n-1}\overline{Y}^n\right) \\
-	 	& = ap_1^{Z_1}\dots p_v^{Z_v}\\
-		& = \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)} \cdot p_1^{Z_1} \dots p_v^{Z_v} \\
-		& = \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a) + Z_i}.
-\end{split}\] 
-Henct $d$ divides $\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a) + Z_i}$. Hence
-\[d = (c_0,Y) = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i},\]
+Denote by $\mathcal{D}$ the set of all positive rational integers $m$ dividing $c_0$ such that ${\ord_p(m)\leq \ord_p(c)}$ for each rational prime $p\notin S$. Equivalently, $\mathcal{D}$ is precisely the set of all possible integers $d$ such that $d = \gcd(c_0,Y)$. To see this, let $q_1, \dots, q_{w}$ denote the distinct prime divisors of $a$ not contained in $S$. Then 
+\[c = \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(c)}\]
+for some integers $b_i >0$. If $(X,Y,Z_1, \dots, Z_v)$ is a solution of the Thue-Mahler equation in question, it follows that
+\[F(X,Y) = cp_1^{Z_1}\dots p_v^{Z_v} =  \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(c) + Z_i}.\]
+Suppose $\gcd(c_0,Y) = d$. Since $d$ divides $F(X,Y)$, it necessarily divides 
+\[{\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(c) + Z_i}}.\] 
+In particular, 
+\[d = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i}\]
 for some non-negative integers $s_1, \dots, s_w, t_1, \dots, t_v$ such that 
-\[s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\} \quad \text{ and } \quad 
-	t_i \leq \min\{\ord_{p_i}(a) + Z_i, \ord_{p_i}(c_0)\}.\] 
+\[s_i \leq \min\{\ord_{q_i}(c), \ord_{q_i}(c_0)\} \quad \text{ and } \quad 
+	t_i \leq \min\{\ord_{p_i}(c) + Z_i, \ord_{p_i}(c_0)\}.\] 
+From here, it is easy to see that ${\ord_p(d)\leq \ord_p(c)}$ for each rational prime $p\notin S$ so that $d \in \mathcal{D}$. 
 
-Let $\mathcal D$ be the set of all positive rational integers $m$  dividing $c_0$ such that $\ord_p(m)\leq \ord_p(a)$ for each rational prime $p\notin S$. In other words, 
-\[\mathcal{D}:= \left\{ m \in \mathbb{Z}_{>0} \ : \ m \mid c_0 \text{ and } \ord_p(m)\leq \ord_p(a) \text{ for all } 					p\notin S \right\}.\]
-In the above notation, $\mathcal{D}$ is the set of all such possible values $d = (c_0,Y)$. That is, given $d$ such that 
-\[d = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i},\]
-as above, then clearly $d \mid c_0$ by construction. In other words, since
-\[\ord_{q_i}(d) = s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\} \leq \ord_{q_i}(c_0)\]
-and
-\[\ord_{p_i}(d) = t_i \leq \min\{\ord_{p_i}(a) + Z_i, \ord_{p_i}(c_0)\} \leq \ord_{p_i}(c_0),\] 
-for all $q_i \in \{q_1, \dots, q_w\}$ and all $p_i \in S$, we have $d \mid c_0$. 
+Conversely, suppose $d \in \mathcal{D}$ so that $\ord_{p}(d) \leq \ord_{p}(c)$ for all $p \notin S$. That is, the right-hand side of 
+\[\ord_{p}(d) \leq \ord_{p}(c) = 
+\ord_p\left(\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(c)}\right)\]
+is non-trivial only at the primes $\{q_1, \dots, q_w\}$. In particular, 
+\[d = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i}\]
+for non-negative integers $s_1, \dots, s_w, t_1, \dots, t_v$ such that 
+\[s_i \leq \min\{\ord_{q_i}(c), \ord_{q_i}(c_0)\} \quad \text{ and } \quad 
+	t_i \leq \ord_{p_i}(c_0).\] 
+It follows that $d = \gcd(c_0,Y)$ for some solution $(X,Y,Z_1, \dots, Z_v)$ of equation~\eqref{eq:ThueMahler}. 
 
-In addition, for all $p \notin S$, the statement $\ord_p(d)\leq \ord_p(a)$ is nontrivial only for those primes for which $p \mid d$ or $p \mid a$. We observe that the set of primes $p \notin S$ such that $p \mid d$ is $\{q_1, \dots, q_w\}$, which is precisely the set of primes $p \notin S$ such that $p \mid a$. Now, 
-\[\ord_{q_i}(d) = s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\} \leq \ord_{q_i}(a).\]
-If $p \notin S$ and $p \notin \{q_1, \dots, q_w\}$, then
-\[0 = \ord_{p}(d) = \ord_p\left(\prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i}\right) \leq \ord_{p}(a) = 
-\ord_p\left(\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}\right) = 0.\]
-Hence $d \mid c_0$ such that $\ord_p(d)\leq \ord_p(a)$ for all $p \notin S$, and so $d \in \mathcal{D}$. 
+For any $d\in \mathcal{D}$, we define the rational numbers 
+\[u_d = c_0^{n-1}/d^n \quad \textnormal{and}\quad c_d = \sgn(u_dc)\prod_{p\notin S} p^{\ord_p(u_dc)}.\]
+On using that $d\in \mathcal{D}$, we see that the rational number $c_d$ is in fact an integer coprime to $S$. 
 
-Conversely, suppose $d \in \mathcal{D}$ so that $d \mid c_0$. Since 
-\[a =  \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)},\]
-and $\ord_p(d)\leq \ord_p(a)$ for all $p \notin S$, then the right-hand side of
-\[\ord_{p}(d) \leq \ord_{p}(a) = 
-\ord_p\left(\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}\right)\]
-is non-zero only for the primes $\{q_1, \dots, q_w\}$. That is, 
-\[\ord_p(d) = 0\]
-for all $p \notin \{q_1, \dots, q_w\}$ and for $i \in \{1, \dots, w\}$
-\[\ord_{q_i}(d) \leq \ord_{q_i}(a) = b_i.\]
-In other words, the only prime factors appearing in $d$ outside of $S$ are those among $\{q_1, \dots, q_w\}$. That is, 
-\[d = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i},\]
-for some integers $t_i$, and $s_i$ such that $s_i \leq \ord_{q_i}(a) = b_i$. Of course, since $d \mid c_0$, we must necessarily have 
-\[s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\}.\]
-Similarly, for $t_i$, as $d \mid c_0$, we must have
-\[t_i \leq \ord_{q_i}(c_0)\}.\]
-It follows that these sets are identical. 
-
-For any $d\in \mathcal D$, we define the rational numbers 
-\[u = c_0^{n-1}/d^n \quad \textnormal{and}\quad c = \sgn(ua)\prod_{p\notin S} p^{\ord_p(ua)}.\]
-Suppose $(X,Y)$ is a solution of \eqref{Eq:TM1} with $(X,Y) = 1$ and $(c_0,Y) = d$. Then, multiplying by $u$ yields
-\[\begin{split}
-uF(X,Y)		& = \frac{c_0^{n-1}}{d^{n}}F(X,Y) \\	
-			& = \frac{c_0^{n}}{d^{n}}X^n + \frac{c_0^{n-1}}{d^{n}}c_1 X^{n-1}Y + \cdots + 								\frac{c_0^{n-1}}{d^{n}}c_{n-1}XY^{n-1} + \frac{c_0^{n-1}}{d^{n}}c_nY^n \\
-			& = ua \prod_{i = 1}^v p_i^{Z_i}\\
-			& = \frac{c_0^{n-1}}{d^n} \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}
-				\prod_{i = 1}^v p_i^{Z_i}\\
-			& = \left(\frac{c_0}{d}\right)^{n-1}\frac{\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v 
-				p_i^{\ord_{p_i}(a)}\prod_{i = 1}^v p_i^{Z_i}}{d}. 
-\end{split}\]
-From above, we know that 
-\[d = \prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i},\]
-with 
-\[s_i \leq \min\{\ord_{q_i}(a), \ord_{q_i}(c_0)\} \quad \text{ and } \quad t_i \leq \ord_{q_i}(c_0)\}.\]
-Hence 
-\[\frac{\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}\prod_{i = 1}^v p_i^{Z_i}}{d} = 
-\frac{\prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(a)}\prod_{i = 1}^v p_i^{Z_i}}{\prod_{i=1}^w q_i^{s_i}\cdot \prod_{i=1}^v p_i^{t_i}}.\]
-
-Indeed $d \mid a \prod_{i = 1}^v p_i^{z_i}$. Of course, $d \mid c_0$ by definition so that the above equation is an integer equation. Now
-\[\begin{split}
-uF(X,Y)		& = u a \prod_{i = 1}^v p_i^{Z_i}\\
-			& = \left(\prod_{p \notin S} p^{\ord_p(u)}\prod_{p \in S} p^{\ord_{p}(u)}\right)\cdot
-				\left(\prod_{p \notin S} p^{\ord_p(a)}\prod_{p \in S} p^{\ord_{p}(a)}\right)\cdot
-				\prod_{i = 1}^v p_i^{Z_i} \\
-			& = \prod_{p \notin S} p^{\ord_p(u) + \ord_p(a)} 
-				\prod_{p \in S}p^{Z_i + \ord_p(u) + \ord_p(a)} \\
-			& = \prod_{p \notin S} p^{\ord_p(ua)} 
-				\prod_{p \in S}p^{Z_i + \ord_p(ua)},
-\end{split}\]
-and it follows that 
-\[uF(X,Y) = c\prod_{p \in S}p^{Z_i + \ord_p(ua)}.\]
-
-On using that $d\in \mathcal D$, we see that the rational number $c$ is in fact an integer which is coprime to $S$. 
-
-Now, suppose that $(X,Y, Z_1, \dots, Z_v)$ is a solution of \eqref{Eq:TM1} and let $d=\gcd(c_0,Y)$. That is, $d \in \mathcal D$. Let  
-\[x=\tfrac{c_0X}{d},\quad y=\tfrac{Y}{d} \quad \textnormal{and}\quad z_i = \ord_p(u) + \ord_p(a) + Z_i\]
-for all $i \in \{1, \dots, v\}$, and let
-\[C_i = c_ic_0^{i-1} \quad \text{ for } i = 1, \dots, n.\]
-By definition of $d$, we note that $x,y \in \mathbb{Z}$. 
-
-Under this definition,  
-\[X = \frac{dx}{c_0},\quad Y=dy,\]
-and
-\[\begin{split}
-uF(X,Y) 	& = \frac{c_0^{n}}{d^{n}}X^n + \frac{c_0^{n-1}}{d^{n}}c_1 X^{n-1}Y + \cdots + 							\frac{c_0^{n-1}}{d^{n}}c_{n-1}XY^{n-1} + \frac{c_0^{n-1}}{d^{n}}c_nY^n \\
-		& = \frac{c_0^{n}}{d^{n}}\left(\frac{dx}{c_0}\right)^n + \frac{c_0^{n-1}}{d^{n}}c_1 							\left(\frac{dx}{c_0}\right)^{n-1}(dy) + \cdots + \frac{c_0^{n-1}}{d^{n}}c_{n-1}
-			\left(\frac{dx}{c_0}\right)(dy)^{n-1} + \frac{c_0^{n-1}}{d^{n}}c_n(dy)^n \\
-		& = x^n + c_1 x^{n-1}y + \dots + c_0^{n-2}c_{n-1}xy^{n-1} + c_0^{n-1}c_ny^n \\
-		& = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n \\
-		& = c \prod_{p \in S}p^{ \ord_p(u) + \ord_p(a) + Z_i} \\
-		& = c \prod_{p \in S}p^{z_i}.
-		\end{split}\]
-Let $f(x,y) = uF(X,Y)$ so that 
-\begin{equation}\label{Eq:TM2}
-f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n = c p_1^{z_1} \cdots p_v^{z_v}.
+Suppose $(X,Y,Z_1, \dots, Z_v)$ is a solution of \eqref{eq:ThueMahler} with ${\gcd(X,Y) = 1}$ and $d = \gcd(c_0,Y)$. Define the homogeneous polynomial $f(x,y) \in \mathbb{Z}[x,y]$ of degree $n$ by
+\[f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n,\]
+where
+\[x=\tfrac{c_0X}{d},\quad y=\tfrac{Y}{d} \quad \text{ and } \quad C_i = c_ic_0^{i-1} \quad \text{ for } i = 1, \dots, n.\]
+Since $\gcd(X,Y) = 1$, the numbers $x$ and $y$ are also coprime integers by definition of $d$. We observe that 
+\[f(x,y) = u_dF(X,Y) = u_dc \prod_{i = 1}^v p_i^{Z_i} = c_d\prod_{p \in S}p^{Z_i + \ord_p(u_dc)}.\]
+Setting $z_i = Z_i + \ord_p(u_dc)$ for all $i \in \{1, \dots, v\}$, we obtain
+\begin{equation} \label{eq:ThueMahler2}
+f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n = c_d p_1^{z_1}\cdots p_v^{z_v}, 
 \end{equation}
+where $\gcd(x,y) = 1$ and $\gcd(c_d,p_i) = 1$ for all $i = 1, \dots, v$. 
 
-Since there are only finitely many choices for $d = \gcd(c_0, Y)$, it follows that there are only finitely many choices for $\{c,u,d\}$. Then, solving \eqref{Eq:TM1} is equivalent to solving the finitely many equations \eqref{Eq:TM2} for each choice of $c,u,d$.  For each such choice, the solution $\{x,y,z_1, \dots, z_v\}$ is related to $\{X,Y, Z_1, \dots, Z_v\}$ via
-\[X = \frac{dx}{c_0},\quad Y=dy \quad \text{ and } \quad Z_i = z_i - \ord_p(u) - \ord_p(a).\]
-We note that for any choice of $c,u,d$, the left-hand side of \eqref{Eq:TM2} is the same. Thus, to solve \eqref{Eq:TM2}, we need only to enumerate over every possible $c$. Now, if $\mathcal{C}$ denotes the set of all $\{c,u,d\}$ and $d_1, d_2 \in \mathcal{D}$, we may have $\{c,u_1, d_1\}, \{c,u_2, d_2\} \in \mathcal{C}$. That is, $d_1, d_2$ may share the same value of $c$, reiterating that we need only solve \eqref{Eq:TM2} for each distinct $c$. 
+Since there are only finitely many choices for $d = \gcd(c_0, Y)$, there are only finitely many choices for $\{c_d,u_d,d\}$. Then, solving \eqref{eq:ThueMahler} is equivalent to solving the finitely many Thue-Mahler equations \eqref{eq:ThueMahler2} for each choice of $\{c_d,u_d,d\}$.  For each such choice, the solution $\{x,y,z_1, \dots, z_v\}$ is related to $\{X,Y, Z_1, \dots, Z_v\}$ via
+\[X = \frac{dx}{c_0},\quad Y=dy \quad \text{ and } \quad Z_i = z_i - \ord_p(u_dc).\]
+
+Lastly, we observe that the polynomial $f(x,y)$ of \eqref{eq:ThueMahler2} remains the same for any choice of $\{c_d,u_d,d\}$. Thus, to solve the family of equations \eqref{eq:ThueMahler2}, we need only to enumerate over every possible $c_d$. Now, if $\mathcal{C}$ denotes the set of all $\{c_d,u_d,d\}$ and $d_1, d_2 \in \mathcal{D}$, we may have $\{c_{d_1},u_{d_1}, d_1\}, \{c_{d_2},u_{d_2}, d_2\} \in \mathcal{C}$ where $c_{d_1} = c_{d_2}$. That is, $d_1, d_2$ may yield the same value of $c_d$, reiterating that we need only solve \eqref{eq:ThueMahler2} for each distinct $c_d$. 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
 
-\section{The Relevant Algebraic Number Field}
-Now, for each $c$, we solve
-\[f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n = c p_1^{z_1} \cdots p_v^{z_v}.\]
-Here, 
-\[\gcd(x,y) = 1 \quad \text{ and } \quad \gcd(c,p_1, \dots, p_v) = 1.\]
-In our case, $n = 3$ and so
-\[f(x,y) = x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 = c p_1^{z_1} \cdots p_v^{z_v}.\]
+\section{The relevant algebraic number field}
+\label{sec:RelevantAlgNumField}
 
-Following the Thue-Mahler solver algorithm, put
-\[g(t) = F(t,1) = t^3 + C_1t^2 + C_2t + C_3\]
-and note that $g(t)$ is irreducible in $\mathbb{Z}[t]$. Let $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$. Then \eqref{Eq:TM2} is equivalent to solving finitely many equations of the form
-\begin{equation} \label{Eq:norm}
-N_{K/\mathbb{Q}}(x-y\theta) = cp_1^{z_1}\dots p_v^{z_v}
+For the remainder of this chapter, we consider the Thue-Mahler equation
+\begin{equation} \label{eq:ThueMahler3}
+f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n = c p_1^{z_1} \cdots p_v^{z_v}
 \end{equation}
-for each distinct value of $c$. 
+where $\gcd(x,y) = 1$ and $\gcd(c,p_i) = 1$ for $i = 1, \dots, p_v$.
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\section{Decomposition of Primes}
+Following \edit{Tzanakis, de Weger, Hambrook}, put
+\[g(t) = f(t,1) = t^n + C_1 t^{n-1} + \dots + C_{n-1}t + C_n\]
+and note that $g(t)$ is irreducible in $\mathbb{Z}[t]$. Let $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$. Now \eqref{eq:ThueMahler3} is equivalent to the norm equation
+\begin{equation} \label{eq:normTM}
+N_{K/\mathbb{Q}}(x-y\theta) = cp_1^{z_1}\dots p_v^{z_v}.
+\end{equation}
 
 Let $p_i$ be any rational prime and let 
-\[(p_i)\mathcal{O}_K = \prod_{j = 1}^{m_i} \mathfrak{p}_{ij}^{e_{ij}}\]
-be the factorization of $p_i$ into prime ideals in the ring of integers $\mathcal{O}_K$ of $K$. Let $f_{ij}$ be the residue degree of $\mathfrak{p}_{ij}$ over $p_i$. We have $\deg(g_i(t)) = e_{ij}f_{ij}$.
-
-Let
-\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
-be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
-
-Then, since $N(\mathfrak{p}_{ij}) = p_i^{f_{ij}}$, \eqref{Eq:norm} leads to finitely many ideal equations of the form
-\begin{equation} \label{Eq:ideals}
+\[(p_i)\mathcal{O}_K = \prod_{j = 1}^{m_i} \mathfrak{p}_{ij}^{e(\mathfrak{p}_{ij}|p_i)}\]
+be the factorization of $p_i$ into prime ideals in the ring of integers $\mathcal{O}_K$ of $K$. Let $f(\mathfrak{p}_{ij}|p_i)$ be the inertial degree of $\mathfrak{p}_{ij}$ over $p_i$. Since $N(\mathfrak{p}_{ij}) = p_i^{f_{ij}}$, \eqref{eq:normTM} leads to finitely many ideal equations of the form
+\begin{equation} \label{eq:idealTM}
 (x-y\theta)\mathcal{O}_K = \mathfrak{a} \prod_{j = 1}^{m_1} \mathfrak{p}_{1j}^{z_{1j}} \cdots \prod_{j = 1}^{m_v} \mathfrak{p}_{vj}^{z_{vj}}
 \end{equation}
-where $\mathfrak{a}$ is an ideal of norm $|c|$ (for each choice of $c$) and the $z_{ij}$ are unknown integers related to $z_i$ by $\sum_{j = 1}^{m_i} f_{ij}z_{ij} = z_i $. Thus
-\[Z_i = z_i - \ord_p{u} - \ord_p(a) =  \sum_{j = 1}^{m_i} f_{ij}z_{ij} -  \ord_p{u} - \ord_p(a).\]
+where $\mathfrak{a}$ is an ideal of norm $|c|$ and the $z_{ij}$ are unknown integers related to $z_i$ by 
+\[\sum_{j = 1}^{m_i} f(\mathfrak{p}_{ij}|p_i)z_{ij} = z_i\]
+for $i \in \{1, \dots, v\}$.
 
-Our first task is to cut down the number of variables appearing in \eqref{Eq:ideals}. We will do this by showing that only a few prime ideals can divide $(x-y\theta)\mathcal{O}_K$ to a large power. 
+Our first task is to cut down the number of variables appearing in \eqref{eq:idealTM}. We will do this by showing that only a few prime ideals can divide $(x-y\theta)\mathcal{O}_K$ to a large power. 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
 
-\section{An Alternative to the Prime Ideal Removing Lemma}
+\section{The prime ideal removing lemma}
+\label{sec:PIRL}
 
 In this section, we establish some key results that will allow us to cut down the number of prime ideals that can appear to a large power in the factorization of $(x-y\theta)\mathcal{O}_K$. It is of particular importance to note that we do not appeal to the Prime Ideal Removing Lemma of Tzanakis, de Weger here and instead apply the following results of Siksek. 
 
@@ -391,6 +298,11 @@ for some $w \ge 0$, then we may delete $\mathfrak{b}$ from $L_p$ and the conclus
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Factorization of the Thue-Mahler Equation}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+Let
+\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
+be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
 
 After applying Algorithm~\ref{alg1} and Algorithm~\ref{alg2}, we are reduced to solving finitely many equations of the form
 \begin{equation}\label{Eq:TMfactored}
