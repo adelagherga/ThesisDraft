@@ -430,42 +430,61 @@ In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
 \section{Lattice-Based Reduction}
-
-
-From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate the variables $x,y$ and set ourselves up to bound the exponents $a_1,n_1, \dots, n_{\nu}$, respectively $a_1,a_2,n_1, \dots, n_{\nu}$. We note here that generating the class group can be a timely computation. However, if we follow the method of Tzanakis-de Weger, we may be left with $h^{\nu}$ $S$-unit equations, all of which we would need to apply the principal ideal test to. That is to say, computing the class group is a faster operation than the alternative provided by Tzanakis-de Weger. 
+\label{sec:LatticeReduction}
 
 \edit{references for this are the two books living in the $x+y=z$ folder on the desktop}
 
-\edit{ Move lattices to prelims, section for LLL, section for Fincke-Pohst}
+At this point in solving the Thue-Mahler equation, we proceed to solve each $S$-unit equation~\eqref{eq:Sunit} for the exponents $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$. To do so, we generate a very large upper bound on the exponents and reduce this bound via Diophantine approximation computations. The specific details of this process are described in \autoref{ch:EfficientTMSolver} and \autoref{ch:Goormaghtigh}. In general, from each $S$-unit equation, we generate several linear forms in logarithms to which we associate an integral lattice $\Gamma$. It will be important in this reduction process to enumerate all short vectors in these lattices. In this section, we describe two algorithms used in the short vector enumeration process. These are algorithms which have many important applications in a variety of mathematical fields, including factorization of polynomials, public-key cryptography, and the disproof of the Mertens Conjecture \edit{references from de Weger}. 
 
-\textbf{LLL}
-\edit{Intro-ish: taken from Cohen p103
-Among al1 the Z bases of a lattice L, some are better than others. The ones whose elements are the shortest (for the corresponding norm associated to the quadratic form q) are called reduced. Since the bases al1 have the same determinant, to be reduced implies also that a basis is not too far from being orthogonal.
-The notion of reduced basis is quite old, and in fact in some sense one can even define an optimal notion of reduced basis. The problem with this is that no really satisfactory algorithm is known to find such a basis in a reasonable time, except in dimension 2 (Algorithm 1.3.14), and quite recently in dimension 3 from the work of B. Vallée [Val].
-A real breakthrough came in 1982when A. K. Lenstra, H. W. Lenstra and L. Lovkz succeeded in giving a new notion of reduction (what is now called
-                                          2.6 Lattice Reduction Algorithms 85
-     LLL-reduction) and simultaneously a reduction algorithm which is determin- istic and polynomial time (see [LLL]).This has proved invaluable.}
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 
-Let $\Gamma$ be a lattice with $\mathbf{c}_1, \dots, \mathbf{c}_n$. Define the vectors $\mathbf{c}_i^*$ for $i = 1, \dots, n$ and real numbers $\mu_{ij}$ ($1\leq j < i \leq n$) inductively by
-\[\mathbf{c}_i^* = \mathbf{c}_i - \sum_{j=1}^{i-1}\mu_{ij}\mathbf{c}_j^*, \quad \mu_{ij} = \frac{\langle\mathbf{c}_i,\mathbf{c}_j^*\rangle}{\langle\mathbf{c}_j,\mathbf{c}_j^*\rangle}\]
-(This is just the Gram-Scmidt process). The basis $\mathbb{c}_1,\dots, \mathbb{c}_n$ is called \textit{LLL-reduced} it
+\subsection{The $L^3$-lattice basis reduction algorithm}
+\label{subsec:LLL}
+
+Let $\Gamma$ be an $n$-dimensional lattice with basis vectors $\mathbf{b}_1, \dots, \mathbf{b}_n$ equipped with a bilinear form $\Phi: \Gamma \times \Gamma \to \mathbb{Z}$. Recall that $\Phi$ defines a norm on $\Gamma$ via the usual inner product on $\mathbb{R}^n$. For $i = 1, \dots, n$, define the vectors $\mathbf{b}_i^*$ inductively by
+\[\mathbf{b}_i^* = \mathbf{b}_i - \sum_{j=1}^{i-1}\mu_{ij}\mathbf{b}_j^*, \quad \mu_{ij} = \frac{\Phi(\mathbf{b}_i,\mathbf{b}_j^*)}{\Phi(\mathbf{b}_j^*,\mathbf{b}_j)},\]
+where $\mu_{ij} \in \mathbb{R}$ for $1\leq j < i \leq n$. This is the usual Gram-Schmidt process. The basis $\mathbf{b}_1,\dots, \mathbf{b}_n$ is called \textit{LLL-reduced} if
 \[|\mu_{ij}| \leq \frac{1}{2} \quad \text{ for } 1\leq j < i \leq n, \]
-\[\frac{3}{4}|\mathbb{c}_{i-1}^*|^2 \leq |\mathbb{c}_i^* + \mu_{ii-1}\mathbb{c}_{i-1}^*|^2 \quad \text{ for } 1 <i \leq n.\]
+\[\frac{3}{4}|\mathbf{b}_{i-1}^*|^2 \leq |\mathbf{b}_i^* + \mu_{ii-1}\mathbf{b}_{i-1}^*|^2 \quad \text{ for } 1 <i \leq n,\]
+where $| \cdot |$ is the usual Euclidean norm in $\mathbb{R}^n$, 
+\[|\mathbf{v}| = \Phi(\mathbf{v},\mathbf{v}) = \mathbf{v}^{T}\mathbf{v}.\]
+\edit{is this too much notation? should I stick to jsut using $\Phi$?}
 
-These properties implies that an LLL-reduced basis is approximately orthogonal, and that, generically, its constituent vectors are roughly of the same length. Every $n$-dimensional lattice has an LLL-reduced basis and such a basis can be computed very quickly using the so-called LLL algorithm (\edit{ref}). The LLL algorithm takes as input an arbitrary basis for a lattice and outputs an LLL-reduced basis for the lattice. The algorithm is typically modified to additionally output a unimodular matrix $U$ such that $B = AU$, where $A$ is the matrix whose column-vectors are the input basis and $B$ is the matrix whose column-vectors are the LLL-reduced output basis. Several versions of this algorirhm are implemented in MAGMA, including de Weger's exact integer version. (\edit{ref}).
+These properties imply that an LLL-reduced basis is approximately orthogonal, and that, generically, its constituent vectors are roughly of the same length. Every $n$-dimensional lattice has an LLL-reduced basis and such a basis can be computed very quickly using the so-called LLL algorithm (\edit{ref: LLL}). This algorithm takes as input an arbitrary basis for a lattice and outputs an LLL-reduced basis. The algorithm is typically modified to additionally output a unimodular matrix $U$ such that $A = BU$, where $B$ is the matrix whose column-vectors are the input basis and $A$ is the matrix whose column-vectors are the LLL-reduced output basis. Several versions of this algorithm are implemented in Magma \edit{typeset for Magma}, including de Weger's exact integer version. (\edit{ref}).
 
-For $\Gamma$ an $n$-dimensional lattice and $\mathbf{y}$ a vector in $\mathbb{R}^n$, we define
+We remark that a lattice may have more than one reduced basis, and that the ordering of the basis vectors is not arbitrary. The properties of reduced bases that are of most interest to us are the following. Let $\mathbf{y}$ a vector in $\mathbb{R}^n$ and denote by $l(\Gamma,\mathbf{y})$ the distance from $\mathbf{y}$ to the nearest point in the lattice $\Gamma$, viz.
 \[l(\Gamma,\mathbf{y}) = \min_{\mathbf{x} \in \Gamma \backslash\{\mathbf{y}\}} |\mathbf{x} - \mathbf{y}|.\]
-The most important property of an LLL-reduced basis for us is the following lemma.
-\begin{lemma}
-\edit{lemma 18.1}
+From an LLL-reduced basis for $\Gamma$, we can compute lower bounds for $l(\Gamma,\mathbf{y})$, according to the following results. 
+
+\begin{lemma} \label{lem:LLL}
+Let $\Gamma$ be a lattice with LLL-reduced basis $\mathbf{c}_1, \dots, \mathbf{c}_n$ and let $\mathbf{y}$ be a vector in $\mathbb{R}^n$. 
+\begin{enumerate}[(a)]
+\item If $\mathbf{y} = \mathbf{0}$, then $l(\Gamma,\mathbf{y}) \geq 2^{-(n-1)/2}|\mathbf{c}_1|$.
+\item Assume $\mathbf{y} = s_1\mathbf{c}_1 + \cdots + s_n \mathbf{c}_n$, where $s_1, \dots, s_n \in \mathbb{R}$ with not all $s_i \in \mathbb{Z}$. Put 
+\[J = \{j \in \{1, \dots, n\} \ : \ s_j \notin \mathbb{Z} \}.\]
+For $j \in J$, set 
+\[\delta(j) = 
+\begin{cases}
+\max_{i > j} \|s_i \| |\mathbf{c}_i| 	& \text{ if } j < n\\
+0 							& \text{ if } j = n,
+\end{cases}\]
+where $\| \cdot \|$ denotes the distance to the nearest integer. We have
+\[l(\Gamma,\mathbf{y}) \geq \max_{j \in J}\left(2^{-(n-1)/2}\| s_j\| |\mathbf{c}_1| - (n-j)\delta(j)\right).\]
+\end{enumerate}
 \end{lemma}
-\edit{refs of where this lemma can be found - Cohen, for 1}
-Note that the assumption in lemma \edit{cite} is equivalent to $\mathbf{y} \notin \Gamma$. 
+\edit{refs of where this lemma can be found - Cohen, for 1; see Hambrook p49 bottom of Lemma 18.1}
+Note that the assumption in Lemma~\ref{lem:LLL} is equivalent to ${\mathbf{y} \notin \Gamma}$. 
 
-\edit{Cohen:}  We see that the vector bl in a reduced basis is, in a very precise sense, not too far from being the shortest non-zero vector of L. In fact, it often is the shortest, and when it is not, one can, most of the time, work with bl instead of the actual shortest vector. As has already been mentioned, what makes al1these notions and theorems so valuable is that there is a very simple and efficient algorithm to find a reduced basis in a lattice. We now describe this algorithm in its simplest form.
+We see that the vector $\mathbf{c}_1$ in a reduced basis is, in a very precise sense, not too far from being the shortest non-zero vector of $\Gamma$. As has already been mentioned, what makes this result so valuable is that there is a very simple and efficient algorithm to find a reduced basis in a lattice, namely the LLL algorithm.
 
-\textbf{Fincke-Pohst}
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{The Fincke-Pohst algorithm}
+\label{subsec:FinckePohst}
+
+Sometimes it is not sufficient to have a lower bound for $l(\Gamma,\mathbf{y})$ only. It may be useful to know exactly all vectors $\mathbf{x} \in \Gamma$ such that $|\mathbf{x}|  = \Phi(\mathbf{x}, \mathbf{x}) \leq C$ for a given constant $C$. This can be done efficiently using an algorithm of Fincke-Pohst (\edit{ref: p49 of Hambrook}). A version of this algorithm with some improvements due to Stehl\'e is implemented in Magma \edit{format}. As input this algorithm takes 
+
+
 
 We show how to modify the Fincke-Pohst algorithm to output short vectors in a translated lattice. That is, we compute the set of vectors $x$ such that 
 \[(x-c)^tB^tB(x-c) \leq C\]
@@ -480,7 +499,7 @@ We consider the quadratic form $Q(\mathbf{x}) = \mathbf{x}^t B^t B\mathbf{x}$ an
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
-\subsection*{Quadratic Completion}
+\textbf{Quadratic Completion}
 
 To solve our inequality, it helps to first rearrange the terms of our quadratic form. This reformulation is called the quadratic completion or quadratic complementation. Here we assume the lattice is positive definite. That is, every nonzero element has a positive norm. With this, we can find the Cholesky decomposition $A = LL^t$, where $L$ is a lower triangular matrix. Equivalently, we can express this as $A = R^t R$, where $R$ is an upper triangular matrix. Since Fincke-Pohst uses upper triangular matrices, this is what we will use. The formulas below will reflect this. We now express $Q$ as:
 \[ Q(\mathbf{x}) = \sum_{i=1}^m q_{ii}\left( x_i + \sum_{j=i+1}^m q_{ij}x_j\right)^2.\]
@@ -509,7 +528,7 @@ In practice, this is how we compute the coefficients for our form. However, it i
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
-\subsection*{The usual Fincke-Pohst way to bound $x_i$}
+\textbf{The usual Fincke-Pohst way to bound $x_i$}
 
 Since the sum $Q(x)$ is less than $C$, the individual term $q_{mm}x_m^2$ must also be less than $C$.
 \begin{align*}
@@ -585,7 +604,7 @@ This improves the search time by giving us a nicer quadratic form to work with. 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
-\subsection{Translated Lattices}
+\textbf{Translated Lattices}
 We now explain how to apply Fincke-Pohst to the case
 \[(x-c)^tB^tB(x-c) \leq C.\]
 In place of the usual reduction listed above, we use MAGMA's built-in LLLGram function on the symmetric positive-definite matrix $A = B^tB$. Here, since $A$ is symmetric and positive-definite, it can be written as $A = R^tR$ for some upper triangular matrix $R$ (via Cholesky Decomposition).The function LLLGram, with input $A$, computes a matrix $G$ which is the Gram matrix corresponding to a LLL-reduced form of the matrix $R$. This function returns three values:
@@ -653,7 +672,7 @@ Since $x_k$ must be an integer, we can restrict our bounds further. Let $t_k = \
 Here $UB_k$ is the upper bound on $y_k$ and $LB_k$ is the lower bound on $y_k$. 
 \[LB_k \leq y_k \leq UB_k.\]
 
-\subsection{Refinements}
+\textbf{Refinements}
 We note here that computing $LB_k$ and $UB_k$ is highly inefficient as it often requires high precision to accurately compute $\sqrt{T_k/q_{kk}}$. Instead, we adopt the following bounds, as per Matshke's algorithm. To help justify this process, we refer to the following diagram
 
 \begin{center}

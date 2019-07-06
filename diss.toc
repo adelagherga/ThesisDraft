@@ -3,10 +3,10 @@
 \contentsline {chapter}{Lay Summary}{iii}{chapter*.2}
 \contentsline {chapter}{Preface}{iv}{chapter*.3}
 \contentsline {chapter}{Contents}{v}{chapter*.4}
-\contentsline {chapter}{List of Tables}{viii}{chapter*.5}
-\contentsline {chapter}{List of Figures}{ix}{chapter*.6}
-\contentsline {chapter}{Glossary}{x}{chapter*.7}
-\contentsline {chapter}{Acknowledgments}{xi}{chapter*.8}
+\contentsline {chapter}{List of Tables}{vi}{chapter*.5}
+\contentsline {chapter}{List of Figures}{vii}{chapter*.6}
+\contentsline {chapter}{Glossary}{viii}{chapter*.7}
+\contentsline {chapter}{Acknowledgments}{ix}{chapter*.8}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Statement of the results}{7}{section.1.1}
 \contentsline {chapter}{\numberline {2}Preliminaries}{14}{chapter.2}
@@ -28,8 +28,8 @@
 \contentsline {subsection}{\numberline {3.4.3}The $S$-unit equation}{43}{subsection.3.4.3}
 \contentsline {subsection}{\numberline {3.4.4}Computational remarks and comparisons}{44}{subsection.3.4.4}
 \contentsline {section}{\numberline {3.5}Lattice-Based Reduction}{46}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Translated Lattices}{54}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Refinements}{58}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.1}The $L^3$-lattice basis reduction algorithm}{46}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}The Fincke-Pohst algorithm}{48}{subsection.3.5.2}
 \contentsline {chapter}{\numberline {4}Towards Efficient Resolution of Thue-Mahler Equations}{60}{chapter.4}
 \contentsline {subsection}{\numberline {4.0.1}Reducing to $(a, p_1, \dots , p_v) = 1$ and $c_0 = 1$}{61}{subsection.4.0.1}
 \contentsline {section}{\numberline {4.1}The Relevant Algebraic Number Field}{61}{section.4.1}
