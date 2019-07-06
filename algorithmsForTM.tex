@@ -326,9 +326,9 @@ For each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \math
 \label{subsec:FactorizationTMwithoutOK}
 
 For $i = 1, \dots, {\nu}$ let $h_i$ be the smallest positive integer for which $\mathfrak{p}_i^{h_i}$ is principal and let 
-$s_i$ be a positive integer satisfying $0 \leq s_i < h_i$. Let
+$r_i$ be a positive integer satisfying $0 \leq r_i < h_i$. Let
 \[\mathbf{a}_i = (a_{1i}, \dots, a_{{\nu}i}).\]
-where $a_{ii} = h_i$ and $a_{ji} = 0$ for $j \neq i$. We let $A$ be the matrix with columns $\mathbf{a}_1, \dots, \mathbf{a}_{\nu}$. Hence $A$ is a $\nu \times \nu$ diagonal matrix over $\mathbb{Z}$ with diagonal entries $h_i$. Now, if \eqref{eq:TMfactored} has a solution $\mathbf{u} = (u_1, \dots, u_{\nu})$, it necessarily must be of the form $\mathbf{u} = A\mathbf{n} + \mathbf{r}$, where $\mathbf{n} = (n_1, \dots, n_{\nu})$ and $\mathbf{r} = (s_1, \dots, s_{\nu})$. The vector $\mathbf{n}$ is comprised of integers $n_i$ which we solve for. The vector $\mathbf{r}$ is comprised of the values $s_i$ satisfying $0 \leq s_i < h_i$ for $i = 1, \dots, \nu$. 
+where $a_{ii} = h_i$ and $a_{ji} = 0$ for $j \neq i$. We let $A$ be the matrix with columns $\mathbf{a}_1, \dots, \mathbf{a}_{\nu}$. Hence $A$ is a $\nu \times \nu$ diagonal matrix over $\mathbb{Z}$ with diagonal entries $h_i$. Now, if \eqref{eq:TMfactored} has a solution $\mathbf{u} = (u_1, \dots, u_{\nu})$, it necessarily must be of the form $\mathbf{u} = A\mathbf{n} + \mathbf{r}$, where $\mathbf{n} = (n_1, \dots, n_{\nu})$ and $\mathbf{r} = (r_1, \dots, r_{\nu})$. The vector $\mathbf{n}$ is comprised of integers $n_i$ which we solve for. The vector $\mathbf{r}$ is comprised of the values $r_i$ satisfying $0 \leq r_i < h_i$ for $i = 1, \dots, \nu$. 
 
 Using the above notation, we let
 \[\mathfrak{c}_i = \tilde{\mathfrak{p}}^{\mathbf{a}_i}=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_{\nu}^{a_{{\nu}i}} = \mathfrak{p}_i^{h_i} \]
@@ -413,81 +413,30 @@ are constants.
 
 To summarize, our original problem of solving \eqref{eq:ThueMahler3} for $(x,y,z_1,\dots, z_v)$ has been reduced to solving finitely many equations of the form \eqref{eq:Sunit} for the variables $(x,y, n_1, \dots, n_{\nu},a_1,\dots,a_r)$.
 
-
-
-
-
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
-\subsection{Computational remarks}
+\subsection{Computational remarks and comparisons}
 \label{subsec:FactorizationRemarks}
 
-In \autoref{subsec:FactorizationTMwithoutOK}, we follow closely the method of \edit{Tzanakis, de Weger}. To implement this reduction to \eqref{eq:TMfactored}, for $i = 1, \dots, \nu$ we compute all $h_i$ for which $\mathfrak{p}_i^{h_i}$ is principal. In doing so, we generate all possible values for $s_i$, the non-negative integer satisfying $0 \leq s_i < h_i$. 
+In \autoref{subsec:FactorizationTMwithoutOK}, we follow closely the method of \edit{Tzanakis, de Weger} to reduce the ideal equation~\eqref{eq:TMfactored} to the $S$-unit equation~\eqref{eq:Sunit}. To implement this reduction, we begin by computing all $h_i$ for which $\mathfrak{p}_i^{h_i}$ is principal for $i = 1, \dots, \nu$. In doing so, we generate all possible values for $r_i$, the non-negative integer satisfying $0 \leq r_i < h_i$. We then generate every possible vector $\mathbf{r} = (r_1, \dots, r_{\nu})$ and test the corresponding ideal product $\mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r}}$ for principality. Those vectors which pass this test yield an $S$-unit equation~\eqref{eq:Sunit}. In the worst case scenario, this method reduces to $h_K^{\nu}$ such equations, where $h_K$ is the class number of $K$. Moreover, this process needs to be applied to every ideal equation~\eqref{eq:TMfactored}, yielding what may be a very large number of principalization tests and subsequent large number of $S$-unit equations to solve. \edit{table with numbers}
 
+In contrast, the method in \autoref{subsec:FactorizationTMwithOK} reduces \eqref{eq:TMfactored} to only $\#T/2$ $S$-unit equations to solve, where $T$ is the set of roots of unity in $K$. In particular, the sum total of $S$-unit equations does not drastically increase. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$, we reach a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain only $\#T/2$ corresponding equations \eqref{eq:Sunit}. In particular, the number of principalization tests in this method is limited by the number of ideal equations~\eqref{eq:TMfactored}, where each such equation yields only $(1+\nu)$ tests. \edit{table with numbers}
 
+However, when generating the vectors $\mathbf{r} = (r_1, \dots, r_{\nu})$ using the class group, we observe that some of the integers $r_i$ may be negative, so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $\alpha$ into our $p$-adic fields. In those instances, the precision on our $\theta^{(i)}$ may not be high enough, and as a result, $\alpha$ may be mapped to $0$. Increasing the precision at that point would be computationally inefficient, as it would require us to recompute a large amount of data. Instead, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. This in itself may present its own problems \edit{can't remember why though}.
 
+In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is far more efficient than that of \autoref{subsec:FactorizationTMwithoutOK}. However, computing the class group may be a very costly computation. Indeed, for some Thue-Mahler equations, this may be the bottle-neck of the algorithm. In this case, it may happen that computing the class group will take longer than directly checking each potential $S$-unit equation arising from the alternative method. \edit{table}. Unfortunately, we cannot know a piori how long computing $\Cl(K)$ will take in so much that we cannot know a priori how long solving all $S$-unit equations from the other algorithm will take. In practicality, generating the class group in Magma \edit{formatting of Magma?} is a process which cannot be terminated without exiting the program. For this reason, we cannot simply apply a timeout in Magma if computing $\Cl(K)$ is exceeding what we deem a reasonable amount of time. Adding to this, Magma does not support parallelization, so we cannot implement both algorithms simultaneously. Our compromise to solve a single Thue-Mahler equation is to run two separate instances of Magma in parallel, each generating the $S$-unit equations using the two aforementioned algorithms. When one of these instances finishes, the other is forced to terminate. In this way, though far from ideal, we are able to select the most computationally efficient option. 
 
-
-
- for each ideal equation \eqref{eq:TMfactored}, we 
-
-In the worst case scenario, the method in Tzanakis-de Weger reduces this to $h^v$ such equations, where $h$ is the class number of $K$. 
-
-
-
-Note that the number of cases has not increased. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$ then we have a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain one corresponding equation \eqref{Eq:TMprincipal}.
-
-
-We note that some of the $r_i$ might be negative so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $\alpha$ into our $p$-adic fields. In those instances, the precision on our $\theta^{(i)}$ may not be high enough, and as a result, $\alpha$ may be mapped to $0$. Increasing the precision is not ideal at this point, as it would require us to recompute a fair amount of data and so is computationally inefficient. Instead, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. (Having already computed the class group, computing the class number is not costly.)
-
-
-In the worst case scenario, the method in Tzanakis-de Weger reduces this to $h^v$ such equations, where $h$ is the class number of $K$. The method of Siksek, described below, gives only $m/2$ $S$-unit equations, where $m$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). 
-
-
-In most cases, the method described above is far more efficient than that of Tzanakis-de Weger, however, computing the class group may still be a costly computation. For some values of $x$, it may happen that computing the class group will take longer than directly checking each potential ideal equation. This case arises when. In such cases, we proceed as follows.
-
-Hence, we iterate through every possible $\mathbf{r}$, and store those cases for which this occurs. 
-
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate the variables $x,y$ and set ourselves up to bound the exponents $a_1,n_1, \dots, n_{\nu}$, respectively $a_1,a_2,n_1, \dots, n_{\nu}$. We note here that generating the class group can be a timely computation. However, if we follow the method of Tzanakis-de Weger, we may be left with $h^{\nu}$ $S$-unit equations, all of which we would need to apply the principal ideal test to. That is to say, computing the class group is a faster operation than the alternative provided by Tzanakis-de Weger. 
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 
 \section{Lattice-Based Reduction}
+
+
+From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate the variables $x,y$ and set ourselves up to bound the exponents $a_1,n_1, \dots, n_{\nu}$, respectively $a_1,a_2,n_1, \dots, n_{\nu}$. We note here that generating the class group can be a timely computation. However, if we follow the method of Tzanakis-de Weger, we may be left with $h^{\nu}$ $S$-unit equations, all of which we would need to apply the principal ideal test to. That is to say, computing the class group is a faster operation than the alternative provided by Tzanakis-de Weger. 
 
 \edit{references for this are the two books living in the $x+y=z$ folder on the desktop}
 
 \edit{ Move lattices to prelims, section for LLL, section for Fincke-Pohst}
-\textbf{Lattices}
-An $n$-dimensional lattice is a discrete subgroup of $\mathbb{R}^n$ of the form
-\[\Gamma = \left\{ \sum_{i=1}^n x_i \mathbf{c}_i \ : \ x_i \in \mathbb{Z} \right\},\]
-where $\mathbf{c}_1, \dots, \mathbf{c_n}$ are vectors forming a basis for $\mathbb{R}^n$. We say that the vectors $\mathbf{c}_1, \dots, \mathbf{c_n}$ form a \textit{basis} for $\Gamma$, or that they generate $\Gamma$. Let $B$ denote the matrix whose columns are the vectors $\mathbf{c}_1, \dots, \mathbf{c_n}$. Any lattice element $\mathbf{v}$ may be expressed as $\mathbf{v} = B\mathbf{x}$ for some $\mathbf{x} \in \mathbb{Z}^n$. 
-
-A \textit{bilinear form} on a lattice $\Gamma$ is a function $\Phi: \Gamma \times \Gamma \to \mathbb{Z}$ satisying
-\begin{enumerate}
-\item $\Phi(\mathbf{u}, \mathbf{v}+\mathbf{w}) = \Phi(\mathbf{u},\mathbf{v}) + \Phi(\mathbf{u},\mathbf{w})$
-\item $\Phi(\mathbf{u}+\mathbf{v}, \mathbf{w}) = \Phi(\mathbf{u},\mathbf{w}) + \Phi(\mathbf{v},\mathbf{w})$
-\item $\Phi(a\mathbf{u}, \mathbf{w}) = a\Phi(\mathbf{u},\mathbf{w})$
-\item $\Phi(\mathbf{u}, a\mathbf{w}) = a\Phi(\mathbf{u},\mathbf{w})$
-\end{enumerate}
-for all $\mathbf{u}, \mathbf{v}$, and $\mathbf{w}$ in $\Gamma$ and any $a \in \mathbb{R}$. 
-
-In particular, given a basis we can define a specific bilinear form on our lattice $\Gamma$ as part of its structure. In the case of integral lattices, we have $\Phi: \Gamma \times \Gamma \to \mathbb{Z}$. This form describes a kind of distance between elements $\mathbf{x}$ and $\mathbf{y}$ of the lattice defined by $\Phi(\mathbf{x},\mathbf{y})$. 
-
-A \textit{quadratic form} is a homogeneous polynomial of degree $2$. A form $Q$ is called positive definite if $Q(\mathbf{x})$ is strictly positive for any nonzero $\mathbf{x}$. A lattice is called \textit{positive definite} if its quadratic form is positive definite. 
-
-A bilinear form has an associated quadratic form $Q: \Gamma \to \mathbb{Z}$ which is simply defined by $Q(\mathbf{x}) = \Phi(\mathbf{x}, \mathbf{x})$. The bilinear forms (and their associated quadratic forms) that we will be using come from the usual inner product on vectors in $\mathbb{R}^n$, also known as the dot product $\mathbf{u}\cdot \mathbf{v}$ for $\mathbf{u},\mathbf{v} \in \Gamma$, and multiplication with the basis matrix for coordinate vectors. That is, if $\mathbf{u} = B\mathbf{x}$ and $\mathbf{v} = B\mathbf{y}$ for a basis $B$, we have $\Phi(\mathbf{x},\mathbf{y}) = \mathbf{x}^TB^TB\mathbf{y}$. 
-
-If $\mathbf{v} = B\mathbf{x}$, the \textit{norm} of the vector $\mathbf{v} \in \Gamma$ is defined by the quadratic form. We will be using the inner product $\mathbf{v} \cdot \mathbf{v}$. The norm of the coordinate vector $\mathbf{x}$ is then 
-\[\mathbf{v}^T\mathbf{v} = (B\mathbf{x})^T(B\mathbf{x}) = \mathbf{x}^TB^TB\mathbf{x}.\]
-Notice that this is also $\mathbf{x}^TA\mathbf{x}$ where $B^TB = A$. Here, $A$ is an example of the Gram matrix of $\Gamma$. The \textit{Gram matrix} of a lattice with basis $B$ with respect to a bilinear form $\Phi$ is defined to be the matrix A with entries $a_{ij} = \Phi(\mathbf{b}_i,\mathbf{b}_j)$.
-
-The bilinear form on L can be written with respect to either embedded or coordinate vectors. Using another basis to express the lattice elements is possible, and sometimes preferable. But the Gram matrix is specific to the bilinear form on the lattice, and should not change when operating on embedded vectors. If it is operating on coordinate vectors, the change of basis must be accounted for.
-
-If $A$ and $B$ are invertible $n \times n$ real matrices, then the lattice generated by the columns of $A$ is equal to the lattice generated by the columns of $B$ if and only if there is a unimodular matrix $U$ such that $AU = B$. 
 
 \textbf{LLL}
 \edit{Intro-ish: taken from Cohen p103
