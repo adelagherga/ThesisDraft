@@ -68,88 +68,9 @@ Our first task is to cut down the number of variables appearing in \eqref{Eq:ide
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Factorization of the Thue-Mahler Equation}
 
-After applying Algorithm~\ref{alg1} and Algorithm~\ref{alg2}, we are reduced to solving finitely many equations of the form
-\begin{equation}\label{Eq:TMfactored}
-(x-y\theta)\mathcal{O}_K=\mathfrak{a} \mathfrak{p}_1^{u_1}\cdots \mathfrak{p}_{\nu}^{u_{\nu}}
-\end{equation}
-in integer variables $x,y,u_1, \dots, u_{\nu}$ with $u_i \geq 0$ for $i = 1, \dots, \nu$, where $0 \leq \nu \leq v$. Here
-\begin{itemize}
-\item $\mathfrak{p}_i$ is a prime ideal of $\mathcal{O}_K$ arising from Algorithm~\ref{alg1} and Algorithm~\ref{alg2} applied to $p_i \in \{p_1, \dots, p_v\}$, such that $(\mathfrak{b_i}, \mathfrak{p}_i) \in M_{p_i}$ for some ideal $\mathfrak{b}_i$. 
-\item $\mathfrak{a}$ is an ideal of $\mathcal{O}_K$ of norm $|c|\cdot p_1^{t_1} \cdots p_v^{t_v}$ such that
-$u_i + t_i =  z_i$. Note that if $M_{p_i} = \emptyset$ for some $i$ (necessarily $i \in \{{\nu} + 1, \dots, v\}$) we take $u_i = 0$. 
-\end{itemize}
-
-For each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_{\nu}$, we reduce this equation to a number of so-called ``$S$-unit equations''. In the worst case scenario, the method in Tzanakis-de Weger reduces this to $h^v$ such equations, where $h$ is the class number of $K$. The method of Siksek, described below, gives only $m/2$ $S$-unit equations, where $m$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). 
-
-Let 
-\[\phi : \mathbb{Z}^v \rightarrow \text{Cl}(K), \qquad (n_1,\dots ,n_{\nu}) \mapsto [\mathfrak{p}_1]^{n_1}\cdots [\mathfrak{p}_{\nu}]^{n_{\nu}}.\]
-We can compute the image and kernel of this map in \texttt{Magma}. Note that if \eqref{Eq:TMfactored} has a solution $\mathbf{u}=(u_1,\dots, u_{\nu})$ then, by \eqref{Eq:TMfactored},
-\[\phi(\mathbf{u})=[\mathfrak{a}]^{-1}.\]
-In particular, if $[\mathfrak{a}]^{-1}$ does not belong to the image of $\phi$ then \eqref{Eq:TMfactored} has no solutions. We therefore suppose that $[\mathfrak{a}]^{-1}$ belongs to the image, and compute a preimage $\mathbf{r}=(r_1,\dotsc,r_{\nu})$ using \texttt{Magma}. Then $\mathbf{u}-\mathbf{r}$ belongs to the kernel of $\phi$. The kernel is a subgroup of $\mathbb{Z}^v$ of rank $\nu$. Let $\mathbf{a}_1,\dots,\mathbf{a}_{\nu}$ be a basis for the kernel and let 
-\[\mathbf{u}-\mathbf{r}=n_1 \mathbf{a}_1+\cdots + n_{\nu} \mathbf{a}_{\nu}\]
-where the $n_i \in \mathbb{Z}$. Here, we adopt the notation
-\[\mathbf{a}_i = (a_{1i}, \dots, a_{\nu i}),\]
-and we let $A$ be the matrix with columns $\mathbf{a}_1,\dots,\mathbf{a}_{\nu}$. Hence the $(i,j)^{\text{th}}$ entry of $A$ is $a_{ij}$, the $i^{\text{th}}$ entry of the vector $\mathbf{a}_j$. Then $\mathbf{u}= A\mathbf{n}+\mathbf{r}$ where $\mathbf{n} = (n_1,\dots,n_{\nu})$.
-%The important thing for us is that $A$ is invertible. In fact its determinant is (up to sign) equal to $\#\img(\phi)$ and so divides the class number. As $A$ is invertible, there are positive constants $C_1$, $C_2$ such that
-%\[
-% H(\mathbf{n}) \le C_1 H(\mm), \mathbb{Q}uad H(\mm) \le C_2 H(\mathbf{n}).
-%\]
-For $\mathbf{a}_i=(a_{1i},\dotsc,a_{\nu i}) \in \mathbb{Z}^{\nu}$ we adopt the notation 
-\[\tilde{\mathfrak{p}}^\mathbf{a} :=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_{\nu}^{a_{\nu i}}.\]
-Let
-\[\mathfrak{c}_1= \tilde{\mathfrak{p}}^{\mathbf{a}_1},\dotsc,\mathfrak{c}_{\nu}= \tilde{\mathfrak{p}}^{\mathbf{a}_{\nu}}.\]
-Then we can rewrite \eqref{Eq:TMfactored} as
-\[\begin{array}{ll}
-(x-y\theta) \mathcal{O}_K 
-	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
-	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_{\nu} \mathbf{a}_{\nu}}\\
-	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.
-\end{array}\]
-
-Now
-\[[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}] 
-	= [\mathfrak{a}] \cdot [\mathfrak{p}_1]^{r_1}\cdots [\mathfrak{p}_{\nu}]^{r_{\nu}} 
-	= [\mathfrak{a}]\cdot \phi(r_1,\dotsc,r_{\nu})=[1]\]
-as $\phi(r_1,\dotsc,r_{\nu})=[\mathfrak{a}]^{-1}$ by construction. Thus 
-\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K\]
-for some $\alpha \in K^*$. We note that some of the $r_i$ might be negative so we don't expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $\alpha$ into our $p$-adic fields. In those instances, the precision on our $\theta^{(i)}$ may not be high enough, and as a result, $\alpha$ may be mapped to $0$. Increasing the precision is not ideal at this point, as it would require us to recompute a fair amount of data and so is computationally inefficient. Instead, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. (Having already computed the class group, computing the class number is not costly.)
-
-Now, 
-\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \phi(\mathbf{a}_j) = [1]\]
-as the $\mathbf{a}_j$ are a basis for the kernel of $\phi$. Thus for all $j \in \{1, \dots, {\nu}\}$, there are $\gamma_j \in K^*$ such that $\mathfrak{c}_j=\gamma_j \mathcal{O}_K$. 
-
-Thus we have rewritten \eqref{Eq:TMfactored} as
-\begin{equation}\label{Eq:TMprincipal}
-(x-y\theta) \mathcal{O}_K=\alpha \cdot \gamma_1^{n_1} \cdots \gamma_{\nu}^{n_{\nu}} \mathcal{O}_K
-\end{equation}
-for unknown integers $(n_1, \dots, n_{\nu})$. 
-Note that the number of cases has not increased. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$ then we have a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain one corresponding equation \eqref{Eq:TMprincipal}.
-
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 \subsection{Refinements}
-In most cases, the method described above is far more efficient than that of Tzanakis-de Weger, however, computing the class group may still be a costly computation. For some values of $x$, it may happen that computing the class group will take longer than directly checking each potential ideal equation. This case arises when. In such cases, we proceed as follows.
 
-For $i = 1, \dots, {\nu}$ let $h_i$ be the smallest positive integer for which $\mathfrak{p}_i^{h_i}$ is principal and let 
-$s_i$ be a positive integer satisfying $0 \leq s_i < h_i$. Let
-\[\mathbf{a}_i = (a_{1i}, \dots, a_{{\nu}i}).\]
-where $a_{ii} = h_i$ and $a_{ji} = 0$ for $j \neq i$. We let $A$ be the matrix with columns $\mathbf{a}_1, \dots, \mathbf{a}_{\nu}$. Hence $A$ is a diagonal matrix with $h_i$ along the diagonal. For every possible combination of the $s_i$, we set $\mathbf{r} = (s_1, \dots, s_{\nu})$. Now, if \eqref{Eq:TMfactored} has a solution $\mathbf{u} = (u_1, \dots, u_{\nu})$, it necessarily must be of the form $\mathbf{u} = A\mathbf{n} + \mathbf{r}$, where $\mathbf{n} = (n_1, \dots, n_{\nu})$. 
-
-Using the above notation, we write
-\[\mathfrak{c}_i = \tilde{\mathfrak{p}}^{\mathbf{a}_i}=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_{\nu}^{a_{{\nu}i}} = \mathfrak{p}_i^{h_i}.\]
-Thus, we can write \eqref{Eq:TMfactored} as
-\[\begin{array}{ll}
-(x-y\theta) \mathcal{O}_K 
-	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
-	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_{\nu} \mathbf{a}_{\nu}}\\
-	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.
-\end{array}\]
-Now, by definition of $h_j$, there exist $\gamma_j \in K^*$ such that 
-\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \mathfrak{p}_j^{h_j} = \gamma_j \mathcal{O}_K.\]
-for all $j \in \{1, \dots, {\nu}\}$.
-
-Now, for each choice of $\mathbf{r}$, if $\mathbf{u}$ is a solution, we must necessarily have
-\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K.\]
-Hence, we iterate through every possible $\mathbf{r}$, and store those cases for which this occurs. 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 

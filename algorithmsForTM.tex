@@ -335,12 +335,8 @@ Using the above notation, we let
 for all $i \in \{1, \dots, {\nu}\}$.
 
 Thus, we can write \eqref{eq:TMfactored} as
-\[\begin{array}{ll}
-(x-y\theta) \mathcal{O}_K 
-	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
-	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_{\nu} \mathbf{a}_{\nu}}\\
-	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.
-\end{array}\]
+\[ (x-y\theta) \mathcal{O}_K = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}  = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.\]
+
 
 By definition of $h_i$, each $i \in \{1, \dots, {\nu}\}$ yields an element $\gamma_i \in K^*$ such that 
 \[\mathfrak{c}_i = (\gamma_i) \mathcal{O}_K.\]
@@ -352,53 +348,97 @@ Furthermore, if $\mathbf{u}$ is a solution of \eqref{eq:TMfactored} with corresp
 \subsection{Using the class group $\Cl(K)$}
 \label{subsec:FactorizationTMwithOK}
 
-\edit{define the class group in the preliminaries section}
-Let 
-\[\phi : \mathbb{Z}^v \rightarrow \text{Cl}(K), \qquad (n_1,\dots ,n_{\nu}) \mapsto [\mathfrak{p}_1]^{n_1}\cdots [\mathfrak{p}_{\nu}]^{n_{\nu}}.\]
-We can compute the image and kernel of this map in \texttt{Magma}. Note that if \eqref{Eq:TMfactored} has a solution $\mathbf{u}=(u_1,\dots, u_{\nu})$ then, by \eqref{Eq:TMfactored},
+Let $\mathbf{u}=(u_1,\dots, u_{\nu})$ be a solution of \eqref{eq:TMfactored} and consider the map
+\[\phi : \mathbb{Z}^{\nu} \rightarrow \text{Cl}(K), \qquad (x_1,\dots ,x_{\nu}) \mapsto [\mathfrak{p}_1]^{x_1}\cdots [\mathfrak{p}_{\nu}]^{x_{\nu}},\]
+where $[ \mathfrak{q} ]$ denotes the equivalence class of the fractional ideal $\mathfrak{q}$. 
+Since the product of $\mathfrak{a}$ and $\mathfrak{p}_1^{u_1}\cdots \mathfrak{p}_{\nu}^{u_{\nu}}$ defines a principal ideal, the map $\phi$ implies
 \[\phi(\mathbf{u})=[\mathfrak{a}]^{-1}.\]
-In particular, if $[\mathfrak{a}]^{-1}$ does not belong to the image of $\phi$ then \eqref{Eq:TMfactored} has no solutions. We therefore suppose that $[\mathfrak{a}]^{-1}$ belongs to the image, and compute a preimage $\mathbf{r}=(r_1,\dotsc,r_{\nu})$ using \texttt{Magma}. Then $\mathbf{u}-\mathbf{r}$ belongs to the kernel of $\phi$. The kernel is a subgroup of $\mathbb{Z}^v$ of rank $\nu$. Let $\mathbf{a}_1,\dots,\mathbf{a}_{\nu}$ be a basis for the kernel and let 
+In particular, if $[\mathfrak{a}]^{-1}$ does not belong to the image of $\phi$ then \eqref{eq:TMfactored} has no solutions. We therefore suppose that $[\mathfrak{a}]^{-1}$ belongs to the image. Let $\mathbf{r}=(r_1,\dotsc,r_{\nu})$ denote a preimage of $[\mathfrak{a}]^{-1}$ and observe that $\mathbf{u} - \mathbf{r}$ belongs to the kernel of $\phi$. The kernel is a subgroup of $\mathbb{Z}^v$ of rank $\nu$. Let $\mathbf{a}_1,\dots,\mathbf{a}_{\nu}$ be a basis for the kernel, where
+\[\mathbf{a}_i = (a_{1i}, \dots, a_{\nu i}) \quad \text{ for } i = 1, \dots, \nu.\]
+Let
 \[\mathbf{u}-\mathbf{r}=n_1 \mathbf{a}_1+\cdots + n_{\nu} \mathbf{a}_{\nu}\]
-where the $n_i \in \mathbb{Z}$. Here, we adopt the notation
-\[\mathbf{a}_i = (a_{1i}, \dots, a_{\nu i}),\]
-and we let $A$ be the matrix with columns $\mathbf{a}_1,\dots,\mathbf{a}_{\nu}$. Hence the $(i,j)^{\text{th}}$ entry of $A$ is $a_{ij}$, the $i^{\text{th}}$ entry of the vector $\mathbf{a}_j$. Then $\mathbf{u}= A\mathbf{n}+\mathbf{r}$ where $\mathbf{n} = (n_1,\dots,n_{\nu})$.
-%The important thing for us is that $A$ is invertible. In fact its determinant is (up to sign) equal to $\#\img(\phi)$ and so divides the class number. As $A$ is invertible, there are positive constants $C_1$, $C_2$ such that
-%\[
-% H(\mathbf{n}) \le C_1 H(\mm), \mathbb{Q}uad H(\mm) \le C_2 H(\mathbf{n}).
-%\]
-For $\mathbf{a}_i=(a_{1i},\dotsc,a_{\nu i}) \in \mathbb{Z}^{\nu}$ we adopt the notation 
+for some integers $n_i \in \mathbb{Z}$ and let $A$ denote the $\nu \times \nu$ matrix over $\mathbb{Z}$ with columns $\mathbf{a}_1,\dots,\mathbf{a}_{\nu}$. It follows that $\mathbf{u}= A\mathbf{n}+\mathbf{r}$ where $\mathbf{n} = (n_1,\dots,n_{\nu})$.
+
+For $\mathbf{a}_i=(a_{1i},\dotsc,a_{\nu i}) \in \mathbb{Z}^{\nu}$, we adopt the notation 
 \[\tilde{\mathfrak{p}}^\mathbf{a} :=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_{\nu}^{a_{\nu i}}.\]
 Let
 \[\mathfrak{c}_1= \tilde{\mathfrak{p}}^{\mathbf{a}_1},\dotsc,\mathfrak{c}_{\nu}= \tilde{\mathfrak{p}}^{\mathbf{a}_{\nu}}.\]
-Then we can rewrite \eqref{Eq:TMfactored} as
-\[\begin{array}{ll}
-(x-y\theta) \mathcal{O}_K 
-	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
-	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_{\nu} \mathbf{a}_{\nu}}\\
-	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.
-\end{array}\]
+Thus, we can rewrite \eqref{eq:TMfactored} as
+\[(x-y\theta) \mathcal{O}_K = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}} = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.\]
 
-Now
+Consider the ideal equivalence class of $(\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r})$ in $\Cl(K)$ and note that
 \[[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}] 
 	= [\mathfrak{a}] \cdot [\mathfrak{p}_1]^{r_1}\cdots [\mathfrak{p}_{\nu}]^{r_{\nu}} 
 	= [\mathfrak{a}]\cdot \phi(r_1,\dotsc,r_{\nu})=[1]\]
-as $\phi(r_1,\dotsc,r_{\nu})=[\mathfrak{a}]^{-1}$ by construction. Thus 
-\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K\]
-for some $\alpha \in K^*$. We note that some of the $r_i$ might be negative so we don't expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $\alpha$ into our $p$-adic fields. In those instances, the precision on our $\theta^{(i)}$ may not be high enough, and as a result, $\alpha$ may be mapped to $0$. Increasing the precision is not ideal at this point, as it would require us to recompute a fair amount of data and so is computationally inefficient. Instead, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. (Having already computed the class group, computing the class number is not costly.)
+as $\phi(r_1,\dotsc,r_{\nu})=[\mathfrak{a}]^{-1}$ by construction. This means 
+\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}= (\alpha) \mathcal{O}_K\]
+for some $\alpha \in K^*$. Furthermore, 
+\[[\mathfrak{c}_i] = [\tilde{\mathfrak{p}}^{\mathbf{a}_i}] = \phi(\mathbf{a}_i) = [1] \quad \text{ for } i = 1, \dots, \nu,\]
+as the $\mathbf{a}_i$ are a basis for the kernel of $\phi$. For all $i \in \{1, \dots, {\nu}\}$, we therefore have
+\[\mathfrak{c}_i= (\gamma_i) \mathcal{O}_K\]
+for some $\gamma_i \in K^*$.
 
-Now, 
-\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \phi(\mathbf{a}_j) = [1]\]
-as the $\mathbf{a}_j$ are a basis for the kernel of $\phi$. Thus for all $j \in \{1, \dots, {\nu}\}$, there are $\gamma_j \in K^*$ such that $\mathfrak{c}_j=\gamma_j \mathcal{O}_K$. 
+%--------------------------------------------------------------------------------------------------------------------------------------------%
 
-Thus we have rewritten \eqref{Eq:TMfactored} as
-\begin{equation}\label{Eq:TMprincipal}
-(x-y\theta) \mathcal{O}_K=\alpha \cdot \gamma_1^{n_1} \cdots \gamma_{\nu}^{n_{\nu}} \mathcal{O}_K
+\subsection{The $S$-unit equation}
+\label{subsec:SUnitEquation}
+
+\autoref{subsec:FactorizationTMwithoutOK} and  \autoref{subsec:FactorizationTMwithOK} outline two different algorithms to reduce the ideal equation~\eqref{eq:TMfactored} to a number of certain ``$S$-unit equations'', which we define shortly. Regardless of which method we use, under both algorithms outlined above, equation~\eqref{eq:TMfactored} becomes
+\begin{equation} \label{eq:TMprincipal}
+(x-y\theta) \mathcal{O}_K= (\alpha \cdot \gamma_1^{n_1} \cdots \gamma_{\nu}^{n_{\nu}}) \mathcal{O}_K
 \end{equation}
-for unknown integers $(n_1, \dots, n_{\nu})$. 
+for some vector $\mathbf{n} = (n_1, \dots, n_{\nu}) \in \mathbb{Z}^{\nu}$. The ideal generated by $\alpha$ in $K$ has norm 
+\[|c|\cdot p_1^{t_1 + r_1} \cdots p_{\nu}^{t_{\nu} + r_{\nu}}p_{\nu +1}^{t_{\nu +1}} \cdots p_v^{t_v}\]
+and the $n_i$ are related to the $z_i$ via
+\[z_i = u_i + t_i = \sum_{j = 1}^{\nu}n_ja_{ij} + r_i + t_i \quad \text{ for } i =1, \dots, v.\]
+where $u_i = r_i = 0$ for all $i \in \{\nu + 1, \dots, v\}$. 
+
+Fix a complete set of fundamental units $\{\eps_1, \dots, \eps_r\}$ of $\mathcal{O}_K$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. Then, under either method, equation~\eqref{eq:TMfactored} reduces to a finite number of equations in $K$ of the form
+\begin{equation} \label{eq:TMinK}
+x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
+\end{equation}
+with unknowns $a_i \in \mathbb{Z}$, $n_i \in \mathbb{Z}$, and $\zeta$ in the set $T$ of roots of unity in $\mathcal{O}_K$. Since $T$ is finite, we treat $\zeta$ as another parameter. 
+
+Let $p \in \{p_1, \dots, p_v, \infty\}$. Recall that $g(t)$ is an irreducible polynomial in $\mathbb{Z}[t]$ arising from \eqref{eq:ThueMahler3} such that
+\[g(t) = f(t,1) = t^n + C_1 t^{n-1} + \dots + C_{n-1}t + C_n.\]
+Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \dots, \theta^{(n)}$. Let $i_0, j, k \in \{1,2,3\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. From the Siegel identity
+\[(\theta^{(i_0)} - \theta^{(j)})(x-y\theta^{(k)}) + (\theta^{(j)} - \theta^{(k)})(x-y\theta^{(i_0)}) + (\theta^{(k)} - \theta^{(i_0)})(x-y\theta^{(j)}) = 0,\]
+applying the embeddings to $\beta = x-y\theta$ yields the so-called ``$S$-unit equation''
+\begin{equation} \label{eq:Sunit}
+\delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i} - 1 = \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i},
+\end{equation}
+where
+\[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
+are constants. 
+
+To summarize, our original problem of solving \eqref{eq:ThueMahler3} for $(x,y,z_1,\dots, z_v)$ has been reduced to solving finitely many equations of the form \eqref{eq:Sunit} for the variables $(x,y, n_1, \dots, n_{\nu},a_1,\dots,a_r)$.
+
+
+
+
+
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{Computational remarks}
+\label{subsec:FactorizationRemarks}
+
+In \autoref{subsec:FactorizationTMwithoutOK}, we follow closely the method of \edit{Tzanakis, de Weger}. To implement this reduction to \eqref{eq:TMfactored}, for $i = 1, \dots, \nu$ we compute all $h_i$ for which $\mathfrak{p}_i^{h_i}$ is principal. In doing so, we generate all possible values for $s_i$, the non-negative integer satisfying $0 \leq s_i < h_i$. 
+
+
+
+
+
+
+ for each ideal equation \eqref{eq:TMfactored}, we 
+
+In the worst case scenario, the method in Tzanakis-de Weger reduces this to $h^v$ such equations, where $h$ is the class number of $K$. 
+
+
+
 Note that the number of cases has not increased. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$ then we have a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain one corresponding equation \eqref{Eq:TMprincipal}.
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{Refinements}
+
+We note that some of the $r_i$ might be negative so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $\alpha$ into our $p$-adic fields. In those instances, the precision on our $\theta^{(i)}$ may not be high enough, and as a result, $\alpha$ may be mapped to $0$. Increasing the precision is not ideal at this point, as it would require us to recompute a fair amount of data and so is computationally inefficient. Instead, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. (Having already computed the class group, computing the class number is not costly.)
 
 
 In the worst case scenario, the method in Tzanakis-de Weger reduces this to $h^v$ such equations, where $h$ is the class number of $K$. The method of Siksek, described below, gives only $m/2$ $S$-unit equations, where $m$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). 
@@ -411,62 +451,16 @@ Hence, we iterate through every possible $\mathbf{r}$, and store those cases for
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
-At this point, regardless of which method was used to compute $A$ and $\mathbf{r}$, we note that the ideal generated by $\alpha$ has norm
-\[|c|\cdot p_1^{t_1 + r_1} \cdots p_{\nu}^{t_{\nu} + r_{\nu}}p_{\nu +1}^{t_{\nu +1}} \cdots p_v^{t_v}.\]
-Now the $n_i$ are related to the $z_i$ via
-\[z_i = u_i + t_i = \sum_{j = 1}^{\nu}n_ja_{ij} + r_i + t_i.\]
-Hence
-\[Z_i = z_i - \ord_p(u) - \ord_p(a) = \sum_{j = 1}^{\nu}n_ja_{ij} + r_i + t_i - \ord_p(u) - \ord_p(a) \]
-Here, we note that $u_i = r_i = 0$ for all $i \in \{\nu + 1, \dots, v\}$. 
-
-
-Fix a complete set of fundamental units of $\mathcal{O}_K: \varepsilon_1, \dots, \varepsilon_r$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. Then
-\begin{equation} \label{Eq:main2}
-x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
-\end{equation}
-with unknowns $a_i \in \mathbb{Z}$, $n_i \in \mathbb{Z}_{\geq 0}$, and $\zeta$ in the set $T$ of roots of unity in $\mathcal{O}_K$. Since $T$ is also finite, we will treat $\zeta$ as another parameter. Since $K$ is a degree $3$ extension of $\mathbb{Q}$, we either have $3$ real embeddings of $K$ into $\mathbb{C}$ (hence $s = 3$, $t = 0$ and $r = s+ t -1 = 3 + 0 -1 = 2$), or there is one real embedding of $K$ into $\mathbb{C}$ and a pair of complex conjugate embeddings of $K$ into $\mathbb{C}$ (hence $s = 1$, $t = 1$, and $r = s +t -1 = 1 + 1 -1 = 1$). 
-That is, we have either  
-\begin{equation} \label{Eq:main3}
-x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
-\quad \text{ or } \quad 
-x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \varepsilon_2^{a_2}\cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
-\end{equation}
-
-To summarize, our original problem of solving \eqref{Eq:TM1} has been reduced to the problem of solving finitely many equations of the form \eqref{Eq:main3} for the variables 
-\[x,y, a_1, n_1, \dots, n_{\nu} \quad \text{ or } \quad x,y, a_1,a_2, n_1, \dots, n_{\nu} .\] 
-
 From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate the variables $x,y$ and set ourselves up to bound the exponents $a_1,n_1, \dots, n_{\nu}$, respectively $a_1,a_2,n_1, \dots, n_{\nu}$. We note here that generating the class group can be a timely computation. However, if we follow the method of Tzanakis-de Weger, we may be left with $h^{\nu}$ $S$-unit equations, all of which we would need to apply the principal ideal test to. That is to say, computing the class group is a faster operation than the alternative provided by Tzanakis-de Weger. 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\section{The $S$-Unit Equation}
-
-Let
-\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
-be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
 
 
-Let $p \in \{p_1, \dots, p_v, \infty\}$. Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \theta^{(2)}, \theta^{(3)}$. Let $i_0, j, k \in \{1,2,3\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. From the Siegel identity
-\[\left(\theta^{(i_0)} - \theta^{(j)}\right)\left(x-y\theta^{(k)}\right) + \left(\theta^{(j)} - \theta^{(k)}\right)\left(x-y\theta^{(i_0)}\right) + \left(\theta^{(k)} - \theta^{(i_0)}\right)\left(x-y\theta^{(j)}\right) = 0,\]
-applying these embeddings to $\beta = x-y\theta$ yields
-\begin{equation}\label{Eq:Sunit}
-\lambda = \delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i} - 1 = \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i},
-\end{equation}
-where
-\[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
-are constants and $r = 1$ or $r = 2$. 
+\section{Lattice-Based Reduction}
 
-Note that $\delta_1$ and $\delta_2$ are constants, in the sense that they do not rely on 
-\[x, y, a_1, \dots, a_r,n_1, \dots, n_{\nu}.\]
-
-
-
-
-
-\section{Lattices: LLL and the Fincke-Pohst algorithm}
 \edit{references for this are the two books living in the $x+y=z$ folder on the desktop}
 
+\edit{ Move lattices to prelims, section for LLL, section for Fincke-Pohst}
 \textbf{Lattices}
 An $n$-dimensional lattice is a discrete subgroup of $\mathbb{R}^n$ of the form
 \[\Gamma = \left\{ \sum_{i=1}^n x_i \mathbf{c}_i \ : \ x_i \in \mathbb{Z} \right\},\]
@@ -737,5 +731,13 @@ holds. We stop searching in this direction only once this equivalence does not h
 
 \endinput
 
+Let
+\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
+be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
+
+
+
 Any text after an \endinput is ignored.
 You could put scraps here or things in progress.
+
+

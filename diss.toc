@@ -24,11 +24,11 @@
 \contentsline {section}{\numberline {3.4}Factorization of the Thue-Mahler equation}{37}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Avoiding the class group $\Cl (K)$}{38}{subsection.3.4.1}
 \contentsline {subsection}{\numberline {3.4.2}Using the class group $\Cl (K)$}{39}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}Refinements}{41}{subsection.3.4.3}
-\contentsline {section}{\numberline {3.5}The $S$-Unit Equation}{43}{section.3.5}
-\contentsline {section}{\numberline {3.6}Lattices: LLL and the Fincke-Pohst algorithm}{44}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Translated Lattices}{53}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Refinements}{57}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.4.3}The $S$-unit equation}{41}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}Computational remarks}{42}{subsection.3.4.4}
+\contentsline {section}{\numberline {3.5}Lattice-Based Reduction}{44}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Translated Lattices}{53}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Refinements}{57}{subsection.3.5.2}
 \contentsline {chapter}{\numberline {4}Goormaghtigh Equations}{59}{chapter.4}
 \contentsline {section}{\numberline {4.1}Introduction}{59}{section.4.1}
 \contentsline {section}{\numberline {4.2}Rational approximations}{63}{section.4.2}
@@ -121,22 +121,22 @@
 \contentsline {section}{\numberline {6.1}The Relevant Algebraic Number Field}{202}{section.6.1}
 \contentsline {section}{\numberline {6.2}Decomposition of Primes}{203}{section.6.2}
 \contentsline {section}{\numberline {6.3}Factorization of the Thue-Mahler Equation}{204}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Refinements}{206}{subsection.6.3.1}
-\contentsline {section}{\numberline {6.4}The $S$-Unit Equation}{209}{section.6.4}
-\contentsline {section}{\numberline {6.5}Specializing to Degree $3$}{209}{section.6.5}
-\contentsline {section}{\numberline {6.6}Initial Heights}{213}{section.6.6}
-\contentsline {subsection}{\numberline {6.6.1}Decomposition of the Weil height.}{214}{subsection.6.6.1}
-\contentsline {subsection}{\numberline {6.6.2}Initial height bounds}{227}{subsection.6.6.2}
-\contentsline {subsection}{\numberline {6.6.3}Coverings of $\Sigma $}{234}{subsection.6.6.3}
-\contentsline {subsubsection}{Refined coverings}{236}{subsubsection*.36}
-\contentsline {subsection}{\numberline {6.6.4}Controlling the exponents in terms of the Weil Height}{236}{subsection.6.6.4}
-\contentsline {subsubsection}{Bounding $\{n_1, \dots , n_{\nu }\}$}{236}{subsubsection*.37}
-\contentsline {subsubsection}{Bounding $\{a_1, \dots , a_{r}\}$}{237}{subsubsection*.38}
-\contentsline {subsection}{\numberline {6.6.5}Archimedean ellipsoid: real case, $r = 2$.}{261}{subsection.6.6.5}
-\contentsline {subsection}{\numberline {6.6.6}Archimedean sieve: Real case, $r = 2$}{279}{subsection.6.6.6}
-\contentsline {subsection}{\numberline {6.6.7}Archimedean Real Case Summary}{283}{subsection.6.6.7}
-\contentsline {section}{\numberline {6.7}Non-Archimedean Case}{286}{section.6.7}
-\contentsline {subsection}{\numberline {6.7.1}Non-Archimedean sieve}{286}{subsection.6.7.1}
-\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{287}{subsubsection*.39}
-\contentsline {subsection}{\numberline {6.7.2}Non-Archimedean ellipsoid.}{304}{subsection.6.7.2}
-\contentsline {chapter}{\numberline {A}Supporting Materials}{310}{appendix.A}
+\contentsline {subsection}{\numberline {6.3.1}Refinements}{204}{subsection.6.3.1}
+\contentsline {section}{\numberline {6.4}The $S$-Unit Equation}{205}{section.6.4}
+\contentsline {section}{\numberline {6.5}Specializing to Degree $3$}{206}{section.6.5}
+\contentsline {section}{\numberline {6.6}Initial Heights}{209}{section.6.6}
+\contentsline {subsection}{\numberline {6.6.1}Decomposition of the Weil height.}{210}{subsection.6.6.1}
+\contentsline {subsection}{\numberline {6.6.2}Initial height bounds}{224}{subsection.6.6.2}
+\contentsline {subsection}{\numberline {6.6.3}Coverings of $\Sigma $}{231}{subsection.6.6.3}
+\contentsline {subsubsection}{Refined coverings}{233}{subsubsection*.36}
+\contentsline {subsection}{\numberline {6.6.4}Controlling the exponents in terms of the Weil Height}{233}{subsection.6.6.4}
+\contentsline {subsubsection}{Bounding $\{n_1, \dots , n_{\nu }\}$}{233}{subsubsection*.37}
+\contentsline {subsubsection}{Bounding $\{a_1, \dots , a_{r}\}$}{234}{subsubsection*.38}
+\contentsline {subsection}{\numberline {6.6.5}Archimedean ellipsoid: real case, $r = 2$.}{258}{subsection.6.6.5}
+\contentsline {subsection}{\numberline {6.6.6}Archimedean sieve: Real case, $r = 2$}{276}{subsection.6.6.6}
+\contentsline {subsection}{\numberline {6.6.7}Archimedean Real Case Summary}{280}{subsection.6.6.7}
+\contentsline {section}{\numberline {6.7}Non-Archimedean Case}{283}{section.6.7}
+\contentsline {subsection}{\numberline {6.7.1}Non-Archimedean sieve}{283}{subsection.6.7.1}
+\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{284}{subsubsection*.39}
+\contentsline {subsection}{\numberline {6.7.2}Non-Archimedean ellipsoid.}{301}{subsection.6.7.2}
+\contentsline {chapter}{\numberline {A}Supporting Materials}{307}{appendix.A}
