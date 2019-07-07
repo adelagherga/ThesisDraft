@@ -988,13 +988,20 @@ where $Z_i = m\alpha_i$.
 
 To find all solutions to this equation, we will use linear forms in $p$-adic logarithms to generate a very large upper bound on $m$. Then, applying several instances of the LLL lattice basis reduction algorithm, we will reduce the bound on $m$ until it is sufficiently small enough that we may perform a brute force search efficiently. The remainder of this section is devoted to the details of this approach.
 
-%----------------------------------------------------------------------------------------------------------------------------------------------%
+(\edit{use algorhtms of Ch 3, but we point out the important differences})
+
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+
 \subsection{The relevant algebraic number field}
-%----------------------------------------------------------------------------------------------------------------------------------------------
+\label{subsec:RelevantGEAlgNumField}
 
-Here and henceforth, write, for concision, $F(y)=F_x(y,1)$. As we are 
+(\edit{maybe change the title here so taht we can incorporate everything into one subsection})
 
- and, following arguments of \autoref{ch:AlgorithmsForTM} for solving  Thue-Mahler equations, put
+Following arguments of \autoref{ch:AlgorithmsForTM} for solving  Thue-Mahler equations, put $S = \{p_1, \dots, p_v\}$. This is the set of all distinct rational primes dividing $x$. As we seek only those solutions $(y,z, Z_1, \dots, Z_v)$ to \eqref{Eq:main} for which $z = 1$, here and henceforth we write, for concision, $F(y)=F_x(y,1)$. 
+
+Recall in  \autoref{sec:FirstSteps} of \autoref{ch:AlgorithmsForTM} the set $\mathcal{D}$. This set consists of all positive rational integers $m$ dividing $(x-1)$ such that $\ord_{p}(m) \leq \ord_p(c)$ for all primes $p \notin S$. In our case, $c = 1$ so that $\mathcal{D} = \{1\}$. Thus the only possible values for $u_d,c_d$ are
+\[u_d = (x-1)^{3} \quad \text{ and } \quad c_d = (x-1)^3.\]
+Under the appropriate change of variables associated to $u_d,c_d$, this yields
 $$
 g(t) = (x-1)^3F\left(\frac{t}{x-1}\right) = t^4 + (x-1)t^3 + (x-1)^2t^2 + (x-1)^3t + x(x-1)^3.
 $$
@@ -1004,256 +1011,51 @@ Note that $g(t)$ is irreducible in $\mathbb{Z}[t]$. Writing $K = \mathbb{Q}(\the
 N_{K/\mathbb{Q}}((x-1)y-\theta) =  (x-1)^{3}p_1^{Z_1}\dots p_v^{Z_v}.
 \end{equation}
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{Decomposition of primes}
-
-If $p_i$ is any rational prime, let 
+Let 
 \[(p_i)\mathcal{O}_K = \prod_{j = 1}^{m_i} \mathfrak{p}_{ij}^{e(\mathfrak{p}_{ij}|p_i)}\]
-be the factorization of $p_i$ into prime ideals in the ring of integers $\mathcal{O}_K$ of $K$ where $e(\mathfrak{p}_{ij}|p_i)$ and $f(\mathfrak{p}_{ij}|p_i)$ denote the ramification index and residue degree of $\mathfrak{p}_{ij}$ respectively.
-
-Then, since $N(\mathfrak{p}_{ij}) = p_i^{f(\mathfrak{p}_{ij}|p_i)}$, equation \eqref{Eq:norm} leads to finitely many ideal equations of the form
+be the factorization of $p_i$ into prime ideals in the ring of integers $\mathcal{O}_K$ of $K$. In this decomposition, $e(\mathfrak{p}_{ij}|p_i)$ and $f(\mathfrak{p}_{ij}|p_i)$ denote the ramification index and residue degree of $\mathfrak{p}_{ij}$ respectively. Then, since $N(\mathfrak{p}_{ij}) = p_i^{f(\mathfrak{p}_{ij}|p_i)}$, equation \eqref{Eq:norm} leads to finitely many ideal equations of the form
 \begin{equation} \label{Eq:ideals}
 ((x-1)y-\theta)\mathcal{O}_K = \mathfrak{a} \prod_{j = 1}^{m_1} \mathfrak{p}_{1j}^{z_{1j}} \cdots \prod_{j = 1}^{m_v} \mathfrak{p}_{vj}^{z_{vj}}
 \end{equation}
 where $\mathfrak{a}$ is an ideal of norm $(x-1)^3$ and the $z_{ij}$ are unknown integers related to $m$ by $\sum_{j = 1}^{m_i} f(\mathfrak{p}_{ij}|p_i)z_{ij} = Z_i = m \alpha_i$. 
-
-Our first task is to cut down the number of variables appearing in \eqref{Eq:ideals}. We will do this by showing that only a few prime ideals can divide $((x-1)y-\theta)\mathcal{O}_K$ to a large power. 
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{An alternative to the Prime Ideal Removing Lemma}
-
-In this subsection, we will establish some key results that will allow us to reduce  the number of prime ideals that can appear to a large power in the factorization of $((x-1)y-\theta)\mathcal{O}_K$. It is of particular importance to note that we do not appeal to the Prime Ideal Removing Lemma of Tzanakis and de Weger (Lemma 5.1 of \cite{TW3}) here. Instead, we will appeal to arguments from \cite{GhKaMaSi}. The reason for this choice is that the latter is a typically much more computationally efficient, leading to significantly fewer subcases than Lemma 5.1 of \cite{TW3}.
-
-Let $p \in \{p_1, \dots, p_v\}$. We will produce two finite lists $L_p$ and $M_p$, the first
-consisting of certain ideals $\mathfrak{b}$ supported at the prime ideals above $p$. The list $M_p$ will consist of certain pairs $(\mathfrak{b},\mathfrak{p})$ where $\mathfrak{b}$ is supported at the prime ideals above $p$, and $\mathfrak{p} \mid p$ is a prime ideal satisfying $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$. We want the lists to satisfy the following property. If $y$ is a solution to \eqref{Eq:main} then
-\begin{enumerate}
-\item[(i)] either there is some $\mathfrak{b} \in L_p$
-such that
-\begin{equation}\label{Eq:case1}
-\mathfrak{b} \mid ((x-1) y- \theta )\mathcal{O}_K, \; \;  \text{$((x-1) y-\theta)\mathcal{O}_K/\mathfrak{b}$ is coprime to $(p)\mathcal{O}_K$};
-\end{equation}
-\item[(ii)] or there is a pair $(\mathfrak{b},\mathfrak{p}) \in M_p$ and a non-negative integer $v_p$ such that
-\begin{equation}\label{Eq:case2}
-(\mathfrak{b} \cdot \mathfrak{p}^{v_p}) \mid ((x-1) y- \theta)\mathcal{O}_K, \; \text{$((x-1) y-\theta)\mathcal{O}_K/(\mathfrak{b} \cdot \mathfrak{p}^{v_p})$ is coprime to $(p)\mathcal{O}_K$}.
-\end{equation}
-\end{enumerate}
-
-To compute $L_p$ and $M_p$, we use the following result of \cite{GhKaMaSi}.
-
-%The relevance of $L_p$ and $M_p$ stems from the following result.
-
-\begin{lemma} \label{Lem:main}
-Let $p \in \{p_1, \dots, p_v\}$. Let $y$ be a solution of \eqref{Eq:main}, $t$  a positive integer, and suppose that $(x-1)y \equiv u \pmod{p^t}$, where $u \in \{0,1,2,\dotsc,p^{t}-1\}$. If $\mathfrak{q} \mid p$, then
-\[\ord_{\mathfrak{q}}((x-1)y-\theta)\ge \min\{\ord_{\mathfrak{q}}(u-\theta), t \cdot e(\mathfrak{q}/p)\},\]
-where $e(\mathfrak{q}|p)$ denotes the ramification degree of $\mathfrak{q}$. 
-Moreover, if $\ord_{\mathfrak{q}}(u-\theta) < t \cdot e(\mathfrak{q}/p)$,
-then
-\[\ord_\mathfrak{q}((x-1)y-\theta) = \ord_{\mathfrak{q}}(u-\theta).\]
-\end{lemma}
-
-%\begin{proof}[Proof of Lemma~\ref{Lem:main}]
-%See \cite{GhKaMaSi}.
-%Since
-%\[(x-1)X-\theta = u - \theta + (x-1)X - u,\]
-%we have
-%\[\begin{array}{ll}
-%\ord_\mathfrak{q}((x-1)X-\theta)	& = \ord_{\mathfrak{q}}(u - \theta + (x-1)X - u) \\
-%						& \geq \min\{\ord_{\mathfrak{q}}(u - \theta), \ord_{\mathfrak{q}}((x-1)X - u)\}. 
-%\end{array}\]
-%But 
-%\[\ord_{\mathfrak{q}}((x-1)X-u) \geq \ord_{\mathfrak{q}}(p^t) =t \cdot e(\mathfrak{q}/p)\]
-%by assumption, %Thus $\ord_\fq(x-\theta)=\ord_\fq(u-\theta)$,
-%completing the proof of Lemma~\ref{Lem:main}.
-%\end{proof}
-
-%The following algorithm computes the lists $L_p$ and $M_p$. 
-%
-%\begin{Algorithm}\label{alg1}
-%To compute
-%$L_p$ and $M_p$.
-%
-%\begin{enumerate}
-%\item[Step (a)] Let 
-%\[L_p \leftarrow \emptyset, \qquad M_p \leftarrow \emptyset,\]
-%\[ t \leftarrow \ord_p(x-1)+1, \qquad \mathcal{U} \leftarrow \{(x-1) w : w \in \{0,1,\dots,p-1\} \}.\]
-%
-%\item[Step (b)] Let
-%\[\mathcal{U}^\prime \leftarrow \emptyset.\]
-%Loop through the elements $u \in \mathcal{U}$. Let 
-%\[\mathcal{P}_u= \{\mathfrak{q} \mid p \ : \ \ord_{\mathfrak{q}}(u-\theta) \geq t \cdot e(\mathfrak{q}/p)\},\]
-%and
-%\[ \mathfrak{b}_u 	= \prod_{\mathfrak{q} \mid p} \mathfrak{q}^{\min\{\ord_\mathfrak{q}(u-\theta), t \cdot e(\mathfrak{q}/p)\}} 
-%				= (u-\theta) \mathcal{O}_K+p^t \mathcal{O}_K.\]
-%\begin{enumerate}
-%\item[(i)] If $\mathcal{P}_u = \emptyset$ then
-%\[L_p \leftarrow L_p \cup \{\mathfrak{b}_u\}.\]
-%
-%\item[(ii)] Else if $\mathcal{P}_u = \{\mathfrak{p}\}$ with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and there is at least one $\mathbb{Z}_p$-root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$, then
-%\[M_p \leftarrow M_p \cup \{ (\mathfrak{b}_u,\mathfrak{p})\}.\]
-%
-%\item[(iii)] Else 
-%\[\mathcal{U}^\prime \leftarrow \mathcal{U} \cup \{ u+p^{t+1}w : w \in \{0,\dots,p-1\} \}.\]
-%\end{enumerate}
-%
-%\item[Step (c)] If $\mathcal{U}^\prime \ne \emptyset$ then let
-%\[t \leftarrow t+1, \qquad \mathcal{U} \leftarrow \mathcal{U}^{\prime},\]
-%and return to Step (b). Else output $L_p$, $M_p$.
-%\end{enumerate}
-%\end{Algorithm}
-%\
-%
-%\begin{lemma}
-%Algorithm~\ref{alg1} terminates.
-%\end{lemma}
-%
-%\begin{proof}
-%Suppose otherwise. Write $t_0=\ord_{p}(x-1)+1$ and $t_i=t_0+i$ for $i=1,2,3,\dots$. Then there is an infinite sequence of congruence classes $u_i \pmod{p^{t_i}}$ such that ${u_{i+1} \equiv u_i \pmod{p^{t_i}}}$, and such that the $u_i$ fail the hypotheses of both (i) and (ii). In particular, $\mathcal{P}_{u_i}$ is non-empty. By the pigeon-hole principle, some $\mathfrak{p}$ appears in infinitely many of the $\mathcal{P}_{u_i}$. Thus $\ord_{\mathfrak{p}}(u_i-\theta) \ge t_i\cdot e(\mathfrak{p}/p)$ infinitely often. However, the sequence $\{u_i\}$ converges to some $\alpha \in \mathbb{Z}_p$. Thus $\alpha=\theta$ in $\mathcal{O}_\mathfrak{p}$. This forces $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and $\alpha$ to be a $\mathbb{Z}_p$-root of $g(t)$. In particular, $\mathfrak{p}$ corresponds to the factor $(t-\alpha)$ in the $p$-adic factorisation of $g(t)$. There can be at most one such $\mathfrak{p}$, and so $\mathcal{P}_{u_i}=\{\mathfrak{p}\}$. In particular, the hypotheses of (ii) are satisfied and we have a contradiction.
-%\end{proof}
-%
-%\begin{lemma}\label{Lem:alg1correct}
-%Let $p \in \{p_1, \dots, p_v\}$ and let $L_p$, $M_p$ be as given by Algorithm~\ref{alg1}. Let $X$ be a solution to \eqref{Eq:main}. Then
-%\begin{itemize}
-%\item either there is some $\mathfrak{b} \in L_p$ such that \eqref{Eq:case1} is satisfied; 
-%\item or there is some $(\mathfrak{b},\mathfrak{p}) \in M_p$, with $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$, and integer $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied.
-%\end{itemize}
-%\end{lemma}
-%
-%\begin{proof}
-%Let 
-%\[t_0 = \ord_p(x-1)+1, \qquad \mathcal{U}_0=\{(x-1) w \; :\;  w \in \{0,1,\dots,p-1\}\}.\]
-%These are the initial values for $t$ and $\mathcal{U}$ in the algorithm. Then $(x-1)X \equiv u_0 \pmod{p^{t_0}}$ for some $u_0 \in \mathcal{U}_0$. Write $\mathcal{U}_i$ for the value of $\mathcal{U}$ after $i$ iterations of the algorithm, and let $t_i=t_0+i$. As the algorithm terminates, $\mathcal{U}_i = \emptyset$ for sufficiently large $i$. In particular, there is some $i$ such that $(x-1)X \equiv u_i \pmod{p^{t_i}}$ where $u_i \in \mathcal{U}_i$, but there is no element in $\mathcal{U}_{i+1}$ congruent to $(x-1)X$ modulo $p^{t_{i+1}}$. Thus $u_i$ must satisfy the hypotheses of either (i) or (ii). Write $u=u_i$ and $t=t_i$ so that $(x-1)X \equiv u \pmod{p^t}$. By Lemma~\ref{Lem:main}, we have $\mathfrak{b}_u \mid ((x-1) X-\theta) \mathcal{O}_K$. Moreover, by that lemma and the definition of $\mathcal{P}_u$, if $\mathfrak{q} \notin \mathcal{P}_u$ then $((x-1)X-\theta)\mathcal{O}_K/\mathfrak{b}_u$ is not divisible by $\mathfrak{q}$. 
-%
-%Suppose first that the hypothesis of (i) is satisfied: $\mathcal{P}_u = \emptyset$. The algorithm adds $\mathfrak{b}_u$ to the set $L_p$, and by the above we know that \eqref{Eq:case1} is satified, proving the lemma in this case.
-%
-%Suppose next that the hypothesis of (ii) is satisfied: $\mathcal{P}_u=\{\mathfrak{p}\}$ where $e(\mathfrak{p}/p)=f(\mathfrak{p}/p)=1$ and there is a unique $\mathbb{Z}_p$ root $\alpha$ of $g(t)$ satisfying $\alpha \equiv u \pmod{p^t}$. The algorithm adds $(\mathfrak{b}_u,\mathfrak{p})$ to the set $M_p$, and by the above, $((x-1) X- \theta)\mathcal{O}_K/\mathfrak{b}_u$ is an integral ideal, not divisible by any prime $\mathfrak{q} \mid p$, $\mathfrak{q} \ne \mathfrak{p}$. Thus there is some positive $v_p \geq 0$ such that \eqref{Eq:case2} is satisfied, proving the lemma in this case.
-%\end{proof}
-
-%%---------------------------------------------------------------------------------------------------------------------------------------------%
-%\subsubsection{Refinements}
-%
-%If some $\mathfrak{b}$ is contained $L_p$, and some $(\mathfrak{b}^\prime,\mathfrak{p})$ is contained in $M_p$, with $\mathfrak{b}^\prime \mid \mathfrak{b}$ and $\mathfrak{b}/\mathfrak{b}^\prime=\mathfrak{p}^w$
-%for some $w \ge 0$, then we may delete $\mathfrak{b}$ from $L_p$ and the conclusion of Lemma~\ref{Lem:alg1correct} continues to hold.
-%
-%If some $(\mathfrak{b},\mathfrak{p})$, $(\mathfrak{b}^\prime,\mathfrak{p})$ are contained in $M_p$, with $\mathfrak{b}^{\prime} \mid \mathfrak{b}$, and $\mathfrak{b}/\mathfrak{b}^{\prime}=\mathfrak{p}^w$ for some $w \geq 0$, then we may delete $(\mathfrak{b},\mathfrak{p})$ from $M_p$ and the conclusion of Lemma~\ref{Lem:alg1correct} continues to hold.
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{Factorization of the Thue-Mahler equation}
-
-After applying Lemma~\ref{Lem:main}, we are reduced to solving finitely many equations of the form
+Applying Algorithms~\ref{alg:AffinePatch1} and \ref{alg:AffinePatch2}, we reduce the number of prime ideals appearing to a large power in this equation. In doing so, we are reduced to solving finitely many equations of the form
 \begin{equation}\label{Eq:TMfactored}
 ((x-1) y- \theta)\mathcal{O}_K=\mathfrak{a} \mathfrak{p}_1^{u_1}\cdots \mathfrak{p}_v^{u_v}
 \end{equation}
-in integer variables $y,u_1, \dots, u_v$ with $u_i \geq 0$ for $i = 1, \dots, v$. Here
+in integer variables $y,u_1, \dots, u_v$ with $u_i \geq 0$ for $i = 1, \dots, v$. 
+Here
 \begin{itemize}
-\item $\mathfrak{p}_i$ is a prime ideal of $\mathcal{O}_K$ arising from Lemma~\ref{Lem:main} applied to $p_i \in \{p_1, \dots, p_v\}$, such that $(\mathfrak{b_i}, \mathfrak{p}_i) \in M_{p_i}$ for some ideal $\mathfrak{b}_i$. Note that if $M_{p_i} = \emptyset$ for $p_i$, we take $\mathfrak{p}_i = (1)\mathcal{O}_K$. 
+\item for $i \in \{1, \dots, v\}$, $\mathfrak{p}_i$ is a prime ideal of $\mathcal{O}_K$ arising from 
+Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePatch2} applied to $p \in \{p_1, \dots, p_v\}$, such that $(\mathfrak{b}, \mathfrak{p}_i) \in M_p$ for some ideal $\mathfrak{b}$;
+\item for any $p_i \in S$ such that $M_{p_i} = \emptyset$, $\mathfrak{p}_i$ denotes the trivial ideal $\mathfrak{p}_i = (1)\mathcal{O}_K$;
 \item $\mathfrak{a}$ is an ideal of $\mathcal{O}_K$ of norm $(x-1)^3\cdot p_1^{t_1} \cdots p_v^{t_v}$ such that
 $u_i + t_i =  Z_i = m\alpha_i$.
 \end{itemize}
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
 \begin{remark}\label{rem:uv}
-Unlike in \cite{TW3} and \cite{GhKaMaSi}, if, after applying Lemma~\ref{Lem:main}, we are in the situation that $u_i = 0$ for some $i$ in $\{1, \dots, v\}$, it follows that
+Unlike in \cite{TW3} \edit{tzanakis de weger} and \cite{GhKaMaSi}\edit{ chapter 3}, if, after applying Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePatch2}, we are in the situation that $u_i = 0$ for some $i$ in $\{1, \dots, v\}$, it follows that
 \[m = \frac{Z_i}{\alpha_i } =  \frac{u_i + t_i}{\alpha_i } = \frac{t_i}{\alpha_i }.\]
 We iterate this computation over all $i \in \{1, \dots, v\}$ such that $u_i = 0$ and take the smallest $m$ as our bound. For all of the values of $x$ that we are interested in, this bound on $m$ is small enough that we may go directly to the final brute force search for solutions.
 \end{remark}
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-Following Remark \ref{rem:uv}, for the remainder of this paper, we assume that $u_i \neq 0$ for all $i = 1, \dots, v$. Now, for each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_v$, we reduce this equation to a number of so-called ``$S$-unit equations''. In the worst case scenario, the method in \cite{TW3} would reduce to $h^v$ such equations, where $h$ is the class number of $K$. This becomes computationally inefficient when the class number is large since, as we will see in the next section, we will need to apply a principal ideal test to each such case. Instead of this, we apply the method of \cite{GhKaMaSi}, which gives only $\kappa/2$ $S$-unit equations, where $\kappa$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). We now describe this second method. 
-
-Let 
-\[\phi : \mathbb{Z}^v \rightarrow \text{Cl}(K), \qquad (n_1,\dots ,n_v) \mapsto [\mathfrak{p}_1]^{n_1}\cdots [\mathfrak{p}_v]^{n_v}.\]
-We can compute the image and kernel of this map in \texttt{Magma}. Note that if \eqref{Eq:TMfactored} has a solution $\mathbf{u}=(u_1,\dots, u_v)$ then in particular,
-\[\phi(\mathbf{u})=[\mathfrak{a}]^{-1}.\]
-In other words, if $[\mathfrak{a}]^{-1}$ does not belong to the image of $\phi$ then \eqref{Eq:TMfactored} has no solutions. We therefore suppose that $[\mathfrak{a}]^{-1}$ belongs to the image, and compute a preimage $\mathbf{r}=(r_1,\dotsc,r_v)$ using \texttt{Magma}. Then $\mathbf{u}-\mathbf{r}$ belongs to the kernel of $\phi$. The kernel is a subgroup of $\mathbb{Z}^v$ of rank $v$. Let $\mathbf{a}_1,\dots,\mathbf{a}_v$ be a basis for the kernel and let 
-\[\mathbf{u}-\mathbf{r}=n_1 \mathbf{a}_1+\cdots + n_v \mathbf{a}_v\]
-where the $n_i \in \mathbb{Z}$. Here, we adopt the notation
-\[\mathbf{a}_i = (a_{1i}, \dots, a_{vi}),\]
-and we let $A$ be the matrix with columns $\mathbf{a}_1,\dots,\mathbf{a}_v$. Hence the $(i,j)^{\text{th}}$ entry of $A$ is $a_{ij}$, the $i^{\text{th}}$ entry of the vector $\mathbf{a}_j$. Then $\mathbf{u}= A\mathbf{n}+\mathbf{r}$ where $\mathbf{n} = (n_1,\dots,n_v)$.
-%The important thing for us is that $A$ is invertible. In fact its determinant is (up to sign) equal to $\#\img(\phi)$ and so divides the class number. As $A$ is invertible, there are positive constants $C_1$, $C_2$ such that
-%\[
-% H(\mathbf{n}) \le C_1 H(\mm), \qquad H(\mm) \le C_2 H(\mathbf{n}).
-%\]
-For $\mathbf{a}_i=(a_{1i},\dotsc,a_{vi}) \in \mathbb{Z}^v$ we adopt the notation 
-\[\tilde{\mathfrak{p}}^\mathbf{a} :=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_v^{a_{vi}}.\]
-Let
-\[\mathfrak{c}_1= \tilde{\mathfrak{p}}^{\mathbf{a}_1},\dotsc,\mathfrak{c}_v= \tilde{\mathfrak{p}}^{\mathbf{a}_v}.\]
-Then we can rewrite \eqref{Eq:TMfactored} as
-\[\begin{array}{ll}
-((x-1) y-\theta) \mathcal{O}_K 
-	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
-	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_v \mathbf{a}_v}\\
-	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_v^{n_v}.
-\end{array}\]
-
-Now
-\[[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}] 
-	= [\mathfrak{a}] \cdot [\mathfrak{p}_1]^{r_1}\cdots [\mathfrak{p}_v]^{r_v} 
-	= [\mathfrak{a}]\cdot \phi(r_1,\dotsc,r_v)=[1]\]
-as $\phi(r_1,\dotsc,r_v)=[\mathfrak{a}]^{-1}$ by construction. Thus 
-\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K\]
-for some $\alpha \in K^*$. We note that some of the $r_i$ might be negative so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $K$ into certain $p$-adic fields of given precision. In those instances, the precision on our $p$-adic fields may not be high enough, and as a result, some non-zero elements of $K$ may be erroneously mapped to $0$. To avoid this, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. 
-Now, 
-\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \phi(\mathbf{a}_j) = [1]\]
-as the $\mathbf{a}_j$ are a basis for the kernel of $\phi$. Thus for all $j \in \{1, \dots, v\}$, there are $\gamma_j \in K^*$ such that $\mathfrak{c}_j=\gamma_j \mathcal{O}_K$. 
-
-Thus we have rewritten \eqref{Eq:TMfactored} as
-\begin{equation}\label{Eq:TMprincipal}
-((x-1) y- \theta) \mathcal{O}_K=\alpha \cdot \gamma_1^{n_1} \cdots \gamma_v^{n_v} \mathcal{O}_K
-\end{equation}
-for unknown integers $(n_1, \dots, n_v)$. 
-Note that the number of cases has not increased. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$ then we have a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain one corresponding equation \eqref{Eq:TMprincipal}.
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{Factorization of the Thue-Mahler equation: an alternate approach}
-
-In many cases, the method described above is far more efficient than that of Tzanakis-de Weger \cite{TW3}. However, there are values of $x$ where computing the class group may prove very costly. In fact, for these values of $x$, it may happen that class group computations  take longer than directly running a  principal ideal test on each ideal equation. In such cases, we return to the method of \cite{TW3}, which we now describe. 
-
-For $i = 1, \dots, v$ let $h_i$ be the smallest positive integer for which $\mathfrak{p}_i^{h_i}$ is principal and let 
-$s_i$ be a positive integer satisfying $0 \leq s_i < h_i$. Let
-\[\mathbf{a}_i = (a_{1i}, \dots, a_{vi}).\]
-where $a_{ii} = h_i$ and $a_{ji} = 0$ for $j \neq i$. We let $A$ be the matrix with columns $\mathbf{a}_1, \dots, \mathbf{a}_v$; $A$ is a diagonal matrix with $h_i$ along the diagonal. For every possible combination of the $s_i$, we set $\mathbf{r} = (s_1, \dots, s_v)$. Now, if \eqref{Eq:TMfactored} has a solution $\mathbf{u} = (u_1, \dots, u_v)$, it necessarily must be of the form $\mathbf{u} = A\mathbf{n} + \mathbf{r}$, where $\mathbf{n} = (n_1, \dots, n_v)$. 
-
-Using the above notation, we write
-$$
-\mathfrak{c}_i = \tilde{\mathfrak{p}}^{\mathbf{a}_i}=\mathfrak{p}_1^{a_{1i}}\cdot \mathfrak{p}_2^{a_{2i}} \cdots \mathfrak{p}_v^{a_{vi}} = \mathfrak{p}_i^{h_i}
-$$
-and hence can rewrite \eqref{Eq:TMfactored} as
-\[\begin{array}{ll}
-((x-1) y-\theta) \mathcal{O}_K 
-	& = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}\\ 
-	& = \mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r} + n_1 \mathbf{a}_1 + \cdots + n_v \mathbf{a}_v}\\
-	& = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_v^{n_v}.
-\end{array}\]
-Now, by definition of $h_j$, there exist $\gamma_j \in K^*$ such that 
-\[[\mathfrak{c}_j] = [\tilde{\mathfrak{p}}^{\mathbf{a}_j}] = \mathfrak{p}_j^{h_j} = \gamma_j \mathcal{O}_K,\]
-for all $j \in \{1, \dots, v\}$. For each choice of $\mathbf{r}$, if $\mathbf{u}$ is a solution, we must necessarily have
-\[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}=\alpha \cdot \mathcal{O}_K.\]
-Hence, we iterate through every possible $\mathbf{r}$, and store those cases for which $\mathfrak{a}\tilde{\mathfrak{p}}^{\mathbf{r}}$ is principal. 
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{The $S$-unit equation}
-
-At this point, regardless of which method was used to compute $A$ and $\mathbf{r}$, we note that the ideal generated by $\alpha$ has norm
-\[(x-1)^3\cdot p_1^{t_1 + r_1} \cdots p_v^{t_v + r_v}.\]
-The $n_i$ are related to $m$ via
-\[m \alpha_i = Z_i = u_i + t_i = \sum_{j = 1}^{v}n_ja_{ij} + r_i + t_i.\]
-The remainder of this paper loosely follows the arguments of \cite{TW3}, with certain modifications designed to improve our timing efficiency. 
-
-Fix a complete set of fundamental units of $\mathcal{O}_K: \varepsilon_1, \dots, \varepsilon_r$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. Then
-\begin{equation} \label{Eq:main2}
-(x-1)y - \theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\gamma_1^{n_1}\cdots \gamma_v^{n_v}
-\end{equation}
-with unknowns $a_i \in \mathbb{Z}$, $n_i \in \mathbb{Z}_{\geq 0}$, and $\zeta$ in the set $T$ of roots of unity in $\mathcal{O}_K$. Since $T$ is also finite, we will treat $\zeta$ as another parameter. More precisely, a quick computation in Mathematica shows that  
+Following Remark \ref{rem:uv}, for the remainder of this paper, we assume that $u_i \neq 0$ for all $i = 1, \dots, v$. Fix a complete set of fundamental units $\{\eps_1, \dots, \eps_r\}$ of $\mathcal{O}_K$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. A quick computation in Mathematica (\edit{format and cite}) shows that  
 \[g(t) = t^4 + (x-1)t^3 + (x-1)^2t^2 + (x-1)^3t + x(x-1)^3\]
-has only complex roots for $x \geq 2$. It follows that we have no real embeddings of $K$ into $\mathbb{R}$, two pairs of complex conjugate embeddings, and hence only one fundamental unit, $\varepsilon_1$. That is, 
-\begin{equation} \label{Eq:main3}
-(x-1)y - \theta = \alpha \zeta \varepsilon_1^{a_1} \cdot \gamma_1^{n_1}\cdots \gamma_v^{n_v}.
-\end{equation}
+has only complex roots for $x \geq 2$. It follows that we have no real embeddings of $K$ into $\mathbb{R}$, two pairs of complex conjugate embeddings, and hence only one fundamental unit, $\varepsilon_1$. 
 
+Now, for each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_v$, we reduce each equation~\eqref{Eq:TMfactored} to a number of so-called ``$S$-unit equations'' via either procedure outlined in \autoref{subsec:FactorizationTMwithoutOK} and \autoref{subsec:FactorizationTMwithOK} of \autoref{ch:AlgorithmsForTM}. Regardless of which of these principalization methods is used, we arrive at finitely many equations of the form
+\begin{equation} \label{Eq:main2}
+(x-1)y - \theta = \alpha \zeta \eps_1^{a_1}\gamma_1^{n_1}\cdots \gamma_v^{n_v}
+\end{equation}
+with unknowns $a_1 \in \mathbb{Z}$, $n_i \in \mathbb{Z}_{\geq 0}$, and $\zeta$ in the set $T$ of roots of unity in $\mathcal{O}_K$. Since $T$ is also finite, we will treat $\zeta$ as another parameter. Moreover, we note that the ideal generated by $\alpha$ has norm
+\begin{equation} \label{Eq:main3}
+(x-1)^3\cdot p_1^{t_1 + r_1} \cdots p_v^{t_v + r_v},
+\end{equation}
+and the $n_i$ are related to $m$ via
+\[m \alpha_i = Z_i = u_i + t_i = \sum_{j = 1}^{v}n_ja_{ij} + r_i + t_i.\]
 To summarize, our original problem of solving \eqref{Eq:main} has been reduced to the problem of solving finitely many equations of the form \eqref{Eq:main3} for the variables 
 \[y, a_1, n_1, \dots, n_v.\] 
 
-From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate the variable $y$ and set ourselves the task of bounding the exponents $a_1, n_1, \dots, n_v$. 
+From here, we follow the arguments of \autoref{subsec:SUnitEquation} to deduce a so-called $S$-unit equation. In doing so, we eliminate the variable $y$ and set ourselves the task of bounding the exponents $a_1, n_1, \dots, n_v$. 
 
 In particular, let $p \in \{p_1, \dots, p_v, \infty\}$. Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \dots, \theta^{(4)}$. Let $i_0, j, k \in \{1, \dots, 4\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. Applying these embeddings to $\beta = (x-1)y - \theta$ yields
 \begin{equation}\label{Eq:Sunit}
@@ -1264,6 +1066,14 @@ where
 are constants. 
 
 Note that $\delta_1$ and $\delta_2$ are constants, in the sense that they do not depend upon $y,a_1,n_1, \dots, n_v.$
+
+
+
+\edit{The remainder of this paper loosely follows the arguments of \cite{TW3}, with certain modifications designed to improve our timing efficiency. }
+
+
+\edit{could probably delete from here to}
+
 
 We now restrict our attention to those $p \in \{p_1, \dots, p_v\}$ and study the $p$-adic valuations of the numbers appearing in \eqref{Eq:Sunit}. Recall that $z \in \mathbb{C}_p$ having $\ord_p(z) = 0$ is called a $p$-adic unit. 
 
@@ -1453,6 +1263,8 @@ By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) 
 \end{enumerate}
 \end{proof}
 
+
+\edit{ could probably delete up to here}
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
 \subsection{Bounding the $\sum_{j = 1}^v n_ja_{ij}$}
@@ -1901,6 +1713,15 @@ $$
 (120, 3,2), (204,-4,2), (340, 4,2), (520,-5,2).\\
 \end{array}
 $$
+
+\edit{some added stuff:}
+\edit{FROM BEGHKR STARTS HERE}
+
+
+. In the worst case scenario, the method in \cite{TW3} would reduce to $h^v$ such equations, where $h$ is the class number of $K$. This becomes computationally inefficient when the class number is large since, as we will see in the next section, we will need to apply a principal ideal test to each such case. Instead of this, we apply the method of \cite{GhKaMaSi}, which gives only $\kappa/2$ $S$-unit equations, where $\kappa$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). We now describe this second method. 
+
+In many cases, the method described above is far more efficient than that of Tzanakis-de Weger \cite{TW3}. However, there are values of $x$ where computing the class group may prove very costly. In fact, for these values of $x$, it may happen that class group computations  take longer than directly running a  principal ideal test on each ideal equation. In such cases, we return to the method of \cite{TW3}, which we now describe. 
+\edit{end of added stuff}
 
 Altogether, this computation took 3 weeks on a $16$-core 2013 vintage MacPro, with the case $x=710$ being the most time-consuming, taking roughly $5$ days and $16$ hours on a single core. This is the better timing attained for this value of $x$ from our two approaches, computed using the class group to generate the $S$-unit equations. The most time-consuming job when computing the class group was $x = 719$, which took $10$ days and $8$ hours. However, using our alternate code, the better timing for $x = 719$ was only $2$ hours. Without computing the class group, the most time-consuming process was $x = 654$, which took $2$ days and $7$ hours. However, this is the faster timing that was attained for this value of $x$, as computing the class group took roughly $4$ days and $8$ hours. 
 

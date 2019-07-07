@@ -301,9 +301,7 @@ After applying Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePat
 \begin{equation}\label{eq:TMfactored}
 (x-y\theta)\mathcal{O}_K=\mathfrak{a} \mathfrak{p}_1^{u_1}\cdots \mathfrak{p}_{\nu}^{u_{\nu}}
 \end{equation}
-in integer variables $x,y,u_1, \dots, u_{\nu}$ with $u_i \geq 0$ for $i = 1, \dots, \nu$, where ${0 \leq \nu \leq v}$. For $i \in \{\nu+1, \dots, v\}$, we have 
-
-Here
+in integer variables $x,y,u_1, \dots, u_{\nu}$ with $u_i \geq 0$ for $i = 1, \dots, \nu$, where ${0 \leq \nu \leq v}$. Here
 \begin{itemize}
 \item for $i \in \{1, \dots, \nu\}$, $\mathfrak{p}_i$ is a prime ideal of $\mathcal{O}_K$ arising from Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePatch2} applied to $p \in \{p_1, \dots, p_v\}$, such that $(\mathfrak{b}, \mathfrak{p}_i) \in M_p$ for some ideal $\mathfrak{b}$;
 \item for $i \in \{\nu+1, \dots, v\}$, the corresponding rational prime $p_i \in S$ yields $M_{p_i} = \emptyset$, in which case we set $u_i = 0$;
@@ -329,7 +327,6 @@ for all $i \in \{1, \dots, {\nu}\}$.
 
 Thus, we can write \eqref{eq:TMfactored} as
 \[ (x-y\theta) \mathcal{O}_K = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}  = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.\]
-
 
 By definition of $h_i$, each $i \in \{1, \dots, {\nu}\}$ yields an element $\gamma_i \in K^*$ such that 
 \[\mathfrak{c}_i = (\gamma_i) \mathcal{O}_K.\]
@@ -394,7 +391,7 @@ with unknowns $a_i \in \mathbb{Z}$, $n_i \in \mathbb{Z}$, and $\zeta$ in the set
 
 Let $p \in \{p_1, \dots, p_v, \infty\}$. Recall that $g(t)$ is an irreducible polynomial in $\mathbb{Z}[t]$ arising from \eqref{eq:ThueMahler3} such that
 \[g(t) = f(t,1) = t^n + C_1 t^{n-1} + \dots + C_{n-1}t + C_n.\]
-Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \dots, \theta^{(n)}$. Let $i_0, j, k \in \{1,2,3\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. From the Siegel identity
+Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \dots, \theta^{(n)}$. Let $i_0, j, k \in \{1,\dots, n\}$ (\edit{should this be $\nu$?}) be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. From the Siegel identity
 \[(\theta^{(i_0)} - \theta^{(j)})(x-y\theta^{(k)}) + (\theta^{(j)} - \theta^{(k)})(x-y\theta^{(i_0)}) + (\theta^{(k)} - \theta^{(i_0)})(x-y\theta^{(j)}) = 0,\]
 applying the embeddings to $\beta = x-y\theta$ yields the so-called ``$S$-unit equation''
 \begin{equation} \label{eq:Sunit}
@@ -415,9 +412,203 @@ In \autoref{subsec:FactorizationTMwithoutOK}, we follow closely the method of \e
 
 In contrast, the method in \autoref{subsec:FactorizationTMwithOK} reduces \eqref{eq:TMfactored} to only $\#T/2$ $S$-unit equations to solve, where $T$ is the set of roots of unity in $K$. In particular, the sum total of $S$-unit equations does not drastically increase. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$, we reach a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain only $\#T/2$ corresponding equations \eqref{eq:Sunit}. In particular, the number of principalization tests in this method is limited by the number of ideal equations~\eqref{eq:TMfactored}, where each such equation yields only $(1+\nu)$ tests. \edit{table with numbers}
 
-However, when generating the vectors $\mathbf{r} = (r_1, \dots, r_{\nu})$ using the class group, we observe that some of the integers $r_i$ may be negative, so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $\alpha$ into our $p$-adic fields. In those instances, the precision on our $\theta^{(i)}$ may not be high enough, and as a result, $\alpha$ may be mapped to $0$. Increasing the precision at that point would be computationally inefficient, as it would require us to recompute a large amount of data. Instead, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. This in itself may present its own problems \edit{can't remember why though}.
+However, when generating the vectors $\mathbf{r} = (r_1, \dots, r_{\nu})$ using the class group, we observe that some of the integers $r_i$ may be negative, so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $K$ into our $p$-adic fields. In those instances, the precision on our $p$-adic fields may not be high enough, and as a result, some non-zero elements of $K$ may be erroneously mapped to $0$. To avoid this, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. This in itself may present its own problems \edit{can't remember why though}.
 
 In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is far more efficient than that of \autoref{subsec:FactorizationTMwithoutOK}. However, computing the class group may be a very costly computation. Indeed, for some Thue-Mahler equations, this may be the bottle-neck of the algorithm. In this case, it may happen that computing the class group will take longer than directly checking each potential $S$-unit equation arising from the alternative method. \edit{table}. Unfortunately, we cannot know a piori how long computing $\Cl(K)$ will take in so much that we cannot know a priori how long solving all $S$-unit equations from the other algorithm will take. In practicality, generating the class group in Magma \edit{formatting of Magma?} is a process which cannot be terminated without exiting the program. For this reason, we cannot simply apply a timeout in Magma if computing $\Cl(K)$ is exceeding what we deem a reasonable amount of time. Adding to this, Magma does not support parallelization, so we cannot implement both algorithms simultaneously. Our compromise to solve a single Thue-Mahler equation is to run two separate instances of Magma in parallel, each generating the $S$-unit equations using the two aforementioned algorithms. When one of these instances finishes, the other is forced to terminate. In this way, though far from ideal, we are able to select the most computationally efficient option. 
+
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+
+\section{Need a title}
+
+
+We now restrict our attention to those $p \in \{p_1, \dots, p_v\}$ and study the $p$-adic valuations of the numbers appearing in \eqref{Eq:Sunit}. Recall that $z \in \mathbb{C}_p$ having $\ord_p(z) = 0$ is called a $p$-adic unit. 
+
+Let $l \in \{1, \dots, v\}$ and consider the prime $p = p_l$. Part (ii) of the Corollary of Lemma 7.2 of \cite{TW3} tells us that $\frac{\varepsilon_1^{(i_0)}}{\varepsilon_1^{(j)}}$ and $\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}$ are $p_l$-adic units. 
+
+From now on we make the following choice for the index $i_0$. Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l[t]) = 1$. We choose $i_0 \in \{1, \dots, 4\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. The indices of $j,k$ are fixed, but arbitrary. 
+
+\begin{lemma} \label{Lem:units} \
+\begin{enumerate}
+\item[(i)] Let $i \in \{1, \dots, v\}$. Then $\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}$ are $p_l$-adic units. 
+\item[(ii)] Let $i \in \{1, \dots, v\}$. Then $\ord_{p_l}\left(\frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right) = a_{li}$, where $\mathbf{a_i} = (a_{1i}, \dots, a_{vi})$. 
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Consider the factorization of $g(t)$ in $\mathbb{Q}_{p_l}[t]: g(t) = g_1(t) \cdots g_m(t)$ and note that $\theta^{(j)}$ is a root of some $g_h(t) \neq g_l(t)$. Let $\mathfrak{p}_h$ be the corresponding prime ideal above $p_l$ and $e_h$ be its ramification index. Then $\mathfrak{p} \neq \mathfrak{p}_l$ and since 
+\[(\gamma_i)\mathcal{O}_K = \mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}},\]
+we have 
+\[\ord_{p_l}(\gamma_i^{(j)}) = \frac{1}{e_h}\ord_{\mathfrak{p}_h}(\gamma_i) = 0.\]
+An analogous argument gives $\ord_{p_l}(\gamma_i^{(k)}) = 0$. On the other hand, 
+\[\ord_{p_l}(\gamma_i^{(i_0)}) = \frac{1}{e_l}\ord_{\mathfrak{p}_l}(\gamma_i) = \ord_{\mathfrak{p}_l}(\mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}}) = a_{li}.\]
+
+\end{proof}
+
+The next lemma deals with a special case in which the $n_l$ can be computed directly. This lemma is analogous to Lemma 7.3 of \cite{TW3}. 
+
+Recall the constants
+\[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
+of \eqref{Eq:Sunit}.
+\begin{lemma}\label{Lem:del1}
+Let $l \in \{1, \dots, v\}$. If $\ord_{p_l}(\delta_1) \neq 0$, then 
+\[ \sum_{i = 1}^v n_ia_{li} = \min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2).\]
+\end{lemma}
+
+\begin{proof}
+Apply the Corollary of Lemma $7.2$ of \cite{TW3} and Lemma~\ref{Lem:units} to both expressions of $\lambda$ in \eqref{Eq:Sunit}. On the one hand, we obtain that $\ord_{p_l}(\lambda) = \min\{\ord_{p_l}(\delta_1), 0\}$, and on the other hand, 
+\[\begin{split}
+\ord_{p_l}(\lambda)
+& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^v \ord_{p_l}\left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\\
+& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^v n_ia_{li}.
+\end{split}\]
+\end{proof}
+
+If this bound holds, it follows that
+\[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} = \frac{\min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2) + r_l + t_l}{\alpha_l}. \]
+We iterate this computation over all $i \in \{1, \dots, v \}$ for which Lemma \ref{Lem:del1} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple brute force search. 
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{A small upper bound for $\sum_{j = 1}^v n_ja_{ij}$ in a special case} \label{subsec:smallbound}
+
+Let $l \in \{1, \dots v\}$. In this section, we identify conditions in which $n_l$ can be bounded by a small explicit constant. We may assume that $\ord_{p_l}(\delta_1) = 0$, since otherwise a reasonable bound is afforded by Lemma \ref{Lem:del1}. 
+
+We first recall the following result on the $p_l$-adic logarithm:
+
+\begin{lemma}\label{Lem:padic}
+Let $z_1, \dots, z_m \in \overline{\mathbb{Q}}_p$ be $p$-adic units and let $b_1, \dots, b_m \in \mathbb{Z}$. If
+\[\ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) > \frac{1}{p-1}\]
+then
+\[\ord_p(b_1\log_p z_1 + \cdots + b_m \log_p z_m) = \ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) \]
+\end{lemma}
+
+We introduce the following notation
+\[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, v\},\]
+and
+\[ b_{v+2} = a_1.\]
+Put
+\[\alpha_1 = \log_{p_l} \delta_1, \quad \alpha_{1+i} = \log_{p_l}\left( \frac{\gamma_i^{(k)}}{\gamma_i^{(l)}}\right)  \ \text{ for } i \in \{1, \dots, v\},\]
+and
+\[\alpha_{v+2} = \log_{p_l}\left( \frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(l)}}\right).\]
+Define
+\[\Lambda_l = \sum_{i = 1}^{v+2} b_i\alpha_i.\]
+
+Let $L$ be a finite extension of $\mathbb{Q}_{p_l}$ containing $\delta_1$, $\frac{\gamma_i^{(k)}}{\gamma_i^{(l)}}$ (for $i = 1, \dots, v$), and $ \frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(l)}}$. Since finite $p$-adic fields are complete, $\alpha_i \in L$ for $i = 1, \dots, v+2$ as well. Choose $\phi \in \overline{\mathbb{Q}_{p_l}}$ such that $L = \mathbb{Q}_{p_l}(\phi)$ and $\ord_{p_l}(\phi) > 0 $. Let $G(t)$ be the minimal polynomial of $\phi$ over $\mathbb{Q}_{p_l}$ and let $s$ be its degree. For $i = 1, \dots, v+2$ write
+\[\alpha_i = \sum_{h = 1}^s \alpha_{ih}\phi^{h - 1}, \quad \alpha_{ih} \in \mathbb{Q}_{p_l}.\]
+Then
+\begin{equation} \label{Eq:lambdalh}
+\Lambda_l = \sum_{h = 1}^s \Lambda_{lh}\phi^{h-1},
+\end{equation}
+with
+\[\Lambda_{lh} = \sum_{i = 1}^{v+2} b_i \alpha_{ih}\]
+for $h = 1, \dots, s$. 
+
+\begin{lemma}\label{Lem:discG}
+For every $h \in \{1, \dots, s\}$, we have
+\[\ord_{p_l}(\Lambda_{lh}) > \ord_{p_l}(\Lambda_l) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
+\end{lemma}
+
+\begin{proof}
+Taking the images of \eqref{Eq:lambdalh} under conjugation $\phi \mapsto \phi^{(h)}$ ($h = 1, \dots, s$) gives
+\[\begin{bmatrix}
+\Lambda_l^{(1)} \\
+\vdots \\
+\Lambda_l^{(s)}	\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 		& \phi^{(1)} 	& \cdots 	& \phi^{(1)s-1}\\
+\vdots 	& \vdots 		& 		& \vdots \\
+1 		& \phi^{(s)} 	& \cdots  	& \phi^{(s)s-1}\\
+\end{bmatrix}
+\begin{bmatrix}
+\Lambda_{l1}\\
+\vdots \\
+\Lambda_{ls}\\
+\end{bmatrix}\]
+The $s \times s$ matrix $(\phi^{(h)i-1})$ above is invertible, with inverse
+\[\frac{1}{\displaystyle \prod_{1\leq j<k\leq s} (\phi^{(k)} - \phi^{(j)})}
+\begin{bmatrix}
+\gamma_{11} 	& \cdots 	& \gamma_{1s}\\
+\vdots 		& 		& \vdots\\
+\gamma_{s1} 	& \cdots 	& \gamma_{ss}\\
+\end{bmatrix},\]
+where $\gamma_{jk}$ is a polynomial in the entries of $(\phi^{(h)i-1})$ having integer coefficients. Since $\ord_{p_l}(\phi) > 0$ and since $\ord_{p_l}(\phi^{(h)}) = \ord_{p_l}(\phi)$ for all $h = 1, \dots, s$, it follows that $\ord_{p_l}(\gamma_{jk}) > 0 $ for every $\gamma_{jk}$. Therefore, since 
+\[\Lambda_{lh} = \frac{1}{\displaystyle \prod_{1\leq j<k\leq s}(\phi^{(k)} - \phi^{(j)})}\sum_{i = 1}^s \gamma_{hi}\Lambda_l^{(i)},\]
+we have 
+\[\begin{split}
+\ord_{p_l}(\Lambda_{lh}) 
+	& = \min_{1 \leq i \leq s} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)})\right\} -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
+	& \geq \min_{1 \leq i \leq s} \ord_{p_l}(\Lambda_l^{(i)}) +  \min_{1 \leq i \leq s} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
+	& = \ord_{p_l}\Lambda_l + \min_{1 \leq i \leq s} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))
+\end{split}\]
+for every $h \in \{1, \dots, s\}$. 
+%\min_{1 \leq i \leq s} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)}) -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\right\}\]
+\end{proof}
+
+\begin{lemma} \label{Lem:Lambda}
+If 
+\[\sum_{i = 1}^v n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2),\]
+then
+\[\ord_{p_l}(\Lambda_l) = \sum_{i = 1}^v n_{i}a_{li} + \ord_{p_l}(\delta_2).\]
+\end{lemma}
+
+\begin{proof}
+Immediate from Lemma~\ref{Lem:padic}.
+\end{proof}
+
+\begin{lemma} \label{Lem:specialcase} \
+\begin{enumerate}
+\item[(i)] If $\ord_{p_l}(\alpha_1) < \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_i)$, then
+\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor,  \bigg \lceil\displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2) \bigg \rceil - 1 \right\}\]
+
+\item[(ii)] For all $h \in \{1, \dots, s\}$, if $\ord_{p_l}(\alpha_{1h}) < \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})$, then
+\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor, \bigg \lceil \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + \nu_l \bigg \rceil - 1\right\},\]
+where 
+\[\nu_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\]
+\end{enumerate}
+\end{lemma}
+
+Similar to Lemma \ref{Lem:del1}, if Lemma \ref{Lem:specialcase} holds for $p_l$ giving
+\[\sum_{i = 1}^v n_i a_{li} \leq B_l\]
+for some bound $B_l$ as in the lemma, it follows that
+\[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} \leq \frac{B_l + r_l + t_l}{\alpha_l}. \]
+Again, we iterate this computation over all $l \in \{1, \dots, v \}$ for which Lemma \ref{Lem:specialcase} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple naive search. 
+
+\begin{proof} \
+\begin{enumerate}
+\item[(i)] We prove the contrapositive. Suppose
+\[\sum_{i = 1}^v n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
+and
+\[\sum_{i = 1}^v n_i a_{li}  \geq \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2).\]
+Observe that
+\[\begin{split}
+\ord_{p_l}(\alpha_{1}) 	
+	& = \ord_{p_l}\left( \Lambda_{l} - \sum_{i = 2}^{v+2}b_i\alpha_{i}\right) \\
+	& \geq \min\left\{ \ord_{p_l}(\Lambda_{l}), \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{i})\right\}.
+\end{split}\]
+Therefore, it suffices to show that 
+\[\ord_{p_l}(\Lambda_{l}) \geq \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{i}).\]
+By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2)$, from which the result follows. 
+
+\item[(ii)] Similar to the proof of (i).
+%\item[(ii)] We prove the contrapositive. Let $h \in \{1, \dots, s\}$ and suppose
+%\[\sum_{i = 1}^v n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
+%and
+%\[\sum_{i = 1}^v n_i a_{li}  \geq \nu_l + \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih}) - \ord_{p_l}(\delta_2).\]
+%Observe that 
+%\[\begin{split}
+%\ord_{p_l}(\alpha_{1h}) 	
+%	& = \ord_{p_l}\left( \Lambda_{lh} - \sum_{i = 2}^{v+2}b_i\alpha_{ih}\right) \\
+%	& \geq \min\left\{ \ord_{p_l}(\Lambda_{lh}), \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{ih})\right\}
+%\end{split}\]
+%Therefore, it suffices to show that 
+%\[\ord_{p_l}(\Lambda_{lh}) \geq \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{ih}).\]
+%By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2)$. Combining this with Lemma~\ref{Lem:discG} yields
+%\[\ord_{p_l}(\Lambda_{lh}) \geq \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2) - \nu_l.\]
+%The results now follow from our second assumption. 
+\end{enumerate}
+\end{proof}
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
