@@ -3,10 +3,10 @@
 \contentsline {chapter}{Lay Summary}{iii}{chapter*.2}
 \contentsline {chapter}{Preface}{iv}{chapter*.3}
 \contentsline {chapter}{Contents}{v}{chapter*.4}
-\contentsline {chapter}{List of Tables}{vi}{chapter*.5}
-\contentsline {chapter}{List of Figures}{vii}{chapter*.6}
-\contentsline {chapter}{Glossary}{viii}{chapter*.7}
-\contentsline {chapter}{Acknowledgments}{ix}{chapter*.8}
+\contentsline {chapter}{List of Tables}{ix}{chapter*.5}
+\contentsline {chapter}{List of Figures}{x}{chapter*.6}
+\contentsline {chapter}{Glossary}{xi}{chapter*.7}
+\contentsline {chapter}{Acknowledgments}{xii}{chapter*.8}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Statement of the results}{7}{section.1.1}
 \contentsline {chapter}{\numberline {2}Preliminaries}{14}{chapter.2}
@@ -30,27 +30,58 @@
 \contentsline {section}{\numberline {3.5}Lattice-Based Reduction}{46}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}The $L^3$-lattice basis reduction algorithm}{46}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}The Fincke-Pohst algorithm}{48}{subsection.3.5.2}
-\contentsline {chapter}{\numberline {4}Towards Efficient Resolution of Thue-Mahler Equations}{60}{chapter.4}
-\contentsline {subsection}{\numberline {4.0.1}Reducing to $(a, p_1, \dots , p_v) = 1$ and $c_0 = 1$}{61}{subsection.4.0.1}
-\contentsline {section}{\numberline {4.1}The Relevant Algebraic Number Field}{61}{section.4.1}
-\contentsline {section}{\numberline {4.2}Decomposition of Primes}{62}{section.4.2}
-\contentsline {section}{\numberline {4.3}Factorization of the Thue-Mahler Equation}{63}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Refinements}{63}{subsection.4.3.1}
-\contentsline {section}{\numberline {4.4}The $S$-Unit Equation}{64}{section.4.4}
-\contentsline {section}{\numberline {4.5}Specializing to Degree $3$}{65}{section.4.5}
-\contentsline {section}{\numberline {4.6}Initial Heights}{68}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}Decomposition of the Weil height.}{69}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}Initial height bounds}{83}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Coverings of $\Sigma $}{90}{subsection.4.6.3}
-\contentsline {subsubsection}{Refined coverings}{92}{subsubsection*.9}
-\contentsline {subsection}{\numberline {4.6.4}Controlling the exponents in terms of the Weil Height}{92}{subsection.4.6.4}
-\contentsline {subsubsection}{Bounding $\{n_1, \dots , n_{\nu }\}$}{92}{subsubsection*.10}
-\contentsline {subsubsection}{Bounding $\{a_1, \dots , a_{r}\}$}{93}{subsubsection*.11}
-\contentsline {subsection}{\numberline {4.6.5}Archimedean ellipsoid: real case, $r = 2$.}{117}{subsection.4.6.5}
-\contentsline {subsection}{\numberline {4.6.6}Archimedean sieve: Real case, $r = 2$}{135}{subsection.4.6.6}
-\contentsline {subsection}{\numberline {4.6.7}Archimedean Real Case Summary}{139}{subsection.4.6.7}
-\contentsline {section}{\numberline {4.7}Non-Archimedean Case}{142}{section.4.7}
-\contentsline {subsection}{\numberline {4.7.1}Non-Archimedean sieve}{142}{subsection.4.7.1}
-\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{143}{subsubsection*.12}
-\contentsline {subsection}{\numberline {4.7.2}Non-Archimedean ellipsoid.}{160}{subsection.4.7.2}
-\contentsline {chapter}{\numberline {A}Supporting Materials}{166}{appendix.A}
+\contentsline {subsection}{\numberline {3.5.3}Computational remarks and translated lattices}{51}{subsection.3.5.3}
+\contentsline {chapter}{\numberline {4}Goormaghtigh Equations}{54}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introduction}{54}{section.4.1}
+\contentsline {section}{\numberline {4.2}Rational approximations}{58}{section.4.2}
+\contentsline {section}{\numberline {4.3}Pad\'e approximants}{62}{section.4.3}
+\contentsline {section}{\numberline {4.4}Proof of Theorem \ref {main-thm} }{68}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Bounding $\delta $}{68}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Applying Proposition \ref {shazam2}}{69}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}Proof of Theorem \ref {main-thm2} for $x$ of moderate size }{72}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Case (1) : $n=3, \tmspace +\thickmuskip {.2777em} d=2, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 40$}{73}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Case (2) : $n=4, \tmspace +\thickmuskip {.2777em} d=3, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 85$}{75}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Case (3) : $n=5, \tmspace +\thickmuskip {.2777em} d=2, \tmspace +\thickmuskip {.2777em} n_0=2, \tmspace +\thickmuskip {.2777em} x \geq 720$}{76}{subsection.4.5.3}
+\contentsline {subsection}{\numberline {4.5.4}Case (4) : $n=5, \tmspace +\thickmuskip {.2777em} d=4, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 300$}{78}{subsection.4.5.4}
+\contentsline {subsection}{\numberline {4.5.5}Treating the remaining small values of $x$ for $n \in \{ 3, 4 \}$}{80}{subsection.4.5.5}
+\contentsline {subsubsection}{Small values of $x$ for $n=3$}{80}{subsubsection*.9}
+\contentsline {subsubsection}{Small values of $x$ for $n=4$}{81}{subsubsection*.10}
+\contentsline {section}{\numberline {4.6}Small values of $x$ for $n=5$}{82}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}The relevant algebraic number field}{84}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Decomposition of primes}{84}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}An alternative to the Prime Ideal Removing Lemma}{85}{subsection.4.6.3}
+\contentsline {subsection}{\numberline {4.6.4}Factorization of the Thue-Mahler equation}{86}{subsection.4.6.4}
+\contentsline {subsection}{\numberline {4.6.5}Factorization of the Thue-Mahler equation: an alternate approach}{89}{subsection.4.6.5}
+\contentsline {subsection}{\numberline {4.6.6}The $S$-unit equation}{90}{subsection.4.6.6}
+\contentsline {subsection}{\numberline {4.6.7}A small upper bound for $\DOTSB \sum@ \slimits@ _{j = 1}^v n_ja_{ij}$ in a special case}{93}{subsection.4.6.7}
+\contentsline {subsection}{\numberline {4.6.8}Bounding the $\DOTSB \sum@ \slimits@ _{j = 1}^v n_ja_{ij}$}{98}{subsection.4.6.8}
+\contentsline {subsection}{\numberline {4.6.9}A bound for $|a_1|$}{100}{subsection.4.6.9}
+\contentsline {subsection}{\numberline {4.6.10}The reduction strategy}{103}{subsection.4.6.10}
+\contentsline {subsection}{\numberline {4.6.11}The $p_l$-adic reduction procedure}{105}{subsection.4.6.11}
+\contentsline {subsection}{\numberline {4.6.12}Computational conclusions}{110}{subsection.4.6.12}
+\contentsline {section}{\numberline {4.7}Bounding $C(k,d)$ : the proof of Proposition \ref {Cee}}{111}{section.4.7}
+\contentsline {section}{\numberline {4.8}Concluding remarks}{114}{section.4.8}
+\contentsline {chapter}{\numberline {5}Towards Efficient Resolution of Thue-Mahler Equations}{116}{chapter.5}
+\contentsline {subsection}{\numberline {5.0.1}Reducing to $(a, p_1, \dots , p_v) = 1$ and $c_0 = 1$}{117}{subsection.5.0.1}
+\contentsline {section}{\numberline {5.1}The Relevant Algebraic Number Field}{117}{section.5.1}
+\contentsline {section}{\numberline {5.2}Decomposition of Primes}{118}{section.5.2}
+\contentsline {section}{\numberline {5.3}Factorization of the Thue-Mahler Equation}{119}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Refinements}{119}{subsection.5.3.1}
+\contentsline {section}{\numberline {5.4}The $S$-Unit Equation}{120}{section.5.4}
+\contentsline {section}{\numberline {5.5}Specializing to Degree $3$}{121}{section.5.5}
+\contentsline {section}{\numberline {5.6}Initial Heights}{124}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Decomposition of the Weil height.}{125}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {5.6.2}Initial height bounds}{139}{subsection.5.6.2}
+\contentsline {subsection}{\numberline {5.6.3}Coverings of $\Sigma $}{146}{subsection.5.6.3}
+\contentsline {subsubsection}{Refined coverings}{148}{subsubsection*.11}
+\contentsline {subsection}{\numberline {5.6.4}Controlling the exponents in terms of the Weil Height}{148}{subsection.5.6.4}
+\contentsline {subsubsection}{Bounding $\{n_1, \dots , n_{\nu }\}$}{148}{subsubsection*.12}
+\contentsline {subsubsection}{Bounding $\{a_1, \dots , a_{r}\}$}{149}{subsubsection*.13}
+\contentsline {subsection}{\numberline {5.6.5}Archimedean ellipsoid: real case, $r = 2$.}{173}{subsection.5.6.5}
+\contentsline {subsection}{\numberline {5.6.6}Archimedean sieve: Real case, $r = 2$}{191}{subsection.5.6.6}
+\contentsline {subsection}{\numberline {5.6.7}Archimedean Real Case Summary}{195}{subsection.5.6.7}
+\contentsline {section}{\numberline {5.7}Non-Archimedean Case}{198}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Non-Archimedean sieve}{198}{subsection.5.7.1}
+\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{199}{subsubsection*.14}
+\contentsline {subsection}{\numberline {5.7.2}Non-Archimedean ellipsoid.}{216}{subsection.5.7.2}
+\contentsline {chapter}{\numberline {A}Supporting Materials}{222}{appendix.A}

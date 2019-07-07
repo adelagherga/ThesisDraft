@@ -452,15 +452,15 @@ where $| \cdot |$ is the usual Euclidean norm in $\mathbb{R}^n$,
 
 These properties imply that an LLL-reduced basis is approximately orthogonal, and that, generically, its constituent vectors are roughly of the same length. Every $n$-dimensional lattice has an LLL-reduced basis and such a basis can be computed very quickly using the so-called LLL algorithm (\edit{ref: LLL}). This algorithm takes as input an arbitrary basis for a lattice and outputs an LLL-reduced basis. The algorithm is typically modified to additionally output a unimodular matrix $U$ such that $A = BU$, where $B$ is the matrix whose column-vectors are the input basis and $A$ is the matrix whose column-vectors are the LLL-reduced output basis. Several versions of this algorithm are implemented in Magma \edit{typeset for Magma}, including de Weger's exact integer version. (\edit{ref}).
 
-We remark that a lattice may have more than one reduced basis, and that the ordering of the basis vectors is not arbitrary. The properties of reduced bases that are of most interest to us are the following. Let $\mathbf{y}$ a vector in $\mathbb{R}^n$ and denote by $l(\Gamma,\mathbf{y})$ the distance from $\mathbf{y}$ to the nearest point in the lattice $\Gamma$, viz.
-\[l(\Gamma,\mathbf{y}) = \min_{\mathbf{x} \in \Gamma \backslash\{\mathbf{y}\}} |\mathbf{x} - \mathbf{y}|.\]
-From an LLL-reduced basis for $\Gamma$, we can compute lower bounds for $l(\Gamma,\mathbf{y})$, according to the following results. 
+We remark that a lattice may have more than one reduced basis, and that the ordering of the basis vectors is not arbitrary. The properties of reduced bases that are of most interest to us are the following. Let $\mathbf{v}$ a vector in $\mathbb{R}^n$ and denote by $l(\Gamma,\mathbf{v})$ the distance from $\mathbf{v}$ to the nearest point in the lattice $\Gamma$, viz.
+\[l(\Gamma,\mathbf{v}) = \min_{\mathbf{u} \in \Gamma \backslash\{\mathbf{v}\}} |\mathbf{u} - \mathbf{v}|.\]
+From an LLL-reduced basis for $\Gamma$, we can compute lower bounds for $l(\Gamma,\mathbf{v})$, according to the following results. 
 
 \begin{lemma} \label{lem:LLL}
-Let $\Gamma$ be a lattice with LLL-reduced basis $\mathbf{c}_1, \dots, \mathbf{c}_n$ and let $\mathbf{y}$ be a vector in $\mathbb{R}^n$. 
+Let $\Gamma$ be a lattice with LLL-reduced basis $\mathbf{c}_1, \dots, \mathbf{c}_n$ and let $\mathbf{v}$ be a vector in $\mathbb{R}^n$. 
 \begin{enumerate}[(a)]
-\item If $\mathbf{y} = \mathbf{0}$, then $l(\Gamma,\mathbf{y}) \geq 2^{-(n-1)/2}|\mathbf{c}_1|$.
-\item Assume $\mathbf{y} = s_1\mathbf{c}_1 + \cdots + s_n \mathbf{c}_n$, where $s_1, \dots, s_n \in \mathbb{R}$ with not all $s_i \in \mathbb{Z}$. Put 
+\item If $\mathbf{v} = \mathbf{0}$, then $l(\Gamma,\mathbf{v}) \geq 2^{-(n-1)/2}|\mathbf{c}_1|$.
+\item Assume $\mathbf{v} = s_1\mathbf{c}_1 + \cdots + s_n \mathbf{c}_n$, where $s_1, \dots, s_n \in \mathbb{R}$ with not all $s_i \in \mathbb{Z}$. Put 
 \[J = \{j \in \{1, \dots, n\} \ : \ s_j \notin \mathbb{Z} \}.\]
 For $j \in J$, set 
 \[\delta(j) = 
@@ -469,11 +469,11 @@ For $j \in J$, set
 0 							& \text{ if } j = n,
 \end{cases}\]
 where $\| \cdot \|$ denotes the distance to the nearest integer. We have
-\[l(\Gamma,\mathbf{y}) \geq \max_{j \in J}\left(2^{-(n-1)/2}\| s_j\| |\mathbf{c}_1| - (n-j)\delta(j)\right).\]
+\[l(\Gamma,\mathbf{v}) \geq \max_{j \in J}\left(2^{-(n-1)/2}\| s_j\| |\mathbf{c}_1| - (n-j)\delta(j)\right).\]
 \end{enumerate}
 \end{lemma}
 \edit{refs of where this lemma can be found - Cohen, for 1; see Hambrook p49 bottom of Lemma 18.1}
-Note that the assumption in Lemma~\ref{lem:LLL} is equivalent to ${\mathbf{y} \notin \Gamma}$. 
+Note that the assumption in Lemma~\ref{lem:LLL} is equivalent to ${\mathbf{v} \notin \Gamma}$. 
 
 We see that the vector $\mathbf{c}_1$ in a reduced basis is, in a very precise sense, not too far from being the shortest non-zero vector of $\Gamma$. As has already been mentioned, what makes this result so valuable is that there is a very simple and efficient algorithm to find a reduced basis in a lattice, namely the LLL algorithm.
 
@@ -482,228 +482,86 @@ We see that the vector $\mathbf{c}_1$ in a reduced basis is, in a very precise s
 \subsection{The Fincke-Pohst algorithm}
 \label{subsec:FinckePohst}
 
-Sometimes it is not sufficient to have a lower bound for $l(\Gamma,\mathbf{y})$ only. It may be useful to know exactly all vectors $\mathbf{x} \in \Gamma$ such that $|\mathbf{x}|  = \Phi(\mathbf{x}, \mathbf{x}) \leq C$ for a given constant $C$. This can be done efficiently using an algorithm of Fincke-Pohst (\edit{ref: p49 of Hambrook}). A version of this algorithm with some improvements due to Stehl\'e is implemented in Magma \edit{format}. As input this algorithm takes 
+Sometimes it is not sufficient to have a lower bound for $l(\Gamma,\mathbf{v})$ only. It may be useful to know exactly all vectors $\mathbf{u} \in \Gamma$ such that $|\mathbf{u}|  = \Phi(\mathbf{u}, \mathbf{u}) \leq C$ for a given constant $C$. This can be done efficiently using an algorithm of Fincke-Pohst (\edit{ref: p49 of Hambrook}). A version of this algorithm with some improvements due to Stehl\'e is implemented in Magma \edit{format}. As input this algorithm takes a matrix $B$, whose columns span the lattice $\Gamma$, and a constant $C > 0$. The output is a list of all lattice points $\mathbf{u} \in \Gamma$ with $|\mathbf{u}| \leq C$, apart from $\mathbf{u} = \mathbf{0}$. In this section, we outline the main steps in this algorithm. 
 
+We begin by letting $B$ denote the basis matrix associated to the lattice $\Gamma$, with corresponding bilinear form $\Phi$. We call a vector $\mathbf{u} \in \Gamma$ \textit{small} if its norm $\Phi(\mathbf{u}, \mathbf{u})$ is less than a constant $C$. As an element of the lattice, $\mathbf{u} = B\mathbf{x}$ for some coordinate vector $\mathbf{x} \in \mathbb{Z}^n$. Let $Q$ be the quadratic form associated to $\Phi$ and let $A=B^TB$. Now finding the short vectors $\mathbf{u} \in \Gamma$ is equivalent to solving 
+\begin{equation} \label{eq:ShortVector}
+Q(\mathbf{x}) = \mathbf{x}^TA\mathbf{x} \leq C.
+\end{equation}
 
-
-We show how to modify the Fincke-Pohst algorithm to output short vectors in a translated lattice. That is, we compute the set of vectors $x$ such that 
-\[(x-c)^tB^tB(x-c) \leq C\]
-where $c$ is some vector over $\mathbb{Q}$ which represents the translation of our lattice. 
-
-
-We begin with the usual Fincke-Pohst method for 
-\[x^tB^tBx \leq C.\]
-We call a vector $\mathbf{v}$ \textit{small} if its norm $\Phi(\mathbf{v}, \mathbf{v})$ is less than a constant $C$. This clearly depends on the basis which is given, and can vary depending on the choice of basis. If a particular basis is not specified, it is assumed to be the matrix $B$ which defines the Gram matrix $A = B^tB$. This is equivalent to solving the inequality $\Phi(\mathbf{y}, \mathbf{y}) \leq C$ where $\Phi(\mathbf{y}, \mathbf{y}) = \mathbf{y}^t\mathbf{y}$ denotes the norm of the vector computed with respect to the lattice. Let $B$ denote the matrix whose columns are the basis vectors of the lattice $\mathcal{L}$. As an element of the lattice, $\mathbf{y} = B\mathbf{x}$ for some coordinate vector $\mathbf{x} \in \mathbb{Z}^n$. So our inequality becomes
-\[\Phi(\mathbf{y}, \mathbf{y}) = \mathbf{y}^t\mathbf{y} = \mathbf{x}^tB^tB\mathbf{x} \leq C.\] 
-We consider the quadratic form $Q(\mathbf{x}) = \mathbf{x}^t B^t B\mathbf{x}$ and solve $Q(\mathbf{x}) \leq C$.
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\textbf{Quadratic Completion}
-
-To solve our inequality, it helps to first rearrange the terms of our quadratic form. This reformulation is called the quadratic completion or quadratic complementation. Here we assume the lattice is positive definite. That is, every nonzero element has a positive norm. With this, we can find the Cholesky decomposition $A = LL^t$, where $L$ is a lower triangular matrix. Equivalently, we can express this as $A = R^t R$, where $R$ is an upper triangular matrix. Since Fincke-Pohst uses upper triangular matrices, this is what we will use. The formulas below will reflect this. We now express $Q$ as:
-\[ Q(\mathbf{x}) = \sum_{i=1}^m q_{ii}\left( x_i + \sum_{j=i+1}^m q_{ij}x_j\right)^2.\]
-
-Our coefficients $q_{ij}$ are defined from $R$ and stored in a matrix for convenience.
-\[q_{ij} =
+Let $\mathbf{x} = (x_1, \dots, x_n)$. To solve this inequality, we first rearrange the terms of the quadratic form via quadratic completion. Here we assume that $\Gamma$ is positive definite so that every nonzero element of the lattice has a positive norm. With this, we find the Cholesky decomposition $A = R^TR$, where $R$ is an upper triangular matrix, and express $Q$ as
+\[ Q(\mathbf{x}) = \sum_{i=1}^n q_{ii}\left( x_i + \sum_{j=i+1}^n q_{ij}x_j\right)^2.\]
+The coefficients $q_{ij}$ are defined from $R$ and stored in a matrix $\tilde{Q}$ for convenience. In particular, 
+\begin{equation} \label{eq:CholeskyCoeffs}
+q_{ij} =
 \begin{cases}
 \frac{r_{ij}}{r_{ii}} & \text{ if } i < j\\
-r_{ii}^2 & \text{ if } i = j
-\end{cases}.\]
-Since $R$ is upper triangular, the matrix $Q = [q_{ij}]$ will be as well.
-
-To obtain the upper triangular matrix $R$ from our matrix $A$, we compute the diagonal and non-diagonal entries as follows:
-\[r_{ii} = \sqrt{ a_{ii} - \sum_{k = 1}^{i-1}r_{ki}^2}\]
-\[r_{ij} = \frac{1}{r_{ii}}\left( a_{ij} - \sum_{k = 1}^{j-1}r_{ki}r_{kj}\right).\]
-
-Using these, we can reformulate the construction of the coefficients of $Q$ to use values from $A$. We will soon see how it is possible to do away with using the Cholesky decomposition entirely.
-\[q_{ii} = a_{ii} - \sum_{k = 1}^{i-1}r_{ki}^2\]
-\[q_{ij} = \frac{1}{r_{ii}^2}\left( a_{ij} - \sum_{k = 1}^{j-1}r_{ki}r_{kj}\right).\]
-By putting this construction in terms of the coefficients of Q only, we arrive at the following
-\[q_{ii} = a_{ii} - \sum_{k = 1}^{i-1}q_{ki}^2q_{kk}\]
-\[q_{ij} = \frac{1}{q_{ii}}\left( a_{ij} - \sum_{k = 1}^{j-1}q_{ki}q_{kj}q_{kk}\right).\]
-
-We can then calculate these coefficients, starting with $q_{11}$ and calculating $q_{1j}$ for $1 \leq j \leq m$. Then we continue by calculating $q_{22}$ and $q_{2j}$ for $2 \leq j \leq m$. We proceed by first always calculating the diagonal entry $q_{ii}$ and then $q_{ij}$ for $i \leq j \leq m$ until we reach $q_{mm}$.
-In practice, this is how we compute the coefficients for our form. However, it is equally possible to first compute the Cholesky Decomposition using available methods, and then computing the entries of $Q$ from this. In fact, we do exactly this, by first computing the Cholesky decomposition.
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\textbf{The usual Fincke-Pohst way to bound $x_i$}
-
-Since the sum $Q(x)$ is less than $C$, the individual term $q_{mm}x_m^2$ must also be less than $C$.
-\begin{align*}
-\sum_{i=1}^m q_{ii}\left( x_i + \sum_{j=i+1}^m q_{ij}x_j\right)^2	& \leq C \\
-q_{mm}x_m^2 & \leq C\\\
-x_m^2 & \leq \frac{C}{q_{mm}}.
-\end{align*}
-In fact, $x_m$ is bounded above by $\sqrt{C/q_{mm}}$ and below by $-\sqrt{C/q_{mm}}$. 
-
-This illustrates the first step in establishing bounds on a specific entry $x_i$. Adding more terms from the outer sum to this sequence, a pattern emerges.
-\begin{align*}
-q_{mm}x_m^2 & \leq C\\
-q_{m-1, m-1}\left(x_{m-1} + q_{m-1,m}x_m\right)^2 & \leq C - q_{mm}x_m^2\\
-q_{m-2, m-2}\left(x_{m-2} + \sum_{j = m-1}^m q_{m-2,j}x_j\right)^2 & \leq C - q_{mm}x_m^2 - q_{m-1, m-1}\left(x_{m-1} + q_{m-1,m}x_m\right)^2\\
-\end{align*}
-
-Let
-\[U_k = \sum_{j = k+1}^m q_{kj}x_j\]
-so that we can rewrite $Q(\mathbf{x})$ as 
-\[Q(\mathbf{x}) = \sum_{i=1}^m q_{ii}\left( x_i + \sum_{j=i+1}^m q_{ij}x_j\right)^2 = \sum_{i=1}^m q_{ii}\left( x_i + U_i\right)^2\]
+r_{ii}^2 & \text{ if } i = j.
+\end{cases}
+\end{equation}
+Since $R$ is upper triangular, the matrix $\tilde{Q}$ is as well. This yields the following reformulation of \eqref{eq:ShortVector}
+\[ \sum_{i=1}^n q_{ii}\left( x_i + \sum_{j=i+1}^n q_{ij}x_j\right)^2 \leq C.\]
+From here we observe that the individual term $q_{nn}x_n^2$ must also be less than $C$. Specifically, 
+\[x_n^2 \leq \frac{C}{q_{nn}}\]
+so that $x_n$ is bounded above by $\sqrt{C/q_{nn}}$ and below by $-\sqrt{C/q_{nn}}$. This illustrates the first step in establishing bounds on a specific entry $x_i$. Adding more terms from the outer sum to this sequence, a pattern emerges. Let
+\[U_k = \sum_{j = k+1}^n q_{kj}x_j,\]
+where $U_n = 0$, and rewrite $Q(\mathbf{x})$ as 
+\[Q(\mathbf{x}) = \sum_{i=1}^n q_{ii}\left( x_i + \sum_{j=i+1}^n q_{ij}x_j\right)^2 = \sum_{i=1}^n q_{ii}\left( x_i + U_i\right)^2.\]
 In general, 
-\[q_{kk}(x_k + U_k)^2 \leq C - \sum_{i = k+1}^m q_{ii}(x_i + U_i)^2.\]
-Let $T_k$ denote the bound on the right-hand side. That is
-\[T_k = C - \sum_{i = k+1}^m q_{ii}(x_i + U_i)^2,\]
-so that $T_m = C$, $T_{m-1} = C - q_{mm}x_m^2$ and 
-\[T_{m-2} = C - q_{mm}x_m^2 - q_{m-1, m-1}\left(x_{m-1} + q_{m-1,m}x_m\right)^2.\]
-
-We set $T_m$ as $C$ and find each subsequent $T_k$ by subtracting the next term from the outer summand:
-\[T_k = C - \sum_{i = k+1}^m q_{ii}(x_i + U_i)^2,\]
+\[q_{kk}(x_k + U_k)^2 \leq C - \sum_{i = k+1}^n q_{ii}(x_i + U_i)^2.\]
+Let $T_k$ denote the bound on the right-hand side, 
+\[T_k = C - \sum_{i = k+1}^n q_{ii}(x_i + U_i)^2.\]
+We set $T_n = C$ and find each subsequent $T_k$ by subtracting the next term from the outer summand,
 \[T_k = T_{k+1} - q_{k+1,k+1}(x_{k+1} + U_{k+1})^2.\]
-Now, we have an upper bound for each summand. 
-\[q_{kk}(x_k + U_k)^2 \leq T_k.\]
-Using this, we can estimate upper and lower bounds for each $x_k$ in the coordinate vector $\mathbf{x}$. We start by computing the last entries of $\mathbf{x}$ and their bounds first. Assuming that the last several entries of $\mathbf{x}$ have been assigned, upper and lower bounds on $x_k$ can be determined. Now that we have established a bound on a term in the outer sum, we can determine bounds on the specific entry $x_k$. Take the above equation, and solve for $x_k$. Take the above equation and solve for $x_k$:
-\begin{align*}
-(x_k + U_k)^2	& \leq T_k/q_{kk}\\
-	x_k + U_k	& \leq \sqrt{T_k/q_{kk}}\\
-	x_k 		& \leq \sqrt{T_k/q_{kk}} - U_k.
-\end{align*}
-Similarly, we have a lower bound:
-\[x_k \geq - \sqrt{T_k/q_{kk}} - U_k.\]
-Since $x_k$ must be an integer, we can restrict our bounds further. Let $t_k = \sqrt{T_k/q_{kk}}$. 
-\[UB_k = \lfloor t_k - U_k \rfloor\]
-\[LB_k = \lceil-t_k - U_k\rceil\]
-Here $UB_k$ is the upper bound on $x_k$ and $LB_k$ is the lower bound on $x_k$. 
-\[LB_x \leq x_k \leq UB_k.\]
-
-To enumerate all of the vectors $\mathbf{x}$ such that $Q(\mathbf{x}) \leq C$, begin with the last entry $x_m$ (letting all other $x_j = 0$). Determine the upper and lower bounds $UB_m$ and $LB_m$ by first calculating $t_m = \sqrt{T_m/q_{mm}}$. We define $U_m = 0$, and by definition remember that $T_m = C$.
-
-For each entry $x_i$, starting with $x_m$ and going down to $x_1$, we initialize the value to be $x_i = LB_i$. After the value is initialized, we begin to increment the values of all the entries, adding 1 to each entry until we either reach the last index (in which case we have found a solution) or we exceed the upper bound on a particular entry (we will need to readjust the previously assigned entries). If at any time the lower bound exceeds the upper bound for a given entry, it will become immediately apparent when the value for that entry is initialized. We must then backtrack to our previous entries (that is, entries with a higher index). If we reach x1 without exceeding the upper bounds for any entry, then we have found a complete vector $\mathbf{x}$ which satisfies $Q(\mathbf{x}) \leq C$.
-
-We will know we have found all the short vectors when we reach the zero vector. This is because we start by assigning each value $x_i$ its lower bound, which is calculated with respect to the values $x_{i+1}, \dots, x_n$. We increase $x_i$ incrementally, until it exceeds the corresponding calculated upper bound. When this happens we revisit $x_{i+1}$, increasing its value. Since $x_{i+1}$ was originally assigned its own lower bound, it starts off as a negative integer and increases steadily until it reaches $0$. Likewise, the other values will start off negative at each iteration and slowly increase in value. It is only when all entries are $0$ that the algorithm terminates. When we add each vector, we also add the vector with entries $-x_i$ for each $i$. In this we capture all the small vectors without having to check positive values for $x_n$.
-
-Before beginning the search, first find the coefficients of the quadratic form expressed as above. Initialize $T_k,U_k,UB_k$ and $x_k$ to be $0$ for all $k$. Begin with $i = m$ and $T_i = C$ as the value bounding our vectors.
-
-It is noted in the Fincke-Pohst paper that if we label the columns of $R$ by $\mathbf{r}_i$ (from the Cholesky decomposition $\mathbf{x}^tR^tR\mathbf{x}$) and the rows of $R^{-1}$ by $\mathbf{r}'_i$, then we see that 
-\[x_i^2 = \left( \mathbf{r}'^t_i \left( \sum_{k=1}^m x_k \mathbf{r}_k\right) \right)^2 \leq \mathbf{r}'^t_i \mathbf{r}_i (\mathbf{x}^tR^tR\mathbf{x}) \leq \| \mathbf{r}'_i \|^2C.\]
-
-So it may behoove us to reduce the rows of $R^{-1}$ in order to reduce our search space. Furthermore, it helps to put the smallest basis vectors first, so reordering the columns may also be beneficial.
-
-Express this reduction with a unimodular matrix $V^{-1}$ so that $R_1^{-1} = V^{-1}R^{-1}$. Then reorder the columns of $R_1$ with a permutation matrix $P$. Since $R_1 = RV$, we then have that $R_2 = (RV)P$.
-
-Then $R_2^{-1} = P^{-1}V^{-1}R^{-1}$. If we find a solution to the inequality $\mathbf{y}^tR_2^tR_2\mathbf{y}\leq C$, we can recover a solution to our original inequality by $\mathbf{x} = VP\mathbf{y}$. Since $R^{-1}_2 =P^{-1}V^{-1}R^{-1}$, we know that $R_2 = RVP$. 
-
-\begin{align*}
-\mathbf{y}^tR_2^tR_2\mathbf{y} & \leq C\\
-\mathbf{y}^t(P^tV^tR^t)(RVP)\mathbf{y} & \leq C\\
-(\mathbf{y}^tP^tV^t)R^tR(VP\mathbf{y}) & \leq C\\
-(VP\mathbf{y})^tR^tR(VP\mathbf{y}) & \leq C\\
-\mathbf{x}^tR^tR\mathbf{x} &\leq C.
-\end{align*}
-
-This improves the search time by giving us a nicer quadratic form to work with. Once we find solutions to the inequality given by $Q_2(\mathbf{y}) = \mathbf{y}^tR_2^tR_2\mathbf{y} \leq C$, it is a simple matter of translating them into solutions of our original inequality.
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\textbf{Translated Lattices}
-We now explain how to apply Fincke-Pohst to the case
-\[(x-c)^tB^tB(x-c) \leq C.\]
-In place of the usual reduction listed above, we use MAGMA's built-in LLLGram function on the symmetric positive-definite matrix $A = B^tB$. Here, since $A$ is symmetric and positive-definite, it can be written as $A = R^tR$ for some upper triangular matrix $R$ (via Cholesky Decomposition).The function LLLGram, with input $A$, computes a matrix $G$ which is the Gram matrix corresponding to a LLL-reduced form of the matrix $R$. This function returns three values:
-\begin{itemize}
-\item A LLL-reduced Gram matrix $G$ of the Gram matrix $A$;
-\item A unimodular matrix $U$ in the matrix ring over $\mathbb{Z}$ whose degree is the number of rows of $A$ such that $G=U^tAU$ (technically it returns $G=UAU^t$, but we change this here to simplify our computations later);
-\item The rank of $A$ (which equals the dimension of the lattice generated by $R$).
-\end{itemize}
-
-Thus
-\[(U^{-1})^tGU^{-1} = A\]
-and we have
-\begin{align*}
-(x-c)^tB^tB(x-c) & \leq C\\
-(x-c)^tA(x-c) & \leq C\\
-(x-c)^t(U^{-1})^tGU^{-1}(x-c) \leq C\\
-\left(U^{-1}(x-c)\right)^tG \left(U^{-1}(x-c)\right) \leq C\\
-\left(y-d\right)^tG \left(y-d\right) \leq C
-\end{align*}
-where
-\[y = U^{-1}x \quad \text{ and } \quad d = U^{-1}c.\]
-Now, we are in position to enumerate the short vectors $y$ satisfying 
-\[\left(y-d\right)^tG \left(y-d\right) \leq C.\]
-We retrieve our solutions $x$ via $x = Uy$.
-
-As before, we generate the matrix $Q$ such that 
-\[ Q(\mathbf{x}) = \sum_{i=1}^m q_{ii}\left( y_i - d_i + \sum_{j=i+1}^m q_{ij}(y_j - d_j)\right)^2.\]
-
-Since the sum $Q(x)$ is less than $C$, the individual term $q_{mm}(y_m - d_m)^2$ must also be less than $C$.
-\begin{align*}
-\sum_{i=1}^m q_{ii}\left( y_i - d_i + \sum_{j=i+1}^m q_{ij}(y_j - d_j)\right)^2	 & \leq C \\
-q_{mm}(y_m - d_m)^2 & \leq C.
-\end{align*}
-Here, in place of the usual method of bounding $y_m - d_m$ by $\sqrt{C/q_{mm}}$ and $-\sqrt{C/q_{mm}}$, we instead let $y_m$ vary between $-\lfloor(-d_m)\rfloor$ and $-\lceil(-d_m)\rceil$. In this way, we simply need to verify that, for these choices of $y_m$, the equivalence
-\[q_{mm}(y_m - d_m)^2 \leq C\]
-is satisfied. If it is, we store this value of $y_m$, otherwise we let $y_m = y_m + 1$. This illustrates the first step in establishing bounds on a specific entry $y_i$. Adding more terms from the outer sum to this sequence, a pattern emerges.
-
-Let
-\[U_i = -d_i + \sum_{j = i+1}^m q_{ij}(y_j - d_j)\]
-so that we can rewrite $Q(\mathbf{x})$ as 
-\[ Q(\mathbf{x}) = \sum_{i=1}^m q_{ii}\left( y_i - d_i + \sum_{j=i+1}^m q_{ij}(y_j - d_j)\right)^2 = \sum_{i=1}^m q_{ii}\left( y_i + U_i\right)^2\]
-In general, 
-\[q_{kk}(y_k + U_k)^2 \leq C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2.\]
-Let $T_k$ denote the bound on the right-hand side. That is
-\[T_k = C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2,\]
-so that $T_m = C$, $T_{m-1} = C - q_{mm}(y_m - d_m)^2$ and 
-\[T_{m-2} = C - q_{mm}(y_m - d_m)^2 - q_{m-1, m-1}\left(y_{m-1} - d_{m-1} + q_{m-1,m}(y_m-d_m)\right)^2.\]
-
-We set $T_m$ as $C$ and find each subsequent $T_k$ by subtracting the next term from the outer summand:
-\[T_k = C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2,\]
-\[T_k = T_{k+1} - q_{k+1,k+1}(y_{k+1} + U_{k+1})^2.\]
-Now, we have an upper bound for each summand. 
-\[q_{kk}(y_k + U_k)^2 \leq T_k.\]
-Using this, we can estimate upper and lower bounds for each $y_k$ in the coordinate vector $\mathbf{y}$. We start by computing the last entries of $\mathbf{y}$ and their bounds first. Assuming that the last several entries of $\mathbf{y}$ have been assigned, upper and lower bounds on $y_k$ can be determined. Now that we have established a bound on a term in the outer sum, we can determine bounds on the specific entry $y_k$. The following diagram illustrates the scenario. In the usual Fincke-Pohst algorithm, we take the above equation and solve for $y_k$:
-\begin{align*}
-(y_k + U_k)^2	& \leq T_k/q_{kk}\\
-	y_k + U_k	& \leq \sqrt{T_k/q_{kk}}\\
-	y_k 		& \leq \sqrt{T_k/q_{kk}} - U_k.
-\end{align*}
-Similarly, we have a lower bound:
-\[y_k \geq - \sqrt{T_k/q_{kk}} - U_k.\]
-Since $x_k$ must be an integer, we can restrict our bounds further. Let $t_k = \sqrt{T_k/q_{kk}}$. 
-\[UB_k = \lfloor t_k - U_k \rfloor\]
-\[LB_k = \lceil-t_k - U_k\rceil\]
-Here $UB_k$ is the upper bound on $y_k$ and $LB_k$ is the lower bound on $y_k$. 
-\[LB_k \leq y_k \leq UB_k.\]
-
-\textbf{Refinements}
-We note here that computing $LB_k$ and $UB_k$ is highly inefficient as it often requires high precision to accurately compute $\sqrt{T_k/q_{kk}}$. Instead, we adopt the following bounds, as per Matshke's algorithm. To help justify this process, we refer to the following diagram
-
-\begin{center}
-\begin{tikzpicture}[scale=6]
-\draw[thick] (0.8,0.05)--(0.8,-0.05) node[anchor=north] {$\lfloor \sqrt{T_k/q_{kk}} - U_k \rfloor$};
-\draw[thick] (-0.8,0.05)--(-0.8,-0.05) node[anchor=north]{$\lceil -\sqrt{T_k/q_{kk}} - U_k \rceil$};
-\draw[thick] (0.4,0.05)--(0.4,-0.05) node[anchor=north] {-$\lfloor U_k \rfloor$};
-\draw[thick] (-0.4,0.05)--(-0.4,-0.05) node[anchor=north]{-$\lceil U_k \rceil$};
-\draw[thick] (-1,0)--(1,0);
-\end{tikzpicture}
-\end{center}
-
-As stated above, 
-\[\lceil -\sqrt{T_k/q_{kk}} - U_k \rceil= LB_k \leq y_k \leq UB_k = \lfloor \sqrt{T_k/q_{kk}} - U_k \rfloor.\]
-In our old implementation for non-translated lattices, we set each $y_k = LB_k$ and increased each term until we reached the zero (centre) vector. Here since the centre vector is non-zero, we instead set each $y_k = -\lceil U_k \rceil$ and increase each $y_k$ successively until $y_k > \lfloor \sqrt{T_k/q_{kk}} - U_k \rfloor$. This is equivalent to the above computation and generates only half of the vectors, assuming symmetry. This symmetry can only be applied if the centre vector is defined over $\mathbb{Z}$, otherwise we must compute all vectors. To do (we can also break symmetry and compute all vectors in the $\mathbb{Z}$ case), we also set $y_k = \lceil U_k \rceil - 1$ and successively decrease this term until $y_k <\lceil -\sqrt{T_k/q_{kk}} - U_k \rceil$.
-
-Of course, in this refinement, we want to avoid computing $\sqrt{T_k/q_{kk}}$, and so instead of verifying whether $y_k > \lfloor \sqrt{T_k/q_{kk}} - U_k \rfloor$ or $y_k <\lceil -\sqrt{T_k/q_{kk}} - U_k \rceil$, we compute $q_{kk}(y_k + U_k)^2$ in each case and verify whether
-\[q_{kk}(y_k + U_k)^2 \leq C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2\]
-holds. In the first round, if this does not hold and if $y_k < -\lfloor U_k \rfloor$, we continue to iterate $y_k = y_k + 1$, otherwise we simply iterate $y_k = y_k + 1$. Once this equivalence does not hold and $y_k \geq -\lfloor U_k \rfloor$, we stop this loop. We then reset $y_k = \lceil U_k \rceil - 1$ and search in the other direction, by successively subtracting $1$ if 
-\[q_{kk}(y_k + U_k)^2 \leq C - \sum_{i = k+1}^m q_{ii}(y_i + U_i)^2\]
-holds. We stop searching in this direction only once this equivalence does not hold.  
+This yields the upper bound
+\[q_{kk}(x_k + U_k)^2 \leq T_k\]
+so that $x_k$ is bounded above by $\sqrt{T_k/q_{kk}} - U_k$ and below by ${-\sqrt{T_k/q_{kk}} - U_k}$. In this way, we iteratively enumerate all vectors $\mathbf{x}$ satisfying $Q(\mathbf{x}) \leq C$, beginning with the entry $x_n$ of $\mathbf{x}$ and working down towards $x_1$.  
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
+\subsection{Computational remarks and translated lattices}
+\label{subsec:FinckePohstRemarks}
+
+Recall that the Cholesky decomposition of $A = B^TB$ yields the upper triangular matrix $R$ where $A = R^TR$. It is noted in the \edit{Fincke-Pohst paper} that if we label the columns of $R$ by $\mathbf{r}_i$ and the rows of $R^{-1}$ by $\mathbf{r}'_i$, then 
+\[x_k^2 = \left( \mathbf{r}'^{\ T}_k \cdot \sum_{i=1}^n x_i \mathbf{r}_i \right)^2 \leq \mathbf{r}'^{\ T}_k \mathbf{r}_k (\mathbf{x}^TR^TR\mathbf{x}) \leq | \mathbf{r}'_k |^2C.\]
+To reduce the search space, it is thus beneficial to reduce the rows of $R^{-1}$. Furthermore, rearranging the columns of $R$ so that the shortest column vector is first helps reduce the total running time of the Fincke-Pohst algorithm. In particular, doing so leads to progressively smaller intervals in which $x_k$ may exist. 
+
+We express this reduction with a unimodular matrix $V^{-1}$ so that $R_1^{-1} = V^{-1}R^{-1}$. Applying an appropriate permutation matrix $P$, we then reorder the columns of $R_1$. Since $R_1 = RV$, this yields $R_2 = (RV)P$. Finally, we compute the solutions $\mathbf{y}$ to $\mathbf{y}^TR_2^TR_2\mathbf{y}\leq C$ and recover the short vectors $\mathbf{x}$ satisfying the original inequality \eqref{eq:ShortVector} via $\mathbf{x} = VP\mathbf{y}$. 
+
+As before, let $\Gamma$ be an $n$-dimensional lattice with basis matrix $B$, quadratic form $\Phi$, and associated bilinear form $Q$. In \autoref{subsec:FinckePohst}, it is noted that an implementation of the Fincke-Pohst algorithm is available in Magma (\edit{text}). Unfortunately, this implementation does not support \textit{translated} lattices, a variant of the Fincke-Pohst algorithm which we will need in \autoref{ch:EfficientTMSolver}. By a translated lattice, we mean the discrete subgroup of $\mathbb{R}^n$ of the form
+\[\Gamma + \mathbf{w} = \left\{ \sum_{i=1}^n x_i \mathbf{b}_i + \mathbf{w}\ : \ x_i \in \mathbb{Z} \right\},\]
+where $\mathbf{b}_1, \dots, \mathbf{b}_n$ form the columns of $B$ and $\mathbf{w} \in \mathbb{R}^n$. In the remainder of this section, we describe how to modify the Fincke-Pohst algorithm and its refinements to support translated lattices. 
+
+Analogous to the non-translated case, any embedded vector $\mathbf{u}$ of $\Gamma + \mathbf{w}$ may be expressed as $\mathbf{u} = B\mathbf{x} + \mathbf{w}$ for a corresponding coordinate vector $\mathbf{x}$. In this case, we call the vector $\mathbf{u} \in \Gamma + \mathbf{w}$ \textit{small} if 
+\begin{equation} \label{eq:TransShortVector}
+(\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c}) \leq C
+\end{equation}
+for some $C \geq 0$, where $\mathbf{c} = -\mathbf{w}$. 
+
+As in the usual short vectors process, we begin by applying Cholesky decomposition to the positive definite matrix $A=B^TB$ to obtain an upper triangular matrix $R$ satisfying $A = R^TR$. We then generate the matrices $R_1, R_2, V,$ and $P$ described earlier in this section. This allows us to write $A = U^TGU$ for a unimodular matrix $U$ and Gram matrix $G$ given by
+\[U = P^{-1}V^{-1} \quad \text{ and } \quad G = R_2^TR_2.\]
+Thus the inequality~\eqref{eq:TransShortVector} becomes
+\begin{equation} \label{eq:TransShortVector2}
+(\mathbf{y}-\mathbf{d})^TG(\mathbf{y}-\mathbf{d}) \leq C
+\end{equation}
+where
+\[\mathbf{y} = U\mathbf{x} \quad \text{ and } \quad \mathbf{d} = U\mathbf{c}.\]
+To enumerate the vectors $\mathbf{y}$ which satisfy this inequality, we consider the bilinear form $Q$ associated to the lattice $\Gamma$. We express this form as
+\[ Q(\mathbf{y}-\mathbf{d}) = \sum_{i=1}^n q_{ii}\left( y_i - d_i + \sum_{j=i+1}^n q_{ij}(y_j - d_j)\right)^2.\]
+As in the usual Fincke-Pohst algorithm, the coefficients $q_{ij}$ are defined from the matrix $R$ via equation~\eqref{eq:CholeskyCoeffs}. Let
+\[U_k = -d_k + \sum_{j = k+1}^n q_{kj}(y_j - d_j),\]
+where $U_n = -d_n$, and rewrite $Q(\mathbf{y}-\mathbf{d})$ as
+\[ Q(\mathbf{y}-\mathbf{d}) = \sum_{i=1}^n q_{ii}\left( y_i - d_i + \sum_{j=i+1}^n q_{ij}(y_j - d_j)\right)^2 = \sum_{i=1}^n q_{ii}\left( y_i + U_i\right)^2.\]
+From here, we proceed as in the usual Fincke-Pohst algorithm described in \autoref{subsec:FinckePohst}. Once we compute all vectors $\mathbf{y}$ which satisfy \eqref{eq:TransShortVector2}, we recover $\mathbf{x}$ using $\mathbf{x} = U^{-1}\mathbf{y}$. 
+
+As a final remark about Fincke-Pohst for translated lattices, it is worth noting that one could use the variant implemented in Magma (\edit{format}) simply by increasing the dimension of the lattice $\Gamma$ and appropriately redefining the basis vectors $\mathbf{b}_i$. This is highly ill-advised as it increases the search space and subsequent running time of the algorithm.  
+
+Generally speaking, the use of Fincke-Pohst in our applications poses one of the main bottlenecks in solving Thue-Mahler and Thue-Mahler-like equations. Specifically, this algorithm often yields upwards of hundreds of millions of short vectors, each one needing to be stored and, in our case, appropriately manipulated. This creates both timing and memory problems, often leading to gigabytes of data usage. Deleting these vectors does not release the memory and, as with the class group function, Magma's (\edit{format}) built-in Fincke-Pohst process cannot be terminated without exiting the program. The primary advantage of implementing and using our own version of Fincke-Pohst, as described in this section, is therefore the ability to add a fail-stop should the number of vectors found become too large.   \edit{table of large numbers of short vectors found?}
+
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+
 \endinput
-
-Let
-\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
-be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
-
-
 
 Any text after an \endinput is ignored.
 You could put scraps here or things in progress.
