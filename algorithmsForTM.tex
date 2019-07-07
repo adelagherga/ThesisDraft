@@ -419,59 +419,54 @@ In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
-\section{Need a title}
+\section{A small upper bound for $u_l$ in a special case}
+\label{sec:SmallBoundForSpecialCase}
 
+We now restrict our attention to those $p \in \{p_1, \dots, p_{\nu}\}$ and study the $p$-adic valuations of the numbers appearing in \eqref{eq:Sunit}. In particular, for $l \in \{1, \dots, \nu\}$, we identify conditions in which $\sum_{j = 1}^{\nu} n_ja_{lj}$ can be bounded by a small explicit constant, where $a_{lj}$ is the $(l,j)^{\text{th}}$ entry of the matrix $A$ derived in either \autoref{subsec:FactorizationTMwithoutOK} or \autoref{subsec:FactorizationTMwithOK}. Recall that $u_l + r_l = \sum_{j = 1}^{\nu} n_ja_{lj}$, where $r_l$ is known, so that a bound on $\sum_{j = 1}^{\nu} n_ja_{lj}$ yields a bound on the exponent $u_l$ in \eqref{eq:TMfactored}.
 
-We now restrict our attention to those $p \in \{p_1, \dots, p_v\}$ and study the $p$-adic valuations of the numbers appearing in \eqref{Eq:Sunit}. Recall that $z \in \mathbb{C}_p$ having $\ord_p(z) = 0$ is called a $p$-adic unit. 
+Fix a rational prime $p_l \in \{p_1, \dots, p_{\nu}\}$ and recall that $z \in \mathbb{C}_{p_l}$ having $\ord_{p_l}(z) = 0$ is called a $p_l$-adic unit. Part (i) of the Corollary of Lemma 7.2 of \edit{tzanakis} \cite{TW3} tells us that $\frac{\eps_1^{(i_0)}}{\varepsilon_1^{(j)}}, \dots, \frac{\eps_r^{(i_0)}}{\varepsilon_r^{(j)}}$ and $\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}, \dots, \frac{\varepsilon_r^{(k)}}{\varepsilon_r^{(j)}}$ are $p_l$-adic units. 
 
-Let $l \in \{1, \dots, v\}$ and consider the prime $p = p_l$. Part (ii) of the Corollary of Lemma 7.2 of \cite{TW3} tells us that $\frac{\varepsilon_1^{(i_0)}}{\varepsilon_1^{(j)}}$ and $\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}$ are $p_l$-adic units. 
+Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l(t)) = 1$. We now choose $i_0 \in \{1, \dots, 4\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. We fix this choice of index $i_0$ for the remainder of this chapter. The indices of $j,k$ are fixed, but arbitrary. 
 
-From now on we make the following choice for the index $i_0$. Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l[t]) = 1$. We choose $i_0 \in \{1, \dots, 4\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. The indices of $j,k$ are fixed, but arbitrary. 
-
-\begin{lemma} \label{Lem:units} \
+\begin{lemma} \label{lem:SunitUnits} \
 \begin{enumerate}
-\item[(i)] Let $i \in \{1, \dots, v\}$. Then $\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}$ are $p_l$-adic units. 
-\item[(ii)] Let $i \in \{1, \dots, v\}$. Then $\ord_{p_l}\left(\frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right) = a_{li}$, where $\mathbf{a_i} = (a_{1i}, \dots, a_{vi})$. 
+\item[(i)] Let $i \in \{1, \dots, \nu\}$. Then $\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}$ are $p_l$-adic units. 
+\item[(ii)] Let $i \in \{1, \dots, \nu\}$. Then $\ord_{p_l}\left(\frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right) = a_{li}$, where $\mathbf{a_i} = (a_{1i}, \dots, a_{vi})$ is the $i^{\text{th}}$ column of the matrix $A$ of either \autoref{subsec:FactorizationTMwithoutOK} or \autoref{subsec:FactorizationTMwithOK}. 
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-Consider the factorization of $g(t)$ in $\mathbb{Q}_{p_l}[t]: g(t) = g_1(t) \cdots g_m(t)$ and note that $\theta^{(j)}$ is a root of some $g_h(t) \neq g_l(t)$. Let $\mathfrak{p}_h$ be the corresponding prime ideal above $p_l$ and $e_h$ be its ramification index. Then $\mathfrak{p} \neq \mathfrak{p}_l$ and since 
+Consider the factorization $g(t) = g_1(t) \cdots g_m(t)$ of $g(t)$ in $\mathbb{Q}_{p_l}[t]$. Note that $\theta^{(j)}$ is a root of some $g_h(t) \neq g_l(t)$. Let $\mathfrak{p}_h$ be the corresponding prime ideal above $p_l$ and $e(\mathfrak{p}_h|p_l)$ be its ramification index. Then $\mathfrak{p} \neq \mathfrak{p}_l$ and since 
 \[(\gamma_i)\mathcal{O}_K = \mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}},\]
 we have 
-\[\ord_{p_l}(\gamma_i^{(j)}) = \frac{1}{e_h}\ord_{\mathfrak{p}_h}(\gamma_i) = 0.\]
+\[\ord_{p_l}(\gamma_i^{(j)}) = \frac{1}{e(\mathfrak{p}_h|p_l)}\ord_{\mathfrak{p}_h}(\gamma_i) = 0.\]
 An analogous argument gives $\ord_{p_l}(\gamma_i^{(k)}) = 0$. On the other hand, 
-\[\ord_{p_l}(\gamma_i^{(i_0)}) = \frac{1}{e_l}\ord_{\mathfrak{p}_l}(\gamma_i) = \ord_{\mathfrak{p}_l}(\mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}}) = a_{li}.\]
-
+\[\ord_{p_l}(\gamma_i^{(i_0)}) = \frac{1}{e(\mathfrak{p}_l|p_l)}\ord_{\mathfrak{p}_l}(\gamma_i) = \ord_{\mathfrak{p}_l}(\mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}}) = a_{li}.\]
 \end{proof}
 
-The next lemma deals with a special case in which the $n_l$ can be computed directly. This lemma is analogous to Lemma 7.3 of \cite{TW3}. 
+The next lemma deals with a special case in which the sum $\sum_{j = 1}^{\nu} n_ja_{lj}$ can be computed directly. This lemma is analogous to Lemma 7.3 of \cite{TW3} \edit{ref}. 
 
 Recall the constants
 \[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
-of \eqref{Eq:Sunit}.
-\begin{lemma}\label{Lem:del1}
+of \eqref{eq:Sunit}.
+\begin{lemma}\label{lem:Delta1}
 Let $l \in \{1, \dots, v\}$. If $\ord_{p_l}(\delta_1) \neq 0$, then 
-\[ \sum_{i = 1}^v n_ia_{li} = \min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2).\]
+\[ \sum_{i = 1}^{\nu} n_ia_{li} = \min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2).\]
 \end{lemma}
 
 \begin{proof}
-Apply the Corollary of Lemma $7.2$ of \cite{TW3} and Lemma~\ref{Lem:units} to both expressions of $\lambda$ in \eqref{Eq:Sunit}. On the one hand, we obtain that $\ord_{p_l}(\lambda) = \min\{\ord_{p_l}(\delta_1), 0\}$, and on the other hand, 
-\[\begin{split}
+Apply the Corollary of Lemma $7.2$ of \cite{TW3} and Lemma~\ref{lem:SunitUnits} to both expressions of $\lambda$ in \eqref{eq:Sunit}. On the one hand, we obtain that $\ord_{p_l}(\lambda) = \min\{\ord_{p_l}(\delta_1), 0\}$, and on the other hand, 
+\begin{align*}
 \ord_{p_l}(\lambda)
-& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^v \ord_{p_l}\left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\\
-& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^v n_ia_{li}.
-\end{split}\]
+& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^{\nu} \ord_{p_l}\left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\\
+& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^{\nu} n_ia_{li}.
+\end{align*}
 \end{proof}
 
+\edit{here}
 If this bound holds, it follows that
 \[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} = \frac{\min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2) + r_l + t_l}{\alpha_l}. \]
 We iterate this computation over all $i \in \{1, \dots, v \}$ for which Lemma \ref{Lem:del1} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple brute force search. 
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{A small upper bound for $\sum_{j = 1}^v n_ja_{ij}$ in a special case} \label{subsec:smallbound}
-
-Let $l \in \{1, \dots v\}$. In this section, we identify conditions in which $n_l$ can be bounded by a small explicit constant. We may assume that $\ord_{p_l}(\delta_1) = 0$, since otherwise a reasonable bound is afforded by Lemma \ref{Lem:del1}. 
 
 We first recall the following result on the $p_l$-adic logarithm:
 
@@ -481,6 +476,7 @@ Let $z_1, \dots, z_m \in \overline{\mathbb{Q}}_p$ be $p$-adic units and let $b_1
 then
 \[\ord_p(b_1\log_p z_1 + \cdots + b_m \log_p z_m) = \ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) \]
 \end{lemma}
+\edit{to here}
 
 We introduce the following notation
 \[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, v\},\]

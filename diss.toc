@@ -27,12 +27,11 @@
 \contentsline {subsection}{\numberline {3.4.2}Using the class group $\Cl (K)$}{44}{subsection.3.4.2}
 \contentsline {subsection}{\numberline {3.4.3}The $S$-unit equation}{45}{subsection.3.4.3}
 \contentsline {subsection}{\numberline {3.4.4}Computational remarks and comparisons}{47}{subsection.3.4.4}
-\contentsline {section}{\numberline {3.5}Need a title}{48}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}A small upper bound for $\DOTSB \sum@ \slimits@ _{j = 1}^v n_ja_{ij}$ in a special case}{50}{subsection.3.5.1}
-\contentsline {section}{\numberline {3.6}Lattice-Based Reduction}{55}{section.3.6}
+\contentsline {section}{\numberline {3.5}A small upper bound for $u_l$ in a special case}{48}{section.3.5}
+\contentsline {section}{\numberline {3.6}Lattice-Based Reduction}{54}{section.3.6}
 \contentsline {subsection}{\numberline {3.6.1}The $L^3$-lattice basis reduction algorithm}{55}{subsection.3.6.1}
 \contentsline {subsection}{\numberline {3.6.2}The Fincke-Pohst algorithm}{57}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Computational remarks and translated lattices}{60}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3.6.3}Computational remarks and translated lattices}{59}{subsection.3.6.3}
 \contentsline {chapter}{\numberline {4}Goormaghtigh Equations}{63}{chapter.4}
 \contentsline {section}{\numberline {4.1}Rational approximations}{67}{section.4.1}
 \contentsline {section}{\numberline {4.2}Pad\'e approximants}{71}{section.4.2}
