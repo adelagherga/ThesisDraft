@@ -4,12 +4,9 @@
 \chapter{Goormaghtigh Equations}
 \label{ch:Goormaghtigh} 
 
+\edit{introduction}
 
 
-%------------------------------------------
-\section{Introduction} \label{intro}
-%------------------------------------------
-\edit{label}
 More than a century ago, Ratat \cite{Ra} and Goormaghtigh \cite{Go} observed the identities
 $$
 31 = \frac{2^5-1}{2-1} = \frac{5^3-1}{5-1} \; \; \mbox{ and } \; \; 8191 = \frac{2^{13}-1}{2-1} = \frac{90^3-1}{90-1}.
@@ -749,7 +746,7 @@ From (\ref{del-upper}) and   Proposition \ref{Cee},
 $$
 |\delta| < \frac{M(\alpha,x)^{1/2}}{\pi x} \; \left( \frac{4^{\alpha} }{x \, M(\alpha,x)} \right)^{m_1}.
 $$
-Appealing to ({\ref{M-lower}), since $x \geq 720$ and $\alpha \leq 6.906$, it follows that 
+Appealing to (\ref{M-lower}), since $x \geq 720$ and $\alpha \leq 6.906$, it follows that 
 $$
 \frac{4^{\alpha} }{x \, M(\alpha,x)} \leq \frac{4^{\alpha} }{\left( 1 + \frac{719}{720 \alpha} \right)^\alpha \, 719 \; (\alpha+1)} < 1,
 $$
@@ -953,7 +950,7 @@ None of these triples lead to nontrivial solutions to (\ref{eq-main}) with $n=4$
  \end{equation}
  note that we always have, for each $x$, solutions $(y,Y) = (0, \pm x), (-1, \pm x)$ and $(x, \pm x^3)$. 
  
- Unfortunately, it does not appear that this approach is computationally efficient enough to solve equation (\ref{quartic}) in a reasonable time for all values of $x$ with  $2 \leq x < 720$ (though it does work somewhat quickly for $2 \leq x \leq 59$ and various other $x < 720$). The elliptic curve defined by (\ref{quartic}) has, in each case, rank at least $2$ (the solutions corresponding to $(y,Y) = (0, x)$ and $(-1, x)$ are independent non-torsion points). Magma's {\it IntegralQuarticPoints} routine is based on bounds for  linear forms in elliptic logarithms and hence requires detailed knowledge of the generators of the Mordell-Weil group. Thus, when the rank is much larger than $2$, Magma's   {\it IntegralQuarticPoints} routine can, in practice, work very slowly. This is the case, for example, when $x=60$ (where the corresponding elliptic curve has rank $5$ over $\mathbb{Q}$).  
+ Unfortunately, it does not appear that this approach is computationally efficient enough to solve equation (\ref{quartic}) in a reasonable time for all values of $x$ with  $2 \leq x < 720$ (though it does work somewhat quickly for $2 \leq x \leq 59$ and various other $x < 720$). The elliptic curve defined by (\ref{quartic}) has, in each case, rank at least $2$ (the solutions corresponding to $(y,Y) = (0, x)$ and $(-1, x)$ are independent non-torsion points). Magma's \edit{format}{\it IntegralQuarticPoints} routine is based on bounds for  linear forms in elliptic logarithms and hence requires detailed knowledge of the generators of the Mordell-Weil group. Thus, when the rank is much larger than $2$, Magma's   {\it IntegralQuarticPoints} routine can, in practice, work very slowly. This is the case, for example, when $x=60$ (where the corresponding elliptic curve has rank $5$ over $\mathbb{Q}$).  
 
  
 %Unfortunately, it does not appear that this approach is computationally efficient enough to solve equation (\ref{quartic}) in a reasonable time for all values of $x$ with  $2 \leq x < 720$ (though it does work somewhat quickly for $2 \leq x \leq 59$ and various other $x < 720$). The elliptic curve defined by (\ref{quartic}) has, in each case, rank at least $2$ (the solutions corresponding to $(y,Y) = (0, x)$ and $(-1, x)$ are independent non-torsion points). When the rank is much larger than this, Magma's   {\it IntegralQuarticPoints} routine (which is based on bounds for  linear forms in elliptic logarithms and hence requires detailed knowledge of the generators of the Mordell-Weil group) can, in practice, work very slowly. This is the case, for example, when $x=60$ (where the corresponding elliptic curve has rank $5$ over $\mathbb{Q}$). 
@@ -983,14 +980,7 @@ None of these triples lead to nontrivial solutions to (\ref{eq-main}) with $n=4$
  $$
  F_x(y,z) = (x-1)(y^4 + y^3z + y^2z^2 + yz^3) + xz^4.
  $$
- For fixed $x$, $F_x(y,z)$ is a homogeneous quartic form and so equation (\ref{TM-start}) is a special case of the \textit{Thue-Mahler} equation, i.e. an equation of the form
- \begin{equation} \label{TM-normal}
- F(y,z) = a p_1^{Z_1}\cdots p_v^{Z_v},
- \end{equation}
- where $F$ is an irreducible binary form of degree at least $3$, $a \in \mathbb{Z}$, the $p_i$ are distinct rational primes and the 
- integers $y, z, Z_1, \dots, Z_v$ with $Z_i \geq 0$ for $i = 1, \dots, v$ are variables. 
-
-Now, if $x = p_1^{\alpha_1}\cdots p_v^{\alpha_v}$ is the prime factorization of $x$, then equation (\ref{TM-start}) becomes 
+For the remainder of this section, we consider the homogeneous quartic form \eqref{TM-start} for fixed $x$. Notably, we observe that this equation is a special case of the Thue-Mahler equation~\eqref{eq:ThueMahler}. In particular, if $x = p_1^{\alpha_1}\cdots p_v^{\alpha_v}$ is the prime factorization of $x$ with $\alpha_i \geq 0$, then equation (\ref{TM-start}) becomes 
 \begin{equation}\label{Eq:main}
 F_x(y,1) =  p_1^{Z_1}\dots p_v^{Z_v}
 \end{equation}
@@ -1002,8 +992,9 @@ To find all solutions to this equation, we will use linear forms in $p$-adic log
 \subsection{The relevant algebraic number field}
 %----------------------------------------------------------------------------------------------------------------------------------------------
 
-Here and henceforth, write, for concision, $F(y)=F_x(y,1)$ and, following arguments of Tzanakis and de Weger 
-\cite{TW3} for solving  Thue-Mahler equations, put
+Here and henceforth, write, for concision, $F(y)=F_x(y,1)$. As we are 
+
+ and, following arguments of \autoref{ch:AlgorithmsForTM} for solving  Thue-Mahler equations, put
 $$
 g(t) = (x-1)^3F\left(\frac{t}{x-1}\right) = t^4 + (x-1)t^3 + (x-1)^2t^2 + (x-1)^3t + x(x-1)^3.
 $$
@@ -2062,7 +2053,6 @@ Perhaps there are no others; we can prove this to be the case if, for example, $
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
 \endinput
-
 
 I'd like to thank the Elysian Room and Pallet Coffee for not kicking me out of their establishments during the arduous writing process, and my lovely lounge chair for (literally) supporting me after closing hours. 
 

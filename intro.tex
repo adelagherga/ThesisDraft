@@ -227,6 +227,63 @@ a Thue-Mahler-like equation of degree $4$ in explicit values of $x$ and unknown 
 The outline of this thesis is as follows. ADD
 
 
+\edit{Intro from Goormaghtigh:}
+More than a century ago, Ratat \cite{Ra} and Goormaghtigh \cite{Go} observed the identities
+$$
+31 = \frac{2^5-1}{2-1} = \frac{5^3-1}{5-1} \; \; \mbox{ and } \; \; 8191 = \frac{2^{13}-1}{2-1} = \frac{90^3-1}{90-1}.
+$$
+These correspond to the known solutions $(x,y,m,n)=(2,5,5,3)$ and $(2,90,13,3)$
+to what is nowadays termed {\it Goormaghtigh's equation}
+\begin{equation} \label{eq-main}
+\frac{x^m-1}{x-1} = \frac{y^n-1}{y-1}, \; \; y>x>1, \; m > n > 2.
+\end{equation}
+This is a classical example of a {\it polynomial-exponential equation} and shares a number of common characteristics with other frequently-studied Diophantine equations of this type, such as those of 
+Catalan
+\begin{equation} \label{Cat}
+x^m-y^n=1, \; \; x, y, m, n > 1,
+\end{equation}
+and 
+Nagell-Ljunggren 
+\begin{equation} \label{NL}
+\frac{x^m-1}{x-1} = y^n, \; \; x, y, n >1, \; m > 2.
+\end{equation}
+In a certain sense, however, equation (\ref{eq-main}) appears to be rather harder to treat than (\ref{Cat}) or (\ref{NL}). Techniques from Diophantine approximation (specifically, bounds for linear forms in complex and $p$-adic logarithms) have been applied by Tijdeman \cite{Ti} to show that equation (\ref{Cat}) has at most finitely many solutions in the four variables $x,y, m$ and $n$ (a result subsequently sharpened by Mih{\u{a}}ilescu \cite{Mih} via a different method to solve (\ref{Cat}) completely). Similarly, Shorey and Tijdeman \cite{ShTi} showed that equation (\ref{NL}) has at most finitely many solutions if any one of the variables $x, y$ or $m$ is fixed (though we do not have a like result for fixed odd $n$; the case where $n$ is even was resolved earlier by Nagell \cite{Nag} and Ljunggren \cite{Lju}). In the case of equation (\ref{eq-main}), on the other hand, to obtain finiteness results with current technology, we apparently need to assume that two of the variables $x, y, m$ and $n$ are fixed (see \cite{BaSh} for references). In addition, if the two variables fixed are the exponents $m$ and $n$, then in order to deduce effectively computable bounds upon the polynomial variables $x$ and $y$, via either Runge's method (Davenport, Lewis and Schinzel \cite{DaLeSc}) or from bounds upon linear forms in logarithms (see e.g. Nesterenko and Shorey \cite{NeSh}, and Bugeaud and Shorey \cite{BuSh}), we require constraints upon $m$ and $n$, that either $m=n+1$, or that
+ \begin{equation} \label{condition}
+ \gcd (m-1,n-1) = d > 1.
+ \end{equation}
+ In the extensive literature on this problem, there are a number of striking results that go well beyond what we have mentioned here. By way of example, work of Balasubramanian and 
+ Shorey \cite{BaSh} shows that equation (\ref{eq-main}) has at most finitely many solutions if we fix only the set of prime divisors of $x$ and $y$, while Bugeaud and Shorey \cite{BuSh} prove an analogous finiteness result, under the additional assumption of (\ref{condition}), provided the quotient $(m-1)/(n-1)$ is bounded above. Additional results on special cases of equation (\ref{eq-main}) are available in, for example, \cite{HeTo}, \cite{Le1}, \cite{Le2} and \cite{Le3}.  An excellent overview of results on this problem  can be found in the survey of Shorey \cite{ShoSur}.
+ 
+In this paper, we prove that, in fact, under assumption (\ref{condition}), equation (\ref{eq-main}) has at most finitely many solutions which may be found effectively, even if we fix only a single exponent.
+\begin{theorem} \label{main-thm}
+If there is a solution in integers $x,y, n$ and $m$ to equation (\ref{eq-main}), satisfying (\ref{condition}), then
+\begin{equation} \label{hive}
+x <  (3d)^{4n/d} \leq  36^n.
+\end{equation}
+In particular, if $n$ is fixed, there is an effectively computable constant $c=c(n)$ such that
+$\max \{ x, y, m \} < c$.
+\end{theorem}
+We note that the latter conclusion here follows immediately from (\ref{hive}), in conjunction with, for example, work of Baker \cite{Bak}.
+The constants present in our upper bound (\ref{hive}) may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation (\ref{eq-main}), subject to condition (\ref{condition}),  for small fixed values of $n$.
+
+\begin{theorem} \label{main-thm2}
+If there is a solution in integers $x,y$ and $m$ to equation (\ref{eq-main}), with $n \in \{ 3, 4, 5 \}$ and satisfying (\ref{condition}), then
+$$
+(x,y,m,n) = (2,5,5,3)  \; \mbox{ and } \; (2,90,13,3).
+$$
+\end{theorem}
+
+Essentially half of the current paper is concerned with developing Diophantine approximation machinery for the case $n=5$ in Theorem \ref{main-thm2}. Here, ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. The new ideas introduced here are explored more fully in the general setting of {\it Thue-Mahler} equations in the forthcoming paper  \cite{GhKaMaSi}. These are polynomial-exponential equations of the form $F(x,y)=p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ where $F$ is a binary form of degree three or greater and $p_1, \ldots, p_k$ are fixed rational primes. Here, we take this opportunity to specialize these refinements to the case of Ramanujan-Nagell equations, and to introduce some further sharpenings which enable us to complete the proof of Theorem \ref{main-thm2}.
+
+We observe that, in case $n=3$, Theorem \ref{main-thm2} was obtained earlier by Yuan \cite{Yu} (see also He \cite{He}).  The techniques employed in both \cite{He} and \cite{Yu}, however, depend essentially upon the fact that $n=3$ (whereby $n-1=2$ and one can appeal to specialized techniques from the theory of quadratic fields) and cannot apparently be generalized to other values of $n$.
+
+The title of this paper reflects the fact that the machinery of Pad\'e approximation to binomial functions has been applied to the problem of solving equation (\ref{eq-main}) in earlier work of Bugeaud and Shorey \cite{BuSh}. We will employ these tools  here rather differently.
+
+The outline of this paper is as follows. In Section \ref{proof}, we derive ``good'' rational approximations to certain algebraic numbers associated to solutions of (\ref{eq-main}). Section \ref{Pade} contains relevant details about Pad\'e approximation to the binomial function. In Sections \ref{sec-main-thm} and \ref{sec-main-thm2}, we find the proofs of Theorems \ref{main-thm} and \ref{main-thm2}, respectively. In the latter case, to treat small fixed values of $n$ and $x$ in equation (\ref{eq-main}), we appeal to a variety of techniques from computational Diophantine approximation. Most interestingly, in case $n=5$, we sharpen existing techniques for solving  Thue-Mahler equations, and specialize them to our problem. We note that this section may essentially be read independently of the rest of the paper. For each $x$, we restrict the problem to that of solving a number of related $S$-unit equations, where $S$ is the set of primes dividing $x$. We then generate a large upper bound on the exponents of these equations using bounds for linear forms in logarithms, both Archimedean and non-Archimedean. Finally, unlike traditional examples of Thue-Mahler equations, where extensive use of geometric and $p$-adic reduction techniques are typically required, using only a few iterations of the LLL algorithm, we reduce this bound significantly, after which we apply a naive search to complete our computation. We will, in fact, employ  two quite different algorithms for solving Thue-Mahler equations, one for which we must compute the class group of a number field and one which avoids this computation altogether. For a given value of $x$, one of these versions may be significantly faster than the other; we list some timings for examples to illustrate this difference. 
+
+
+
+
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
