@@ -463,49 +463,34 @@ Apply the Corollary of Lemma $7.2$ of \cite{TW3} and Lemma~\ref{lem:SunitUnits} 
 \end{align*}
 \end{proof}
 
-\edit{here}
-If this bound holds, it follows that
-\[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} = \frac{\min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2) + r_l + t_l}{\alpha_l}. \]
-We iterate this computation over all $i \in \{1, \dots, v \}$ for which Lemma \ref{Lem:del1} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple brute force search. 
-
-We first recall the following result on the $p_l$-adic logarithm:
-
-\begin{lemma}\label{Lem:padic}
-Let $z_1, \dots, z_m \in \overline{\mathbb{Q}}_p$ be $p$-adic units and let $b_1, \dots, b_m \in \mathbb{Z}$. If
-\[\ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) > \frac{1}{p-1}\]
-then
-\[\ord_p(b_1\log_p z_1 + \cdots + b_m \log_p z_m) = \ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) \]
-\end{lemma}
-\edit{to here}
-
-We introduce the following notation
-\[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, v\},\]
+For the remainder of this section, we assume $\ord_{p_l}(\delta_1) = 0$. Here, it is convenient to use the notation
+\[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, \nu\},\] 
 and
-\[ b_{v+2} = a_1.\]
+\[ b_{1+{\nu}+i} = a_i \ \text{ for } i  \in \{1, \dots, r\}.\]
 Put
-\[\alpha_1 = \log_{p_l} \delta_1, \quad \alpha_{1+i} = \log_{p_l}\left( \frac{\gamma_i^{(k)}}{\gamma_i^{(l)}}\right)  \ \text{ for } i \in \{1, \dots, v\},\]
+\[\alpha_1 = \log_{p_l} \delta_1, \quad \alpha_{1+i} = \log_{p_l}\left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)  \ \text{ for } i \in \{1, \dots, \nu\},\]
 and
-\[\alpha_{v+2} = \log_{p_l}\left( \frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(l)}}\right).\]
+\[\alpha_{1+\nu+i} = \log_{p_l}\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right) \ \text{ for } i  \in \{1, \dots, r\}.\]
 Define
-\[\Lambda_l = \sum_{i = 1}^{v+2} b_i\alpha_i.\]
+\[\Lambda_l = \sum_{i = 1}^{1+\nu+r} b_i\alpha_i.\]
 
-Let $L$ be a finite extension of $\mathbb{Q}_{p_l}$ containing $\delta_1$, $\frac{\gamma_i^{(k)}}{\gamma_i^{(l)}}$ (for $i = 1, \dots, v$), and $ \frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(l)}}$. Since finite $p$-adic fields are complete, $\alpha_i \in L$ for $i = 1, \dots, v+2$ as well. Choose $\phi \in \overline{\mathbb{Q}_{p_l}}$ such that $L = \mathbb{Q}_{p_l}(\phi)$ and $\ord_{p_l}(\phi) > 0 $. Let $G(t)$ be the minimal polynomial of $\phi$ over $\mathbb{Q}_{p_l}$ and let $s$ be its degree. For $i = 1, \dots, v+2$ write
+Let $L$ be a finite extension of $\mathbb{Q}_{p_l}$ containing $\delta_1$, $\frac{\gamma_1^{(k)}}{\gamma_1^{(j)}}, \dots, \frac{\gamma_{\nu}^{(k)}}{\gamma_{\nu}^{(j)}}$, and $\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}, \dots, \frac{\varepsilon_r^{(k)}}{\varepsilon_r^{(j)}}$. Since finite $p_l$-adic fields are complete, $\alpha_i \in L$ for $i = 1, \dots, 1+\nu+r$ as well. Choose $\phi \in \overline{\mathbb{Q}_{p_l}}$ such that $L = \mathbb{Q}_{p_l}(\phi)$ and $\ord_{p_l}(\phi) > 0 $. Let $G(t)$ be the minimal polynomial of $\phi$ over $\mathbb{Q}_{p_l}$ and let $s$ be its degree. For $i = 1, \dots, 1+\nu+r$ write
 \[\alpha_i = \sum_{h = 1}^s \alpha_{ih}\phi^{h - 1}, \quad \alpha_{ih} \in \mathbb{Q}_{p_l}.\]
 Then
-\begin{equation} \label{Eq:lambdalh}
+\begin{equation} \label{eq:LambdaL}
 \Lambda_l = \sum_{h = 1}^s \Lambda_{lh}\phi^{h-1},
 \end{equation}
 with
-\[\Lambda_{lh} = \sum_{i = 1}^{v+2} b_i \alpha_{ih}\]
+\[\Lambda_{lh} = \sum_{i = 1}^{1+\nu+r} b_i \alpha_{ih}\]
 for $h = 1, \dots, s$. 
 
-\begin{lemma}\label{Lem:discG}
+\begin{lemma}\label{lem:DiscG}
 For every $h \in \{1, \dots, s\}$, we have
 \[\ord_{p_l}(\Lambda_{lh}) > \ord_{p_l}(\Lambda_l) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
 \end{lemma}
 
 \begin{proof}
-Taking the images of \eqref{Eq:lambdalh} under conjugation $\phi \mapsto \phi^{(h)}$ ($h = 1, \dots, s$) gives
+Taking the images of \eqref{eq:LambdaL} under conjugation $\phi \mapsto \phi^{(h)}$ ($h = 1, \dots, s$) yields
 \[\begin{bmatrix}
 \Lambda_l^{(1)} \\
 \vdots \\
@@ -529,65 +514,58 @@ The $s \times s$ matrix $(\phi^{(h)i-1})$ above is invertible, with inverse
 \vdots 		& 		& \vdots\\
 \gamma_{s1} 	& \cdots 	& \gamma_{ss}\\
 \end{bmatrix},\]
-where $\gamma_{jk}$ is a polynomial in the entries of $(\phi^{(h)i-1})$ having integer coefficients. Since $\ord_{p_l}(\phi) > 0$ and since $\ord_{p_l}(\phi^{(h)}) = \ord_{p_l}(\phi)$ for all $h = 1, \dots, s$, it follows that $\ord_{p_l}(\gamma_{jk}) > 0 $ for every $\gamma_{jk}$. Therefore, since 
+where $\gamma_{jk}$ is an integral polynomial in the entries of $(\phi^{(h)i-1})$. Since $\ord_{p_l}(\phi) > 0$ and $\ord_{p_l}(\phi^{(h)}) = \ord_{p_l}(\phi)$ for all $h = 1, \dots, s$, it follows that $\ord_{p_l}(\gamma_{jk}) > 0 $ for every $\gamma_{jk}$. Therefore, as 
 \[\Lambda_{lh} = \frac{1}{\displaystyle \prod_{1\leq j<k\leq s}(\phi^{(k)} - \phi^{(j)})}\sum_{i = 1}^s \gamma_{hi}\Lambda_l^{(i)},\]
 we have 
-\[\begin{split}
+\begin{align*}
 \ord_{p_l}(\Lambda_{lh}) 
 	& = \min_{1 \leq i \leq s} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)})\right\} -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
 	& \geq \min_{1 \leq i \leq s} \ord_{p_l}(\Lambda_l^{(i)}) +  \min_{1 \leq i \leq s} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
 	& = \ord_{p_l}\Lambda_l + \min_{1 \leq i \leq s} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))
-\end{split}\]
+\end{align*}
 for every $h \in \{1, \dots, s\}$. 
 %\min_{1 \leq i \leq s} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)}) -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\right\}\]
 \end{proof}
 
-\begin{lemma} \label{Lem:Lambda}
+\begin{lemma} \label{lem:Lambda}
 If 
-\[\sum_{i = 1}^v n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2),\]
+\[\sum_{i = 1}^{\nu} n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2),\]
 then
-\[\ord_{p_l}(\Lambda_l) = \sum_{i = 1}^v n_{i}a_{li} + \ord_{p_l}(\delta_2).\]
+\[\ord_{p_l}(\Lambda_l) = \sum_{i = 1}^{\nu} n_{i}a_{li} + \ord_{p_l}(\delta_2).\]
 \end{lemma}
 
 \begin{proof}
-Immediate from Lemma~\ref{Lem:padic}.
+Immediate from Lemma~\ref{lem:pAdicLogarithms2}.
 \end{proof}
 
 \begin{lemma} \label{Lem:specialcase} \
-\begin{enumerate}
-\item[(i)] If $\ord_{p_l}(\alpha_1) < \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_i)$, then
-\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor,  \bigg \lceil\displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2) \bigg \rceil - 1 \right\}\]
-
-\item[(ii)] For all $h \in \{1, \dots, s\}$, if $\ord_{p_l}(\alpha_{1h}) < \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})$, then
-\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor, \bigg \lceil \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + \nu_l \bigg \rceil - 1\right\},\]
+\begin{enumerate}[(i)]
+\item If $\ord_{p_l}(\alpha_1) < \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_i)$, then
+\[\sum_{i = 1}^{\nu} n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p_l-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor,  \bigg \lceil\displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2) \bigg \rceil - 1 \right\}\]
+\item For all $h \in \{1, \dots, s\}$, if $\ord_{p_l}(\alpha_{1h}) < \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{ih})$, then
+\[\sum_{i = 1}^{\nu} n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p_l-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor, \bigg \lceil \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + w_l \bigg \rceil - 1\right\},\]
 where 
-\[\nu_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\]
+\[w_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
 \end{enumerate}
 \end{lemma}
 
-Similar to Lemma \ref{Lem:del1}, if Lemma \ref{Lem:specialcase} holds for $p_l$ giving
-\[\sum_{i = 1}^v n_i a_{li} \leq B_l\]
-for some bound $B_l$ as in the lemma, it follows that
-\[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} \leq \frac{B_l + r_l + t_l}{\alpha_l}. \]
-Again, we iterate this computation over all $l \in \{1, \dots, v \}$ for which Lemma \ref{Lem:specialcase} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple naive search. 
-
 \begin{proof} \
-\begin{enumerate}
-\item[(i)] We prove the contrapositive. Suppose
-\[\sum_{i = 1}^v n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
+\begin{enumerate}[(i)]
+\item We prove the contrapositive. Suppose
+\[\sum_{i = 1}^{\nu} n_i a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2), \]
 and
-\[\sum_{i = 1}^v n_i a_{li}  \geq \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2).\]
+\[\sum_{i = 1}^{\nu} n_i a_{li}  \geq \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2).\]
 Observe that
-\[\begin{split}
+\begin{align*}
 \ord_{p_l}(\alpha_{1}) 	
-	& = \ord_{p_l}\left( \Lambda_{l} - \sum_{i = 2}^{v+2}b_i\alpha_{i}\right) \\
-	& \geq \min\left\{ \ord_{p_l}(\Lambda_{l}), \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{i})\right\}.
-\end{split}\]
+	& = \ord_{p_l}\left( \Lambda_{l} - \sum_{i = 2}^{1+\nu+r}b_i\alpha_{i}\right) \\
+	& \geq \min\left\{ \ord_{p_l}(\Lambda_{l}), \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(b_i\alpha_{i})\right\}.
+\end{align*}
 Therefore, it suffices to show that 
-\[\ord_{p_l}(\Lambda_{l}) \geq \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{i}).\]
-By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2)$, from which the result follows. 
+\[\ord_{p_l}(\Lambda_{l}) \geq \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(b_i\alpha_{i}).\]
+By Lemma~\ref{lem:pAdicLogarithms2}, the first inequality implies ${\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^{\nu} n_ia_{li} + \ord_{p_l}(\delta_2)}$, from which the result follows. 
 
-\item[(ii)] Similar to the proof of (i).
+\item Similar to the proof of (i).
 %\item[(ii)] We prove the contrapositive. Let $h \in \{1, \dots, s\}$ and suppose
 %\[\sum_{i = 1}^v n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
 %and

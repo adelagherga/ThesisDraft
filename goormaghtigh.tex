@@ -992,10 +992,8 @@ To find all solutions to this equation, we will use linear forms in $p$-adic log
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
-\subsection{The relevant algebraic number field}
-\label{subsec:RelevantGEAlgNumField}
-
-(\edit{maybe change the title here so taht we can incorporate everything into one subsection})
+\subsection{First steps and small bounds}
+\label{subsec:FirstStepsSmallBoundsGE}
 
 Following arguments of \autoref{ch:AlgorithmsForTM} for solving  Thue-Mahler equations, put $S = \{p_1, \dots, p_v\}$. This is the set of all distinct rational primes dividing $x$. As we seek only those solutions $(y,z, Z_1, \dots, Z_v)$ to \eqref{Eq:main} for which $z = 1$, here and henceforth we write, for concision, $F(y)=F_x(y,1)$. 
 
@@ -1052,7 +1050,7 @@ with unknowns $a_1 \in \mathbb{Z}$, $n_i \in \mathbb{Z}_{\geq 0}$, and $\zeta$ i
 \end{equation}
 and the $n_i$ are related to $m$ via
 \[m \alpha_i = Z_i = u_i + t_i = \sum_{j = 1}^{v}n_ja_{ij} + r_i + t_i.\]
-To summarize, our original problem of solving \eqref{Eq:main} has been reduced to the problem of solving finitely many equations of the form \eqref{Eq:main3} for the variables 
+To summarize, our original problem of solving \eqref{Eq:main} is now reduced to the problem of solving finitely many equations of the form \eqref{Eq:main3} for the variables 
 \[y, a_1, n_1, \dots, n_v.\] 
 
 From here, we follow the arguments of \autoref{subsec:SUnitEquation} to deduce a so-called $S$-unit equation. In doing so, we eliminate the variable $y$ and set ourselves the task of bounding the exponents $a_1, n_1, \dots, n_v$. 
@@ -1067,75 +1065,17 @@ are constants.
 
 Note that $\delta_1$ and $\delta_2$ are constants, in the sense that they do not depend upon $y,a_1,n_1, \dots, n_v.$
 
+Let $l \in \{1, \dots, v\}$ and consider the prime $p = p_l$. From now on we make the following choice for the index $i_0$. Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l[t]) = 1$. We choose $i_0 \in \{1, \dots, 4\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. The indices of $j,k$ are fixed, but arbitrary. 
 
-
-\edit{The remainder of this paper loosely follows the arguments of \cite{TW3}, with certain modifications designed to improve our timing efficiency. }
-
-
-\edit{could probably delete from here to}
-
-
-We now restrict our attention to those $p \in \{p_1, \dots, p_v\}$ and study the $p$-adic valuations of the numbers appearing in \eqref{Eq:Sunit}. Recall that $z \in \mathbb{C}_p$ having $\ord_p(z) = 0$ is called a $p$-adic unit. 
-
-Let $l \in \{1, \dots, v\}$ and consider the prime $p = p_l$. Part (ii) of the Corollary of Lemma 7.2 of \cite{TW3} tells us that $\frac{\varepsilon_1^{(i_0)}}{\varepsilon_1^{(j)}}$ and $\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}$ are $p_l$-adic units. 
-
-From now on we make the following choice for the index $i_0$. Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l[t]) = 1$. We choose $i_0 \in \{1, \dots, 4\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. The indices of $j,k$ are fixed, but arbitrary. 
-
-\begin{lemma} \label{Lem:units} \
-\begin{enumerate}
-\item[(i)] Let $i \in \{1, \dots, v\}$. Then $\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}$ are $p_l$-adic units. 
-\item[(ii)] Let $i \in \{1, \dots, v\}$. Then $\ord_{p_l}\left(\frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right) = a_{li}$, where $\mathbf{a_i} = (a_{1i}, \dots, a_{vi})$. 
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-Consider the factorization of $g(t)$ in $\mathbb{Q}_{p_l}[t]: g(t) = g_1(t) \cdots g_m(t)$ and note that $\theta^{(j)}$ is a root of some $g_h(t) \neq g_l(t)$. Let $\mathfrak{p}_h$ be the corresponding prime ideal above $p_l$ and $e_h$ be its ramification index. Then $\mathfrak{p} \neq \mathfrak{p}_l$ and since 
-\[(\gamma_i)\mathcal{O}_K = \mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}},\]
-we have 
-\[\ord_{p_l}(\gamma_i^{(j)}) = \frac{1}{e_h}\ord_{\mathfrak{p}_h}(\gamma_i) = 0.\]
-An analogous argument gives $\ord_{p_l}(\gamma_i^{(k)}) = 0$. On the other hand, 
-\[\ord_{p_l}(\gamma_i^{(i_0)}) = \frac{1}{e_l}\ord_{\mathfrak{p}_l}(\gamma_i) = \ord_{\mathfrak{p}_l}(\mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}}) = a_{li}.\]
-
-\end{proof}
-
-The next lemma deals with a special case in which the $n_l$ can be computed directly. This lemma is analogous to Lemma 7.3 of \cite{TW3}. 
-
-Recall the constants
-\[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
-of \eqref{Eq:Sunit}.
-\begin{lemma}\label{Lem:del1}
-Let $l \in \{1, \dots, v\}$. If $\ord_{p_l}(\delta_1) \neq 0$, then 
+By Lemma~\ref{lem:Delta1}, if $\ord_{p_l}(\delta_1) \neq 0$ for any $l \in \{1, \dots, v\}$, then 
 \[ \sum_{i = 1}^v n_ia_{li} = \min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2).\]
-\end{lemma}
-
-\begin{proof}
-Apply the Corollary of Lemma $7.2$ of \cite{TW3} and Lemma~\ref{Lem:units} to both expressions of $\lambda$ in \eqref{Eq:Sunit}. On the one hand, we obtain that $\ord_{p_l}(\lambda) = \min\{\ord_{p_l}(\delta_1), 0\}$, and on the other hand, 
-\[\begin{split}
-\ord_{p_l}(\lambda)
-& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^v \ord_{p_l}\left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\\
-& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^v n_ia_{li}.
-\end{split}\]
-\end{proof}
-
-If this bound holds, it follows that
+For us, if this bound holds for any prime $p_l \in S$, it follows that
 \[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} = \frac{\min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2) + r_l + t_l}{\alpha_l}. \]
-We iterate this computation over all $i \in \{1, \dots, v \}$ for which Lemma \ref{Lem:del1} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple brute force search. 
+In particular, we iterate this computation over all $i \in \{1, \dots, v \}$ for which Lemma~\ref{lem:Delta1} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple brute force search. 
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{A small upper bound for $\sum_{j = 1}^v n_ja_{ij}$ in a special case} \label{subsec:smallbound}
+For the remainder of this chapter, we may assume that $\ord_{p_l}(\delta_1) = 0$, since otherwise a reasonable bound is afforded by Lemma \ref{lem:Delta1}. 
 
-Let $l \in \{1, \dots v\}$. In this section, we identify conditions in which $n_l$ can be bounded by a small explicit constant. We may assume that $\ord_{p_l}(\delta_1) = 0$, since otherwise a reasonable bound is afforded by Lemma \ref{Lem:del1}. 
-
-We first recall the following result on the $p_l$-adic logarithm:
-
-\begin{lemma}\label{Lem:padic}
-Let $z_1, \dots, z_m \in \overline{\mathbb{Q}}_p$ be $p$-adic units and let $b_1, \dots, b_m \in \mathbb{Z}$. If
-\[\ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) > \frac{1}{p-1}\]
-then
-\[\ord_p(b_1\log_p z_1 + \cdots + b_m \log_p z_m) = \ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) \]
-\end{lemma}
-
-We introduce the following notation
+Following the notation of \autoref{sec:SmallBoundForSpecialCase}, we let
 \[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, v\},\]
 and
 \[ b_{v+2} = a_1.\]
@@ -1156,48 +1096,11 @@ with
 \[\Lambda_{lh} = \sum_{i = 1}^{v+2} b_i \alpha_{ih}\]
 for $h = 1, \dots, s$. 
 
+We recall several important lemmata from \autoref{sec:SmallBoundForSpecialCase} which we restate here.
 \begin{lemma}\label{Lem:discG}
 For every $h \in \{1, \dots, s\}$, we have
 \[\ord_{p_l}(\Lambda_{lh}) > \ord_{p_l}(\Lambda_l) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
 \end{lemma}
-
-\begin{proof}
-Taking the images of \eqref{Eq:lambdalh} under conjugation $\phi \mapsto \phi^{(h)}$ ($h = 1, \dots, s$) gives
-\[\begin{bmatrix}
-\Lambda_l^{(1)} \\
-\vdots \\
-\Lambda_l^{(s)}	\\
-\end{bmatrix}
-=
-\begin{bmatrix}
-1 		& \phi^{(1)} 	& \cdots 	& \phi^{(1)s-1}\\
-\vdots 	& \vdots 		& 		& \vdots \\
-1 		& \phi^{(s)} 	& \cdots  	& \phi^{(s)s-1}\\
-\end{bmatrix}
-\begin{bmatrix}
-\Lambda_{l1}\\
-\vdots \\
-\Lambda_{ls}\\
-\end{bmatrix}\]
-The $s \times s$ matrix $(\phi^{(h)i-1})$ above is invertible, with inverse
-\[\frac{1}{\displaystyle \prod_{1\leq j<k\leq s} (\phi^{(k)} - \phi^{(j)})}
-\begin{bmatrix}
-\gamma_{11} 	& \cdots 	& \gamma_{1s}\\
-\vdots 		& 		& \vdots\\
-\gamma_{s1} 	& \cdots 	& \gamma_{ss}\\
-\end{bmatrix},\]
-where $\gamma_{jk}$ is a polynomial in the entries of $(\phi^{(h)i-1})$ having integer coefficients. Since $\ord_{p_l}(\phi) > 0$ and since $\ord_{p_l}(\phi^{(h)}) = \ord_{p_l}(\phi)$ for all $h = 1, \dots, s$, it follows that $\ord_{p_l}(\gamma_{jk}) > 0 $ for every $\gamma_{jk}$. Therefore, since 
-\[\Lambda_{lh} = \frac{1}{\displaystyle \prod_{1\leq j<k\leq s}(\phi^{(k)} - \phi^{(j)})}\sum_{i = 1}^s \gamma_{hi}\Lambda_l^{(i)},\]
-we have 
-\[\begin{split}
-\ord_{p_l}(\Lambda_{lh}) 
-	& = \min_{1 \leq i \leq s} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)})\right\} -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
-	& \geq \min_{1 \leq i \leq s} \ord_{p_l}(\Lambda_l^{(i)}) +  \min_{1 \leq i \leq s} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
-	& = \ord_{p_l}\Lambda_l + \min_{1 \leq i \leq s} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))
-\end{split}\]
-for every $h \in \{1, \dots, s\}$. 
-%\min_{1 \leq i \leq s} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)}) -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\right\}\]
-\end{proof}
 
 \begin{lemma} \label{Lem:Lambda}
 If 
@@ -1205,10 +1108,6 @@ If
 then
 \[\ord_{p_l}(\Lambda_l) = \sum_{i = 1}^v n_{i}a_{li} + \ord_{p_l}(\delta_2).\]
 \end{lemma}
-
-\begin{proof}
-Immediate from Lemma~\ref{Lem:padic}.
-\end{proof}
 
 \begin{lemma} \label{Lem:specialcase} \
 \begin{enumerate}
@@ -1218,53 +1117,16 @@ Immediate from Lemma~\ref{Lem:padic}.
 \item[(ii)] For all $h \in \{1, \dots, s\}$, if $\ord_{p_l}(\alpha_{1h}) < \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})$, then
 \[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor, \bigg \lceil \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + \nu_l \bigg \rceil - 1\right\},\]
 where 
-\[\nu_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\]
+\[\nu_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
 \end{enumerate}
 \end{lemma}
 
-Similar to Lemma \ref{Lem:del1}, if Lemma \ref{Lem:specialcase} holds for $p_l$ giving
+Similar to Lemma~\ref{lem:Delta1}, if Lemma \ref{Lem:specialcase} holds for $p_l$ giving
 \[\sum_{i = 1}^v n_i a_{li} \leq B_l\]
 for some bound $B_l$ as in the lemma, it follows that
 \[m = \frac{\sum_{j = 1}^{v}n_ja_{lj} + r_l + t_l}{\alpha_l} \leq \frac{B_l + r_l + t_l}{\alpha_l}. \]
 Again, we iterate this computation over all $l \in \{1, \dots, v \}$ for which Lemma \ref{Lem:specialcase} holds and take the smallest $m$ as our bound on the solutions. We then compute all solutions below this bound using a simple naive search. 
 
-\begin{proof} \
-\begin{enumerate}
-\item[(i)] We prove the contrapositive. Suppose
-\[\sum_{i = 1}^v n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
-and
-\[\sum_{i = 1}^v n_i a_{li}  \geq \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2).\]
-Observe that
-\[\begin{split}
-\ord_{p_l}(\alpha_{1}) 	
-	& = \ord_{p_l}\left( \Lambda_{l} - \sum_{i = 2}^{v+2}b_i\alpha_{i}\right) \\
-	& \geq \min\left\{ \ord_{p_l}(\Lambda_{l}), \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{i})\right\}.
-\end{split}\]
-Therefore, it suffices to show that 
-\[\ord_{p_l}(\Lambda_{l}) \geq \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{i}).\]
-By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2)$, from which the result follows. 
-
-\item[(ii)] Similar to the proof of (i).
-%\item[(ii)] We prove the contrapositive. Let $h \in \{1, \dots, s\}$ and suppose
-%\[\sum_{i = 1}^v n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
-%and
-%\[\sum_{i = 1}^v n_i a_{li}  \geq \nu_l + \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih}) - \ord_{p_l}(\delta_2).\]
-%Observe that 
-%\[\begin{split}
-%\ord_{p_l}(\alpha_{1h}) 	
-%	& = \ord_{p_l}\left( \Lambda_{lh} - \sum_{i = 2}^{v+2}b_i\alpha_{ih}\right) \\
-%	& \geq \min\left\{ \ord_{p_l}(\Lambda_{lh}), \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{ih})\right\}
-%\end{split}\]
-%Therefore, it suffices to show that 
-%\[\ord_{p_l}(\Lambda_{lh}) \geq \min_{2 \leq i \leq v+2} \ord_{p_l}(b_i\alpha_{ih}).\]
-%By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2)$. Combining this with Lemma~\ref{Lem:discG} yields
-%\[\ord_{p_l}(\Lambda_{lh}) \geq \displaystyle \sum_{i = 1}^v n_ia_{li} + \ord_{p_l}(\delta_2) - \nu_l.\]
-%The results now follow from our second assumption. 
-\end{enumerate}
-\end{proof}
-
-
-\edit{ could probably delete up to here}
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
 \subsection{Bounding the $\sum_{j = 1}^v n_ja_{ij}$}
@@ -1439,7 +1301,7 @@ In each step, we let $N_l$ denote the current best upper bound on $\sum_{j = 1}^
 \[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, v\},\]
 and
 \[ b_{v+2} = a_1\]
-of Section \ref{subsec:smallbound} frequently. It will therefore be convenient to let $B_l$ denote the current best upper bound for $|b_l|$ for $l = 1, \dots, v+2$. Then
+of Section \ref{subsec:smallbound} (\edit{need title}) frequently. It will therefore be convenient to let $B_l$ denote the current best upper bound for $|b_l|$ for $l = 1, \dots, v+2$. Then
 \[B_1 = 1 \quad \text{ and } \quad B_{v+2} = A_0.\]
 For $l = 1, \dots, v$, using that
 \[ \sum_{j = 1}^v n_ja_{lj} < N_l, \quad \text{ for } l = 1, \dots, v,\]
@@ -1463,7 +1325,7 @@ Lastly, rather than testing each possible tuple $(|a_1|,|n_1|, \dots, |n_v|)$ as
 
 \subsection{The $p_l$-adic reduction procedure}
 
-In this section, we set some notation and give some preliminaries for the $p_l$-adic reduction procedures. Consider a fixed index $l \in \{1, \dots, v\}$. Following Section \ref{subsec:smallbound}, we have
+In this section, we set some notation and give some preliminaries for the $p_l$-adic reduction procedures. Consider a fixed index $l \in \{1, \dots, v\}$. Following Section \ref{subsec:smallbound} \edit{name}, we have
 \[\ord_{p_l}(\alpha_1) \geq \min_{2\leq i\leq v+2} \ord_{p_l}(\alpha_i) \quad \text{ and } \quad \ord_{p_l}(\alpha_{1h}) \geq \min_{2\leq i\leq v+2}(\alpha_{ih}) \quad h = (1, \dots, s).\]
 
 Let $I$ be the set of all indices $i' \in \{2, \dots, v+2\}$ for which
@@ -1714,21 +1576,12 @@ $$
 \end{array}
 $$
 
-\edit{some added stuff:}
-\edit{FROM BEGHKR STARTS HERE}
-
-
-. In the worst case scenario, the method in \cite{TW3} would reduce to $h^v$ such equations, where $h$ is the class number of $K$. This becomes computationally inefficient when the class number is large since, as we will see in the next section, we will need to apply a principal ideal test to each such case. Instead of this, we apply the method of \cite{GhKaMaSi}, which gives only $\kappa/2$ $S$-unit equations, where $\kappa$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). We now describe this second method. 
-
-In many cases, the method described above is far more efficient than that of Tzanakis-de Weger \cite{TW3}. However, there are values of $x$ where computing the class group may prove very costly. In fact, for these values of $x$, it may happen that class group computations  take longer than directly running a  principal ideal test on each ideal equation. In such cases, we return to the method of \cite{TW3}, which we now describe. 
-\edit{end of added stuff}
-
 Altogether, this computation took 3 weeks on a $16$-core 2013 vintage MacPro, with the case $x=710$ being the most time-consuming, taking roughly $5$ days and $16$ hours on a single core. This is the better timing attained for this value of $x$ from our two approaches, computed using the class group to generate the $S$-unit equations. The most time-consuming job when computing the class group was $x = 719$, which took $10$ days and $8$ hours. However, using our alternate code, the better timing for $x = 719$ was only $2$ hours. Without computing the class group, the most time-consuming process was $x = 654$, which took $2$ days and $7$ hours. However, this is the faster timing that was attained for this value of $x$, as computing the class group took roughly $4$ days and $8$ hours. 
 
 We list below some timings for our computation. These times are listed in seconds, with the second column indicating the algorithm requiring the computation of the class group, and the third column indicating the time taken by the algorithm which avoids the class group. In implementing these two algorithms, we terminated the latter algorithm if the program ran longer than its class group counterpart took. From these timings, it is clear that it is not always easy to predict which algorithm will prove faster. 
 
 \[\begin{array}{c | c| c|c}
-x & \text{Timing with } Cl(K) & \text{Timing without } Cl(K) & \text{Solutions} \\ \hline \hline
+x & \text{Timing with } \Cl(K) & \text{Timing without } \Cl(K) & \text{Solutions} \\ \hline \hline
 689 & 647.269 	& \text{Terminated} & [ -1, 1 ],[ 0, 1 ],[ 689, 5 ]  \\
 690  & 215306.420 & \text{Terminated} & [ -1, 1 ],[ 0, 1 ],[ 690, 5 ] \\
 691  & 456194.210 &   1821.049 & [ -1, 1 ],[ 0, 1 ],[ 691, 5 ] \\
@@ -1854,7 +1707,7 @@ This completes the  proof of Proposition \ref{Cee}.
 \section{Concluding remarks} \label{conclude}
 %-------------------------------------------------------------------------------------------------------------
 
-The techniques employed in this paper may be used, with very minor modifications, to treat equation (\ref{eq-main}), subject to condition (\ref{condition}), with the variables $x$ and $y$ integers (rather than just positive integers). Since 
+The techniques employed in this chapter may be used, with very minor modifications, to treat equation (\ref{eq-main}), subject to condition (\ref{condition}), with the variables $x$ and $y$ integers (rather than just positive integers). Since 
 $$
 \frac{(-a-1)^3-1}{(-a-1)-1} = \frac{a^3-1}{a-1},
 $$
@@ -1874,6 +1727,15 @@ Perhaps there are no others; we can prove this to be the case if, for example, $
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
 \endinput
+
+\edit{some added stuff:}
+\edit{FROM BEGHKR STARTS HERE}
+
+
+. In the worst case scenario, the method in \cite{TW3} would reduce to $h^v$ such equations, where $h$ is the class number of $K$. This becomes computationally inefficient when the class number is large since, as we will see in the next section, we will need to apply a principal ideal test to each such case. Instead of this, we apply the method of \cite{GhKaMaSi}, which gives only $\kappa/2$ $S$-unit equations, where $\kappa$ is the number of roots of unity in $K$ (typically this means only one $S$-unit equation). We now describe this second method. 
+
+In many cases, the method described above is far more efficient than that of Tzanakis-de Weger \cite{TW3}. However, there are values of $x$ where computing the class group may prove very costly. In fact, for these values of $x$, it may happen that class group computations  take longer than directly running a  principal ideal test on each ideal equation. In such cases, we return to the method of \cite{TW3}, which we now describe. 
+\edit{end of added stuff}
 
 I'd like to thank the Elysian Room and Pallet Coffee for not kicking me out of their establishments during the arduous writing process, and my lovely lounge chair for (literally) supporting me after closing hours. 
 
