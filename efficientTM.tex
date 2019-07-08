@@ -111,7 +111,7 @@ Further, if $[K:\mathbb{Q}] = 3$, then
 \end{cases}\]
 when one can choose $(i_0),(j), (k) : L \to \mathbb{C}$ such that $\mathfrak{p}_{p}^{(j)} \neq \mathfrak{p}_{p}^{(i_0)}$ for all $p \in S$. 
 \end{proposition}
-Denote by $m$ the number of infinite places $w: L \to \mathbb{C}$. 
+Denote by $m$ the number of infinite places $w: L \to \mathbb{C}$. For ease of notation, we may sometimes write $h\left(\frac{\delta_2}{\lambda}\right) = \sum_{v}h_v\left(\frac{\delta_2}{\lambda}\right)$ where the sum runs over all places $v$ of $L$ and $h_{v}\left(\frac{\delta_2}{\lambda}\right)$ is understood to be the height at $v$ as in Proposition~\ref{prop:heightdecomp}.
 
 \begin{proof}[Proof of Proposition~\ref{prop:heightdecomp}]Since $\frac{\delta_2}{\lambda} \in L$, the definition of the absolute logarithmic Weil height gives
 \[h\left(\frac{\delta_2}{\lambda}\right)=\frac{1}{[L:\mathbb{Q}]}\sum_{w \in M_L} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}\]
@@ -141,8 +141,6 @@ For $p_l \in \{p_1, \dots, p_{\nu}\}$, there is 1 unique prime ideal $\mathfrak{
 \begin{align*}
 \sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}
 	& = \sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}} \max \left\{ -(u_l - r_l)f(\mathfrak{P}^{(j)}\mid p_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})\log(p_l), 0\right\}\\
-	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}\sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}}f(\mathfrak{P}^{(j)}\mid p_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})\\
-	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}\sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}}f(\mathfrak{P}^{(j)}\mid \mathfrak{p}_l^{(j)})f(\mathfrak{p}_l^{(j)}\mid p_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})\\
 	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)\sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}}f(\mathfrak{P}^{(j)}\mid \mathfrak{p}_l^{(j)})e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})\\
 	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:\mathbb{Q}(\theta^{(j)})]\\
 	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:K].
@@ -241,11 +239,6 @@ Then we obtain
 	& = \log \max \left\{ \left|\text{id}_L\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} 
 		+ \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} \\
 		& \quad+ \log \max \left\{ \left|\sigma^2\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\\
-	& = \log \max \left\{ \left|\prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(a)}}{\varepsilon_i^{(b)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(a)}}{\gamma_i^{(b)}}\right)^{n_i} \right|, 1\right\} \\
-		& \quad + \log \max \left\{ \left|\ \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(b)}}{\varepsilon_i^{(c)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(b)}}{\gamma_i^{(c)}}\right)^{n_i} \right|,1\right\} \\
-		& \quad+ \log \max \left\{ \left| \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(c)}}{\varepsilon_i^{(a)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(c)}}{\gamma_i^{(a)}}\right)^{n_i} \right|, 1\right\}\\
-	& = \log  \left|\prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(a)}}{\varepsilon_i^{(b)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(a)}}{\gamma_i^{(b)}}\right)^{n_i} \right| \\
-		& \quad + \log \left|\ \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(b)}}{\varepsilon_i^{(c)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(b)}}{\gamma_i^{(c)}}\right)^{n_i} \right| \\
 	& = \log  \left|\prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(a)}}{\varepsilon_i^{(c)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(a)}}{\gamma_i^{(c)}}\right)^{n_i} \right|.
 \end{align*}
 Hence it follows that
@@ -274,9 +267,6 @@ Then we obtain
 		+ \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} \\
 		& \quad+ \log \max \left\{ \left|\sigma^2\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \log \max \left\{ \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\\
 		& \quad+ \log \max \left\{ \left|\tau\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \log \max \left\{ \left|\tau\sigma^2\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\\
-	& = \log \left|\prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(a)}}{\varepsilon_i^{(b)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(a)}}{\gamma_i^{(b)}}\right)^{n_i} \right|\\
-		& \quad + \log \left|\ \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(b)}}{\varepsilon_i^{(c)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(b)}}{\gamma_i^{(c)}}\right)^{n_i} \right|\\
-		& \quad+ \log \left| \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(a)}}{\varepsilon_i^{(c)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(a)}}{\gamma_i^{(c)}}\right)^{n_i} \right|\\
 	& = 2\log  \left|\prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(a)}}{\varepsilon_i^{(c)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(a)}}{\gamma_i^{(c)}}\right)^{n_i} \right|.
 \end{align*}
 Hence it follows that
@@ -296,17 +286,17 @@ where
 are constants and $r = 1$ or $r = 2$. 
 
 For simplicity of notation, write
-\[y =  \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}, \quad 
-x = \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\]
+\[\tilde{y} =  \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}, \quad 
+\tilde{x} = \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\]
 so that our equation is
 \begin{equation} \label{eq:TrueSunit}
-\delta_1y - 1 = \delta_2x.
+\delta_1\tilde{y} - 1 = \delta_2\tilde{x}.
 \end{equation}
-Let $z= \frac{1}{x} = \frac{\delta_2}{\lambda}$ and denote by $\Sigma$ the set of pairs $(x,y)$ satisfying \eqref{eq:TrueSunit}. That is, $\Sigma$ denotes the set of tuples $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ giving $x,y$ which satisfy \eqref{eq:TrueSunit}.
+Let $z= \frac{1}{\tilde{x}} = \frac{\delta_2}{\lambda}$ and denote by $\Sigma$ the set of pairs $(\tilde{x},\tilde{y})$ satisfying \eqref{eq:TrueSunit}. That is, $\Sigma$ denotes the set of tuples $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ giving $\tilde{x},\tilde{y}$ which satisfy \eqref{eq:TrueSunit}.
 
-Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. Then we define $\Sigma(\mathbf{l},\mathbf{h})$ as the set of all $(x,y)\in \Sigma$ such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq \mathbf{h}$ and such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\nleq \mathbf{l}$. 
-\[\Sigma(\mathbf{l},\mathbf{h}) = \{(x,y) \in \Sigma \ | \ (h_v(z))\leq \mathbf{h} \text{ and } (h_v(z))\nleq \mathbf{l}\}.\]
-Write $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})$ if $\mathbf{l}=\mathbf{0}$. Further, for each place $w$, we denote by $\Sigma_w(\mathbf{l},\mathbf{h})$ the set of all $(x,y)\in\Sigma(\mathbf{h})$ such that $h_w(z)>l_w$. 
+Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. Then we define $\Sigma(\mathbf{l},\mathbf{h})$ as the set of all $(\tilde{x},\tilde{y}) \in \Sigma$ such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq \mathbf{h}$ and such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\nleq \mathbf{l}$. 
+\[\Sigma(\mathbf{l},\mathbf{h}) = \{(\tilde{x},\tilde{y}) \in \Sigma \ | \ (h_v(z))\leq \mathbf{h} \text{ and } (h_v(z))\nleq \mathbf{l}\}.\]
+Write $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})$ if $\mathbf{l}=\mathbf{0}$. Further, for each place $w$, we denote by $\Sigma_w(\mathbf{l},\mathbf{h})$ the set of all $(\tilde{x},\tilde{y})\in\Sigma(\mathbf{h})$ such that $h_w(z)>l_w$. 
 
 Recall that 
 \[f(x,y) = x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 = c p_1^{z_1} \cdots p_v^{z_v}.\]
@@ -326,88 +316,44 @@ h(f-c) & = \max(\log|C_1|, \log|C_2|, \log|C_3|, \log|c|),
 where we recall that $C_i \in \mathbb{N}$.
 Put $b = 432 \Delta c^2$ with $\Delta$ the discriminant of $F$. Now, let 
 \[\Omega = 2b_S \log(b_S) + 172h(f-c).\]
-By \edit{Rafael and Benjamin's paper}, 
+By \cite{KanMat}, 
 \[\max(h(x),h(y))\leq \Omega. \]
 
 We recall that  
-\[\beta = X-Y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}\]
+\[\beta = x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}\]
 and we define
 \[\Omega' = 2h(\alpha) + 4\Omega + 2h(\theta) + 2\log(2).\]
 
-For $z \in K$, we recall
-\[h(z)=\frac{1}{[K:\mathbb{Q}]}\sum_{w \in M_K} \log \max \left\{ \left\|z\right\|_{w}, 1\right\}\]
-where $||z||_w$ are the usual norms and $M_K$ is a set of inequivalent absolute values on $K$. Now, 
-\[(\alpha)\mathcal{O}_K = \mathfrak{p}_1^{A_1} \cdots \mathfrak{p}_n^{A_n} \quad \text{ and } \quad (\theta)\mathcal{O}_K = \mathfrak{p}_1^{B_1} \cdots \mathfrak{p}_m^{B_m}.\]
-For $w = \mathfrak{p}$ a finite place, we have
-\[ \log \max \{ \|z\|_{w}, 1\} = \max \left\{ \log\left(\frac{1}{N(\mathfrak{p}_i)^{\ord_{\mathfrak{p}_i}(\alpha)}} \right), 0\right\} = \max \left\{ \log\left(\frac{1}{p^{fA_i}} \right), 0\right\} = 0\]
-and 
-\[ \log \max \{ \|z\|_{w}, 1\} = \max \left\{ \log\left(\frac{1}{N(\mathfrak{p}_i)^{\ord_{\mathfrak{p}_i}(\theta)}} \right), 0\right\} = \max \left\{ \log\left(\frac{1}{p^{fB_i}} \right), 0\right\} = 0.\]
-It follows that
-\[h(\alpha)=\frac{1}{[K:\mathbb{Q}]}\sum_{w \in M_K} \log \max \left\{ \left\|\alpha\right\|_{w}, 1\right\}
-	= \frac{1}{[K:\mathbb{Q}]}\sum_{\sigma:K \to \mathbb{C}} \log \max \left\{ |\sigma(\alpha)|, 1\right\}
-\]
-and 
-\[h(\theta)=\frac{1}{[K:\mathbb{Q}]}\sum_{w \in M_K} \log \max \left\{ \left\|\theta\right\|_{w}, 1\right\}
-	= \frac{1}{[K:\mathbb{Q}]}\sum_{\sigma:K \to \mathbb{C}} \log \max \left\{ |\sigma(\theta)|, 1\right\}.
-\]
-Now, 
-\begin{align*}
-\Omega'	
-	& = 2h(\alpha) + 4\Omega + 2h(\theta) + 2\log(2)\\
-	& = \frac{2}{[K:\mathbb{Q}]}\sum_{\sigma:K \to \mathbb{C}} \log \max \left\{ |\sigma(\alpha)|, 1\right\} + 4\Omega + \frac{2}{[K:\mathbb{Q}]}\sum_{\sigma:K \to \mathbb{C}} \log \max \left\{ |\sigma(\theta)|, 1\right\} + 2\log(2)
-\end{align*}
-
 \begin{lemma}
-Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{Eq:main3}. If $\mathbf{h} \in\mathbb{R}^{\nu + r}$ with $\mathbf{h} = (\Omega')$, then $\mathbf{m}\in \Sigma(h)$, where
-\[\Sigma(h) = \Sigma(0,h)= \{(x,y) \in \Sigma \ | \ (h_v(z))\leq h \text{ and }  (h_v(z))\nleq 0 \},\]
+Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{Eq:main3}. If $\mathbf{h} \in\mathbb{R}^{\nu + m}$ with $\mathbf{h} = (\Omega')$, then $\mathbf{m}\in \Sigma(h)$.
 \end{lemma}
-That is, all solutions $(x,y) \in \Sigma$ satisfy $\mathbf{m}\in \Sigma(h)$ if $\mathbf{h} = (\Omega')$.
+That is, all solutions $(\tilde{x},\tilde{y}) \in \Sigma$ satisfy $\mathbf{m}\in \Sigma(\mathbf{h})$ if $\mathbf{h} = (\Omega')$.
 
 \begin{proof}
-Let $(x,y) \in \Sigma$. Then $(x,y)$ satisfy $\mu_0y-\lambda_0x=1$. We must show that the resulting value of $z:= \frac{1}{x} = \frac{\delta_2}{\lambda}$ arising from this choice of $x,y$ satisfies
-\[0 < \left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq h.\]
-Now, via Rafael and Benjamin, for a solution $X,Y$ of $f(X,Y) = c p_1^{z_1}\cdots p_v^{z_v}$, we have
-\[\max(h(X),h(Y)) \leq \Omega.\]
-We use the following height properties
-\begin{enumerate}
-\item For a non-zero rational number $a/b$ where $\gcd(a,b) = 1$,
-\[h(a/b) = \max \{\log{|a|}, \log{|b|}\}\]
-\item For $\alpha \in \overline{\mathbb{Q}}$, $n \in \mathbb{N}$, we have
-\[h(n \alpha) = n h(\alpha).\]
-\item For $\alpha, \beta \in \overline{\mathbb{Q}}$, we have
-\[h(\alpha + \beta) \leq h(\alpha) + h(\beta) + \log{2}.\]
-\item For $\alpha, \beta \in \overline{\mathbb{Q}}$, we have
-\[h(\alpha\beta) \leq h(\alpha) + h(\beta).\]
-\item For $\alpha \in \overline{\mathbb{Q}}$, we have
-\[h(1/\alpha) = h(\alpha).\]
-\end{enumerate}
-
-Now, applying these properties to $\beta = X-\theta Y$, we obtain
-\begin{align*}
-h(\beta)	& = h(X-\theta Y)\\
-		& \leq h(X) + h(-\theta Y) + \log{2}\\
-		& \leq h(X) + h(-\theta) + h(Y) + \log{2}\\
-		& = h(X) + h(\theta) + h(Y) + \log{2}\\
-		& \leq 2\Omega + h(\theta) + \log{2}.
-\end{align*}
+Let $(\tilde{x},\tilde{y}) \in \Sigma$. Then $(\tilde{x},\tilde{y})$ satisfy $\delta_1y-\delta_2x=1$. We must show that the resulting value of $z:= \frac{1}{\tilde{x}} = \frac{\delta_2}{\lambda}$ arising from this choice of $\tilde{x},\tilde{y}$ satisfies
+\[0 < \left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq \mathbf{h}.\]
+Now, via \cite{KanMat}, for a solution $x,y$ of $f(x,y) = c p_1^{z_1}\cdots p_v^{z_v}$, we have
+\[\max(h(x),h(u)) \leq \Omega.\]
+Now, applying height properties to $\beta = x-\theta y$, we obtain
+\[h(\beta) = h(x) + h(\theta) + h(y) + \log{2}  \leq 2\Omega + h(\theta) + \log{2}.\]
 Now, $h(\beta) = h(\beta^{(i)})$, hence
 \[h(\beta^{(i)}) \leq 2\Omega + h(\theta) + \log{2}.\]
 Further, we have
 \begin{align*}
-\delta_2x	& =  \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i} \\
+\delta_2\tilde{x}	& =  \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i} \\
 		& =  \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}} \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i} \\
 		& = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\beta^{(i_0)}}{\beta^{(j)}}.
 \end{align*}
 This means that 
 \begin{align*}
-x	& = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot\frac{1}{\delta_2}\\
+\tilde{x}	& = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot\frac{1}{\delta_2}\\
 	& =  \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot\frac{1}{\frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}}\\
 	& = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot\frac{\theta^{(k)} - \theta^{(i_0)}}{\theta^{(j)} - \theta^{(k)}}\cdot \frac{\alpha^{(j)}\zeta^{(j)}}{\alpha^{(i_0)}\zeta^{(i_0)}}\\
 	& =\frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot \frac{\alpha^{(j)}\zeta^{(j)}}{\alpha^{(i_0)}\zeta^{(i_0)}}.
 \end{align*}
 Hence, 
 \begin{align*}
-h(x)	& = h\left( \frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot \frac{\alpha^{(j)}\zeta^{(j)}}{\alpha^{(i_0)}\zeta^{(i_0)}}\right)\\
+h(\tilde{x})	& = h\left( \frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot \frac{\alpha^{(j)}\zeta^{(j)}}{\alpha^{(i_0)}\zeta^{(i_0)}}\right)\\
 	& = h(\beta^{(i_0)}) + h\left( \frac{1}{\beta^{(j)}}\right) + h(\alpha^{(j)}) + h\left( \frac{1}{\alpha^{(i_0)}}\right)+ h(\zeta^{(j)}) + h\left( \frac{1}{\zeta^{(i_0)}}\right)\\
 	& = 2h(\beta) + 2h(\alpha) + 2h(\zeta)\\
 	& \leq 2(2\Omega + h(\theta) + \log{2}) +2h(\alpha) + 2h(\zeta)\\
@@ -421,32 +367,26 @@ h(\zeta)	& =\frac{1}{[K:\mathbb{Q}]}\sum_{w \in M_K} \log \max \left\{ \left\|\z
 		& = 0.
 \end{align*}
 Therefore, 
-\[h(x) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha) = \Omega'\]
-and hence
-\[h(z) = h\left(\frac{\delta_2}{\lambda}\right) = h(1/x) = h(x) \leq \Omega'.\]
+\[h(\tilde{x}) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha) = \Omega'\]
+and
+\[h(z) = h\left(\frac{\delta_2}{\lambda}\right) = h(1/\tilde{x}) = h(\tilde{x}) \leq \Omega'.\]
 Together with $\displaystyle h_v\left(\frac{\delta_2}{\lambda}\right) \leq h\left(\frac{\delta_2}{\lambda}\right)$ implies
-\[h_v\left(\frac{\delta_2}{\lambda}\right) \leq \Omega'\]
-for each $v \in S^*.$
-Similarly, by definition, we have $h_v\left(\frac{\delta_2}{\lambda}\right) \geq 0$. That is, $(x,y) \in \Sigma(h)$ as required. 
+\[h_v\left(\frac{\delta_2}{\lambda}\right) \leq \Omega'.\]
+Similarly, by definition, we have $h_v\left(\frac{\delta_2}{\lambda}\right) \geq 0$. That is, $(\tilde{x},\tilde{y}) \in \Sigma(h)$ as required. 
 \end{proof}
 
-\subsection{Coverings of $\Sigma$}
+\section{Coverings of $\Sigma$}
 
-From the previous section, we see that all solutions $(x,y) \in \Sigma$ satisfy $\mathbf{m}\in \Sigma(h)$ if ${\mathbf{h} = (\Omega')}$.
+From the previous section, we see that all solutions $(\tilde{x},\tilde{y}) \in \Sigma$ satisfy $\mathbf{m}\in \Sigma(h)$ if ${\mathbf{h} = (\Omega')}$.
 
-Now, let $l,h\in\mathbb{R}^{\nu+r}$ with $0\leq l\leq h$. With the definitions of the previous section, we have that
+Now, let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu+m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. With the definitions of the previous section, we have that
 
 \begin{lemma}\label{lem:covering}
-It holds that $\Sigma(h)=\Sigma(l,h)\cup \Sigma(l)$ and $\Sigma(l,h)=\cup_{v\in S^*}\Sigma_v(l,h)$.
+It holds that $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})\cup \Sigma(\mathbf{l})$ and $\Sigma(\mathbf{l},\mathbf{h})=\cup_{v}\Sigma_v(\mathbf{l},\mathbf{h})$.
 \end{lemma}
 \begin{proof}
-Recall that 
-\[\Sigma(l,h) = \{(x,y) \in \Sigma \ | \ (h_v(z))\leq h \text{ and } (h_v(z))\nleq l\},\]
-\[\Sigma(h) = \Sigma(0,h)= \{(x,y) \in \Sigma \ | \ (h_v(z))\leq h \text{ and }  (h_v(z))\nleq 0 \},\]
-and for each $w\in S^*$
-\[\Sigma_w(l,h) = \{(x,y) \in \Sigma \ | \ (h_v(z))\leq h \text{ and }  (h_v(z))\nleq 0 \text{ and } h_w(z)>l_w\}.\]
 
-Suppose $(x,y) \in \Sigma(h)$. By definition this means, $(h_v(z))\leq h$ and that $h_v(z) > 0$ for at least one coordinate. Since $0 \leq l \leq h$, it follows that either $(h_v(z))\leq l$ or $(h_v(z))\nleq l$. That is, either all coordinates satisfy $h_v(z) \leq l_v$, or there is at least one coordinate for which $h_v(z) > l_v$, meaning that either $(x,y) \in \Sigma(l)$ or $(x,y) \in \Sigma(l,h)$. Hence $(x,y) \in \Sigma(l,h) \cup \Sigma(l)$. That is, $\Sigma(h) \subseteq \Sigma(l,h) \cup \Sigma(l)$.
+Suppose $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{h})$. By definition this means, $(h_v(z))\leq \mathbf{h}$ and that $h_v(z) > 0$ for at least one coordinate. Since $\mathbf{0} \leq \mathbf{l} \leq \mathbf{h}$, it follows that either $(h_v(z))\leq \mathbf{l}$ or $(h_v(z))\nleq \mathbf{l}$. That is, either all coordinates satisfy $h_v(z) \leq l_v$, or there is at least one coordinate for which $h_v(z) > l_v$, meaning that either $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l})$ or $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h})$. Hence $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$. That is, $\Sigma(\mathbf{h}) \subseteq \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$.
 
 Conversely, we suppose that $(x,y) \in \Sigma(l,h) \cup \Sigma(l)$. It follows that either $(h_v(z))\leq h \text{ and } (h_v(z))\nleq l$ or $(h_v(z))\leq l \text{ and } (h_v(z))\nleq 0$. In either case, this means that $(h_v(z)) \leq h$ and $(h_v(z)) \nleq 0$. Hence $(x,y) \in \Sigma(h)$. Thus $\Sigma(h) \supseteq \Sigma(l,h) \cup \Sigma(l)$. Together with the previous paragraph, this yields $\Sigma(h)=\Sigma(l,h)\cup \Sigma(l)$.
 
@@ -484,11 +424,7 @@ Thus, after choosing a good sequence of lower and upper bounds (i.e. $l,h\in R^{
 %
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{Controlling the exponents in terms of the Weil Height}
-
-We now work with the norm $\|\cdot \|_\infty$. However, below we shall give much more precise estimates (which are essentially optimal) to make the volumes of the involved ellipsoids as small as possible. 
-
-\subsubsection{Bounding $\{a_1, \dots, a_{r}\}$}
+\section{Construction of the ellipsoids}
 
 We next consider the quadratic form $q_f=A^TD^2A$ on $\mathbb{Z}^{\nu}$ and where $D^2$ is a $\nu \times \nu$ diagonal matrix with diagonal entries $\lfloor\frac{\log(p_i)^2}{\log(2)^2}\rfloor$ for $p_i \in S$. We note that $\lfloor(\log(2))^2\rfloor = 0$, so if the diagonal entries of $D$ were set to $\lfloor\log(p_i)^2$ and $2\in S$, our matrix $D$ would not be invertible. In this case, when generating the lattice and ellipsoid, this will yield a matrix which is not positive-definite, meaning that we will not be able to apply Fincke-Pohst. With this in mind, the quadratic form $q_f$ is positive definite since $A$ is invertible. 
 
@@ -594,10 +530,10 @@ When $r = 2$, the matrix $R$ has an inverse
 \end{lemma}
 	
 \begin{proof}
-See Rafael's proof.
+See \edit{add}
 \end{proof}
 
-\textbf{Bounding $\{a_1, \dots, a_r\}$ when $r = 1$.}\\
+\subsection{The complex case}
 
 Suppose first that $r = 1$. Now, for any solution $(x,y, a_1, n_1, \dots, n_{\nu})$ of \eqref{Eq:main3}, set
 \[\vec{\varepsilon} = \begin{pmatrix} a_1 \end{pmatrix}.\]
@@ -747,7 +683,7 @@ for $k = 1, \dots, \nu$. That is,
 	& \leq \max\{w_{\varepsilon \sigma}, w_{\gamma 1}, \dots, w_{\gamma \nu}\} h\left(\frac{\delta_2}{\lambda}\right)
 \end{align*}
 
-\textbf{Bounding $\{a_1, \dots, a_r\}$ when $r = 2$.}\\
+\subsection{The real case}
 
 Now, suppose $r = 2$. For any solution $(x,y, n_1, \dots, n_{\nu}, a_1, a_2)$ of \eqref{Eq:main3}, set
 \[\vec{\varepsilon} = \begin{pmatrix} a_1 & a_2 \end{pmatrix}^{\text{T}}.\]
@@ -1008,19 +944,6 @@ For any solution $(x,y,a_1, \dots, a_r, n_1, \dots, n_{\nu})$ of \eqref{Eq:main3
 where $l = 1, \dots, r$, where $r = 1, 2$. 
 \end{lemma}
 
-\begin{remark}\label{rem:i12}
-In Lemma~\ref{lem:mepsbound},  one can take $w_{\epsilon 1}=[L:K]\|r_\epsilon\|_\infty$ for $v\in I$ if $|I|=1$ and the summand $\sum_{v:L\to \mathbb{C}}w_{\epsilon v}h_v(z)$ can be replaced by $3[L:K]\|r_\epsilon\|_\infty\max_{v:L\to\mathbb{C}}h_v(z)$ if $|I|=2$.
-\end{remark}
-\begin{proof}
-In the case $|I|=1$, we  either have precisely one non-negative or precisely one negative. If precisely one non-negative then the claim follows, and if precisely one negative then we just get $\sum_{v\mid\infty}h_v(z)$ by above proof, which again proves the claim.
-
-Consider now the case $|I|=2$. The claim follows if both are non-negative. If both are negative then we just apply once $N(z)=1$ (and product formula) and the claim follows again. Finally, if one is non-negative and one negative, then we compute that $$2\sum_{v\in I\setminus I^-}h_v(z)+\sum_{v\mid \infty,v\notin I}h_v(z)\leq 3\max_{v\mid \infty}h_v(z).$$ This follows since there are at most 3 positive ones in total and if there are indeed 3 positive ones, then the middle one cancels out (see proof of above lemma).
-\end{proof}
-
-\begin{question}
-I should go through the above. But isn't it more accurate if we just compute the bound as is?
-\end{question}
-
 Now, 
 \begin{equation}\label{def:bepsbound}
 |a_l|^2 \leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k| + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right)^2.
@@ -1046,7 +969,7 @@ and suppose $h_v(z)\leq h_v$ for all $v\in \{1, \dots, r+\nu\}$. Then we deduce
 %\left( \frac{1}{[L:\mathbb{Q}]}\max_{\sigma:L\to \mathbb{C}} w_{\varepsilon \sigma}h_{\sigma} + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}h_k\right)^2 & \text{ if } \sqrt{\Delta}\in\mathbb{Q} \\
 %\end{cases}\right)\]
 
-\subsection{Archimedean ellipsoid: real case, $r = 2$.}
+\subsection{Archimedean ellipsoid: the real case}
 We first consider the case when all roots of $f$ are real numbers. That is, there are $3$ real embeddings, hence $s=3, t = 0$ and therefore $r = s+t-1 = 2$. 
 
 Let $\tau:L\to\mathbb{R} \subset \mathbb{C}$ be an embedding and let $l_\tau\geq c_\tau$ and $c>0$ be given real numbers for $c_\tau=\log^+(2|\tau(\delta_2)|)= \log \max\{2|\tau(\delta_2)|,1\}$. We define 

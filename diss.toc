@@ -52,72 +52,73 @@
 \contentsline {section}{\numberline {4.6}Bounding $C(k,d)$ : the proof of Proposition \ref {Cee}}{108}{section.4.6}
 \contentsline {section}{\numberline {4.7}Concluding remarks}{111}{section.4.7}
 \contentsline {chapter}{\numberline {5}Computing Elliptic Curves over $\mathbb {Q}$}{113}{chapter.5}
-\contentsline {section}{\numberline {5.1}Elliptic curves}{116}{section.5.1}
-\contentsline {section}{\numberline {5.2}Cubic forms : the main theorem and algorithm}{118}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Remarks}{122}{subsection.5.2.1}
-\contentsline {subsubsection}{Historical comments}{122}{subsubsection*.10}
-\contentsline {subsubsection}{$2$-division fields and reducible forms}{123}{subsubsection*.11}
-\contentsline {subsubsection}{Imprimitive forms}{123}{subsubsection*.12}
-\contentsline {subsubsection}{Possible twists}{124}{subsubsection*.13}
-\contentsline {subsubsection}{Necessity, but not sufficiency}{124}{subsubsection*.14}
-\contentsline {subsubsection}{Special binary cubic forms}{124}{subsubsection*.15}
-\contentsline {subsubsection}{The case $j_E = 0$}{125}{subsubsection*.16}
-\contentsline {subsection}{\numberline {5.2.2}The algorithm}{126}{subsection.5.2.2}
-\contentsline {section}{\numberline {5.3}Proof of Theorem \ref {fisk}}{127}{section.5.3}
-\contentsline {section}{\numberline {5.4}Finding representative forms}{137}{section.5.4}
-\contentsline {subsection}{\numberline {5.4.1}Irreducible Forms}{137}{subsection.5.4.1}
-\contentsline {subsection}{\numberline {5.4.2}Reducible forms}{138}{subsection.5.4.2}
-\contentsline {subsection}{\numberline {5.4.3}Computing forms of fixed discriminant}{140}{subsection.5.4.3}
-\contentsline {subsection}{\numberline {5.4.4}$\unhbox \voidb@x \hbox {GL}_2(\mathbb {Z})$ vs $\unhbox \voidb@x \hbox {SL}_2(\mathbb {Z})$}{140}{subsection.5.4.4}
-\contentsline {section}{\numberline {5.5}Examples}{141}{section.5.5}
-\contentsline {subsection}{\numberline {5.5.1}Cases without irreducible forms}{141}{subsection.5.5.1}
-\contentsline {subsubsection}{Conductor $2655632887 = 31 \cdot 9007 \cdot 9511$}{142}{subsubsection*.19}
-\contentsline {subsubsection}{Conductor $3305354359 = 41 \cdot 409 \cdot 439 \cdot 449$}{143}{subsubsection*.20}
-\contentsline {subsection}{\numberline {5.5.2}Cases with fixed conductor (and corresponding irreducible forms)}{144}{subsection.5.5.2}
-\contentsline {subsubsection}{Conductor $399993 = 3 \cdot 11 \cdot 17 \cdot 23 \cdot 31$}{144}{subsubsection*.21}
-\contentsline {subsubsection}{Conductor $10^6-1$}{148}{subsubsection*.22}
-\contentsline {subsubsection}{Conductor $10^9-1$}{151}{subsubsection*.23}
-\contentsline {subsection}{\numberline {5.5.3}Curves with good reduction outside $\{ 2, 3, 23 \}$ : an example of Koutsianis and of von Kanel and Matchke}{153}{subsection.5.5.3}
-\contentsline {subsection}{\numberline {5.5.4}Curves with good reduction outside $\{ 2, 3, 5, 7, 11 \}$ : an example of von Kanel and Matschke}{155}{subsection.5.5.4}
-\contentsline {section}{\numberline {5.6}Good reduction outside a single prime}{156}{section.5.6}
-\contentsline {subsection}{\numberline {5.6.1}Conductor $N=p$}{157}{subsection.5.6.1}
-\contentsline {subsection}{\numberline {5.6.2}Conductor $N=p^2$}{158}{subsection.5.6.2}
-\contentsline {subsection}{\numberline {5.6.3}Reducible forms}{160}{subsection.5.6.3}
-\contentsline {subsection}{\numberline {5.6.4}Irreducible forms : conductor $p$}{161}{subsection.5.6.4}
-\contentsline {subsection}{\numberline {5.6.5}Irreducible forms : conductor $p^2$}{162}{subsection.5.6.5}
-\contentsline {subsubsection}{Elliptic curves of discriminant $\pm p^3$}{162}{subsubsection*.25}
-\contentsline {subsubsection}{A (conjecturally infinite) family of forms and solutions}{163}{subsubsection*.26}
-\contentsline {subsubsection}{Elliptic curves of discriminant $p^2$ and $p^4$}{165}{subsubsection*.27}
-\contentsline {subsubsection}{Elliptic curves of discriminant $-p^2$ and $-p^4$}{167}{subsubsection*.28}
-\contentsline {section}{\numberline {5.7}Computational details}{169}{section.5.7}
-\contentsline {subsection}{\numberline {5.7.1}Generating the required forms}{169}{subsection.5.7.1}
-\contentsline {subsection}{\numberline {5.7.2}Complete solution of Thue equations : conductor $p$}{171}{subsection.5.7.2}
-\contentsline {subsection}{\numberline {5.7.3}Non-exhaustive, heuristic solution of Thue equations}{172}{subsection.5.7.3}
-\contentsline {subsection}{\numberline {5.7.4}Conversion to curves}{173}{subsection.5.7.4}
-\contentsline {subsection}{\numberline {5.7.5}Conductor $p^2$}{173}{subsection.5.7.5}
-\contentsline {subsubsection}{Twisting conductor $p$}{174}{subsubsection*.29}
-\contentsline {subsubsection}{Solving $F(x,y)=8p$ with $F$ of discriminant $\pm 4p$}{174}{subsubsection*.30}
-\contentsline {subsubsection}{Solving $F(x,y) \in \{ 8, 8p \}$ with $F$ of discriminant $\pm 4p^2$}{175}{subsubsection*.31}
-\contentsline {section}{\numberline {5.8}Data}{175}{section.5.8}
-\contentsline {subsection}{\numberline {5.8.1}Previous work}{175}{subsection.5.8.1}
-\contentsline {subsection}{\numberline {5.8.2}Counts : conductor $p$}{176}{subsection.5.8.2}
-\contentsline {subsection}{\numberline {5.8.3}Counts : conductor $p^2$}{177}{subsection.5.8.3}
-\contentsline {subsection}{\numberline {5.8.4}Thue equations}{178}{subsection.5.8.4}
-\contentsline {subsection}{\numberline {5.8.5}Elliptic curves with the same prime conductor}{180}{subsection.5.8.5}
-\contentsline {subsection}{\numberline {5.8.6}Rank and discriminant records}{181}{subsection.5.8.6}
-\contentsline {section}{\numberline {5.9}Completeness of our data}{183}{section.5.9}
-\contentsline {section}{\numberline {5.10}Concluding remarks}{191}{section.5.10}
-\contentsline {chapter}{\numberline {6}Towards Efficient Resolution of Thue-Mahler Equations}{192}{chapter.6}
-\contentsline {section}{\numberline {6.1}Decomposition of the Weil height}{193}{section.6.1}
-\contentsline {section}{\numberline {6.2}Initial height bounds}{203}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Coverings of $\Sigma $}{209}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Controlling the exponents in terms of the Weil Height}{210}{subsection.6.2.2}
-\contentsline {subsubsection}{Bounding $\{a_1, \dots , a_{r}\}$}{211}{subsubsection*.32}
-\contentsline {subsection}{\numberline {6.2.3}Archimedean ellipsoid: real case, $r = 2$.}{235}{subsection.6.2.3}
-\contentsline {subsection}{\numberline {6.2.4}Archimedean sieve: Real case, $r = 2$}{253}{subsection.6.2.4}
-\contentsline {subsection}{\numberline {6.2.5}Archimedean Real Case Summary}{257}{subsection.6.2.5}
-\contentsline {section}{\numberline {6.3}Non-Archimedean Case}{260}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Non-Archimedean sieve}{260}{subsection.6.3.1}
-\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{261}{subsubsection*.33}
-\contentsline {subsection}{\numberline {6.3.2}Non-Archimedean ellipsoid.}{278}{subsection.6.3.2}
-\contentsline {chapter}{Bibliography}{284}{chapter*.34}
+\contentsline {section}{\numberline {5.1}Elliptic curves}{115}{section.5.1}
+\contentsline {section}{\numberline {5.2}Cubic forms : the main theorem and algorithm}{117}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Remarks}{121}{subsection.5.2.1}
+\contentsline {subsubsection}{Historical comments}{121}{subsubsection*.10}
+\contentsline {subsubsection}{$2$-division fields and reducible forms}{122}{subsubsection*.11}
+\contentsline {subsubsection}{Imprimitive forms}{122}{subsubsection*.12}
+\contentsline {subsubsection}{Possible twists}{123}{subsubsection*.13}
+\contentsline {subsubsection}{Necessity, but not sufficiency}{123}{subsubsection*.14}
+\contentsline {subsubsection}{Special binary cubic forms}{123}{subsubsection*.15}
+\contentsline {subsubsection}{The case $j_E = 0$}{124}{subsubsection*.16}
+\contentsline {subsection}{\numberline {5.2.2}The algorithm}{125}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}Proof of Theorem \ref {fisk}}{126}{section.5.3}
+\contentsline {section}{\numberline {5.4}Finding representative forms}{136}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Irreducible Forms}{136}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}Reducible forms}{137}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.3}Computing forms of fixed discriminant}{139}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.4}$\unhbox \voidb@x \hbox {GL}_2(\mathbb {Z})$ vs $\unhbox \voidb@x \hbox {SL}_2(\mathbb {Z})$}{139}{subsection.5.4.4}
+\contentsline {section}{\numberline {5.5}Examples}{140}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Cases without irreducible forms}{140}{subsection.5.5.1}
+\contentsline {subsubsection}{Conductor $2655632887 = 31 \cdot 9007 \cdot 9511$}{141}{subsubsection*.19}
+\contentsline {subsubsection}{Conductor $3305354359 = 41 \cdot 409 \cdot 439 \cdot 449$}{142}{subsubsection*.20}
+\contentsline {subsection}{\numberline {5.5.2}Cases with fixed conductor (and corresponding irreducible forms)}{143}{subsection.5.5.2}
+\contentsline {subsubsection}{Conductor $399993 = 3 \cdot 11 \cdot 17 \cdot 23 \cdot 31$}{143}{subsubsection*.21}
+\contentsline {subsubsection}{Conductor $10^6-1$}{147}{subsubsection*.22}
+\contentsline {subsubsection}{Conductor $10^9-1$}{150}{subsubsection*.23}
+\contentsline {subsection}{\numberline {5.5.3}Curves with good reduction outside $\{ 2, 3, 23 \}$ : an example of Koutsianis and of von Kanel and Matchke}{152}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.5.4}Curves with good reduction outside $\{ 2, 3, 5, 7, 11 \}$ : an example of von Kanel and Matschke}{154}{subsection.5.5.4}
+\contentsline {section}{\numberline {5.6}Good reduction outside a single prime}{155}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Conductor $N=p$}{156}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {5.6.2}Conductor $N=p^2$}{157}{subsection.5.6.2}
+\contentsline {subsection}{\numberline {5.6.3}Reducible forms}{159}{subsection.5.6.3}
+\contentsline {subsection}{\numberline {5.6.4}Irreducible forms : conductor $p$}{160}{subsection.5.6.4}
+\contentsline {subsection}{\numberline {5.6.5}Irreducible forms : conductor $p^2$}{161}{subsection.5.6.5}
+\contentsline {subsubsection}{Elliptic curves of discriminant $\pm p^3$}{161}{subsubsection*.25}
+\contentsline {subsubsection}{A (conjecturally infinite) family of forms and solutions}{162}{subsubsection*.26}
+\contentsline {subsubsection}{Elliptic curves of discriminant $p^2$ and $p^4$}{164}{subsubsection*.27}
+\contentsline {subsubsection}{Elliptic curves of discriminant $-p^2$ and $-p^4$}{166}{subsubsection*.28}
+\contentsline {section}{\numberline {5.7}Computational details}{168}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Generating the required forms}{168}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.2}Complete solution of Thue equations : conductor $p$}{170}{subsection.5.7.2}
+\contentsline {subsection}{\numberline {5.7.3}Non-exhaustive, heuristic solution of Thue equations}{171}{subsection.5.7.3}
+\contentsline {subsection}{\numberline {5.7.4}Conversion to curves}{172}{subsection.5.7.4}
+\contentsline {subsection}{\numberline {5.7.5}Conductor $p^2$}{172}{subsection.5.7.5}
+\contentsline {subsubsection}{Twisting conductor $p$}{173}{subsubsection*.29}
+\contentsline {subsubsection}{Solving $F(x,y)=8p$ with $F$ of discriminant $\pm 4p$}{173}{subsubsection*.30}
+\contentsline {subsubsection}{Solving $F(x,y) \in \{ 8, 8p \}$ with $F$ of discriminant $\pm 4p^2$}{174}{subsubsection*.31}
+\contentsline {section}{\numberline {5.8}Data}{174}{section.5.8}
+\contentsline {subsection}{\numberline {5.8.1}Previous work}{174}{subsection.5.8.1}
+\contentsline {subsection}{\numberline {5.8.2}Counts : conductor $p$}{175}{subsection.5.8.2}
+\contentsline {subsection}{\numberline {5.8.3}Counts : conductor $p^2$}{176}{subsection.5.8.3}
+\contentsline {subsection}{\numberline {5.8.4}Thue equations}{177}{subsection.5.8.4}
+\contentsline {subsection}{\numberline {5.8.5}Elliptic curves with the same prime conductor}{179}{subsection.5.8.5}
+\contentsline {subsection}{\numberline {5.8.6}Rank and discriminant records}{180}{subsection.5.8.6}
+\contentsline {section}{\numberline {5.9}Completeness of our data}{182}{section.5.9}
+\contentsline {section}{\numberline {5.10}Concluding remarks}{190}{section.5.10}
+\contentsline {chapter}{\numberline {6}Towards Efficient Resolution of Thue-Mahler Equations}{191}{chapter.6}
+\contentsline {section}{\numberline {6.1}Decomposition of the Weil height}{192}{section.6.1}
+\contentsline {section}{\numberline {6.2}Initial height bounds}{201}{section.6.2}
+\contentsline {section}{\numberline {6.3}Coverings of $\Sigma $}{206}{section.6.3}
+\contentsline {section}{\numberline {6.4}Construction of the ellipsoids}{207}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}The complex case}{211}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}The real case}{218}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {6.4.3}Archimedean ellipsoid: the real case}{231}{subsection.6.4.3}
+\contentsline {subsection}{\numberline {6.4.4}Archimedean sieve: Real case, $r = 2$}{248}{subsection.6.4.4}
+\contentsline {subsection}{\numberline {6.4.5}Archimedean Real Case Summary}{252}{subsection.6.4.5}
+\contentsline {section}{\numberline {6.5}Non-Archimedean Case}{255}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}Non-Archimedean sieve}{255}{subsection.6.5.1}
+\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{256}{subsubsection*.32}
+\contentsline {subsection}{\numberline {6.5.2}Non-Archimedean ellipsoid.}{273}{subsection.6.5.2}
+\contentsline {chapter}{Bibliography}{279}{chapter*.33}

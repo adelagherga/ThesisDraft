@@ -4,7 +4,6 @@
 \chapter{Computing Elliptic Curves over $\mathbb{Q}$}
 \label{ch:EllipticCurves} 
 
-\edit{intro edits}
 A classical result of Shafarevich \cite{Shaf} implies that, given  fixed set of prime numbers $S$,  there are only finitely many $\mathbb{Q}$-isomorphism classes of elliptic curves 
 defined over $\mathbb{Q}$ with good reduction outside $S$. In 1970, Coates \cite{Coa} proved an effective version of this theorem, using bounds for linear forms in $p$-adic and complex logarithms. Early attempts to make these results explicit, for fixed sets of small primes, overlap with the arguments of \cite{Coa}, in 
 that they reduce the problem to solving a number of {\it Thue-Mahler equations}. These are Diophantine equations 
@@ -36,7 +35,7 @@ great computational success of this approach can be primarily attributed to Crem
 and his collaborators; they have devoted many years of work to it and are responsible for the current state-of-the-art. 
 In particular, at the time of writing in 2017, all $E/\mathbb{Q}$ of conductor $N \leq 400000$ have been determined by these methods.
 
-In the paper at hand, we return to techniques based upon solving Thue-Mahler equations\index{Thue-Mahler equations}, using a 
+In the chapter at hand, we return to techniques based upon solving Thue-Mahler equations\index{Thue-Mahler equations}, using a 
 number of results from classical invariant theory. Our aim is to give a straightforward demonstration of the link 
 between the conductors in question and the corresponding equations, and to make the Diophantine approximation problem 
 that follows as easy to tackle as possible. It is worth noting here that these connections are quite straightforward for primes $p > 3$, but require 
@@ -47,26 +46,6 @@ are able to find all curves of prime conductor up to $2 \times 10^9$ ($10^{10}$ 
 discriminant) and conductor $p^2$ for $p \leq 5\times 10^5$. We then extend these computations in the case of conductor 
 $p$,  for prime $p \leq 2 \times 10^{13}$, and conductor $p^2$ for prime $p \leq 10^{10}$. We are not, however, able to 
 guarantee completeness for these extended computations (we will discuss this further in what follows). 
-
-The outline of this paper is as follows. In Section~\ref{elliptic}, we discuss some basic facts about elliptic curves, with corresponding
-notation. In Section~\ref{forms}, we review the invariant theory of cubic forms and 
-state our main theorem upon which our algorithm is based. Section \ref{BigProof} contains the proof of this theorem. Section~\ref{rep} is devoted to the actual computation of the 
-cubic forms we require. We provide a few examples of our approach for composite conductors in 
-Section~\ref{examples}. Specifically, we find all elliptic curves $E/\mathbb{Q}$ with conductor $N$ for 
-$$
-N \in \{ 399993, 999999, 999999999, 2655632887, 3305354359  \}
-$$
-and all  $E/\mathbb{Q}$  with good reduction outside $S$, where
-$$
-S = \{ 2, 3, 23 \} \; \; \mbox{ and } \; \; S = \{ 2, 3, 5, 7, 11 \}.
-$$
-These last two examples have been considered recently by other authors (\cite{KanMat} and \cite{Kou}), using different techniques.
-
-The remainder of the paper is devoted to finding curves with bad reduction at a single prime $p$, i.e. those of conductor  $N=p$ or $p^2$.
-We indicate in Section~\ref{primes} how the problem of computing elliptic curves over $\mathbb{Q}$ of fixed conductor simplifies considerably in such a situation and set the stage for our main computation. In Section~\ref{compy}, we provide a variety of further details for 
-these cases and  an outline of a heuristic approach to the problem that enables us to work with curves of quite large conductor (allowing us to find, in all likelihood, all elliptic curves of prime conductor $p$ for $p < 2 \times 10^{13}$).  Here, the obstruction to a deterministic solution to our problem for such large values of $p$ is provided by the existence of extremely large fundamental units in corresponding cubic fields. Section~\ref{data} contains an overview 
-of our output, with comparisons  to previous results in the literature. Finally, in Section \ref{spartan}, we provide an argument to show that any elliptic curve that has not been detected by our ``heuristic'' approach corresponds to a record-setting ``Hall ratio'', that is, an example of integers $x$ and $y$ where the (nonzero) difference $|x^3-y^2|$ is unusually small.
-
 
 %We are in the process of making our data more easily available through the LMFDB\footnote{The $L$-function and modular 
 %form database, currently accessible at \url{http://www.lmfdb.org/}}. Until this is completed, we invite 
@@ -405,7 +384,7 @@ $E[2] \cong E_0[2]$ (as Galois modules), then $E_0$ is isomorphic to the curve
 $$
 y^2 = x^3 - 3 H_F(u,v) x + G_F(u,v),
 $$
-for some $u, v \in K$. We thank the referee for bringing this paper to our attention.
+for some $u, v \in K$. 
 
 %--------------------------------------------------------------
 \subsection{Remarks}
@@ -1475,7 +1454,7 @@ where details on the resulting Thue-Mahler computation may also be found. Confir
 \section{Good reduction outside a single prime} \label{primes}
 %------------------------------------------------------------------------------------
 
-For the remainder of this paper, we will focus our attention on the case of elliptic curves with bad reduction at a single prime, i.e. curves of conductor $p$ or $p^2$, for $p$ prime.
+For the remainder of this chapter, we will focus our attention on the case of elliptic curves with bad reduction at a single prime, i.e. curves of conductor $p$ or $p^2$, for $p$ prime.
 In this case, our approach simplifies considerably and 
 rather than being required to solve Thue-Mahler equations, the problem reduces to one of solving \emph{Thue} equations, i.e. equations of the shape $F(x,y)=m$, where $F$ is a form and $m$ is a fixed integer. While, once again, we do not have a detailed computational complexity analysis of either algorithms for solving Thue equations or more general algorithms for solving Thue-Mahler equations, computations to date strongly support the contention that the former is, usually, much, much faster than the latter, particularly if the set of primes $S$ considered for the Thue-Mahler equations is anything other than tiny. Since none of these conductors are divisible by $9$, we may always suppose that $j_E \neq 0$. We note that the data we have produced in these cases totals several terabytes. As a result, we have not yet determined how best to make it publicly available; interested readers should contact the authors for further details.
 
@@ -2312,7 +2291,7 @@ $$
 $$
 
 \vskip2ex
-Here, the curves listed above the line are proven to be those of smallest conductor with the given rank. Those listed below the line have the smallest known conductor for the corresponding rank. It is our belief that the techniques of this paper should enable one to determine whether the  curve listed here of rank $5$ has the smallest conductor of any curve with this property.
+Here, the curves listed above the line are proven to be those of smallest conductor with the given rank. Those listed below the line have the smallest known conductor for the corresponding rank. It is our belief that the techniques of this chapter should enable one to determine whether the  curve listed here of rank $5$ has the smallest conductor of any curve with this property.
 
 
 %---------------------------------------------------
