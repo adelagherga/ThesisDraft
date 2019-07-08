@@ -14,26 +14,33 @@ where $(X,Y) \in \mathbb{Z}^2$, $\gcd(X,Y)=1$, and $Z_i \geq 0$ for $i = 1, \dot
 \end{equation}
 where
 \[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
-are constants. Here, we adopt the notation of \autoref{ch:AlgorithmsForTM} and recall that 
-\[g(t) = t^3 + C_1t^2 + C_2t + C_3,\]
-so that $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$. Recall further that $\zeta$ is a root of unity in $K$, while $\{\eps_1, \dots, \eps_r\}$ denotes the set of fundamental units of $\mathcal{O}_K$. In this case, as $K$ is a degree $3$ extension of $\mathbb{Q}$, we either have $3$ real embeddings of $K$ into $\mathbb{C}$, or there is one real embedding of $K$ into $\mathbb{C}$ and a pair of complex conjugate embeddings of $K$ into $\mathbb{C}$. Thus either $r = 1$ or $r = 2$. 
+are constants. Here, we adopt the notation of \autoref{ch:AlgorithmsForTM} and recall that we reduce \eqref{Eq:TM1} to a homogenous equation of the form
+\begin{equation} \label{eq:Efficientpoly}
+f(x,y) = x^3 + C_1x^2y + C_2xy^2 + C_3y^3 = cp_1^{z_1}\cdots p_v^{z_v},
+\end{equation}
+where $\gcd(x,y) = 1$ and $\gcd(c,p_i) = 1$ for $i = 1, \dots, p_v$. Moreover, we set
+\begin{equation} \label{eq:Efficientg}
+g(t) = f(t,1) = t^3 + C_1t^2 + C_2t + C_3
+\end{equation}
+so that $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$. Recall that $\zeta$ in \eqref{eq:EfficientSunit} denotes a root of unity in $K$, while $\{\eps_1, \dots, \eps_r\}$ is a set of fundamental units of $\mathcal{O}_K$. In this case, as $K$ is a degree $3$ extension of $\mathbb{Q}$, we either have $3$ real embeddings of $K$ into $\mathbb{C}$, or one real embedding of $K$ into $\mathbb{C}$ and a pair of complex conjugate embeddings of $K$ into $\mathbb{C}$. Thus either $r = 1$ or $r = 2$. 
 
-In this section, we describe new techniques to solve equation~\eqref{eq:EfficientSunit} via global sieves and new geometric ideas. This work is part of the on-going collaborative project \cite{GhKaMaSi}. Notably, the ideas presented in this chapter do not yet yield a full degree $3$ Thue-Mahler solver. Indeed, for the time being, only those Thue-Mahler equations with $r = 2$ are considered. However, when $r = 1$, the general setup established in this chapter remains the same. 
+In this section, we describe new techniques to solve equation~\eqref{eq:EfficientSunit} via a global Weil height. This work is part of the on-going collaborative project \cite{GhKaMaSi}. Notably, the ideas presented in this chapter do not yet yield a full degree $3$ Thue-Mahler solver. Indeed, for the time being, only those Thue-Mahler equations with $r = 2$ are considered. However, when $r = 1$, the general setup established in this chapter remains the same. 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Decomposition of the Weil height} 
+\label{sec:DecompositionofWeilHeight}
 
-The sieves of \cite{TW3} involves logarithms which are of local nature. To obtain a global sieve, we work instead with the global logarithmic Weil height. This height is invariant under conjugation and admits a decomposition into local heights which can be related to complex and $p$-adic logarithms. 
+The sieves of \cite{TW3} involve logarithms which are of local nature. To obtain a global sieve, we work instead with the global logarithmic Weil height. This height is invariant under conjugation and admits a decomposition into local heights which can be related to complex and $p$-adic logarithms. 
 
-Let $\mathbf{n} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ be a solution to \eqref{eq:EfficientSunit} and consider the Weil height of $\frac{\delta_2}{\lambda}$, 
+Let $n_1, \dots, n_{\nu}, a_1, \dots, a_r$ be a solution to \eqref{eq:EfficientSunit} and consider the Weil height of
 \[\frac{\delta_2}{\lambda}= \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i}.\]
-Given the global Weil height of $\delta_2/\lambda$, or all the local heights of $\delta_2/\lambda$, we will construct several ellipsoids `containing' $\mathbf{n}$ such that the volume of the ellipsoids are as small as possible. We begin by computing the height of $\delta_2/\lambda$. 
+Given the global Weil height of $\delta_2/\lambda$, or all the local heights of $\delta_2/\lambda$, we will construct several ellipsoids `containing' $n_1, \dots, n_{\nu}, a_1, \dots, a_r$ such that the volume of the ellipsoids are as small as possible. We begin by computing the height of $\delta_2/\lambda$. 
 
 Let $L$ be the splitting field of $K$. Recall that for cubic extensions $K$, the Galois group $\Gal(L/\mathbb{Q})$ is isomorphic to either the alternating group $A_3$ or the symmetric group $S_3$. 
 
 \begin{lemma}\label{lem:cancellation}
-Let $\mathfrak{P}$ be a prime ideal of $L$ lying over $\mathfrak{p}$ in $K$. Let $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $\mathfrak{P}^{(j)} = \sigma_{j}(\mathfrak{P})$ be the prime ideals lying over $\mathfrak{p}^{(i_0)}$, $\mathfrak{p}^{(j)}$ respectively, where $\sigma_{i_0}: L \to L$, $\theta \mapsto \theta^{(i_0)}$ and $\sigma_{j}: L \to L$, $\theta \mapsto \theta^{(j)}$ are two automorphisms of $L$ such that $(i_0,j,k)$ forms a subgroup of $\Gal(L/\mathbb{Q})$ order $3$. For $i = 1, \dots, \nu$, 
+Let $\mathfrak{p}$ be a prime ideal of $\mathcal{O}_K$ and let $\mathfrak{P}$ denote an ideal of $\mathcal{O}_L$ lying above it. Suppose $\sigma_{i_0}: L \to L$, $\theta \mapsto \theta^{(i_0)}$ and $\sigma_{j}: L \to L$, $\theta \mapsto \theta^{(j)}$ are two automorphisms of $L$ such that $(i_0,j,k)$ forms a subgroup of $\Gal(L/\mathbb{Q})$ of order $3$. Let $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $\mathfrak{P}^{(j)} = \sigma_{j}(\mathfrak{P})$ be the prime ideals lying over $\mathfrak{p}^{(i_0)}$, $\mathfrak{p}^{(j)}$ respectively. For $i = 1, \dots, \nu$, 
 \[\left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)\mathcal{O}_L 
 	 = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{a_{1i}} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{a_{\nu i}}\]
 where $\mathfrak{P}^{(j)} \neq \mathfrak{P}^{(i_0)}$ for all $\mathfrak{P}$ lying above $\mathfrak{p}$ in $K$. 
@@ -53,17 +60,15 @@ respectively. That is, $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $
 \[\left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)\mathcal{O}_L 
 	 = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{a_{1i}} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{a_{\nu i}}.\]
 
-Now, to show that $\mathfrak{P}^{(j)} \neq \mathfrak{P}^{(i_0)}$ for all $\mathfrak{P}$ lying above $\mathfrak{p}$ in $K$, we consider the decomposition group of $\mathfrak{P}$, 
+To show that $\mathfrak{P}^{(j)} \neq \mathfrak{P}^{(i_0)}$ for all $\mathfrak{P}$ lying above $\mathfrak{p}$ in $K$, we consider the decomposition group of $\mathfrak{P}$, 
 \[D(\mathfrak{P}|p) = \{\sigma \in G \ : \ \sigma(\mathfrak{P}) = \mathfrak{P}\}.\]
-If we consider all possible decompositions of $\mathfrak{p}$ in $L$, we conclude that $\mathfrak{P}^{(i_0)} \neq \mathfrak{P}^{(j)}$ whenever $D(\mathfrak{P}_i|p)$ does not have cardinality $2$. Thus if we choose $(i_0,j,k)$ so that it forms an order $3$ subgroup of $\Gal(L/\mathbb{Q})$, it cannot coincide with $D(\mathfrak{P}|p)$ and therefore cannot lead to $\mathfrak{P}^{(i_0)} = \mathfrak{P}^{(j)}$. 
+Iterating through all possible decompositions of $\mathfrak{p}$ in $L$, we observe that $\mathfrak{P}^{(i_0)} \neq \mathfrak{P}^{(j)}$ whenever $D(\mathfrak{P}_i|p)$ does not have cardinality $2$. Since $(i_0,j,k)$ forms an order $3$ subgroup of $\Gal(L/\mathbb{Q})$, it cannot coincide with $D(\mathfrak{P}|p)$ and therefore cannot lead to $\mathfrak{P}^{(i_0)} = \mathfrak{P}^{(j)}$. 
 \end{proof}
 
 For the remainder of this paper, we assume that $(i_0,j,k)$ are automorphisms of $L$ selected as in Lemma~\ref{lem:cancellation}.
 
 \begin{lemma}\label{lem:ordpz}
-Let $\mathfrak{P}$ be a prime ideal of $L$ lying above $\mathfrak{p}$ of $K$. Let $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $\mathfrak{P}^{(j)} = \sigma_{j}(\mathfrak{P})$, where $\sigma_{i_0}: L \to L$, $\theta \mapsto \theta^{(i_0)}$ and $\sigma_{j}: L \to L$, $\theta \mapsto \theta^{(j)}$ are two automorphisms of $L$. For 
-\[\frac{\delta_2}{\lambda}= \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i},\]
-we have
+Let $\mathfrak{p}$ be a prime ideal of $\mathcal{O}_K$ and let $\mathfrak{P}$ denote an ideal of $\mathcal{O}_L$ lying above it. Let $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $\mathfrak{P}^{(j)} = \sigma_{j}(\mathfrak{P})$ be the prime ideals lying over $\mathfrak{p}^{(i_0)}$, $\mathfrak{p}^{(j)}$ respectively. We have
 \[\ord_{\mathfrak{P}}\left(\frac{\delta_2}{\lambda}\right)=
 \begin{cases}
 (u_l - r_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})	
@@ -76,16 +81,13 @@ we have
 \begin{proof}
 
 By Lemma~\ref{lem:cancellation}, we have 
-\[\left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)\mathcal{O}_L 
-	 = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{a_{1i}} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{a_{\nu i}}.\]
-Hence
 \begin{align*}
 \left(\frac{\delta_2}{\lambda}\right)\mathcal{O}_L
 	& = \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{n_1}\cdots \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{n_{\nu}} \mathcal{O}_L\\
 	& = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{\sum_{i = 1}^\nu n_ia_{1i}} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{\sum_{i=1}^{\nu} n_ia_{\nu i}}\\
-	& = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{u_1 - r_1} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{u_{\nu} - r_{\nu}}
+	& = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{u_1 - r_1} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{u_{\nu} - r_{\nu}}.
 \end{align*}
-and so
+It follows that 
 \[\ord_{\mathfrak{P}}\left( \frac{\delta_2}{\lambda}\right)=
 \begin{cases}
 (u_l - r_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})	
@@ -99,17 +101,24 @@ and so
 Let $\log^+(\cdot)$ denote the real valued function $\max(\log(\cdot), 0)$ on $\mathbb{R}_{\geq 0}$. 
 
 \begin{proposition}\label{prop:heightdecomp}
-The height $h\left(\frac{\delta_2}{\lambda}\right)$ admits a decomposition
-\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
+The height $h\left(\frac{\delta_2}{\lambda}\right)$ admits a decomposition 
+\begin{equation} \label{eq:hdecomp}
+h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.
+\end{equation}
 \end{proposition}
-Denote by $m$ the number of infinite places $v: L \to \mathbb{C}$ and let $S^* = S \cup \{v : L \to \mathbb{C}\}$. For ease of notation, we may sometimes write $h\left(\frac{\delta_2}{\lambda}\right) = \sum_{v\in S^*}h_v\left(\frac{\delta_2}{\lambda}\right)$, where $h_{v}\left(\frac{\delta_2}{\lambda}\right)$ is the corresponding height at $v$ as in Proposition~\ref{prop:heightdecomp}.
+For ease of notation, let $S^* = S \cup \{v : L \to \mathbb{C}\}$ and write 
+\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{v \in S^*}h_{v}\left(\frac{\delta_2}{\lambda}\right).\]
+By Proposition~\ref{prop:heightdecomp}, when $v = p_l$ is a finite place, 
+\[h_{v}\left(\frac{\delta_2}{\lambda}\right) = \log(p_l)|u_l - r_l|,\]
+whereas we write
+\[h_{v}\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[L:K]} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\]
+for all infinite places $v = w$. Finally, let $m$ denote the number of embeddings of $L$ into $\mathbb{C}$,  $m = \# \{v : L \to \mathbb{C}\}$. 
 
 \begin{proof}[Proof of Proposition~\ref{prop:heightdecomp}]Since $\frac{\delta_2}{\lambda} \in L$, the definition of the absolute logarithmic Weil height gives
 \[h\left(\frac{\delta_2}{\lambda}\right)=\frac{1}{[L:\mathbb{Q}]}\sum_{w \in M_L} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}\]
-where $||z||_w$ are the usual norms and $M_L$ is a set of inequivalent absolute values on $L$. In particular, if $w: L \to \mathbb{C}$ is an infinite place, we obtain
+where $||z||_w$ is the usual norms and $M_L$ is a set of inequivalent absolute values on $L$. In particular, if $w: L \to \mathbb{C}$ is an infinite place, we obtain
 \[ \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\} = \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
-
-Now, for $z = \frac{\delta_2}{\lambda}$ and $w = \mathfrak{P}$ a finite place, we have
+Writing $z = \frac{\delta_2}{\lambda}$ and $w = \mathfrak{P}$ a finite place, we have
 \[ \log \max \{ \|z\|_{w}, 1\} = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{\ord_{\mathfrak{P}}(z)}} \right), 0\right\}. \]
 By Lemma~\ref{lem:ordpz}, 
 \[\ord_{\mathfrak{P}}\left( \frac{\delta_2}{\lambda}\right)=
@@ -127,12 +136,12 @@ That is, for $\mathfrak{P}^{(j)}\mid p_l$ where $p_l \in \{p_1, \dots, p_{\nu}\}
 	& = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{(u_l - r_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})}} \right), 0\right\}\\
 	& = \max \left\{ -(u_l - r_l)f(\mathfrak{P}^{(j)}\mid p_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})\log(p_l), 0\right\}.
 \end{align*}
-For $p_l \in \{p_1, \dots, p_{\nu}\}$, there is 1 unique prime ideal $\mathfrak{p}_1$ in the ideal equation \eqref{Eq:TMfactored} lying above $p_l$ in $K$. Hence, each $\mathfrak{P}$ lying over $p_l$ must also lie over $\mathfrak{p}_l$. Now, 
+Moreover, for $p_l \in \{p_1, \dots, p_{\nu}\}$, there is one unique prime ideal $\mathfrak{p}_l$ in the ideal equation \eqref{eq:TMfactored} lying above $p_l$ in $K$. Hence, each $\mathfrak{P}$ lying over $p_l$ must also lie over $\mathfrak{p}_l$. Now, 
 \begin{align*}
 \sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}
 	& = \sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}} \max \left\{ -(u_l - r_l)f(\mathfrak{P}^{(j)}\mid p_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})\log(p_l), 0\right\}\\
 	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:\mathbb{Q}(\theta^{(j)})]\\
-	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:K].
+	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:K],
 \end{align*}
 where the last inequality follows from $K = \mathbb{Q}(\theta) \cong \mathbb{Q}(\theta^{(j)})$.
 
@@ -151,164 +160,121 @@ and so
 
 Lastly, if $w = \mathfrak{P}$ such that $\mathfrak{P} \neq \mathfrak{P}^{(i_0)},  \mathfrak{P}^{(j)}$, we have
 \[\log \max \{ \|z\|_{w}, 1\} = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{\ord_{\mathfrak{P}}(z)}} \right), 0\right\}=0.\]
-Now, 
+Putting this all together, we obtain
 \begin{align*}
 h\left(\frac{\delta_2}{\lambda}\right)
-	& =\frac{1}{[L:\mathbb{Q}]}\sum_{w \in M_L} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}\\
-	& = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[L:\mathbb{Q}]}\sum_{\mathfrak{P} \in \mathcal{O}_L \text{ finite }} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{\mathfrak{P}}, 1\right\},
-\end{align*}
-where
-\begin{align*}
-& \sum_{\mathfrak{P} \in \mathcal{O}_L \text{ finite }} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\} \\
-	& = \sum_{l = 1}^{\nu} \left(\sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\} + \sum_{\mathfrak{P}^{(i_0)} \mid \mathfrak{p}_l^{(i_0)}} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}\right)\\
-	& =  [L:K]\sum_{l = 1}^{\nu} \log(p_l)\left(\max \left\{ -(u_l - r_l), 0\right\}+ \max \left\{ (u_l - r_l), 0\right\}\right)\\
-	& =  [L:K]\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l|.
-\end{align*}
-
-Altogether, we thus have
-\begin{align*}
-h\left(\frac{\delta_2}{\lambda}\right)
+	& = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[L:\mathbb{Q}]}\sum_{\mathfrak{P} \in \mathcal{O}_L \text{ finite }} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{\mathfrak{P}}, 1\right\}\\
 	& = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l|.
 \end{align*}
 \end{proof}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Initial height bounds}
+\label{sec:InitialHeightBounds}
 
-Recall that we seek solutions to
+We seek solutions to equaition~\eqref{eq:EfficientSunit}. We recall this equation presently, 
 \begin{equation*}
-\lambda = \delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i} - 1 = \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i},
+\lambda = \delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i} - 1 = \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}.
 \end{equation*}
-where
-\[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
-are constants and $r = 1$ or $r = 2$. 
-
-For simplicity of notation, write
+To simplify notation, we write
 \[\tilde{y} =  \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}, \quad 
 \tilde{x} = \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\]
 so that equation~\eqref{eq:EfficientSunit} becomes
 \begin{equation} \label{eq:TrueSunit}
-\delta_1\tilde{y} - 1 = \delta_2\tilde{x}.
+\delta_1\tilde{y} - \delta_2\tilde{x} = 1.
 \end{equation}
-Let $z= \frac{1}{\tilde{x}} = \frac{\delta_2}{\lambda}$ and denote by $\Sigma$ the set of pairs $(\tilde{x},\tilde{y})$ satisfying \eqref{eq:TrueSunit}. That is, $\Sigma$ denotes the set of tuples $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ giving $\tilde{x},\tilde{y}$ which satisfy \eqref{eq:TrueSunit}.
+Let $z= \frac{1}{\tilde{x}} = \frac{\delta_2}{\lambda}$ and denote by $\Sigma$ the set of pairs $(\tilde{x},\tilde{y})$ satisfying \eqref{eq:TrueSunit}. That is, $\Sigma$ denotes the set of tuples $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ corresponding to $(\tilde{x},\tilde{y})$ which satisfy \eqref{eq:TrueSunit}.
 
-Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. Then we define $\Sigma(\mathbf{l},\mathbf{h})$ as the set of all $(\tilde{x},\tilde{y}) \in \Sigma$ such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq \mathbf{h}$ and such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\nleq \mathbf{l}$. Write $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})$ if $\mathbf{l}=\mathbf{0}$. Further, for each place $w$, we denote by $\Sigma_w(\mathbf{l},\mathbf{h})$ the set of all $(\tilde{x},\tilde{y})\in\Sigma(\mathbf{h})$ such that $h_w(z)>l_w$. 
+Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. Then we define $\Sigma(\mathbf{l},\mathbf{h})$ as the set of all $(\tilde{x},\tilde{y}) \in \Sigma$ such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq \mathbf{h}$ and such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\nleq \mathbf{l}$, and write $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})$ if $\mathbf{l}=\mathbf{0}$. Additionally, for each place $w$, we denote by $\Sigma_w(\mathbf{l},\mathbf{h})$ the set of all $(\tilde{x},\tilde{y})\in\Sigma(\mathbf{h})$ such that $h_w(z)>l_w$. 
 
-Recall that 
-\[f(x,y) = x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 = c p_1^{Z_1} \cdots p_v^{Z_v}\]
-and $\gcd(x,y)=1$ and $S = \{p_1, \dots, p_v\}$. Let 
-\[N_S = \prod_{p\in S}p.\]
-To measure an integer $b$ and the finite set $S$, we take
-\begin{align*}
-b_S	& = 1728 N_S^2 \prod_{p \notin S} p^{\min(2,\ord_p(b))}\\
-	& = 1728 \prod_{p\in S}p^2 \prod_{\substack{p \notin S \\ p \mid b}} p^{\min(2,\ord_p(b))}.
-\end{align*}
-Recall further that the Weil height of an integer $n \in \mathbb{Z}\backslash {0}$ is given by
-\[h(n) = \log|n|.\] 
-Now, denote by $h(f-c)$ the maximum logarithmic Weil heights of the coefficients of the polynomial $f - c$,
-\begin{align*}
-h(f-c) & = \max(\log|C_1|, \log|C_2|, \log|C_3|, \log|c|),		
-\end{align*}
-where we recall that $C_i \in \mathbb{N}$.
-Put $b = 432 \Delta c^2$ with $\Delta$ the discriminant of $f$. Now, let 
-\[\Omega = 2b_S \log(b_S) + 172h(f-c).\]
-By \cite{KanMat}, 
-\[\max(h(x),h(y))\leq \Omega. \]
+Recall the minimal polynomial $g(t)$ of $K$, \eqref{eq:Efficientg}, derived from 
+\[f(x,y) = x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 = cp_1^{z_1}\cdots p_v^{z_v}.\]
+For $S = \{p_1, \dots, p_v\}$, let $N_S = \prod_{p\in S}p$ and set 
+\[b_S	 = 1728 N_S^2 \prod_{p \notin S} p^{\min(2,\ord_p(b))}\]
+for any integer $b$. In particular, we take $b = 432 \Delta c^2$ with $\Delta$ the discriminant of $f$. Denote by $h(f-c)$ the maximum logarithmic Weil heights of the coefficients of the polynomial $f - c$,
+\[h(f-c) = \max(\log|C_1|, \log|C_2|, \log|C_3|, \log|c|).\]
 
-We recall that  
-\[\beta = x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}\]
-and define
-\[\Omega' = 2h(\alpha) + 4\Omega + 2h(\theta) + 2\log(2).\]
-
+Now, setting
+\[\Omega = 2b_S \log(b_S) + 172h(f-c),\]
+we obtain, by Corollary J (ii) of \cite{KanMat}, the following height bound on any solution $(x,y)$ of \eqref{eq:Efficientpoly}
+\[\max(h(x),h(y))\leq \Omega.\]
+To translate this result for use with our logarithmic Weil height \eqref{eq:hdecomp}, we have the following lemma. 
 \begin{lemma} \label{lem:TMinitialheight}
-Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{eq:EfficientSunit}. If $\mathbf{h} \in\mathbb{R}^{\nu + m}$ with $\mathbf{h} = (\Omega')$, then $\mathbf{m}\in \Sigma(h)$.
+Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{eq:EfficientSunit} and let 
+\begin{equation} \label{eq:Omegaprime}
+\Omega' = 2h(\alpha) + 4\Omega + 2h(\theta) + 2\log(2).
+\end{equation}
+If $\mathbf{h} \in\mathbb{R}^{\nu + m}$ with $\mathbf{h} = (\Omega')$, then $\mathbf{m}\in \Sigma(h)$.
 \end{lemma}
-That is, all solutions $(\tilde{x},\tilde{y}) \in \Sigma$ satisfy $\mathbf{m}\in \Sigma(\mathbf{h})$ if $\mathbf{h} = (\Omega')$.
 
 \begin{proof}
-Let $(\tilde{x},\tilde{y}) \in \Sigma$. Then $(\tilde{x},\tilde{y})$ satisfy $\delta_1\tilde{y}-\delta_2\tilde{x}=1$. We must show that the resulting value of $z = \frac{1}{\tilde{x}} = \frac{\delta_2}{\lambda}$ arising from this choice of $\tilde{x},\tilde{y}$ satisfies
+Let $(\tilde{x},\tilde{y}) \in \Sigma$. We show that the corresponding value $z = \frac{1}{\tilde{x}} = \frac{\delta_2}{\lambda}$ arising from this choice of $\tilde{x},\tilde{y}$ satisfies
 \[\mathbf{0} < \left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq \mathbf{h}.\]
-Now, via \cite{KanMat} any solution $x,y$ of $f(x,y) = c p_1^{z_1}\cdots p_v^{z_v}$ yields
+
+As stated earlier, any solution $x,y$ of $f(x,y) = c p_1^{z_1}\cdots p_v^{z_v}$ satisfies
 \[\max(h(x),h(y)) \leq \Omega.\]
-Applying height properties to $\beta = x-\theta y$, we find
+Taking the height of 
+\[\beta = x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}},\]
+we obtain
 \[h(\beta) = h(x) + h(\theta) + h(y) + \log{2}  \leq 2\Omega + h(\theta) + \log{2}.\]
-As $h(\beta) = h(\beta^{(i)})$, 
+In particular, as $h(\beta) = h(\beta^{(i)})$, 
 \[h(\beta^{(i)}) \leq 2\Omega + h(\theta) + \log{2}.\]
-Further, we have
+Now, 
 \[\delta_2\tilde{x} 
 	= \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}} \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}  
 	= \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\beta^{(i_0)}}{\beta^{(j)}},\]
-meaning that
+meaning that $\tilde{x}$ may be written as
 \[\tilde{x} =\frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot \frac{\alpha^{(j)}\zeta^{(j)}}{\alpha^{(i_0)}\zeta^{(i_0)}}.\]
 Hence, 
-\begin{align*}
-h(\tilde{x})	
-	& = 2h(\beta) + 2h(\alpha) + 2h(\zeta)\\
-	& \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha) = \Omega',
-\end{align*}
-and 
-\[h(z) = h\left(\frac{\delta_2}{\lambda}\right) = h(1/\tilde{x}) \leq \Omega'.\]
+\[h(\tilde{x})	 = 2h(\beta) + 2h(\alpha) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha) = \Omega'.\]
+Finally, we observer that 
+\[h(z) = h(1/\tilde{x}) \leq \Omega'.\]
 Together with $\displaystyle h_v\left(\frac{\delta_2}{\lambda}\right) \leq h\left(\frac{\delta_2}{\lambda}\right)$, this implies
 \[h_v\left(\frac{\delta_2}{\lambda}\right) \leq \Omega'.\]
-Finally, by definition, we have $h_v\left(\frac{\delta_2}{\lambda}\right) \geq 0$. That is, $(\tilde{x},\tilde{y}) \in \Sigma(h)$ as required. 
+Of course, by definition, we have $h_v\left(\frac{\delta_2}{\lambda}\right) \geq 0$, so that $(\tilde{x},\tilde{y}) \in \Sigma(h)$ as required. 
 \end{proof}
-
-\section{Coverings of $\Sigma$}
-
-From the previous section, we see that all solutions $(\tilde{x},\tilde{y}) \in \Sigma$ satisfy $\mathbf{m}\in \Sigma(h)$ if ${\mathbf{h} = (\Omega')}$.
-
-Now, let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu+m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. With the definitions of the previous section, we have
-
-\begin{lemma}\label{lem:covering}
-It holds that $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})\cup \Sigma(\mathbf{l})$ and $\Sigma(\mathbf{l},\mathbf{h})=\cup_{v \in S^*}\Sigma_v(\mathbf{l},\mathbf{h})$.
-\end{lemma}
-\begin{proof}
-
-Suppose $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{h})$. By definition this means, $(h_v(z))\leq \mathbf{h}$ and that $h_v(z) > 0$ for at least one coordinate. Since $\mathbf{0} \leq \mathbf{l} \leq \mathbf{h}$, it follows that either $(h_v(z))\leq \mathbf{l}$ or $(h_v(z))\nleq \mathbf{l}$. That is, either all coordinates satisfy $h_v(z) \leq l_v$, or there is at least one coordinate for which $h_v(z) > l_v$, meaning that either $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l})$ or $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h})$. Hence $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$, so $\Sigma(\mathbf{h}) \subseteq \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$.
-
-Conversely, we suppose that $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$. It follows that either $(h_v(z))\leq \mathbf{h} \text{ and } (h_v(z))\nleq \mathbf{l}$ or $(h_v(z))\leq \mathbf{l} \text{ and } (h_v(z))\nleq \mathbf{0}$. In either case, this means that $(h_v(z)) \leq \mathbf{h}$ and $(h_v(z)) \nleq \mathbf{0}$. Hence $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{h})$. Thus $\Sigma(\mathbf{h}) \supseteq \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$. Together with the previous paragraph, this yields $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})\cup \Sigma(\mathbf{l})$.
-
-To prove the second point, let $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h})$. Then there exists $w\in S^*$ with $h_w(z)>l_w$ so that $(\tilde{x},\tilde{y})$ lies in $\Sigma_w(\mathbf{l},\mathbf{h})$. Hence $\Sigma(\mathbf{l},\mathbf{h}) \subseteq \cup_{v\in S^*}\Sigma_v(\mathbf{l},\mathbf{h})$. Lastly, since each set $\Sigma_v(\mathbf{l},\mathbf{h})$ is contained in $\Sigma(\mathbf{l},\mathbf{h})$ it follows that $\Sigma(\mathbf{l},\mathbf{h})=\cup_{v\in S^*}\Sigma_v(\mathbf{l},\mathbf{h})$.
-\end{proof}
-
-Suppose now we are given an initial bound $\mathbf{h}_0$ with $\Sigma=\Sigma(\mathbf{h}_0)$ and pairs $(\mathbf{l}_n,\mathbf{h}_n)\in \mathbb{R}^{\nu + m}\times \mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}_n\leq \mathbf{h}_n$ and $\mathbf{h}_{n+1}=\mathbf{l}_{n}$ for $n=0,\dotsc,N$. Then we can cover $\Sigma$: $$\Sigma=\Sigma(\mathbf{l}_{N})\cup\bigl(\cup_{n=0}^{N}\cup_{v\in S^*}\Sigma_v(\mathbf{l}_n,\mathbf{h}_n)\bigl).$$
-Indeed this follows directly by applying the above lemma $N$ times. If $\mathbf{h}_0=(\Omega',\dotsc,\Omega')$ for $\Omega'$ the initial height bound of Lemma~\ref{lem:TMinitialheight}, then Lemma~\ref{lem:covering} gives  $$\Sigma=\Sigma(\mathbf{h}_0), \quad \Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})\cup \Sigma(\mathbf{l}) \quad \textnormal{and} \quad \Sigma(\mathbf{l},\mathbf{h})=\cup_{v\in S^*}\Sigma_v(\mathbf{l},\mathbf{h}).$$
-After choosing a good sequence of lower and upper bounds (i.e. $\mathbf{l},\mathbf{h}\in R^{\nu+m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$) covering the whole space $\mathbf{0}\leq \mathbf{h}_0$, we are reduced to compute $\Sigma_v(\mathbf{l},\mathbf{h})$.
-%
-%
-%\subsubsection{Refined coverings}
-%
-%Next, for any nonempty subset $V\subseteq S^*$ we denote by $\Sigma_V(l,v)$ the set of all $(x,y)\in \Sigma(l,h)$ such that $h_v(z)>l_v$ for each $v\in V$ and such that $h_v(z)\leq l_v$ for each $v\in S^*\setminus V$.
-%
-%
-%\begin{lemma}[Refined coverings]
-%It holds that $\Sigma(l,h)
-%=\cup_{V}\Sigma_V(l,h)$ with the union taken over all nonempty subsets $V\subseteq S^*$.
-%\end{lemma}
-%\begin{proof}
-%To see that $\Sigma(l,h)\subseteq \cup_V\Sigma_V(l,h)$, we take $(x,y)$ in $\cup_V\Sigma_V(l,h)$ and we let $V$ be the set of $v\in S^*$ with $h_v(z)>l_v$. Then the set $V$ is nonempty since $(h_v(z))\nleq l$ and thus $(x,y)$ lies in $\Sigma_V(l,h)$. This proves that $\Sigma(l,h)= \cup_V\Sigma_V(l,h)$.
-%\end{proof}
-%Suppose again we are given an initial bound $h_0$ with $\Sigma=\Sigma(h_0)$ and pairs $(l_n,h_n)\in \RR^{S^*}\times \RR^{S^*}$ with $0\leq l_n\leq h_n$ and $h_{n+1}=l_{n}$ for $n=0,\dotsc,N$. Then we can cover $\Sigma$: $$\Sigma=\Sigma(l_{N})\cup\bigl(\cup_{n=0}^{N}\cup_{V\subseteq S^*}\Sigma_V(l_n,h_n)\bigl).$$
-%Indeed this follows directly by applying the above lemma $N$ times. In the subsequent sections, we shall show that one can efficiently enumerate each set $\Sigma_V(l_n,h_n)$ by finding all points in the intersection $\Gamma_V\cap \mathcal E_V$ of a lattice $\Gamma_V=\cap_{v\in V}\Gamma_v$ with an ellipsoid $\mathcal E_V$.
-%
-%Note these refined coverings are not that efficient in practice. We should consider the refined coverings from the elllog sieve.
-%
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
+\section{Coverings of $\Sigma$}
+\label{sec:CoveringsofSigma}
+
+From \autoref{sec:InitialHeightBounds}, we now know that all solutions $(\tilde{x},\tilde{y}) \in \Sigma$ satisfy $\mathbf{m}\in \Sigma(h)$ if ${\mathbf{h} = (\Omega')}$. In the notation of \autoref{sec:InitialHeightBounds}, we have the following result. 
+
+\begin{lemma}\label{lem:covering}
+Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu+m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. It holds that $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})\cup \Sigma(\mathbf{l})$ and $\Sigma(\mathbf{l},\mathbf{h})=\cup_{v \in S^*}\Sigma_v(\mathbf{l},\mathbf{h})$.
+\end{lemma}
+
+\begin{proof}
+Suppose $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{h})$. By definition this means, $(h_v(z))\leq \mathbf{h}$ and that $h_v(z) > 0$ for at least one coordinate $v$. Since $\mathbf{0} \leq \mathbf{l} \leq \mathbf{h}$, it follows that either $(h_v(z))\leq \mathbf{l}$ or $(h_v(z))\nleq \mathbf{l}$. That is, either all coordinates satisfy $h_v(z) \leq l_v$, or there is at least one coordinate for which $h_v(z) > l_v$. This means that either $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l})$ or $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h})$, and so $\Sigma(\mathbf{h}) \subseteq \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$.
+
+Conversely, suppose  $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$. It follows that either $(h_v(z))\leq \mathbf{h} \text{ and } (h_v(z))\nleq \mathbf{l}$ or $(h_v(z))\leq \mathbf{l} \text{ and } (h_v(z))\nleq \mathbf{0}$. In either case, this means that $(h_v(z)) \leq \mathbf{h}$ and $(h_v(z)) \nleq \mathbf{0}$. Hence $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{h})$ and $\Sigma(\mathbf{h}) \supseteq \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$.
+
+To prove the second equality, let $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h})$. Then there exists $w\in S^*$ with $h_w(z)>l_w$ so that $(\tilde{x},\tilde{y})$ lies in $\Sigma_w(\mathbf{l},\mathbf{h})$. Hence $\Sigma(\mathbf{l},\mathbf{h}) \subseteq \cup_{v\in S^*}\Sigma_v(\mathbf{l},\mathbf{h})$. Lastly, since each set $\Sigma_v(\mathbf{l},\mathbf{h})$ is contained in $\Sigma(\mathbf{l},\mathbf{h})$ it follows that $\Sigma(\mathbf{l},\mathbf{h})=\cup_{v\in S^*}\Sigma_v(\mathbf{l},\mathbf{h})$ as required. 
+\end{proof}
+
+Let $\mathbf{h}_0 = (\Omega', \dots, \Omega')$ denote the vector consisting of the initial bound $\Omega'$. By Proposition~\ref{lem:TMinitialheight}, every solution of \eqref{eq:EfficientSunit} is contained in $\mathbf{h}_0$. Therefore, we write $\Sigma = \Sigma(\mathbf{h}_0)$. Consider the pairs $(\mathbf{l}_n,\mathbf{h}_n)\in \mathbb{R}^{\nu + m}\times \mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}_n\leq \mathbf{h}_n$ and $\mathbf{h}_{n+1}=\mathbf{l}_{n}$ for $n=0,\dotsc,N$. Then we can cover $\Sigma$: 
+$$\Sigma=\Sigma(\mathbf{l}_{N})\cup\bigl(\cup_{n=0}^{N}\cup_{v\in S^*}\Sigma_v(\mathbf{l}_n,\mathbf{h}_n)\bigl).$$
+Indeed this follows directly by applying Lemma~\ref{lem:covering} $N$ times. In particular, Lemma~\ref{lem:covering} gives  $$\Sigma=\Sigma(\mathbf{h}_0), \quad \Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})\cup \Sigma(\mathbf{l}) \quad \textnormal{and} \quad \Sigma(\mathbf{l},\mathbf{h})=\cup_{v\in S^*}\Sigma_v(\mathbf{l},\mathbf{h}).$$
+After choosing a good sequence of lower and upper bounds $\mathbf{l}_n,\mathbf{h}_n$ covering the whole space $\Sigma$, we are reduced to computing $\Sigma_v(\mathbf{l},\mathbf{h})$ for each $v \in S^*$. In the following section, we construct the ellipsoids associated to each $\Sigma_v(\mathbf{l},\mathbf{h})$, after which we describe the sieve allowing us to compute the solutions of each $\Sigma_v(\mathbf{l},\mathbf{h})$. 
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
 \section{Construction of the ellipsoids}
+\label{sec:ConstructionofEllipsoids}
 
-We next consider the quadratic form $q_f=A^TD^2A$ on $\mathbb{Z}^{\nu}$ and where $D^2$ is a $\nu \times \nu$ diagonal matrix with diagonal entries $\lfloor\frac{\log(p_i)^2}{\log(2)^2}\rfloor$ for $p_i \in S$. This quadratic form $q_f$ is positive definite since $A$ is invertible. We note that $\lfloor(\log(2))^2\rfloor = 0$, so if the diagonal entries of $D$ were set to $\log(p_i)^2$ and $2\in S$, our matrix $D$ would not be invertible and subsequently, would not be positive-definite. 
+In \autoref{sec:CoveringsofSigma}, we establish that for a suitable pair of vectors $\mathbf{l}, \mathbf{h}$, solving \eqref{eq:EfficientSunit} reduces to computing $\Sigma_v(\mathbf{l},\mathbf{h})$ for each $v \in S^*$. In this section, we construct the ellipsoids associated to each $\Sigma_v(\mathbf{l},\mathbf{h})$, which will subsequently allow us to compute all solutions of $\Sigma_v(\mathbf{l},\mathbf{h})$. 
 
-\begin{lemma}
-For any solution $(x,y, n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ of \eqref{eq:EfficientSunit} with $\mathbf{n} = (n_1, \dots, n_{\nu})^T$, we have 
+We begin with the quadratic form $q_f=A^TD^2A$ on $\mathbb{Z}^{\nu}$, where $D^2$ is a $\nu \times \nu$ diagonal matrix with diagonal entries $\lfloor\frac{\log(p_i)^2}{\log(2)^2}\rfloor$ for $p_i \in S$. Recall that $A$ is the matrix generated in either \autoref{subsec:FactorizationTMwithoutOK} or \autoref{subsec:FactorizationTMwithoutOK}. As $A$ is invertible, our choice of entries in $D$ guarantees that this quadratic form is positive definite. This will become very important later in the sieve when we will need to apply many instances of the Fincke-Pohst algorithm. 
+
+\begin{lemma} \label{lem:boundqf}
+For any solution $(x,y, n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ of \eqref{eq:EfficientSunit} with $\mathbf{n} = (n_1, \dots, n_{\nu})$, we have 
 \[\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n}) < \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2.\] 
 \end{lemma}
 
 \begin{proof}
 Recall from \autoref{subsec:FactorizationTMwithoutOK} and \autoref{subsec:FactorizationTMwithOK} that
-\[A\mathbf{n} = \mathbf{u} - \mathbf{r},\]
-and
-\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
+\[A\mathbf{n} = \mathbf{u} - \mathbf{r}.\]
 Assume first that $2 \notin S$ so that
 \begin{align*}
 q_f(\mathbf{n})	
@@ -316,13 +282,13 @@ q_f(\mathbf{n})
 	 = (\mathbf{u} - \mathbf{r})^{\text{T}}D^2(\mathbf{u} - \mathbf{r})
 	 = \sum_{l = 1}^{\nu}\left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l-r_l|^2.
 \end{align*}
-Multiplying by $\frac{\log(2)^2}{[K:\mathbb{Q}]}$, this yields
+Multiplication by $\frac{\log(2)^2}{[K:\mathbb{Q}]}$ then gives
 \begin{align*}
 \frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n})  
 	= \frac{\log(2)^2}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l -r_l|^2 
  	\leq \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2,
 \end{align*}
-since all terms are positive. 
+where all terms in the summand are positive. 
 
 If $2 \in S$, we have
 \begin{align*}
@@ -334,26 +300,28 @@ It follows that
 \begin{align*}
 \frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n}) 
 	& \leq \frac{\log(2)^2}{[K:\mathbb{Q}]}\left( |u_1 - r_1|^2 + \sum_{l = 2}^{\nu} \frac{\log(p_l)^2}{\log(2)^2}|u_l -r_l|^2\right) \\
-	& = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2
+	& = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2.
 \end{align*}
-since all terms are positive. 
 \end{proof}
 
-Recall that for the degree $3$ Thue-Mahler equation, either $r = 1$ or $r = 2$. Choose a set $I$ of embeddings $L \rightarrow \mathbb{C}$ of cardinality $r$. For $r = 1$, this is simply
+We now briefly re-examine the decomposition of $h\left(\frac{\delta_2}{\lambda}\right)$ into local heights, 
+\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
+In particular, for every finite place $v$, Lemma~\ref{lem:boundqf} tells us that any bound $h_v$ on $h_v\left(\frac{\delta_2}{\lambda}\right)$ yields a bound on $\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n})$. In the remainder of this section, we build analogous bounds on the exponents $a_1, \dots, a_r$ of the fundamental units. 
+
+Recall $r = 1$ or $r = 2$ for the degree $3$ Thue-Mahler equation~\eqref{eq:Efficientpoly} in question. Choose a set $I$ of embeddings $L \rightarrow \mathbb{C}$ of cardinality $r$. For $r = 1$, this is simply
 \[R = \begin{pmatrix}
 	\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \end{pmatrix}.\]
-Clearly, as long as we choose $\iota_1$ such that $\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \neq 0$, that is $\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \neq 1$, this matrix is invertible.
+Clearly, as long as we choose $\iota_1$ such that $\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \neq 0$, this matrix is invertible.
 
-When $r = 2$, we let $I$ be the set of embeddings $L \to \mathbb{C}$ of cardinality $2$ such that for any $\alpha \in K$, it holds that $I\alpha^{(i_0)} \cup I\alpha^{(j)} = \Gal(L/\mathbb{Q})\alpha$. Such a set $I$ exists. Then we consider the $2 \times 2$ matrix
+When $r = 2$, we let $I$ be the set of embeddings $L \to \mathbb{C}$ of cardinality $2$ such that for any $\alpha \in K$, it holds that $I\alpha^{(i_0)} \cup I\alpha^{(j)} = \Gal(L/\mathbb{Q})\alpha$. Let $R$ be the $2 \times 2$ matrix
 \[R = \begin{pmatrix}
 	\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| &
 	\log\left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1}\right|\\
 	\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2}\right| &
 	\log\left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2}\right|\\
 	\end{pmatrix}.\]
-Here, we let $I$ be the set of embeddings $L \to \mathbb{C}$ of cardinality $2$ such that for any $\alpha \in K$, it holds that $I\alpha^{(i_0)} \cup I\alpha^{(j)} = \Gal(L/\mathbb{Q})\alpha$. Such a set $I$ exists. 
 \begin{lemma}
-When $r = 2$, the matrix $R$ has an inverse
+When $r = 2$, the matrix $R$ has an inverse,
 \[R^{-1} = \begin{pmatrix}
 	\overline{r}_{11} & \overline{r}_{12} \\
 	\overline{r}_{21} & \overline{r}_{22}
@@ -361,14 +329,16 @@ When $r = 2$, the matrix $R$ has an inverse
 \end{lemma}
 	
 \begin{proof}
-Suppose that $\mathbf{m}\in\mathbb{Z}^{r}$ satisfies $R\mathbf{m}=0$. Then for each $\iota\in I$ it holds that 
-\[\sum_{i=1}^r m_{\eps_i} \log\left|\left(\frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{\iota_1}\right| =0\] and hence 
-\[\prod_{i=1}^r \left|\left(\frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{\iota_1}\right|^{m_{\eps_i}}=1.\] This together with $I(i)\cup I(j)=Gal(L/\mathbb{Q})$ implies that all conjugates of $\alpha=\prod_{i=1}^r \eps_i^{m_{\eps_i}}$ have the same absolute value. Since all $\eps_i$ are units of $\mathcal{O}_K$, it then follows that $|\alpha|^{[L:\mathbb{Q}]}=N(\alpha)=1$ and hence $\alpha$ is a root of unity in $K$. Thus, on using that  the elements $\eps_i$ are multiplicatively independent, we obtain that $\mathbf{m}=\mathbf{0}$.  Then linear algebra gives $R^{-1}\in\mathbb{R}^{r\times r}$. This completes the proof.
+Suppose that $\mathbf{m}\in\mathbb{Z}^{r}$ satisfies $R\mathbf{m}=\mathbf{0}$. Then for each $\iota\in I$ it holds that 
+\[\sum_{i=1}^r m_{\eps_i} \log\left|\left(\frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{\iota_1}\right| =0,\] and hence 
+\[\prod_{i=1}^r \left|\left(\frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{\iota_1}\right|^{m_{\eps_i}}=1.\] This together with $I(i)\cup I(j)=Gal(L/\mathbb{Q})$ implies that all conjugates of $\alpha=\prod_{i=1}^r \eps_i^{m_{\eps_i}}$ have the same absolute value. Since all $\eps_i$ are units of $\mathcal{O}_K$, it follows that $|\alpha|^{[L:\mathbb{Q}]}=N(\alpha)=1$ and hence $\alpha$ is a root of unity in $K$. On using that  the elements $\eps_i$ are multiplicatively independent, we obtain that $\mathbf{m}=\mathbf{0}$.  Then linear algebra gives $R^{-1}\in\mathbb{R}^{r\times r}$, completing the proof. 
 \end{proof}
 
-Now, for the remainder of this chapter, we specialize to the real case, $r = 2$. For any solution $(x,y, n_1, \dots, n_{\nu}, a_1, a_2)$ of \eqref{eq:EfficientSunit}, set
+For the remainder of this chapter, we specialize to the real case, $r = 2$. The setup for $r = 1$ follows closely the work described here, yet poses other difficulties when defining the corresponding sieves. This case is treated in the on-going results of \cite{GhKaMaSi}. 
+
+Now, for any solution $(x,y, n_1, \dots, n_{\nu}, a_1, a_2)$ of \eqref{eq:EfficientSunit}, set
 \[\mathbf{\eps} = \begin{pmatrix} a_1 & a_2 \end{pmatrix}^{\text{T}}.\]
-Now, 
+We have 
 \begin{align*}
 R{\varepsilon}
 	& = \begin{pmatrix} 
@@ -387,8 +357,8 @@ Since $R$ is invertible with $R^{-1} = (\overline{r}_{nm})$, we find
 		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right| \\
 		\overline{r}_{21}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1} 		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1 \ a_2}\right| +
 		\overline{r}_{22}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2\ a_1}
-		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right| \\
-		\end{pmatrix}
+		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right|
+		\end{pmatrix},
 \end{align*}
 giving
 \[a_l = \overline{r}_{l1}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1} 		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1 \ a_2}\right| + 
@@ -420,11 +390,7 @@ a_l	& = \overline{r}_{l1}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_
 \end{align*}
 where
 \[\beta_{\gamma l k} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
-for $k = 1, \dots, \nu$. Recall that 
-\[A\mathbf{n} = \mathbf{u} - \mathbf{r}\]
-so
-\[\mathbf{n} = A^{-1}(\mathbf{u} - \mathbf{r}).\]
-Suppose inverse of $A$ has entries $\overline{a}_{ij}$. We have
+for $k = 1, \dots, \nu$. Recall that $\mathbf{n} = A^{-1}(\mathbf{u} - \mathbf{r})$ and suppose $A^{-1} = (\overline{a}_{nm})$. We have
 \begin{align*}
 \mathbf{n}  = A^{-1}(\mathbf{u} - \mathbf{r})
 	 = \begin{pmatrix} \sum_{k=1}^{\nu} \overline{a}_{1k}(u_k-r_k)\\  \vdots \\ \sum_{k=1}^{\nu} \overline{a}_{\nu k}(u_k-r_k) \end{pmatrix}.
@@ -441,7 +407,8 @@ and
 \[\beta_{\gamma l k} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
 for $k = 1, \dots, \nu$.
 
-Further, recall that $\frac{\delta_2}{\lambda}$ is a quotient of elements which are conjugate to one another. In other words, taking the norm on $L$ of $\frac{\delta_2}{\lambda}$, we obtain $N\left(\frac{\delta_2}{\lambda}\right) = 1.$ On the other hand, by definition, we have 
+\edit{here}
+Here, $\frac{\delta_2}{\lambda}$ is a quotient of elements which are conjugate to one another. In other words, taking the norm on $L$ of $\frac{\delta_2}{\lambda}$, we obtain $N\left(\frac{\delta_2}{\lambda}\right) = 1.$ On the other hand, by definition, we have 
 \[1 = N\left(\frac{\delta_2}{\lambda}\right) = \prod_{\sigma: L \to \mathbb{C}} \sigma \left(\frac{\delta_2}{\lambda}\right).\]
 Taking absolute values and logarithms, 
 \[0 = \sum_{\sigma: L \to \mathbb{C}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|\]
@@ -517,7 +484,7 @@ For any solution $(x,y,a_1, \dots, a_r, n_1, \dots, n_{\nu})$ of \eqref{eq:Effic
 \[|a_l| \leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|.\]
 \end{lemma}
 
-\subsection{Archimedean ellipsoid: the real case}
+\subsection{The Archimedean ellipsoid: the real case}
 Let $\tau:L\to\mathbb{R} \subset \mathbb{C}$ be an embedding and let $l_\tau\geq c_\tau$ and $c>0$ be given real numbers for $c_\tau=\log^+(2|\tau(\delta_2)|)= \log \max\{2|\tau(\delta_2)|,1\}$. We define 
 \[\alpha_0 = [c\log|\tau(\delta_1)|] \quad \text{ and } \quad \alpha_{\varepsilon 1} =  \left[c\log\left|\tau\left(\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}\right)\right|\right],\ \  \alpha_{\varepsilon 2} =  \left[c\log\left|\tau\left(\frac{\varepsilon_2^{(k)}}{\varepsilon_2^{(j)}}\right)\right|\right].\]
 For $i = 1, \dots, \nu$, define

@@ -110,14 +110,14 @@
 \contentsline {chapter}{\numberline {6}Towards Efficient Resolution of Thue-Mahler Equations}{191}{chapter.6}
 \contentsline {section}{\numberline {6.1}Decomposition of the Weil height}{192}{section.6.1}
 \contentsline {section}{\numberline {6.2}Initial height bounds}{198}{section.6.2}
-\contentsline {section}{\numberline {6.3}Coverings of $\Sigma $}{202}{section.6.3}
-\contentsline {section}{\numberline {6.4}Construction of the ellipsoids}{203}{section.6.4}
-\contentsline {subsection}{\numberline {6.4.1}Archimedean ellipsoid: the real case}{212}{subsection.6.4.1}
-\contentsline {subsection}{\numberline {6.4.2}Non-Archimedean ellipsoid}{222}{subsection.6.4.2}
-\contentsline {section}{\numberline {6.5}Archimedean sieve: the real case}{223}{section.6.5}
-\contentsline {subsection}{\numberline {6.5.1}Archimedean Real Case Summary}{226}{subsection.6.5.1}
-\contentsline {section}{\numberline {6.6}Non-Archimedean Case}{229}{section.6.6}
-\contentsline {subsection}{\numberline {6.6.1}Non-Archimedean sieve}{229}{subsection.6.6.1}
-\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{230}{subsubsection*.32}
-\contentsline {subsection}{\numberline {6.6.2}Non-Archimedean ellipsoid.}{247}{subsection.6.6.2}
-\contentsline {chapter}{Bibliography}{253}{chapter*.33}
+\contentsline {section}{\numberline {6.3}Coverings of $\Sigma $}{201}{section.6.3}
+\contentsline {section}{\numberline {6.4}Construction of the ellipsoids}{202}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}The Archimedean ellipsoid: the real case}{211}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Non-Archimedean ellipsoid}{221}{subsection.6.4.2}
+\contentsline {section}{\numberline {6.5}Archimedean sieve: the real case}{222}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}Archimedean Real Case Summary}{225}{subsection.6.5.1}
+\contentsline {section}{\numberline {6.6}Non-Archimedean Case}{228}{section.6.6}
+\contentsline {subsection}{\numberline {6.6.1}Non-Archimedean sieve}{228}{subsection.6.6.1}
+\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{229}{subsubsection*.32}
+\contentsline {subsection}{\numberline {6.6.2}Non-Archimedean ellipsoid.}{246}{subsection.6.6.2}
+\contentsline {chapter}{Bibliography}{252}{chapter*.33}
