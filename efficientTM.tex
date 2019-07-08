@@ -220,7 +220,7 @@ We recall that
 and define
 \[\Omega' = 2h(\alpha) + 4\Omega + 2h(\theta) + 2\log(2).\]
 
-\begin{lemma}
+\begin{lemma} \label{lem:TMinitialheight}
 Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{eq:EfficientSunit}. If $\mathbf{h} \in\mathbb{R}^{\nu + m}$ with $\mathbf{h} = (\Omega')$, then $\mathbf{m}\in \Sigma(h)$.
 \end{lemma}
 That is, all solutions $(\tilde{x},\tilde{y}) \in \Sigma$ satisfy $\mathbf{m}\in \Sigma(\mathbf{h})$ if $\mathbf{h} = (\Omega')$.
@@ -268,19 +268,12 @@ Suppose $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{h})$. By definition this means
 
 Conversely, we suppose that $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$. It follows that either $(h_v(z))\leq \mathbf{h} \text{ and } (h_v(z))\nleq \mathbf{l}$ or $(h_v(z))\leq \mathbf{l} \text{ and } (h_v(z))\nleq \mathbf{0}$. In either case, this means that $(h_v(z)) \leq \mathbf{h}$ and $(h_v(z)) \nleq \mathbf{0}$. Hence $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{h})$. Thus $\Sigma(\mathbf{h}) \supseteq \Sigma(\mathbf{l},\mathbf{h}) \cup \Sigma(\mathbf{l})$. Together with the previous paragraph, this yields $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})\cup \Sigma(\mathbf{l})$.
 
-To prove the second point, let $(x,y) \in \Sigma(l,h)$. Then there exists $w\in S^*$ with $h_w(z)>l_w$ and thus $(x,y)$ lies in $\Sigma_w(l,h)$. Hence $\Sigma(l,h) \subseteq \cup_{v\in S^*}\Sigma_v(l,h)$. Lastly, since each set $\Sigma_v(l,h)$ is contained in $\Sigma(l,h)$ it follows that $\Sigma(l,h)=\cup_{v\in S^*}\Sigma_v(l,h)$.
+To prove the second point, let $(\tilde{x},\tilde{y}) \in \Sigma(\mathbf{l},\mathbf{h})$. Then there exists $w\in S^*$ with $h_w(z)>l_w$ so that $(\tilde{x},\tilde{y})$ lies in $\Sigma_w(\mathbf{l},\mathbf{h})$. Hence $\Sigma(\mathbf{l},\mathbf{h}) \subseteq \cup_{v\in S^*}\Sigma_v(\mathbf{l},\mathbf{h})$. Lastly, since each set $\Sigma_v(\mathbf{l},\mathbf{h})$ is contained in $\Sigma(\mathbf{l},\mathbf{h})$ it follows that $\Sigma(\mathbf{l},\mathbf{h})=\cup_{v\in S^*}\Sigma_v(\mathbf{l},\mathbf{h})$.
 \end{proof}
 
-Suppose now we are given an initial bound $h_0$ with $\Sigma=\Sigma(h_0)$ and pairs $(l_n,h_n)\in \mathbb{R}^{\nu + r}\times \mathbb{R}^{\nu + r}$ with $0\leq l_n\leq h_n$ and $h_{n+1}=l_{n}$ for $n=0,\dotsc,N$. Then we can cover $\Sigma$: $$\Sigma=\Sigma(l_{N})\cup\bigl(\cup_{n=0}^{N}\cup_{v\in S^*}\Sigma_v(l_n,h_n)\bigl).$$
-Indeed this follows directly by applying the above lemma $N$ times. In the subsequent sections, we shall show that one can efficiently enumerate each set $\Sigma_v(l_n,h_n)$ by finding all points in the intersection $\Gamma_v\cap \mathcal E_v$ of a lattice $\Gamma_v$ with an ellipsoid $\mathcal E_v$.
-
-
-
-
-
-If $h_0=(b,\dotsc,b)$ for $b$ the initial height bound, then
-Lemma~\ref{lem:covering} gives  $$\Sigma=\Sigma(h_0), \quad \Sigma(h)=\Sigma(l,h)\cup \Sigma(l) \quad \textnormal{and} \quad \Sigma(l,h)=\cup_{v\in S^*}\Sigma_v(l,h).$$
-Thus, after choosing a good sequence of lower and upper bounds (i.e. $l,h\in R^{S^*}$ with $0\leq l\leq h$) covering the whole space $0\leq h_0$, we are reduced to compute $\Sigma_v(l,h)$.
+Suppose now we are given an initial bound $\mathbf{h}_0$ with $\Sigma=\Sigma(\mathbf{h}_0)$ and pairs $(\mathbf{l}_n,\mathbf{h}_n)\in \mathbb{R}^{\nu + m}\times \mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}_n\leq \mathbf{h}_n$ and $\mathbf{h}_{n+1}=\mathbf{l}_{n}$ for $n=0,\dotsc,N$. Then we can cover $\Sigma$: $$\Sigma=\Sigma(\mathbf{l}_{N})\cup\bigl(\cup_{n=0}^{N}\cup_{v\in S^*}\Sigma_v(\mathbf{l}_n,\mathbf{h}_n)\bigl).$$
+Indeed this follows directly by applying the above lemma $N$ times. If $\mathbf{h}_0=(\Omega',\dotsc,\Omega')$ for $\Omega'$ the initial height bound of Lemma~\ref{lem:TMinitialheight}, then Lemma~\ref{lem:covering} gives  $$\Sigma=\Sigma(\mathbf{h}_0), \quad \Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})\cup \Sigma(\mathbf{l}) \quad \textnormal{and} \quad \Sigma(\mathbf{l},\mathbf{h})=\cup_{v\in S^*}\Sigma_v(\mathbf{l},\mathbf{h}).$$
+After choosing a good sequence of lower and upper bounds (i.e. $\mathbf{l},\mathbf{h}\in R^{\nu+m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$) covering the whole space $\mathbf{0}\leq \mathbf{h}_0$, we are reduced to compute $\Sigma_v(\mathbf{l},\mathbf{h})$.
 %
 %
 %\subsubsection{Refined coverings}
@@ -304,92 +297,65 @@ Thus, after choosing a good sequence of lower and upper bounds (i.e. $l,h\in R^{
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Construction of the ellipsoids}
 
-We next consider the quadratic form $q_f=A^TD^2A$ on $\mathbb{Z}^{\nu}$ and where $D^2$ is a $\nu \times \nu$ diagonal matrix with diagonal entries $\lfloor\frac{\log(p_i)^2}{\log(2)^2}\rfloor$ for $p_i \in S$. We note that $\lfloor(\log(2))^2\rfloor = 0$, so if the diagonal entries of $D$ were set to $\lfloor\log(p_i)^2$ and $2\in S$, our matrix $D$ would not be invertible. In this case, when generating the lattice and ellipsoid, this will yield a matrix which is not positive-definite, meaning that we will not be able to apply Fincke-Pohst. With this in mind, the quadratic form $q_f$ is positive definite since $A$ is invertible. 
+We next consider the quadratic form $q_f=A^TD^2A$ on $\mathbb{Z}^{\nu}$ and where $D^2$ is a $\nu \times \nu$ diagonal matrix with diagonal entries $\lfloor\frac{\log(p_i)^2}{\log(2)^2}\rfloor$ for $p_i \in S$. This quadratic form $q_f$ is positive definite since $A$ is invertible. We note that $\lfloor(\log(2))^2\rfloor = 0$, so if the diagonal entries of $D$ were set to $\log(p_i)^2$ and $2\in S$, our matrix $D$ would not be invertible and subsequently, would not be positive-definite. 
 
 \begin{lemma}
-For any solution $(x,y, n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ of \eqref{Eq:main3}, we have 
-\[\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n}) = \frac{\log(2)^2}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l -r_l|^2 < \left(h\left(\frac{\delta_2}{\lambda}\right)\right)^2.\] 
+For any solution $(x,y, n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ of \eqref{eq:EfficientSunit} with $\mathbf{n} = (n_1, \dots, n_{\nu})^T$, we have 
+\[\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n}) < \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2.\] 
 \end{lemma}
 
 \begin{proof}
-Recall that $\mathbf{n} = (n_1, \dots, n_{\nu})^{\text{T}}$ and 
-\[A\mathbf{n} = \mathbf{u} - \mathbf{r}.\]
-Assume first that $2 \notin S$. Now
+Recall from \autoref{subsec:FactorizationTMwithoutOK} and \autoref{subsec:FactorizationTMwithOK} that
+\[A\mathbf{n} = \mathbf{u} - \mathbf{r},\]
+and
+\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
+Assume first that $2 \notin S$ so that
 \begin{align*}
 q_f(\mathbf{n})	
-	& = (A\mathbf{n})^{\text{T}}D^2A\mathbf{n}\\
-	& = \mathbf{n}^{\text{T}}A^{\text{T}}D^2A\mathbf{n}\\
-	& = (\mathbf{u} - \mathbf{r})^{\text{T}}D^2(\mathbf{u} - \mathbf{r})\\
-	& = \begin{pmatrix} u_1 - r_1&  \dots & u_{\nu} - r_{\nu} \end{pmatrix} 
-		\begin{pmatrix} \lfloor\frac{\log(p_1)^2}{\log(2)^2}\rfloor& 0 & \dots & 0\\ 0 &\lfloor\frac{\log(p_2)^2}{\log(2)^2}\rfloor & \dots & 0\\
-		\vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \dots & \lfloor\frac{\log(p_{\nu})^2}{\log(2)^2}\rfloor\\ 
-		\end{pmatrix} 
-		\begin{pmatrix} u_1 - r_1 \\  \vdots \\ u_{\nu} - r_{\nu} \end{pmatrix} \\
-	& =\left\lfloor\frac{\log(p_1)^2}{\log(2)^2}\right\rfloor(u_1-r_1)^2 + \cdots + \left\lfloor\frac{\log(p_{\nu})^2}{\log(2)^2}\right\rfloor(u_{\nu}-r_{\nu})^2\\
-	& = \sum_{l = 1}^{\nu}\left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l-r_l|^2.
+	 = (A\mathbf{n})^{\text{T}}D^2A\mathbf{n}
+	 = (\mathbf{u} - \mathbf{r})^{\text{T}}D^2(\mathbf{u} - \mathbf{r})
+	 = \sum_{l = 1}^{\nu}\left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l-r_l|^2.
 \end{align*}
-Hence it follows that
-\[ q_f(\mathbf{n}) = \sum_{l = 1}^{\nu}\left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l-r_l|^2.\]
-Now, recall that
-\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
-It follows that
+Multiplying by $\frac{\log(2)^2}{[K:\mathbb{Q}]}$, this yields
 \begin{align*}
-\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n}) 
-	& = \frac{\log(2)^2}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l -r_l|^2 \\
-	& \leq \frac{\log(2)^2}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\frac{\log(p_l)^2}{\log(2)^2}|u_l -r_l|^2 \\
-	& = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2 \\
-%	& < \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \left(\log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\right)^2 + \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \left(\log(p_l)|u_l - r_l|\right)^2\\
-%	& < \left(h\left(\frac{\delta_2}{\lambda}\right)\right)^2 
+\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n})  
+	= \frac{\log(2)^2}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l -r_l|^2 
+ 	\leq \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2,
 \end{align*}
 since all terms are positive. 
 
 If $2 \in S$, we have
 \begin{align*}
 q_f(\mathbf{n})	
-	& = (A\mathbf{n})^{\text{T}}D^2A\mathbf{n}\\
-	& = \mathbf{n}^{\text{T}}A^{\text{T}}D^2A\mathbf{n}\\
-	& = (\mathbf{u} - \mathbf{r})^{\text{T}}D^2(\mathbf{u} - \mathbf{r})\\
-	& = \begin{pmatrix} u_1 - r_1&  \dots & u_{\nu} - r_{\nu} \end{pmatrix} 
-		\begin{pmatrix} \lfloor\frac{\log(2)^2}{\log(2)^2}\rfloor& 0 & \dots & 0\\ 0 &\lfloor\frac{\log(p_2)^2}{\log(2)^2}\rfloor & \dots & 0\\
-		\vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \dots & \lfloor\frac{\log(p_{\nu})^2}{\log(2)^2}\rfloor\\ 
-		\end{pmatrix} 
-		\begin{pmatrix} u_1 - r_1 \\  \vdots \\ u_{\nu} - r_{\nu} \end{pmatrix} \\
-	& = \begin{pmatrix} u_1 - r_1&  \dots & u_{\nu} - r_{\nu} \end{pmatrix} 
-		\begin{pmatrix} 1 & 0 & \dots & 0\\ 0 &\lfloor\frac{\log(p_2)^2}{\log(2)^2}\rfloor & \dots & 0\\
-		\vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \dots & \lfloor\frac{\log(p_{\nu})^2}{\log(2)^2}\rfloor\\ 
-		\end{pmatrix} 
-		\begin{pmatrix} u_1 - r_1 \\  \vdots \\ u_{\nu} - r_{\nu} \end{pmatrix} \\
-	& = (u_1-r_1)^2  + \left\lfloor\frac{\log(p_2)^2}{\log(2)^2}\right\rfloor(u_2-r_2)^2 + \cdots + \left\lfloor\frac{\log(p_{\nu})^2}{\log(2)^2}\right\rfloor(u_{\nu}-r_{\nu})^2\\
-	& = |u_1 - r_1|^2 + \sum_{l = 2}^{\nu}\left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l-r_l|^2.
+	 = (A\mathbf{n})^{\text{T}}D^2A\mathbf{n}
+	 = |u_1 - r_1|^2 + \sum_{l = 2}^{\nu}\left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l-r_l|^2.
 \end{align*}
-Hence it follows that
-\[ q_f(\mathbf{n}) = |u_1 - r_1|^2 + \sum_{l = 2}^{\nu}\left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l-r_l|^2.\]
-Now, recall that
-\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
 It follows that
 \begin{align*}
 \frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n}) 
-	& = \frac{\log(2)^2}{[K:\mathbb{Q}]}\left( |u_1 - r_1|^2 + \sum_{l = 2}^{\nu} \left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l -r_l|^2\right) \\
 	& \leq \frac{\log(2)^2}{[K:\mathbb{Q}]}\left( |u_1 - r_1|^2 + \sum_{l = 2}^{\nu} \frac{\log(p_l)^2}{\log(2)^2}|u_l -r_l|^2\right) \\
-	& = \frac{1}{[K:\mathbb{Q}]}\left( \log(2)^2|u_1 - r_1|^2 + \sum_{l = 2}^{\nu} \log(p_l)^2|u_l -r_l|^2\right) \\
 	& = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2
 \end{align*}
 since all terms are positive. 
 \end{proof}
 
+\edit{FROM HERE}
 Now, 
 \[\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n}) =  \frac{\log(2)^2}{[K:\mathbb{Q}]} \sum_{l = 1}^{\nu}\left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l-r_l|^2.\]
 
-Take $\mathbf{h}\in\mathbb{R}^{r+\nu}$ such that $\mathbf{h}\geq \mathbf{0}$. Let $\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}$ be any solution of \eqref{Eq:main3}. Denote by $h_{v}\left(\frac{\delta_2}{\lambda}\right)$ the $v^{\text{th}}$ entry of the solution vector
-\[\left(\log(p_1)|u_1 - r_1|, \dots, \log(p_{\nu})|u_{\nu} - r_{\nu}|, \log \max \left\{ \left|w_1\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}, \dots, \log \max \left\{ \left|w_n\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}  \right)\] 
-and suppose $h_v(z)\leq h_v$ for all $v\in \{1, \dots, r+\nu\}$. Then we deduce
+Take $\mathbf{h}\in\mathbb{R}^{\nu+m}$ such that $\mathbf{h}\geq \mathbf{0}$. Let $\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}$ be any solution of \eqref{eq:EfficientSunit}. Denote by $h_{v}\left(\frac{\delta_2}{\lambda}\right)$ the $v^{\text{th}}$ entry of the solution vector
+\begin{align*}
+&\bigg(\log(p_1)|u_1 - r_1|, \dots, \log(p_{\nu})|u_{\nu} - r_{\nu}|, \\
+	& \quad \quad \left. \log \max \left\{ \left|w_1\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}, \dots, \log \max \left\{ \left|w_n\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}  \right)
+\end{align*}
+and suppose $h_v(z)\leq h_v$ for all $v\in S^*$. Then we deduce
 \[\log(2)^2q_f(\mathbf{n}) = \log(2)^2\sum_{k = 1}^{\nu}\left\lfloor\frac{\log(p_k)^2}{\log(2)^2}\right\rfloor|u_k-r_k|^2 \leq \sum_{k = 1}^{\nu} \log(p_k)^2|u_k -r_k|^2 \leq \sum_{k = 1}^{\nu} h_k^2.\]
+\edit{TO HERE; maybe want to move this after all the lemmata}
 
 Recall that for the degree $3$ Thue-Mahler equation, either $r = 1$ or $r = 2$. Choose a set $I$ of embeddings $L \rightarrow \mathbb{C}$ of cardinality $r$. For $r = 1$, this is simply
 \[R = \begin{pmatrix}
 	\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \end{pmatrix}.\]
-Clearly, as long as we choose $\iota_1$ such that $\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \neq 0$, that is $\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \neq 1$, this matrix is invertible, with inverse matrix
-\[R^{-1} = \begin{pmatrix} \frac{1}{\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right|}\end{pmatrix}.\]
+Clearly, as long as we choose $\iota_1$ such that $\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \neq 0$, that is $\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \neq 1$, this matrix is invertible.
 
 When $r = 2$, we let $I$ be the set of embeddings $L \to \mathbb{C}$ of cardinality $2$ such that for any $\alpha \in K$, it holds that $I\alpha^{(i_0)} \cup I\alpha^{(j)} = \Gal(L/\mathbb{Q})\alpha$. Such a set $I$ exists. Then we consider the $2 \times 2$ matrix
 \[R = \begin{pmatrix}
@@ -408,184 +374,16 @@ When $r = 2$, the matrix $R$ has an inverse
 \end{lemma}
 	
 \begin{proof}
-See \edit{add}
+Suppose that $\mathbf{m}\in\mathbb{Z}^{r}$ satisfies $R\mathbf{m}=0$. Then for each $\iota\in I$ it holds that 
+\[\sum_{i=1}^r m_{\eps_i} \log\left|\left(\frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{\iota_1}\right| =0\] and hence 
+\[\prod_{i=1}^r \left|\left(\frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{\iota_1}\right|^{m_{\eps_i}}=1.\] This together with $I(i)\cup I(j)=Gal(L/\mathbb{Q})$ implies that all conjugates of $\alpha=\prod_{i=1}^r \eps_i^{m_{\eps_i}}$ have the same absolute value. Since all $\eps_i$ are units of $\mathcal{O}_K$, it then follows that $|\alpha|^{[L:\mathbb{Q}]}=N(\alpha)=1$ and hence $\alpha$ is a root of unity in $K$. Thus, on using that  the elements $\eps_i$ are multiplicatively independent, we obtain that $\mathbf{m}=\mathbf{0}$.  Then linear algebra gives $R^{-1}\in\mathbb{R}^{r\times r}$. This completes the proof.
 \end{proof}
 
-\subsection{The complex case}
-
-Suppose first that $r = 1$. Now, for any solution $(x,y, a_1, n_1, \dots, n_{\nu})$ of \eqref{Eq:main3}, set
-\[\vec{\varepsilon} = \begin{pmatrix} a_1 \end{pmatrix}.\]
+Now, for the remainder of this chapter, we specialize to the real case, $r = 2$. For any solution $(x,y, n_1, \dots, n_{\nu}, a_1, a_2)$ of \eqref{eq:EfficientSunit}, set
+\[\mathbf{\eps} = \begin{pmatrix} a_1 & a_2 \end{pmatrix}^{\text{T}}.\]
 Now, 
 \begin{align*}
-R\vec{\varepsilon}
-	& = \begin{pmatrix}
-		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \end{pmatrix}
-		\begin{pmatrix} a_1\end{pmatrix}\\
-	& = \begin{pmatrix} 
-		a_1\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \end{pmatrix}\\
-	& = \begin{pmatrix} 
-		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right|^{a_1} 	 		\end{pmatrix}\\
-	& = \begin{pmatrix} 
-		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1}\right| 		 \end{pmatrix}.
-\end{align*}
-Since $R$ is invertible, we find
-\begin{align*}
-\vec{\varepsilon} = \begin{pmatrix} a_1\end{pmatrix} 
-& =  R^{-1} \begin{pmatrix} \log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ 		a_1}\right| \end{pmatrix}\\
-& = \begin{pmatrix} \frac{1}{\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right|}	\end{pmatrix}
-	\begin{pmatrix} \log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1}\right| 	\end{pmatrix}\\
-& = \begin{pmatrix} \overline{r}_{11} \end{pmatrix}\begin{pmatrix} \log\left|\left(\frac{\varepsilon_1^{(j)}}		{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1}\right| \end{pmatrix}\\
-& = \begin{pmatrix} \overline{r}_{11}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ 	a_1}\right|\end{pmatrix}.
-\end{align*}
-
-It follows that 
-\[a_1 =  \overline{r}_{11}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ 	a_1}\right|.\]
-
-Now, to estimate $|a_1|$, we begin to estimate the sum on the right hand side. For this, we consider
-\[\frac{\delta_2}{\lambda}= \left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{a_1}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i}.\]
-For any embedding $\iota: L \to \mathbb{C}$, we have 
-\[\left(\frac{\delta_2}{\lambda}\right)^{\iota} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i} =  \left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}.\] 
-
-Taking absolute values, we obtain
-\[\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i}\right| = \left|\left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}\right|,\]
-so that
-\begin{align*}
-\log\left|\left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}\right|
-	& = \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i}\right|\\
-	& = \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota}\right| + \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i}\right|\\
-	& = \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota \ n_i}\right|. 
-\end{align*}
-
-Hence, 
-\begin{align*}
-a_1	& =  \overline{r}_{11}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ 	a_1}\right| \\
-	& = \overline{r}_{11}\left( \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota_1 \ n_i}\right|\right)\\
-	& = \overline{r}_{11}\left(\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - 
-	n_1\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| - \cdots -n_{\nu}\log \left|\left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|\right).
-\end{align*}
-
-Recall that 
-\[A\mathbf{n} = \mathbf{u} - \mathbf{r}\]
-so
-\[\mathbf{n} = A^{-1}(\mathbf{u} - \mathbf{r}).\]
-If 
-\[A = \begin{pmatrix}
-	a_{11} & a_{12} & \dots & a_{1\nu} \\ a_{21} & a_{22} & \dots & a_{2\nu}\\
-	\vdots & \vdots & \ddots & \vdots\\ a_{\nu 1} & a_{\nu 2} & \dots & a_{\nu\nu}\\ 
-	\end{pmatrix},\]
-then 
-\[A^{-1} = \begin{pmatrix}
-	\overline{a}_{11} & \overline{a}_{12} & \dots & \overline{a}_{1\nu} \\ \overline{a}_{21} & \overline{a}_{22} 	& \dots & \overline{a}_{2\nu}\\
-	\vdots & \vdots & \ddots & \vdots\\ \overline{a}_{\nu 1} & \overline{a}_{\nu 2} & \dots 
-	& \overline{a}_{\nu\nu}\\ 
-	\end{pmatrix},\]
-and 
-\begin{align*}
-\begin{pmatrix} n_1 \\  \vdots \\ n_{\nu} \end{pmatrix}	
-	& = \mathbf{n}  = A^{-1}(\mathbf{u} - \mathbf{r})\\
-	& = \begin{pmatrix}
-	\overline{a}_{11} & \overline{a}_{12} & \dots & \overline{a}_{1\nu} \\ \overline{a}_{21} & \overline{a}_{22} 	& \dots & \overline{a}_{2\nu}\\
-	\vdots & \vdots & \ddots & \vdots\\ \overline{a}_{\nu 1} & \overline{a}_{\nu 2} & \dots 
-	& \overline{a}_{\nu\nu}\\ 
-	\end{pmatrix}
-	\begin{pmatrix} u_1-r_1 \\  \vdots \\ u_{\nu}-r_{\nu} \end{pmatrix}\\
-	& = \begin{pmatrix} \overline{a}_{11}(u_1-r_1) + \cdots + \overline{a}_{1\nu}(u_{\nu}-r_{\nu}) \\  \vdots \\ \overline{a}_{\nu 1}(u_1-r_1) + \cdots + \overline{a}_{\nu \nu}(u_{\nu}-r_{\nu}) \end{pmatrix}\\
-	& = \begin{pmatrix} \sum_{k=1}^{\nu} \overline{a}_{1k}(u_k-r_k)\\  \vdots \\ \sum_{k=1}^{\nu} \overline{a}_{\nu k}(u_k-r_k) \end{pmatrix}\\
-\end{align*}
-Now, 
-\begin{align*}
-a_1	& = \overline{r}_{11}\left(\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - 
-	n_1\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| - \cdots -n_{\nu}\log \left|\left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|\right)\\
-	& = \overline{r}_{11}\left(\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - 
-	 \left(\overline{a}_{11}(u_1-r_1) + \cdots + \overline{a}_{1\nu}(u_{\nu}-r_{\nu})\right)\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| - \cdots \right. \\
-	 &  \quad \quad \left. \cdots - (\overline{a}_{\nu 1}(u_1-r_1) + \cdots + \overline{a}_{\nu \nu}(u_{\nu}-r_{\nu}))\log \left|\left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|\right)\\
-	 & = \overline{r}_{11}\left[\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - (u_1-r_1)\left(\overline{a}_{11}\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| + \cdots + \overline{a}_{\nu 1}\log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|\right) - \cdots\right.\\
-	 & \quad \quad \cdots - \left.(u_{\nu}-r_{\nu})\left(\overline{a}_{1\nu}\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| + \cdots + \overline{a}_{\nu \nu}\log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|\right)\right]\\
-	 & = \overline{r}_{11}\left[\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - (u_1-r_1)\alpha_{\gamma 1} - \cdots - (u_{\nu} - r_{\nu})\alpha_{\gamma \nu}\right]\\
-	 & = \overline{r}_{11}\left(\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma k}\right)
-\end{align*}
-where
-\[\alpha_{\gamma k} = \overline{a}_{1k}\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| + \cdots + \overline{a}_{\nu k}\log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|.\]
-Taking absolute values, this yields
-\begin{align*}
-|a_1|	& = \left|\overline{r}_{11}\left(\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma k}\right)\right|\\
-	& \leq |\overline{r}_{11}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + \left| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma k}\overline{r}_{11}\right|\\
-	& \leq |\overline{r}_{11}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma k}\overline{r}_{11}|. 
-\end{align*}
-
-Now, if $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| \geq 0$ we obtain
-\begin{align*}
-|a_1|	& \leq |\overline{r}_{11}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma k}\overline{r}_{11}|\\
-		& \leq |\overline{r}_{11}|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma k}\overline{r}_{11}|\\
-		& \leq |\overline{r}_{11}|\log\max\left\{\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|, 1 \right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma k}\overline{r}_{11}|\\
-		& \leq \sum_{\sigma: L \to \mathbb{C}}|\overline{r}_{11}|\log\max \left\{\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|\alpha_{\gamma k}\overline{r}_{11}||u_k-r_k|.
-\end{align*}
-
-Recall that $\frac{\delta_2}{\lambda}$ is a quotient of elements which are conjugate to one another. In other words, taking the norm on $L$ of $\frac{\delta_2}{\lambda}$, we obtain $N\left(\frac{\delta_2}{\lambda}\right) = 1.$ On the other hand, by definition, we have 
-\[1 = N\left(\frac{\delta_2}{\lambda}\right) = \prod_{\sigma: L \to \mathbb{C}} \sigma \left(\frac{\delta_2}{\lambda}\right).\]
-Taking absolute values and logarithms, 
-\[0 = \sum_{\sigma: L \to \mathbb{C}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|\]
-so that
-\[-\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| = -\log\left|\iota_1 \left(\frac{\delta_2}{\lambda}\right)\right| = \sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|.\]
-
-Hence if $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| < 0$ we obtain
-\begin{align*}
-|a_1|	& \leq |\overline{r}_{11}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma k}\overline{r}_{11}|\\
-		& \leq |\overline{r}_{11}|\left(-\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right) + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma k}\overline{r}_{11}|\\
-		& = |\overline{r}_{11}|\left(\sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|\right) + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma k}\overline{r}_{11}|\\
-		& \leq |\overline{r}_{11}|\sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1$}}\log\max\left\{\left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1 \right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma k}\overline{r}_{11}|\\
-		& \leq \sum_{\sigma: L \to \mathbb{C}}|\overline{r}_{11}|\log\max \left\{\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|\alpha_{\gamma k}\overline{r}_{11}||u_k-r_k|.
-\end{align*}
-
-In both cases, it follows that
-\[|a_1| \leq \sum_{\sigma: L \to \mathbb{C}}|\overline{r}_{11}|\log\max \left\{\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|\alpha_{\gamma k}\overline{r}_{11}||u_k-r_k|\]
-for 
-\[\alpha_{\gamma k} = \overline{a}_{1k}\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| + \cdots + \overline{a}_{\nu k}\log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|\]
-Recall that
-\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} \log(p_k)|u_k - r_k|.\]
-Hence
-\begin{align*}
-|a_1|	& \leq \sum_{\sigma: L \to \mathbb{C}}|\overline{r}_{11}|\log\max \left\{\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|\alpha_{\gamma k}\overline{r}_{11}||u_k-r_k|\\
-	& = \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma: L \to \mathbb{C}}|\overline{r}_{11}|[L:\mathbb{Q}]\log\max \left\{\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \\
-	& \quad \quad + \frac{1}{[K:\mathbb{Q}]}\sum_{k=1}^{\nu}|\alpha_{\gamma k}\overline{r}_{11}|\frac{[K:\mathbb{Q}]}{\log(p_k)}\log(p_k)|u_k-r_k|\\
-	& = \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\sum_{k= 1}^{\nu} w_{\gamma k}\log(p_k)|u_k - r_k|
-\end{align*}
-where
-\[w_{\varepsilon \sigma} = |\overline{r}_{11}|[L:\mathbb{Q}] \quad \text{ and } \quad 
-	w_{\gamma k} = |\alpha_{\gamma k}\overline{r}_{11}|\frac{[K:\mathbb{Q}]}{\log(p_l)}\]
-and
-\[\alpha_{\gamma k} = \overline{a}_{1k}\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| + \cdots + \overline{a}_{\nu k}\log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|\]
-for $k = 1, \dots, \nu$. That is, 
-\begin{align*}
-|a_1|	& \leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}\log(p_k)|u_k - r_k|\\
-	& \leq \max\{w_{\varepsilon \sigma}, w_{\gamma 1}, \dots, w_{\gamma \nu}\} h\left(\frac{\delta_2}{\lambda}\right)
-\end{align*}
-
-\subsection{The real case}
-
-Now, suppose $r = 2$. For any solution $(x,y, n_1, \dots, n_{\nu}, a_1, a_2)$ of \eqref{Eq:main3}, set
-\[\vec{\varepsilon} = \begin{pmatrix} a_1 & a_2 \end{pmatrix}^{\text{T}}.\]
-Now, 
-\begin{align*}
-R\vec{\varepsilon}
-	& = \begin{pmatrix}
-		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| &
-		\log\left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1}\right|\\
-		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2}\right| &
-		\log\left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2}\right|\\
-		\end{pmatrix}
-		\begin{pmatrix} a_1 \\ a_2 \end{pmatrix}\\
-	& = \begin{pmatrix} 
-		a_1\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right|  
-		+ a_2\log\left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1}\right|\\
-		a_1\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2}\right|  
-		+ a_2\log\left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2}\right|
-	 	 \end{pmatrix}\\
-	& = \begin{pmatrix} 
-		\log\left(\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right|^{a_1} \cdot 
-		 \left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1}\right|^{a_2}\right)\\
-		\log\left(\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2}\right|^{a_1} \cdot 
-		 \left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2}\right|^{a_2}\right)	 	 		\end{pmatrix}\\
+R{\varepsilon}
 	& = \begin{pmatrix} 
 		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1} \cdot 
 		 \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1 \ a_2}\right| \\ 
@@ -593,25 +391,9 @@ R\vec{\varepsilon}
 		 \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right|
 		 \end{pmatrix}.
 \end{align*}
-Now, since $R$ is invertible with $R^{-1} = (\overline{r}_{nm})$, we find
+Since $R$ is invertible with $R^{-1} = (\overline{r}_{nm})$, we find
 \begin{align*}
-\vec{\varepsilon} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} 
-	& =  R^{-1} \begin{pmatrix} 
-		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1} \cdot 
-		 \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1 \ a_2}\right| \\ 
-		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2\ a_2} \cdot 
-		 \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right|
-		 \end{pmatrix}\\
-	& = \begin{pmatrix}
-		\overline{r}_{11} & \overline{r}_{12} \\
-		\overline{r}_{21} & \overline{r}_{22}
-		\end{pmatrix}
-		\begin{pmatrix} 
-		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1} \cdot 
-		 \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1 \ a_2}\right| \\ 
-		\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2\ a_2} \cdot 
-		 \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right|
-		 \end{pmatrix}\\
+{\varepsilon} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} 
 	& = \begin{pmatrix} 
 		\overline{r}_{11}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1} 		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1 \ a_2}\right| + 
 		\overline{r}_{12}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2\ a_1}
@@ -619,15 +401,15 @@ Now, since $R$ is invertible with $R^{-1} = (\overline{r}_{nm})$, we find
 		\overline{r}_{21}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1} 		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1 \ a_2}\right| +
 		\overline{r}_{22}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2\ a_1}
 		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right| \\
-		\end{pmatrix}.
+		\end{pmatrix}
 \end{align*}
-and so we have
+giving
 \[a_l = \overline{r}_{l1}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1} 		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1 \ a_2}\right| + 
 	\overline{r}_{l2}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2\ a_1}
 	\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right|\]
 for $l = 1,2$. 
 
-Now, to estimate $|a_l|$, we begin to estimate the sum on the right hand side. For this, we consider
+To estimate $|a_l|$, we begin to estimate the sum on the right hand side. For this, we consider
 \[\frac{\delta_2}{\lambda}= \left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{a_2}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i}.\]
 For any embedding $\iota: L \to \mathbb{C}$, we have 
 \[\left(\frac{\delta_2}{\lambda}\right)^{\iota} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i} =  \left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota \ a_2}.\] 
@@ -637,8 +419,6 @@ Taking absolute values, we obtain
 so that
 \begin{align*}
 \log\left|\left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota \ a_2}\right|
-	& = \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i}\right|\\
-	& = \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota}\right| + \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i}\right|\\
 	& = \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota \ n_i}\right|. 
 \end{align*}
 
@@ -649,21 +429,6 @@ a_l	& = \overline{r}_{l1}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_
 	\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right|\\
 	& = \overline{r}_{l1}\left( \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota_1 \ n_i}\right|\right) + \\ 
 	& \quad \quad + \overline{r}_{l2}\left( \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota_2 \ n_i}\right|\right)\\
-	& = \overline{r}_{l1}\left(\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - 
-	n_1\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| - \cdots -n_{\nu}\log \left|\left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|\right) + \\
-	& \quad \quad + \overline{r}_{l2}\left(\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - 
-	n_1\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_2}\right| - \cdots -n_{\nu}\log \left|\left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_2}\right|\right).
-\end{align*}
-
-Now, for $l = 1,2$, 
-\begin{align*}
-a_l 	& = \overline{r}_{l1}\left(\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - 
-	n_1\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| - \cdots -n_{\nu}\log \left|\left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|\right) + \\
-	& \quad \quad + \overline{r}_{l2}\left(\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - 
-	n_1\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_2}\right| - \cdots -n_{\nu}\log \left|\left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_2}\right|\right)\\
-	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| + \\
-	& \quad \quad - n_1\left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_2}\right|\right) - \cdots \\
-	& \quad \quad \cdots - n_{\nu} \left(\overline{r}_{l1}\log \left|\left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right| + \overline{r}_{l2}\log \left|\left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_2}\right| \right)  \\
 	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - n_1\beta_{\gamma l 1} - \dots - n_{\nu}\beta_{\gamma l \nu},
 \end{align*}
 where
@@ -672,40 +437,16 @@ for $k = 1, \dots, \nu$. Recall that
 \[A\mathbf{n} = \mathbf{u} - \mathbf{r}\]
 so
 \[\mathbf{n} = A^{-1}(\mathbf{u} - \mathbf{r}).\]
-If 
-\[A = \begin{pmatrix}
-	a_{11} & a_{12} & \dots & a_{1\nu} \\ a_{21} & a_{22} & \dots & a_{2\nu}\\
-	\vdots & \vdots & \ddots & \vdots\\ a_{\nu 1} & a_{\nu 2} & \dots & a_{\nu\nu}\\ 
-	\end{pmatrix},\]
-then 
-\[A^{-1} = \begin{pmatrix}
-	\overline{a}_{11} & \overline{a}_{12} & \dots & \overline{a}_{1\nu} \\ \overline{a}_{21} & \overline{a}_{22} 	& \dots & \overline{a}_{2\nu}\\
-	\vdots & \vdots & \ddots & \vdots\\ \overline{a}_{\nu 1} & \overline{a}_{\nu 2} & \dots 
-	& \overline{a}_{\nu\nu}\\ 
-	\end{pmatrix},\]
-and 
+Suppose inverse of $A$ has entries $\overline{a}_{ij}$. We have
 \begin{align*}
-\begin{pmatrix} n_1 \\  \vdots \\ n_{\nu} \end{pmatrix}	
-	& = \mathbf{n}  = A^{-1}(\mathbf{u} - \mathbf{r})\\
-	& = \begin{pmatrix}
-	\overline{a}_{11} & \overline{a}_{12} & \dots & \overline{a}_{1\nu} \\ \overline{a}_{21} & \overline{a}_{22} 	& \dots & \overline{a}_{2\nu}\\
-	\vdots & \vdots & \ddots & \vdots\\ \overline{a}_{\nu 1} & \overline{a}_{\nu 2} & \dots 
-	& \overline{a}_{\nu\nu}\\ 
-	\end{pmatrix}
-	\begin{pmatrix} u_1-r_1 \\  \vdots \\ u_{\nu}-r_{\nu} \end{pmatrix}\\
-	& = \begin{pmatrix} \overline{a}_{11}(u_1-r_1) + \cdots + \overline{a}_{1\nu}(u_{\nu}-r_{\nu}) \\  \vdots \\ \overline{a}_{\nu 1}(u_1-r_1) + \cdots + \overline{a}_{\nu \nu}(u_{\nu}-r_{\nu}) \end{pmatrix}\\
-	& = \begin{pmatrix} \sum_{k=1}^{\nu} \overline{a}_{1k}(u_k-r_k)\\  \vdots \\ \sum_{k=1}^{\nu} \overline{a}_{\nu k}(u_k-r_k) \end{pmatrix}
+\mathbf{n}  = A^{-1}(\mathbf{u} - \mathbf{r})
+	 = \begin{pmatrix} \sum_{k=1}^{\nu} \overline{a}_{1k}(u_k-r_k)\\  \vdots \\ \sum_{k=1}^{\nu} \overline{a}_{\nu k}(u_k-r_k) \end{pmatrix}.
 \end{align*}
 
 Now, 
 \begin{align*}
 a_l 	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - n_1\beta_{\gamma l 1} - \dots - n_{\nu}\beta_{\gamma l \nu}\\
-	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \left(\overline{a}_{11}(u_1-r_1) + \cdots + \overline{a}_{1\nu}(u_{\nu}-r_{\nu})\right)\beta_{\gamma l 1} - \cdots \\
-	&  \quad \quad \cdots - (\overline{a}_{\nu 1}(u_1-r_1) + \cdots + \overline{a}_{\nu \nu}(u_{\nu}-r_{\nu}))\beta_{\gamma l \nu} \\
-	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| -(u_1-r_1)(\overline{a}_{11}\beta_{\gamma l 1} + \cdots + \overline{a}_{\nu 1}\beta_{\gamma l \nu}) - \cdots\\
-	& \quad \quad \cdots - (u_{\nu}-r_{\nu})\left(\overline{a}_{1\nu}\beta_{\gamma l 1} + \cdots + \overline{a}_{\nu \nu}\beta_{\gamma l \nu}\right)\\
-	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - (u_1-r_1)\alpha_{\gamma l 1} - \cdots - (u_{\nu} - r_{\nu})\alpha_{\gamma l \nu}\\
-	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma l k}
+	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma l k},
 \end{align*}
 where
 \[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma l 1} + \cdots + \overline{a}_{\nu k}\beta_{\gamma l \nu}\]
@@ -720,17 +461,11 @@ Taking absolute values and logarithms,
 so that
 \[-\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota}\right| = -\log\left|\iota \left(\frac{\delta_2}{\lambda}\right)\right| = \sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|.\]
 
-Taking absolute values, this yields
+Therefore,
 \begin{align*}
 |a_l| 	& = \left|\overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma l k}\right|\\
-	& \leq |\overline{r}_{l1}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + |\overline{r}_{l2}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right| + \left| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma l k}\right|\\
-	& \leq |\overline{r}_{l1}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + |\overline{r}_{l2}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|
+	& \leq |\overline{r}_{l1}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + |\overline{r}_{l2}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
 \end{align*}
-where
-\[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma l 1} + \cdots + \overline{a}_{\nu k}\beta_{\gamma l \nu}\]
-and
-\[\beta_{\gamma l k} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
-for $k = 1, \dots, \nu$.
 
 Suppose $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| \geq 0$ and $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| \geq 0$. Then, we obtain
 \begin{align*}
@@ -761,7 +496,7 @@ Lastly, if, without loss of generality, we have $\log\left|\left(\frac{\delta_2}
 	& = \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + |\overline{r}_{l1}|\log\max\left\{\left|\iota_1\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}+ \\
 	&\quad\quad + |\overline{r}_{l2}|\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}+ \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
 \end{align*}
-In all cases, it follows that we have 
+In all three cases, it follows that
 \begin{align*}
 |a_l|	& \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + |\overline{r}_{l1}|\log\max\left\{\left|\iota_1\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \\
 	&\quad\quad + |\overline{r}_{l2}|\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}+ \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|
@@ -771,16 +506,6 @@ where
 and
 \[\beta_{\gamma l k} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
 for $k = 1, \dots, \nu$.
-That is, for $k = 1, \dots, \nu$, we have
-\begin{align*}
-\alpha_{\gamma l k}	
-& = \overline{a}_{1k}\left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_2}\right|\right) + \cdots \\ 
-	& \quad \quad  \cdots + \overline{a}_{\nu k}\left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_2}\right|\right) \\
-& = \left(\overline{a}_{1k}\overline{r}_{l1} \log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| + \cdots + \overline{a}_{\nu k}\overline{r}_{l1} \log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right| \right)+  \\ 
-	& \quad \quad + \left(\overline{a}_{1k}\overline{r}_{l2} \log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_2}\right| + \cdots + \overline{a}_{\nu k}\overline{r}_{l2} \log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_2}\right| \right)\\
-& = \overline{r}_{l1} \left(\overline{a}_{1k} \log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_1}\right| + \cdots + \overline{a}_{\nu k} \log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_1}\right| \right)+  \\ 
-	& \quad \quad + \overline{r}_{l2}\left(\overline{a}_{1k} \log\left| \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{\iota_2}\right| + \cdots + \overline{a}_{\nu k}\log\left| \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{\iota_2}\right| \right).
-\end{align*}
 
 Recall that
 \[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l|.\]
