@@ -4,56 +4,24 @@
 \chapter{Introduction}
 \label{ch:Introduction}
 
-\aaron{
-i mean, the beginning is the part you're not comfortable writing, right? the longer it went on, the better it flowed. at that point you're quoting and weaving results you know well, referencing the little mental web you have woven. it seems cohesive, but also i don't understand it. 
-the beginning bit seems thrown together — like Mike told you to include bits about DEs and so you begrudgingly injected something ?? 
-like the very very beginning bit
-anyway, i'll e-mail you back the tex file and the pdf. 
-i know you're not asking for this advice but it's coming from ozgur and yaniv and they are very smart and i trust them lots:}
-
-\aaron{
-\begin{enumerate}
-\item be very careful about whether you're using colloquial language, and how it might be interpreted. e.g. be careful not to insult people's work, and try to not to flip flop on how hand wavey you are being. I think I have a couple of notes in the file pertaining to each of these points
-\item when citing work, either use the author names every time or don't. don't mix and match unless appropriate. why would you deny some the respect of appearing in your work, but not others? 
-\item if you're going to write notes to yourself in your thesis/papers, you must have a way of ensuring that you'll see them later before you send it off. caps lock is not sufficient and yaniv and ozgur can provide examples if you need. I included a little \edit{} command for you so that you can just Cmd+F (or C-s ?? ) for all appearances of \edit in the .tex file if you use it. Has the added advantage of making PDF text blue so that everyone reading too knows that it doesn't belong. 
-\end{enumerate}}
-
-\aaron{
-also my disclaimer for edits: 
-1. for some reason my brain is tired today;
-2. I don't know the culture of your field nor some of the very elementary things you're presenting
-3. Because of 1, I tried to communicate what I wanted to say using the best language I could, but may not have always succeeded at clarity/intent/approachability ?? 
-So basically, remember that it's possible that my edits deserve to be treated with a grain of salt. ??}
-
-
-
-
-\aaron{This start feels outside the realm of where you're going --- it seems at once abrupt and off-topic. It would be nice to have an introductory sentence or two to get the reader on track before discussing the ``required background'' material.}
-A Diophantine equation is a polynomial equation in several variables defined over the integers. The term \textit{Diophantine} refers to the Greek mathematician Diophantus of Alexandria, who studied such equations in the 3rd century A.D.  \aaron{why the history lesson? maybe you could use this as one way of motivating/introducing DEs: ``look at these things. look how long they've been studied. here's why, and here are the ways people study them. \ldots or something\ldots}
-
-\aaron{remove separate paragraph if it's the same thought --- $f$ is a DE right? If so, then these next lines are providing additional information to what was given above, not starting a new thread.}
-Let $f(x_1, \dots, x_n)$ be a polynomial with integer coefficients. We wish to study the set of solutions $(x_1, \dots, x_n) \in \mathbb{Z}^n$ to the equation
+A Diophantine equation is a polynomial equation in several variables defined over the integers. The term \textit{Diophantine} refers to the Greek mathematician Diophantus of Alexandria, who studied such equations in the 3rd century A.D.  Let $f(x_1, \dots, x_n)$ be a polynomial with integer coefficients. We wish to study the set of solutions $(x_1, \dots, x_n) \in \mathbb{Z}^n$ to the equation
 \begin{equation}\label{Introduction:Diophantine}
 f(x_1, \dots, x_n) = 0.
 \end{equation}
 There are several different approaches for doing so, arising from three basic
 problems concerning Diophantine equations. The first such problem is to
-determine whether \strike{or not} \eqref{Introduction:Diophantine} has any
-solutions \strike{at all} \aaron{(too colloquial imo)}. Indeed, one of the most
+determine whether \eqref{Introduction:Diophantine} has any
+solutions. Indeed, one of the most
 famous theorems in mathematics, Fermat's Last Theorem, proven by Wiles in 1995,
 states that for $f(x,y,z) = x^n + y^n - z^n$, where $n \geq 3$, there are no
-solutions in the positive integers $x,y,z$ \aaron{(there are so many commas in this sentence. You can remove at least 2 of 7 by splicing and/or rearranging)}. Qualitative questions of this type
+solutions in the positive integers $x,y,z$. Qualitative questions of this type
 are often studied using algebraic methods.
 
 Suppose now that \eqref{Introduction:Diophantine} is solvable, that is, has at least one solution. The second basic problem is to determine whether the number of solutions is finite or infinite. For example, consider the \textit{Thue equation}, 
 \begin{equation}\label{Introduction:Thue}
 f(x,y) = a,
 \end{equation}
-where $f(x,y)$ is an integral binary form of degree $n \geq 3$ \aaron{(feels
-  like you really jump into the language here. you spelled out what a DE was,
-  but now assume the reader knows the definition of an integral binary
-  form. Personally, I knew the former but the latter reads like domain-specific
-  jargon to me)} and $a$ is a fixed nonzero rational integer. In 1909, Thue
+where $f(x,y)$ is an integral binary form of degree $n \geq 3$ and $a$ is a fixed nonzero rational integer. In 1909, Thue
 [\textcolor{red}{REF}] proved that this equation has only finitely many
 solutions. This result followed from a sharpening of Liouville's inequality, an
 observation that algebraic numbers do not admit very strong approximation by
@@ -67,7 +35,7 @@ where $c_1 >0 $ is a value depending explicitly on $\alpha$. The finitude of the
 \begin{equation}\label{Introduction:Sharpening}
 \left|\alpha - \frac{p}{q}\right| > \frac{\lambda(q)}{q^{n}}, \quad \lambda(q) \to \infty.
 \end{equation}
-\aaron{what is the limit $\lambda \to \infty$ with respect to?}  Indeed, if
+Indeed, if
 $\alpha$ is a real root of $f(x,1)$ and $\alpha^{(i)}$, $i = 1, \dots, n$ are
 its conjugates, it follows from \eqref{Introduction:Thue} that
 \[\prod_{i=1}^n\left|\alpha^{(i)}-\frac{x}{y}\right| = \frac{a}{|a_0||y|^n}\]
@@ -110,7 +78,7 @@ $x,y,z_i \geq 0$, $i = 1, \dots, v$ are unknown integers, and $f(x,y)$ is an
 integral irreducible binary form of degree $n \geq 3$. Generalizing the
 classical result of Thue, Mahler proved that this equation has only finitely
 many solutions. Unfortunately, like Thue, Mahler's argument is also
-ineffective \aaron{each time I read this, I believe more strongly that a different word should be used to describe their work. ineffective seems like an attack, and a broad stroke that misses the precise critique you're looking to discuss}.
+ineffective.
 
 This leads us to the third basic problem regarding Diophantine equations and the main focus of this thesis: given a solvable Diophantine equation, determine all of its solutions. Until long after Thue's work, no method was known for the construction of bounds for the number of solutions of a Thue equation in terms of the parameters of the equation. Only in 1968 was such a method introduced by Baker [REF], based on his theory of bounds for linear forms in the logarithms of algebraic numbers. Generalizing Baker's ground-breaking result to the $p$-adic case, Sprind\u zuk and Vinogradov [CITE] and Coates [CITE] proved that the solutions of any \textit{Thue-Mahler equation},
 \begin{equation}\label{Introduction:ThueMahler}
@@ -124,7 +92,7 @@ As for Goormaghtigh's equation, when $m$ and $n$ are fixed and
 \begin{equation}\label{Introduction:GoormaghtighCondition}
 \gcd(m-1,n-1) > 1,
 \end{equation}
-Davenport, Lewis, and Schinzel ([REF]) were able to replace Siegel's result by an effective argument due to Runge. This result was improved by Nesterenko and Shorey ([REF]) and Bugeaud and Shorey ([REF]) using Baker's theory of linear forms in logarithms. In either case, in order to deduce effectively computable bounds \aaron{(I like this use of effectively)} upon the polynomial variables $x$ and $y$, one must impose the constraints upon $m$ and $n$ that either $m=n+1$, or that the assumption \eqref{Introduction:GoormaghtighCondition} holds. In the extensive literature on this problem, there are a number of striking results that go well beyond what we have mentioned here. By way of example, work of Balasubramanian and Shorey ([REF]) shows that equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions if we fix only the set of prime divisors of $x$ and $y$, while Bugeaud and Shorey ([REF]) prove an analogous finiteness result, under the additional assumption of \eqref{Introduction:GoormaghtighCondition}, provided the quotient $(m-1)/(n-1)$ is bounded above. Additional results on special cases of equation \eqref{Introduction:Goormaghtigh} are available in, for example, \cite{HeTo}, \cite{Le1}, \cite{Le2} and \cite{Le3}.  An excellent overview of results on this problem  can be found in the survey of Shorey \cite{ShoSur}.
+Davenport, Lewis, and Schinzel ([REF]) were able to replace Siegel's result by an effective argument due to Runge. This result was improved by Nesterenko and Shorey ([REF]) and Bugeaud and Shorey ([REF]) using Baker's theory of linear forms in logarithms. In either case, in order to deduce effectively computable bounds  upon the polynomial variables $x$ and $y$, one must impose the constraints upon $m$ and $n$ that either $m=n+1$, or that the assumption \eqref{Introduction:GoormaghtighCondition} holds. In the extensive literature on this problem, there are a number of striking results that go well beyond what we have mentioned here. By way of example, work of Balasubramanian and Shorey ([REF]) shows that equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions if we fix only the set of prime divisors of $x$ and $y$, while Bugeaud and Shorey ([REF]) prove an analogous finiteness result, under the additional assumption of \eqref{Introduction:GoormaghtighCondition}, provided the quotient $(m-1)/(n-1)$ is bounded above. Additional results on special cases of equation \eqref{Introduction:Goormaghtigh} are available in, for example, \cite{HeTo}, \cite{Le1}, \cite{Le2} and \cite{Le3}.  An excellent overview of results on this problem  can be found in the survey of Shorey \cite{ShoSur}.
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
@@ -210,9 +178,6 @@ For a given \eqref{Introduction:SUnit}, we show that the height $h(1/x)$ admits 
 
 \textbf{Step 3.}
 For each place of $K$ appearing in \eqref{Introduction:SUnit}, we drastically reduce the upper bounds derived in Step 2 by using computational Diophantine approximation techniques applied to the intersection of a certain ellipsoid and translated lattice. This technique involves using the Finke-Pohst algorithm to enumerate all short vectors in the intersection. Here, working with the Weil height $h(1/x)$ has the advantage that it leads to ellipsoids whose volumes are smaller than the ellipsoids implicitly used in [TdW] by a factor of $\sim r^{r/2}$ for $r$ the number of places of $K$ appearing in our $S$-unit equation. In this way, we reduce the number of short vectors appearing from the Fincke-Pohst algorithm, and consequently reduce our running time and memory requirements. 
-
-\textbf{Step 4.}
-Samir's sieve - this may not be done in time as we only just received Samir's writeup and explanation as pertaining to Thue-Mahler equations.
 
 \textbf{Step 5.}
 Finally, we use a sieving procedure to find all the solutions of the Diophantine equation that live in the box defined by the bounds derived in the previous steps. To carry out this step, we run through all the possible solutions in the box and ‘sieve’ out the vast majority of non-solutions. This is done via certain low-cost congruence tests. The candidate solutions passing this test are then verified directly against \eqref{Introduction:SUnit}. Though we expect the bounds defining the box to be small, there can still be a very large number of possible solutions to check, especially if the number of rational primes involved in the Thue-Mahler equation is large. The computations performed on each individual candidate solution are relatively simple, but the sheer number of candidates often makes this step the computational bottleneck of the entire algorithm. 

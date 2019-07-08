@@ -4,8 +4,7 @@
 \chapter{Algorithms for Thue-Mahler Equations}
 \label{ch:AlgorithmsForTM}
 
-\edit{introduction}
-
+In this chapter, we give some of primary algorithms needed to solve an arbitrary Thue-Mahler equation. The methods presented here follow somewhat \cite{Ham} and \cite{TW3}, with new results and modifications from \cite{GhKaMaSi}. 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
@@ -19,7 +18,7 @@ be an irreducible binary form over $\mathbb{Z}$ of degree $n \geq 3$. We want to
 \begin{equation} \label{eq:ThueMahler}
 F(X,Y) = c p_1^{Z_1}\cdots p_v^{Z_v}
 \end{equation}
-for unknowns $X,Y, Z_1, \dots, Z_v$ with $\gcd(X,Y) = 1$ and $Z_i \geq 0$ for $i = 1,\dots, v$. To do so, we first reduce \eqref{eq:ThueMahler} to the special case where $c_0 = 1$ and $\gcd(c,p_i) = 1$ for $i = 1, \dots, v$. 
+for unknowns $X,Y, Z_1, \dots, Z_v$ with $\gcd(X,Y) = 1$ and $Z_i \geq 0$ for $i = 1,\dots, v$. To do so, we first reduce \eqref{eq:ThueMahler} to the special case where $c_0 = 1$ and $\gcd(c,p_i) = 1$ for $i = 1, \dots, v$, loosely following \cite{Ham}. 
 
 As $F$ is irreducible by assumption, at least one of the coefficients $c_0$ and $c_n$ is nonzero. Hence, we may transform the given Thue--Mahler equation to one with $c_0 \neq 0$ by interchanging $X$ and $Y$ and by renaming the coefficients $c_i$ appropriately. In particular, solving \eqref{eq:ThueMahler} is equivalent to solving 
 \[ c_0' \overline{X}^n + c_1' \overline{X}^{n-1}\overline{Y} + \cdots + c_{n-1}'\overline{X}\overline{Y}^{n-1} + c_n'\overline{Y}^n = c p_1^{Z_1}\cdots p_v^{Z_v},\]
@@ -81,7 +80,7 @@ f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n = c p_1^{z_1} \cd
 \end{equation}
 where $\gcd(x,y) = 1$ and $\gcd(c,p_i) = 1$ for $i = 1, \dots, p_v$.
 
-Following \edit{Tzanakis, de Weger, Hambrook}, put
+Following \cite{TW3}, put
 \[g(t) = f(t,1) = t^n + C_1 t^{n-1} + \dots + C_{n-1}t + C_n\]
 and note that $g(t)$ is irreducible in $\mathbb{Z}[t]$. Let $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$. Now \eqref{eq:ThueMahler3} is equivalent to the norm equation
 \begin{equation} \label{eq:normTM}
@@ -106,7 +105,7 @@ Our first task is to cut down the number of variables appearing in \eqref{eq:ide
 \section{The prime ideal removing lemma}
 \label{sec:PIRL}
 
-In this section, we establish some key results that will allow us to cut down the number of prime ideals that can appear to a large power in the factorization of $(x-y\theta)\mathcal{O}_K$. It is of particular importance to note that we do not appeal to the Prime Ideal Removing Lemma of Tzanakis, de Weger \edit{ref and Hambrook} here and instead apply the following results of \edit{cite new paper}
+In this section, we establish some key results that will allow us to cut down the number of prime ideals that can appear to a large power in the factorization of $(x-y\theta)\mathcal{O}_K$. It is of particular importance to note that we do not appeal to the Prime Ideal Removing Lemma of Tzanakis and de Weger (\cite{TW3}) here and instead apply the following results of \cite{GhKaMaSi}. 
 
 Let $p \in \{p_1, \dots, p_v\}$. We will produce the following two finite lists $L_p$ and $M_p$. The list $L_p$ will
 consist of certain ideals $\mathfrak{b}$ of $\mathcal{O}_K$ supported at the prime ideals above $p$. The list $M_p$ will consist of certain pairs $(\mathfrak{b},\mathfrak{p})$ where $\mathfrak{b}$ is supported at the prime ideals above $p$ and $\mathfrak{p}$ is a prime ideal lying over $p$ satisfying $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$. These lists will satisfy the following property: if $(x,y,z_1,\dots,z_v)$ is a solution to the Thue-Mahler equation \eqref{eq:ThueMahler3} then
@@ -124,14 +123,14 @@ such that
 
 To generate the lists $M_p$, $L_p$ we consider two affine patches, $p \nmid y$ and $p \mid y$. We begin with the following lemmata.
 
-\begin{lemma} \label{lem:AffinePatch1}\edit{[Siksek]}
+\begin{lemma} \label{lem:AffinePatch1}
 Let $(x,y,z_1, \dots, z_v)$ be a solution of \eqref{eq:ThueMahler3} with $p \nmid y$, let $t$ be a positive integer, and suppose $x/y \equiv u \pmod{p^t}$, where ${u \in \{0,1,2,\dotsc,p^{t}-1\}}$. If $\mathfrak{q}$ is a prime ideal of $\mathcal{O}_K$ lying over $p$, then
 \[\ord_{\mathfrak{q}}(x-y\theta)\ge \min\{\ord_{\mathfrak{q}}(u-\theta), t \cdot e(\mathfrak{q}|p)\}.\]
 Moreover, if $\ord_{\mathfrak{q}}(u-\theta) < t \cdot e(\mathfrak{q}|p)$, then
 \[\ord_\mathfrak{q}(x-y\theta) = \ord_{\mathfrak{q}}(u-\theta).\]
 \end{lemma}
 
-\begin{lemma} \label{lem:AffinePatch2} \edit{[Siksek]}
+\begin{lemma} \label{lem:AffinePatch2}
 Let $(x,y,z_1, \dots, z_v)$ be a solution of \eqref{eq:ThueMahler3} with $p \mid y$ (and thus $p \nmid x$), let $t$ be a positive integer, and suppose $y/x \equiv u \pmod{p^t}$, where $u \in \{0,1,2,\dotsc,p^{t}-1\}$. If $\mathfrak{q}$ is a prime ideal of $\mathcal{O}_K$ lying over $p$, then
 \[\ord_{\mathfrak{q}}(x-y\theta)\ge \min\{\ord_{\mathfrak{q}}(1-\theta u), t \cdot e(\mathfrak{q}|p)\}.\]
 Moreover, if $\ord_{\mathfrak{q}}(1-\theta u) < t \cdot e(\mathfrak{q}|p)$, then
@@ -279,17 +278,14 @@ Let $(x,y,z_1,\dots, z_v)$ be a solution to \eqref{eq:ThueMahler3}. In view of L
 \subsection{Computational remarks and refinements}
 \label{subsec:PIRLRemarks}
 
-In implementing Algorithms~\ref{alg:AffinePatch1} and \ref{alg:AffinePatch2}, we reduce the number of prime ideals appearing in the factorization of $(x-y\theta)\mathcal{O}_K$ to a large power. The Prime Ideal Removing Lemma, as originally stated in \edit{Tzanakis, deWeger and used in Hambrook} outlines a similar process by comparing the valuations of $(x-y\theta)\mathcal{O}_K$ at two prime ideals $\mathfrak{p}_1$ and $\mathfrak{p}_2$ above $p$. Of course if $\mathfrak{p}_1 \mid (x-y\theta)\mathcal{O}_K$, we restrict the possible values for $x$ and $y$ modulo $p$. However any choice of $x$ and $y$ modulo $p$ affects the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$. In the present refinement outlined by Lemma~\ref{lem:AffinePatch1} and Lemma~\ref{lem:AffinePatch2}, we instead study the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$ simultaneously. This presents us with considerably less ideal equations of the form \ref{eq:idealTM} to resolve. \edit{In particular, we outline some examples in the following table.}
+In implementing Algorithms~\ref{alg:AffinePatch1} and \ref{alg:AffinePatch2}, we reduce the number of prime ideals appearing in the factorization of $(x-y\theta)\mathcal{O}_K$ to a large power. The Prime Ideal Removing Lemma, as originally stated in Tzanakis - de Weger outlines a similar process by comparing the valuations of $(x-y\theta)\mathcal{O}_K$ at two prime ideals $\mathfrak{p}_1$ and $\mathfrak{p}_2$ above $p$. Of course if $\mathfrak{p}_1 \mid (x-y\theta)\mathcal{O}_K$, we restrict the possible values for $x$ and $y$ modulo $p$. However any choice of $x$ and $y$ modulo $p$ affects the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$. In the present refinement outlined by Lemma~\ref{lem:AffinePatch1} and Lemma~\ref{lem:AffinePatch2}, we instead study the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$ simultaneously. This presents us with considerably less ideal equations of the form \ref{eq:idealTM} to resolve. 
 
 Moreover, this variant of the Prime Ideal Removing Lemma permits the following additional refinements:
 \begin{itemize}
 \item Let $\mathfrak{b} \in L_p$. If there exists a pair $(\mathfrak{b}^\prime,\mathfrak{p}) \in M_p$ with $\mathfrak{b}^\prime \mid \mathfrak{b}$ and $\mathfrak{b}/\mathfrak{b}^\prime=\mathfrak{p}^w$
 for some $w \ge 0$, then we may delete $\mathfrak{b}$ from $L_p$. In doing so, the conclusion to Lemma~\ref{lem:AffinePatch2Check} continues to hold.
 \item Suppose $(\mathfrak{b},\mathfrak{p})$, $(\mathfrak{b}^\prime,\mathfrak{p}) \in M_p$ with $\mathfrak{b}^{\prime} \mid \mathfrak{b}$, and $\mathfrak{b}/\mathfrak{b}^{\prime}=\mathfrak{p}^w$ for some ${w \geq 0}$. Then, we may delete $(\mathfrak{b},\mathfrak{p})$ from $M_p$ without affecting the conclusion to Lemma~\ref{lem:AffinePatch2Check}. 
-\item \edit{After the above two refinements, we reduced the redundancy in the sets $M_p$ and $L_p$ similar to Kyle Hambrook's redundancy removal.}
 \end{itemize}
-
-\edit{ Add test examples, restructure subsection, table format?}
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
@@ -391,7 +387,7 @@ with unknowns $a_i \in \mathbb{Z}$, $n_i \in \mathbb{Z}$, and $\zeta$ in the set
 
 Let $p \in \{p_1, \dots, p_v, \infty\}$. Recall that $g(t)$ is an irreducible polynomial in $\mathbb{Z}[t]$ arising from \eqref{eq:ThueMahler3} such that
 \[g(t) = f(t,1) = t^n + C_1 t^{n-1} + \dots + C_{n-1}t + C_n.\]
-Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \dots, \theta^{(n)}$. Let $i_0, j, k \in \{1,\dots, n\}$ (\edit{should this be $\nu$?}) be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. From the Siegel identity
+Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \dots, \theta^{(n)}$. Let $i_0, j, k \in \{1,\dots, n\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. From the Siegel identity
 \[(\theta^{(i_0)} - \theta^{(j)})(x-y\theta^{(k)}) + (\theta^{(j)} - \theta^{(k)})(x-y\theta^{(i_0)}) + (\theta^{(k)} - \theta^{(i_0)})(x-y\theta^{(j)}) = 0,\]
 applying the embeddings to $\beta = x-y\theta$ yields the so-called ``$S$-unit equation''
 \begin{equation} \label{eq:Sunit}
@@ -408,13 +404,13 @@ To summarize, our original problem of solving \eqref{eq:ThueMahler3} for $(x,y,z
 \subsection{Computational remarks and comparisons}
 \label{subsec:FactorizationRemarks}
 
-In \autoref{subsec:FactorizationTMwithoutOK}, we follow closely the method of \edit{Tzanakis, de Weger} to reduce the ideal equation~\eqref{eq:TMfactored} to the $S$-unit equation~\eqref{eq:Sunit}. To implement this reduction, we begin by computing all $h_i$ for which $\mathfrak{p}_i^{h_i}$ is principal for $i = 1, \dots, \nu$. In doing so, we generate all possible values for $r_i$, the non-negative integer satisfying $0 \leq r_i < h_i$. We then generate every possible vector $\mathbf{r} = (r_1, \dots, r_{\nu})$ and test the corresponding ideal product $\mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r}}$ for principality. Those vectors which pass this test yield an $S$-unit equation~\eqref{eq:Sunit}. In the worst case scenario, this method reduces to $h_K^{\nu}$ such equations, where $h_K$ is the class number of $K$. Moreover, this process needs to be applied to every ideal equation~\eqref{eq:TMfactored}, yielding what may be a very large number of principalization tests and subsequent large number of $S$-unit equations to solve. \edit{table with numbers}
+In \autoref{subsec:FactorizationTMwithoutOK}, we follow closely the method of \cite{TW3} to reduce the ideal equation~\eqref{eq:TMfactored} to the $S$-unit equation~\eqref{eq:Sunit}. To implement this reduction, we begin by computing all $h_i$ for which $\mathfrak{p}_i^{h_i}$ is principal for $i = 1, \dots, \nu$. In doing so, we generate all possible values for $r_i$, the non-negative integer satisfying $0 \leq r_i < h_i$. We then generate every possible vector $\mathbf{r} = (r_1, \dots, r_{\nu})$ and test the corresponding ideal product $\mathfrak{a} \cdot \tilde{\mathfrak{p}}^{\mathbf{r}}$ for principality. Those vectors which pass this test yield an $S$-unit equation~\eqref{eq:Sunit}. In the worst case scenario, this method reduces to $h_K^{\nu}$ such equations, where $h_K$ is the class number of $K$. Moreover, this process needs to be applied to every ideal equation~\eqref{eq:TMfactored}, yielding what may be a very large number of principalization tests and subsequent large number of $S$-unit equations to solve. 
 
-In contrast, the method in \autoref{subsec:FactorizationTMwithOK} reduces \eqref{eq:TMfactored} to only $\#T/2$ $S$-unit equations to solve, where $T$ is the set of roots of unity in $K$. In particular, the sum total of $S$-unit equations does not drastically increase. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$, we reach a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain only $\#T/2$ corresponding equations \eqref{eq:Sunit}. In particular, the number of principalization tests in this method is limited by the number of ideal equations~\eqref{eq:TMfactored}, where each such equation yields only $(1+\nu)$ tests. \edit{table with numbers}
+In contrast, the method in \autoref{subsec:FactorizationTMwithOK} reduces \eqref{eq:TMfactored} to only $\#T/2$ $S$-unit equations to solve, where $T$ is the set of roots of unity in $K$. In particular, the sum total of $S$-unit equations does not drastically increase. If $[\mathbf{a}]^{-1}$ is not in the image of $\phi$, we reach a contradiction. If $[\mathbf{a}]^{-1}$ is in the image of $\phi$ then we obtain only $\#T/2$ corresponding equations \eqref{eq:Sunit}. In particular, the number of principalization tests in this method is limited by the number of ideal equations~\eqref{eq:TMfactored}, where each such equation yields only $(1+\nu)$ tests. 
 
-However, when generating the vectors $\mathbf{r} = (r_1, \dots, r_{\nu})$ using the class group, we observe that some of the integers $r_i$ may be negative, so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $K$ into our $p$-adic fields. In those instances, the precision on our $p$-adic fields may not be high enough, and as a result, some non-zero elements of $K$ may be erroneously mapped to $0$. To avoid this, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. This in itself may present its own problems \edit{can't remember why though}.
+However, when generating the vectors $\mathbf{r} = (r_1, \dots, r_{\nu})$ using the class group, we observe that some of the integers $r_i$ may be negative, so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $K$ into our $p$-adic fields. In those instances, the precision on our $p$-adic fields may not be high enough, and as a result, some non-zero elements of $K$ may be erroneously mapped to $0$. To avoid this, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. 
 
-In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is far more efficient than that of \autoref{subsec:FactorizationTMwithoutOK}. However, computing the class group may be a very costly computation. Indeed, for some Thue-Mahler equations, this may be the bottle-neck of the algorithm. In this case, it may happen that computing the class group will take longer than directly checking each potential $S$-unit equation arising from the alternative method. \edit{table}. Unfortunately, we cannot know a piori how long computing $\Cl(K)$ will take in so much that we cannot know a priori how long solving all $S$-unit equations from the other algorithm will take. In practicality, generating the class group in Magma \edit{formatting of Magma?} is a process which cannot be terminated without exiting the program. For this reason, we cannot simply apply a timeout in Magma if computing $\Cl(K)$ is exceeding what we deem a reasonable amount of time. Adding to this, Magma does not support parallelization, so we cannot implement both algorithms simultaneously. Our compromise to solve a single Thue-Mahler equation is to run two separate instances of Magma in parallel, each generating the $S$-unit equations using the two aforementioned algorithms. When one of these instances finishes, the other is forced to terminate. In this way, though far from ideal, we are able to select the most computationally efficient option. 
+In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is far more efficient than that of \autoref{subsec:FactorizationTMwithoutOK}. However, computing the class group may be a very costly computation. Indeed, for some Thue-Mahler equations, this may be the bottle-neck of the algorithm. In this case, it may happen that computing the class group will take longer than directly checking each potential $S$-unit equation arising from the alternative method. Unfortunately, we cannot know a piori how long computing $\Cl(K)$ will take in so much that we cannot know a priori how long solving all $S$-unit equations from the other algorithm will take. In practicality, generating the class group in Magma is a process which cannot be terminated without exiting the program. For this reason, we cannot simply apply a timeout in Magma if computing $\Cl(K)$ is exceeding what we deem a reasonable amount of time. Adding to this, Magma does not support parallelization, so we cannot implement both algorithms simultaneously. Our compromise to solve a single Thue-Mahler equation is to run two separate instances of Magma in parallel, each generating the $S$-unit equations using the two aforementioned algorithms. When one of these instances finishes, the other is forced to terminate. In this way, though far from ideal, we are able to select the most computationally efficient option. 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
@@ -424,7 +420,7 @@ In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is
 
 We now restrict our attention to those $p \in \{p_1, \dots, p_{\nu}\}$ and study the $p$-adic valuations of the numbers appearing in \eqref{eq:Sunit}. In particular, for $l \in \{1, \dots, \nu\}$, we identify conditions in which $\sum_{j = 1}^{\nu} n_ja_{lj}$ can be bounded by a small explicit constant, where $a_{lj}$ is the $(l,j)^{\text{th}}$ entry of the matrix $A$ derived in either \autoref{subsec:FactorizationTMwithoutOK} or \autoref{subsec:FactorizationTMwithOK}. Recall that $u_l + r_l = \sum_{j = 1}^{\nu} n_ja_{lj}$, where $r_l$ is known, so that a bound on $\sum_{j = 1}^{\nu} n_ja_{lj}$ yields a bound on the exponent $u_l$ in \eqref{eq:TMfactored}.
 
-Fix a rational prime $p_l \in \{p_1, \dots, p_{\nu}\}$ and recall that $z \in \mathbb{C}_{p_l}$ having $\ord_{p_l}(z) = 0$ is called a $p_l$-adic unit. Part (i) of the Corollary of Lemma 7.2 of \edit{tzanakis} \cite{TW3} tells us that $\frac{\eps_1^{(i_0)}}{\varepsilon_1^{(j)}}, \dots, \frac{\eps_r^{(i_0)}}{\varepsilon_r^{(j)}}$ and $\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}, \dots, \frac{\varepsilon_r^{(k)}}{\varepsilon_r^{(j)}}$ are $p_l$-adic units. 
+Fix a rational prime $p_l \in \{p_1, \dots, p_{\nu}\}$ and recall that $z \in \mathbb{C}_{p_l}$ having $\ord_{p_l}(z) = 0$ is called a $p_l$-adic unit. Part (i) of the Corollary of Lemma 7.2 of \cite{TW3} tells us that $\frac{\eps_1^{(i_0)}}{\varepsilon_1^{(j)}}, \dots, \frac{\eps_r^{(i_0)}}{\varepsilon_r^{(j)}}$ and $\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}, \dots, \frac{\varepsilon_r^{(k)}}{\varepsilon_r^{(j)}}$ are $p_l$-adic units. 
 
 Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l(t)) = 1$. We now choose $i_0 \in \{1, \dots, 4\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. We fix this choice of index $i_0$ for the remainder of this chapter. The indices of $j,k$ are fixed, but arbitrary. 
 
@@ -444,7 +440,7 @@ An analogous argument gives $\ord_{p_l}(\gamma_i^{(k)}) = 0$. On the other hand,
 \[\ord_{p_l}(\gamma_i^{(i_0)}) = \frac{1}{e(\mathfrak{p}_l|p_l)}\ord_{\mathfrak{p}_l}(\gamma_i) = \ord_{\mathfrak{p}_l}(\mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_v^{a_{vi}}) = a_{li}.\]
 \end{proof}
 
-The next lemma deals with a special case in which the sum $\sum_{j = 1}^{\nu} n_ja_{lj}$ can be computed directly. This lemma is analogous to Lemma 7.3 of \cite{TW3} \edit{ref}. 
+The next lemma deals with a special case in which the sum $\sum_{j = 1}^{\nu} n_ja_{lj}$ can be computed directly. This lemma is analogous to Lemma 7.3 of \cite{TW3}.
 
 Recall the constants
 \[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
@@ -590,9 +586,7 @@ By Lemma~\ref{lem:pAdicLogarithms2}, the first inequality implies ${\ord_{p_l}(\
 \section{Lattice-Based Reduction}
 \label{sec:LatticeReduction}
 
-\edit{references for this are the two books living in the $x+y=z$ folder on the desktop}
-
-At this point in solving the Thue-Mahler equation, we proceed to solve each $S$-unit equation~\eqref{eq:Sunit} for the exponents $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$. To do so, we generate a very large upper bound on the exponents and reduce this bound via Diophantine approximation computations. The specific details of this process are described in \autoref{ch:EfficientTMSolver} and \autoref{ch:Goormaghtigh}. In general, from each $S$-unit equation, we generate several linear forms in logarithms to which we associate an integral lattice $\Gamma$. It will be important in this reduction process to enumerate all short vectors in these lattices. In this section, we describe two algorithms used in the short vector enumeration process. These are algorithms which have many important applications in a variety of mathematical fields, including factorization of polynomials, public-key cryptography, and the disproof of the Mertens Conjecture \edit{references from de Weger}. 
+At this point in solving the Thue-Mahler equation, we proceed to solve each $S$-unit equation~\eqref{eq:Sunit} for the exponents $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$. To do so, we generate a very large upper bound on the exponents and reduce this bound via Diophantine approximation computations. The specific details of this process are described in \autoref{ch:EfficientTMSolver} and \autoref{ch:Goormaghtigh}. In general, from each $S$-unit equation, we generate several linear forms in logarithms to which we associate an integral lattice $\Gamma$. It will be important in this reduction process to enumerate all short vectors in these lattices. In this section, we describe two algorithms used in the short vector enumeration process. 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
@@ -606,9 +600,8 @@ where $\mu_{ij} \in \mathbb{R}$ for $1\leq j < i \leq n$. This is the usual Gram
 \[\frac{3}{4}|\mathbf{b}_{i-1}^*|^2 \leq |\mathbf{b}_i^* + \mu_{ii-1}\mathbf{b}_{i-1}^*|^2 \quad \text{ for } 1 <i \leq n,\]
 where $| \cdot |$ is the usual Euclidean norm in $\mathbb{R}^n$, 
 \[|\mathbf{v}| = \Phi(\mathbf{v},\mathbf{v}) = \mathbf{v}^{T}\mathbf{v}.\]
-\edit{is this too much notation? should I stick to jsut using $\Phi$?}
 
-These properties imply that an LLL-reduced basis is approximately orthogonal, and that, generically, its constituent vectors are roughly of the same length. Every $n$-dimensional lattice has an LLL-reduced basis and such a basis can be computed very quickly using the so-called LLL algorithm (\edit{ref: LLL}). This algorithm takes as input an arbitrary basis for a lattice and outputs an LLL-reduced basis. The algorithm is typically modified to additionally output a unimodular matrix $U$ such that $A = BU$, where $B$ is the matrix whose column-vectors are the input basis and $A$ is the matrix whose column-vectors are the LLL-reduced output basis. Several versions of this algorithm are implemented in Magma \edit{typeset for Magma}, including de Weger's exact integer version. (\edit{ref}).
+These properties imply that an LLL-reduced basis is approximately orthogonal, and that, generically, its constituent vectors are roughly of the same length. Every $n$-dimensional lattice has an LLL-reduced basis and such a basis can be computed very quickly using the so-called LLL algorithm (\cite{LLL}). This algorithm takes as input an arbitrary basis for a lattice and outputs an LLL-reduced basis. The algorithm is typically modified to additionally output a unimodular matrix $U$ such that $A = BU$, where $B$ is the matrix whose column-vectors are the input basis and $A$ is the matrix whose column-vectors are the LLL-reduced output basis. Several versions of this algorithm are implemented in Magma, including de Weger's exact integer version. (\cite{Weg0}).
 
 We remark that a lattice may have more than one reduced basis, and that the ordering of the basis vectors is not arbitrary. The properties of reduced bases that are of most interest to us are the following. Let $\mathbf{v}$ a vector in $\mathbb{R}^n$ and denote by $l(\Gamma,\mathbf{v})$ the distance from $\mathbf{v}$ to the nearest point in the lattice $\Gamma$, viz.
 \[l(\Gamma,\mathbf{v}) = \min_{\mathbf{u} \in \Gamma \backslash\{\mathbf{v}\}} |\mathbf{u} - \mathbf{v}|.\]
@@ -630,8 +623,7 @@ where $\| \cdot \|$ denotes the distance to the nearest integer. We have
 \[l(\Gamma,\mathbf{v}) \geq \max_{j \in J}\left(2^{-(n-1)/2}\| s_j\| |\mathbf{c}_1| - (n-j)\delta(j)\right).\]
 \end{enumerate}
 \end{lemma}
-\edit{refs of where this lemma can be found - Cohen, for 1; see Hambrook p49 bottom of Lemma 18.1}
-Note that the assumption in Lemma~\ref{lem:LLL} is equivalent to ${\mathbf{v} \notin \Gamma}$. 
+Lemma~\ref{lem:LLL} (a) is Proposition 1.11 in \cite{LLL}; proofs can be found in \cite{LLL}, \cite{Weg0} (Section 3.4), or \cite{Sm} (Section V.3). Lemma~\ref{lem:LLL} (b) is a combination of Lemmas 3.5 and 3.6 in \cite{Weg0}. Note that the assumption in Lemma~\ref{lem:LLL} (b) is equivalent to ${\mathbf{v} \notin \Gamma}$. 
 
 We see that the vector $\mathbf{c}_1$ in a reduced basis is, in a very precise sense, not too far from being the shortest non-zero vector of $\Gamma$. As has already been mentioned, what makes this result so valuable is that there is a very simple and efficient algorithm to find a reduced basis in a lattice, namely the LLL algorithm.
 
@@ -640,7 +632,7 @@ We see that the vector $\mathbf{c}_1$ in a reduced basis is, in a very precise s
 \subsection{The Fincke-Pohst algorithm}
 \label{subsec:FinckePohst}
 
-Sometimes it is not sufficient to have a lower bound for $l(\Gamma,\mathbf{v})$ only. It may be useful to know exactly all vectors $\mathbf{u} \in \Gamma$ such that $|\mathbf{u}|  = \Phi(\mathbf{u}, \mathbf{u}) \leq C$ for a given constant $C$. This can be done efficiently using an algorithm of Fincke-Pohst (\edit{ref: p49 of Hambrook}). A version of this algorithm with some improvements due to Stehl\'e is implemented in Magma \edit{format}. As input this algorithm takes a matrix $B$, whose columns span the lattice $\Gamma$, and a constant $C > 0$. The output is a list of all lattice points $\mathbf{u} \in \Gamma$ with $|\mathbf{u}| \leq C$, apart from $\mathbf{u} = \mathbf{0}$. In this section, we outline the main steps in this algorithm. 
+Sometimes it is not sufficient to have a lower bound for $l(\Gamma,\mathbf{v})$ only. It may be useful to know exactly all vectors $\mathbf{u} \in \Gamma$ such that $|\mathbf{u}|  = \Phi(\mathbf{u}, \mathbf{u}) \leq C$ for a given constant $C$. This can be done efficiently using an algorithm of Fincke-Pohst (cf. \cite{FP}, \cite{Coh1}). A version of this algorithm with some improvements due to Stehl\'e is implemented in Magma. As input this algorithm takes a matrix $B$, whose columns span the lattice $\Gamma$, and a constant $C > 0$. The output is a list of all lattice points $\mathbf{u} \in \Gamma$ with $|\mathbf{u}| \leq C$, apart from $\mathbf{u} = \mathbf{0}$. In this section, we outline the main steps in this algorithm. 
 
 We begin by letting $B$ denote the basis matrix associated to the lattice $\Gamma$, with corresponding bilinear form $\Phi$. We call a vector $\mathbf{u} \in \Gamma$ \textit{small} if its norm $\Phi(\mathbf{u}, \mathbf{u})$ is less than a constant $C$. As an element of the lattice, $\mathbf{u} = B\mathbf{x}$ for some coordinate vector $\mathbf{x} \in \mathbb{Z}^n$. Let $Q$ be the quadratic form associated to $\Phi$ and let $A=B^TB$. Now finding the short vectors $\mathbf{u} \in \Gamma$ is equivalent to solving 
 \begin{equation} \label{eq:ShortVector}
@@ -680,13 +672,13 @@ so that $x_k$ is bounded above by $\sqrt{T_k/q_{kk}} - U_k$ and below by ${-\sqr
 \subsection{Computational remarks and translated lattices}
 \label{subsec:FinckePohstRemarks}
 
-Recall that the Cholesky decomposition of $A = B^TB$ yields the upper triangular matrix $R$ where $A = R^TR$. It is noted in the \edit{Fincke-Pohst paper} that if we label the columns of $R$ by $\mathbf{r}_i$ and the rows of $R^{-1}$ by $\mathbf{r}'_i$, then 
+Recall that the Cholesky decomposition of $A = B^TB$ yields the upper triangular matrix $R$ where $A = R^TR$. It is noted in the \cite{FP} that if we label the columns of $R$ by $\mathbf{r}_i$ and the rows of $R^{-1}$ by $\mathbf{r}'_i$, then 
 \[x_k^2 = \left( \mathbf{r}'^{\ T}_k \cdot \sum_{i=1}^n x_i \mathbf{r}_i \right)^2 \leq \mathbf{r}'^{\ T}_k \mathbf{r}_k (\mathbf{x}^TR^TR\mathbf{x}) \leq | \mathbf{r}'_k |^2C.\]
 To reduce the search space, it is thus beneficial to reduce the rows of $R^{-1}$. Furthermore, rearranging the columns of $R$ so that the shortest column vector is first helps reduce the total running time of the Fincke-Pohst algorithm. In particular, doing so leads to progressively smaller intervals in which $x_k$ may exist. 
 
 We express this reduction with a unimodular matrix $V^{-1}$ so that $R_1^{-1} = V^{-1}R^{-1}$. Applying an appropriate permutation matrix $P$, we then reorder the columns of $R_1$. Since $R_1 = RV$, this yields $R_2 = (RV)P$. Finally, we compute the solutions $\mathbf{y}$ to $\mathbf{y}^TR_2^TR_2\mathbf{y}\leq C$ and recover the short vectors $\mathbf{x}$ satisfying the original inequality \eqref{eq:ShortVector} via $\mathbf{x} = VP\mathbf{y}$. 
 
-As before, let $\Gamma$ be an $n$-dimensional lattice with basis matrix $B$, quadratic form $\Phi$, and associated bilinear form $Q$. In \autoref{subsec:FinckePohst}, it is noted that an implementation of the Fincke-Pohst algorithm is available in Magma (\edit{text}). Unfortunately, this implementation does not support \textit{translated} lattices, a variant of the Fincke-Pohst algorithm which we will need in \autoref{ch:EfficientTMSolver}. By a translated lattice, we mean the discrete subgroup of $\mathbb{R}^n$ of the form
+As before, let $\Gamma$ be an $n$-dimensional lattice with basis matrix $B$, quadratic form $\Phi$, and associated bilinear form $Q$. In \autoref{subsec:FinckePohst}, it is noted that an implementation of the Fincke-Pohst algorithm is available in Magma. Unfortunately, this implementation does not support \textit{translated} lattices, a variant of the Fincke-Pohst algorithm which we will need in \autoref{ch:EfficientTMSolver}. By a translated lattice, we mean the discrete subgroup of $\mathbb{R}^n$ of the form
 \[\Gamma + \mathbf{w} = \left\{ \sum_{i=1}^n x_i \mathbf{b}_i + \mathbf{w}\ : \ x_i \in \mathbb{Z} \right\},\]
 where $\mathbf{b}_1, \dots, \mathbf{b}_n$ form the columns of $B$ and $\mathbf{w} \in \mathbb{R}^n$. In the remainder of this section, we describe how to modify the Fincke-Pohst algorithm and its refinements to support translated lattices. 
 
@@ -712,9 +704,9 @@ where $U_n = -d_n$, and rewrite $Q(\mathbf{y}-\mathbf{d})$ as
 \[ Q(\mathbf{y}-\mathbf{d}) = \sum_{i=1}^n q_{ii}\left( y_i - d_i + \sum_{j=i+1}^n q_{ij}(y_j - d_j)\right)^2 = \sum_{i=1}^n q_{ii}\left( y_i + U_i\right)^2.\]
 From here, we proceed as in the usual Fincke-Pohst algorithm described in \autoref{subsec:FinckePohst}. Once we compute all vectors $\mathbf{y}$ which satisfy \eqref{eq:TransShortVector2}, we recover $\mathbf{x}$ using $\mathbf{x} = U^{-1}\mathbf{y}$. 
 
-As a final remark about Fincke-Pohst for translated lattices, it is worth noting that one could use the variant implemented in Magma (\edit{format}) simply by increasing the dimension of the lattice $\Gamma$ and appropriately redefining the basis vectors $\mathbf{b}_i$. This is highly ill-advised as it increases the search space and subsequent running time of the algorithm.  
+As a final remark about Fincke-Pohst for translated lattices, it is worth noting that one could use the variant implemented in Magma simply by increasing the dimension of the lattice $\Gamma$ and appropriately redefining the basis vectors $\mathbf{b}_i$. This is highly ill-advised as it increases the search space and subsequent running time of the algorithm.  
 
-Generally speaking, the use of Fincke-Pohst in our applications poses one of the main bottlenecks in solving Thue-Mahler and Thue-Mahler-like equations. Specifically, this algorithm often yields upwards of hundreds of millions of short vectors, each one needing to be stored and, in our case, appropriately manipulated. This creates both timing and memory problems, often leading to gigabytes of data usage. Deleting these vectors does not release the memory and, as with the class group function, Magma's (\edit{format}) built-in Fincke-Pohst process cannot be terminated without exiting the program. The primary advantage of implementing and using our own version of Fincke-Pohst, as described in this section, is therefore the ability to add a fail-stop should the number of vectors found become too large.   \edit{table of large numbers of short vectors found?}
+Generally speaking, the use of Fincke-Pohst in our applications poses one of the main bottlenecks in solving Thue-Mahler and Thue-Mahler-like equations. Specifically, this algorithm often yields upwards of hundreds of millions of short vectors, each one needing to be stored and, in our case, appropriately manipulated. This creates both timing and memory problems, often leading to gigabytes of data usage. Deleting these vectors does not release the memory and, as with the class group function, Magma's built-in Fincke-Pohst process cannot be terminated without exiting the program. The primary advantage of implementing and using our own version of Fincke-Pohst, as described in this section, is therefore the ability to add a fail-stop should the number of vectors found become too large. 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%

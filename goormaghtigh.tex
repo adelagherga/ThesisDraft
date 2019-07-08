@@ -4,36 +4,16 @@
 \chapter{Goormaghtigh Equations}
 \label{ch:Goormaghtigh} 
 
-\edit{introduction}
-
-
-More than a century ago, Ratat \cite{Ra} and Goormaghtigh \cite{Go} observed the identities
-$$
-31 = \frac{2^5-1}{2-1} = \frac{5^3-1}{5-1} \; \; \mbox{ and } \; \; 8191 = \frac{2^{13}-1}{2-1} = \frac{90^3-1}{90-1}.
-$$
-These correspond to the known solutions $(x,y,m,n)=(2,5,5,3)$ and $(2,90,13,3)$
-to what is nowadays termed {\it Goormaghtigh's equation}
+Let $m$ and $n$ be integers such that $m > n > 2$, where either $m=n+1$ or
+ \begin{equation} \label{condition}
+ \gcd (m-1,n-1) = d > 1m
+ \end{equation}
+ and consider the Goormaghtigh's equation
 \begin{equation} \label{eq-main}
 \frac{x^m-1}{x-1} = \frac{y^n-1}{y-1}, \; \; y>x>1, \; m > n > 2.
 \end{equation}
-This is a classical example of a {\it polynomial-exponential equation} and shares a number of common characteristics with other frequently-studied Diophantine equations of this type, such as those of 
-Catalan
-\begin{equation} \label{Cat}
-x^m-y^n=1, \; \; x, y, m, n > 1,
-\end{equation}
-and 
-Nagell-Ljunggren 
-\begin{equation} \label{NL}
-\frac{x^m-1}{x-1} = y^n, \; \; x, y, n >1, \; m > 2.
-\end{equation}
-In a certain sense, however, equation (\ref{eq-main}) appears to be rather harder to treat than (\ref{Cat}) or (\ref{NL}). Techniques from Diophantine approximation (specifically, bounds for linear forms in complex and $p$-adic logarithms) have been applied by Tijdeman \cite{Ti} to show that equation (\ref{Cat}) has at most finitely many solutions in the four variables $x,y, m$ and $n$ (a result subsequently sharpened by Mih{\u{a}}ilescu \cite{Mih} via a different method to solve (\ref{Cat}) completely). Similarly, Shorey and Tijdeman \cite{ShTi} showed that equation (\ref{NL}) has at most finitely many solutions if any one of the variables $x, y$ or $m$ is fixed (though we do not have a like result for fixed odd $n$; the case where $n$ is even was resolved earlier by Nagell \cite{Nag2} and Ljunggren \cite{Lju}). In the case of equation (\ref{eq-main}), on the other hand, to obtain finiteness results with current technology, we apparently need to assume that two of the variables $x, y, m$ and $n$ are fixed (see \cite{BaSh} for references). In addition, if the two variables fixed are the exponents $m$ and $n$, then in order to deduce effectively computable bounds upon the polynomial variables $x$ and $y$, via either Runge's method (Davenport, Lewis and Schinzel \cite{DaLeSc}) or from bounds upon linear forms in logarithms (see e.g. Nesterenko and Shorey \cite{NeSh}, and Bugeaud and Shorey \cite{BuSh}), we require constraints upon $m$ and $n$, that either $m=n+1$, or that
- \begin{equation} \label{condition}
- \gcd (m-1,n-1) = d > 1.
- \end{equation}
- In the extensive literature on this problem, there are a number of striking results that go well beyond what we have mentioned here. By way of example, work of Balasubramanian and 
- Shorey \cite{BaSh} shows that equation (\ref{eq-main}) has at most finitely many solutions if we fix only the set of prime divisors of $x$ and $y$, while Bugeaud and Shorey \cite{BuSh} prove an analogous finiteness result, under the additional assumption of (\ref{condition}), provided the quotient $(m-1)/(n-1)$ is bounded above. Additional results on special cases of equation (\ref{eq-main}) are available in, for example, \cite{HeTo}, \cite{Le1}, \cite{Le2} and \cite{Le3}.  An excellent overview of results on this problem  can be found in the survey of Shorey \cite{ShoSur}.
  
-In this paper, we prove that, in fact, under assumption (\ref{condition}), equation (\ref{eq-main}) has at most finitely many solutions which may be found effectively, even if we fix only a single exponent.
+In this chapter, we prove that, in fact, under assumption (\ref{condition}), equation (\ref{eq-main}) has at most finitely many solutions which may be found effectively, even if we fix only a single exponent.
 \begin{theorem} \label{main-thm}
 If there is a solution in integers $x,y, n$ and $m$ to equation (\ref{eq-main}), satisfying (\ref{condition}), then
 \begin{equation} \label{hive}
@@ -52,13 +32,7 @@ $$
 $$
 \end{theorem}
 
-Essentially half of the current paper is concerned with developing Diophantine approximation machinery for the case $n=5$ in Theorem \ref{main-thm2}. Here, ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. The new ideas introduced here are explored more fully in the general setting of {\it Thue-Mahler} equations in the forthcoming paper  \cite{GhKaMaSi}. These are polynomial-exponential equations of the form $F(x,y)=p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ where $F$ is a binary form of degree three or greater and $p_1, \ldots, p_k$ are fixed rational primes. Here, we take this opportunity to specialize these refinements to the case of Ramanujan-Nagell equations, and to introduce some further sharpenings which enable us to complete the proof of Theorem \ref{main-thm2}.
-
-We observe that, in case $n=3$, Theorem \ref{main-thm2} was obtained earlier by Yuan \cite{Yu} (see also He \cite{He}).  The techniques employed in both \cite{He} and \cite{Yu}, however, depend essentially upon the fact that $n=3$ (whereby $n-1=2$ and one can appeal to specialized techniques from the theory of quadratic fields) and cannot apparently be generalized to other values of $n$.
-
-The title of this paper reflects the fact that the machinery of Pad\'e approximation to binomial functions has been applied to the problem of solving equation (\ref{eq-main}) in earlier work of Bugeaud and Shorey \cite{BuSh}. We will employ these tools  here rather differently.
-
-The outline of this paper is as follows. In Section \ref{proof}, we derive ``good'' rational approximations to certain algebraic numbers associated to solutions of (\ref{eq-main}). Section \ref{Pade} contains relevant details about Pad\'e approximation to the binomial function. In Sections \ref{sec-main-thm} and \ref{sec-main-thm2}, we find the proofs of Theorems \ref{main-thm} and \ref{main-thm2}, respectively. In the latter case, to treat small fixed values of $n$ and $x$ in equation (\ref{eq-main}), we appeal to a variety of techniques from computational Diophantine approximation. Most interestingly, in case $n=5$, we sharpen existing techniques for solving  Thue-Mahler equations, and specialize them to our problem. We note that this section may essentially be read independently of the rest of the paper. For each $x$, we restrict the problem to that of solving a number of related $S$-unit equations, where $S$ is the set of primes dividing $x$. We then generate a large upper bound on the exponents of these equations using bounds for linear forms in logarithms, both Archimedean and non-Archimedean. Finally, unlike traditional examples of Thue-Mahler equations, where extensive use of geometric and $p$-adic reduction techniques are typically required, using only a few iterations of the LLL algorithm, we reduce this bound significantly, after which we apply a naive search to complete our computation. We will, in fact, employ  two quite different algorithms for solving Thue-Mahler equations, one for which we must compute the class group of a number field and one which avoids this computation altogether. For a given value of $x$, one of these versions may be significantly faster than the other; we list some timings for examples to illustrate this difference. 
+Essentially half of the current chapter is concerned with developing Diophantine approximation machinery for the case $n=5$ in Theorem \ref{main-thm2}. Here, ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. The new ideas introduced here are explored more fully in the general setting of {\it Thue-Mahler} equations in the forthcoming paper  \cite{GhKaMaSi}. These are polynomial-exponential equations of the form $F(x,y)=p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ where $F$ is a binary form of degree three or greater and $p_1, \ldots, p_k$ are fixed rational primes. Here, we take this opportunity to specialize these refinements to the case of Ramanujan-Nagell equations, and to introduce some further sharpenings which enable us to complete the proof of Theorem \ref{main-thm2}.
 
 %--------------------------------------------------------------
 \section{Rational approximations} \label{proof}
@@ -950,7 +924,7 @@ None of these triples lead to nontrivial solutions to (\ref{eq-main}) with $n=4$
  \end{equation}
  note that we always have, for each $x$, solutions $(y,Y) = (0, \pm x), (-1, \pm x)$ and $(x, \pm x^3)$. 
  
- Unfortunately, it does not appear that this approach is computationally efficient enough to solve equation (\ref{quartic}) in a reasonable time for all values of $x$ with  $2 \leq x < 720$ (though it does work somewhat quickly for $2 \leq x \leq 59$ and various other $x < 720$). The elliptic curve defined by (\ref{quartic}) has, in each case, rank at least $2$ (the solutions corresponding to $(y,Y) = (0, x)$ and $(-1, x)$ are independent non-torsion points). Magma's \edit{format}{\it IntegralQuarticPoints} routine is based on bounds for  linear forms in elliptic logarithms and hence requires detailed knowledge of the generators of the Mordell-Weil group. Thus, when the rank is much larger than $2$, Magma's   {\it IntegralQuarticPoints} routine can, in practice, work very slowly. This is the case, for example, when $x=60$ (where the corresponding elliptic curve has rank $5$ over $\mathbb{Q}$).  
+ Unfortunately, it does not appear that this approach is computationally efficient enough to solve equation (\ref{quartic}) in a reasonable time for all values of $x$ with  $2 \leq x < 720$ (though it does work somewhat quickly for $2 \leq x \leq 59$ and various other $x < 720$). The elliptic curve defined by (\ref{quartic}) has, in each case, rank at least $2$ (the solutions corresponding to $(y,Y) = (0, x)$ and $(-1, x)$ are independent non-torsion points). Magma's {\it IntegralQuarticPoints} routine is based on bounds for  linear forms in elliptic logarithms and hence requires detailed knowledge of the generators of the Mordell-Weil group. Thus, when the rank is much larger than $2$, Magma's   {\it IntegralQuarticPoints} routine can, in practice, work very slowly. This is the case, for example, when $x=60$ (where the corresponding elliptic curve has rank $5$ over $\mathbb{Q}$).  
 
  
 %Unfortunately, it does not appear that this approach is computationally efficient enough to solve equation (\ref{quartic}) in a reasonable time for all values of $x$ with  $2 \leq x < 720$ (though it does work somewhat quickly for $2 \leq x \leq 59$ and various other $x < 720$). The elliptic curve defined by (\ref{quartic}) has, in each case, rank at least $2$ (the solutions corresponding to $(y,Y) = (0, x)$ and $(-1, x)$ are independent non-torsion points). When the rank is much larger than this, Magma's   {\it IntegralQuarticPoints} routine (which is based on bounds for  linear forms in elliptic logarithms and hence requires detailed knowledge of the generators of the Mordell-Weil group) can, in practice, work very slowly. This is the case, for example, when $x=60$ (where the corresponding elliptic curve has rank $5$ over $\mathbb{Q}$). 
@@ -987,8 +961,6 @@ F_x(y,1) =  p_1^{Z_1}\dots p_v^{Z_v}
 where $Z_i = m\alpha_i$. 
 
 To find all solutions to this equation, we will use linear forms in $p$-adic logarithms to generate a very large upper bound on $m$. Then, applying several instances of the LLL lattice basis reduction algorithm, we will reduce the bound on $m$ until it is sufficiently small enough that we may perform a brute force search efficiently. The remainder of this section is devoted to the details of this approach.
-
-(\edit{use algorhtms of Ch 3, but we point out the important differences})
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
@@ -1031,12 +1003,12 @@ $u_i + t_i =  Z_i = m\alpha_i$.
 \end{itemize}
 
 \begin{remark}\label{rem:uv}
-Unlike in \cite{TW3} \edit{tzanakis de weger} and \cite{GhKaMaSi}\edit{ chapter 3}, if, after applying Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePatch2}, we are in the situation that $u_i = 0$ for some $i$ in $\{1, \dots, v\}$, it follows that
+Unlike in \cite{TW3} and \cite{GhKaMaSi}, if, after applying Algorithm~\ref{alg:AffinePatch1} and Algorithm~\ref{alg:AffinePatch2}, we are in the situation that $u_i = 0$ for some $i$ in $\{1, \dots, v\}$, it follows that
 \[m = \frac{Z_i}{\alpha_i } =  \frac{u_i + t_i}{\alpha_i } = \frac{t_i}{\alpha_i }.\]
 We iterate this computation over all $i \in \{1, \dots, v\}$ such that $u_i = 0$ and take the smallest $m$ as our bound. For all of the values of $x$ that we are interested in, this bound on $m$ is small enough that we may go directly to the final brute force search for solutions.
 \end{remark}
 
-Following Remark \ref{rem:uv}, for the remainder of this paper, we assume that $u_i \neq 0$ for all $i = 1, \dots, v$. Fix a complete set of fundamental units $\{\eps_1, \dots, \eps_r\}$ of $\mathcal{O}_K$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. A quick computation in Mathematica (\edit{format and cite}) shows that  
+Following Remark \ref{rem:uv}, for the remainder of this paper, we assume that $u_i \neq 0$ for all $i = 1, \dots, v$. Fix a complete set of fundamental units $\{\eps_1, \dots, \eps_r\}$ of $\mathcal{O}_K$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. A quick computation in Maple shows that  
 \[g(t) = t^4 + (x-1)t^3 + (x-1)^2t^2 + (x-1)^3t + x(x-1)^3\]
 has only complex roots for $x \geq 2$. It follows that we have no real embeddings of $K$ into $\mathbb{R}$, two pairs of complex conjugate embeddings, and hence only one fundamental unit, $\varepsilon_1$. 
 
@@ -1301,7 +1273,7 @@ In each step, we let $N_l$ denote the current best upper bound on $\sum_{j = 1}^
 \[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, v\},\]
 and
 \[ b_{v+2} = a_1\]
-of Section \ref{subsec:smallbound} (\edit{need title}) frequently. It will therefore be convenient to let $B_l$ denote the current best upper bound for $|b_l|$ for $l = 1, \dots, v+2$. Then
+of Section \autoref{subsec:FirstStepsSmallBoundsGE} frequently. It will therefore be convenient to let $B_l$ denote the current best upper bound for $|b_l|$ for $l = 1, \dots, v+2$. Then
 \[B_1 = 1 \quad \text{ and } \quad B_{v+2} = A_0.\]
 For $l = 1, \dots, v$, using that
 \[ \sum_{j = 1}^v n_ja_{lj} < N_l, \quad \text{ for } l = 1, \dots, v,\]
@@ -1325,7 +1297,7 @@ Lastly, rather than testing each possible tuple $(|a_1|,|n_1|, \dots, |n_v|)$ as
 
 \subsection{The $p_l$-adic reduction procedure}
 
-In this section, we set some notation and give some preliminaries for the $p_l$-adic reduction procedures. Consider a fixed index $l \in \{1, \dots, v\}$. Following Section \ref{subsec:smallbound} \edit{name}, we have
+In this section, we set some notation and give some preliminaries for the $p_l$-adic reduction procedures. Consider a fixed index $l \in \{1, \dots, v\}$. Following Section \ref{subsec:FirstStepsSmallBoundsGE}, we have
 \[\ord_{p_l}(\alpha_1) \geq \min_{2\leq i\leq v+2} \ord_{p_l}(\alpha_i) \quad \text{ and } \quad \ord_{p_l}(\alpha_{1h}) \geq \min_{2\leq i\leq v+2}(\alpha_{ih}) \quad h = (1, \dots, s).\]
 
 Let $I$ be the set of all indices $i' \in \{2, \dots, v+2\}$ for which
