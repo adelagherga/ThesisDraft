@@ -4,12 +4,13 @@
 \chapter{Towards Efficient Resolution of Thue-Mahler Equations}
 \label{ch:EfficientTMSolver}
 
-Let $a \in \mathbb{Z}$ be nonzero, let $S=\{p_1,\dotsc,p_v\}$ be a set of rational primes, and let $F \in \mathbb{Z}[X,Y]$ be irreducible and homogeneous of degree $n \geq 3$. We consider the classical Thue--Mahler equation
+\edit{precedent}
+Let $a \in \mathbb{Z}$ be nonzero and let $S=\{p_1,\dotsc,p_v\}$ be a set of rational primes. In this section, we consider the degree $3$ Thue--Mahler equation
 \begin{equation} \label{Eq:TM1}
 F(X,Y) = a p_1^{Z_1}\cdots p_v^{Z_v}, \quad (X,Y) \in \mathbb{Z}^2,
 \end{equation}
 where
-\[F(X,Y) = c_0 X^n + c_1 X^{n-1}Y + \cdots + c_{n-1}XY^{n-1} + c_nY^n.\]
+\[F(X,Y) = c_0 X^3 + c_1 X^{n-1}Y + \cdots + c_{n-1}XY^{n-1} + c_nY^n.\]
 and $\gcd(X,Y)=1$. 
 
 We would like to enumerate the set of solutions $\{X,Y, Z_1, \dots, Z_v\}$ of \eqref{Eq:TM1}, where $Z_i \geq 0$ for $i = 1, \dots, v$. Solutions to this equation having $(X,Y) = 1$ and $n = 3$ correspond to elliptic curves with good reduction outside of $\{p_1, \dots, p_v\}$. The algorithm of Tzanakis, de Weger generates solutions $(X,Y)$ in the case 
