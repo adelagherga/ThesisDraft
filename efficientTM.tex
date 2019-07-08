@@ -4,258 +4,38 @@
 \chapter{Towards Efficient Resolution of Thue-Mahler Equations}
 \label{ch:EfficientTMSolver}
 
-\edit{precedent}
-Let $a \in \mathbb{Z}$ be nonzero and let $S=\{p_1,\dotsc,p_v\}$ be a set of rational primes. In this section, we consider the degree $3$ Thue--Mahler equation
+Let $a$ denote a nonzero integer and let $S=\{p_1,\dotsc,p_v\}$ be a set of rational primes. In this section, we specialize the results of \autoref{ch:AlgorithmsForTM} to the degree $3$ Thue--Mahler equation
 \begin{equation} \label{Eq:TM1}
-F(X,Y) = a p_1^{Z_1}\cdots p_v^{Z_v}, \quad (X,Y) \in \mathbb{Z}^2,
+F(X,Y) = c_0 X^3 + c_1 X^{2}Y + c_2XY^2 + c_3Y^3 = a p_1^{Z_1}\cdots p_v^{Z_v},
 \end{equation}
-where
-\[F(X,Y) = c_0 X^3 + c_1 X^{n-1}Y + \cdots + c_{n-1}XY^{n-1} + c_nY^n.\]
-and $\gcd(X,Y)=1$. 
-
-We would like to enumerate the set of solutions $\{X,Y, Z_1, \dots, Z_v\}$ of \eqref{Eq:TM1}, where $Z_i \geq 0$ for $i = 1, \dots, v$. Solutions to this equation having $(X,Y) = 1$ and $n = 3$ correspond to elliptic curves with good reduction outside of $\{p_1, \dots, p_v\}$. The algorithm of Tzanakis, de Weger generates solutions $(X,Y)$ in the case 
-\[(X,Y) = 1, \quad (a, p_1, \dots, p_v) = 1, \quad (Y,c_0) = 1.\]
-To implement this algorithm for our specific application, we modify our Thue-Mahler equation so that we are reduced to the case where
-\[(X,Y) = 1, \quad (a, p_1, \dots, p_v) = 1, \quad c_0 = 1.\]
-The solutions corresponding to these conditions are then converted back into solutions of the original Thue-Mahler equation. The remainder of this section outlines these modifications. 
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\subsection{Reducing to $(a, p_1, \dots, p_v) = 1$ and $c_0 = 1$}
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\section{The Relevant Algebraic Number Field}
-Now, for each $c$, we solve
-\[f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n = c p_1^{z_1} \cdots p_v^{z_v}.\]
-Here, 
-\[\gcd(x,y) = 1 \quad \text{ and } \quad \gcd(c,p_1, \dots, p_v) = 1.\]
-In our case, $n = 3$ and so
-\[f(x,y) = x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 = c p_1^{z_1} \cdots p_v^{z_v}.\]
-
-Following the Thue-Mahler solver algorithm, put
-\[g(t) = F(t,1) = t^3 + C_1t^2 + C_2t + C_3\]
-and note that $g(t)$ is irreducible in $\mathbb{Z}[t]$. Let $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$. Then \eqref{Eq:TM2} is equivalent to solving finitely many equations of the form
-\begin{equation} \label{Eq:norm}
-N_{K/\mathbb{Q}}(x-y\theta) = cp_1^{z_1}\dots p_v^{z_v}
-\end{equation}
-for each distinct value of $c$. 
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\section{Decomposition of Primes}
-
-Let $p_i$ be any rational prime and let 
-\[(p_i)\mathcal{O}_K = \prod_{j = 1}^{m_i} \mathfrak{p}_{ij}^{e_{ij}}\]
-be the factorization of $p_i$ into prime ideals in the ring of integers $\mathcal{O}_K$ of $K$. Let $f_{ij}$ be the residue degree of $\mathfrak{p}_{ij}$ over $p_i$. We have $\deg(g_i(t)) = e_{ij}f_{ij}$.
-
-Let
-\[g(t) = g_{i1}(t)\cdots g_{im}(t)\]
-be the decomposition of $g(t)$ into irreducible polynomials $g_{ij}(t) \in \mathbb{Q}_{p_i}[t]$. The prime ideals in $K$ dividing $p_i$ are in one-to-one correspondence with $g_{i1}(t), \dots, g_{im}(t)$, and in particular, $\deg(g_{ij}(t)) = e_{ij}f_{ij}$. 
-
-Then, since $N(\mathfrak{p}_{ij}) = p_i^{f_{ij}}$, \eqref{Eq:norm} leads to finitely many ideal equations of the form
-\begin{equation} \label{Eq:ideals}
-(x-y\theta)\mathcal{O}_K = \mathfrak{a} \prod_{j = 1}^{m_1} \mathfrak{p}_{1j}^{z_{1j}} \cdots \prod_{j = 1}^{m_v} \mathfrak{p}_{vj}^{z_{vj}}
-\end{equation}
-where $\mathfrak{a}$ is an ideal of norm $|c|$ (for each choice of $c$) and the $z_{ij}$ are unknown integers related to $z_i$ by $\sum_{j = 1}^{m_i} f_{ij}z_{ij} = z_i $. Thus
-\[Z_i = z_i - \ord_p{u} - \ord_p(a) =  \sum_{j = 1}^{m_i} f_{ij}z_{ij} -  \ord_p{u} - \ord_p(a).\]
-
-Our first task is to cut down the number of variables appearing in \eqref{Eq:ideals}. We will do this by showing that only a few prime ideals can divide $(x-y\theta)\mathcal{O}_K$ to a large power. 
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\section{Factorization of the Thue-Mahler Equation}
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{Refinements}
-
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-At this point, regardless of which method was used to compute $A$ and $\mathbf{r}$, we note that the ideal generated by $\alpha$ has norm
-\[|c|\cdot p_1^{t_1 + r_1} \cdots p_{\nu}^{t_{\nu} + r_{\nu}}p_{\nu +1}^{t_{\nu +1}} \cdots p_v^{t_v}.\]
-Now the $n_i$ are related to the $z_i$ via
-\[z_i = u_i + t_i = \sum_{j = 1}^{\nu}n_ja_{ij} + r_i + t_i.\]
-Hence
-\[Z_i = z_i - \ord_p(u) - \ord_p(a) = \sum_{j = 1}^{\nu}n_ja_{ij} + r_i + t_i - \ord_p(u) - \ord_p(a) \]
-Here, we note that $u_i = r_i = 0$ for all $i \in \{\nu + 1, \dots, v\}$. 
-
-
-Fix a complete set of fundamental units of $\mathcal{O}_K: \varepsilon_1, \dots, \varepsilon_r$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. Then
-\begin{equation} \label{Eq:main2}
-x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
-\end{equation}
-with unknowns $a_i \in \mathbb{Z}$, $n_i \in \mathbb{Z}_{\geq 0}$, and $\zeta$ in the set $T$ of roots of unity in $\mathcal{O}_K$. Since $T$ is also finite, we will treat $\zeta$ as another parameter. Since $K$ is a degree $3$ extension of $\mathbb{Q}$, we either have $3$ real embeddings of $K$ into $\mathbb{C}$ (hence $s = 3$, $t = 0$ and $r = s+ t -1 = 3 + 0 -1 = 2$), or there is one real embedding of $K$ into $\mathbb{C}$ and a pair of complex conjugate embeddings of $K$ into $\mathbb{C}$ (hence $s = 1$, $t = 1$, and $r = s +t -1 = 1 + 1 -1 = 1$). 
-That is, we have either  
-\begin{equation} \label{Eq:main3}
-x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
-\quad \text{ or } \quad 
-x-y\theta = \alpha \zeta \varepsilon_1^{a_1} \varepsilon_2^{a_2}\cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}
-\end{equation}
-
-To summarize, our original problem of solving \eqref{Eq:TM1} has been reduced to the problem of solving finitely many equations of the form \eqref{Eq:main3} for the variables 
-\[x,y, a_1, n_1, \dots, n_{\nu} \quad \text{ or } \quad x,y, a_1,a_2, n_1, \dots, n_{\nu} .\] 
-
-From here, we deduce a so-called $S$-unit equation. In doing so, we eliminate the variables $x,y$ and set ourselves up to bound the exponents $a_1,n_1, \dots, n_{\nu}$, respectively $a_1,a_2,n_1, \dots, n_{\nu}$. We note here that generating the class group can be a timely computation. However, if we follow the method of Tzanakis-de Weger, we may be left with $h^{\nu}$ $S$-unit equations, all of which we would need to apply the principal ideal test to. That is to say, computing the class group is a faster operation than the alternative provided by Tzanakis-de Weger. 
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\section{The $S$-Unit Equation}
-
-Let $p \in \{p_1, \dots, p_v, \infty\}$. Denote the roots of $g(t)$ in $\overline{\mathbb{Q}_p}$ (where $\overline{\mathbb{Q}_{\infty}} = \overline{\mathbb{R}} = \mathbb{C}$) by $\theta^{(1)}, \theta^{(2)}, \theta^{(3)}$. Let $i_0, j, k \in \{1,2,3\}$ be distinct indices and consider the three embeddings of $K$ into $\overline{\mathbb{Q}_p}$ defined by $\theta \mapsto \theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$. We use $z^{(i)}$ to denote the image of $z$ under the embedding $\theta \mapsto \theta^{(i)}$. From the Siegel identity
-\[\left(\theta^{(i_0)} - \theta^{(j)}\right)\left(x-y\theta^{(k)}\right) + \left(\theta^{(j)} - \theta^{(k)}\right)\left(x-y\theta^{(i_0)}\right) + \left(\theta^{(k)} - \theta^{(i_0)}\right)\left(x-y\theta^{(j)}\right) = 0,\]
-applying these embeddings to $\beta = x-y\theta$ yields
-\begin{equation}\label{Eq:Sunit}
+where $(X,Y) \in \mathbb{Z}^2$, $\gcd(X,Y)=1$, and $Z_i \geq 0$ for $i = 1, \dots, v$. In particular, to enumerate the set of solutions $\{X,Y, Z_1, \dots, Z_v\}$ of this equation, we follow \autoref{sec:FactorizationTM} to reduce the problem of solving \eqref{Eq:TM1} to solving finitely many so-called ``$S$-unit'' equations
+\begin{equation} \label{eq:EfficientSunit}
 \lambda = \delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i} - 1 = \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i},
 \end{equation}
 where
 \[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
-are constants and $r = 1$ or $r = 2$. 
+are constants. Here, we adopt the notation of \autoref{ch:AlgorithmsForTM} and recall that 
+\[g(t) = F(t,1) = t^3 + C_1t^2 + C_2t + C_3,\]
+so that $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$. Recall further that $\zeta$ is a root of unity in $K$, while $\{\eps_1, \dots, \eps_r\}$ denotes the set of fundamental units of $\mathcal{O}_K$. In this case, as $K$ is a degree $3$ extension of $\mathbb{Q}$, we either have $3$ real embeddings of $K$ into $\mathbb{C}$, or there is one real embedding of $K$ into $\mathbb{C}$ and a pair of complex conjugate embeddings of $K$ into $\mathbb{C}$. Thus either $r = 1$ or $r = 2$. 
 
-Note that $\delta_1$ and $\delta_2$ are constants, in the sense that they do not rely on 
-\[x, y, a_1, \dots, a_r,n_1, \dots, n_{\nu}.\]
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\section{Specializing to Degree $3$}
-
-We are interested in solving a Thue-Mahler equation of degree $3$. That is, 
-\[F(X,Y) = c_0X^3 + c_1X^2Y + c_2XY^2 + c_3Y^3 = ap_1^{Z_1}\cdots p_v^{Z_v}.\]
-Making the relevant changes as in the setup above (ie. reducing to a monic polynomial having solutions $(x,y) = 1$) and putting $g(t) = F(t,1)$ yields
-\[g(t) = t^3 + C_1t^2 + C_2t + C_3,\]
-an irreducible polynomial in $\mathbb{Z}[t]$. Then, setting $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$ yields a field $K$ of degree $3$ over $\mathbb{Q}$. Hence, the splitting field of $K$ is divisible by $3$. Since the Galois group is a subgroup of $S_3$, there are only two possibilities, namely $A_3$ or $S_3$. Recall that the discriminant of $g(t)$ is defined as 
-\[D = C_1^2C_2^2 - 4C_2^3 - 4C_1^3C_3 - 27C_3^2 + 18C_1C_2C_3.\]
-
-The Galois group of $g(t)$ is $A_3$ if and only if $D$ is a square. Explicitly, if $D$ is the square of an element of $\mathbb{Q}$, then the splitting field of the irreducible cubic $g(t)$ is obtained by adjoining any single root of $g(t)$ to $K$. The resulting field is Galois over $\mathbb{Q}$ of degree $3$ with cyclic group of order $3$ as Galois group. In particular, $K$ is the Galois group of $g(t)$. In this case, 
-\[g(t) = (t - \theta_1)(t - \theta_2)(t - \theta_3)\]
-in $K$, where $\theta_1, \theta_2, \theta_3 \in K$ and, without loss of generality, $\theta_1 = \theta$.  
-
-If $D$ is not the square of an element of $\mathbb{Q}$, then the splitting field of $g(t)$ is of degree $6$ over $\mathbb{Q}$, hence is the field $K\left(\theta, \sqrt{D}\right)$ for any one of the roots $\theta$ of $g(t)$. This extension is Galois over $\mathbb{Q}$ with Galois group $S_3$. In this case, 
-\[g(t) = (t - \theta)\tilde{g}(t)\]
-in $K = \mathbb{Q}(\theta)$, where $\tilde{g}(t) \in K[t]$ is an irreducible degree $2$ polynomial. The Galois group is generated by $\sigma$, which takes $\theta$ to one of the other roots of $g(t)$ and fixes $\sqrt{D}$, and $\tau$, which takes $\sqrt{D}$ to $-\sqrt{D}$ and fixes $\theta$. In particular, if $L = K(\theta, \sqrt{D})$,
-\[\Gal(L/\mathbb{Q}) = \{ \text{id}_\text{L}, \sigma, \sigma^2, \tau, \tau\sigma, \tau\sigma^2\},\]
-where
-\begin{align*}
-\text{id}_{\text{L}}: 
-\begin{cases}
-\theta_1 \mapsto \theta_1\\
-\theta_2 \mapsto \theta_2\\
-\theta_3 \mapsto \theta_3\\
-\sqrt{D} \mapsto \sqrt{D}
-\end{cases}
-& \quad ,
-\sigma: 
-\begin{cases}
-\theta_1 \mapsto \theta_2\\
-\theta_2 \mapsto \theta_3\\
-\theta_3 \mapsto \theta_1\\
-\sqrt{D} \mapsto \sqrt{D}
-\end{cases}
-& \quad ,
-\sigma^2: 
-\begin{cases}
-\theta_1 \mapsto \theta_3\\
-\theta_2 \mapsto \theta_1\\
-\theta_3 \mapsto \theta_2\\
-\sqrt{D} \mapsto \sqrt{D}
-\end{cases}, \\ \
-\tau: 
-\begin{cases}
-\theta_1 \mapsto \theta_1\\
-\theta_2 \mapsto \theta_3\\
-\theta_3 \mapsto \theta_2\\
-\sqrt{D} \mapsto -\sqrt{D}
-\end{cases}
-& \quad ,
-\tau\sigma: 
-\begin{cases}
-\theta_1 \mapsto \theta_3\\
-\theta_2 \mapsto \theta_2\\
-\theta_3 \mapsto \theta_1\\
-\sqrt{D} \mapsto -\sqrt{D}
-\end{cases}
-& \quad ,
-\tau\sigma^2: 
-\begin{cases}
-\theta_1 \mapsto \theta_2\\
-\theta_2 \mapsto \theta_1\\
-\theta_3 \mapsto \theta_3\\
-\sqrt{D} \mapsto -\sqrt{D}
-\end{cases}.
-\end{align*}
-We note of course, that since $\sqrt{D} = (\theta_1-\theta_2)(\theta_1-\theta_3)(\theta_2-\theta_3)$, in order to map $\sqrt{D}$ to $-\sqrt{D}$, two of $\theta_1,\theta_2,\theta_3$ must be interchanged. 
-
-Let $p \in S$ and choose $\mathfrak{P} \in L$ over $p$. Let $L_{\mathfrak{P}}$ denote the completion of $L$ at $\mathfrak{P}$. There are $3$ possibilities for the factorization of ${g(t) \in \mathbb{Q}_p[t]}$:
-\begin{enumerate}
-\item $g(t) = g_1(t)$, where $\deg{g_1(t)} = 3$. That is $g(t)$ is irreducible in $\mathbb{Q}_p[t]$. It follows that 
-\[(p)\mathcal{O}_K = \mathfrak{p}_1^{e_1}\]
-so that there is only $1$ prime ideal lying above $p$. Since $3 = \deg{g_1(t)} = e_1d_1$, it follows that either $e_1 = 1$ and $d_1 = 3$ or $e_1 = 3$ and $d_1 = 1$, so that we have the following $2$ subcases:
-
-\begin{enumerate}
-\item $g(t) = g_1(t) \in \mathbb{Q}_p[t]$ is irreducible of degree $3$ and
-\[(p)\mathcal{O}_K = \mathfrak{p}_1 \quad \text{ with } e_1 = 1, d_1 = 3.\]
-In this case $\theta^{(1)}, \theta^{(2)}, \theta^{(3)} = \theta_1^{(1)}, \theta_1^{(2)}, \theta_1^{(3)} \in \overline{\mathbb{Q}}_p\backslash \mathbb{Q}_p$. 
-
-Further, there is only one prime ideal, $\mathfrak{p_1}$ over $p$, so all roots $\theta_1^{(1)}, \theta_1^{(2)}, \theta_1^{(3)}$ of $g(t)$ over $L_{\mathfrak{P}}$ are associated to it. 
-
-\item $g(t) = g_1(t) \in \mathbb{Q}_p[t]$ is irreducible of degree $3$ and
-\[(p)\mathcal{O}_K = \mathfrak{p}_1^3 \quad \text{ with } e_1 = 3, d_1 = 1.\]
-In this case $\theta^{(1)}, \theta^{(2)}, \theta^{(3)} = \theta_1^{(1)}, \theta_1^{(2)}, \theta_1^{(3)} \in \overline{\mathbb{Q}}_p$.
-\end{enumerate}
-
-\item $g(t) = g_1(t)g_2(t)$ where (without loss of generality) $\deg{g_1(t)} = 1$ and $\deg{g_2(t)} = 2$. It follows that 
-\[(p)\mathcal{O}_K = \mathfrak{p}_1^{e_1}\mathfrak{p}_2^{e_2}\]
-so that there are $2$ prime ideal lying above $p$. Since $1 = \deg{g_1(t)} = e_1d_1$ and $2 = \deg{g_2(t)} = e_2d_2$, it follows that $e_1 = d_1 = 1$ and either $e_2 = 1$ and $d_2 = 2$ or $e_2 = 2$ and $d_2 = 1$, so that we have the following 2 subcases:
-
-\begin{enumerate}
-\item $g(t) = g_1(t)g_2(t) \in \mathbb{Q}_p[t]$ where $\deg{g_1(t)} = 1$ and $\deg{g_2(t)} = 2$ and 
-\[(p)\mathcal{O}_K = \mathfrak{p}_1 \mathfrak{p}_2 \quad \text{ with } 
-	e_1 = 1, d_1 = 1 \text{ and } e_2 = 1, d_2 = 2.\]
-In this case $\theta^{(1)}, \theta^{(2)}, \theta^{(3)} = \theta_1^{(1)}, \theta_2^{(1)}, \theta_2^{(2)} \in \overline{\mathbb{Q}}_p$, where $\theta_1^{(1)} \in \mathbb{Q}_p$.
-\item $g(t) = g_1(t)g_2(t) \in \mathbb{Q}_p[t]$ where $\deg{g_1(t)} = 1$ and $\deg{g_2(t)} = 2$ and
-\[(p)\mathcal{O}_K = \mathfrak{p}_1 \mathfrak{p}_2^2 \quad \text{ with } 
-	e_1 = 1, d_1 = 1 \text{ and } e_2 = 2, d_2 = 1.\]
-In this case $\theta^{(1)}, \theta^{(2)}, \theta^{(3)} = \theta_1^{(1)}, \theta_2^{(1)}, \theta_2^{(2)} \in \overline{\mathbb{Q}}_p$, where $\theta_1^{(1)} \in \mathbb{Q}_p$.
-\end{enumerate}
-
-\item $g(t) = g_1(t)g_2(t)g_3(t)$ where $\deg{g_1(t)} = \deg{g_2(t)} = \deg{g_3(t)} = 1$. It follows that 
-\[(p)\mathcal{O}_K = \mathfrak{p}_1^{e_1}\mathfrak{p}_2^{e_2}\mathfrak{p}_3^{e_3}\]
-so that there are $3$ prime ideal lying above $p$. Since $1 = \deg{g_i(t)} = e_id_i$ for $i = 1, 2,3$, it follows that that $e_i = d_i = 1$ for $i = 1,2,3$ so that we have the following case:
-
-\begin{enumerate}
-\item $g(t) = g_1(t)g_2(t)g_3(t) \in \mathbb{Q}_p[t]$ where $\deg{g_1(t)} = \deg{g_2(t)} = \deg{g_3(t)} = 1$ and 
-\[(p)\mathcal{O}_K = \mathfrak{p}_1 \mathfrak{p}_2\mathfrak{p}_3  \quad \text{ with } 
-	e_i = d_i = 1 \text{ for } i = 1,2,3.\]
-In this case $\theta^{(1)}, \theta^{(2)}, \theta^{(3)} = \theta_1^{(1)}, \theta_2^{(1)}, \theta_3^{(1)} \in \mathbb{Q}_p$.
-\end{enumerate}
-\end{enumerate}
+In this section, we describe new techniques to solve equation~\eqref{eq:EfficientSunit} via global sieves and new geometric ideas. This work is part of an on-going collaborative project with \edit{Rafael, Benjamin, Samir - how do I reference this?}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-\section{Initial Heights}
+\section{Decomposition of the Weil height} 
 
-The sieves involving logarithms are of local nature. To obtain a global sieve, we work with the global logarithmic Weil height 
-\[h:\mathbb{G}_m(\overline{\mathbb{Q}})\to\mathbb{R}_{\geq 0}.\]
-Similar as the N\'eron-Tate height on $E(\overline{\mathbb{Q}})$, the height  $h$ on $\mathbb{G}_m(\overline{\mathbb{Q}})$ is invariant under conjugation and it admits a decomposition into local heights which can be related to complex and $p$-adic logarithms. We now begin to construct the sieve.
+The sieves of \cite{TW3} involving logarithms are of local nature. To obtain a global sieve, we work instead with the global logarithmic Weil height. This height is invariant under conjugation and admits a decomposition into local heights which can be related to complex and $p$-adic logarithms. 
 
-
-Let $\mathbf{n} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ be a solution to \eqref{Eq:Sunit}, let
+Let $\mathbf{n} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ be a solution to \eqref{eq:EfficientSunit}, let
 \[\frac{\lambda}{\delta_2}= \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\]
 and consider the Weil height of $\frac{\delta_2}{\lambda}$, 
 \[\frac{\delta_2}{\lambda}= \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i}.\]
 Given the global Weil height of $\delta_2/\lambda$, or all the local heights of $\delta_2/\lambda$, we will construct several ellipsoids `containing' $\mathbf{n}$ such that the volume of the ellipsoids are as small as possible. We begin by computing the height of $\delta_2/\lambda$. 
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\subsection{Decomposition of the Weil height.} 
+Let $L$ be the splitting field of $K$, and note that for cubic extensions, the Galois group $\Gal(L/\mathbb{Q})$ is isomorphic to either the alternating group $A_3$ or the symmetric group $S_3$. 
 
 \begin{lemma}\label{lem:cancellation}
-Let $\mathfrak{P}$ be a finite place of $L$ and let $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $\mathfrak{P}^{(j)} = \sigma_{j}(\mathfrak{P})$ lying over $\mathfrak{p}^{(i_0)}$, $\mathfrak{p}^{(j)}$ respectively, where $\sigma_{i_0}: L \to L$, $\theta \mapsto \theta^{(i_0)}$ and $\sigma_{j}: L \to L$, $\theta \mapsto \theta^{(j)}$ are two automorphisms of $L$ such that $(i_0,j,k)$ form a subgroup of $S_3$ of order $3$. For $i = 1, \dots, \nu$, 
+Let $\mathfrak{P}$ be a prime ideal of $L$ and let $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $\mathfrak{P}^{(j)} = \sigma_{j}(\mathfrak{P})$ lying over $\mathfrak{p}^{(i_0)}$, $\mathfrak{p}^{(j)}$ respectively, where $\sigma_{i_0}: L \to L$, $\theta \mapsto \theta^{(i_0)}$ and $\sigma_{j}: L \to L$, $\theta \mapsto \theta^{(j)}$ are two automorphisms of $L$ such that $(i_0,j,k)$ form a subgroup of order $3$. For $i = 1, \dots, \nu$, 
 \[\left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)\mathcal{O}_L 
 	 = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{a_{1i}} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{a_{\nu i}}\]
 where $\mathfrak{P}^{(j)} \neq \mathfrak{P}^{(i_0)}$ for all $\mathfrak{P}$ lying above $\mathfrak{p}$ in $K$. 
@@ -277,95 +57,13 @@ respectively. That is, $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $
 
 Now, to show that $\mathfrak{P}^{(j)} \neq \mathfrak{P}^{(i_0)}$ for all $\mathfrak{P}$ lying above $\mathfrak{p}$ in $K$, we consider the decomposition group of $\mathfrak{P}$, 
 \[D(\mathfrak{P}|p) = \{\sigma \in G \ : \ \sigma(\mathfrak{P}) = \mathfrak{P}\}.\]
-Let $L_D$ denote the field under $L$ fixed by $D(\mathfrak{P}|p)$. By Galois theory, we have the following tower of fields
-
-\begin{center}
-\begin{tikzpicture}[node distance = 1.2cm, auto]
-      \node (Q) {$\mathbb{Q}$};
-      \node (L_E) [above of=Q] {$L_E$};
-      \node (L_D) [above of=L_E] {$L_D$};
-      \node (L) [above of=L_D] {$L$};
-      \draw[-] (Q) to node {$e(\mathfrak{P}|p)$} (L_E);
-      \draw[-] (L_E) to node {$f(\mathfrak{P}|p)$} (L_D);
-      \draw[-] (L_D) to node {$r$} (L);
-      \end{tikzpicture}
-\end{center}
-
-where $[L:\mathbb{Q}] = 6$. From this tower of fields, we may determine the decomposition group. Let $p \in S$. For any $\mathfrak{p}$ lying over $p$, we note that $L/K$ is a Galois extension of degree $2$. Hence there are 3 possibilities for the decomposition of $\mathfrak{p}$ in $L$. Namely
-\begin{enumerate}[i.]
-\item $r = 2$ and  $e(\mathfrak{P}|\mathfrak{p}) = f(\mathfrak{P}|\mathfrak{p}) = 1$. Then $\mathfrak{p}\mathcal{O}_L = \mathfrak{P}_1\mathfrak{P}_2.$
-\item $e(\mathfrak{P}|\mathfrak{p}) = 2$ and $r = f(\mathfrak{P}|\mathfrak{p}) = 1$. Then $\mathfrak{p}\mathcal{O}_L = \mathfrak{P}_1^2.$
-\item $f(\mathfrak{P}|\mathfrak{p}) = 2$ and $r = e(\mathfrak{P}|\mathfrak{p}) = 1$. Then $\mathfrak{p}\mathcal{O}_L = \mathfrak{P}_1.$
-\end{enumerate}
-
-For $p \in S$, there are $5$ possibilities for the decomposition of $p$ in $K$. In particular,
-\begin{enumerate}[1.]
-\item $(p)\mathcal{O}_K = \mathfrak{p}_1$ with $e(\mathfrak{p}_1|p) = 1, f(\mathfrak{p}_1|p) = 3$. By the PIRL, it follows that this prime ideal is bounded and therefore does not appear unbounded in \eqref{Eq:TMfactored}.
-\item $(p)\mathcal{O}_K = \mathfrak{p}_1^3$ with $e(\mathfrak{p}_1|p) = 3, f(\mathfrak{p}_1|p) = 1$. By the PIRL, it follows that this prime ideal is bounded and therefore does not appear unbounded in \eqref{Eq:TMfactored}.
-
-\item $(p)\mathcal{O}_K = \mathfrak{p}_1 \mathfrak{p}_2$ with $e(\mathfrak{p}_1|p) = f(\mathfrak{p}_1|p) = 1$ and $e(\mathfrak{p}_2|p) = 1, f(\mathfrak{p}_2|p) = 2$.
-
-Looking at the possibilities for the factorization of $\mathfrak{p}_2$ in $L$, we observe
-\begin{enumerate}[i.]
-\item Since 
-\[e(\mathfrak{P}|p) = e(\mathfrak{P}|\mathfrak{p}_2)e(\mathfrak{p}|p) = 1 \quad \text{ and } \quad f(\mathfrak{P}|p) = f(\mathfrak{P}|\mathfrak{p}_2)f(\mathfrak{p}|p) = 2,\]
-it follows from $6 = r\cdot e(\mathfrak{P}|p)\cdot f(\mathfrak{P}|p)$ that $r = 3$. Hence
-\[(p)\mathcal{O}_L = \mathfrak{P}_1\mathfrak{P}_2\mathfrak{P}_3 \implies |D(\mathfrak{P}_i|p)| = 2.\]
-\item Since 
-\[e(\mathfrak{P}|p) = e(\mathfrak{P}|\mathfrak{p}_2)e(\mathfrak{p}|p) = 2 \quad \text{ and } \quad f(\mathfrak{P}|p) = f(\mathfrak{P}|\mathfrak{p}_2)f(\mathfrak{p}|p) = 2,\]
-it follows from $6 = r\cdot e(\mathfrak{P}|p)\cdot f(\mathfrak{P}|p) = r \cdot 4$ that such a case is not possible.
-\item Since 
-\[e(\mathfrak{P}|p) = e(\mathfrak{P}|\mathfrak{p}_2)e(\mathfrak{p}|p) = 1 \quad \text{ and } \quad f(\mathfrak{P}|p) = f(\mathfrak{P}|\mathfrak{p}_2)f(\mathfrak{p}|p) = 4,\]
-it follows from $6 = r\cdot e(\mathfrak{P}|p)\cdot f(\mathfrak{P}|p) = r \cdot 4$ that such a case is not possible.\end{enumerate}
-Now, since
-\[e(\mathfrak{P}|p) = 1 \quad \text{ and } \quad f(\mathfrak{P}|p) = 2\]
-is the only possible case, we have that $|D(\mathfrak{P}_i|p)| = 2$ for $i = 1,2,3$.
-
-\item $(p)\mathcal{O}_K = \mathfrak{p}_1 \mathfrak{p}_2^2$ with $e(\mathfrak{p}_1|p) = f(\mathfrak{p}_1|p) = 1$ and $e(\mathfrak{p}_2|p) = 2, f(\mathfrak{p}_2|p) = 1$.
-
-Looking at the possibilities for the factorization of $\mathfrak{p}_2$ in $L$, we observe
-\begin{enumerate}[i.]
-\item Since 
-\[e(\mathfrak{P}|p) = e(\mathfrak{P}|\mathfrak{p}_2)e(\mathfrak{p}|p) = 2 \quad \text{ and } \quad f(\mathfrak{P}|p) = f(\mathfrak{P}|\mathfrak{p}_2)f(\mathfrak{p}|p) = 1,\]
-it follows from $6 = r\cdot e(\mathfrak{P}|p)\cdot f(\mathfrak{P}|p)$ that $r = 3$. Hence
-\[(p)\mathcal{O}_L = \mathfrak{P}_1^2\mathfrak{P}_2^2\mathfrak{P}_3^2 \implies |D(\mathfrak{P}_i|p)| = 2.\]
-\item Since 
-\[e(\mathfrak{P}|p) = e(\mathfrak{P}|\mathfrak{p}_2)e(\mathfrak{p}|p) = 4 \quad \text{ and } \quad f(\mathfrak{P}|p) = f(\mathfrak{P}|\mathfrak{p}_2)f(\mathfrak{p}|p) = 1,\]
-it follows from $6 = r\cdot e(\mathfrak{P}|p)\cdot f(\mathfrak{P}|p) = r \cdot 4$ that such a case is not possible.
-\item Since 
-\[e(\mathfrak{P}|p) = e(\mathfrak{P}|\mathfrak{p}_2)e(\mathfrak{p}|p) = 2 \quad \text{ and } \quad f(\mathfrak{P}|p) = f(\mathfrak{P}|\mathfrak{p}_2)f(\mathfrak{p}|p) = 2,\]
-it follows from $6 = r\cdot e(\mathfrak{P}|p)\cdot f(\mathfrak{P}|p) = r \cdot 4$ that such a case is not possible.\end{enumerate}
-Now, since
-\[e(\mathfrak{P}|p) = 2 \quad \text{ and } \quad f(\mathfrak{P}|p) = 1\]
-is the only possible case, we have that $|D(\mathfrak{P}_i|p)| = 2$ for $i = 1,2,3$.
-
-\item $(p)\mathcal{O}_K = \mathfrak{p}_1 \mathfrak{p}_2\mathfrak{p}_3$ with $e(\mathfrak{p}_i|p) = f(\mathfrak{p}_i|p) = 1$ for $i = 1,2,3$.
-
-Looking at the possibilities for the factorization of $\mathfrak{p}_i$ in $L$, we observe
-\begin{enumerate}[i.]
-\item Since 
-\[e(\mathfrak{P}|p) = e(\mathfrak{P}|\mathfrak{p}_i)e(\mathfrak{p}|p) = 1 \quad \text{ and } \quad f(\mathfrak{P}|p) = f(\mathfrak{P}|\mathfrak{p}_i)f(\mathfrak{p}|p) = 1,\]
-it follows from $6 = r\cdot e(\mathfrak{P}|p)\cdot f(\mathfrak{P}|p)$ that $r = 6$. Hence
-\[(p)\mathcal{O}_L = \mathfrak{P}_1\mathfrak{P}_2\mathfrak{P}_3\mathfrak{P}_4\mathfrak{P}_5\mathfrak{P}_6 \implies |D(\mathfrak{P}_i|p)| = 1.\]
-In this case, the only automorphism $\sigma$ on $L$ such that $\sigma(\mathfrak{P}) = \mathfrak{P}$ is the identity map, hence there can be no cancellation in this case.  
-\item Since 
-\[e(\mathfrak{P}|p) = e(\mathfrak{P}|\mathfrak{p}_i)e(\mathfrak{p}|p) = 2 \quad \text{ and } \quad f(\mathfrak{P}|p) = f(\mathfrak{P}|\mathfrak{p}_i)f(\mathfrak{p}|p) = 1,\]
-it follows from $6 = r\cdot e(\mathfrak{P}|p)\cdot f(\mathfrak{P}|p)$ that $r = 3$. Hence
-\[(p)\mathcal{O}_L = \mathfrak{P}_1^2\mathfrak{P}_2^2\mathfrak{P}_3^2 \implies |D(\mathfrak{P}_i|p)| = 2.\]
-\item Since 
-\[e(\mathfrak{P}|p) = e(\mathfrak{P}|\mathfrak{p}_2)e(\mathfrak{p}|p) = 1 \quad \text{ and } \quad f(\mathfrak{P}|p) = f(\mathfrak{P}|\mathfrak{p}_2)f(\mathfrak{p}|p) = 2,\]
-it follows from $6 = r\cdot e(\mathfrak{P}|p)\cdot f(\mathfrak{P}|p)$ that $r = 3$. Hence
-\[(p)\mathcal{O}_L = \mathfrak{P}_1\mathfrak{P}_2\mathfrak{P}_3 \implies |D(\mathfrak{P}_i|p)| = 2.\]
-\end{enumerate}
-\end{enumerate}
-
-From the above list, we observe that we are left to determine whether $D(\mathfrak{P}_i|p)$ having cardinality $2$ can result in $\mathfrak{P}^{(i_0)} = \mathfrak{P}^{(j)}$. We recall that the generating automorphisms of $S_3$ either permute $\theta$ or send $\sqrt{D}$ to $-\sqrt{D}$. If we fix $\theta = \theta_1$, then, in sending $\theta_1$ to $\theta_1$, then we either select an element of $S_3$ that has order 1 (the identity map) or order $2$ ($\tau$). To send $\theta_1$ to $\theta_2$, our choices are either an order $3$ element ($\sigma$) or an order 2 element, $\tau\sigma^2$. Lastly, to send $\theta_1$ to $\theta_3$, we choose either between an order $3$ element, $\sigma^2$, or an order 2 element, $\tau\sigma$. The choice of the automorphisms themselves do not matter so long as $\theta$ is permuted. In other words, we choose $(i_0, j,k)$ so that it forms an order $3$ subgroup of $S_3$. Since only a cardinality $2$ subgroup can map a prime ideal $\mathfrak{P}$ to itself, it follows that this choice of $(i_0,j,k)$ cannot coincide with $D(\mathfrak{P}|p)$ and therefore cannot lead to $\mathfrak{P}^{(i_0)} = \mathfrak{P}^{(j)}$. 
+If we consider all possible decompositions of $\mathfrak{p}$ in $L$, we conclude that $\mathfrak{P}^{(i_0)} \neq \mathfrak{P}^{(j)}$ whenever $D(\mathfrak{P}_i|p)$ does not have cardinality $2$. Thus if we choose $(i_0,j,k)$ so that it forms an order $3$ subgroup of $\Gal(L/\mathbb{Q})$, it cannot coincide with $D(\mathfrak{P}|p)$ and therefore cannot lead to $\mathfrak{P}^{(i_0)} = \mathfrak{P}^{(j)}$. 
 \end{proof}
 
 For the remainder of this paper, we assume that $(i_0,j,k)$ are automorphisms of $L$ selected as in Lemma~\ref{lem:cancellation}.
 
 \begin{lemma}\label{lem:ordpz}
-Let $\mathfrak{P}$ be a finite place of $L$ and let $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $\mathfrak{P}^{(j)} = \sigma_{j}(\mathfrak{P})$, where $\sigma_{i_0}: L \to L$, $\theta \mapsto \theta^{(i_0)}$ and $\sigma_{j}: L \to L$, $\theta \mapsto \theta^{(j)}$ are two automorphisms of $L$. For 
+Let $\mathfrak{P}$ be a prime ideal of $L$ and let $\mathfrak{P}^{(i_0)} = \sigma_{i_0}(\mathfrak{P})$ and $\mathfrak{P}^{(j)} = \sigma_{j}(\mathfrak{P})$, where $\sigma_{i_0}: L \to L$, $\theta \mapsto \theta^{(i_0)}$ and $\sigma_{j}: L \to L$, $\theta \mapsto \theta^{(j)}$ are two automorphisms of $L$. For 
 \[\frac{\delta_2}{\lambda}= \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i},\]
 we have
 \[\ord_{\mathfrak{P}}\left(\frac{\delta_2}{\lambda}\right)=
@@ -386,11 +84,8 @@ Hence
 \begin{align*}
 \left(\frac{\delta_2}{\lambda}\right)\mathcal{O}_L
 	& = \left( \frac{\gamma_1^{(j)}}{\gamma_1^{(i_0)}}\right)^{n_1}\cdots \left( \frac{\gamma_{\nu}^{(j)}}{\gamma_{\nu}^{(i_0)}}\right)^{n_{\nu}} \mathcal{O}_L\\
-	& = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{n_1a_{11}} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{n_1a_{\nu 1}} \cdots \\
-	& \quad \quad \cdots 
-\left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{n_{\nu}a_{1\nu}} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{n_{\nu} a_{\nu \nu}} \\
 	& = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{\sum_{i = 1}^\nu n_ia_{1i}} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{\sum_{i=1}^{\nu} n_ia_{\nu i}}\\
-	& = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{u_1 - r_1} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{u_{\nu} - r_{\nu}}\\
+	& = \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_1} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_1^{(j)})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_1)}}\right)^{u_1 - r_1} \cdots \left(\prod_{\mathfrak{P}\mid\mathfrak{p}_{\nu}} \frac{\mathfrak{P}^{(j) \ e(\mathfrak{P}^{(j)}\mid\mathfrak{p}^{(j)}_{\nu})}}{\mathfrak{P}^{(i_0) \ e(\mathfrak{P}^{(i_0)}\mid\mathfrak{p}^{(i_0)}_{\nu})}}\right)^{u_{\nu} - r_{\nu}}
 \end{align*}
 and so
 \[\ord_{\mathfrak{P}}\left( \frac{\delta_2}{\lambda}\right)=
@@ -407,22 +102,20 @@ Let $\log^+(\cdot)$ denote the real valued function $\max(\log(\cdot), 0)$ on $\
 
 \begin{proposition}\label{prop:heightdecomp}
 The height $h\left(\frac{\delta_2}{\lambda}\right)$ admits a decomposition
-\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \]
-
-Further, if $\deg{g(t)}=3$ then 
+\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
+Further, if $[K:\mathbb{Q}] = 3$, then
 \[\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} = 
 \begin{cases}
 2\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} & \text{ if } \sqrt{\Delta}\notin\mathbb{Q} \\
-\max_{w:L\to \mathbb{C}}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} & \text{ if } \sqrt{\Delta}\in\mathbb{Q} \\
+\max_{w:L\to \mathbb{C}}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} & \text{ if } \sqrt{\Delta}\in\mathbb{Q}
 \end{cases}\]
 when one can choose $(i_0),(j), (k) : L \to \mathbb{C}$ such that $\mathfrak{p}_{p}^{(j)} \neq \mathfrak{p}_{p}^{(i_0)}$ for all $p \in S$. 
 \end{proposition}
+Denote by $m$ the number of infinite places $w: L \to \mathbb{C}$. 
 
 \begin{proof}[Proof of Proposition~\ref{prop:heightdecomp}]Since $\frac{\delta_2}{\lambda} \in L$, the definition of the absolute logarithmic Weil height gives
 \[h\left(\frac{\delta_2}{\lambda}\right)=\frac{1}{[L:\mathbb{Q}]}\sum_{w \in M_L} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}\]
-where $||z||_w$ are the usual norms and $M_L$ is a set of inequivalent absolute values on $L$. 
-
-In particular, if $w: L \to \mathbb{C}$ is an infinite place, we obtain
+where $||z||_w$ are the usual norms and $M_L$ is a set of inequivalent absolute values on $L$. In particular, if $w: L \to \mathbb{C}$ is an infinite place, we obtain
 \[ \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\} = \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
 
 Now, for $z = \frac{\delta_2}{\lambda}$ and $w = \mathfrak{P}$ a finite place, we have
@@ -454,7 +147,7 @@ For $p_l \in \{p_1, \dots, p_{\nu}\}$, there is 1 unique prime ideal $\mathfrak{
 	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:\mathbb{Q}(\theta^{(j)})]\\
 	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:K].
 \end{align*}
-where the last inequality follows from $K = \mathbb{Q}(\theta) \cong \mathbb{Q}(\theta^{(j)})$
+where the last inequality follows from $K = \mathbb{Q}(\theta) \cong \mathbb{Q}(\theta^{(j)})$.
 
 Similarly, for $\mathfrak{P}^{(i_0)}\mid p_l$ where $p_l \in \{p_1, \dots, p_{\nu}\}$, we have
 \begin{align*}
@@ -501,7 +194,7 @@ h\left(\frac{\delta_2}{\lambda}\right)
 	& =\frac{1}{[L:\mathbb{Q}]}\sum_{w \in M_L} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}\\
 	& = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[L:\mathbb{Q}]}\sum_{\mathfrak{P} \in \mathcal{O}_L \text{ finite }} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{\mathfrak{P}}, 1\right\}\\
 	& = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l|\\
-	& = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\log\left(p_1^{|u_1 - r_1|} \cdots p_{\nu}^{|u_{\nu} - r_{\nu}|}\right)
+	& = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\log\left(p_1^{|u_1 - r_1|} \cdots p_{\nu}^{|u_{\nu} - r_{\nu}|}\right).
 \end{align*}
 
 To prove the last statement, we first assume that $\sqrt{\Delta}\in\mathbb{Q}$. Then $L=\mathbb{Q}(\theta, \sqrt{\Delta}) = \mathbb{Q}(\theta) = K$ and the Galois group of $L/\mathbb{Q}$ is the alternating group $A_3$. Hence the Galois group is generated by $\sigma$, which takes $\theta$ to one of the other roots of $g(t)$. In particular, 
@@ -559,7 +252,7 @@ Hence it follows that
 \[\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} = 
 \max_{w:L\to \mathbb{C}}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
 
-It remains to consider the case when $\sqrt{\Delta} \notin \mathbb{Q}$. Then the Galois group of $L/\mathbb{Q}$ is the symmetric group $S_3$. We now write $j = 1, i_0 = 2,$ and $k = 3$, the orbit of 
+It remains to consider the case when $\sqrt{\Delta} \notin \mathbb{Q}$. Then the Galois group of $L/\mathbb{Q}$ is the symmetric group $S_3$. We now write $j = 1, i_0 = 2,$ and $k = 3$. The orbit of 
 \[\frac{\delta_2}{\lambda}= \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(1)}}{\varepsilon_i^{(2)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(1)}}{\gamma_i^{(2)}}\right)^{n_i}\in L\]
 is
 \begin{align*}
@@ -592,7 +285,7 @@ Hence it follows that
 \end{proof}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-\subsection{Initial height bounds}
+\section{Initial height bounds}
 
 Recall that we seek solutions to
 \begin{equation*}
@@ -602,66 +295,39 @@ where
 \[\delta_1 = \frac{\theta^{(i_0)} - \theta^{(j)}}{\theta^{(i_0)} - \theta^{(k)}}\cdot\frac{\alpha^{(k)}\zeta^{(k)}}{\alpha^{(j)}\zeta^{(j)}}, \quad \delta_2 = \frac{\theta^{(j)} - \theta^{(k)}}{\theta^{(k)} - \theta^{(i_0)}}\cdot \frac{\alpha^{(i_0)}\zeta^{(i_0)}}{\alpha^{(j)}\zeta^{(j)}}\]
 are constants and $r = 1$ or $r = 2$. 
 
-In Rafael's notation, let
+For simplicity of notation, write
 \[y =  \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}, \quad 
 x = \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\]
 so that our equation is
-\[\delta_1y - 1 = \delta_2x.\]
-Equivalently, letting $\mu_0 = \delta_1$ and $\lambda_0 = \delta_2$, we arrive at
-\[\mu_0y - \lambda_0x = 1,\]
-just as in Rafael's notation. 
+\begin{equation} \label{eq:TrueSunit}
+\delta_1y - 1 = \delta_2x.
+\end{equation}
+Let $z= \frac{1}{x} = \frac{\delta_2}{\lambda}$ and denote by $\Sigma$ the set of pairs $(x,y)$ satisfying \eqref{eq:TrueSunit}. That is, $\Sigma$ denotes the set of tuples $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ giving $x,y$ which satisfy \eqref{eq:TrueSunit}.
 
-Returning to our notation, we see that 
-\begin{align*}
-\lambda 	& = \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\\
-		& = \delta_2 x\\
-		& = \lambda_0 x.
-\end{align*}
-Hence, let $z:= \frac{1}{x} = \frac{\delta_2}{\lambda}$.
-
-Now, let $\Sigma$ denote the set of pairs $(x,y)$ satisfying the equation 
-\[\mu_0y - \lambda_0x = 1.\]
-That is, let $\Sigma$ denote the set of tuples $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ giving $x,y$ which satisfy
-\[\mu_0y - \lambda_0x = 1.\]
-
-Let $l,h\in\mathbb{R}^{S^*}$ with $0\leq l\leq h$. Then we define $\Sigma(l,h)$ as the set of all $(x,y)\in \Sigma$ such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq h$ and such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\nleq l$, 
-\[\Sigma(l,h) = \{(x,y) \in \Sigma \ | \ (h_v(z))\leq h \text{ and } (h_v(z))\nleq l\}.\]
-Since we are comparing vectors, we note that $(h_v(z))\nleq l$ does not necessarily mean that $l < (h_v(z))$. Instead, this means that not \textit{all} coordinates $h_v(z)$ satisfy $h_v(z) \leq l_v$, and hence there is at least one coordinate for which $h_v(z) > l_v$.
-
-Here we write $\Sigma(h)=\Sigma(l,h)$ if $l=0$.  
-\[\Sigma(h) = \Sigma(0,h)= \{(x,y) \in \Sigma \ | \ (h_v(z))\leq h \text{ and }  (h_v(z))\nleq 0 \},\]
-so that at least one coordinate satisfies $h_v(z) > 0$.
-
-Further, for each $w\in S^*$, we denote by $\Sigma_w(l,h)$ the set of all $(x,y)\in\Sigma(h)$ such that $h_w(z)>l_w$. 
-\begin{align*}
-\Sigma_w(l,h)	& = \{(x,y) \in \Sigma(h) \ | \ h_w(z)>l_w \} \\
-			& = \{(x,y) \in \Sigma \ | \ (h_v(z))\leq h \text{ and }  (h_v(z))\nleq 0 \text{ and } h_w(z)>l_w\}.
-\end{align*}
+Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. Then we define $\Sigma(\mathbf{l},\mathbf{h})$ as the set of all $(x,y)\in \Sigma$ such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq \mathbf{h}$ and such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\nleq \mathbf{l}$. 
+\[\Sigma(\mathbf{l},\mathbf{h}) = \{(x,y) \in \Sigma \ | \ (h_v(z))\leq \mathbf{h} \text{ and } (h_v(z))\nleq \mathbf{l}\}.\]
+Write $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})$ if $\mathbf{l}=\mathbf{0}$. Further, for each place $w$, we denote by $\Sigma_w(\mathbf{l},\mathbf{h})$ the set of all $(x,y)\in\Sigma(\mathbf{h})$ such that $h_w(z)>l_w$. 
 
 Recall that 
-\[f(X,Y) = X^3 + C_1 X^{2}Y + C_2XY^2 + C_3Y^3 = c p_1^{z_1} \cdots p_v^{z_v}.\]
-and $\gcd(X,Y)=1$ and $S = \{p_1, \dots, p_v\}$. Let 
+\[f(x,y) = x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 = c p_1^{z_1} \cdots p_v^{z_v}.\]
+and $\gcd(x,y)=1$ and $S = \{p_1, \dots, p_v\}$. Let 
 \[N_S = \prod_{p\in S}p.\]
-To measure an integer $m$ and the finite set $S$, we take
+To measure an integer $b$ and the finite set $S$, we take
 \begin{align*}
-m_S	& = 1728 N_S^2 \prod_{p \notin S} p^{\min(2,\ord_p(m))}\\
-	& = 1728 \prod_{p\in S}p^2 \prod_{\substack{p \notin S \\ p \mid m}} p^{\min(2,\ord_p(m))}.
+b_S	& = 1728 N_S^2 \prod_{p \notin S} p^{\min(2,\ord_p(b))}\\
+	& = 1728 \prod_{p\in S}p^2 \prod_{\substack{p \notin S \\ p \mid b}} p^{\min(2,\ord_p(b))}.
 \end{align*}
 Recall further that the Weil height of an integer $n \in \mathbb{Z}\backslash {0}$ is given by
 \[h(n) = \log|n|.\] 
 Now, denote by $h(f-c)$ the maximum logarithmic Weil heights of the coefficients of the polynomial $f - c$,
 \begin{align*}
-h(f-a)	& = h(x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 - c)\\
-		& = \max(h(1), h(C_1), h(C_2), h(C_3), h(-c))\\
-		& = \max(\log|1|, \log|C_1|, \log|C_2|, \log|C_3|, \log|c|)\\
-		& = \max(0, \log|C_1|, \log|C_2|, \log|C_3|, \log|c|)\\
-		& = \max(\log|C_1|, \log|C_2|, \log|C_3|, \log|c|),		
+h(f-c) & = \max(\log|C_1|, \log|C_2|, \log|C_3|, \log|c|),		
 \end{align*}
 where we recall that $C_i \in \mathbb{N}$.
-Put $m = 432 \Delta c^2$ with $\Delta$ the discriminant of $F$. Now, let 
-\[\Omega = 2m_S \log(m_S) + 172h(f-c).\]
-By Rafael and Benjamin's paper, 
-\[\max(h(X),h(Y))\leq \Omega. \]
+Put $b = 432 \Delta c^2$ with $\Delta$ the discriminant of $F$. Now, let 
+\[\Omega = 2b_S \log(b_S) + 172h(f-c).\]
+By \edit{Rafael and Benjamin's paper}, 
+\[\max(h(x),h(y))\leq \Omega. \]
 
 We recall that  
 \[\beta = X-Y\theta = \alpha \zeta \varepsilon_1^{a_1} \cdots \varepsilon_r^{a_r}\cdot \gamma_1^{n_1}\cdots \gamma_{\nu}^{n_{\nu}}\]
@@ -799,7 +465,7 @@ Lemma~\ref{lem:covering} gives  $$\Sigma=\Sigma(h_0), \quad \Sigma(h)=\Sigma(l,h
 Thus, after choosing a good sequence of lower and upper bounds (i.e. $l,h\in R^{S^*}$ with $0\leq l\leq h$) covering the whole space $0\leq h_0$, we are reduced to compute $\Sigma_v(l,h)$.
 %
 %
-\subsubsection{Refined coverings}
+%\subsubsection{Refined coverings}
 %
 %Next, for any nonempty subset $V\subseteq S^*$ we denote by $\Sigma_V(l,v)$ the set of all $(x,y)\in \Sigma(l,h)$ such that $h_v(z)>l_v$ for each $v\in V$ and such that $h_v(z)\leq l_v$ for each $v\in S^*\setminus V$.
 %
@@ -821,31 +487,6 @@ Thus, after choosing a good sequence of lower and upper bounds (i.e. $l,h\in R^{
 \subsection{Controlling the exponents in terms of the Weil Height}
 
 We now work with the norm $\|\cdot \|_\infty$. However, below we shall give much more precise estimates (which are essentially optimal) to make the volumes of the involved ellipsoids as small as possible. 
-
-\subsubsection{Bounding $\{n_1, \dots, n_{\nu}\}$}
-\begin{lemma}
-For any solution $(x,y, a_1, \dots, a_r, n_1, \dots, n_{\nu})$ of \eqref{Eq:main3}, we have 
-\[\|\mathbf{n}\|_{\infty} \leq \|A^{-1}\|_{\infty} \frac{h\left(\frac{\delta_2}{\lambda}\right)}{\log(2)}.\]
-\end{lemma}
-
-\begin{proof}
-Recall that $\mathbf{n} = (n_1, \dots, n_{\nu})^{\text{T}}$ and 
-\[A\mathbf{n} = \mathbf{u} - \mathbf{r}.\]
-Now, taking the $\| \cdot \|_{\infty}$ norm of both sides yields
-\[ \mathbf{n} = A^{-1}( \mathbf{u} - \mathbf{r} ) \implies \|\mathbf{n}\|_{\infty} = \|A^{-1} (\mathbf{u} - \mathbf{r})\|_{\infty} \leq \|A^{-1}\|_{\infty} \|\mathbf{u} - \mathbf{r}\|_{\infty}.\]
-Here, 
-\[\|\mathbf{u}-\mathbf{r}\|_{\infty} = \max_{1 \leq l \leq \nu} |u_l - r_l|.\]
-Now, since
-\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l|,\]
-it follows that 
-\[0 \leq |u_l - r_l| \log(p_l) \leq h\left(\frac{\delta_2}{\lambda}\right)\]
-for each $l \in \{1, \dots, \nu\}$. In other words, 
-\[|u_l - r_l| \leq \frac{h\left(\frac{\delta_2}{\lambda}\right)}{\log(p_l)}\]
-and so
-\[\max_{1 \leq l \leq \nu} |u_l - r_l| \leq \max_{1\leq l\leq \nu}\left(\frac{h\left(\frac{\delta_2}{\lambda}\right)}{\log(p_l)}\right) = \frac{h\left(\frac{\delta_2}{\lambda}\right)}{\log(2)}.\]
-Altogether this gives
-\[\|\mathbf{n}\|_{\infty} \leq \|A^{-1}\|_{\infty} \|\mathbf{u} - \mathbf{r}\|_{\infty} \leq \|A^{-1}\|_{\infty} \frac{h\left(\frac{\delta_2}{\lambda}\right)}{\log(2)}.\]
-\end{proof}
 
 \subsubsection{Bounding $\{a_1, \dots, a_{r}\}$}
 

@@ -3,6 +3,28 @@
 
 \chapter{Abstract}
 
+We present a practical and efficient algorithm for solving an arbitrary Thue-Mahler equation. This algorithm uses explicit height bounds with refined sieves, combining Diophantine approximation techniques of Tzanakis-de Weger with new geometric ideas. We begin by using methods of algebraic number theory to reduce the problem of solving the Thue-Mahler equation to the problem of solving a finite collection of related Diophantine equations. In the first part of this thesis, we establish the key results which allow us to drastically reduce the number of such Diophantine equations and subsequently reduce running time. 
+
+In the second part of this thesis, we show that if $n \geq 3$ is a fixed integer, then there exists an effectively computable constant $c (n)$ such that if $x, y$ and $m$ are integers satisfying
+$$
+\frac{x^m-1}{x-1} = \frac{y^n-1}{y-1}, \; \; y>x>1, \; m > n,
+$$
+with $\gcd(m-1,n-1)>1$,
+then $\max \{ x, y, m \} < c (n)$. In case $n \in \{ 3, 4, 5 \}$, we solve the equation completely, subject to this non-coprimality condition.  In case $n=5$, our resulting computations require a variety of innovations for solving Ramanujan-Nagell equations of the shape $f(x)=y^n$, where $f(x)$ is a given polynomial with integer coefficients (and degree at least two), and $y$ is a fixed integer. In particular, we modify our Thue-Mahler algorithm and specialize our refinements to the case of Ramanujan-Nagell equations, enabling us to fully resolve the $n = 5$ case. 
+
+In the third part, we discuss an algorithm for finding all elliptic curves over $\mathbb{Q}$ with a given conductor. Though based on 
+classical ideas derived from reducing the problem to one of solving associated Thue-Mahler equations,  our approach, in many cases at least, appears to be reasonably efficient  computationally. We provide 
+details of the output derived from running the algorithm, concentrating on the cases of conductor $p$ or $p^2$, for $p$ prime, with comparisons to existing 
+data. 
+
+Finally, we specialize the Thue-Mahler algorithm to degree $3$, applying an analogue of Matshke-von Kanel's elliptic logarithm sieve to construct a global sieve, leading to reduce search spaces. The algorithm is implemented in the Magma computer algebra system, and is part of an on-going collaborative project. 
+
+
+
+%--------------------------------------------------------------------------------------------------------------------------------------------%
+
+\endinput
+
 This document provides brief instructions for using the \class{ubcdiss}
 class to write a \acs{UBC}-conformant dissertation in \LaTeX.  This
 document is itself written using the \class{ubcdiss} class and is
@@ -23,3 +45,6 @@ words.
 %\fbox{Revision: \today}
 %\end{sf}
 %\end{center}
+
+Any text after an \endinput is ignored.
+You could put scraps here or things in progress.

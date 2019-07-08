@@ -1,8 +1,8 @@
 \select@language {english}
 \contentsline {chapter}{Abstract}{ii}{chapter*.1}
-\contentsline {chapter}{Lay Summary}{iii}{chapter*.2}
-\contentsline {chapter}{Contents}{iv}{chapter*.3}
-\contentsline {chapter}{Acknowledgments}{viii}{chapter*.4}
+\contentsline {chapter}{Lay Summary}{iv}{chapter*.2}
+\contentsline {chapter}{Contents}{v}{chapter*.3}
+\contentsline {chapter}{Acknowledgments}{ix}{chapter*.4}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Statement of the results}{7}{section.1.1}
 \contentsline {chapter}{\numberline {2}Preliminaries}{17}{chapter.2}
@@ -108,25 +108,16 @@
 \contentsline {section}{\numberline {5.9}Completeness of our data}{186}{section.5.9}
 \contentsline {section}{\numberline {5.10}Concluding remarks}{194}{section.5.10}
 \contentsline {chapter}{\numberline {6}Towards Efficient Resolution of Thue-Mahler Equations}{195}{chapter.6}
-\contentsline {subsection}{\numberline {6.0.1}Reducing to $(a, p_1, \dots , p_v) = 1$ and $c_0 = 1$}{196}{subsection.6.0.1}
-\contentsline {section}{\numberline {6.1}The Relevant Algebraic Number Field}{196}{section.6.1}
-\contentsline {section}{\numberline {6.2}Decomposition of Primes}{197}{section.6.2}
-\contentsline {section}{\numberline {6.3}Factorization of the Thue-Mahler Equation}{198}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Refinements}{198}{subsection.6.3.1}
-\contentsline {section}{\numberline {6.4}The $S$-Unit Equation}{199}{section.6.4}
-\contentsline {section}{\numberline {6.5}Specializing to Degree $3$}{200}{section.6.5}
-\contentsline {section}{\numberline {6.6}Initial Heights}{203}{section.6.6}
-\contentsline {subsection}{\numberline {6.6.1}Decomposition of the Weil height.}{204}{subsection.6.6.1}
-\contentsline {subsection}{\numberline {6.6.2}Initial height bounds}{218}{subsection.6.6.2}
-\contentsline {subsection}{\numberline {6.6.3}Coverings of $\Sigma $}{225}{subsection.6.6.3}
-\contentsline {subsubsection}{Refined coverings}{227}{subsubsection*.32}
-\contentsline {subsection}{\numberline {6.6.4}Controlling the exponents in terms of the Weil Height}{227}{subsection.6.6.4}
-\contentsline {subsubsection}{Bounding $\{n_1, \dots , n_{\nu }\}$}{227}{subsubsection*.33}
-\contentsline {subsubsection}{Bounding $\{a_1, \dots , a_{r}\}$}{228}{subsubsection*.34}
-\contentsline {subsection}{\numberline {6.6.5}Archimedean ellipsoid: real case, $r = 2$.}{252}{subsection.6.6.5}
-\contentsline {subsection}{\numberline {6.6.6}Archimedean sieve: Real case, $r = 2$}{270}{subsection.6.6.6}
-\contentsline {subsection}{\numberline {6.6.7}Archimedean Real Case Summary}{274}{subsection.6.6.7}
-\contentsline {section}{\numberline {6.7}Non-Archimedean Case}{277}{section.6.7}
-\contentsline {subsection}{\numberline {6.7.1}Non-Archimedean sieve}{277}{subsection.6.7.1}
-\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{278}{subsubsection*.35}
-\contentsline {subsection}{\numberline {6.7.2}Non-Archimedean ellipsoid.}{295}{subsection.6.7.2}
+\contentsline {section}{\numberline {6.1}Decomposition of the Weil height}{196}{section.6.1}
+\contentsline {section}{\numberline {6.2}Initial height bounds}{206}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Coverings of $\Sigma $}{212}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Controlling the exponents in terms of the Weil Height}{213}{subsection.6.2.2}
+\contentsline {subsubsection}{Bounding $\{a_1, \dots , a_{r}\}$}{214}{subsubsection*.32}
+\contentsline {subsection}{\numberline {6.2.3}Archimedean ellipsoid: real case, $r = 2$.}{238}{subsection.6.2.3}
+\contentsline {subsection}{\numberline {6.2.4}Archimedean sieve: Real case, $r = 2$}{256}{subsection.6.2.4}
+\contentsline {subsection}{\numberline {6.2.5}Archimedean Real Case Summary}{260}{subsection.6.2.5}
+\contentsline {section}{\numberline {6.3}Non-Archimedean Case}{263}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Non-Archimedean sieve}{263}{subsection.6.3.1}
+\contentsline {subsubsection}{Computing $u_l - r_l = \DOTSB \sum@ \slimits@ _{i = 1}^{\nu } n_ia_{li}$}{264}{subsubsection*.33}
+\contentsline {subsection}{\numberline {6.3.2}Non-Archimedean ellipsoid.}{281}{subsection.6.3.2}
+\contentsline {chapter}{Bibliography}{287}{chapter*.34}
