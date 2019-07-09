@@ -781,6 +781,7 @@ M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
 \section{The Archimedean sieve: the real case}
+\label{sec:archsieve}
 
 Let $\tau:L\to\mathbb{C}$ be an embedding. We take $\mathbf{l},\mathbf{h} \in \mathbb{R}^{m+\nu}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$ and $l_\tau\geq \log 2$. Let $c$ be a constant the size of $e^{l_\tau}$ and let $\alpha_0, \alpha_{\varepsilon 1}, \dots, \alpha_{\varepsilon {r}}, \alpha_{\gamma 1}, \dots, \alpha_{\gamma {\nu}}$ be defined as in \eqref{eq:alpha0eps} and \eqref{eq:alphagamma}. 
 
@@ -976,236 +977,56 @@ Let $v \in \{1, \dots, \nu\}$. We take vectors $\mathbf{l},\mathbf{h} \in \mathb
 \[\frac{l_v}{\log(p)} \geq \max\left( \frac{1}{p-1}, \ord_{p_v}(\delta_1)\right) - \ord_{p_v}(\delta_2)\]
 and then consider the translated lattice $\Gamma_v \subseteq \mathbb{Z}^{\nu + r}$ defined below. We say that ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ is determined by some $\mathbf{y} \in \Gamma_v$ if the entries of $\mathbf{y}$ are a (fixed) permutation of the entries of $\mathbf{m}$. Let $\mathcal{E}_v$ be the ellipsoid constructed in \eqref{def:ellp}. 
 
-\begin{lemma}
+\begin{lemma} \label{lem:mainnonarch}
 Any $(\tilde{x},\tilde{y}) \in \Sigma_v(l,h)$ is determined by some $\mathbf{y} \in \Gamma_v \cap \mathcal{E}_v$. 
 \end{lemma}
 
 In the remainder of this section, we prove this lemma. 
 
-\subsection{?}
-We begin by applying the results of \autoref{sec:SmallBoundForSpecialCase} to obtain small bounds. In particular, we consider the form
-\[\Lambda_l = \sum_{i = 1}^{1+\nu+r} b_i\alpha_i\]
-defined in \label{sec:SmallBoundForSpecialCase}. 
-
-\[\Lambda_{p_l} = \log_{p_l}(\delta_1) + \sum_{i=1}^r a_i\log_{p_l}\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right) + \sum_{i=1}^{\nu} n_i \log_{p_l} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right).\]
-derived in 
-
-To simplify our exposition, we introduce the following notation. 
+We begin by applying the results of \autoref{sec:SmallBoundForSpecialCase}. In particular, we consider the form
+\[\Lambda_v = \sum_{i = 1}^{1+\nu+r} b_i\alpha_i\]
+where
 \[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, \nu\},\]
+\[ b_{1 + \nu+i} = a_i \ \text{ for } i \in \{1, \dots, r\},\]
 and
-\[ b_{1 + \nu+i} = a_i \ \text{ for } i \in \{1, \dots, r\}.\]
-Put
 \[\alpha_1 = \log_{p_l} \delta_1, \quad \alpha_{1+i} = \log_{p_l}\left( \frac{\gamma_i^{(k)}}{\gamma_i^{(l)}}\right)  \ \text{ for } i \in \{1, \dots, \nu\},\]
-and
 \[\alpha_{1+ \nu+i} = \log_{p_l}\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(l)}}\right)
 \ \text{ for } i \in \{1, \dots, r\}.\]
-Now, 
-\[\Lambda_{p_l} = \log_{p_l}(\delta_1) + \sum_{i=1}^r a_i\log_{p_l}\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right) + \sum_{i=1}^{\nu} n_i \log_{p_l} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right) = \sum_{i = 1}^{1 + \nu + r} b_i\alpha_i.\]
 
+We apply Lemma~\ref{lem:Delta1} by which $\sum_{j = 1}^{\nu} n_ja_{vj}$ can be computed directly if ${\ord_{p_v}(\delta_1) \neq 0}$. In doing so, we assume for the remainder of this chapter that $\ord_{p_v}(\delta_1) = 0$. Furthermore, we apply Lemma~\ref{Lem:specialcase} to obtain a small bound on $\sum_{j = 1}^{\nu} n_ja_{vj}$ when $\ord_{p_v}(\alpha_1) < \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_v}(\alpha_i)$. Again, in doing so, we assume 
+\[\ord_{p_v}(\alpha_1) \geq \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_v}(\alpha_i)\]
+for the remainder of this chapter. 
 
-The next lemma deals with a special case in which the $n_l$ can be computed directly. 
-
-\begin{lemma}
-Let $l \in \{1, \dots, \nu \}$. If $\ord_{p_l}(\delta_1) \neq 0$, then 
-\[ \sum_{i = 1}^{\nu} n_ia_{li} = \min\{\ord_{p_l}(\delta_1), 0\} - \ord_{p_l}(\delta_2).\]
-\end{lemma}
-
-%From here it follows that
-%\[z_l = u_l + t_l = \sum_{j = 1}^{\nu}n_ja_{lj} + r_l + t_l.\]
-
-\begin{proof}
-Apply the Corollary of Lemma $2$ of Tzanakis-de Weger and Lemma~\ref{Lem:units} to both expressions of $\lambda$ in \eqref{Eq:Sunit}. On the one hand, we obtain $\ord_{p_l}(\lambda) = \min\{\ord_{p_l}(\delta_1), 0\}$, and on the other hand, we obtain 
-\[\begin{split}
-\ord_{p_l}(\lambda)
-& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^{\nu} \ord_{p_l}\left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\\
-& = \ord_{p_l}(\delta_2) + \sum_{i = 1}^{\nu} n_ia_{li}.
-\end{split}\]
-\end{proof}
-
-That is, 
-\[\sum_{i = 1}^{\nu} n_ia_{li} = \begin{cases}
-- \ord_{p_l}(\delta_2) & \text{ if } \ord_{p_l}(\delta_1) > 0 \\
- \ord_{p_l}(\delta_1)- \ord_{p_l}(\delta_2) = \ord_{p_l}(\delta_1/\delta_2) & \text{ if } \ord_{p_l}(\delta_1) < 0 \\
-\end{cases}\]
-
-
-From here, we will need to assume that $\ord_{p_l}(\delta_1) = 0$. We first recall the following result of the $p_l$-adic logarithm:
-
-\begin{lemma}\label{Lem:padic}
-Let $z_1, \dots, z_m \in \overline{\mathbb{Q}}_p$ be $p$-adic units and let $b_1, \dots, b_m \in \mathbb{Z}$. If
-\[\ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) > \frac{1}{p-1}\]
-then
-\[\ord_p(b_1\log_p z_1 + \cdots + b_m \log_p z_m) = \ord_p(z_1^{b_1}\cdots z_m^{b_m} - 1) \]
-\end{lemma}
-
-NOT CLEAR TO ME IF THE BELOW IS AN EFFICIENT COMPUTATION TO MAKE, OR THAT IT HAPPENS OFTEN ENOUGH TO TEST.
-
-For $l \in \{1, \dots \nu\}$, we identify conditions in which $n_l$ can be bounded by a small explicit constant.
-
-Let $L$ be a finite extension of $\mathbb{Q}_{p_l}$ containing $\delta_1$, $\frac{\gamma_i^{(k)}}{\gamma_i^{(l)}}$ (for $i = 1, \dots, \nu$), and $ \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(l)}}$ (for $i = 1, \dots, r$). Since finite $p$-adic fields are complete, $\alpha_i \in L$ for $i = 1, \dots, 1+ \nu +r$ as well. Choose $\phi \in \overline{\mathbb{Q}_{p_l}}$ such that $L = \mathbb{Q}_{p_l}(\phi)$ and $\ord_{p_l}(\phi) > 0 $. Let $G(t)$ be the minimal polynomial of $\phi$ over $\mathbb{Q}_{p_l}$ and let $S$ be its degree. For $i = 1, \dots, 1 + \nu + r$ write
-\[\alpha_i = \sum_{h = 1}^S \alpha_{ih}\phi^{h - 1}, \quad \alpha_{ih} \in \mathbb{Q}_{p_l}.\]
-Then
-\begin{equation} \label{Eq:lambdalh}
-\Lambda_l = \sum_{h = 1}^S \Lambda_{lh}\phi^{h-1},
-\end{equation}
-with
-\[\Lambda_{lh} = \sum_{i = 1}^{1 + \nu + r } b_i \alpha_{ih}\]
-for $h = 1, \dots, S$. 
-
-\begin{lemma}\label{Lem:discG}
-For every $h \in \{1, \dots, S\}$, we have
-\[\ord_{p_l}(\Lambda_{lh}) > \ord_{p_l}(\Lambda_l) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
-\end{lemma}
-
-\begin{proof}
-Taking the images of \eqref{Eq:lambdalh} under conjugation $\phi \mapsto \phi^{(h)}$ ($h = 1, \dots, S$) gives
-\[\begin{bmatrix}
-\Lambda_l^{(1)} \\
-\vdots \\
-\Lambda_l^{(S)}	\\
-\end{bmatrix}
-=
-\begin{bmatrix}
-1 		& \phi^{(1)} 	& \cdots 	& \phi^{(1)S-1}\\
-\vdots 	& \vdots 		& 		& \vdots \\
-1 		& \phi^{(S)} 	& \cdots  	& \phi^{(S)S-1}\\
-\end{bmatrix}
-\begin{bmatrix}
-\Lambda_{l1}\\
-\vdots \\
-\Lambda_{lS}\\
-\end{bmatrix}\]
-The $s \times s$ matrix $(\phi^{(h)i-1})$ above is invertible, with inverse
-\[\frac{1}{\displaystyle \prod_{1\leq j<k\leq S} (\phi^{(k)} - \phi^{(j)})}
-\begin{bmatrix}
-\gamma_{11} 	& \cdots 	& \gamma_{1S}\\
-\vdots 		& 		& \vdots\\
-\gamma_{s1} 	& \cdots 	& \gamma_{SS}\\
-\end{bmatrix},\]
-where $\gamma_{jk}$ is a polynomial in the entries of $(\phi^{(h)i-1})$ having integer coefficients. Since $\ord_{p_l}(\phi) > 0$ and since $\ord_{p_l}(\phi^{(h)}) = \ord_{p_l}(\phi)$ for all $h = 1, \dots, S$, it follows that $\ord_{p_l}(\gamma_{jk}) > 0 $ for every $\gamma_{jk}$. Therefore, since 
-\[\Lambda_{lh} = \frac{1}{\displaystyle \prod_{1\leq j<k\leq S}(\phi^{(k)} - \phi^{(j)})}\sum_{i = 1}^S \gamma_{hi}\Lambda_l^{(i)},\]
-we have 
-\[\begin{split}
-\ord_{p_l}(\Lambda_{lh}) 
-	& = \min_{1 \leq i \leq S} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)})\right\} -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
-	& \geq \min_{1 \leq i \leq S} \ord_{p_l}(\Lambda_l^{(i)}) +  \min_{1 \leq i \leq S} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\\
-	& = \ord_{p_l}\Lambda_l + \min_{1 \leq i \leq S} \ord_{p_l}(\gamma_{hi}) - \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))
-\end{split}\]
-for every $h \in \{1, \dots, S\}$. 
-%\min_{1 \leq i \leq s} \left\{\ord_{p_l}(\gamma_{hi}) + \ord_{p_l}(\Lambda_l^{(i)}) -\frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\right\}\]
-\end{proof}
-
-\textbf{Remark.} The above can made more precise using the $\gamma_{jk}$, possibly giving us a tighter subsequent bound on the $n_l$. 
-
-\begin{lemma} \label{Lem:Lambda}
-If $\ord_{p_l}(\delta_1) = 0$ and 
-\[\sum_{i = 1}^{\nu} n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2),\]
-then
-\[\ord_{p_l}(\Lambda_l) = \sum_{i = 1}^{\nu} n_{i}a_{li} + \ord_{p_l}(\delta_2).\]
-\end{lemma}
-
-\begin{proof}
-Immediate from Lemma~\ref{Lem:padic}.
-\end{proof}
-Said another way, this means
-\[ \sum_{i = 1}^{\nu} n_{i}a_{li} = \ord_{p_l}(\Lambda_l) - \ord_{p_l}(\delta_2) =  \ord_{p_l}(\Lambda_l/\delta_2).\]
-
-\begin{lemma} \label{Lem:specialcase} \
-Suppose $\ord_{p_l}(\delta_1) = 0$. 
-\begin{enumerate}
-\item[(i)] If $\ord_{p_l}(\alpha_1) < \displaystyle \min_{2 \leq i \leq 1 + \nu + r} \ord_{p_l}(\alpha_i)$, then
-\[\sum_{i = 1}^{\nu} n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor,  \bigg \lceil\displaystyle \min_{2 \leq i \leq 1 + \nu + r} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2) \bigg \rceil - 1 \right\}\]
-
-\item[(ii)] For all $h \in \{1, \dots, S\}$, if $\ord_{p_l}(\alpha_{1h}) < \displaystyle \min_{2 \leq i \leq 1+ \nu + r} \ord_{p_l}(\alpha_{ih})$, then
-\[\sum_{i = 1}^{\nu} n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor, \bigg \lceil \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + \nu_l \bigg \rceil - 1\right\},\]
-where 
-\[\nu_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t)))\]
-\end{enumerate}
-\end{lemma}
-
-AGAIN, IT'S NOT CLEAR HOW EFFICIENT THIS COMPUTATION IS... WE SHALL SEE. PART (1) IS ACTUALLY NEEDED IN THE REST OF THE COMPUTATIONS, BUT PART (2) MIGHT BE THE INEFFICIENT PART OF THIS. 
-
-\begin{proof} \
-\begin{enumerate}
-\item[(i)] We prove the contrapositive. Suppose
-\[\sum_{i = 1}^{\nu} n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
-and
-\[\sum_{i = 1}^{\nu} n_i a_{li}  \geq \displaystyle \min_{2 \leq i \leq 1 +\nu + r} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2).\]
-Observe that
-\[\begin{split}
-\ord_{p_l}(\alpha_{1}) 	
-	& = \ord_{p_l}\left( \Lambda_{l} - \sum_{i = 2}^{1+\nu +r}b_i\alpha_{i}\right) \\
-	& \geq \min\left\{ \ord_{p_l}(\Lambda_{l}), \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(b_i\alpha_{i})\right\}.
-\end{split}\]
-Therefore, it suffices to show that 
-\[\ord_{p_l}(\Lambda_{l}) \geq \min_{2 \leq i \leq 1 + \nu + r} \ord_{p_l}(b_i\alpha_{i}).\]
-By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^{\nu} n_ia_{li} + \ord_{p_l}(\delta_2)$, from which the result follows. 
-
-\item[(ii)] We prove the contrapositive. Let $h \in \{1, \dots, S\}$ and suppose
-\[\sum_{i = 1}^{\nu} n_i a_{li} > \frac{1}{p-1} - \ord_{p_l}(\delta_2), \]
-and
-\[\sum_{i = 1}^{\nu} n_i a_{li}  \geq \nu_l + \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{ih}) - \ord_{p_l}(\delta_2).\]
-Observe that 
-\[\begin{split}
-\ord_{p_l}(\alpha_{1h}) 	
-	& = \ord_{p_l}\left( \Lambda_{lh} - \sum_{i = 2}^{1+\nu+r}b_i\alpha_{ih}\right) \\
-	& \geq \min\left\{ \ord_{p_l}(\Lambda_{lh}), \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(b_i\alpha_{ih})\right\}
-\end{split}\]
-Therefore, it suffices to show that 
-\[\ord_{p_l}(\Lambda_{lh}) \geq \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(b_i\alpha_{ih}).\]
-By Lemma~\ref{Lem:padic}, the first inequality implies $\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^{\nu}n_ia_{li} + \ord_{p_l}(\delta_2)$. Combining this with Lemma~\ref{Lem:discG} yields
-\[\ord_{p_l}(\Lambda_{lh}) \geq \displaystyle \sum_{i = 1}^{\nu} n_ia_{li} + \ord_{p_l}(\delta_2) - \nu_l.\]
-The results now follow from our second assumption. 
-\end{enumerate}
-\end{proof}
-
-
-We now set some notation and give some preliminaries for the $p_l$-adic reduction procedures. Consider a fixed index $l \in \{1, \dots, v\}$. Following Lemma \ref{Lem:specialcase}, we have
-\[\ord_{p_l}(\alpha_1) \geq \min_{2\leq i\leq 1+ \nu+ r} \ord_{p_l}(\alpha_i) \quad \text{ and } \quad \ord_{p_l}(\alpha_{1h}) \geq \min_{2\leq i\leq 1+ \nu+ r}(\alpha_{ih}) \quad h = (1, \dots, s).\]
-and 
-\[\ord_{p_l}(\delta_1) = 0.\]
-
-Let $I$ be the set of all indices $i' \in \{2, \dots, 1+ \nu + r\}$ for which
-\[\ord_{p_l}(\alpha_{i'}) = \min_{2\leq i\leq 1+ \nu+ r} \ord_{p_l}(\alpha_i).\]
-We will identify two cases, the \textit{special case} and the \textit{general case}. The special case occurs when there is some index $i' \in I$ such that $\alpha_i/\alpha_{i'} \in \mathbb{Q}_{p_l}$ for $i = 1, \dots, 1+ \nu+ r$. The general case is when there is no such index. 
-
-We now assume that our Thue-Mahler equation has degree $3$ to assure that our linear form in $p$-adic logs has coefficients in $\mathbb{Q}_p$. DETAILS NEEDED HERE [p51 of HAMBROOK]. This means that we are indeed always in the Special Case of TdW/Hambrook. 
-
-Thus, let $\hat{i}$ be an arbitrary index in $I$ for which $\alpha_i/\alpha_{\hat{i}} \in \mathbb{Q}_{p_l}$ for every $i = 1, \dots, 1+ \nu+ r$. We further define
+We now set some notation and give some preliminaries for the $p_l$-adic reduction procedures. Let $I$ be the set of all indices $i' \in \{2, \dots, 1+ \nu + r\}$ for which
+\[\ord_{p_v}(\alpha_{i'}) = \min_{2\leq i\leq 1+ \nu+ r} \ord_{p_v}(\alpha_i).\]
+Following \cite{Ham}, we are always in the case where there exists an index $i' \in I$ such that $\alpha_i/\alpha_{i'} \in \mathbb{Q}_{p_l}$ for $i = 1, \dots, 1+ \nu+ r$. Thus, let $\hat{i}$ denote this index. We define
 \[\beta_i = - \frac{\alpha_i}{\alpha_{\hat{i}}} \quad i = 1, \dots, 1+ \nu+ r,\]
 and 
-\[\Lambda'_l = \frac{1}{\alpha_{\hat{i}}}\Lambda_l = \sum_{i = 1}^{1+ \nu+ r} b_i(-\beta_i).\]
-Now, we have $\beta_i \in \mathbb{Z}_{p_l}$ for $i = 1, \dots, 1+ \nu+ r$. 
+\[\Lambda'_v = \frac{1}{\alpha_{\hat{i}}}\Lambda_v = \sum_{i = 1}^{1+ \nu+ r} b_i(-\beta_i).\]
+Now, we have $\beta_i \in \mathbb{Z}_{p_v}$ for $i = 1, \dots, 1+ \nu+ r$. 
 
 \begin{lemma} \label{Lem:19.1}
-Suppose $\ord_{p_l}(\delta_1) = 0$ and 
-\[\sum_{i = 1}^v n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2).\]
+Suppose $\ord_{p_v}(\delta_1) = 0$ and 
+\[\sum_{i = 1}^v n_{i}a_{li} > \frac{1}{p_v-1} - \ord_{p_v}(\delta_2).\]
 Then
-\[\ord_{p_l}(\Lambda_l') = \sum_{i = 1}^v n_{i}a_{li} + \ord_{p_l}(\delta_2) - \ord_{p_l}(\alpha_{\hat{i}}).\]
+\[\ord_{p_v}(\Lambda_v') = \sum_{i = 1}^v n_{i}a_{li} + \ord_{p_l}(\delta_2) - \ord_{p_l}(\alpha_{\hat{i}}).\]
 \end{lemma}
 
 \begin{proof}
-Immediate from Lemma \ref{Lem:discG} and Lemma \ref{Lem:Lambda}. 
+Immediate from Lemma \ref{lem:DiscG} and Lemma \ref{lem:Lambda}. 
 \end{proof}
 
-We now describe the $p_l$-adic reduction procedure. Recall that $l_v$ is a constant such that
-\[\frac{l_v}{\log(p)} \geq \max\left( \frac{1}{p-1}, \ord_{p_v}(\delta_1)\right) - \ord_{p_v}(\delta_2).\]
-Now, let $l_v'$ (denoted $\mu$ in BeGhKr and $m$ in TdW) be the largest element of $\mathbb{Z}_{\geq 0}$ at most
-\[l_v' \leq \frac{l_v}{\log(p)} - \ord_{p_l}(\alpha_{\hat{i}}) + \ord_{p_l}(\delta_2).\]
-We will use the notation $l_v'$ and $\mu$ interchangeably. Eventually we should use consistent notation here, but we will just use $\mu$ for now in place of $l_v'$. 
+We now describe the $p_v$-adic reduction procedure. Recall that $l_v$ is a constant such that
+\[\frac{l_v}{\log(p)} \geq \max\left( \frac{1}{p_v-1}, \ord_{p_v}(\delta_1)\right) - \ord_{p_v}(\delta_2).\]
+Now, let $\mu$ be the largest element of $\mathbb{Z}_{\geq 0}$ at most
+\[\mu \leq \frac{l_v}{\log(p)} - \ord_{p_l}(\alpha_{\hat{i}}) + \ord_{p_l}(\delta_2).\]
 
-For each $x \in \mathbb{Z}_{p_l}$, let $x^{\{\mu\}}$ denote the unique rational integer in $[0,p_l^{\mu} - 1]$ such that $\ord_{p_l}(x - x^{\mu}) \geq \mu$ (ie. $x \equiv x^{\{\mu\}} \pmod{p_l^{\mu}}$). That is, 
-\[x \equiv x^{\{\mu\}} \pmod{p_l^{\mu}} \implies x - x^{\{\mu\}} =\alpha p_l^{\mu}\]
-for some $\alpha \in \mathbb{Z}$. Hence $x \equiv x^{\{\mu\}} \pmod{p_l^{j}}$ for $j =1, \dots, \mu$. In other words, we must have
-\[x = a_0+ a_1 p + \cdots + a_n p^n + \cdots \quad \text{ and } \quad x^{\{\mu\}} = a_0+ a_1 p + \cdots + a_{\mu - 1}p^{\mu - 1}.\]
-Then 
-\[x - x^{\{\mu\}} = a_{\mu}p^{\mu} + \cdots + a_n p^n + \cdots \implies x - x^{\{\mu\}} \equiv 0 \pmod{p^{\mu}}\]
-so that the highest power dividing $x - x^{\{\mu\}}$ is at least $\mu$. Recall, the order is the first non-zero term appearing in the series expansion of $x - x^{\{\mu\}}$, and thus $a_{\mu}$ may or may not be the first non-zero term, hence the order is at least $\mu$, though can be larger.
+For each $x \in \mathbb{Z}_{p_l}$, let $x^{\{\mu\}}$ denote the unique rational integer in $[0,p_l^{\mu} - 1]$ such that $\ord_{p_l}(x - x^{\mu}) \geq \mu$ (ie. $x \equiv x^{\{\mu\}} \pmod{p_l^{\mu}}$). 
 
-Let $\Gamma_{\mu}$ be the $(\nu+r)$-dimensional translated lattice $A_{\mu}x + w$, where $A_{\mu}$ is the diagonal matrix having $\hat{i}^{\text{th}}$ row 
+Let $\Gamma_{v}$ be the $(\nu+r)$-dimensional translated lattice determined by $A_{v}\mathbf{x} + \mathbf{w}$, where $A_{v}$ is the diagonal matrix having $\hat{i}^{\text{th}}$ row 
 \[\left(\beta_2^{\{\mu\}}, \cdots, \beta_{\hat{i} - 1}^{\{\mu\}}, p_l^{\mu}, \beta_{\hat{i} + 1}^{\{\mu\}}, \cdots, \beta_{1+ \nu+ r}^{\{\mu\}}\right) \in \mathbb{Z}^{\nu+r}.\]
-Here, $p_l^{\mu}$ is the $(\hat{i},\hat{i})$ entry of $A_{\mu}$. That is, 
-\[A_{\mu} = 
+Here, $p_l^{\mu}$ is the $(\hat{i},\hat{i})$ entry of $A_{v}$. That is, 
+\[A_{v} = 
 \begin{pmatrix}
 1	& 		&		&		&		&		&	\\
 	& \ddots	& 		&		& 0		& 		&	\\
@@ -1215,95 +1036,60 @@ Here, $p_l^{\mu}$ is the $(\hat{i},\hat{i})$ entry of $A_{\mu}$. That is,
 	& 0		& 		& 		&		& \ddots	&	\\	
 	& 		& 		& 		&		& 		& 1	\\	
 \end{pmatrix}.\]
-Additionally, $w$ is the vector whose only non-zero entry is the $\hat{i}^{\text{th}}$ element, $ \beta_1^{\{\mu\}}$,
-\[w = (0, \dots 0, \beta_1^{\{\mu\}},0, \dots, 0)^T \in \mathbb{Z}^{\nu + r}.\]
+Additionally, $\mathbf{w}$ is the vector whose only non-zero entry is the $\hat{i}^{\text{th}}$ element, $ \beta_1^{\{\mu\}}$,
+\[\mathbf{w} = (0, \dots 0, \beta_1^{\{\mu\}},0, \dots, 0)^T \in \mathbb{Z}^{\nu + r}.\]
 
 Of course, we must compute the $\beta_i$ to $p_l$-adic precision at least $\mu$ in order to avoid errors here. 
-Let $\gamma = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{\nu + r}$ be a solution to our $S$-unit equation. 
+Let $\mathbf{y} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{\nu + r}$ denote a solution to \eqref{eq:EfficientSunit}. 
 
 \begin{lemma}
-Suppose $\ord_{p_l}(\delta_1) = 0$ and 
-\[\sum_{i = 1}^v n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2).\]
+Suppose $\ord_{p_v}(\delta_1) = 0$ and 
+\[\sum_{i = 1}^{\nu} n_{i}a_{vi} > \frac{1}{p_v-1} - \ord_{p_v}(\delta_2).\]
 Then the following equivalence holds: 
 \begin{align*}
-\sum_{i = 1}^v n_{i}a_{li}  \geq \mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}}) 
-	& \quad \text{ if and only if } \quad \ord_{p_l}(\Lambda_l') \geq \mu \\
-	& \quad \text{ if and only if } \quad \gamma \in\Gamma_v.
+\sum_{i = 1}^{\nu} n_{i}a_{vi}  \geq \mu - \ord_{p_v}(\delta_2) + \ord_{p_v}(\alpha_{\hat{i}}) 
+	& \quad \text{ if and only if } \quad \ord_{p_v}(\Lambda_v') \geq \mu \\
+	& \quad \text{ if and only if } \quad \mathbf{y} \in\Gamma_v.
 \end{align*}
 \end{lemma} 
 
-\begin{remark}
-Note that the conditions $\ord_{p_l}(\delta_1) = 0$ and 
-\[\sum_{i = 1}^v n_{i}a_{li} > \frac{1}{p_l-1} - \ord_{p_l}(\delta_2)\]
-are equivalent to 
-\[\sum_{i = 1}^v n_{i}a_{li} > \max\left\{\frac{1}{p_l-1}, \ord_{p_l}(\delta_1)\right\} - \ord_{p_l}(\delta_2).\]
-\end{remark}
-
 \begin{proof}
 By Lemma \ref{Lem:19.1}, the assumption means that 
-\[\ord_{p_l}(\Lambda_l') = \sum_{i = 1}^v n_{i}a_{li} + \ord_{p_l}(\delta_2) - \ord_{p_l}(\alpha_{\hat{i}}).\]
+\[\ord_{p_v}(\Lambda_v') = \sum_{i = 1}^{\nu} n_{i}a_{vi} + \ord_{p_v}(\delta_2) - \ord_{p_v}(\alpha_{\hat{i}}).\]
 
 Now, suppose 
-\[\sum_{i = 1}^v n_{i}a_{li}  \geq \mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}}).\]
+\[\sum_{i = 1}^{\nu} n_{i}a_{vi}  \geq \mu - \ord_{p_v}(\delta_2) + \ord_{p_v}(\alpha_{\hat{i}}).\]
 We thus have
 \begin{align*}
-\ord_{p_l}(\Lambda_l')	
-	& = \sum_{i = 1}^v n_{i}a_{li} + \ord_{p_l}(\delta_2) - \ord_{p_l}(\alpha_{\hat{i}})\\
-	& \geq  \mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}}) + \ord_{p_l}(\delta_2) - \ord_{p_l}(\alpha_{\hat{i}})\\	
+\ord_{p_v}(\Lambda_v')	
+	& = \sum_{i = 1}^{\nu} n_{i}a_{vi} + \ord_{p_v}(\delta_2) - \ord_{p_v}(\alpha_{\hat{i}})\\
+	& \geq  \mu - \ord_{p_v}(\delta_2) + \ord_{p_v}(\alpha_{\hat{i}}) + \ord_{p_v}(\delta_2) - \ord_{p_v}(\alpha_{\hat{i}})\\	
 	& = \mu.
 \end{align*}
-Conversely, suppose $\ord_{p_l}(\Lambda_l') \geq \mu$. Then
-\[\mu \leq \ord_{p_l}(\Lambda_l') = \sum_{i = 1}^v n_{i}a_{li} + \ord_{p_l}(\delta_2) - \ord_{p_l}(\alpha_{\hat{i}}).\]
+Conversely, suppose $\ord_{p_v}(\Lambda_v') \geq \mu$. Then
+\[\mu \leq \ord_{p_v}(\Lambda_v') = \sum_{i = 1}^{\nu} n_{i}a_{vi} + \ord_{p_v}(\delta_2) - \ord_{p_v}(\alpha_{\hat{i}}).\]
 That is, 
-\[\sum_{i = 1}^v n_{i}a_{li} \geq \mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}}).\]
-Hence, it follows that $\displaystyle \sum_{i = 1}^v n_{i}a_{li} \geq \mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}})$ if and only if $\ord_{p_l}(\Lambda_l') \geq \mu$.
+\[\sum_{i = 1}^{\nu} n_{i}a_{vi} \geq \mu - \ord_{p_v}(\delta_2) + \ord_{p_v}(\alpha_{\hat{i}}).\]
+Hence, it follows that $\displaystyle \sum_{i = 1}^{\nu} n_{i}a_{vi} \geq \mu - \ord_{p_v}(\delta_2) + \ord_{p_v}(\alpha_{\hat{i}})$ if and only if $\ord_{p_v}(\Lambda_v') \geq \mu$.
 
-Now, suppose $\gamma = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{\nu + r}$ is a solution to our $S$-unit equation. Suppose further that $\displaystyle \sum_{i = 1}^v n_{i}a_{li} \geq \mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}})$ so that $\ord_{p_l}(\Lambda_l') \geq \mu$. Let
-\[\lambda = \frac{1}{p^{\mu}}\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}})\]
+Now, suppose $\mathbf{y}= (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{\nu + r}$ is a solution to \eqref{eq:EfficientSunit}. Suppose further that $\displaystyle \sum_{i = 1}^{\nu} n_{i}a_{vi} \geq \mu - \ord_{p_v}(\delta_2) + \ord_{p_v}(\alpha_{\hat{i}})$ so that $\ord_{p_v}(\Lambda_v') \geq \mu$. Let
+\[\lambda = \frac{1}{p_v^{\mu}}\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}})\]
 and consider the $(\nu + r)$-dimensional vector
-\[x= (n_1, \dots, n_{\hat{i} -1}, \lambda, n_{\hat{i} +1}, \dots, n_{\nu}, a_1, \dots, a_r)^T.\]
-We claim $x \in \mathbb{Z}^{\nu + r}$. That is, $\lambda \in \mathbb{Z}$, meaning that $\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}})$ is divisible by $p^{\mu}$, or equivalently, 
-\[\ord_p\left(\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}})\right) \geq \mu.\]
+\[\mathbf{x}= (n_1, \dots, n_{\hat{i} -1}, \lambda, n_{\hat{i} +1}, \dots, n_{\nu}, a_1, \dots, a_r).\]
+We claim $\mathbf{x} \in \mathbb{Z}^{\nu + r}$. That is, $\lambda \in \mathbb{Z}$, meaning that $\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}})$ is divisible by $p_v^{\mu}$, or equivalently, 
+\[\ord_{p_v}\left(\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}})\right) \geq \mu.\]
 Indeed, since 
-\[\ord_{p_{l}}\left(\beta_{i}^{\{\mu\}}-\beta_{i}\right) \geq \mu \quad \text { for } i=1, \dots, 1+\nu+r,\]
-by definition, it follows that $\beta_{i}^{\{\mu\}}$ and $\beta_{i}$ share the first $\mu - 1$ terms and thus $\ord_p(\beta_i) = \ord_p(\beta_i^{\{\mu\}})$.
+\[\ord_{p_{v}}\left(\beta_{i}^{\{\mu\}}-\beta_{i}\right) \geq \mu \quad \text { for } i=1, \dots, 1+\nu+r,\]
+by definition, it follows that $\beta_{i}^{\{\mu\}}$ and $\beta_{i}$ share the first $\mu - 1$ terms and thus $\ord_{p_v}(\beta_i) = \ord_{p_v}(\beta_i^{\{\mu\}})$.
 Now, to compute this order, we only need to concern ourselves with the first non-zero term in the series expansion of $\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}})$. Since $\beta_{i}^{\{\mu\}}$ and $\beta_{i}$ share the first $\mu - 1$ terms, it follows that showing
-\[\ord_p\left(\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}})\right) \geq \mu\]
+\[\ord_{p_v}\left(\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}})\right) \geq \mu\]
 is equivalent to showing that 
-\[\ord_p\left(\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i)\right) \geq \mu \implies \ord_{p_l}(\Lambda_l') \geq \mu.\]
-This latter inequality is true by assumption. Thus $\lambda \in \mathbb{Z}$. 
+\[\ord_{p_l}(\Lambda_l') \geq \mu.\]
+Of course, this latter inequality is true by assumption. Thus $\lambda \in \mathbb{Z}$. 
 
-Then, computing $A_{\mu}x + w$ yields
+Then, computing $A_{v}\mathbf{x} + \mathbf{w}$ yields
 \begin{align*}
-A_{\mu}x + w & = 
-\begin{pmatrix}
-1	& 		&		&		&		&		&	\\
-	& \ddots	& 		&		& 0		& 		&	\\
-	&		& 1		&		&		&		&	\\
-	\beta_2^{\{\mu\}}& \cdots & \beta_{\hat{i} - 1}^{\{\mu\}} & p_l^{\mu} & \beta_{\hat{i} + 1}^{\{\mu\}}& \cdots &\beta_{1+ \nu+ r}^{\{\mu\}}\\
-	& 		& 		& 		& 1		&		&	\\	
-	& 0		& 		& 		&		& \ddots	&	\\	
-	& 		& 		& 		&		& 		& 1	\\	
-\end{pmatrix}
-\begin{pmatrix}
-n_1 \\ \vdots \\ n_{\hat{i} -1} \\ \lambda \\ n_{\hat{i} +1} \\ \vdots \\ n_{\nu} \\ a_1 \\ \vdots \\ a_r \end{pmatrix}
-+ \begin{pmatrix}
-0 \\ \vdots \\ 0 \\ \beta_1^{\{\mu\}} \\ 0\\ \vdots \\ \vdots \\ \vdots \\ 0
-\end{pmatrix}\\
-&= \begin{pmatrix}
-1	& 		&		&		&		&		&	\\
-	& \ddots	& 		&		& 0		& 		&	\\
-	&		& 1		&		&		&		&	\\
-	\beta_2^{\{\mu\}}& \cdots & \beta_{\hat{i} - 1}^{\{\mu\}} & p_l^{\mu} & \beta_{\hat{i} + 1}^{\{\mu\}}& \cdots &\beta_{1+ \nu+ r}^{\{\mu\}}\\
-	& 		& 		& 		& 1		&		&	\\	
-	& 0		& 		& 		&		& \ddots	&	\\	
-	& 		& 		& 		&		& 		& 1	\\	
-\end{pmatrix}\begin{pmatrix}
-b_2 \\ \vdots \\ b_{\hat{i} -1} \\ \lambda \\ b_{\hat{i} +1} \\ \vdots \\ b_{\nu + r + 1} 
-\end{pmatrix}
-+ \begin{pmatrix}
-0 \\ \vdots \\ 0 \\ \beta_1^{\{\mu\}} \\ 0 \\ \vdots \\ 0 
-\end{pmatrix}\\
+A_{v}\mathbf{x} + \mathbf{w} & 
 & = \begin{pmatrix}
 b_2 \\ \vdots \\ b_{\hat{i} -1} \\ 
  b_2\beta_2^{\{\mu\}} + \cdots + b_{\hat{i} - 1}\beta_{\hat{i} - 1}^{\{\mu\}} + \lambda p_l^{\mu} + b_{\hat{i} + 1}\beta_{\hat{i} + 1}^{\{\mu\}} + \cdots + b_{\nu+r+ 1}\beta_{1+\nu+r}^{\{\mu\}} + \beta_1^{\{\mu\}} \\
@@ -1311,34 +1097,26 @@ b_{\hat{i} +1} \\ \vdots \\ b_{\nu+r+1} \\
 \end{pmatrix}\\
 \end{align*}
 Now, 
-\[ \lambda p_l^{\mu} = p^{\mu}\frac{1}{p^{\mu}}\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}}) = \sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}}),\]
+\[ \lambda p_v^{\mu} = p_v^{\mu}\frac{1}{p_v^{\mu}}\sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}}) = \sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}}),\]
 hence
 \begin{align*}
 & b_2\beta_2^{\{\mu\}} + \cdots + b_{\hat{i} - 1}\beta_{\hat{i} - 1}^{\{\mu\}} + b_{\hat{i} + 1}\beta_{\hat{i} + 1}^{\{\mu\}} + \cdots + b_{\nu+r+ 1}\beta_{1+\nu+r}^{\{\mu\}} + \lambda p_l^{\mu} + \beta_1^{\{\mu\}}\\
-& = b_1 \beta_1^{\{\mu\}} + b_2\beta_2^{\{\mu\}} + \cdots + b_{\hat{i} - 1}\beta_{\hat{i} - 1}^{\{\mu\}} + b_{\hat{i} + 1}\beta_{\hat{i} + 1}^{\{\mu\}} + \cdots + b_{\nu+r+ 1}\beta_{1+\nu+r}^{\{\mu\}} + \sum_{i = 1}^{\nu + r + 1}b_i(-\beta_i^{\{\mu\}}) \\
 & = b_{\hat{i}}(-\beta_{\hat{i}}^{\{\mu\}})\\
 & = b_{\hat{i}}
 \end{align*}
 where the last equality follows from the fact that 
 \[-\beta_i = \frac{\alpha_{\hat{i}}}{\alpha_{\hat{i}}} =1.\]
 Thus, 
-\[A_{\mu}x + w = \begin{pmatrix}
+\[A_{v}\mathbf{x} + \mathbf{w} = \begin{pmatrix}
 b_2 \\ \vdots \\ b_{\hat{i} -1} \\ b_{\hat{i}} \\ b_{\hat{i} +1} \\ \vdots \\ b_{\nu+r+1}
 \end{pmatrix} = 
 \begin{pmatrix}
-n_1 \\ \vdots \\ n_{\nu} \\ a_1 \\ \vdots \\ a_r \end{pmatrix} = \gamma.\]
-Thus, it follows that $\gamma \in \Gamma_v$. 
-CONVERSELY STILL NEED TO SHOW THE CONVERSE, THAT IS 
-\[m'\in\Gamma_v \quad \text{ implies } \quad \sum_{i = 1}^v n_{i}a_{li}  \geq \mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}}).\]
-
+n_1 \\ \vdots \\ n_{\nu} \\ a_1 \\ \vdots \\ a_r \end{pmatrix} = \mathbf{y}.\]
+and $\mathbf{y} \in \Gamma_v$. 
 
 %Our assumption gives $n_p-a_p\geq \max(0,\ord_p(\mu_0))-\ord_p(\lambda_0)$ and then Lemma~\ref{lem:padiccomp} implies that $\ord_p(\mu_0)=0$. Therefore, on using again our assumption which assures that $n_p-a_p> \tfrac{1}{p-1}-\ord_p(\lambda_0)$, we see that an application of Lemma~\ref{lem:padiccomp}  gives  $$(n_p-a_p)+\ord_p(\lambda_0)=\ord_p(\Lambda_p)=\ord_p(\Lambda'_p)+\ord_p(\xi_p).$$
 %Thus $n_p-a_p\geq l_v'-\ord_p(\xi_p/\lambda_0)$ if and only if $\ord_p(\Lambda'_p)\geq l_v'$. Further, the TdW arguments show that $\ord_p(\Lambda'_p)\geq l_v'$ if and only if $m'\in\Gamma_v$. On combining we deduce the lemma.
 \end{proof}
-
-\begin{remark}
-In the case $n=3$, the construction of $\Lambda'_p$ is simpler since there are only two cases to consider (either $g_p$ splits completely over $\mathbb{Q}_p$, or it has square factor).
-\end{remark}
 
 
 %
@@ -1406,148 +1184,64 @@ In the case $n=3$, the construction of $\Lambda'_p$ is simpler since there are o
 %\leq ||A^{-1}||_{\infty} \max_{1 \leq i\leq v}(N_i) = B_{l+1}.\]
 %we update the $B_i$ and repeat the above procedure until $M < 3000$ or until no further improvement can be made on the $B_i$, in which case we move onto the next $l \in \{1, \dots, v\}$.
 
-We define 
-\[c_p=\log p\left(\max\left(\tfrac{1}{p-1},\ord_{p_l}(\delta_1)\right)-\ord_{p_l}(\delta_2)\right).\]
+Define 
+\[c_{p_v}=\log p_v\left(\max\left(\tfrac{1}{p_v-1},\ord_{p_v}(\delta_1)\right)-\ord_{p_v}(\delta_2)\right).\]
 
-\begin{corollary}
-Assume that $h_{p_l}(z)>\max(0,c_p)$. Then the following equivalence holds: 
-\[h_{p_l}(z)\geq \log{p_l}\left(\mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}})\right) \quad \text{ if and only if } \quad \gamma \in\Gamma_v.\]
+\begin{corollary} \label{lem:cpequiv}
+Assume that $h_{p_v}(z)>\max(0,c_{p_v})$. Then the following equivalence holds: 
+\[h_{p_v}(z)\geq \log{p_v}\left(\mu - \ord_{p_v}(\delta_2) + \ord_{p_v}(\alpha_{\hat{i}})\right) \quad \text{ if and only if } \quad \mathbf{y} \in\Gamma_v.\]
 \end{corollary}
 \begin{proof}
 Recall from Proposition~\ref{prop:heightdecomp} that 
-\[h_{p_l}(z) = 
+\[h_{p_v}(z) = 
 \begin{cases}
-\log(p_l)|u_l - r_l| \\
+\log(p_v)|u_v - r_v| \\
 0
 \end{cases}.\]
-Since $h_{p_l}(z) > 0$, it follows that $h_{p_l}(z) = \log(p_l)|u_l - r_l|$. Hence the assumption becomes
-\begin{align*}
-&\log(p_l)|u_l - r_l| = h_{p_l}(z) > \log p\left(\max\left(\tfrac{1}{p-1},\ord_{p_l}(\delta_1)\right)-\ord_{p_l}(\delta_2)\right)\\
-&|u_l - r_l| = h_{p_l}(z) > \left(\max\left(\tfrac{1}{p-1},\ord_{p_l}(\delta_1)\right)-\ord_{p_l}(\delta_2)\right) \\
-& \sum_{j = 1}^{\nu}n_ja_{lj} > \left(\max\left(\tfrac{1}{p-1},\ord_{p_l}(\delta_1)\right)-\ord_{p_l}(\delta_2)\right)
-\end{align*}
-with conclusion
-\begin{align*}
-h_{p_l}(z)\geq \log{p_l}\left(\mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}})\right) 
-	& \quad \text{ if and only if } \quad \gamma \in\Gamma_v\\
-\log(p_l)|u_l - r_l| \geq \log{p_l}\left(\mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}})\right) 
-	&\quad \text{ if and only if } \quad \gamma \in\Gamma_v\\
-|u_l - r_l| \geq \left(\mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}})\right) 
-	& \quad \text{ if and only if } \quad \gamma \in\Gamma_v\\
-\sum_{j = 1}^{\nu}n_ja_{lj} \geq \left(\mu - \ord_{p_l}(\delta_2) + \ord_{p_l}(\alpha_{\hat{i}})\right) 
-	&\quad \text{ if and only if } \quad \gamma \in\Gamma_v,
-\end{align*}
+Since $h_{p_v}(z) > 0$, it follows that $h_{p_v}(z) = \log(p_v)|u_v - r_v|$. Hence the assumption becomes
+\[\log(p_v)|u_v - r_v| = h_{p_v}(z) > \log p_v\left(\max\left(\tfrac{1}{p_v-1},\ord_{p_v}(\delta_1)\right)-\ord_{p_v}(\delta_2)\right),\]
+or equivalently, 
+\[\sum_{j = 1}^{\nu}n_ja_{vj} > \left(\max\left(\tfrac{1}{p_v-1},\ord_{p_v}(\delta_1)\right)-\ord_{p_v}(\delta_2)\right).\]
+Moreover, the conclusion is equivalent to 
+\[\log(p_v)|u_v - r_v| \geq \log{p_v}\left(\mu - \ord_{p_v}(\delta_2) + \ord_{p_v}(\alpha_{\hat{i}})\right) 
+	\quad \text{ if and only if } \quad \mathbf{y} \in\Gamma_v,\]
+or, 
+\[\sum_{j = 1}^{\nu}n_ja_{vj} \geq \left(\mu - \ord_{p_v}(\delta_2) + \ord_{p_v}(\alpha_{\hat{i}})\right) 
+	\quad \text{ if and only if } \quad \mathbf{y} \in\Gamma_v,\]
 which is the previous lemma. 
 
 %This follows from the above lemma, since Proposition~\ref{prop:heightdecomp} together with $h_p(z)>0$ implies that $h_p(z)=\log p(n_p-a_p)$.
 \end{proof}
 
-Recall that we wish to prove the following lemma:
-\begin{lemma}\label{lem:nonarchsieve}
-Any $(x,y) \in \Sigma_v(l,h)$ is determined by some $\gamma \in \Gamma_v \cap \mathcal{E}_v$. 
-\end{lemma}
+We now prove Lemma~\ref{lem:mainnonarch}. 
 
-\begin{proof}[Proof of Lemma~\ref{lem:nonarchsieve}]
-If $(n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r+\nu}$ is a solution which lies in $\Sigma_v(l,h)$, then, by definition, it corresponds to a solution $(x,y)$ satisfying
-\[\Sigma_v(l,h) = \{(x,y) \in \Sigma \ | \ (h_w(z))\leq h \text{ and }  (h_w(z))\nleq 0 \text{ and } h_v(z)>l_v\}.\]
+\begin{proof}[Proof of Lemma~\ref{lem:mainnonarch}]
+If $(n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r+\nu}$ with corresponding $\tilde{x}, \tilde{y} \in\Sigma_v(\mathbf{l},\mathbf{h})$, then, by definition, it corresponds to a solution $(\tilde{x},\tilde{y}) \in \Sigma_v(\mathbf{l},\mathbf{h})$. 
 Hence $h_v(z)>l_v$, where $l_v$ is a constant such that
-\[\frac{l_v}{\log(p)} \geq \max\left( \frac{1}{p-1}, \ord_{p_v}(\delta_1)\right) - \ord_{p_v}(\delta_2).\]
+\[\frac{l_v}{\log(p_v)} \geq \max\left( \frac{1}{p_v-1}, \ord_{p_v}(\delta_1)\right) - \ord_{p_v}(\delta_2).\]
 That is, 
-\[h_v(z) > l_v \geq \log(p)\left(\max\left( \frac{1}{p-1}, \ord_{p_v}(\delta_1)\right) - \ord_{p_v}(\delta_2)\right) = c_p.\]
-Now, recall that $l \geq 0$ so that $l_v \geq 0$. It thus follows that 
+\[h_v(z) > l_v \geq \log(p_v)\left(\max\left( \frac{1}{p_v-1}, \ord_{p_v}(\delta_1)\right) - \ord_{p_v}(\delta_2)\right) = c_p.\]
+Now, recall that $\mathbf{l} \geq \mathbf{0}$ so that $l_v \geq 0$. It thus follows that 
 \[h_v(z) > l_v \geq
 \begin{cases}
 0\\
 c_p
 \end{cases}
 \implies h_v(z) >\max(0,c_p).\]
-In other words, the condition of the previous corollary is satisfied. 
+In other words, the conditions of Corollary~\ref{lem:cpequiv} are satisfied. 
 
-Now, recall that $l_v'$ (sometimes denoted $\mu$) is the largest element of $\mathbb{Z}_{\geq 0}$ at most
-\[l_v' \leq \frac{l_v}{\log(p)} - \ord_{p_l}(\alpha_{\hat{i}}) + \ord_{p_l}(\delta_2).\]
+Now, recall that $\mu$ is the largest element of $\mathbb{Z}_{\geq 0}$ at most
+\[\mu \leq \frac{l_v}{\log(p_v)} - \ord_{p_v}(\alpha_{\hat{i}}) + \ord_{p_v}(\delta_2).\]
 That is
-\[\frac{l_v}{\log(p)} \geq l_v' + \ord_{p_l}(\alpha_{\hat{i}}) - \ord_{p_l}(\delta_2)\]
+\[\frac{l_v}{\log(p_v)} \geq \mu + \ord_{p_v}(\alpha_{\hat{i}}) - \ord_{p_v}(\delta_2)\]
 so that
-\[h_v(z) > l_v \geq \log(p)\left(\l_v' + \ord_{p_l}(\alpha_{\hat{i}}) - \ord_{p_l}(\delta_2)\right).\]
-Now, by the previous corollary, we must have $\gamma \in \Gamma_v$. This shows that $(x,y)$ is determined by $\gamma=m'\in\Gamma_v$, which proves Lemma~\ref{lem:nonarchsieve}.
+\[h_v(z) > l_v \geq \log(p_v)\left(\mu + \ord_{p_l}(\alpha_{\hat{i}}) - \ord_{p_v}(\delta_2)\right).\]
+Now, by Corollary~\ref{lem:cpequiv}, we must have $\mathbf{y} \in \Gamma_v$. This shows that $(\tilde{x},\tilde{y})$ is determined by $\mathbf{y}=\mathbf{m}'\in\Gamma_v$, which proves Lemma~\ref{lem:mainnonarch}.
 %
 %If $h_v(z)>l_v$ then $h_v(z)>\max(0,c_p)$ since $l\geq 0$ and $l_v\geq c_p$ by assumption. Further, it holds that $l_v/\log p\geq l_v'-v(\xi_p/\lambda_0)$ by the definition of $l_v'$. Hence $h_v(z)\geq \log p(l_v'-v(\xi_p/\lambda_0))$ and then the above corollary implies that $m'\in\Gamma_v$. This shows that $(x,y)$ is determined by $\gamma=m'\in\Gamma_v$, which proves Lemma~\ref{lem:nonarchsieve}.
 \end{proof}
 
-
-\subsection{Non-Archimedean ellipsoid.} 
-Recall that
-\[h\left(\frac{\delta_2}{\lambda}\right) =  \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
-
-We now restrict our attention to those $p \in \{p_1, \dots, p_{\nu}\}$ and study the $p$-adic valuations of the numbers appearing in \eqref{Eq:Sunit}. Let $l \in \{1, \dots, \nu\}$, corresponding to $p_l \in \{p_1, \dots, p_{\nu}\}$. Take $\mathbf{h}\in\mathbb{R}^{r+\nu}$ such that $\mathbf{h}\geq \mathbf{0}$. Let
-\[b = \frac{1}{\log(2)^2}\sum_{k = 1}^{\nu} h_k^2\]
-where
-\[\log(2)^2q_f(\mathbf{n}) = \log(2)^2\sum_{k = 1}^{\nu}\left\lfloor\frac{\log(p_k)^2}{\log(2)^2}\right\rfloor|u_k-r_k|^2 \leq \sum_{k = 1}^{\nu} \log(p_k)^2|u_k -r_k|^2 \leq \sum_{k = 1}^{\nu} h_k^2.\]
-
-%\[q_f(\mathbf{n}) = \sum_{l = 1}^{\nu} \lfloor\log(p_l)^2\rfloor|u_l -r_l|^2 \leq \sum_{l = 1}^{\nu} \log(p_l)^2|u_l -r_l|^2 \leq \sum_{l = 1}^{\nu} h_k^2:= b \]
-
-%\[q_f(\mathbf{n}) = \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} \log(p_k)^2|u_k -r_k|^2 \leq \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} h_k^2 = b.\]
-For each $\varepsilon_l$ in $\{\varepsilon_1, \dots, \varepsilon_r\}$, we define
-%\[b_{\varepsilon_l} = 
-%\begin{cases}
-%\left( \frac{2}{[L:\mathbb{Q}]}\max_{\sigma:L\to \mathbb{C}} w_{\varepsilon \sigma}h_{\sigma}  + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}h_k\right)^2 & \text{ if } \sqrt{\Delta}\notin\mathbb{Q} \\
-%\left( \frac{1}{[L:\mathbb{Q}]}\max_{\sigma:L\to \mathbb{C}} w_{\varepsilon \sigma}h_{\sigma} + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}h_k\right)^2 & \text{ if } \sqrt{\Delta}\in\mathbb{Q}, \\
-%\end{cases}\]
-%where
-\[|a_l|^2 \leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}h_k + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma:L\to \mathbb{C}} w_{\varepsilon l \sigma}h_{\sigma}\right)^2=:b_{\varepsilon_l}.\]
-Note that here, we do not distinguish any $\varepsilon_l^*$. 
-
-We define the ellipsoid $\mathcal{E}_l \subseteq \mathbb{R}^{\nu + r}$ by 
-\begin{align}\label{def:ellp}
-& \mathcal{E}_l=\{q_l(\mathbf{x})\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}); \ \mathbf{x}\in\mathbb{R}^{r+\nu}\}, \quad \text{ where }\\
-&\quad \quad \quad q_l(\mathbf{x})= (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\\
-&\quad \quad \quad q_l(\mathbf{x})=\left((b_{\varepsilon_1}\cdots b_{\varepsilon_r})\cdot q_f(x_1, \dots, x_{\nu}) + (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\\
-&\quad \quad \quad q_l(\mathbf{x})=\left((b_{\varepsilon_1}\cdots b_{\varepsilon_r})\cdot q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^rb(b_{\varepsilon_1}\cdots b_{\varepsilon_{i-1}}b_{\varepsilon_{i+1}}b_{\varepsilon_r})x_{\varepsilon_i}^2\right)
-\end{align}
-where
-\[q_f(\mathbf{y}) = (A\mathbf{y})^{\text{T}}D^2A\mathbf{y}.\]
-
-To generate the matrix for this ellipsoid, recall that $I$ is the set of all indices $i' \in \{2, \dots, 1+ \nu + r\}$ for which
-\[\ord_{p_l}(\alpha_{i'}) = \min_{2\leq i\leq 1+ \nu+ r} \ord_{p_l}(\alpha_i).\]
-We note that we are always in the so-called \textit{special case}, where there is some index $i' \in I$ such that $\alpha_i/\alpha_{i'} \in \mathbb{Q}_{p_l}$ for $i = 1, \dots, 1+ \nu+ r$. 
-
-Now we state several relatively-easy-to-check conditions that each imply that we are always in the special case for degree $3$ Thue-Mahler equations. Moreover, each condition implies that we have $\frac{\alpha_{i_1}}{\alpha_{i_2}} \in \mathbb{Q}_p$ for every $i_1, i_2 \in\{1, \dots, 1+\nu+r\}$.
-
-\begin{enumerate}[(a)]
-\item $\alpha_1, \dots, \alpha_{1+\nu+r} \in \mathbb{Q}_p$
-\item $g(t)$ has three or more linear factors in $\mathbb{Q}_p[t]$ and $\theta^{(i_0)}, \theta^{(j)}, \theta^{(k)}$ are roots of such polynomials. 
-\item $g(t)$ has an irreducible factor in $\mathbb{Q}_p[t]$ of degree two, and $\theta^{(j)}, \theta^{(k)}$ are roots of this
-\item $g(t)$ has a non-linear irreducible factor in $\mathbb{Q}_p[t]$ that splits completely in the extension of $\mathbb{Q}_p$ that it generates and $\theta^{(j)}, \theta^{(k)}$ are roots of this factor
-\end{enumerate}
-
-\begin{proof}
-It is obvious that (a) implies $\alpha_{i_1}/\alpha_{i_2} \in \mathbb{Q}_p$ for every $i_1, i_2 \in\{1, \dots, 1+\nu+r\}$. If (b) holds, then $\delta_1, \gamma_{i}^{(k)} / \gamma_{i}^{(j)} (i=1, \ldots, \nu), \varepsilon_{i}^{(k)} / \varepsilon_{i}^{(j)} (i=1, \ldots, r)$ all belong to $\mathbb{Q}_p$, which, since $\mathbb{Q}_p$ is complete, implies (a). Now, (c) implies (d). We claim that (d) implies $\alpha_{i_1}/\alpha_{i_2} \in \mathbb{Q}_p$ for every $i_1, i_2 \in\{1, \dots, 1+\nu+r\}$. To see this, assume (d), let $L$ be the extension of $\mathbb{Q}_p$ generated by the factor of $g(t)$ in question, and consider any $\alpha, \beta \in L$. The automorphisms on $L$ that maps $\theta^{(j)}$ to $\theta^{(k)}$ multiplies the logarithms $\log _{p_{l}}\left(\alpha^{(k)} / \alpha^{(j)}\right)$ and $\log _{p_{l}}\left(\beta^{(k)} / \beta^{(j)}\right)$ by $-1$ and hence fixes the quotient
-\begin{equation}\label{logs}
-\frac{\log _{p_{l}}\left(\alpha^{(k)} / \alpha^{(j)}\right)}{\log _{p_{l}}\left(\beta^{(k)} / \beta^{(j)}\right)}.
-\end{equation}
-Therefore, since $L$ is Galois, this quotient belongs to $\mathbb{Q}_p$. Since $\alpha_{i_1}/\alpha_{i_2}$ is of the form \eqref{logs} for every $i_1, i_2 \in\{1, \dots, 1+\nu+r\}$, the claim is proved. 
-\end{proof}
-
-Now, recall that if our Thue-Mahler is only of degree $3$, it follows that $g(t)$ can only split in 3 ways in $\mathbb{Q}_p$. 
-\begin{enumerate}[(a)]
-\item $g(t) = g_1(t)$, where $\deg(g_1(t)) = 3$
-\item $g(t) = g_1(t)g_2(t)$ where $\deg(g_1(t)) = 1$ and $\deg(g_2(t)) = 2$ (without loss of generality) 
-\item $g(t) = g_1(t)g_2(t)g_3(t)$ where $\deg(g_i(t)) = 3$ for $i = 1, 2, 3$. 
-\end{enumerate}
-In the event that that $g(t)$ is irreducible (a), the corresponding prime ideal $\mathfrak{p}$ in $K$ has $ef = 3$, and is therefore bounded. That is, it does not appear in the set of unbounded ideals $\{\mathfrak{p}_1, \dots, \mathfrak{p}_{\nu}\}$, and we can ignore this case. The other 2 cases appear in the list above, therefore guaranteeing that $\alpha_{i_1}/\alpha_{i_2} \in \mathbb{Q}_p$ for every $i_1, i_2 \in\{1, \dots, 1+\nu+r\}$. 
-
-
-% and take $h\in\mathbb{R}^{}$ with $h\geq 0$. Let $b=b(h)$ be the real number defined in \eqref{def:bbound} and for any $\epsilon\in\unit_\infty$ we define $b_\epsilon=b_\epsilon(h)$ as in \eqref{def:bepsbound}. Then we define the ellipsoid $\mathcal E_v\subseteq \RR^{\unit}$ by
-%\begin{equation}\label{def:ellnonarch}
-%\mathcal E_v=\{q_v(x)\leq b; \ x\in\RR^\unit\}, \quad q_v(x)=\frac{1}{|\unit|}\left(|\unit_S|q_f(x_\delta)+\sum_{\epsilon\in\unit_\infty}\frac{b}{b_\epsilon}x_{\epsilon}^2\right)
-%\end{equation}
-%where $x=(x_\delta)\oplus(x_\epsilon)$ with $(x_\delta)\in\RR^{\unit_S}$ and $(x_\epsilon)\in \RR^{\unit_\infty}$.
-%
-%
-
-Finally, suppose that $\gamma\in \Gamma_v\cap \mathcal E_v$. Let $M=M_v$ be the matrix defining the ellipsoid 
-\[\mathcal E_\tau: z^tM^tMz\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}),\]
-that is,  
+Finally, suppose that $\mathbf{y}\in \Gamma_v\cap \mathcal E_v$. Let $M=M_v$ be the matrix defining the ellipsoid $\mathcal{E}_v$. That is
 \begin{align*}
 M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
 	DA & 0 & \dots & 0 & 0\\
@@ -1557,38 +1251,10 @@ M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
 	0 & 0 & \dots & \dots & \sqrt{\frac{b}{b_{\varepsilon}}} \\
 	\end{pmatrix}.
 \end{align*}	
-Note that we never need to compute $M$, but rather $M^TM$ so that we do not need to worry about precision. In this case, 
-\begin{align*}
-M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
-	A^TD^2A & 0 & \dots & 0 & 0\\
-	0 & \frac{b}{b_{\varepsilon 1}} & \dots & 0 & 0\\
-	0 & 0  & \frac{b}{b_{\varepsilon 2}} & \dots & 0\\
-	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & \frac{b}{b_{\varepsilon}} \\
-	\end{pmatrix}\\
-	& = \begin{pmatrix}
-	(b_{\varepsilon_1}\cdots b_{\varepsilon_r})A^TD^2A & 0 & \dots & 0 & 0\\
-	0 & b b_{\varepsilon_2}\cdots b_{\varepsilon_r} & \dots & 0 & 0\\
-	0 & 0  & bb_{\varepsilon_1}b_{\varepsilon_3}\cdots b_{\varepsilon_r} & \dots & 0\\
-	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & bb_{\varepsilon_1}\cdots b_{\varepsilon_{r-1}} \\
-	\end{pmatrix}.
-\end{align*}	
-	
-Recall that 
-\[A_{\mu}= \begin{pmatrix}
-1	& 		&		&		&		&		&	\\
-	& \ddots	& 		&		& 0		& 		&	\\
-	&		& 1		&		&		&		&	\\
-	\beta_2^{\{\mu\}}& \cdots & \beta_{\hat{i} - 1}^{\{\mu\}} & p_l^{\mu} & \beta_{\hat{i} + 1}^{\{\mu\}}& \cdots &\beta_{1+ \nu+ r}^{\{\mu\}}\\
-	& 		& 		& 		& 1		&		&	\\	
-	& 0		& 		& 		&		& \ddots	&	\\	
-	& 		& 		& 		&		& 		& 1	\\	
-\end{pmatrix}\]
-$A_{\mu}x + w$ define the lattice $\Gamma_v$ where $\gamma\in \Gamma_v\cap \mathcal E_v$. In particular, since $\gamma\in \Gamma_v\cap \mathcal E_v$, there exists $x\in \mathbb{R}^{r + \nu}$ such that $\gamma=\Gamma_v x+w$ and ${\gamma^tM^tM\gamma\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})}$. We thus have
-\[(\Gamma_v x+w)^tM^tM(\Gamma_\tau x+w) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
-As $A_{\tau}$ is clearly invertible, with matrix inverse
-\[A_{\tau}^{-1} = \begin{pmatrix}
+Recall that $A_{v}\mathbf{x} + \mathbf{w}$ defines the lattice $\Gamma_v$. In particular, since $\mathbf{y}\in \Gamma_v\cap \mathcal E_v$, there exists $\mathbf{x}\in \mathbb{R}^{r + \nu}$ such that $\mathbf{y}=A_v \mathbf{x}+\mathbf{w}$ and ${\mathbf{y}^TM^TM\mathbf{y}\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})}$. We thus have
+\[(A_v \mathbf{x}+\mathbf{w})^TM^TM(A_v \mathbf{x}+\mathbf{w}) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+As $A_{v}$ is clearly invertible, with matrix inverse
+\[A_{v}^{-1} = \begin{pmatrix}
 1	& 		&		&		&		&		&	\\
 	& \ddots	& 		&		& 0		& 		&	\\
 	&		& 1		&		&		&		&	\\
@@ -1597,43 +1263,22 @@ As $A_{\tau}$ is clearly invertible, with matrix inverse
 	& 0		& 		& 		&		& \ddots	&	\\	
 	& 		& 		& 		&		& 		& 1	\\
 	\end{pmatrix},\]
-we can find a vector $c$ such that $A_{\tau}c = -w$. Indeed, this vector is $c = A_{\tau}^{-1}(-w)$, where
-\[c = A_{\tau}^{-1}w =  \begin{pmatrix}
-1	& 		&		&		&		&		&	\\
-	& \ddots	& 		&		& 0		& 		&	\\
-	&		& 1		&		&		&		&	\\
-	-\frac{\beta_2^{\{\mu\}}}{p_l^{\mu}} & \cdots & -\frac{\beta_{\hat{i} - 1}^{\{\mu\}}}{p_l^{\mu}} & \frac{1}{p_l^{\mu}} & -\frac{\beta_{\hat{i} + 1}^{\{\mu\}}}{p_l^{\mu}}& \cdots &-\frac{\beta_{1+ \nu+ r}^{\{\mu\}}}{p_l^{\mu}}\\
-	& 		& 		& 		& 1		&		&	\\	
-	& 0		& 		& 		&		& \ddots	&	\\	
-	& 		& 		& 		&		& 		& 1	\\
-	\end{pmatrix}\begin{pmatrix}
-	0 \\ \vdots \\ 0 \\ -\beta_1^{\{\mu\}} \\ 0 \\ \vdots \\ 0
-	\end{pmatrix}
-	= \begin{pmatrix}
+we can find a vector $\mathbf{c}$ such that $A_{v}\mathbf{c} = -\mathbf{w}$. Indeed, this vector is $\mathbf{c} = A_{v}^{-1}(-\mathbf{w})$, where
+\[\mathbf{c}=\begin{pmatrix}
 	0 \\ \vdots \\ 0 \\-\frac{\beta_1^{\{\mu\}}}{p^{\{\mu\}}} \\ 0 \\ \vdots \\ 0
 \end{pmatrix}.\]
 Now, 
 \begin{align*}
 (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})
-	& \geq (\Gamma_\tau x+w)^tM^tM(\Gamma_\tau x+w) \\
-	& =  (\Gamma_\tau x- (-w))^tM^tM(\Gamma_\tau x-(-w)) \\
-	& = (\Gamma_\tau x-\Gamma_{\tau}c)^tM^tM(\Gamma_\tau x-\Gamma_{\tau}c)\\
-	& = (\Gamma_\tau (x-c))^tM^tM(\Gamma_\tau (x-c))\\
-	& = (x-c)^t(M\Gamma_{\tau})^tM\Gamma_\tau(x-c)\\
-	& = (x-c)^tB^tB(x-c)
+	& \geq (A_v \mathbf{x}+\mathbf{w})^TM^TM(A_v \mathbf{x}+\mathbf{w}) \\
+	& = (A_v \mathbf{x}-A_v\mathbf{c})^TM^TM(A_v \mathbf{x}-A_v\mathbf{c})\\
+	& = (\mathbf{x}-\mathbf{c})^T(MA_v)^TMA_v(\mathbf{x}-\mathbf{c})\\
+	& = (\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c})
 \end{align*}
-where $B = M\Gamma_\tau$. That is, we are left to solve
-\[(x-c)B^tB(x-c) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
-
-
-
-
-Recall that $\gamma \in \Gamma_v$ means
-\[A_{\mu}x + w = \begin{pmatrix}
-b_2 \\ \vdots \\ b_{\hat{i} -1} \\ b_{\hat{i} +1} \\ \vdots \\ b_{\nu+r+1} \\ b_{\hat{i}}
-\end{pmatrix} = \gamma.\]
-
-
+where $B = MA_v$. That is, we are left to solve
+\[(\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c}) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+As in \autoref{sec:archsieve} finding all vectors satisfying this inequality amounts to computing all solutions to \eqref{eq:EfficientSunit} contained in $\Sigma_{v}(\mathbf{l}, \mathbf{h})$. The set of vectors $\mathbf{x}$ can be found using the Fincke-Pohst algorithm outlined in \autoref{subsec:FinckePohst}. 
+ 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
 \endinput
