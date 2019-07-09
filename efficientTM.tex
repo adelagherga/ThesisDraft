@@ -699,11 +699,7 @@ where
 and
 \[q_f(\mathbf{y}) = (A\mathbf{y})^{\text{T}}D^2A\mathbf{y}.\]
 
-\edit{here}
-\edit{here}
-Let $M=M_\tau$ be the matrix defining the ellipsoid 
-\[\mathcal E_\tau: z^tM^tMz\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}),\]
-that is,  
+We associate to this ellipsoid a matrix. More precisely, we let $M=M_\tau$ be the matrix defining the ellipsoid $\mathcal{E}_{\tau}$. Explicitly, this is the matrix
 \begin{align*}
 M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
 	DA & 0 & \dots & 0 & 0\\
@@ -713,7 +709,7 @@ M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
 	0 & 0 & \dots & \dots & \sqrt{\frac{b}{b_{\varepsilon^*}}} \\
 	\end{pmatrix}.
 \end{align*}	
-Note that we never need to compute $M$, but rather $M^TM$ so that we do not need to worry about precision. In this case, 
+Note that we never need to compute $M$, but rather $M^TM$ so that we only ever work with integral matrices. In this case, 
 \begin{align*}
 M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
 	A^TD^2A & 0 & \dots & 0 & 0\\
@@ -749,13 +745,40 @@ where
 and
 \[q_f(\mathbf{y}) = (A\mathbf{y})^{\text{T}}D^2A\mathbf{y}.\]
 
+Similar to the Archimedean case, we let $M=M_v$ be the matrix defining the ellipsoid $\mathcal{E}_{v}$. Explicitly, this is the matrix
+\begin{align*}
+M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
+	DA & 0 & \dots & 0 & 0\\
+	0 & \sqrt{\frac{b}{b_{\varepsilon 1}}} & \dots & 0 & 0\\
+	0 & 0  & \sqrt{\frac{b}{b_{\varepsilon 2}}} & \dots & 0\\
+	\vdots & \vdots &0 &  \ddots & \vdots\\ 
+	0 & 0 & \dots & \dots & \sqrt{\frac{b}{b_{\varepsilon}}} \\
+	\end{pmatrix}.
+\end{align*}	
+As before, we never need to compute $M$, but rather $M^TM$ so that we only ever work with integral matrices. In this case, 
+\begin{align*}
+M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
+	A^TD^2A & 0 & \dots & 0 & 0\\
+	0 & \frac{b}{b_{\varepsilon 1}} & \dots & 0 & 0\\
+	0 & 0  & \frac{b}{b_{\varepsilon 2}} & \dots & 0\\
+	\vdots & \vdots &0 &  \ddots & \vdots\\ 
+	0 & 0 & \dots & \dots & \frac{b}{b_{\varepsilon}} \\
+	\end{pmatrix}\\
+	& = \begin{pmatrix}
+	(b_{\varepsilon_1}\cdots b_{\varepsilon_r})A^TD^2A & 0 & \dots & 0 & 0\\
+	0 & b b_{\varepsilon_2}\cdots b_{\varepsilon_r} & \dots & 0 & 0\\
+	0 & 0  & bb_{\varepsilon_1}b_{\varepsilon_3}\cdots b_{\varepsilon_r} & \dots & 0\\
+	\vdots & \vdots &0 &  \ddots & \vdots\\ 
+	0 & 0 & \dots & \dots & bb_{\varepsilon_1}\cdots b_{\varepsilon_{r-1}} \\
+	\end{pmatrix}.
+\end{align*}	
 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
-\section{Archimedean sieve: the real case}
+\section{The Archimedean sieve: the real case}
 
-Let $\tau:L\to\mathbb{C}$ be an embedding. We take $l,h \in \mathbb{R}^{m+\nu}$ with $0\leq l\leq h$ and $l_\tau\geq \log 2$. Then we consider the 
+Let $\tau:L\to\mathbb{C}$ be an embedding. We take $\mathbf{l},\mathbf{h} \in \mathbb{R}^{m+\nu}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$ and $l_\tau\geq \log 2$. Then we consider the 
 translated lattice $\Gamma_{\tau}\subset \mathbb{Z}^{r + \nu}$ defined by 
 \[\Gamma_{\tau} =\Phi_{\tau}(\mathbb{Z}^{r+\nu})+w\]
 where $w=(0,\dotsc,0,\alpha_0)^{\text{T}}$ for $c$ a constant of the size $e^{l_\tau}$ and where $\Phi_\tau$ is a linear transformation which is the identity on $\mathbb{Z}^{u+r - 1}$ and which sends 
