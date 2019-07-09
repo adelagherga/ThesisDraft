@@ -407,7 +407,6 @@ and
 \[\beta_{\gamma l k} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
 for $k = 1, \dots, \nu$.
 
-\edit{here}
 Since $\frac{\delta_2}{\lambda}$ is a quotient of elements which are conjugate to one another, by taking the norm on $L$ of $\frac{\delta_2}{\lambda}$, we obtain $N\left(\frac{\delta_2}{\lambda}\right) = 1.$ On the other hand, by definition, we have 
 \[1 = N\left(\frac{\delta_2}{\lambda}\right) = \prod_{\sigma: L \to \mathbb{C}} \sigma \left(\frac{\delta_2}{\lambda}\right).\]
 Taking absolute values and logarithms, 
@@ -629,31 +628,32 @@ Finally, we now have
 %The constant $\kappa_\tau$ depends on $N$ which can be taken arbitrarily as long as $N\geq 2$ is even. Further, the value $k_N$ can be slightly improved when one finds the maximum of the functions $x^{n-1}(\tfrac{x}{n+1}-1)$ on the interval $[0,\log 2]$ for each even $n\geq 2$. 
 \end{proof}
 
-\edit{here!}
-
-To summarize, take $\mathbf{h}\in\mathbb{R}^{\nu+m}$ such that $\mathbf{h}\geq \mathbf{0}$. Let $\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}$ be any solution of \eqref{eq:EfficientSunit} and let $\mathbf{n} = (n_1, \dots, n_{\nu})$. Denote by $h_{v}\left(\frac{\delta_2}{\lambda}\right)$ the $v^{\text{th}}$ entry of the solution vector
-\begin{align*}
-&\bigg(\log(p_1)|u_1 - r_1|, \dots, \log(p_{\nu})|u_{\nu} - r_{\nu}|, \\
-	& \quad \quad \left. \log \max \left\{ \left|w_1\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}, \dots, \log \max \left\{ \left|w_n\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}  \right)
-\end{align*}
-and suppose $h_v(z)\leq h_v$ for all $v\in S^*$. Then we deduce
+To summarize the results of this section, let $\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}$ be any solution of \eqref{eq:EfficientSunit} with corresponding vector $\mathbf{n} = (n_1, \dots, n_{\nu})$. Take $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu+m}$ such that $\mathbf{0} \leq \mathbf{l} \leq \mathbf{h}$ and suppose $h_v(z)\leq h_v$ for all $v\in S^*$. By Lemma~\ref{lem:boundqf}, we deduce
 \begin{equation} \label{def:bbound}
-\log(2)^2q_f(\mathbf{n}) \leq \sum_{k = 1}^{\nu} \log(p_k)^2|u_k -r_k|^2 \leq \sum_{k = 1}^{\nu} h_k^2,
+\log(2)^2q_f(\mathbf{n}) \leq \sum_{k = 1}^{\nu} \log(p_k)^2|u_k -r_k|^2 \leq \sum_{k = 1}^{\nu} h_k^2=:b.
 \end{equation}
-and 
+For $l = 1, 2$, Lemma~\ref{lem:mepsbound} gives us
 \begin{align}\label{def:bepsbound}
 |a_l|^2 &\leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k| + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right)^2\\
-	&\leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}h_k + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma:L\to \mathbb{C}} w_{\varepsilon l \sigma}h_{\sigma}\right)^2.
+	&\leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}h_k + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma:L\to \mathbb{C}} w_{\varepsilon l \sigma}h_{\sigma}\right)^2 =: b_{\eps_l}.
 \end{align}
-Moreover, since
-\[h_{\tau}\left(\frac{\delta_2}{\lambda}\right) \geq l_{\tau} > c_{\tau},\]
-the previous lemma holds. That is, 
+Finally, suppose in addition that
+\[h_{\tau}\left(\frac{\delta_2}{\lambda}\right) \geq l_{\tau} > c_{\tau}.\]
+Then by Lemma~\ref{lem:archellest}, we obtain
 \begin{align*}
 &\left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right|\\
 	& \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right) + \\
 	& \quad \quad \quad + \left(\frac{1}{2} + c\kappa_{\tau}e^{-h_{\tau}\left(\frac{\delta_2}{\lambda}\right)}\right)\\
-	& \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}.
+	& \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}, 
 \end{align*} 
+and we set
+\begin{equation} \label{bepstarbound}
+b_{\eps_l^*}:= \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}.
+\end{equation}
+
+It is of particular importance to note that the assumptions $h_{\tau}(z) \geq l_{\tau}$ and  $h_v(z)\leq h_v$ for all $v\in S^*$ are not arbitrary. Indeed, for the vectors $\mathbf{l}, \mathbf{h}$, these conditions imply precisely that $(\tilde{x},\tilde{y}) \in \Sigma_{\tau}(\mathbf{l}, \mathbf{h})$, where $(\tilde{x},\tilde{y})$ are solutions to \eqref{eq:EfficientSunit} corresponding to $\mathbf{m}$.
+
+
 %
 %\begin{align*}
 %& \left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right| ^2 \\ & \leq
@@ -670,30 +670,8 @@ the previous lemma holds. That is,
 %By Remark~\ref{rem:i12}, we can replace $\sum_{v:L\to\CC}w_{v}h_v$ by $3[L:K]\|r_\epsilon\|_\infty\max_{v:L\to\CC}h_v$ if $|I|=2$.
 %
 
-We finally can define the ellipsoid. Let
-\[b = \frac{1}{\log(2)^2}\sum_{k = 1}^{\nu} h_k^2,\]
-and, for each $\varepsilon_l$ in $\{\varepsilon_1, \dots, \varepsilon_r\}$ such that $\varepsilon_l \neq \varepsilon_l^*$, we define
-%\[b_{\varepsilon_l} = 
-%\begin{cases}
-%\left( \frac{2}{[L:\mathbb{Q}]}\max_{\sigma:L\to \mathbb{C}} w_{\varepsilon \sigma}h_{\sigma}  + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}h_k\right)^2 & \text{ if } \sqrt{\Delta}\notin\mathbb{Q} \\
-%\left( \frac{1}{[L:\mathbb{Q}]}\max_{\sigma:L\to \mathbb{C}} w_{\varepsilon \sigma}h_{\sigma} + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}h_k\right)^2 & \text{ if } \sqrt{\Delta}\in\mathbb{Q}, \\
-%\end{cases}\]
-%where
-\[|a_l|^2 \leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}h_k + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma:L\to \mathbb{C}} w_{\varepsilon l \sigma}h_{\sigma}\right)^2=:b_{\varepsilon_l}. \]
-
-%
-%
-%\[|a_l|^2 \leq b_{\varepsilon_l} =
-%\begin{cases}
-%\left( \frac{2}{[L:\mathbb{Q}]}\max_{\sigma:L\to \mathbb{C}} w_{\varepsilon \sigma}h_{\sigma}  + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}h_k\right)^2 & \text{ if } \sqrt{\Delta}\notin\mathbb{Q} \\
-%\left( \frac{1}{[L:\mathbb{Q}]}\max_{\sigma:L\to \mathbb{C}} w_{\varepsilon \sigma}h_{\sigma} + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}h_k\right)^2 & \text{ if } \sqrt{\Delta}\in\mathbb{Q}. \\
-%\end{cases}\]
-Now, for $\varepsilon_l$ in $\{\varepsilon_1, \dots, \varepsilon_r\}$ such that $\varepsilon_l = \varepsilon_l^*$, we define
-\begin{align*}
-&\left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right|^2\\
-	& \leq \left(\frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}h_{\sigma}\right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}\right)^2=:b_{\varepsilon_l}. 
-\end{align*} 
-
+We are finally in position to define the ellipsoid corresponding to $\Sigma_{\tau}(\mathbf{l}, \mathbf{h})$. Fix any $\eps_l^* \in \{\varepsilon_1, \dots, \varepsilon_r\}$. 
+For each $\varepsilon_l$ in $\{\varepsilon_1, \dots, \varepsilon_r\}$ such that $\varepsilon_l \neq \varepsilon_l^*$, we associate the bound $b_{\eps_l}$. For $\varepsilon_l$, we associate the value $b_{\eps_l^*}$.
 %
 %\[b_{\varepsilon_l} = 
 %\begin{cases}
@@ -721,33 +699,60 @@ where
 and
 \[q_f(\mathbf{y}) = (A\mathbf{y})^{\text{T}}D^2A\mathbf{y}.\]
 
+\edit{here}
+\edit{here}
+Let $M=M_\tau$ be the matrix defining the ellipsoid 
+\[\mathcal E_\tau: z^tM^tMz\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}),\]
+that is,  
+\begin{align*}
+M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
+	DA & 0 & \dots & 0 & 0\\
+	0 & \sqrt{\frac{b}{b_{\varepsilon 1}}} & \dots & 0 & 0\\
+	0 & 0  & \sqrt{\frac{b}{b_{\varepsilon 2}}} & \dots & 0\\
+	\vdots & \vdots &0 &  \ddots & \vdots\\ 
+	0 & 0 & \dots & \dots & \sqrt{\frac{b}{b_{\varepsilon^*}}} \\
+	\end{pmatrix}.
+\end{align*}	
+Note that we never need to compute $M$, but rather $M^TM$ so that we do not need to worry about precision. In this case, 
+\begin{align*}
+M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
+	A^TD^2A & 0 & \dots & 0 & 0\\
+	0 & \frac{b}{b_{\varepsilon 1}} & \dots & 0 & 0\\
+	0 & 0  & \frac{b}{b_{\varepsilon 2}} & \dots & 0\\
+	\vdots & \vdots &0 &  \ddots & \vdots\\ 
+	0 & 0 & \dots & \dots & \frac{b}{b_{\varepsilon^*}} \\
+	\end{pmatrix}\\
+	& = \begin{pmatrix}
+	(b_{\varepsilon_1}\cdots b_{\varepsilon_r})A^TD^2A & 0 & \dots & 0 & 0\\
+	0 & b b_{\varepsilon_2}\cdots b_{\varepsilon_r} & \dots & 0 & 0\\
+	0 & 0  & bb_{\varepsilon_1}b_{\varepsilon_3}\cdots b_{\varepsilon_r} & \dots & 0\\
+	\vdots & \vdots &0 &  \ddots & \vdots\\ 
+	0 & 0 & \dots & \dots & bb_{\varepsilon_1}\cdots b_{\varepsilon_{r-1}} \\
+	\end{pmatrix}.
+\end{align*}	
+
+
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
 \subsection{The non-Archimedean ellipsoid}
 \label{subsec:nonArchEllipsoid}
 
-We now restrict our attention to those $p \in \{p_1, \dots, p_{\nu}\}$ and study the $p$-adic valuations of the numbers appearing in \eqref{eq:EfficientSunit}. Let $l \in \{1, \dots, \nu\}$, corresponding to $p_l \in \{p_1, \dots, p_{\nu}\}$. As before, take $\mathbf{h}\in\mathbb{R}^{r+\nu}$ such that $\mathbf{h}\geq \mathbf{0}$ and let
-\[b = \frac{1}{\log(2)^2}\sum_{k = 1}^{\nu} h_k^2.\]
-For each $\varepsilon_l$ in $\{\varepsilon_1, \dots, \varepsilon_r\}$, we define
-%\[b_{\varepsilon_l} = 
-%\begin{cases}
-%\left( \frac{2}{[L:\mathbb{Q}]}\max_{\sigma:L\to \mathbb{C}} w_{\varepsilon \sigma}h_{\sigma}  + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}h_k\right)^2 & \text{ if } \sqrt{\Delta}\notin\mathbb{Q} \\
-%\left( \frac{1}{[L:\mathbb{Q}]}\max_{\sigma:L\to \mathbb{C}} w_{\varepsilon \sigma}h_{\sigma} + \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma k}h_k\right)^2 & \text{ if } \sqrt{\Delta}\in\mathbb{Q}, \\
-%\end{cases}\]
-%where
-\[|a_l|^2 \leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}h_k + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma:L\to \mathbb{C}} w_{\varepsilon l \sigma}h_{\sigma}\right)^2=:b_{\varepsilon_l}.\]
-Note that here, we do not distinguish any $\varepsilon_l^*$. 
+We now restrict our attention to those $p_v \in \{p_1, \dots, p_{\nu}\}$ and define the corresponding ellipsoid. As before, let $\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}$ be any solution of \eqref{eq:EfficientSunit} with corresponding vector $\mathbf{n} = (n_1, \dots, n_{\nu})$. Take $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu+m}$ such that $\mathbf{0} \leq \mathbf{l} \leq \mathbf{h}$ and suppose $h_v(z)\leq h_v$ for all $v\in S^*$. 
 
-We define the ellipsoid $\mathcal{E}_l \subseteq \mathbb{R}^{\nu + r}$ by 
+Now, Lemma~\ref{lem:boundqf} and Lemma~\ref{lem:mepsbound} still hold here. In particular, we let $b$, $b_{\eps_l}$ be defined as in \eqref{def:bbound} and \eqref{def:bepsbound}, respectively, where $l = 1, \dots, r$. We do not distinguish any $\varepsilon_l^*$. Instead, we will see later that the condition $h_{v}(z) \geq l_{v}$ corresponding to the set $\Sigma_v(\mathbf{l}, \mathbf{h})$ will be used elsewhere. 
+
+We define the ellipsoid $\mathcal{E}_v \subseteq \mathbb{R}^{\nu + r}$ by 
 \begin{align}\label{def:ellp}
-& \mathcal{E}_l=\{q_l(\mathbf{x})\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}); \ \mathbf{x}\in\mathbb{R}^{r+\nu}\},\end{align}
+& \mathcal{E}_v=\{q_l(\mathbf{x})\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}); \ \mathbf{x}\in\mathbb{R}^{r+\nu}\},\end{align}
 where
-\[q_l(\mathbf{x})= (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\]
+\[q_v\mathbf{x})= (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\]
 and
 \[q_f(\mathbf{y}) = (A\mathbf{y})^{\text{T}}D^2A\mathbf{y}.\]
 
+
+
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-\edit{ stopped here}
+
 \section{Archimedean sieve: the real case}
 
 Let $\tau:L\to\mathbb{C}$ be an embedding. We take $l,h \in \mathbb{R}^{m+\nu}$ with $0\leq l\leq h$ and $l_\tau\geq \log 2$. Then we consider the 
