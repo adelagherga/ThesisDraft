@@ -87,36 +87,13 @@ As for Goormaghtigh's equation, when $m$ and $n$ are fixed and
 Davenport, Lewis, and Schinzel \cite{DaLeSc} were able to replace Siegel's result by an effective argument due to Runge. This result was improved by Nesterenko and Shorey \cite{NeSh}, and Bugeaud and Shorey \cite{BuSh} using Baker's theory of linear forms in logarithms. In either case, in order to deduce effectively computable bounds  upon the polynomial variables $x$ and $y$, one must impose the constraints upon $m$ and $n$ that either $m=n+1$, or that the assumption \eqref{Introduction:GoormaghtighCondition} holds. In the extensive literature on this problem, there are a number of striking results that go well beyond what we have mentioned here. By way of example, work of Balasubramanian and 
  Shorey \cite{BaSh} shows that equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions if we fix only the set of prime divisors of $x$ and $y$, while Bugeaud and Shorey \cite{BuSh} prove an analogous finiteness result, under the additional assumption of \eqref{Introduction:GoormaghtighCondition}, provided the quotient $(m-1)/(n-1)$ is bounded above. Additional results on special cases of equation \eqref{Introduction:Goormaghtigh} are available in, for example, \cite{HeTo}, \cite{Le1}, \cite{Le2},\cite{ShoSur} and \cite{Le3}. 
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\section{Statement of the results}
-
-The novel contributions of this thesis concern the development and implementation of efficient algorithms to determine all solutions of certain Goormaghtigh equations and Thue-Mahler equations. In particular, we follow [REF: BeGhKr] to prove that, in fact, under assumption \eqref{Introduction:GoormaghtighCondition}, equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions which may be found effectively, even if we fix only a single exponent. \\
-
-\begin{theorem}[BeGhKr]\label{IntroductionTheorem:Goormaghtigh1}
-If there is a solution in integers $x,y, n$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, satisfying \eqref{Introduction:GoormaghtighCondition}, then
-\begin{equation} \label{IntroductionTheorem:Goormaghtigh1Eq}
-x <  (3d)^{4n/d} \leq  36^n.
-\end{equation}
-In particular, if $n$ is fixed, there is an effectively computable constant $c=c(n)$ such that
-$\max \{ x, y, m \} < c$.
-\end{theorem}
-We note that the latter conclusion here follows immediately from \eqref{IntroductionTheorem:Goormaghtigh1Eq}, in conjunction with, for example, work of Baker ([REF]). The constants present in our upper bound \eqref{IntroductionTheorem:Goormaghtigh1Eq} may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation \eqref{Introduction:Goormaghtigh}, subject to condition \eqref{Introduction:GoormaghtighCondition}, for small fixed values of $n$. \\
-
-\begin{theorem}[BeGhKr] \label{IntroductionTheorem:Goormaghtigh2Eq}
-If there is a solution in integers $x,y$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, with $n \in \{ 3, 4, 5 \}$ and satisfying \eqref{Introduction:GoormaghtighCondition}, then
-\[(x,y,m,n) = (2,5,5,3)  \; \mbox{ and } \; (2,90,13,3).\]
-\end{theorem}
-
-In the case $n = 5$ of Theorem \eqref{IntroductionTheorem:Goormaghtigh2Eq} ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. Instead, we sharpen the existing techniques of [TdW] and [Hambrook] for solving Thue-Mahler equations and specialize them to this problem. 
-
-A direct consequence and primary motivation for developing an efficient Thue-Mahler algorithm is the computation of elliptic curves over $\mathbb{Q}$. Let $S$ be a finite set of rational primes. In $1963$, Shafarevich [CITE] proved that there are at most finitely many $\mathbb{Q}$-isomorphism classes of elliptic curves defined over $\mathbb{Q}$ having good reduction outside $S$. The first effective proof of this statement was provided by Coates [CITE] in 1970 for the case $K = \mathbb{Q}$ and $S = \{2,3\}$ using bounds for linear forms in $p$-adic and complex logarithms. Early attempts to make these results explicit for fixed sets of small primes overlap with the arguments of [COATES], in that they reduce the problem to that of solving a number of degree $3$ Thue-Mahler equations of the form
+A direct application of determining the solutions of a solvable Diophantine equation is the computation of elliptic curves over $\mathbb{Q}$. Let $S$ be a finite set of rational primes. In $1963$, Shafarevich \cite{Shaf} proved that there are at most finitely many $\mathbb{Q}$-isomorphism classes of elliptic curves defined over $\mathbb{Q}$ having good reduction outside $S$. The first effective proof of this statement was provided by Coates \cite{Coa} in 1970 for the case $K = \mathbb{Q}$ and $S = \{2,3\}$ using bounds for linear forms in $p$-adic and complex logarithms. Early attempts to make these results explicit for fixed sets of small primes overlap with the arguments of \cite{Coa}, in that they reduce the problem to that of solving a number of degree $3$ Thue-Mahler equations of the form
 \[F(x,y) = au,\]
 where $u$ is an integer whose prime factors all lie in $S$. 
 
-In the $1950$'s and $1960$'s, Taniyama and Weil asked whether all elliptic curves over $\mathbb{Q}$ of a given conductor $N$ are related to modular functions. While this conjecture is now known as the Modularity Theorem, until its proof in $2001$ \cite{Breuil}, attempts to verify it sparked a large effort to tabulate all elliptic curves over $\mathbb{Q}$ of given conductor $N$. In 1966, Ogg (\cite{Ogg1}, \cite{Ogg2}) determined all elliptic curves defined over $\mathbb{Q}$ with conductor of the form $2^a$. Coghlan, in his dissertation \cite{Coghlan}, studied the curves of conductor $2^a3^b$ independently of Ogg, while Setzer \cite{Setzer} computed all $\mathbb{Q}$-isomorphism classes of elliptic curves of conductor $p$ for certain small primes $p$. Each of these examples corresponds, via the [BR] approach, to cases with reducible forms. The first analysis on irreducible forms in \eqref{Eq:tmEquation} was carried out by Agrawal, Coates, Hunt and van der Poorten \cite{Agrawal}, who determined all elliptic curves of conductor $11$ defined over $\mathbb{Q}$ to verify the (then) conjecture of Taniyama-Weil.
+In the $1950$'s and $1960$'s, Taniyama and Weil asked whether all elliptic curves over $\mathbb{Q}$ of a given conductor $N$ are related to modular functions. While this conjecture is now known as the Modularity Theorem, until its proof in $2001$ \cite{BCDT}, attempts to verify it sparked a large effort to tabulate all elliptic curves over $\mathbb{Q}$ of given conductor $N$. In 1966, Ogg (\cite{Ogg1}, \cite{Ogg2}) determined all elliptic curves defined over $\mathbb{Q}$ with conductor of the form $2^a$. Coghlan, in his dissertation \cite{Cog}, studied the curves of conductor $2^a3^b$ independently of Ogg, while Setzer \cite{Set} computed all $\mathbb{Q}$-isomorphism classes of elliptic curves of conductor $p$ for certain small primes $p$. Each of these examples corresponds, via the \cite{BeGhRe} approach, to cases with reducible forms. The first analysis on irreducible forms in \eqref{Introduction:ThueMahler} was carried out by Agrawal, Coates, Hunt and van der Poorten \cite{ACHP}, who determined all elliptic curves of conductor $11$ defined over $\mathbb{Q}$ to verify the (then) conjecture of Taniyama-Weil.
 
-There are very few, if any, subsequent attempts in the literature to find elliptic curves of given conductor via Thue-Mahler equations. Instead, many of the approaches involve a completely different method to the problem, using modular forms. This method relies upon the Modularity Theorem of Breuil, Conrad, Diamond and Taylor \cite{Breuil}, which was still a conjecture (under various guises) when these ideas were first implemented. Much of the success of this approach can be attributed to Cremona (see e.g. \cite{Cremona1}, \cite{Cremona2}) and his collaborators, who have devoted decades of work to it. In fact, using this method, all elliptic curves over $\mathbb{Q}$ of conductor $N$ have been determined for values of $N$ as follows
+There are very few, if any, subsequent attempts in the literature to find elliptic curves of given conductor via Thue-Mahler equations. Instead, many of the approaches involve a completely different method to the problem, using modular forms. This method relies upon the Modularity Theorem of Breuil, Conrad, Diamond and Taylor \cite{BCDT}, which was still a conjecture (under various guises) when these ideas were first implemented. Much of the success of this approach can be attributed to Cremona (see e.g. \cite{Cre1}, \cite{Cre2}) and his collaborators, who have devoted decades of work to it. In fact, using this method, all elliptic curves over $\mathbb{Q}$ of conductor $N$ have been determined for values of $N$ as follows
 \begin{itemize} \itemsep0em
 \item Antwerp IV ($1972$): $N \leq 200$
 \item Tingley ($1975$): $N \leq 320$
@@ -130,11 +107,35 @@ There are very few, if any, subsequent attempts in the literature to find ellipt
 \item Cremona ($2016$): $N \leq 390000$.
 \end{itemize}
 
-In this thesis, we follow [BeGhRe] wherein we return to techniques based upon solving Thue-Mahler equations, using a number of results from classical invariant theory. In particular, we illustrate the connection between elliptic curves over $\mathbb{Q}$ and cubic forms and subsequently describe an effective algorithm for determining all elliptic curves over $\mathbb{Q}$ having good reduction outside $S$. This result can be summarized as follows. If we wish to find an elliptic curves $E$ of conductor $N = p_1^{a_1}\cdots p_v^{a_v}$ for some $a_i \in \mathbb{N}$, by Theorem 1 of [BeGhRe], there exists an integral binary cubic form $F$ of discriminant $N_0 \mid 12 N$ and relatively prime integers $u,v$ satisfying
-\[F(u,v) = w_0u^3 + w_1u^2v + w_2uv^2 + w_3v^3 = 2^{\alpha_1}3^{\beta_1}\prod_{p|N_0}p^{\kappa_p}\]
-for some $\alpha_1, \beta_1, \kappa_p$. Then $E$ is isomorphic over $\mathbb{Q}$ to the elliptic curve $E_{\mathcal{D}}$, where $E_{\mathcal{D}}$ is determined by the form $F$ and $(u,v)$. It is worth noting that Theorem 1 of [BeGhRe] very explicitly describes how to generate $E_{\mathcal{D}}$; once a solution $(u,v)$ to the Thue-Mahler equation $F$ is known, a quick computation of the Hessian and Jacobian discriminant of $F$ evaluated at $(u,v)$ yields the coefficients of $E_{\mathcal{D}}$. Using this theorem, all $E/\mathbb{Q}$ of conductor $N$ may be computed by generating all of the relevant binary cubic forms, solving the corresponding Thue-Mahler equations, and outputting the elliptic curves that arise. The first and last steps of this process are straightforward. Indeed, Bennett and Rechnitzer describe an efficient algorithm for carrying out the first step \aaron{REF}. In fact, they having carried out a one-time computation of all irreducible forms that can arise in Theorem 1 of absolute discriminant bounded by $10^{10}$. The bulk of the work is therefore concentrated in step 2, solving a large number of degree 3 Thue-Mahler equations. 
+%---------------------------------------------------------------------------------------------------------------------------------------------%
 
-Unfortunately, despite many refinements, [Hambrook's] MAGMA implementation of a Thue-Mahler solver encounters a multitude of bottlenecks which often yield unavoidable timing and memory problems, even when parallelization is considered. As our aim is to use the results of [BeGhRe] to generate all elliptic curves over $\mathbb{Q}$ of conductor $N < 10^6$, in its current state, the Hambrook algorithm is inefficient for this task, and in many cases, simply unusable due to its memory requirements. The main novel contribution of this thesis is therefore the efficient resolution of an arbitrary degree $3$ Thue-Mahler equation and the implementation of this algorithm as a MAGMA package. This work is based on ideas of Matshke, von Kanel [CITE], and Siksek and is summarized in the following steps.
+\section{Statement of the results}
+
+The novel contributions of this thesis concern the development and implementation of efficient algorithms to determine all solutions of certain Goormaghtigh equations and Thue-Mahler equations. In particular, we follow \cite{BeGhKr} to prove that, in fact, under assumption \eqref{Introduction:GoormaghtighCondition}, equation \eqref{Introduction:Goormaghtigh} has at most finitely many solutions which may be found effectively, even if we fix only a single exponent. \\
+
+\begin{theorem}\label{IntroductionTheorem:Goormaghtigh1}
+If there is a solution in integers $x,y, n$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, satisfying \eqref{Introduction:GoormaghtighCondition}, then
+\begin{equation} \label{IntroductionTheorem:Goormaghtigh1Eq}
+x <  (3d)^{4n/d} \leq  36^n.
+\end{equation}
+In particular, if $n$ is fixed, there is an effectively computable constant $c=c(n)$ such that
+$\max \{ x, y, m \} < c$.
+\end{theorem}
+We note that the latter conclusion here follows immediately from \eqref{IntroductionTheorem:Goormaghtigh1Eq}, in conjunction with, for example, work of Baker \cite{Bak}. The constants present in our upper bound \eqref{IntroductionTheorem:Goormaghtigh1Eq} may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation \eqref{Introduction:Goormaghtigh}, subject to condition \eqref{Introduction:GoormaghtighCondition}, for small fixed values of $n$. \\
+
+\begin{theorem} \label{IntroductionTheorem:Goormaghtigh2Eq}
+If there is a solution in integers $x,y$ and $m$ to equation \eqref{Introduction:Goormaghtigh}, with $n \in \{ 3, 4, 5 \}$ and satisfying \eqref{Introduction:GoormaghtighCondition}, then
+\[(x,y,m,n) = (2,5,5,3)  \; \mbox{ and } \; (2,90,13,3).\]
+\end{theorem}
+
+In the case $n = 5$ of Theorem \eqref{IntroductionTheorem:Goormaghtigh2Eq} ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. Instead, we sharpen the existing techniques of \cite{TW} and \cite{Ham} for solving Thue-Mahler equations and specialize them to this problem. 
+
+A direct consequence and primary motivation for developing an efficient Thue-Mahler algorithm is the computation of elliptic curves over $\mathbb{Q}$. In this thesis, we follow \cite{BeGhRe} wherein we return to techniques based upon solving Thue-Mahler equations, using a number of results from classical invariant theory. In particular, we illustrate the connection between elliptic curves over $\mathbb{Q}$ and cubic forms and subsequently describe an effective algorithm for determining all elliptic curves over $\mathbb{Q}$ having good reduction outside $S$. This result can be summarized as follows. If we wish to find an elliptic curves $E$ of conductor $N = p_1^{a_1}\cdots p_v^{a_v}$ for some $a_i \in \mathbb{N}$, by Theorem 1 of \cite{BeGhRe}, there exists an integral binary cubic form $F$ of discriminant $N_0 \mid 12 N$ and relatively prime integers $u,v$ satisfying
+\[F(u,v) = w_0u^3 + w_1u^2v + w_2uv^2 + w_3v^3 = 2^{\alpha_1}3^{\beta_1}\prod_{p|N_0}p^{\kappa_p}\]
+for some $\alpha_1, \beta_1, \kappa_p$. Then $E$ is isomorphic over $\mathbb{Q}$ to the elliptic curve $E_{\mathcal{D}}$, where $E_{\mathcal{D}}$ is determined by the form $F$ and $(u,v)$. It is worth noting that Theorem 1 of \cite{BeGhRe} very explicitly describes how to generate $E_{\mathcal{D}}$; once a solution $(u,v)$ to the Thue-Mahler equation $F$ is known, a quick computation of the Hessian and Jacobian discriminant of $F$ evaluated at $(u,v)$ yields the coefficients of $E_{\mathcal{D}}$. Using this theorem, all $E/\mathbb{Q}$ of conductor $N$ may be computed by generating all of the relevant binary cubic forms, solving the corresponding Thue-Mahler equations, and outputting the elliptic curves that arise. The first and last steps of this process are straightforward. Indeed, Bennett and Rechnitzer \cite{BR-survey} describe an efficient algorithm for carrying out the first step. In fact, they having carried out a one-time computation of all irreducible forms that can arise in Theorem 1 of absolute discriminant bounded by $10^{10}$. The bulk of the work is therefore concentrated in step 2, solving a large number of degree 3 Thue-Mahler equations. 
+
+Unfortunately, despite many refinements, the Magma implementation of a Thue-Mahler \cite{Ham} solver encounters a multitude of bottlenecks which often yield unavoidable timing and memory problems, even when parallelization is considered. As our aim is to use the results of \cite{BeGhRe} to generate all elliptic curves over $\mathbb{Q}$ of conductor $N < 10^6$, in its current state, this current Magma implementation is insufficient for this task. The main novel contribution of this thesis are new theoretical results towards the efficient resolution of an arbitrary degree $3$ Thue-Mahler equation and the implementation of these results as a Magma package. This work is based on ideas of \cite{KanMat} and is part of an ongoing collaborative project \cite{GhKaMaSi}. %In its present state, this 
+%and is summarized in the following steps.
 
 
 
@@ -155,90 +156,34 @@ Unfortunately, despite many refinements, [Hambrook's] MAGMA implementation of a 
 %
 %Unfortunately, despite Hambrook's refinements, this algorithm encounters a multitude of bottlenecks which often yield unavoidable timing and memory problems, even when parallelization is considered. As we will outline shortly, one of our primary aims in this thesis is to solve a very large number of Thue-Mahler equations. In its current state, the Hambrook algorithm is inefficient for this task, and in many cases, simply unusable due to its memory requirements. The main novel contribution of this thesis is therefore the efficient resolution of an arbitrary Thue-Mahler equation and the implementation of this algorithm as a MAGMA package. This work is based on ideas of Matshke, von Kanel [CITE], and Siksek and is summarized in the following steps.
 
-\textbf{Step 1.}
-Following [TdW] and [Hambrook], we reduce the problem of solving the given Thue-Mahler equation to the problem of solving a collection of finitely many $S$-unit equations in a certain algebraic number field $K$. These are equations of the form
-\begin{equation}\label{Introduction:SUnit}
-\mu_0 y - \lambda_0 x = 1
-\end{equation}
-for some $\mu_0, \lambda_0 \in K$ and unknowns $x,y$. The collection of forms is such that if we know the solutions of each equation in the collection, then we can easily derive all of the solutions of the Thue-Mahler equation. This reduction is performed in two steps. First, \eqref{Introduction:ThueMahler} is reduced to a finite number of ideal equations over $K$. Here, we employ new results by Siksek [Cite?] to significantly reduce the number of ideal equations to consider. Next, we reduce each ideal equation to a number of certain $S$-unit equations \eqref{Introduction:SUnit} via a finite number of principalization tests. The method of [TdW] reduces \eqref{Introduction:ThueMahler} to $(m/2) h^v$ $S$-unit equations, where $m$ is the number of roots of unity of $K$, $h$ is the class number, and $v$ is the number of rational primes $p_1, \dots, p_v$. The method of Siksek that we employ gives only $m/2$ $S$-unit equations. The principle computational work here consists of computing an integral basis, a system of fundamental units, and a splitting field of $K$, as well as computing the class group of $K$ and the factorizations of the primes $p_1,\dots,p_v$ into prime ideals in the ring of integers of $K$. 
+%\textbf{Step 1.}
+%Following [TdW] and [Hambrook], we reduce the problem of solving the given Thue-Mahler equation to the problem of solving a collection of finitely many $S$-unit equations in a certain algebraic number field $K$. These are equations of the form
+%\begin{equation}\label{Introduction:SUnit}
+%\mu_0 y - \lambda_0 x = 1
+%\end{equation}
+%for some $\mu_0, \lambda_0 \in K$ and unknowns $x,y$. The collection of forms is such that if we know the solutions of each equation in the collection, then we can easily derive all of the solutions of the Thue-Mahler equation. This reduction is performed in two steps. First, \eqref{Introduction:ThueMahler} is reduced to a finite number of ideal equations over $K$. Here, we employ new results by Siksek [Cite?] to significantly reduce the number of ideal equations to consider. Next, we reduce each ideal equation to a number of certain $S$-unit equations \eqref{Introduction:SUnit} via a finite number of principalization tests. The method of [TdW] reduces \eqref{Introduction:ThueMahler} to $(m/2) h^v$ $S$-unit equations, where $m$ is the number of roots of unity of $K$, $h$ is the class number, and $v$ is the number of rational primes $p_1, \dots, p_v$. The method of Siksek that we employ gives only $m/2$ $S$-unit equations. The principle computational work here consists of computing an integral basis, a system of fundamental units, and a splitting field of $K$, as well as computing the class group of $K$ and the factorizations of the primes $p_1,\dots,p_v$ into prime ideals in the ring of integers of $K$. 
+%
+%The remaining steps are performed for each of the $S$-unit equations in our collection. 
+%
+%\textbf{Step 2.}
+%In place of the logarithmic sieves used in [TdW] to derive a large upper bound, we work with the global logarithmic Weil height
+%\[h: \mathbb{G}_m(\overline{\mathbb{Q}}) \to \mathbb{R}_{\geq 0}.\]
+%For a given \eqref{Introduction:SUnit}, we show that the height $h(1/x)$ admits a decomposition into local heights at each place of $K$ appearing in the $S$-unit equation. Using [CITE : Matshke, von Kanel], we generate a very large upper bound on the height $h(1/x)$, and subsequently, on the local heights. This step is a straightforward computation, whereas the analogous step in Hambrook and TdW is a complex and lengthy derivation which involves factoring rational primes into prime ideals in a splitting field of $K$ and computing heights of certain elements of the splitting field. 
+%
+%\textbf{Step 3.}
+%For each place of $K$ appearing in \eqref{Introduction:SUnit}, we drastically reduce the upper bounds derived in Step 2 by using computational Diophantine approximation techniques applied to the intersection of a certain ellipsoid and translated lattice. This technique involves using the Finke-Pohst algorithm to enumerate all short vectors in the intersection. Here, working with the Weil height $h(1/x)$ has the advantage that it leads to ellipsoids whose volumes are smaller than the ellipsoids implicitly used in [TdW] by a factor of $\sim r^{r/2}$ for $r$ the number of places of $K$ appearing in our $S$-unit equation. In this way, we reduce the number of short vectors appearing from the Fincke-Pohst algorithm, and consequently reduce our running time and memory requirements. 
+%
+%\textbf{Step 5.}
+%Finally, we use a sieving procedure to find all the solutions of the Diophantine equation that live in the box defined by the bounds derived in the previous steps. To carry out this step, we run through all the possible solutions in the box and ÔsieveÕ out the vast majority of non-solutions. This is done via certain low-cost congruence tests. The candidate solutions passing this test are then verified directly against \eqref{Introduction:SUnit}. Though we expect the bounds defining the box to be small, there can still be a very large number of possible solutions to check, especially if the number of rational primes involved in the Thue-Mahler equation is large. The computations performed on each individual candidate solution are relatively simple, but the sheer number of candidates often makes this step the computational bottleneck of the entire algorithm. 
+%
+%\textbf{Step 6.}
+%Having performed Steps 2-5 for each $S$-unit equation in our collection, we now have all the solutions of each such equation, and we use this knowledge to determine all the solutions of the Thue-Mahler equation. 
+%
+%The reader will notice several parallels between this refined algorithm and the aforementioned Goormaghtigh equation solver in the case $n=5$. In particular, both algorithms share the same setup and refinements of the [TdW] and [Hambrook] solver. For \eqref{Introduction:Goormaghtigh}, however, we are left to solve
+%\[f(y) = x^m,\]
+%a Thue-Mahler-like equation of degree $4$ in explicit values of $x$ and unknown integers $y$ and $m$. In this case, we are permitted simplifications which allow us to omit the Fincke-Pohst algorithm and final congruence sieves. Instead, for each $x$, we rely on only a few iterations of the LLL algorithm to reduce our initial bound on the exponents before entering a naive search to complete our computation. Of course, this algorithm can be refined further for efficiency, however, in the context of [BeGhKr], such improvements are not needed. 
 
-The remaining steps are performed for each of the $S$-unit equations in our collection. 
-
-\textbf{Step 2.}
-In place of the logarithmic sieves used in [TdW] to derive a large upper bound, we work with the global logarithmic Weil height
-\[h: \mathbb{G}_m(\overline{\mathbb{Q}}) \to \mathbb{R}_{\geq 0}.\]
-For a given \eqref{Introduction:SUnit}, we show that the height $h(1/x)$ admits a decomposition into local heights at each place of $K$ appearing in the $S$-unit equation. Using [CITE : Matshke, von Kanel], we generate a very large upper bound on the height $h(1/x)$, and subsequently, on the local heights. This step is a straightforward computation, whereas the analogous step in Hambrook and TdW is a complex and lengthy derivation which involves factoring rational primes into prime ideals in a splitting field of $K$ and computing heights of certain elements of the splitting field. 
-
-\textbf{Step 3.}
-For each place of $K$ appearing in \eqref{Introduction:SUnit}, we drastically reduce the upper bounds derived in Step 2 by using computational Diophantine approximation techniques applied to the intersection of a certain ellipsoid and translated lattice. This technique involves using the Finke-Pohst algorithm to enumerate all short vectors in the intersection. Here, working with the Weil height $h(1/x)$ has the advantage that it leads to ellipsoids whose volumes are smaller than the ellipsoids implicitly used in [TdW] by a factor of $\sim r^{r/2}$ for $r$ the number of places of $K$ appearing in our $S$-unit equation. In this way, we reduce the number of short vectors appearing from the Fincke-Pohst algorithm, and consequently reduce our running time and memory requirements. 
-
-\textbf{Step 5.}
-Finally, we use a sieving procedure to find all the solutions of the Diophantine equation that live in the box defined by the bounds derived in the previous steps. To carry out this step, we run through all the possible solutions in the box and ÔsieveÕ out the vast majority of non-solutions. This is done via certain low-cost congruence tests. The candidate solutions passing this test are then verified directly against \eqref{Introduction:SUnit}. Though we expect the bounds defining the box to be small, there can still be a very large number of possible solutions to check, especially if the number of rational primes involved in the Thue-Mahler equation is large. The computations performed on each individual candidate solution are relatively simple, but the sheer number of candidates often makes this step the computational bottleneck of the entire algorithm. 
-
-\textbf{Step 6.}
-Having performed Steps 2-5 for each $S$-unit equation in our collection, we now have all the solutions of each such equation, and we use this knowledge to determine all the solutions of the Thue-Mahler equation. 
-
-The reader will notice several parallels between this refined algorithm and the aforementioned Goormaghtigh equation solver in the case $n=5$. In particular, both algorithms share the same setup and refinements of the [TdW] and [Hambrook] solver. For \eqref{Introduction:Goormaghtigh}, however, we are left to solve
-\[f(y) = x^m,\]
-a Thue-Mahler-like equation of degree $4$ in explicit values of $x$ and unknown integers $y$ and $m$. In this case, we are permitted simplifications which allow us to omit the Fincke-Pohst algorithm and final congruence sieves. Instead, for each $x$, we rely on only a few iterations of the LLL algorithm to reduce our initial bound on the exponents before entering a naive search to complete our computation. Of course, this algorithm can be refined further for efficiency, however, in the context of [BeGhKr], such improvements are not needed. 
-
-The outline of this thesis is as follows. ADD
-
-
-\edit{Intro from Goormaghtigh:}
-More than a century ago, Ratat \cite{Ra} and Goormaghtigh \cite{Go} observed the identities
-$$
-31 = \frac{2^5-1}{2-1} = \frac{5^3-1}{5-1} \; \; \mbox{ and } \; \; 8191 = \frac{2^{13}-1}{2-1} = \frac{90^3-1}{90-1}.
-$$
-These correspond to the known solutions $(x,y,m,n)=(2,5,5,3)$ and $(2,90,13,3)$
-to what is nowadays termed {\it Goormaghtigh's equation}
-\begin{equation} \label{eq-main}
-\frac{x^m-1}{x-1} = \frac{y^n-1}{y-1}, \; \; y>x>1, \; m > n > 2.
-\end{equation}
-This is a classical example of a {\it polynomial-exponential equation} and shares a number of common characteristics with other frequently-studied Diophantine equations of this type, such as those of 
-Catalan
-\begin{equation} \label{Cat}
-x^m-y^n=1, \; \; x, y, m, n > 1,
-\end{equation}
-and 
-Nagell-Ljunggren 
-\begin{equation} \label{NL}
-\frac{x^m-1}{x-1} = y^n, \; \; x, y, n >1, \; m > 2.
-\end{equation}
-In a certain sense, however, equation (\ref{eq-main}) appears to be rather harder to treat than (\ref{Cat}) or (\ref{NL}). Techniques from Diophantine approximation (specifically, bounds for linear forms in complex and $p$-adic logarithms) have been applied by Tijdeman \cite{Ti} to show that equation (\ref{Cat}) has at most finitely many solutions in the four variables $x,y, m$ and $n$ (a result subsequently sharpened by Mih{\u{a}}ilescu \cite{Mih} via a different method to solve (\ref{Cat}) completely). Similarly, Shorey and Tijdeman \cite{ShTi} showed that equation (\ref{NL}) has at most finitely many solutions if any one of the variables $x, y$ or $m$ is fixed (though we do not have a like result for fixed odd $n$; the case where $n$ is even was resolved earlier by Nagell \cite{Nag} and Ljunggren \cite{Lju}). In the case of equation (\ref{eq-main}), on the other hand, to obtain finiteness results with current technology, we apparently need to assume that two of the variables $x, y, m$ and $n$ are fixed (see \cite{BaSh} for references). In addition, if the two variables fixed are the exponents $m$ and $n$, then in order to deduce effectively computable bounds upon the polynomial variables $x$ and $y$, via either Runge's method (Davenport, Lewis and Schinzel \cite{DaLeSc}) or from bounds upon linear forms in logarithms (see e.g. Nesterenko and Shorey \cite{NeSh}, and Bugeaud and Shorey \cite{BuSh}), we require constraints upon $m$ and $n$, that either $m=n+1$, or that
- \begin{equation} \label{condition}
- \gcd (m-1,n-1) = d > 1.
- \end{equation}
- In the extensive literature on this problem, there are a number of striking results that go well beyond what we have mentioned here. By way of example, work of Balasubramanian and 
- Shorey \cite{BaSh} shows that equation (\ref{eq-main}) has at most finitely many solutions if we fix only the set of prime divisors of $x$ and $y$, while Bugeaud and Shorey \cite{BuSh} prove an analogous finiteness result, under the additional assumption of (\ref{condition}), provided the quotient $(m-1)/(n-1)$ is bounded above. Additional results on special cases of equation (\ref{eq-main}) are available in, for example, \cite{HeTo}, \cite{Le1}, \cite{Le2} and \cite{Le3}.  An excellent overview of results on this problem  can be found in the survey of Shorey \cite{ShoSur}.
- 
-In this paper, we prove that, in fact, under assumption (\ref{condition}), equation (\ref{eq-main}) has at most finitely many solutions which may be found effectively, even if we fix only a single exponent.
-\begin{theorem} \label{main-thm}
-If there is a solution in integers $x,y, n$ and $m$ to equation (\ref{eq-main}), satisfying (\ref{condition}), then
-\begin{equation} \label{hive}
-x <  (3d)^{4n/d} \leq  36^n.
-\end{equation}
-In particular, if $n$ is fixed, there is an effectively computable constant $c=c(n)$ such that
-$\max \{ x, y, m \} < c$.
-\end{theorem}
-We note that the latter conclusion here follows immediately from (\ref{hive}), in conjunction with, for example, work of Baker \cite{Bak}.
-The constants present in our upper bound (\ref{hive}) may be sharpened somewhat at the cost of increasing the complexity of our argument. By refining our approach, in conjunction with some new results from computational Diophantine approximation, we are able to achieve the complete solution of equation (\ref{eq-main}), subject to condition (\ref{condition}),  for small fixed values of $n$.
-
-\begin{theorem} \label{main-thm2}
-If there is a solution in integers $x,y$ and $m$ to equation (\ref{eq-main}), with $n \in \{ 3, 4, 5 \}$ and satisfying (\ref{condition}), then
-$$
-(x,y,m,n) = (2,5,5,3)  \; \mbox{ and } \; (2,90,13,3).
-$$
-\end{theorem}
-
-Essentially half of the current paper is concerned with developing Diophantine approximation machinery for the case $n=5$ in Theorem \ref{main-thm2}. Here, ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. The new ideas introduced here are explored more fully in the general setting of {\it Thue-Mahler} equations in the forthcoming paper  \cite{GhKaMaSi}. These are polynomial-exponential equations of the form $F(x,y)=p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ where $F$ is a binary form of degree three or greater and $p_1, \ldots, p_k$ are fixed rational primes. Here, we take this opportunity to specialize these refinements to the case of Ramanujan-Nagell equations, and to introduce some further sharpenings which enable us to complete the proof of Theorem \ref{main-thm2}.
-
-We observe that, in case $n=3$, Theorem \ref{main-thm2} was obtained earlier by Yuan \cite{Yu} (see also He \cite{He}).  The techniques employed in both \cite{He} and \cite{Yu}, however, depend essentially upon the fact that $n=3$ (whereby $n-1=2$ and one can appeal to specialized techniques from the theory of quadratic fields) and cannot apparently be generalized to other values of $n$.
-
-The title of this paper reflects the fact that the machinery of Pad\'e approximation to binomial functions has been applied to the problem of solving equation (\ref{eq-main}) in earlier work of Bugeaud and Shorey \cite{BuSh}. We will employ these tools  here rather differently.
-
-The outline of this paper is as follows. In Section \ref{proof}, we derive ``good'' rational approximations to certain algebraic numbers associated to solutions of (\ref{eq-main}). Section \ref{Pade} contains relevant details about Pad\'e approximation to the binomial function. In Sections \ref{sec-main-thm} and \ref{sec-main-thm2}, we find the proofs of Theorems \ref{main-thm} and \ref{main-thm2}, respectively. In the latter case, to treat small fixed values of $n$ and $x$ in equation (\ref{eq-main}), we appeal to a variety of techniques from computational Diophantine approximation. Most interestingly, in case $n=5$, we sharpen existing techniques for solving  Thue-Mahler equations, and specialize them to our problem. We note that this section may essentially be read independently of the rest of the paper. For each $x$, we restrict the problem to that of solving a number of related $S$-unit equations, where $S$ is the set of primes dividing $x$. We then generate a large upper bound on the exponents of these equations using bounds for linear forms in logarithms, both Archimedean and non-Archimedean. Finally, unlike traditional examples of Thue-Mahler equations, where extensive use of geometric and $p$-adic reduction techniques are typically required, using only a few iterations of the LLL algorithm, we reduce this bound significantly, after which we apply a naive search to complete our computation. We will, in fact, employ  two quite different algorithms for solving Thue-Mahler equations, one for which we must compute the class group of a number field and one which avoids this computation altogether. For a given value of $x$, one of these versions may be significantly faster than the other; we list some timings for examples to illustrate this difference. 
-
+%The outline of this thesis is as follows. In \autoref{ch:Preliminaries}, we establish some background 
 
 
 
