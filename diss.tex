@@ -226,7 +226,7 @@
 %%   rather than the entry text.
 \usepackage[bookmarks,bookmarksnumbered,%
     allbordercolors={0.8 0.8 0.8},%
-    pagebackref,linktocpage%
+    linktocpage%
     ]{hyperref}
 %% The following change how the the back-references text is typeset in a
 %% bibliography when `backref' or `pagebackref' are used
@@ -237,17 +237,17 @@
 %%\newcommand{\nocitations}{No citations}
 %%
 %\renewcommand*{\backref}[1]{}% necessary for backref < 1.33
-\renewcommand*{\backrefsep}{,~}%
-\renewcommand*{\backreftwosep}{,~}% ', and~'
-\renewcommand*{\backreflastsep}{,~}% ' and~'
-\renewcommand*{\backrefalt}[4]{%
-\textcolor{greytext}{\ifcase #1%
-\nocitations%
-\or
-\(\rightarrow\) page #2%
-\else
-\(\rightarrow\) pages #2%
-\fi}}
+%\renewcommand*{\backrefsep}{,~}%
+%\renewcommand*{\backreftwosep}{,~}% ', and~'
+%\renewcommand*{\backreflastsep}{,~}% ' and~'
+%\renewcommand*{\backrefalt}[4]{%
+%\textcolor{greytext}{\ifcase #1%
+%\nocitations%
+%\or
+%\(\rightarrow\) page #2%
+%\else
+%\(\rightarrow\) pages #2%
+%\fi}}
 
 
 %% The following uses most defaults, which causes hyperlinks to be
