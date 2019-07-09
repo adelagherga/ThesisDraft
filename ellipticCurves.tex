@@ -4,40 +4,8 @@
 \chapter{Computing Elliptic Curves over $\mathbb{Q}$}
 \label{ch:EllipticCurves} 
 
-A classical result of Shafarevich \cite{Shaf} implies that, given  fixed set of prime numbers $S$,  there are only finitely many $\mathbb{Q}$-isomorphism classes of elliptic curves 
-defined over $\mathbb{Q}$ with good reduction outside $S$. In 1970, Coates \cite{Coa} proved an effective version of this theorem, using bounds for linear forms in $p$-adic and complex logarithms. Early attempts to make these results explicit, for fixed sets of small primes, overlap with the arguments of \cite{Coa}, in 
-that they reduce the problem to solving a number of {\it Thue-Mahler equations}. These are Diophantine equations 
-of the form
-\begin{equation} \label{TM}
-F(x,y) = u.
-\end{equation}
-Here, $F$ is a binary form of degree $3$ or greater, with integer coefficients, and $u$ is an {\it $S$-unit} -- an integer whose prime factors are 
-contained in $S$. The number of solutions in relatively prime integers $x$ and $y$ to equation (\ref{TM}), provided that $F$ is irreducible, is known to be finite, via work of Mahler \cite{Mahler}.
-This generalizes a classical result of Thue \cite{Th} who had proved an analogous statement for the case of $u$ fixed in equation (\ref{TM}). When 
-$F$ is a reducible form in $\mathbb{Z}[x,y]$, equation~\eqref{TM} is typically less difficult to solve; in the context of finding elliptic curves, this situation arises
-from consideration of elliptic curves with at least one nontrivial rational $2$-torsion point. The 
-first examples where all elliptic curves $E/\mathbb{Q}$ with good reduction outside a 
-given set $S$ were determined were for  $S = \{2, 3 \}$ by Coghlan \cite{Cog} and Stephens \cite{Ste}  (see also \cite{BK}),  and for $S = 
-\{p\}$ for certain small primes $p$ -- see e.g. Setzer \cite{Set} and Neumann \cite{Neu}. Each of these examples corresponds, via our approach, 
-to cases with reducible forms.  Agrawal, Coates, Hunt and van der 
-Poorten \cite{ACHP} carried out the first analysis where irreducible forms in equation~\eqref{TM} were treated to find elliptic curves of given conductor (dealing with the case $S= \{ 11 \}$).  In this situation, the reduction to equation~\eqref{TM} is not particular involved, but subsequent computations are quite difficult; they use 
-arguments from \cite{Coa} and a range of techniques from computational Diophantine approximation. 
-
-It appears that there are very few subsequent attempts in the literature to compute elliptic curves of given 
-conductor\index{conductor} through the solution of Thue-Mahler equations\index{Thue-Mahler equations}. Instead, one finds a wealth of 
-results which approach the problem via modular forms. This route relies upon the Modularity theorem (see Wiles 
-\cite{Wi} and Breuil, Conrad, Diamond and Taylor \cite{BCDT}\index{modularity theorem}), which was actually still conjectural 
-when these ideas were first implemented. To find all $E/\mathbb{Q}$ of conductor $N$ by this method, one computes the 
-space of $\Gamma_0(N)$ modular symbols and the action of the Hecke algebra on it, and then searches for one-dimensional 
-rational eigenspaces. After calculating a large number of Hecke eigenvalues, one is then able to extract corresponding 
-elliptic curves. For a detailed description of how this technique works, the reader is directed to  \cite{Cre2}. The 
-great computational success of this approach can be primarily attributed to Cremona (see e.g. \cite{Cre1}, \cite{Cre2}) 
-and his collaborators; they have devoted many years of work to it and are responsible for the current state-of-the-art. 
-In particular, at the time of writing in 2017, all $E/\mathbb{Q}$ of conductor $N \leq 400000$ have been determined by these methods.
-
-In the chapter at hand, we return to techniques based upon solving Thue-Mahler equations\index{Thue-Mahler equations}, using a 
-number of results from classical invariant theory. Our aim is to give a straightforward demonstration of the link 
-between the conductors in question and the corresponding equations, and to make the Diophantine approximation problem 
+In the chapter at hand, we outline an algorithm to compute elliptic curves over $\mathbb{Q}$, based upon techniques of solving Thue-Mahler equations. Our aim is to give a straightforward demonstration of the link 
+between the conductors of the elliptic curves in question and the corresponding equations, and to make the Diophantine approximation problem 
 that follows as easy to tackle as possible. It is worth noting here that these connections are quite straightforward for primes $p > 3$, but require 
 careful analysis at the primes $2$ and $3$. We will demonstrate our approach for a number of specific conductors and sets $S$, and then focus 
 our main computational efforts on curves with bad reduction at a single prime (i.e. curves of conductor $p$ or $p^2$ for 
