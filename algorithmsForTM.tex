@@ -4,7 +4,7 @@
 \chapter{Algorithms for Thue-Mahler Equations}
 \label{ch:AlgorithmsForTM}
 
-In this chapter, we give some of primary algorithms needed to solve an arbitrary Thue-Mahler equation. The methods presented here follow somewhat \cite{Ham} and \cite{TW3}, with new results and modifications from \cite{GhKaMaSi}. 
+In this chapter, we give some of the primary algorithms needed to solve an arbitrary Thue-Mahler equation. The methods presented here follow somewhat \cite{Ham} and \cite{TW3}, with new results and modifications from \cite{GhKaMaSi}. 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
@@ -24,7 +24,7 @@ As $F$ is irreducible by assumption, at least one of the coefficients $c_0$ and 
 \[ c_0' \overline{X}^n + c_1' \overline{X}^{n-1}\overline{Y} + \cdots + c_{n-1}'\overline{X}\overline{Y}^{n-1} + c_n'\overline{Y}^n = c p_1^{Z_1}\cdots p_v^{Z_v},\]
 where $c_i' = c_{n-1}$ for $i = 0, \dots, n$, $\overline{X} = Y$, and $\overline{Y} = X$. 
 
-Denote by $\mathcal{D}$ the set of all positive rational integers $m$ dividing $c_0$ such that ${\ord_p(m)\leq \ord_p(c)}$ for each rational prime $p\notin S$. Equivalently, $\mathcal{D}$ is precisely the set of all possible integers $d$ such that $d = \gcd(c_0,Y)$. To see this, let $q_1, \dots, q_{w}$ denote the distinct prime divisors of $a$ not contained in $S$. Then 
+Let $\mathcal{D}$ be the set of all positive integers $m$ dividing $c_0$ such that ${\ord_p(m)\leq \ord_p(c)}$ for each rational prime $p\notin S$. Equivalently, $\mathcal{D}$ is precisely the set of all possible integers $d$ such that $d = \gcd(c_0,Y)$. To see this, let $q_1, \dots, q_{w}$ denote the distinct prime divisors of $a$ not contained in $S$. Then 
 \[c = \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(c)}\]
 for some integers $b_i >0$. If $(X,Y,Z_1, \dots, Z_v)$ is a solution of the Thue-Mahler equation in question, it follows that
 \[F(X,Y) = cp_1^{Z_1}\dots p_v^{Z_v} =  \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(c) + Z_i}.\]
@@ -278,7 +278,7 @@ Let $(x,y,z_1,\dots, z_v)$ be a solution to \eqref{eq:ThueMahler3}. In view of L
 \subsection{Computational remarks and refinements}
 \label{subsec:PIRLRemarks}
 
-In implementing Algorithms~\ref{alg:AffinePatch1} and \ref{alg:AffinePatch2}, we reduce the number of prime ideals appearing in the factorization of $(x-y\theta)\mathcal{O}_K$ to a large power. The Prime Ideal Removing Lemma, as originally stated in Tzanakis - de Weger outlines a similar process by comparing the valuations of $(x-y\theta)\mathcal{O}_K$ at two prime ideals $\mathfrak{p}_1$ and $\mathfrak{p}_2$ above $p$. Of course if $\mathfrak{p}_1 \mid (x-y\theta)\mathcal{O}_K$, we restrict the possible values for $x$ and $y$ modulo $p$. However any choice of $x$ and $y$ modulo $p$ affects the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$. In the present refinement outlined by Lemma~\ref{lem:AffinePatch1} and Lemma~\ref{lem:AffinePatch2}, we instead study the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$ simultaneously. This presents us with considerably less ideal equations of the form \ref{eq:idealTM} to resolve. 
+In implementing Algorithms~\ref{alg:AffinePatch1} and \ref{alg:AffinePatch2}, we reduce the number of prime ideals appearing to a large power in the factorization of $(x-y\theta)\mathcal{O}_K$. The Prime Ideal Removing Lemma, as originally stated in Tzanakis - de Weger outlines a similar process by comparing the valuations of $(x-y\theta)\mathcal{O}_K$ at two prime ideals $\mathfrak{p}_1$ and $\mathfrak{p}_2$ above $p$. Of course if $\mathfrak{p}_1 \mid (x-y\theta)\mathcal{O}_K$, we restrict the possible values for $x$ and $y$ modulo $p$. However any choice of $x$ and $y$ modulo $p$ affects the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$. In the present refinement outlined by Lemma~\ref{lem:AffinePatch1} and Lemma~\ref{lem:AffinePatch2}, we instead study the valuations of $(x-y\theta)\mathcal{O}_K$ at all prime ideals above $p$ simultaneously. This presents us with considerably less ideal equations of the form \eqref{eq:idealTM} to resolve. 
 
 Moreover, this variant of the Prime Ideal Removing Lemma permits the following additional refinements:
 \begin{itemize}
@@ -410,7 +410,7 @@ In contrast, the method in \autoref{subsec:FactorizationTMwithOK} reduces \eqref
 
 However, when generating the vectors $\mathbf{r} = (r_1, \dots, r_{\nu})$ using the class group, we observe that some of the integers $r_i$ may be negative, so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $K$ into our $p$-adic fields. In those instances, the precision on our $p$-adic fields may not be high enough, and as a result, some non-zero elements of $K$ may be erroneously mapped to $0$. To avoid this, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. 
 
-In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is far more efficient than that of \autoref{subsec:FactorizationTMwithoutOK}. However, computing the class group may be a very costly computation. Indeed, for some Thue-Mahler equations, this may be the bottle-neck of the algorithm. In this case, it may happen that computing the class group will take longer than directly checking each potential $S$-unit equation arising from the alternative method. Unfortunately, we cannot know a piori how long computing $\Cl(K)$ will take in so much that we cannot know a priori how long solving all $S$-unit equations from the other algorithm will take. In practicality, generating the class group in Magma is a process which cannot be terminated without exiting the program. For this reason, we cannot simply apply a timeout in Magma if computing $\Cl(K)$ is exceeding what we deem a reasonable amount of time. Adding to this, Magma does not support parallelization, so we cannot implement both algorithms simultaneously. Our compromise to solve a single Thue-Mahler equation is to run two separate instances of Magma in parallel, each generating the $S$-unit equations using the two aforementioned algorithms. When one of these instances finishes, the other is forced to terminate. In this way, though far from ideal, we are able to select the most computationally efficient option. 
+In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is far more efficient than that of \autoref{subsec:FactorizationTMwithoutOK}. However, computing the class group may be a very costly computation. Indeed, for some Thue-Mahler equations, this may be the bottle-neck of the algorithm. In this case, it may happen that computing the class group will take longer than directly checking each potential $S$-unit equation arising from the alternative method. Unfortunately, we cannot know a priori how long computing $\Cl(K)$ will take in so much that we cannot know a priori how long solving all $S$-unit equations from the other algorithm will take. In practicality, generating the class group in Magma is a process which cannot be terminated without exiting the program. For this reason, we cannot simply apply a timeout in Magma if computing $\Cl(K)$ is exceeding what we deem a reasonable amount of time. Adding to this, Magma does not support parallelization, so we cannot implement both algorithms simultaneously. Our compromise to solve a single Thue-Mahler equation is to run two separate instances of Magma in parallel, each generating the $S$-unit equations using the two aforementioned algorithms. When one of these instances finishes, the other is forced to terminate. In this way, though far from ideal, we are able to select the most computationally efficient option. 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
@@ -451,7 +451,9 @@ Let $l \in \{1, \dots, v\}$. If $\ord_{p_l}(\delta_1) \neq 0$, then
 \end{lemma}
 
 \begin{proof}
-Apply the Corollary of Lemma $7.2$ of \cite{TW3} and Lemma~\ref{lem:SunitUnits} to both expressions of $\lambda$ in \eqref{eq:Sunit}. On the one hand, we obtain that $\ord_{p_l}(\lambda) = \min\{\ord_{p_l}(\delta_1), 0\}$, and on the other hand, 
+Apply the Corollary of Lemma $7.2$ of \cite{TW3} and Lemma~\ref{lem:SunitUnits} to both expressions of $\lambda$ in \eqref{eq:Sunit}. On the one hand, we obtain that 
+\[\ord_{p_l}(\lambda) = \min\{\ord_{p_l}(\delta_1), 0\},\] 
+and on the other hand, 
 \begin{align*}
 \ord_{p_l}(\lambda)
 & = \ord_{p_l}(\delta_2) + \sum_{i = 1}^{\nu} \ord_{p_l}\left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\\
@@ -486,7 +488,7 @@ For every $h \in \{1, \dots, s\}$, we have
 \end{lemma}
 
 \begin{proof}
-Taking the images of \eqref{eq:LambdaL} under conjugation $\phi \mapsto \phi^{(h)}$ ($h = 1, \dots, s$) yields
+For $h = 1, \dots, s$, taking the images of \eqref{eq:LambdaL} under conjugation $\phi \mapsto \phi^{(h)}$ yields
 \[\begin{bmatrix}
 \Lambda_l^{(1)} \\
 \vdots \\
@@ -502,7 +504,7 @@ Taking the images of \eqref{eq:LambdaL} under conjugation $\phi \mapsto \phi^{(h
 \Lambda_{l1}\\
 \vdots \\
 \Lambda_{ls}\\
-\end{bmatrix}\]
+\end{bmatrix}.\] 
 The $s \times s$ matrix $(\phi^{(h)i-1})$ above is invertible, with inverse
 \[\frac{1}{\displaystyle \prod_{1\leq j<k\leq s} (\phi^{(k)} - \phi^{(j)})}
 \begin{bmatrix}
@@ -510,7 +512,7 @@ The $s \times s$ matrix $(\phi^{(h)i-1})$ above is invertible, with inverse
 \vdots 		& 		& \vdots\\
 \gamma_{s1} 	& \cdots 	& \gamma_{ss}\\
 \end{bmatrix},\]
-where $\gamma_{jk}$ is an integral polynomial in the entries of $(\phi^{(h)i-1})$. Since $\ord_{p_l}(\phi) > 0$ and $\ord_{p_l}(\phi^{(h)}) = \ord_{p_l}(\phi)$ for all $h = 1, \dots, s$, it follows that $\ord_{p_l}(\gamma_{jk}) > 0 $ for every $\gamma_{jk}$. Therefore, as 
+where $\gamma_{jk}$ is an integral polynomial in the entries of $(\phi^{(h)i-1})$. As $\ord_{p_l}(\phi) > 0$ and $\ord_{p_l}(\phi^{(h)}) = \ord_{p_l}(\phi)$ for all $h = 1, \dots, s$, it follows that $\ord_{p_l}(\gamma_{jk}) > 0 $ for every $\gamma_{jk}$. Therefore, as 
 \[\Lambda_{lh} = \frac{1}{\displaystyle \prod_{1\leq j<k\leq s}(\phi^{(k)} - \phi^{(j)})}\sum_{i = 1}^s \gamma_{hi}\Lambda_l^{(i)},\]
 we have 
 \begin{align*}
@@ -535,13 +537,18 @@ Immediate from Lemma~\ref{lem:pAdicLogarithms2}.
 \end{proof}
 
 \begin{lemma} \label{lem:specialcase} \
+Let 
+\[w_l = \bigg\lfloor{\frac{1}{p_l-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor.\]
 \begin{enumerate}[(i)]
 \item If $\ord_{p_l}(\alpha_1) < \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_i)$, then
-\[\sum_{i = 1}^{\nu} n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p_l-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor,  \bigg \lceil\displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2) \bigg \rceil - 1 \right\}\]
+\begin{align*}
+\sum_{i = 1}^{\nu} n_i a_{li} \leq \max \left\{ w_l,  \bigg \lceil\displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2) \bigg \rceil - 1 \right\}
+\end{align*}
+
 \item For all $h \in \{1, \dots, s\}$, if $\ord_{p_l}(\alpha_{1h}) < \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{ih})$, then
-\[\sum_{i = 1}^{\nu} n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p_l-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor, \bigg \lceil \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + w_l \bigg \rceil - 1\right\},\]
+\[\sum_{i = 1}^{\nu} n_i a_{li} \leq \max \left\{w_l, \bigg \lceil \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + d_l \bigg \rceil - 1\right\},\]
 where 
-\[w_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
+\[d_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
 \end{enumerate}
 \end{lemma}
 
@@ -559,7 +566,9 @@ Observe that
 \end{align*}
 Therefore, it suffices to show that 
 \[\ord_{p_l}(\Lambda_{l}) \geq \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(b_i\alpha_{i}).\]
-By Lemma~\ref{lem:pAdicLogarithms2}, the first inequality implies ${\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^{\nu} n_ia_{li} + \ord_{p_l}(\delta_2)}$, from which the result follows. 
+By Lemma~\ref{lem:pAdicLogarithms2}, the first inequality implies 
+\[{\ord_{p_l}(\Lambda_{l}) = \displaystyle \sum_{i = 1}^{\nu} n_ia_{li} + \ord_{p_l}(\delta_2)},\] 
+from which the result follows. 
 
 \item Similar to the proof of (i).
 %\item[(ii)] We prove the contrapositive. Let $h \in \{1, \dots, s\}$ and suppose

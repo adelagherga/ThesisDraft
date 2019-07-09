@@ -58,9 +58,10 @@ Our argument will be somewhat different, as we consider instead a rational appro
 $\sqrt[d]{(x-1)/x}$ that is, on the surface, much less impressive than that to $\sqrt[d]{\frac{y(x-1)}{x(y-1)}}$ afforded by (\ref{good}). The key additional idea is that we are able to take advantage of the arithmetic structure of our approximations  to obtain very strong lower bounds for how well they can approximate $\sqrt[d]{(x-1)/x}$. This argument has its genesis in work of Beukers \cite{Beu1}, \cite{Beu2}.
 
 For the remainder of this section, we will always assume that $x \geq 40$. From
- $$
- \frac{y^n-1}{y-1} = y^{dn_0} \left( 1 + \frac{1}{y} +  \cdots + \frac{1}{y^{dn_0}} \right) \mbox{ and }  \frac{x^m-1}{x-1} = x^{dm_0} \left( 1 + \frac{1}{x} + \cdots + \frac{1}{x^{dm_0}} \right) ,
- $$
+ \[\frac{y^n-1}{y-1} = y^{dn_0} \left( 1 + \frac{1}{y} +  \cdots + \frac{1}{y^{dn_0}} \right)\]
+ and
+ \[\frac{x^m-1}{x-1} = x^{dm_0} \left( 1 + \frac{1}{x} + \cdots + \frac{1}{x^{dm_0}} \right),\]
+
  we thus have
  $$
 y^{dn_0}  <  \frac{y^n-1}{y-1} =  \frac{x^m-1}{x-1}  < \frac{x}{x-1} \,   x^{dm_0}
@@ -595,8 +596,10 @@ To prove Theorem \ref{main-thm2}, we will begin by deducing slightly weaker vers
 \item $n=5, \; d=4, \; n_0=1, \; 2 \leq x \leq 248831$.
 \end{enumerate}
 Initially, we will suppose that $x \geq 40$ and, in all cases, that $m_1$ and $m_2$ are nonnegative integers satisfying (\ref{sturdy}). We will always, in fact, choose $m_1$ positive. Again setting $m_2=\alpha m_1$, 
-via calculus, we may bound the integral $\int^{1}_{0} ~
-\frac{v^{m_2+1/d} (1-v)^{m_1-1/d} dv}{(1-(1-v)/x)^{m_2+1}}$ in (\ref{del}) by
+via calculus, we may bound the integral 
+\[\int^{1}_{0} ~
+\frac{v^{m_2+1/d} (1-v)^{m_1-1/d} dv}{(1-(1-v)/x)^{m_2+1}}\]
+in (\ref{del}) by
 $$
 \left( \max_{v \in [0,1]} \frac{v^{(\alpha+1)/d}}{ \left( 1 - (1-v)/x \right)^{(\alpha+d)/d}} \right) 
 \; M(\alpha,x)^{1/d-m_1} < M(\alpha,x)^{1/d-m_1}.
@@ -1082,12 +1085,14 @@ then
 \end{lemma}
 
 \begin{lemma} \label{Lem:specialcase} \
+Let
+\[w_l = \bigg\lfloor{\frac{1}{p_l-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor.\]
 \begin{enumerate}
 \item[(i)] If $\ord_{p_l}(\alpha_1) < \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_i)$, then
-\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor,  \bigg \lceil\displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2) \bigg \rceil - 1 \right\}\]
+\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{w_l, \bigg \lceil\displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{i}) - \ord_{p_l}(\delta_2) \bigg \rceil - 1 \right\}\]
 
 \item[(ii)] For all $h \in \{1, \dots, s\}$, if $\ord_{p_l}(\alpha_{1h}) < \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})$, then
-\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ \bigg\lfloor{\frac{1}{p-1} - \ord_{p_l}(\delta_2)}\bigg\rfloor, \bigg \lceil \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + \nu_l \bigg \rceil - 1\right\},\]
+\[\sum_{i = 1}^v n_i a_{li} \leq \max \left\{ w_l, \bigg \lceil \displaystyle \min_{2 \leq i \leq v+2} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + \nu_l \bigg \rceil - 1\right\},\]
 where 
 \[\nu_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
 \end{enumerate}
@@ -1298,7 +1303,7 @@ Lastly, rather than testing each possible tuple $(|a_1|,|n_1|, \dots, |n_v|)$ as
 \subsection{The $p_l$-adic reduction procedure}
 
 In this section, we set some notation and give some preliminaries for the $p_l$-adic reduction procedures. Consider a fixed index $l \in \{1, \dots, v\}$. Following Section \ref{subsec:FirstStepsSmallBoundsGE}, we have
-\[\ord_{p_l}(\alpha_1) \geq \min_{2\leq i\leq v+2} \ord_{p_l}(\alpha_i) \quad \text{ and } \quad \ord_{p_l}(\alpha_{1h}) \geq \min_{2\leq i\leq v+2}(\alpha_{ih}) \quad h = (1, \dots, s).\]
+\[\ord_{p_l}(\alpha_1) \geq \min_{2\leq i\leq v+2} \ord_{p_l}(\alpha_i) \  \text{ and } \ \ord_{p_l}(\alpha_{1h}) \geq \min_{2\leq i\leq v+2}(\alpha_{ih}) \quad h = (1, \dots, s).\]
 
 Let $I$ be the set of all indices $i' \in \{2, \dots, v+2\}$ for which
 \[\ord_{p_l}(\alpha_{i'}) = \min_{2\leq i\leq v+2} \ord_{p_l}(\alpha_i).\]

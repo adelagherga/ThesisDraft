@@ -24,7 +24,7 @@
 \contentsline {subsection}{\numberline {3.4.3}The $S$-unit equation}{38}{subsection.3.4.3}
 \contentsline {subsection}{\numberline {3.4.4}Computational remarks and comparisons}{40}{subsection.3.4.4}
 \contentsline {section}{\numberline {3.5}A small upper bound for $u_l$ in a special case}{41}{section.3.5}
-\contentsline {section}{\numberline {3.6}Lattice-Based Reduction}{46}{section.3.6}
+\contentsline {section}{\numberline {3.6}Lattice-Based Reduction}{47}{section.3.6}
 \contentsline {subsection}{\numberline {3.6.1}The $L^3$-lattice basis reduction algorithm}{47}{subsection.3.6.1}
 \contentsline {subsection}{\numberline {3.6.2}The Fincke-Pohst algorithm}{49}{subsection.3.6.2}
 \contentsline {subsection}{\numberline {3.6.3}Computational remarks and translated lattices}{51}{subsection.3.6.3}
@@ -64,17 +64,17 @@
 \contentsline {subsubsection}{The case $j_E = 0$}{117}{subsubsection*.16}
 \contentsline {subsection}{\numberline {5.2.2}The algorithm}{117}{subsection.5.2.2}
 \contentsline {section}{\numberline {5.3}Proof of Theorem \ref {fisk}}{119}{section.5.3}
-\contentsline {section}{\numberline {5.4}Finding representative forms}{128}{section.5.4}
+\contentsline {section}{\numberline {5.4}Finding representative forms}{129}{section.5.4}
 \contentsline {subsection}{\numberline {5.4.1}Irreducible Forms}{129}{subsection.5.4.1}
-\contentsline {subsection}{\numberline {5.4.2}Reducible forms}{129}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.2}Reducible forms}{130}{subsection.5.4.2}
 \contentsline {subsection}{\numberline {5.4.3}Computing forms of fixed discriminant}{131}{subsection.5.4.3}
 \contentsline {subsection}{\numberline {5.4.4}$\unhbox \voidb@x \hbox {GL}_2(\mathbb {Z})$ vs $\unhbox \voidb@x \hbox {SL}_2(\mathbb {Z})$}{132}{subsection.5.4.4}
 \contentsline {section}{\numberline {5.5}Examples}{132}{section.5.5}
 \contentsline {subsection}{\numberline {5.5.1}Cases without irreducible forms}{133}{subsection.5.5.1}
 \contentsline {subsubsection}{Conductor $2655632887 = 31 \cdot 9007 \cdot 9511$}{134}{subsubsection*.19}
 \contentsline {subsubsection}{Conductor $3305354359 = 41 \cdot 409 \cdot 439 \cdot 449$}{135}{subsubsection*.20}
-\contentsline {subsection}{\numberline {5.5.2}Cases with fixed conductor (and corresponding irreducible forms)}{135}{subsection.5.5.2}
-\contentsline {subsubsection}{Conductor $399993 = 3 \cdot 11 \cdot 17 \cdot 23 \cdot 31$}{135}{subsubsection*.21}
+\contentsline {subsection}{\numberline {5.5.2}Cases with fixed conductor (and corresponding irreducible forms)}{136}{subsection.5.5.2}
+\contentsline {subsubsection}{Conductor $399993 = 3 \cdot 11 \cdot 17 \cdot 23 \cdot 31$}{136}{subsubsection*.21}
 \contentsline {subsubsection}{Conductor $10^6-1$}{139}{subsubsection*.22}
 \contentsline {subsubsection}{Conductor $10^9-1$}{143}{subsubsection*.23}
 \contentsline {subsection}{\numberline {5.5.3}Curves with good reduction outside $\{ 2, 3, 23 \}$ : an example of Koutsianis and of von Kanel and Matchke}{145}{subsection.5.5.3}
@@ -110,10 +110,10 @@
 \contentsline {chapter}{\numberline {6}Towards Efficient Resolution of Thue-Mahler Equations}{184}{chapter.6}
 \contentsline {section}{\numberline {6.1}Decomposition of the Weil height}{185}{section.6.1}
 \contentsline {section}{\numberline {6.2}Initial height bounds}{191}{section.6.2}
-\contentsline {section}{\numberline {6.3}Coverings of $\Sigma $}{194}{section.6.3}
+\contentsline {section}{\numberline {6.3}Coverings of $\Sigma $}{193}{section.6.3}
 \contentsline {section}{\numberline {6.4}Construction of the ellipsoids}{195}{section.6.4}
 \contentsline {subsection}{\numberline {6.4.1}The Archimedean ellipsoid: the real case}{204}{subsection.6.4.1}
-\contentsline {subsection}{\numberline {6.4.2}The non-Archimedean ellipsoid}{212}{subsection.6.4.2}
-\contentsline {section}{\numberline {6.5}The Archimedean sieve: the real case}{214}{section.6.5}
-\contentsline {section}{\numberline {6.6}The non-Archimedean Sieve}{216}{section.6.6}
-\contentsline {chapter}{Bibliography}{227}{chapter*.32}
+\contentsline {subsection}{\numberline {6.4.2}The non-Archimedean ellipsoid}{214}{subsection.6.4.2}
+\contentsline {section}{\numberline {6.5}The Archimedean sieve: the real case}{215}{section.6.5}
+\contentsline {section}{\numberline {6.6}The non-Archimedean Sieve}{218}{section.6.6}
+\contentsline {chapter}{Bibliography}{228}{chapter*.32}

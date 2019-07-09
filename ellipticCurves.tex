@@ -394,9 +394,10 @@ $$
 D_F \equiv 0 \mod{g^4}.
 $$
 This is a necessary but not sufficient condition for the form $F$ to be imprimitive. It follows, if we wish to restrict attention to primitive forms in Theorem \ref{fisk}, that the possible values for $\nu_p (D_F)$ that can arise are
-\begin{equation} \label{lumpy}
-\nu_2 (D_F) \in \{ 0, 2, 3, 4 \}, \; \;  \nu_3 (D_F) \in \{ 0, 1, 3, 4, 5 \} \; \; \mbox{ and } \; \; \nu_p (D_F) \in \{ 0, 1, 2 \}, \; \mbox{ for } p > 3.
-\end{equation}
+\begin{align} \label{lumpy}
+& \nu_2 (D_F) \in \{ 0, 2, 3, 4 \}, \; \;  \nu_3 (D_F) \in \{ 0, 1, 3, 4, 5 \} \\
+& \mbox{ and } \nu_p (D_F) \in \{ 0, 1, 2 \}, \; \mbox{ for } p > 3.
+\end{align}
 
 
 \subsubsection{Possible twists}
@@ -521,11 +522,11 @@ while, if $\nu_p (N)=2$, then either
 \end{equation}
 or
 %
-\begin{equation} \label{super}
+\begin{align} \label{super}
 \nu_p (\mathcal{D}) \leq 1, \;
-(\nu_p (X), \nu_p (Y), \nu_p (M) ) = (0,0, \geq 1), (\geq 1, 1, 2), (1, \geq 2, 3) 
-\mbox{ or } (\geq 2, 2, 4).
-\end{equation}
+&(\nu_p (X), \nu_p (Y), \nu_p (M) ) = (0,0, \geq 1), (\geq 1, 1, 2), (1, \geq 2, 3) \\
+&\mbox{ or } (\geq 2, 2, 4).
+\end{align}
 Things are rather more complicated for the primes $2$ and $3$; we summarize this in Tables~\ref{tab nu2 nxym} and~\ref{tab nu3 
 nxym} (which are, in turn, compiled from the data in Tables~\ref{tab nu2} and ~\ref{tab nu3}). 
 
@@ -555,9 +556,10 @@ $$
 \nu_3 (N) & (\nu_3 (X), \nu_3 (Y), \nu_3 (M), \nu_3 (\mathcal{D}) ) \\ \hline
 0 & (1, \geq 3, 3, 0)  \mbox{ or } (0,0,3, 0)  \\
 1 & (0,0,\geq 4, 0)  \\
-2 & (\geq 0, 0, 0, 1), (0, \geq 2, 0, 1), (0,0, \geq 3, 1), (1, \geq 3, 3, 1), (\geq 0,0,0,2) 
-\mbox{ or } (0,\geq 2, 0, 2)  \\
-3 & (\geq 0, 0, 0, 1),  (\geq 0, 0, 0, 2), (0,1,0, 1), (0,1,0, 2), (0,0,2,1) \mbox{ or } (0,0,2, 2) \\
+2 & (\geq 0, 0, 0, 1), (0, \geq 2, 0, 1), (0,0, \geq 3, 1), (1, \geq 3, 3, 1), (\geq 0,0,0,2)  \\
+ & \mbox{ or } (0,\geq 2, 0, 2) \\
+3 & (\geq 0, 0, 0, 1),  (\geq 0, 0, 0, 2), (0,1,0, 1), (0,1,0, 2), (0,0,2,1)\\
+ &  \mbox{ or } (0,0,2, 2) \\
 4 &  (0,0,1,1), (0,0,1,2), (1,2,3,1) \mbox{ or } (1, 2, 3, 2) \\
 5 &   (\geq 1, 1, 2, 1), (\geq 1, 1, 2, 2), (\geq 2, 2, 4, 1) \mbox{ or }  (\geq 2, 2, 4,2). \\
  \hline
@@ -707,11 +709,10 @@ In cases (i), (ii), and (iii), we choose $F=F_1$, i.e.
 (\omega_0,\omega_1,\omega_2,\omega_3) = (a, 3 b_0, 3 c_0, d),
 \end{align*}
 so that
-$$
-F(1,0)=a, \; \; D_{F} = (-1)^\delta 2^2 \cdot 3^3 \cdot K, \; \; 
-c_4 = \mathcal{D}^2 \widetilde{H}_{F} (1,0) \; \; \mbox{ and } \; \; 
-c_6 = - \frac{1}{2}  \mathcal{D}^3 \widetilde{G}_{F} (1,0).
-$$
+\[F(1,0)=a, \; \; D_{F} = (-1)^\delta 2^2 \cdot 3^3 \cdot K, \; \; 
+c_4 = \mathcal{D}^2 \widetilde{H}_{F} (1,0)\]
+and 
+\[c_6 = - \frac{1}{2}  \mathcal{D}^3 \widetilde{G}_{F} (1,0).\]
 It follows that $E$ is isomorphic over $\mathbb{Q}$ to the curve
 $$
 y^2 = x^3 -27 c_4 x -54 c_6 = x^3 - 3 \mathcal{D}^2 H_{F}(1,0) x + \mathcal{D}^3 G_{F}(1,0).
@@ -732,11 +733,10 @@ set $F = F_1/3$, i.e. take
 (\omega_0,\omega_1,\omega_2,\omega_3) = (a_0, b_0, c_0, d_0).
 \end{align*}
 We have
-$$
-F(1,0) =a/3, \; \;  D_{F}  = (-1)^\delta 2^2  \cdot K/3, \; \; 
-c_4 = \mathcal{D}^2 H_{F} (1,0)  \; \; \mbox{ and } \; \;  
-c_6 = - \frac{1}{2}  \mathcal{D}^3 G_{F} (1,0).
-$$
+\[F(1,0) =a/3, \; \;  D_{F}  = (-1)^\delta 2^2  \cdot K/3, \; \; 
+c_4 = \mathcal{D}^2 H_{F} (1,0)\]
+and 
+\[c_6 = - \frac{1}{2}  \mathcal{D}^3 G_{F} (1,0).\]
 The curve $E$ is now isomorphic over $\mathbb{Q}$ to the model
 $$
 y^2 = x^3 -27 c_4 x -54 c_6 = x^3 - 27 \mathcal{D}^2 H_{F}(1,0) x + 27 \mathcal{D}^3 G_{F}(1,0).
@@ -1012,7 +1012,8 @@ For the possible cases with rational $2$-torsion, we solve $X+Y=Z^2$ with $X$ an
 $$
 \begin{array}{lll}
 (X,Y) &= &  (2,-1), (2,2), (8,1), (32,-31), (62,2), (256,-31), (961,128), \\
-& & (992,-31), (3968,1), (76088,-9007), (294841, 8) \mbox{ and } (492032,-9007).  \\
+& & (992,-31), (3968,1), (76088,-9007), (294841, 8)\\
+& & \mbox{ and } (492032,-9007).  \\
 \end{array}
 $$
 A short calculation confirms that each elliptic curve arising from these solutions via quadratic twist has bad reduction at the prime $2$ (and, in particular, cannot have conductor $2655632887$). There are thus no elliptic curves over $\mathbb{Q}$ with conductor $2655632887$.
@@ -1022,7 +1023,7 @@ Full computational details are available at
 \begin{center}
 \url{http://www.nt.math.ubc.ca/BeGhRe/Examples/2655632887-data}.
 \end{center}
-We should observe that it is much more challenging computationally to try to extend this argument to tabulate curves $E$ with good reduction outside 
+We observe that it is much more challenging computationally to try to extend this argument to tabulate curves $E$ with good reduction outside 
 $S = \{ 31, 9007, 9511 \}$. To do this, we would have to first determine whether or not there exist irreducible cubic forms of discriminant, say,
 $D_F = \pm 4 \cdot 31^2 \cdot 9007^2 \cdot 9511^2 > 2.8 \times 10^{19}$. This appears to be at or beyond current computational limits.
 
@@ -1033,13 +1034,16 @@ $D_F = \pm 4 \cdot 31^2 \cdot 9007^2 \cdot 9511^2 > 2.8 \times 10^{19}$. This ap
 For there to exist an elliptic curve with trivial rational $2$-torsion and conductor $3305354359$, we require the existence of an irreducible cubic form of discriminant $\pm 4  \cdot 41^{\delta_1} \cdot 409^{\delta_2} \cdot 439^{\delta_3} \cdot 449^{\delta_4}$, with $\delta_i \in \{ 0, 1 \}$. We check that, again, there are no such forms (once more employing a short auxiliary computation in the case $D_F =\pm 4  \cdot 41 \cdot 409 \cdot 439 \cdot 449$). If we solve $X+Y=Z^2$ with $X$ and $Y$ $S$-units for $S = \{ 2, 41, 409, 439, 449 \}$, we find that the solutions to this equation with $X \geq Y$, $Z > 0$ and $\gcd (X,Y)$ squarefree are precisely 
 $$
 \begin{array}{l}
-(X,Y) =  (2,-1), (2,2), (8,1), (41,-16),  (41,-32), (41,8), (82,-1), (128,41), ( 409, -328),  \\
- \hskip9.6ex (409, 32), (439, 2), (449, -328), (449, -8), (512, 449), (818, 82), (898, 2), \\
-\hskip9.6ex   (3272, 449), (3362, 2), (7184, 41), (16769, -128), (16769, -14368),  (18409, -16384), \\
- \hskip9.6ex  (33538, -18409), (36818, 818), (41984, 41), (68921, -57472), (183641, -1312),\\
-\hskip9.6ex   (183641, -56192), (183641, 41984), (359102, 898), (403202, -33538), \\
-\hskip9.6ex   (403202, -359102), (403202, 17999), (737959, 183641), (754769, -6544), \\
-\hskip9.6ex  (6858521, -919552), (8265641, -16) \mbox{ and } (7095601778, -5610270178). \\
+(X,Y) =  (2,-1), (2,2), (8,1), (41,-16),  (41,-32), (41,8), (82,-1), \\
+ \hskip9.6ex  (128,41), (409, -328), (409, 32), (439, 2), (449, -328), (449, -8),\\
+\hskip9.6ex   (512, 449),(818, 82), (898, 2), (3272, 449), (3362, 2), (7184, 41),\\
+ \hskip9.6ex  (16769, -128), (16769, -14368),  (18409, -16384), \\
+\hskip9.6ex   (33538, -18409),(36818, 818), (41984, 41), (68921, -57472), \\
+\hskip9.6ex   (183641, -1312),(183641, -56192), (183641, 41984), \\
+\hskip9.6ex  (359102, 898), (403202, -33538),(403202, -359102), \\
+\hskip9.6ex (403202, 17999), (737959, 183641), (754769, -6544), \\
+\hskip9.6ex (6858521, -919552), (8265641, -16) \\
+\hskip9.6ex \mbox{and } (7095601778, -5610270178). \\
 \end{array}
 $$
 Once again, a short calculation confirms that each elliptic curve arising from these solutions via twists has even conductor. There are thus no elliptic curves over $\mathbb{Q}$ with conductor $3305354359$.
@@ -1106,7 +1110,8 @@ $$
 (1, 2, 2, 6) & (-1851, 892), (14133, -3790) \\
 (2, 1, 14, -2) & (13, -5), (-29, -923) \\
 (2, 4, -6, -3) & (10,-3), (64, 49), (-95, 199), (-3395, 1189), \\
-& (3677, -1069), (5158, 4045), (-23546, 57259),  (-77755, 30999) \\
+& (3677, -1069), (5158, 4045), (-23546, 57259), \\
+& (-77755, 30999) \\
 (3,3,44,66) & (1,0), (1,2), (-3,4), (3,-2), (-11,9), (25,-3), \\
 & (231,2), (-317,240), (489,61), (1263, -878), (6853, -4119) \\
 (3, 7, 5, 7) & (1, 12), (-29, 26), (78, 1),  (423, -160) \\
@@ -2395,7 +2400,7 @@ Since $|v| \geq 1$ and $D_F =4p > 8 \times 10^9$, we thus have that
 \left| \alpha_1 - \frac{u}{v} \right| < 0.12.
 \end{equation}
 
-We may suppose that $F$ is reduced, whereby, crudely, from Lemma \ref{fisher},
+We may suppose that $F$ is reduced,
 $$
 |\omega_0| \leq \frac{2D_F^{1/4}}{3 \sqrt{3}} \; \mbox{ and } \; |\omega_1| \leq  \frac{3\omega_0}{2}+  \left( \sqrt{D_F}-\frac{27\omega_0^2}{4} \right)^{1/2}
 < \left( 1 + \frac{1}{\sqrt{3}} \right) D_F^{1/4}.
