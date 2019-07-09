@@ -487,9 +487,13 @@ For any solution $(x,y,a_1, \dots, a_r, n_1, \dots, n_{\nu})$ of \eqref{eq:Effic
 \label{subsec:ArchEllipsoid}
 
 Let $\tau:L\to\mathbb{R} \subset \mathbb{C}$ be an embedding and let $l_\tau\geq c_\tau$ and $c>0$ be given real numbers for $c_\tau=\log^+(2|\tau(\delta_2)|)= \log \max\{2|\tau(\delta_2)|,1\}$. We define 
-\[\alpha_0 = [c\log|\tau(\delta_1)|] \quad \text{ and } \quad \alpha_{\varepsilon 1} =  \left[c\log\left|\tau\left(\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}\right)\right|\right],\ \  \alpha_{\varepsilon 2} =  \left[c\log\left|\tau\left(\frac{\varepsilon_2^{(k)}}{\varepsilon_2^{(j)}}\right)\right|\right].\]
+\begin{equation} \label{eq:alpha0eps}
+\alpha_0 = [c\log|\tau(\delta_1)|] \quad \text{ and } \quad \alpha_{\varepsilon 1} =  \left[c\log\left|\tau\left(\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}\right)\right|\right],\ \  \alpha_{\varepsilon 2} =  \left[c\log\left|\tau\left(\frac{\varepsilon_2^{(k)}}{\varepsilon_2^{(j)}}\right)\right|\right].
+\end{equation}
 For $i = 1, \dots, \nu$, define
-\[\alpha_{\gamma i} = \left[c\log\left|\tau\left(\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)\right|\right].\]
+\begin{equation} \label{eq:alphagamma}
+\alpha_{\gamma i} = \left[c\log\left|\tau\left(\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)\right|\right].
+\end{equation}
 Here, $[ \ \cdot\  ]$ denotes the nearest integer function. 
 
 Let
@@ -647,7 +651,7 @@ Then by Lemma~\ref{lem:archellest}, we obtain
 	& \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}, 
 \end{align*} 
 and we set
-\begin{equation} \label{bepstarbound}
+\begin{equation} \label{def:bepstarbound}
 b_{\eps_l^*}:= \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}.
 \end{equation}
 
@@ -741,7 +745,7 @@ We define the ellipsoid $\mathcal{E}_v \subseteq \mathbb{R}^{\nu + r}$ by
 \begin{align}\label{def:ellp}
 & \mathcal{E}_v=\{q_l(\mathbf{x})\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}); \ \mathbf{x}\in\mathbb{R}^{r+\nu}\},\end{align}
 where
-\[q_v\mathbf{x})= (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\]
+\[q_v(\mathbf{x})= (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\]
 and
 \[q_f(\mathbf{y}) = (A\mathbf{y})^{\text{T}}D^2A\mathbf{y}.\]
 
@@ -778,78 +782,48 @@ M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
 
 \section{The Archimedean sieve: the real case}
 
-Let $\tau:L\to\mathbb{C}$ be an embedding. We take $\mathbf{l},\mathbf{h} \in \mathbb{R}^{m+\nu}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$ and $l_\tau\geq \log 2$. Then we consider the 
-translated lattice $\Gamma_{\tau}\subset \mathbb{Z}^{r + \nu}$ defined by 
-\[\Gamma_{\tau} =\Phi_{\tau}(\mathbb{Z}^{r+\nu})+w\]
-where $w=(0,\dotsc,0,\alpha_0)^{\text{T}}$ for $c$ a constant of the size $e^{l_\tau}$ and where $\Phi_\tau$ is a linear transformation which is the identity on $\mathbb{Z}^{u+r - 1}$ and which sends 
-\[(0, \dots, 0, 1) \mapsto (\alpha_{\gamma 1}, \dots, \alpha_{\gamma {\nu}}, \alpha_{\varepsilon 1}, \dots, \alpha_{\varepsilon {r}}).\]
-That is, 
-\[\left( \left[c\log\left(\tau\left(\frac{\gamma_1^{(k)}}{\gamma_1^{(j)}}\right)\right)\right], \dots, \left[c\log\left(\tau\left(\frac{\gamma_{\nu}^{(k)}}{\gamma_{\nu}^{(j)}}\right)\right)\right], \left[c\log\left(\tau\left(\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}\right)\right)\right], \dots, \left[c\log\left(\tau\left(\frac{\varepsilon_r^{(k)}}{\varepsilon_r^{(j)}}\right)\right)\right] \right).\]
-The matrix associated to this lattice is therefore
-\[\Gamma_{\tau} = \begin{pmatrix}
+Let $\tau:L\to\mathbb{C}$ be an embedding. We take $\mathbf{l},\mathbf{h} \in \mathbb{R}^{m+\nu}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$ and $l_\tau\geq \log 2$. Let $c$ be a constant the size of $e^{l_\tau}$ and let $\alpha_0, \alpha_{\varepsilon 1}, \dots, \alpha_{\varepsilon {r}}, \alpha_{\gamma 1}, \dots, \alpha_{\gamma {\nu}}$ be defined as in \eqref{eq:alpha0eps} and \eqref{eq:alphagamma}. 
+
+Define the $(\nu+r) \times (\nu +r)$-dimensional matrix $A_{\tau}$ as
+\[A_{\tau} = \begin{pmatrix}
 	1 & 0 & \dots &  \dots & 0 & 0\\ 
 	0 & 1	& \dots & \dots & 0 & 0\\
 	\vdots & \vdots & \ddots & \dots & \vdots & \vdots \\ 
 	0 & 0 & \dots &  \dots & 1 & 0\\ 
 	\alpha_{\gamma 1} & \dots &\alpha_{\gamma {\nu}} & \alpha_{\varepsilon 1} & \dots & \alpha_{\varepsilon {r}}
-\end{pmatrix}.\]
-
+\end{pmatrix}\]
+and consider the lattice defined by its columns. Let $\mathbf{w} = (0,\dotsc,0,\alpha_0)$ be a vector of length $(\nu + r)$. We now consider the translated lattice $\Gamma_{\tau}$ defined by $A_{\tau}\mathbf{x} + \mathbf{w}$, where $\mathbf{x}$ is an arbitrary coordinate vector. 
+ 
 %for some fixed $\epsilon^*\in\unit_\infty$ and whose row indexed by $\epsilon^*$ is given by $(\alpha_u)\in\ZZ^\unit$. 
-Let $\mathcal E_{\tau}=\mathcal E_{\tau}(h,l_{\tau})$ be the ellipsoid constructed in \eqref{def:ellreal}. Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{Eq:main3}. We say that $\mathbf{m}$ is determined by some $\mathbf{y} \in \Gamma_{\tau}$ if 
+Let $\mathcal E_{\tau}=\mathcal E_{\tau}(h,l_{\tau})$ be the ellipsoid constructed in \eqref{def:ellreal}. Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{eq:EfficientSunit}. We say that $\mathbf{m}$ is determined by some $\mathbf{y} \in \Gamma_{\tau}$ if 
 \[\mathbf{y} = (y_1, \dots, y_{r+ \nu}) = \left(n_1, \dots, n_{\nu}, a_1, \dots, a_{r-1}, \alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right)\]
-where the missing element $a_{i}$ corresponds to $\varepsilon^*$.
+where the missing element $a_{l}$ corresponds to $\varepsilon_l^*$.
 
 \begin{lemma}\label{lem:archsieve}
-Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{Eq:main3} which lies in $\Sigma_\tau(l,h)$. Then $\mathbf{m}$ is determined by some $\gamma\in \Gamma_\tau\cap\mathcal E_\tau.$
+Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{eq:EfficientSunit} which lies in $\Sigma_\tau(l,h)$. Then $\mathbf{m}$ is determined by some $\mathbf{y}\in \Gamma_\tau\cap\mathcal E_\tau.$
 \end{lemma}
 
-%\begin{proof}
-%We define $\gamma\in \ZZ^\unit$ with $\gamma_u=m_u$ for each $u\in\unit\setminus \epsilon^*$ and $\gamma_{\epsilon^*}=\alpha_0+\sum_{u\in\unit} m_u \alpha_u$. Then $\gamma\in \Gamma_\tau$ and \eqref{def:bepsstarbound} implies that $\gamma_{\epsilon^*}^2\leq b_{\epsilon^*}$. Further \eqref{def:bbound} gives that $q_f(\gamma_\delta)\leq b$, and  \eqref{def:bepsbound} provides that $\gamma_\epsilon^2\leq b_\epsilon$ for each $\epsilon\in\unit_\infty$ with $\epsilon\neq \epsilon^*$. It follows that $$q_\tau(\gamma)\leq \frac{1}{|\unit|}(|\unit_S|b+\sum_{\epsilon\in\unit_\infty}\frac{b}{b_\epsilon}b_\epsilon)\leq b.$$
-%This proves that $\gamma\in\mathcal E_\tau$ and hence the statement follows.
-%\end{proof}
+\begin{proof}
+Let 
+\[\mathbf{y} = \left(n_1, \dots, n_{\nu}, a_1, \dots, a_{r-1}, \alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right).\]
+Then $\mathbf{y} \in \Gamma_\tau$ and \eqref{def:bepstarbound} implies that $y_{\eps_l^*}^2\leq b_{\eps_l^*}$. Further \eqref{def:bbound} gives that $q_f((y_1, \dots, y_{\nu}))\leq b$, and \eqref{def:bepsbound} provides that $y_{\eps_l}^2\leq b_{\eps_l}$ for $l = 1, \dots, r$ with $\eps_l \neq \eps_l^*$. It follows that 
+\[q_\tau(\mathbf{y}) = (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(y_1, \dots, y_{\nu}) + \sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}y_{\varepsilon_i}^2\right) \leq (1+r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+This proves that $\mathbf{y}\in\mathcal E_\tau$ and hence the statement follows.
+\end{proof}
 %
-Suppose that $\gamma\in \Gamma_\tau\cap \mathcal E_\tau$. Let $M=M_\tau$ be the matrix defining the ellipsoid 
-\[\mathcal E_\tau: z^tM^tMz\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}),\]
-that is,  
-\begin{align*}
-M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
-	DA & 0 & \dots & 0 & 0\\
-	0 & \sqrt{\frac{b}{b_{\varepsilon 1}}} & \dots & 0 & 0\\
-	0 & 0  & \sqrt{\frac{b}{b_{\varepsilon 2}}} & \dots & 0\\
-	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & \sqrt{\frac{b}{b_{\varepsilon^*}}} \\
-	\end{pmatrix}.
-\end{align*}	
-Note that we never need to compute $M$, but rather $M^TM$ so that we do not need to worry about precision. In this case, 
-\begin{align*}
-M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
-	A^TD^2A & 0 & \dots & 0 & 0\\
-	0 & \frac{b}{b_{\varepsilon 1}} & \dots & 0 & 0\\
-	0 & 0  & \frac{b}{b_{\varepsilon 2}} & \dots & 0\\
-	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & \frac{b}{b_{\varepsilon^*}} \\
-	\end{pmatrix}\\
-	& = \begin{pmatrix}
-	(b_{\varepsilon_1}\cdots b_{\varepsilon_r})A^TD^2A & 0 & \dots & 0 & 0\\
-	0 & b b_{\varepsilon_2}\cdots b_{\varepsilon_r} & \dots & 0 & 0\\
-	0 & 0  & bb_{\varepsilon_1}b_{\varepsilon_3}\cdots b_{\varepsilon_r} & \dots & 0\\
-	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & bb_{\varepsilon_1}\cdots b_{\varepsilon_{r-1}} \\
-	\end{pmatrix}.
-\end{align*}	
-	
-Since $\gamma\in \Gamma_\tau\cap \mathcal E_\tau$, there exists $x\in \mathbb{R}^{r + \nu}$ such that $\gamma=\Gamma_\tau x+w$ and ${\gamma^tM^tM\gamma\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})}$. We thus have
-\[(\Gamma_\tau x+w)^tM^tM(\Gamma_\tau x+w) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
-As $\Gamma_{\tau}$ is clearly invertible, with matrix inverse
-\[\Gamma_{\tau}^{-1} = \begin{pmatrix}
+We now explicitly determine $ \Gamma_\tau\cap \mathcal E_\tau$. Suppose that $\mathbf{y}\in \Gamma_\tau\cap \mathcal E_\tau$. Let $M=M_\tau$ be the matrix defining the ellipsoid $\mathcal{E}_{\tau}$. 	
+Since $\mathbf{y}\in \Gamma_\tau\cap \mathcal E_\tau$, there exists $\mathbf{x}\in \mathbb{R}^{r + \nu}$ such that $\mathbf{y}= A_\tau \mathbf{x}+\mathbf{w}$ and ${\mathbf{y}^tM^tM\mathbf{y}\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})}$. We thus have
+\[(A_\tau \mathbf{x}+\mathbf{w})^tM^tM(A_\tau \mathbf{x}+\mathbf{w}) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+As $A_{\tau}$ is clearly invertible, with matrix inverse
+\[A_{\tau}^{-1} = \begin{pmatrix}
 	1 & 0 & \dots &  \dots & 0 & 0\\ 
 	0 & 1	& \dots & \dots & 0 & 0\\
 	\vdots & \vdots & \ddots & \dots & \vdots & \vdots \\ 
 	0 & 0 & \dots &  \dots & 1 & 0\\ 
 	-\frac{\alpha_{\gamma 1}}{\alpha_{\varepsilon {r}}} & \dots &-\frac{\alpha_{\gamma {\nu}}}{\alpha_{\varepsilon {r}}} & -\frac{\alpha_{\varepsilon 1}}{\alpha_{\varepsilon {r}}} & \dots & \frac{1}{\alpha_{\varepsilon {r}}}
 \end{pmatrix},\]
-we can find a vector $c$ such that $\Gamma_{\tau}c = -w$. Indeed, this vector is $c = \Gamma_{\tau}^{-1}(-w)$, where
-\[c = \Gamma_{\tau}^{-1}w = \begin{pmatrix}
+we can find a vector $\mathbf{c}$ such that $A_{\tau}\mathbf{c} = -\mathbf{w}$. Indeed, this vector is $\mathbf{c} = A_{\tau}^{-1}(-\mathbf{w})$, where
+\[\mathbf{c} = A_{\tau}^{-1}\mathbf{w} = \begin{pmatrix}
 	1 & 0 & \dots &  \dots & 0 & 0\\ 
 	0 & 1	& \dots & \dots & 0 & 0\\
 	\vdots & \vdots & \ddots & \dots & \vdots & \vdots \\ 
@@ -865,15 +839,14 @@ we can find a vector $c$ such that $\Gamma_{\tau}c = -w$. Indeed, this vector is
 Now, 
 \begin{align*}
 (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})
-	& \geq (\Gamma_\tau x+w)^tM^tM(\Gamma_\tau x+w) \\
-	& =  (\Gamma_\tau x- (-w))^tM^tM(\Gamma_\tau x-(-w)) \\
-	& = (\Gamma_\tau x-\Gamma_{\tau}c)^tM^tM(\Gamma_\tau x-\Gamma_{\tau}c)\\
-	& = (\Gamma_\tau (x-c))^tM^tM(\Gamma_\tau (x-c))\\
-	& = (x-c)^t(M\Gamma_{\tau})^tM\Gamma_\tau(x-c)\\
-	& = (x-c)^tB^tB(x-c)
+	& \geq (A_\tau \mathbf{x}+\mathbf{w})^tM^tM(A_\tau \mathbf{x}+\mathbf{w}) \\
+	& = (A_\tau (\mathbf{x}-\mathbf{c}))^TM^TM(A_\tau (\mathbf{x}-\mathbf{c}))\\
+	& = (\mathbf{x}-\mathbf{c})^T(MA_{\tau})^TMA_\tau(\mathbf{x}-\mathbf{c})\\
+	& = (\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c})
 \end{align*}
-where $B = M\Gamma_\tau$. That is, we are left to solve
-\[(x-c)B^tB(x-c) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+where $B = MA_\tau$. That is, we are left to solve
+\[(\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c}) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+Now, finding all vectors satisfying this inequality amounts to computing all solutions to \eqref{eq:EfficientSunit} contained in $\Sigma_{\tau}(\mathbf{l}, \mathbf{h})$. The set of vectors $\mathbf{x}$ can be found using the Fincke-Pohst algorithm outlined in \autoref{subsec:FinckePohst}. 
 %Here we observe that the vector $c$ is likely not an integral vector; that is, $-\frac{\alpha_0}{\alpha_{\varepsilon r}} \notin \mathbb{Z}$. To amend this, we modify the bound as follows
 %\begin{align*}
 %\alpha_{\varepsilon r}^2(x-c)^tB^tB(x-c) & \leq \alpha_{\varepsilon r}^2(1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})\\
@@ -994,140 +967,29 @@ where $B = M\Gamma_\tau$. That is, we are left to solve
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
-\subsection{Archimedean Real Case Summary}
-If $(n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r+\nu}$ is a solution which lies in $\Sigma_{\tau}(l,h)$, then, by definition, it corresponds to a solution $(x,y)$ satisfying
-\[\Sigma_{\tau}(l,h) = \{(x,y) \in \Sigma \ | \ (h_v(z))\leq h \text{ and }  (h_v(z))\nleq 0 \text{ and } h_{\tau}(z)>l_{\tau}\}.\]
-Here, $l_{\tau}$ is defined as some constant such that 
-\[l_{\tau} > c_{\tau}.\]
-By the computations above (see page 99), it follows that
-\[\left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right|
- \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}.\]
-
-Now, consider the vector 
-\[\gamma = (n_1, \dots, n_{\nu}, a_1, \dots, a_{r-1}, \alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i})\]
-and the lattice defined by $\Gamma_{\tau}x + w$
-\[\begin{pmatrix}
-	1 & 0 & \dots &  \dots & 0 & 0\\ 
-	0 & 1	& \dots & \dots & 0 & 0\\
-	\vdots & \vdots & \ddots & \dots & \vdots & \vdots \\ 
-	0 & 0 & \dots &  \dots & 1 & 0\\ 
-	\alpha_{\gamma 1} & \dots &\alpha_{\gamma {\nu}} & \alpha_{\varepsilon 1} & \dots & \alpha_{\varepsilon {r}}
-\end{pmatrix}
-\begin{pmatrix}
-	x_1 \\ x_2 \\ \vdots \\ x_{\nu+r - 1} \\ x_{\nu+r}\\ 
-\end{pmatrix}+
-\begin{pmatrix}
-	0 \\ 0 \\ \vdots \\ 0 \\ \alpha_0\\ 
-\end{pmatrix}\]
-for some vector $(x_1, \dots, x_{\nu+r}) \in \mathbb{Z}^{\nu+r}$.
-If  $(x_1, \dots, x_{\nu+r}) = (n_1, \dots, n_{\nu}, a_1, \dots, a_{r})$, then a quick computation shows that 
-\[\Gamma_{\tau}x + w = 
-\begin{pmatrix}
-	x_1 \\ x_2 \\ \vdots \\ x_{\nu+r - 1} \\ \alpha_0+\sum_{i = 1}^r x_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} x_i \alpha_{\gamma i}\\ 
-\end{pmatrix} = 
-\begin{pmatrix}
-	n_1 \\ n_2 \\ \vdots \\ a_{r - 1} \\ \alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\\ 
-\end{pmatrix} = \gamma^T.\]
-Hence, $\gamma$ is in the lattice $\Gamma$.
-
-Now, consider the ellipsoid $\mathcal{E}_\tau$. We claim that $\gamma \in \mathcal{E}_{\tau}$. Indeed, this means that 
-\[\gamma^tM^tM\gamma  \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
-In particular
-\begin{align*}
-& \gamma^TM^TM\gamma \\ 
-	& = \begin{pmatrix}
-	n_1 \\ n_2 \\ \vdots \\ a_{r - 1} \\ \alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i 	\alpha_{\gamma i}\\ 
-	\end{pmatrix}
-	\begin{pmatrix}
-	(b_{\varepsilon_1}\cdots b_{\varepsilon_r})A^TD^2A & 0 & \dots & 0\\
-	0 & b b_{\varepsilon_2}\cdots b_{\varepsilon_r} & \dots & 0 \\
-	\vdots & \vdots  &  \ddots & \vdots\\ 
-	0 & 0 & \dots & bb_{\varepsilon_1}\cdots b_{\varepsilon_{r-1}} \\
-	\end{pmatrix}
-	\gamma\\
-	& = \begin{pmatrix}
-		\begin{pmatrix} 
-		n_1 \\ n_2 \\ \vdots \\ n_{\nu}
-		\end{pmatrix}(b_{\varepsilon_1}\cdots b_{\varepsilon_r})A^TD^2A\\
-		a_1 b b_{\varepsilon_2}\cdots b_{\varepsilon_r} \\ 
-		\vdots \\
-		a_{r - 1} b b_{\varepsilon_1}\cdots b_{\varepsilon_{r-2}}b_{\varepsilon_r} \\ 
-		\left(\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right)b b_{\varepsilon_1}\cdots b_{\varepsilon_{r-1}}\\ 
-	\end{pmatrix}
-	\begin{pmatrix}
-	 n_1 & \dots & a_{r-1} & \alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}
-	 \end{pmatrix}\\
-	 & = \begin{pmatrix} 
-		n_1 \\ n_2 \\ \vdots \\ n_{\nu}
-		\end{pmatrix}(b_{\varepsilon_1}\cdots b_{\varepsilon_r})A^TD^2A
-		\begin{pmatrix}
-	 n_1 & \dots & n_{\nu} \end{pmatrix} + a_1^2 b b_{\varepsilon_2}\cdots b_{\varepsilon_r} + \cdots + a_{r - 1}^2 b b_{\varepsilon_1}\cdots b_{\varepsilon_{r-2}}b_{\varepsilon_r} + \\
-	 & \quad \quad \quad + \left(\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right)^2b b_{\varepsilon_1}\cdots b_{\varepsilon_{r-1}}.
-\end{align*}	
-Now, by definition, we have 
-\begin{align*}
-\gamma^TM^TM\gamma 
-	& = \begin{pmatrix} 
-		n_1 \\ n_2 \\ \vdots \\ n_{\nu}
-		\end{pmatrix}(b_{\varepsilon_1}\cdots b_{\varepsilon_r})A^TD^2A
-		\begin{pmatrix}
-	 n_1 & \dots & n_{\nu} \end{pmatrix} + a_1^2 b b_{\varepsilon_2}\cdots b_{\varepsilon_r} + \cdots + a_{r - 1}^2 b b_{\varepsilon_1}\cdots b_{\varepsilon_{r-2}}b_{\varepsilon_r} + \\
-	 & \quad \quad \quad + \left(\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right)^2b b_{\varepsilon_1}\cdots b_{\varepsilon_{r-1}}\\
-& \leq (b_{\varepsilon_1}\cdots b_{\varepsilon_r}) q_f(n_1 \dots n_{\nu}) +					 			b_{\varepsilon_1} b b_{\varepsilon_2}\cdots b_{\varepsilon_r} + \cdots + b_{\varepsilon_{r - 1}} b 		b_{\varepsilon_1}\cdots b_{\varepsilon_{r-2}}b_{\varepsilon_r} + b_{\varepsilon_r}b 					b_{\varepsilon_1}\cdots b_{\varepsilon_{r-2}}b_{\varepsilon_{r-1}}\\
-& \leq (b_{\varepsilon_1}\cdots b_{\varepsilon_r})b + r(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})\\
-& = (1+r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).
-\end{align*}
-Thus $\gamma \in \mathcal{E}_{\tau}$. Thus, if we assume that our solution lies in $\Sigma_{\tau}(l,h)$, it follows that $\gamma \in \Gamma \cap \mathcal{E}_{\tau}$. Now, by Rafael, 
-\[\Sigma=\Sigma\left(h_{0}\right), \quad \Sigma(h)=\Sigma(l, h) \cup \Sigma(l) \quad \text { and } \quad \Sigma(l, h)=\cup_{v \in S^{*}} \Sigma_{v}(l, h).\]
-Thus, we collect all solutions from $\Sigma_{\tau}(l,h)$ and continue to generate all solutions at the other places. 
-
-MAYBE COULD USE MORE DETAIL HERE
-%---------------------------------------------------------------------------------------------------------------------------------------------%
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
-\section{Non-Archimedean Case}
+\section{The non-Archimedean Sieve}
+\label{sec:nonArchSieve}
 
-\subsection{Non-Archimedean sieve}
-
-Note that in this section we might use $v$ and $l$ interchangeably. Eventually this will be fixed to be consistent...
-
-Let $v \in \{1, \dots, \nu\}$. We take vectors $l,h \in \mathbb{R}^{\nu+r}$ with $0 \leq l \leq h$ and 
+Let $v \in \{1, \dots, \nu\}$. We take vectors $\mathbf{l},\mathbf{h} \in \mathbb{R}^{\nu+r}$ with $\mathbf{0} \leq \mathbf{l} \leq \mathbf{h}$ and 
 \[\frac{l_v}{\log(p)} \geq \max\left( \frac{1}{p-1}, \ord_{p_v}(\delta_1)\right) - \ord_{p_v}(\delta_2)\]
-and then consider the translated lattice $\Gamma_v \subseteq \mathbb{Z}^{\nu + r}$ defined below. We say that $(x,y) \in \Sigma$ with ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ is determined by some $\gamma \in \Gamma_v$ if the entries of $\gamma$ are a (fixed) permutation of the entries of $\mathbf{m}$. Let $\mathcal{E}_v$ be the ellipsoid constructed in \eqref{def:ellp}. 
+and then consider the translated lattice $\Gamma_v \subseteq \mathbb{Z}^{\nu + r}$ defined below. We say that ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ is determined by some $\mathbf{y} \in \Gamma_v$ if the entries of $\mathbf{y}$ are a (fixed) permutation of the entries of $\mathbf{m}$. Let $\mathcal{E}_v$ be the ellipsoid constructed in \eqref{def:ellp}. 
 
 \begin{lemma}
-And $(x,y) \in \Sigma_v(l,h)$ is determined by some $\gamma \in \Gamma_v \cap \mathcal{E}_v$. 
+Any $(\tilde{x},\tilde{y}) \in \Sigma_v(l,h)$ is determined by some $\mathbf{y} \in \Gamma_v \cap \mathcal{E}_v$. 
 \end{lemma}
 
 In the remainder of this section, we prove this lemma. 
 
-\subsubsection{Computing $u_l - r_l = \sum_{i = 1}^{\nu} n_ia_{li}$}
+\subsection{?}
+We begin by applying the results of \autoref{sec:SmallBoundForSpecialCase} to obtain small bounds. In particular, we consider the form
+\[\Lambda_l = \sum_{i = 1}^{1+\nu+r} b_i\alpha_i\]
+defined in \label{sec:SmallBoundForSpecialCase}. 
 
-Recall that $z \in \mathbb{C}_p$ having $\ord_p(z) = 0$ is called a $p$-adic unit. 
-
-Let $l \in \{1, \dots, \nu \}$ and consider the prime $p = p_l$. For every $i \in \{1, \dots, r\}$, part (ii) of the Corollary of Lemma 2 of Tzanakis-de Weger tells us that $\frac{\varepsilon_1^{(i_0)}}{\varepsilon_1^{(j)}}$ and $\frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}$ (for $i = 1, \dots, r$) are $p_l$-adic units. 
-
-From now on we make the following choice for the index $i_0$. Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l[t]) = 1$. We choose $i_0 \in \{1,2,3\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. The indices of $j,k$ are fixed, but arbitrary. 
-
-\begin{lemma} \label{Lem:units} \
-\begin{enumerate}
-\item[(i)] Let $i \in \{1, \dots, \nu\}$. Then $\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}$ are $p_l$-adic units. 
-\item[(ii)] Let $i \in \{1, \dots, \nu\}$. Then $\ord_{p_l}\left(\frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right) = a_{li}$, where $\mathbf{a_i} = (a_{1i}, \dots, a_{\nu i})$. 
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-Consider the factorization of $g(t)$ in $\mathbb{Q}_{p_l}[t]: g(t) = g_1(t) \cdots g_m(t)$. Note $\theta^{(j)}$ is a root of some $g_h(t) \neq g_l(t)$. Let $\mathfrak{p}_h$ be the corresponding prime ideal above $p_l$ and $e_h$ be its ramification index. Then $\mathfrak{p} \neq \mathfrak{p}_l$ and since 
-\[(\gamma_i)\mathcal{O}_K = \mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_{\nu}^{a_{\nu i}},\]
-we have 
-\[\ord_{p_l}(\gamma_i^{(j)}) = \frac{1}{e_h}\ord_{\mathfrak{p}_h}(\gamma_i) = 0.\]
-An analogous argument gives $\ord_{p_l}(\gamma_i^{(k)}) = 0$. On the other hand, 
-\[\ord_{p_l}(\gamma_i^{(i_0)}) = \frac{1}{e_l}\ord_{\mathfrak{p}_l}(\gamma_i) = \ord_{\mathfrak{p}_l}(\mathfrak{p}_1^{a_{1i}} \cdots \mathfrak{p}_{\nu}^{a_{\nu i}}) = a_{li}.\]
-
-\end{proof}
-
-We consider the form
 \[\Lambda_{p_l} = \log_{p_l}(\delta_1) + \sum_{i=1}^r a_i\log_{p_l}\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right) + \sum_{i=1}^{\nu} n_i \log_{p_l} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right).\]
+derived in 
+
 To simplify our exposition, we introduce the following notation. 
 \[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, \nu\},\]
 and
