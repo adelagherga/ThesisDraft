@@ -1,0 +1,332 @@
+\documentclass[11pt]{article}
+
+% relevant packages
+\usepackage[parfill]{parskip} 	% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs }
+\usepackage{amsthm}
+\usepackage{epstopdf}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz-cd}
+\usepackage[all]{xy}
+\usepackage[english]{babel}
+\usepackage{setspace}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+% stylistic environment
+\definecolor{grau}{rgb}{0.3,0.3,0.3}
+\usepackage[colorlinks, linkcolor=grau, citecolor=grau, urlcolor=grau]{hyperref}
+\urlstyle{same}
+\usepackage[top=1.3in, bottom=1.6in, left=1.3in, right=1.3in]{geometry}
+\frenchspacing
+\sloppy
+\usepackage{booktabs}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{enumerate}
+\onehalfspacing
+
+% relevant environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{properties}[theorem]{Properties}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{definition}
+\newtheorem{Algorithm}[theorem]{Algorithm}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% math operators
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Gal}{Gal}
+
+% code environment
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{%frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+% new commands
+\newcommand{\eps}{\varepsilon}
+
+
+% draft edit commands
+\usepackage{soul}
+\newcommand{\edit}[1]{\textcolor{blue}{#1}}
+\newcommand{\aaron}[1]{\textcolor{purple}{\footnotesize #1}}
+\newcommand{\strike}[1]{\textcolor{red}{\st{#1}}}
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\title{Kyle's Code}
+	
+\author{}
+\date{\today}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\begin{multicols}{2}
+Kyle's Code
+\begin{itemize}
+\item Create $K$, $OK$, integral basis of $OK$, $U$, compute $r$
+\item Compute FFF, rootsofginFFF, OF, which are $L$, $\theta$ in $L$ and $OL$, the splitting field of $K$
+\item Set precision and start massive precision loop
+\item Compute the decomposition of primes in $OK$ with their ramification, inertial degrees, compute $h_{ij}$
+\item Compute Completions of $K$ at prime ideals, Kpp, with map mKpp
+\item Generate minimal polynomial gp of mKpp(theta) in Qp
+\item Compute decomposition of prime ideal in $OL$ (store only 1), find ramification, inertial degrees
+\item Compute the completion of FFF at one prime ideal above p in FFF, FFFppF. This is the completion of $L$ at a single prime ideal in $L$ over $p$, Lp, along with mFFFpF the map $L \mapsto Lp$
+\end{itemize}
+
+\columnbreak
+
+My Code
+\begin{itemize}
+\item Create $K$, $OK$, integral basis of $OK$, $U$, compute $r$
+\item Compute FFF, rootsofginFFF, OF, which are $L$, $\theta$ in $L$ and $OL$, the splitting field of $K$ 
+\item Generate all automorphisms of L, AutL and set ijkL as $\sigma, \sigma^2, \text{id}$
+\item Generate large upper bound
+\end{itemize}
+\end{multicols}
+
+\begin{multicols}{2}
+Kyle's Code
+\begin{itemize}
+\item Generate thetap, roots of gp in FFFppF, the completion of $L$ at a single prime over $p$, Lp
+\item \textcolor{blue}{Generate ImageOfIntegralBasisElementp, the image of the integral basis for $K$ in Kp, where the map is defined by $\theta \mapsto thetap[i][j]$}
+\item \textcolor{blue}{Generate ImageOfpip, ImageOfepsp, the image of $\pi, \eps$ under $K$ in Kp, where the map is defined by $\theta \mapsto thetap[i][j]$}
+\item Compute conjugates of theta in C, thetaC
+\item \textcolor{red}{Generate ImageOfIntegralBasisElementC, the image of the integral basis for $K$ in $C$, where the map is defined by $\theta \mapsto Conjugates(\theta)$}
+\begin{itemize}
+\item This is where we invoke the use of the hom function, as Kyle's method sometimes sends elements to $0$
+\end{itemize}
+\item \textcolor{red}{Generate ImageOfpiC, ImageOfepsC, the image of $\pi, \eps$ under $K$ in C, where the map is defined by $\theta \mapsto Conjugates(\theta)$}
+\item Relabel the $\theta$ in $L$ from earlier as thetaF
+\item \textcolor{purple}{Generate ImageOfIntegralBasisElementF, the image of the integral basis for $K$ in $L$, where the map is defined by $\theta \mapsto thetaF[i]$. That is, $\theta \mapsto \theta[i][j] in L$}
+\end{itemize}
+
+\columnbreak 
+
+My Code
+\begin{itemize}
+\item
+\end{itemize}
+\end{multicols}
+
+\begin{multicols}{2}
+Kyle's Code
+\begin{itemize}
+\item \textcolor{purple}{Generate ImageOfpiF, ImageOfepsF, the image of $\pi, \eps$ under $K$ in L, where the map is defined by $\theta \mapsto thetaF[i]$}
+\item Apply prime ideal removing lemma \\
+\end{itemize}
+
+\columnbreak 
+
+My Code
+\begin{itemize}
+\item
+\end{itemize}
+\end{multicols}
+
+Begin to iterate through the cases. For each case, we now have $\zeta, \alpha$. Hence, for each prime
+
+\begin{multicols}{2}
+Kyle's Code
+\begin{itemize}
+\item 
+\end{itemize}
+
+\columnbreak 
+
+My Code
+\begin{itemize}
+\item Begin p adic precision loop
+\item Compute completion of $L$ at one prime ideal above p, FFFppF, with map mFFFpF, Lp, mapLLp. This is 
+\item Compute the decomposition of primes in $OK$
+\item Compute Completions of $K$ at prime ideals, Kpp, with map mKpp, Kp, mKp
+\item Generate minimal polynomial gp of mKpp(theta) in Qp (mKp(th))
+\end{itemize}
+\begin{center}
+\begin{tikzcd}
+L \to L \arrow[r, "\phi"] \arrow[d]
+& Lp \arrow[d] \\
+K \arrow[r]
+& Kp
+\end{tikzcd}
+\end{center}
+\begin{itemize}
+\item Take th in $K$ into $L$, apply each automorphism $ijkL: L \to L$, apply $mapLLp: L \to Lp$ (mFFFpF). These are the roots of gp in Lp (thetap)
+\item Find which ijkL[k] map corresponds to thetap[i][j], mapsLL[i][j]
+\end{itemize}
+\end{multicols}
+
+\begin{multicols}{2}
+Kyle's Code
+\begin{itemize}
+\item Compute images of zeta, alpha in Qp
+\item \textcolor{blue}{Generate ImageOfzetap, ImageOfalphap, the image of $\zeta, \alpha$ under $K$ in Kp, where the map is defined by $\theta \mapsto thetap[i][j]$}
+\item \textcolor{red}{Generate ImageOfzetaC, ImageOfalphaC, the image of $\zeta, \alpha$ under $K$ in C, where the map is defined by $\theta \mapsto Conjugates(\theta)$}
+\item Determine $i_0, j, k$ by computing $\delta_1, \delta_2$ in FFFppF, the completion of $L$ at prime ideal, Lp (using thetap)
+\item Verify Special Case 1
+\item If Special Case 1 holds, recompute $\alpha$, ImageOfalphap, ImageOfalphaC
+\item \textcolor{blue}{Generate LogarithmicAlphap, the pAdicLof of $\delta_1$, ImageOfpip[k]/ImageOfpip[j], ImageOfepsp[k]/ImageOfepsp[j], etc}
+\item Verify Special Case 2 and see if we can find $i_0, j,k$ for which it holds
+\item Compute $\hat{i}$
+\item \textcolor{blue}{Generate betas:= -LogarithmicAlphap[i] /LogarithmicAlphap[ihat]}
+\item Compute rootsofginFFFppF[l][i]:= mFFFppF(theta[i][j]), taking theta[i][j], the roots $\theta$ in $L$, into Lp
+\end{itemize}
+\begin{center}
+\begin{tikzcd}
+L \arrow[r, "\phi"] \arrow[d]
+& Lp \arrow[d] \\
+K \arrow[r]
+& Kp
+\end{tikzcd}
+\end{center}
+
+\columnbreak 
+
+My Code
+\begin{itemize}
+\item \textcolor{purple}{Define thetaL (thetap) as ijk[k](L!th)}
+\item Find i0,jj,kk among ijkL using thetaL
+\item \textcolor{purple}{Compute tauL, gammalistL, epslistL, the image of $\alpha*\zeta$, gammalist, epslist using mapsLL[i][j]}
+\item \textcolor{purple}{Compute $\delta_1, \delta_2$ in $L$}
+\item \textcolor{blue}{Compute $\delta_1, \delta_2$ in $Lp$ via mapLLp}
+\item Check Special Case 1, Special Case 2; determine small bound if true
+\item Generate heuristic precision
+\item \textcolor{blue}{Compute pAdicLog of gammalistL,epslistL in Lp, mapped there via mapLLp}
+\item Compute ihat
+\item \textcolor{blue}{Compute beta:= -LogList[i]/Loglist[ihat]}
+\item Generate ellipsoid [DETAILS]
+\item Generate pAdicLattice [DETAILS]
+\end{itemize}
+\end{multicols}
+
+\begin{multicols}{2}
+Kyle's Code
+\begin{itemize}
+\item In $L$, we have rootsofginFFF, theta[i][j]. To compute thetap, generate minimal polynomial of theta in Kp, compute roots in Lp. Now, when generating Lp, we also generated the map $\phi:L \to Lp$. Applying $\phi(theta[i][j])$ gives us the same roots theta[i][j] in possibly different order. Hence thetap are the same as rootsofginFFFppF
+\item Find which rootsofginFFFppF[l][i] corresponds to thetap[i0], thetap[j], thetap[k]; label these as ii0, ijjj, ikkk
+\item \textcolor{purple}{Generate the preimage of $\zeta, \alpha$ in $L$ corresponding to i0, j,k using the above ii0,ijjj,ikkk}
+\item \textcolor{purple}{Now, we have thetaF, ImageOfpiF, PreimageOfalpha, PreimageOfzeta, ImageOfepsF}
+\item \textcolor{purple}{Generate alphaALGEBRAIC, images of $\delta_1$, ImageOfpiF[ikkk]/ImageOfpiF[ijjj] in $L$}
+\end{itemize}
+
+\columnbreak 
+
+My Code
+\begin{itemize}
+\item
+\end{itemize}
+\end{multicols}
+
+\newpage
+
+\begin{multicols}{2}
+Kyle's Code
+\begin{itemize}
+\item
+\end{itemize}
+
+\columnbreak
+
+My Code
+\begin{itemize}
+\item
+\end{itemize}
+\end{multicols}
+
+
+
+
+
+\newpage
+\begin{itemize}
+\item \textcolor{red}{Choose one conjugate of $L.1$ in C, giving a map $L \mapsto C$. Use this to compute rootsofginC, theta[i][j] under this map}
+\end{itemize}
+\begin{center}
+\begin{tikzcd}
+L \arrow[r, "\phi"] \arrow[d]
+& \mathbb{C} \arrow[d] \\
+K \arrow[r]
+& \mathbb{C}
+\end{tikzcd}
+\end{center}
+\begin{itemize}
+\item In C, we have Conjugates(theta), also known as thetaC. We now have theta[i][j] in L mapped into C, rootsofginC, and these items should be the same
+\item Find which rootsofginC[i] correspond to thetaC[i0], thetaC[j], thetaC[k]; label these as ii0,ijjj,ikkk
+\item \textcolor{purple}{Generate the preimage of $\zeta, \alpha$ in $L$ corresponding to i0, j,k using the above ii0,ijjj,ikkk}
+\item \textcolor{purple}{Generate alphaALGEBRAIC, images of $\delta_1$, ImageOfpiF[ikkk]/ImageOfpiF[ijjj] in $L$}
+\item Compute upper bound $C22$ for cases $s = 0,1,2, \geq 3$, use this to determine UpperBoundForn \\
+\item alphaALGEBRAIC (and therefore preimages) are only used to generate the upper bound
+\end{itemize}
+
+Begin basic $p$-adic reduction (LLL)
+\begin{itemize}
+\item \textcolor{blue}{Use betas:= -LogarithmicAlphap[i] /LogarithmicAlphap[ihat] to generate $p$-adic approximation matrix; from imagesinp}
+\end{itemize}
+
+Begin basic real reduction (LLL)
+\begin{itemize}
+\item \textcolor{red}{Use LogarithmicAlphaC to generate complex approximation matrix; from imagesinC}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
