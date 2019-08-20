@@ -10,8 +10,7 @@
 \section{Algebraic number theory} 
 \label{sec:AlgebraicNumberTheory}
 
-\edit{Add some better intro: maybe see masters thesis}\\
-\edit{In this section we recall some basic results from algebraic number theory that we use throughout the remaining chapters. We refer to \edit{Marcus} and \edit{Neukirch} for full details. Establish notation. The background for the material presented in this chapter is taken primarily from \edit{Marcus} and \edit{Neukirch}, and the material presented in \edit{}Section 2.2 can be found in [5]}
+In this section we recall some basic results from algebraic number theory that we use throughout the remaining chapters. We refer to \cite{Mar} and \cite{Neuk} for full details. 
 
 Let $K$ be a finite algebraic extension of $\mathbb{Q}$ of degree $n = [K:\mathbb{Q}]$. There are $n$ embeddings $\sigma: K \to \mathbb{C}$. These embeddings can be described by writing $K = \mathbb{Q}(\theta)$ for some $\theta \in \mathbb{C}$ and observing that $\theta$ can be sent to any one of its conjugates. 
 Let $s$ denote the number of real embeddings of $K$ and let $t$ denote the number of conjugate pairs of complex embeddings of $K$, where $n = s + 2t$. By Dirichlet's Unit Theorem, the group of units of $K$ is the direct product of a finite cyclic group consisting of the roots of unity in $K$ and a free abelian group of rank $r = s + t -1$. Equivalently, there exists a system of $r$ independent units $\eps_1, \dots, \eps_r$ such that the group of units of $K$ is given by 
@@ -42,10 +41,9 @@ in $\mathcal{O}_L$, where the $\mathfrak{P}_i$ are distinct prime ideals all hav
 \section{$p$-adic valuations}
 \label{sec:pAdicValuations}
 
-\edit{fix intro:
-In this section we give a concise exposition of $p$-adic valuations. 
-Everything in this document is based off of ``Elementary and analytic theory of algebraic numbers'' by W. Narkiewicz.
-Throughout this thesis, we denote the algebraic closure of $\mathbb{Q}_p$ by $\overline{\mathbb{Q}}_p$. The completion of $\overline{\mathbb{Q}}_p$ with respect to the absolute value of $\overline{\mathbb{Q}}_p$ is denoted by $\mathbb{C}_p$.}
+In this section we give a concise exposition of $p$-adic valuations. As references for this material we give \cite{BS} (especially Theorem 3 in Chapter 4, Section 2), \cite{Ca} (especially Lemma 2.1 in Chapter 9), \cite{Has2} (especially Chapter 18), \cite{Ko} (especially Chapter 3, Section 2), and \cite{Nark} (especially Theorem 6.1).
+
+We denote the algebraic closure of $\mathbb{Q}_p$ by $\overline{\mathbb{Q}}_p$. The completion of $\overline{\mathbb{Q}}_p$ with respect to the absolute value of $\overline{\mathbb{Q}}_p$ is denoted by $\mathbb{C}_p$.
 
 Let $K$ be an arbitrary number field. A homomorphism $v: K^* \to \mathbb{R}_{\geq 0}$ of the multiplicative group of $K$ into the group of positive real numbers is called a \textit{valuation} if it satisfies the condition
 \[v(x+y) \leq v(x) + v(y).\]
@@ -97,7 +95,7 @@ For $\ord_p(x) \geq k$ we also write $x \equiv 0 \mod{p^k}$.
 \section{$p$-adic logarithms}
 \label{sec:pAdicLogarithms}
 
-We have seen how to define $\ord_{\mathfrak{p}}$ and $\ord_p$ on algebraic extensions of $\mathbb{Q}$. For any $z \in \mathbb{C}_p$ with $\ord_p(z-1) > 0$, we can also define the $p$-adic logarithm of $z$ by
+We have seen how to extend $p$-adic valuations to algebraic extensions of $\mathbb{Q}$. For any $z \in \mathbb{C}_p$ with $\ord_p(z-1) > 0$, we can also define the $p$-adic logarithm of $z$ by
 \[\log_p(z) = -\sum_{i=1}^{\infty} \frac{(1-z)^i}{i}.\]
 By the $n^{\text{th}}$ term test, this series converges precisely in the region where ${\ord_p(z-1) > 0}$. Three important properties of the $p$-adic logarithm are
 \begin{enumerate}
@@ -105,7 +103,7 @@ By the $n^{\text{th}}$ term test, this series converges precisely in the region 
 \item $\log_p(z^k) = k \log(p)$ whenever $\ord_p(z-1) > 0$ and $k \in \mathbb{Z}$. 
 \item $\ord_p(\log_p(z)) = \ord_p(z-1)$ whenever $\ord_p(z-1) > 1/(p-1)$.
 \end{enumerate}
-Proofs of the first and last property can be found in \edit{ [Ha] (pp. 264-265)}. The second property follows from the first.
+Proofs of the first and last property can be found in \cite{Has2} (pp. 264-265). The second property follows from the first.
 
 We will use the following lemma to extend the definition of the $p$-adic logarithm to all $p$-adic units in $\overline{\mathbb{Q}_p}$. 
 \begin{lemma} \label{lem: pAdicLogarithms}
@@ -117,13 +115,12 @@ Let $z$ be a $p$-adic unit belonging to a finite extensions $L$ of $\mathbb{Q}_p
 \[\ord_p(z^{rp^k}-1) >\frac{1}{p-1}.\]
 \end{enumerate}
 \end{lemma}
-\edit{proofs and what e,f are?}
 
 For $z$ a $p$-adic unit in $\overline{\mathbb{Q}_p}$ we define
 \[\log_p{z} = \frac{1}{q}\log_p{z^q},\]
 where $q$ is an arbitrary non-zero integer such that $\ord_p(z^q-1) >0$. To see that this definition is independent of $q$, let $r$ be the smallest positive integer with $\ord_p(z^r-1) >0$, note that $q/r$ is an integer, and use the second property of $p$-adic logarithms above to write
 \[\frac{1}{q}\log_p{z^q} = \frac{1}{r(q/r)}\log_p{z^{r(q/r)}} = \frac{1}{r}\log_p{z^r}.\]
-Choosing $q$ such that $\ord_p(z^q-1) > 1/(p-1)$ helps to speed up and control the convergence of the series defining $\log_p$ \edit{references here}.
+Choosing $q$ such that $\ord_p(z^q-1) > 1/(p-1)$ helps to speed up and control the convergence of the series defining $\log_p$ (cf. \cite{Sm} (pp. 28-30) and \cite{Coh2} (pp. 263-265)).
 
 It is straightforward to see that Properties 1 and 2 above extend to the case where $x,y,z$ are $p$-adic units. Combining this with Property 3, we obtain
 \begin{lemma}\label{lem:pAdicLogarithms2}
@@ -147,6 +144,8 @@ Let $x \in K$ and let $\log^+(\cdot)$ denote the real-valued function $\max\{\lo
 \[h(x) = \frac{1}{[K:\mathbb{Q}]}\sum_v \log^+|x|_v,\]
 where the sum is take over all places $v$ of $K$. If $x$ is an algebraic unit, then $|x|_v = 1$ for all non-Archimedean places $v$, and therefore $h(x)$ can be taken over the Archimedean places only. 
 In particular, if $x \in \mathbb{Q}$, then with $x = p/q$ for $p,q \in \mathbb{Z}$ with $\gcd(p,q) = 1$, we have $h(x) = \log\max\{|p|,|q|\}$, and if $x \in \mathbb{Z}$ then $h(x) = \log|x|$. 
+
+%reference: BoGu
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%

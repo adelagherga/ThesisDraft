@@ -226,7 +226,7 @@
 %%   rather than the entry text.
 \usepackage[bookmarks,bookmarksnumbered,%
     allbordercolors={0.8 0.8 0.8},%
-    pagebackref,linktocpage%
+    linktocpage%
     ]{hyperref}
 %% The following change how the the back-references text is typeset in a
 %% bibliography when `backref' or `pagebackref' are used
@@ -237,17 +237,17 @@
 %%\newcommand{\nocitations}{No citations}
 %%
 %\renewcommand*{\backref}[1]{}% necessary for backref < 1.33
-\renewcommand*{\backrefsep}{,~}%
-\renewcommand*{\backreftwosep}{,~}% ', and~'
-\renewcommand*{\backreflastsep}{,~}% ' and~'
-\renewcommand*{\backrefalt}[4]{%
-\textcolor{greytext}{\ifcase #1%
-\nocitations%
-\or
-\(\rightarrow\) page #2%
-\else
-\(\rightarrow\) pages #2%
-\fi}}
+%\renewcommand*{\backrefsep}{,~}%
+%\renewcommand*{\backreftwosep}{,~}% ', and~'
+%\renewcommand*{\backreflastsep}{,~}% ' and~'
+%\renewcommand*{\backrefalt}[4]{%
+%\textcolor{greytext}{\ifcase #1%
+%\nocitations%
+%\or
+%\(\rightarrow\) page #2%
+%\else
+%\(\rightarrow\) pages #2%
+%\fi}}
 
 
 %% The following uses most defaults, which causes hyperlinks to be
@@ -300,8 +300,8 @@
 %\subtitle{If you want a subtitle}
 
 \author{Adela Gherga}
-\previousdegree{B.Sc. Mathematics, McMaster University, 2006}
-\previousdegree{M.Sc. Mathematics, McMaster University, 2010}
+\previousdegree{B.Sc. Mathematics, McMaster University, 2010}
+\previousdegree{M.Sc. Mathematics, McMaster University, 2012}
 
 % What is this dissertation for?
 \degreetitle{Doctor of Philosophy}
@@ -330,9 +330,9 @@
 %% hyperref package provides support for embedding meta-data in .PDF
 %% files
 \hypersetup{
-  pdftitle={Change this title!  (DRAFT: \today)},
+  pdftitle={Gherga_Dissertation (\today)},
   pdfauthor={Adela Gherga},
-  pdfkeywords={Your keywords here}
+  pdfkeywords={Diophantine equation, elliptic curves, Goormaghtigh equations, Thue-Mahler}
 }
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%%--------------------------------------------------------------------------------------------------------------------------------------------%

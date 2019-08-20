@@ -4,41 +4,8 @@
 \chapter{Computing Elliptic Curves over $\mathbb{Q}$}
 \label{ch:EllipticCurves} 
 
-\edit{intro edits}
-A classical result of Shafarevich \cite{Shaf} implies that, given  fixed set of prime numbers $S$,  there are only finitely many $\mathbb{Q}$-isomorphism classes of elliptic curves 
-defined over $\mathbb{Q}$ with good reduction outside $S$. In 1970, Coates \cite{Coa} proved an effective version of this theorem, using bounds for linear forms in $p$-adic and complex logarithms. Early attempts to make these results explicit, for fixed sets of small primes, overlap with the arguments of \cite{Coa}, in 
-that they reduce the problem to solving a number of {\it Thue-Mahler equations}. These are Diophantine equations 
-of the form
-\begin{equation} \label{TM}
-F(x,y) = u.
-\end{equation}
-Here, $F$ is a binary form of degree $3$ or greater, with integer coefficients, and $u$ is an {\it $S$-unit} -- an integer whose prime factors are 
-contained in $S$. The number of solutions in relatively prime integers $x$ and $y$ to equation (\ref{TM}), provided that $F$ is irreducible, is known to be finite, via work of Mahler \cite{Mahler}.
-This generalizes a classical result of Thue \cite{Th} who had proved an analogous statement for the case of $u$ fixed in equation (\ref{TM}). When 
-$F$ is a reducible form in $\mathbb{Z}[x,y]$, equation~\eqref{TM} is typically less difficult to solve; in the context of finding elliptic curves, this situation arises
-from consideration of elliptic curves with at least one nontrivial rational $2$-torsion point. The 
-first examples where all elliptic curves $E/\mathbb{Q}$ with good reduction outside a 
-given set $S$ were determined were for  $S = \{2, 3 \}$ by Coghlan \cite{Cog} and Stephens \cite{Ste}  (see also \cite{BK}),  and for $S = 
-\{p\}$ for certain small primes $p$ -- see e.g. Setzer \cite{Set} and Neumann \cite{Neu}. Each of these examples corresponds, via our approach, 
-to cases with reducible forms.  Agrawal, Coates, Hunt and van der 
-Poorten \cite{ACHP} carried out the first analysis where irreducible forms in equation~\eqref{TM} were treated to find elliptic curves of given conductor (dealing with the case $S= \{ 11 \}$).  In this situation, the reduction to equation~\eqref{TM} is not particular involved, but subsequent computations are quite difficult; they use 
-arguments from \cite{Coa} and a range of techniques from computational Diophantine approximation. 
-
-It appears that there are very few subsequent attempts in the literature to compute elliptic curves of given 
-conductor\index{conductor} through the solution of Thue-Mahler equations\index{Thue-Mahler equations}. Instead, one finds a wealth of 
-results which approach the problem via modular forms. This route relies upon the Modularity theorem (see Wiles 
-\cite{Wi} and Breuil, Conrad, Diamond and Taylor \cite{BCDT}\index{modularity theorem}), which was actually still conjectural 
-when these ideas were first implemented. To find all $E/\mathbb{Q}$ of conductor $N$ by this method, one computes the 
-space of $\Gamma_0(N)$ modular symbols and the action of the Hecke algebra on it, and then searches for one-dimensional 
-rational eigenspaces. After calculating a large number of Hecke eigenvalues, one is then able to extract corresponding 
-elliptic curves. For a detailed description of how this technique works, the reader is directed to  \cite{Cre2}. The 
-great computational success of this approach can be primarily attributed to Cremona (see e.g. \cite{Cre1}, \cite{Cre2}) 
-and his collaborators; they have devoted many years of work to it and are responsible for the current state-of-the-art. 
-In particular, at the time of writing in 2017, all $E/\mathbb{Q}$ of conductor $N \leq 400000$ have been determined by these methods.
-
-In the paper at hand, we return to techniques based upon solving Thue-Mahler equations\index{Thue-Mahler equations}, using a 
-number of results from classical invariant theory. Our aim is to give a straightforward demonstration of the link 
-between the conductors in question and the corresponding equations, and to make the Diophantine approximation problem 
+In the chapter at hand, we outline an algorithm to compute elliptic curves over $\mathbb{Q}$, based upon techniques of solving Thue-Mahler equations. Our aim is to give a straightforward demonstration of the link 
+between the conductors of the elliptic curves in question and the corresponding equations, and to make the Diophantine approximation problem 
 that follows as easy to tackle as possible. It is worth noting here that these connections are quite straightforward for primes $p > 3$, but require 
 careful analysis at the primes $2$ and $3$. We will demonstrate our approach for a number of specific conductors and sets $S$, and then focus 
 our main computational efforts on curves with bad reduction at a single prime (i.e. curves of conductor $p$ or $p^2$ for 
@@ -47,26 +14,6 @@ are able to find all curves of prime conductor up to $2 \times 10^9$ ($10^{10}$ 
 discriminant) and conductor $p^2$ for $p \leq 5\times 10^5$. We then extend these computations in the case of conductor 
 $p$,  for prime $p \leq 2 \times 10^{13}$, and conductor $p^2$ for prime $p \leq 10^{10}$. We are not, however, able to 
 guarantee completeness for these extended computations (we will discuss this further in what follows). 
-
-The outline of this paper is as follows. In Section~\ref{elliptic}, we discuss some basic facts about elliptic curves, with corresponding
-notation. In Section~\ref{forms}, we review the invariant theory of cubic forms and 
-state our main theorem upon which our algorithm is based. Section \ref{BigProof} contains the proof of this theorem. Section~\ref{rep} is devoted to the actual computation of the 
-cubic forms we require. We provide a few examples of our approach for composite conductors in 
-Section~\ref{examples}. Specifically, we find all elliptic curves $E/\mathbb{Q}$ with conductor $N$ for 
-$$
-N \in \{ 399993, 999999, 999999999, 2655632887, 3305354359  \}
-$$
-and all  $E/\mathbb{Q}$  with good reduction outside $S$, where
-$$
-S = \{ 2, 3, 23 \} \; \; \mbox{ and } \; \; S = \{ 2, 3, 5, 7, 11 \}.
-$$
-These last two examples have been considered recently by other authors (\cite{KanMat} and \cite{Kou}), using different techniques.
-
-The remainder of the paper is devoted to finding curves with bad reduction at a single prime $p$, i.e. those of conductor  $N=p$ or $p^2$.
-We indicate in Section~\ref{primes} how the problem of computing elliptic curves over $\mathbb{Q}$ of fixed conductor simplifies considerably in such a situation and set the stage for our main computation. In Section~\ref{compy}, we provide a variety of further details for 
-these cases and  an outline of a heuristic approach to the problem that enables us to work with curves of quite large conductor (allowing us to find, in all likelihood, all elliptic curves of prime conductor $p$ for $p < 2 \times 10^{13}$).  Here, the obstruction to a deterministic solution to our problem for such large values of $p$ is provided by the existence of extremely large fundamental units in corresponding cubic fields. Section~\ref{data} contains an overview 
-of our output, with comparisons  to previous results in the literature. Finally, in Section \ref{spartan}, we provide an argument to show that any elliptic curve that has not been detected by our ``heuristic'' approach corresponds to a record-setting ``Hall ratio'', that is, an example of integers $x$ and $y$ where the (nonzero) difference $|x^3-y^2|$ is unusually small.
-
 
 %We are in the process of making our data more easily available through the LMFDB\footnote{The $L$-function and modular 
 %form database, currently accessible at \url{http://www.lmfdb.org/}}. Until this is completed, we invite 
@@ -405,7 +352,7 @@ $E[2] \cong E_0[2]$ (as Galois modules), then $E_0$ is isomorphic to the curve
 $$
 y^2 = x^3 - 3 H_F(u,v) x + G_F(u,v),
 $$
-for some $u, v \in K$. We thank the referee for bringing this paper to our attention.
+for some $u, v \in K$. 
 
 %--------------------------------------------------------------
 \subsection{Remarks}
@@ -447,9 +394,10 @@ $$
 D_F \equiv 0 \mod{g^4}.
 $$
 This is a necessary but not sufficient condition for the form $F$ to be imprimitive. It follows, if we wish to restrict attention to primitive forms in Theorem \ref{fisk}, that the possible values for $\nu_p (D_F)$ that can arise are
-\begin{equation} \label{lumpy}
-\nu_2 (D_F) \in \{ 0, 2, 3, 4 \}, \; \;  \nu_3 (D_F) \in \{ 0, 1, 3, 4, 5 \} \; \; \mbox{ and } \; \; \nu_p (D_F) \in \{ 0, 1, 2 \}, \; \mbox{ for } p > 3.
-\end{equation}
+\begin{align} \label{lumpy}
+& \nu_2 (D_F) \in \{ 0, 2, 3, 4 \}, \; \;  \nu_3 (D_F) \in \{ 0, 1, 3, 4, 5 \} \\
+& \mbox{ and } \nu_p (D_F) \in \{ 0, 1, 2 \}, \; \mbox{ for } p > 3.
+\end{align}
 
 
 \subsubsection{Possible twists}
@@ -524,7 +472,7 @@ and all its quadratic twists by squarefree divisors of $6N$. Output those curves
 \end{enumerate}
 The first, second and fourth steps here are straightforward; the first and second can be done efficiently, while the fourth is essentially 
 trivial. The main bottleneck is step~(3). While there is a deterministic procedure for carrying this out (see Tzanakis and de 
-Weger \cite{TW2}, \cite{TW3}), it is both involved and, often, computationally taxing. An earlier  implementation of this method in Magma due to Hambrook \cite{Ham} has subsequently been refined by the second author \cite{Ghe}; the most up-to-date version of this code (which we will reference here and henceforth as UBC-TM) is available at 
+Weger \cite{TW2}, \cite{TW3}), it is both involved and, often, computationally taxing. An earlier  implementation of this method in Magma due to Hambrook \cite{Ham} has subsequently been refined by the second author \cite{GhKaMaSi}; the most up-to-date version of this code (which we will reference here and henceforth as UBC-TM) is available at 
 \begin{center}
 \url{http://www.nt.math.ubc.ca/BeGhRe/Code/UBC-TMCode}
 \end{center}
@@ -574,11 +522,11 @@ while, if $\nu_p (N)=2$, then either
 \end{equation}
 or
 %
-\begin{equation} \label{super}
+\begin{align} \label{super}
 \nu_p (\mathcal{D}) \leq 1, \;
-(\nu_p (X), \nu_p (Y), \nu_p (M) ) = (0,0, \geq 1), (\geq 1, 1, 2), (1, \geq 2, 3) 
-\mbox{ or } (\geq 2, 2, 4).
-\end{equation}
+&(\nu_p (X), \nu_p (Y), \nu_p (M) ) = (0,0, \geq 1), (\geq 1, 1, 2), (1, \geq 2, 3) \\
+&\mbox{ or } (\geq 2, 2, 4).
+\end{align}
 Things are rather more complicated for the primes $2$ and $3$; we summarize this in Tables~\ref{tab nu2 nxym} and~\ref{tab nu3 
 nxym} (which are, in turn, compiled from the data in Tables~\ref{tab nu2} and ~\ref{tab nu3}). 
 
@@ -608,9 +556,10 @@ $$
 \nu_3 (N) & (\nu_3 (X), \nu_3 (Y), \nu_3 (M), \nu_3 (\mathcal{D}) ) \\ \hline
 0 & (1, \geq 3, 3, 0)  \mbox{ or } (0,0,3, 0)  \\
 1 & (0,0,\geq 4, 0)  \\
-2 & (\geq 0, 0, 0, 1), (0, \geq 2, 0, 1), (0,0, \geq 3, 1), (1, \geq 3, 3, 1), (\geq 0,0,0,2) 
-\mbox{ or } (0,\geq 2, 0, 2)  \\
-3 & (\geq 0, 0, 0, 1),  (\geq 0, 0, 0, 2), (0,1,0, 1), (0,1,0, 2), (0,0,2,1) \mbox{ or } (0,0,2, 2) \\
+2 & (\geq 0, 0, 0, 1), (0, \geq 2, 0, 1), (0,0, \geq 3, 1), (1, \geq 3, 3, 1), (\geq 0,0,0,2)  \\
+ & \mbox{ or } (0,\geq 2, 0, 2) \\
+3 & (\geq 0, 0, 0, 1),  (\geq 0, 0, 0, 2), (0,1,0, 1), (0,1,0, 2), (0,0,2,1)\\
+ &  \mbox{ or } (0,0,2, 2) \\
 4 &  (0,0,1,1), (0,0,1,2), (1,2,3,1) \mbox{ or } (1, 2, 3, 2) \\
 5 &   (\geq 1, 1, 2, 1), (\geq 1, 1, 2, 2), (\geq 2, 2, 4, 1) \mbox{ or }  (\geq 2, 2, 4,2). \\
  \hline
@@ -760,11 +709,10 @@ In cases (i), (ii), and (iii), we choose $F=F_1$, i.e.
 (\omega_0,\omega_1,\omega_2,\omega_3) = (a, 3 b_0, 3 c_0, d),
 \end{align*}
 so that
-$$
-F(1,0)=a, \; \; D_{F} = (-1)^\delta 2^2 \cdot 3^3 \cdot K, \; \; 
-c_4 = \mathcal{D}^2 \widetilde{H}_{F} (1,0) \; \; \mbox{ and } \; \; 
-c_6 = - \frac{1}{2}  \mathcal{D}^3 \widetilde{G}_{F} (1,0).
-$$
+\[F(1,0)=a, \; \; D_{F} = (-1)^\delta 2^2 \cdot 3^3 \cdot K, \; \; 
+c_4 = \mathcal{D}^2 \widetilde{H}_{F} (1,0)\]
+and 
+\[c_6 = - \frac{1}{2}  \mathcal{D}^3 \widetilde{G}_{F} (1,0).\]
 It follows that $E$ is isomorphic over $\mathbb{Q}$ to the curve
 $$
 y^2 = x^3 -27 c_4 x -54 c_6 = x^3 - 3 \mathcal{D}^2 H_{F}(1,0) x + \mathcal{D}^3 G_{F}(1,0).
@@ -785,11 +733,10 @@ set $F = F_1/3$, i.e. take
 (\omega_0,\omega_1,\omega_2,\omega_3) = (a_0, b_0, c_0, d_0).
 \end{align*}
 We have
-$$
-F(1,0) =a/3, \; \;  D_{F}  = (-1)^\delta 2^2  \cdot K/3, \; \; 
-c_4 = \mathcal{D}^2 H_{F} (1,0)  \; \; \mbox{ and } \; \;  
-c_6 = - \frac{1}{2}  \mathcal{D}^3 G_{F} (1,0).
-$$
+\[F(1,0) =a/3, \; \;  D_{F}  = (-1)^\delta 2^2  \cdot K/3, \; \; 
+c_4 = \mathcal{D}^2 H_{F} (1,0)\]
+and 
+\[c_6 = - \frac{1}{2}  \mathcal{D}^3 G_{F} (1,0).\]
 The curve $E$ is now isomorphic over $\mathbb{Q}$ to the model
 $$
 y^2 = x^3 -27 c_4 x -54 c_6 = x^3 - 27 \mathcal{D}^2 H_{F}(1,0) x + 27 \mathcal{D}^3 G_{F}(1,0).
@@ -1065,7 +1012,8 @@ For the possible cases with rational $2$-torsion, we solve $X+Y=Z^2$ with $X$ an
 $$
 \begin{array}{lll}
 (X,Y) &= &  (2,-1), (2,2), (8,1), (32,-31), (62,2), (256,-31), (961,128), \\
-& & (992,-31), (3968,1), (76088,-9007), (294841, 8) \mbox{ and } (492032,-9007).  \\
+& & (992,-31), (3968,1), (76088,-9007), (294841, 8)\\
+& & \mbox{ and } (492032,-9007).  \\
 \end{array}
 $$
 A short calculation confirms that each elliptic curve arising from these solutions via quadratic twist has bad reduction at the prime $2$ (and, in particular, cannot have conductor $2655632887$). There are thus no elliptic curves over $\mathbb{Q}$ with conductor $2655632887$.
@@ -1075,7 +1023,7 @@ Full computational details are available at
 \begin{center}
 \url{http://www.nt.math.ubc.ca/BeGhRe/Examples/2655632887-data}.
 \end{center}
-We should observe that it is much more challenging computationally to try to extend this argument to tabulate curves $E$ with good reduction outside 
+We observe that it is much more challenging computationally to try to extend this argument to tabulate curves $E$ with good reduction outside 
 $S = \{ 31, 9007, 9511 \}$. To do this, we would have to first determine whether or not there exist irreducible cubic forms of discriminant, say,
 $D_F = \pm 4 \cdot 31^2 \cdot 9007^2 \cdot 9511^2 > 2.8 \times 10^{19}$. This appears to be at or beyond current computational limits.
 
@@ -1086,13 +1034,16 @@ $D_F = \pm 4 \cdot 31^2 \cdot 9007^2 \cdot 9511^2 > 2.8 \times 10^{19}$. This ap
 For there to exist an elliptic curve with trivial rational $2$-torsion and conductor $3305354359$, we require the existence of an irreducible cubic form of discriminant $\pm 4  \cdot 41^{\delta_1} \cdot 409^{\delta_2} \cdot 439^{\delta_3} \cdot 449^{\delta_4}$, with $\delta_i \in \{ 0, 1 \}$. We check that, again, there are no such forms (once more employing a short auxiliary computation in the case $D_F =\pm 4  \cdot 41 \cdot 409 \cdot 439 \cdot 449$). If we solve $X+Y=Z^2$ with $X$ and $Y$ $S$-units for $S = \{ 2, 41, 409, 439, 449 \}$, we find that the solutions to this equation with $X \geq Y$, $Z > 0$ and $\gcd (X,Y)$ squarefree are precisely 
 $$
 \begin{array}{l}
-(X,Y) =  (2,-1), (2,2), (8,1), (41,-16),  (41,-32), (41,8), (82,-1), (128,41), ( 409, -328),  \\
- \hskip9.6ex (409, 32), (439, 2), (449, -328), (449, -8), (512, 449), (818, 82), (898, 2), \\
-\hskip9.6ex   (3272, 449), (3362, 2), (7184, 41), (16769, -128), (16769, -14368),  (18409, -16384), \\
- \hskip9.6ex  (33538, -18409), (36818, 818), (41984, 41), (68921, -57472), (183641, -1312),\\
-\hskip9.6ex   (183641, -56192), (183641, 41984), (359102, 898), (403202, -33538), \\
-\hskip9.6ex   (403202, -359102), (403202, 17999), (737959, 183641), (754769, -6544), \\
-\hskip9.6ex  (6858521, -919552), (8265641, -16) \mbox{ and } (7095601778, -5610270178). \\
+(X,Y) =  (2,-1), (2,2), (8,1), (41,-16),  (41,-32), (41,8), (82,-1), \\
+ \hskip9.6ex  (128,41), (409, -328), (409, 32), (439, 2), (449, -328), (449, -8),\\
+\hskip9.6ex   (512, 449),(818, 82), (898, 2), (3272, 449), (3362, 2), (7184, 41),\\
+ \hskip9.6ex  (16769, -128), (16769, -14368),  (18409, -16384), \\
+\hskip9.6ex   (33538, -18409),(36818, 818), (41984, 41), (68921, -57472), \\
+\hskip9.6ex   (183641, -1312),(183641, -56192), (183641, 41984), \\
+\hskip9.6ex  (359102, 898), (403202, -33538),(403202, -359102), \\
+\hskip9.6ex (403202, 17999), (737959, 183641), (754769, -6544), \\
+\hskip9.6ex (6858521, -919552), (8265641, -16) \\
+\hskip9.6ex \mbox{and } (7095601778, -5610270178). \\
 \end{array}
 $$
 Once again, a short calculation confirms that each elliptic curve arising from these solutions via twists has even conductor. There are thus no elliptic curves over $\mathbb{Q}$ with conductor $3305354359$.
@@ -1129,6 +1080,7 @@ $$
 \end{array}
 $$
 
+
 \vskip1.2ex
 In each case, we are thus led to solve the Thue-Mahler equation
 \begin{equation} \label{lonely}
@@ -1139,6 +1091,7 @@ where $\gcd(u,v) =1$, $\delta \in \{ 0, 1 \}$ and $\beta_1$, $\kappa_{11}$, $\ka
 F(u,v) \, D_F \equiv 0 \mod{ 3 \cdot 11 \cdot 17 \cdot 23 \cdot 31}.
 \end{equation}
 We readily check that the congruence $F(u,v) \equiv 0 \mod{p}$ has only the solution $u \equiv v \equiv 0 \mod{p}$ for the following forms $F$ and primes $p$ (whereby (\ref{mary}) cannot be satisfied by coprime integers $u$ and $v$ for these forms) :
+
 
 $$
 \begin{array}{cc|cc} 
@@ -1151,6 +1104,7 @@ $$
 \end{array}
 $$
 
+
 For the remaining $6$ forms under consideration, we appeal to UBC-TM. The only solutions we find satisfying (\ref{mary})
 are as follows.
 $$
@@ -1159,7 +1113,8 @@ $$
 (1, 2, 2, 6) & (-1851, 892), (14133, -3790) \\
 (2, 1, 14, -2) & (13, -5), (-29, -923) \\
 (2, 4, -6, -3) & (10,-3), (64, 49), (-95, 199), (-3395, 1189), \\
-& (3677, -1069), (5158, 4045), (-23546, 57259),  (-77755, 30999) \\
+& (3677, -1069), (5158, 4045), (-23546, 57259), \\
+& (-77755, 30999) \\
 (3,3,44,66) & (1,0), (1,2), (-3,4), (3,-2), (-11,9), (25,-3), \\
 & (231,2), (-317,240), (489,61), (1263, -878), (6853, -4119) \\
 (3, 7, 5, 7) & (1, 12), (-29, 26), (78, 1),  (423, -160) \\
@@ -1188,21 +1143,31 @@ $$
 As in subsection \ref{ssec reducible}, we attach to each solution a pair of elliptic curves $E_1(X,Y)$ and $E_2(X,Y)$.
 Of these, the only twists we find to have conductor $399993$ are the quadratic twists by $t$ of $E_i(X,Y)$  given in the following table. Note that there is some duplication -- the curve labelled 399993.f2 in the LMFDB, for example, arises from three distinct solutions to $X+Y=Z^2$.
 
-
 $$
-\begin{array}{c|c|c|c|c||c|c|c|c|c}
-X & Y & E_i & t & \mbox{ LMFDB}  & X & Y & E_i & t & \mbox{ LMFDB} \\ \hline
-16192 & -4743 & E_1 & -1 & 399993.g2 & 534336 & -506447 & E_2 & 2 & 399993.e1 \\
-16192 & -4743 & E_2 & 2 & 399993.g1 & 1311552 & -527 & E_1 & 1 & 399993.a2 \\
-23529 & 18496 & E_1 & -2 & 399993.f2  & 1311552 & -527 & E_2 & -2 & 399993.a1\\
-23529 & 18496 & E_2 & 1 & 399993.f3 & 1414017 & -1045568 & E_1 & 2 & 399993.b2 \\
-116281 & -75072 & E_1 & 2 & 399993.f4 & 1414017 & -1045568 & E_2 & -1 & 399993.b1 \\
-116281 & -75072 & E_2 & -1 & 399993.f2 & 6305121 & 3027904 & E_1 & 2 & 399993.c1  \\
-371008 & 4761 & E_1 & 1 & 399993.f2 & 6305121 & 3027904 & E_2 & -1 & 399993.c2 \\
-371008 & 4761 & E_2 & -2 & 399993.f1& 6988113 & 18496 & E_1 & 2 & 399993.c2 \\
-519777 & -131648 & E_1 & 2 & 399993.d2  & 6988113 & 18496 & E_2 & -1 & 399993.c3 \\
-519777 & -131648 & E_2 & -1 & 399993.d1 & 7745089 & -2731968 & E_1 & 2 & 399993.c4\\
-534336 & -506447 & E_1 & -1 & 399993.e2 & 7745089 & -2731968 & E_2 & -1 & 399993.c2 \\
+\begin{array}{c|c|c|c|c}
+X & Y & E_i & t & \mbox{ LMFDB} \\ \hline
+16192 & -4743 & E_1 & -1 & 399993.g2 \\
+16192 & -4743 & E_2 & 2 & 399993.g1 \\
+23529 & 18496 & E_1 & -2 & 399993.f2 \\
+23529 & 18496 & E_2 & 1 & 399993.f3 \\ 
+116281 & -75072 & E_1 & 2 & 399993.f4 \\
+116281 & -75072 & E_2 & -1 & 399993.f2 \\
+371008 & 4761 & E_1 & 1 & 399993.f2 \\
+371008 & 4761 & E_2 & -2 & 399993.f1 \\
+519777 & -131648 & E_1 & 2 & 399993.d2   \\
+519777 & -131648 & E_2 & -1 & 399993.d1 \\
+534336 & -506447 & E_1 & -1 & 399993.e2 \\
+534336 & -506447 & E_2 & 2 & 399993.e1 \\
+1311552 & -527 & E_1 & 1 & 399993.a2 \\
+1311552 & -527 & E_2 & -2 & 399993.a1\\
+1414017 & -1045568 & E_1 & 2 & 399993.b2 \\
+1414017 & -1045568 & E_2 & -1 & 399993.b1 \\
+6305121 & 3027904 & E_1 & 2 & 399993.c1  \\
+6305121 & 3027904 & E_2 & -1 & 399993.c2 \\
+6988113 & 18496 & E_1 & 2 & 399993.c2 \\
+6988113 & 18496 & E_2 & -1 & 399993.c3\\
+7745089 & -2731968 & E_1 & 2 & 399993.c4\\
+7745089 & -2731968 & E_2 & -1 & 399993.c2 \\
 \end{array}
 $$
 
@@ -1221,30 +1186,47 @@ $$
 10^6-1 = 3^3 \cdot 7 \cdot 11 \cdot 13 \cdot 37.
 $$
 From Theorem \ref{fisk}, we thus need to consider binary cubic forms $F(u,v) =  \omega_0 u^3 + \omega_1 u^2v + \omega_2 uv^2 + \omega_3 v^3$ of discriminant $D_F = \pm 108 N_1$, where $N_1 \mid 7 \cdot 11 \cdot 13 \cdot 37$ and $\omega_1 \equiv \omega_2 \equiv 0 \mod{3}$. The irreducible forms of this shape are as follows.
+
 $$
-\begin{array}{ccc|ccc} 
-(\omega_0,\omega_1,\omega_2,\omega_3) & D_F & p & (\omega_0,\omega_1,\omega_2,\omega_3)  & D_F & p \\ \hline
-(1,0,-6,-2) & 108 \cdot 7 & 37 &   (2,3,-78,-26) & 108 \cdot 7 \cdot 11 \cdot 13 \cdot 37 & \mbox{ none } \\
-(1,0,21,16) & -108 \cdot 11 \cdot 37 & 7, 13 &  (2,3,6,3) & -108 \cdot 7 & 11, 37 \\
-(1,0,30,2) & -108 \cdot 7 \cdot 11 \cdot 13 & \mbox{ none } &  
-(2,3,6,8) & -108 \cdot 37 & 7 \\
-(1, 3, 3, 3) & -108 & 7, 13, 37 &   (2, 6, -12, 1) & 108 \cdot 11 \cdot 13 & 7 \\
-(1, 3, 6, 16) & -108 \cdot 37 & 7 &  (2,6,21,88) & -108 \cdot 11 \cdot 13 \cdot 37 &  \mbox{ none } \\
+\begin{array}{ccc} 
+(\omega_0,\omega_1,\omega_2,\omega_3) & D_F & p \\ \hline
+(1,0,-6,-2) & 108 \cdot 7 & 37 \\
+(1,0,21,16) & -108 \cdot 11 \cdot 37 & 7, 13 \\
+(1,0,30,2) & -108 \cdot 7 \cdot 11 \cdot 13 & \mbox{ none } \\
+(1, 3, 3, 3) & -108 & 7, 13, 37  \\
+(1, 3, 6, 16) & -108 \cdot 37 & 7 \\
  %(2,10,-26,-13) & 108 \cdot 7 \cdot 13 \cdot 37 & 11  \\
-(1,3,12,26) & -108 \cdot 7 \cdot 13 & \mbox{ none } &  (2,12,0,13) & -108 \cdot 7 \cdot 11 \cdot 13 &  \mbox{ none } \\
-(1,3,33,117) & -108 \cdot 7 \cdot 11 \cdot 37 & \mbox{ none } & (2,21,-6,80) &  -108 \cdot 7 \cdot 11 \cdot 13 \cdot 37 &  \mbox{ none }  \\ 
-(1,6,-36,-34) & 108 \cdot 7 \cdot 13 \cdot 37 & 11 & (3,3,18,20) &  -108 \cdot 7 \cdot 11 \cdot 13 &  \mbox{ none } \\
-(1,6,3,6) & -108 \cdot 37 & 7 &  (4,6,15,14) & -108 \cdot 13 \cdot  37 & 11 \\
-(1,6,9,26) & -108 \cdot 11 \cdot 13 & \mbox{ none } & (5,6,27,14) & -108 \cdot 7 \cdot 11 \cdot 37 &  \mbox{ none } \\
-(1,9,0,74) & -108 \cdot 7 \cdot 13 \cdot 37 & \mbox{ none } & (5,9,3,21) & -108 \cdot 7 \cdot 11 \cdot 37 &  \mbox{ none } \\
-(1,12,12,14) & -108 \cdot 13 \cdot 37 & 11 &  (7,0,12,14) &  -108 \cdot 7 \cdot 11 \cdot 37 &  \mbox{ none }  \\
+(1,3,12,26) & -108 \cdot 7 \cdot 13 & \mbox{ none } \\
+(1,3,33,117) & -108 \cdot 7 \cdot 11 \cdot 37 & \mbox{ none }  \\ 
+(1,6,-36,-34) & 108 \cdot 7 \cdot 13 \cdot 37 & 11 \\
+(1,6,3,6) & -108 \cdot 37 & 7 \\
+(1,6,9,26) & -108 \cdot 11 \cdot 13 & \mbox{ none } \\
+(1,9,0,74) & -108 \cdot 7 \cdot 13 \cdot 37 & \mbox{ none } \\
+(1,12,12,14) & -108 \cdot 13 \cdot 37 & 11  \\
 %(6,32,-35,-7) & 108 \cdot 7 \cdot 11 \cdot 13 \cdot 37 & \mbox{ none } \\
-(2, 0, -18, -5) & 108 \cdot 11 \cdot 37 & 13 & (10,3,42,-16) & -108 \cdot 7 \cdot 11 \cdot 13 \cdot 37 &  \mbox{ none }  \\
-(2,0,3,3) & -108 \cdot 11 & 7, 37 & (10,6,12,3) & -108 \cdot 13 \cdot  37 &  \mbox{ none }  \\
-(2,0,15,3) & -108 \cdot 7 \cdot 37 & 11, 13 & (11,6,12,6) & -108 \cdot 7 \cdot 11 \cdot 13  &  \mbox{ none } \\
-(2,0,18,7) & -108 \cdot 13 \cdot 37 & 11 & (21,12,27,20) &  -108 \cdot 7 \cdot 11 \cdot 13 \cdot 37 &  \mbox{ none }  \\
+(2, 0, -18, -5) & 108 \cdot 11 \cdot 37 & 13  \\
+(2,0,3,3) & -108 \cdot 11 & 7, 37   \\
+(2,0,15,3) & -108 \cdot 7 \cdot 37 & 11, 13 \\
+(2,0,18,7) & -108 \cdot 13 \cdot 37 & 11 \\
+ (2,3,-78,-26) & 108 \cdot 7 \cdot 11 \cdot 13 \cdot 37 & \mbox{ none }\\
+(2,3,6,3) & -108 \cdot 7 & 11, 37\\
+  (2,3,6,8) & -108 \cdot 37 & 7 \\
+ (2, 6, -12, 1) & 108 \cdot 11 \cdot 13 & 7\\
+(2,6,21,88) & -108 \cdot 11 \cdot 13 \cdot 37 &  \mbox{ none } \\
+(2,12,0,13) & -108 \cdot 7 \cdot 11 \cdot 13 &  \mbox{ none }\\
+(2,21,-6,80) &  -108 \cdot 7 \cdot 11 \cdot 13 \cdot 37 &  \mbox{ none } \\
+(3,3,18,20) &  -108 \cdot 7 \cdot 11 \cdot 13 &  \mbox{ none } \\
+(4,6,15,14) & -108 \cdot 13 \cdot  37 & 11 \\
+(5,6,27,14) & -108 \cdot 7 \cdot 11 \cdot 37 &  \mbox{ none } \\
+ (5,9,3,21) & -108 \cdot 7 \cdot 11 \cdot 37 &  \mbox{ none } \\
+(7,0,12,14) &  -108 \cdot 7 \cdot 11 \cdot 37 &  \mbox{ none } \\
+(10,3,42,-16) & -108 \cdot 7 \cdot 11 \cdot 13 \cdot 37 &  \mbox{ none }\\
+(10,6,12,3) & -108 \cdot 13 \cdot  37 &  \mbox{ none }\\
+ (11,6,12,6) & -108 \cdot 7 \cdot 11 \cdot 13  &  \mbox{ none }\\
+(21,12,27,20) &  -108 \cdot 7 \cdot 11 \cdot 13 \cdot 37 &  \mbox{ none }  \\
 \end{array}
 $$
+
 Here, we list primes $p$ for which a local obstruction exists modulo $p$ to finding coprime integers  $u$ and $v$ satisfying (\ref{term3}). 
 It is worth noting at this point that the restriction to forms with $\omega_1 \equiv \omega_2 \equiv 0 \mod{3}$ that follows from the fact that we are considering a conductor divisible by $3^3$ is a helpful one. There certainly can and do exist irreducible forms $F$ with $108 \mid D_F$ that fail to satisfy $\omega_1 \equiv \omega_2 \equiv 0 \mod{3}$.
 
@@ -1261,8 +1243,9 @@ $$
 (1, 0, 30, 2) & (-1,21), (1,16), (27,25) \\
 (1,3,33,117) & (26,-7) \\
 (1,9,0,74) &  (-19,2) \\
-(2,3,-78,-26) & (-1,3), (-3,2), (-5,-1), (9,-1), (13,2), (-17,-58), (-39,-61), \\
-&   (-57,-10), (-59,9), (65,-6), (79,-330), (159,-23) \\
+(2,3,-78,-26) & (-1,3), (-3,2), (-5,-1), (9,-1), (13,2), (-17,-58), \\
+&    (-39,-61),(-57,-10), (-59,9), (65,-6), (79,-330), \\
+& (159,-23) \\
 (2,6,21,88) & (3,1), (165,-43) \\
 (2,12,0,13) & (-1,9), (18,23) \\
 (2,21,-6,80) & (1, -10), (2,1), (4, -3), (4,-1), (17, 1),\\
@@ -1272,8 +1255,10 @@ $$
 (5,9,3,21) & (-1,2), (6,1), (8,-3), (-649,284), (1077,-464)  \\
 % (6,32,-35,-7)  & (0,-1), (2,-1), (2,-3),(16,3), (17,-3), (28,25), (95, -13), (859,-5009) \\
 (7,0,12,14) & (-1,5), (-7,9), (301,-62), (-459,553)  \\
-(10,3,42,-16) & (1,1), (1,2), (2,-1), (3,1), (4,-17), (20,19), (-22,-69),  (127,339)  \\
-(10,6,12,3) & (2,-1), (5,-13), (-12,83), (-24,89), (81,-107), (125,-437) \\
+(10,3,42,-16) & (1,1), (1,2), (2,-1), (3,1), (4,-17), (20,19), (-22,-69), \\
+& (127,339) \\
+(10,6,12,3) & (2,-1), (5,-13), (-12,83), (-24,89), (81,-107), \\
+&    (125,-437) \\
 (11,6,12,6) & (-1,22), (47,-72), (223,-429) \\
 (21,12,27,20) & (1, -3 ),(1, 0 ),(1, 5 ),(4, -9),(4, 3 ),(9, -29 ),\\
 & 	(19, -15 ),(29, -40 ),(316, -455 ),(551, -805)\\
@@ -1323,19 +1308,30 @@ and so, applying Theorem \ref{fisk}, we are led to consider binary cubic forms o
 restrict our attention to primitive forms of discriminant $\pm 4 \cdot 3^\kappa \cdot 37^{\delta_1} \cdot 333667^{\delta_2}$, where $\delta_i \in \{ 0, 1 \}$
  and $\kappa \in \{ 0, 4 \}$.
 For the irreducible forms, we have, by slight abuse of notation (since, for the $F$ listed here with $D_F \not\equiv 0 \mod{3}$, the form whose existence is guaranteed by Theorem \ref{fisk} is actually $3F$), the following.
+
 $$
-\begin{array}{ccc|ccc} 
-(\omega_0,\omega_1,\omega_2,\omega_3) & D_F & p & (\omega_0,\omega_1,\omega_2,\omega_3)  & D_F & p \\ \hline
-(1,1,-3,-1) & 4 \cdot 37 & 333667 & (5,14,19,54) &  -4 \cdot 333667 & 37 \\
-(1,4,52,250) & -4 \cdot 333667 & 37 & (6,18,168,323) & -4 \cdot 3^4 \cdot 333667 & 37 \\
-(1,9,37,279) & -4 \cdot 333667 &   \mbox{ none } & (6,27,42,356) & -4 \cdot 3^4 \cdot 333667 & 37 \\
-(1,21,117,2135) & -4 \cdot 3^4 \cdot 333667 & 37 & (6,54,-48,115) & -4 \cdot 3^4 \cdot 333667 & 37 \\
-(2,0,3,1) & -4 \cdot 3^4 & 37 & (10,18,96,229) &  -4 \cdot 3^4 \cdot 333667 & 37 \\
-(2,17,-26,-31) & 4 \cdot 333667 & 37 & (26,9,102,4) & -4 \cdot 3^4 \cdot 333667 & \mbox{ none } \\
-(4,30,117,665) & -4 \cdot 3^4 \cdot 333667 & 37 & (27,7,70,32) & -4 \cdot 37 \cdot 333667 & \mbox{ none } \\
-(4,35,14,216) & -4 \cdot 37 \cdot 333667 & \mbox{ none } & (31,9,87,-25) & -4 \cdot 3^4 \cdot 333667 & \mbox{ none } \\
-(5,6,9,6) & -4 \cdot 3^4 \cdot 37 & \mbox{ none } & (49,51,63,55) & -4 \cdot 3^4 \cdot 333667  & \mbox{ none } \\ 
-(5,7,19,51) & -4 \cdot 333667 & 37 & (52,55,72,37) & -4 \cdot 37 \cdot 333667 & \mbox{ none } \\
+\begin{array}{ccc} 
+(\omega_0,\omega_1,\omega_2,\omega_3) & D_F & p \\ \hline
+(1,1,-3,-1) & 4 \cdot 37 & 333667 \\
+(1,4,52,250) & -4 \cdot 333667 & 37 \\
+(1,9,37,279) & -4 \cdot 333667 &   \mbox{ none }\\
+(1,21,117,2135) & -4 \cdot 3^4 \cdot 333667 & 37  \\
+(2,0,3,1) & -4 \cdot 3^4 & 37  \\
+(2,17,-26,-31) & 4 \cdot 333667 & 37  \\
+(4,30,117,665) & -4 \cdot 3^4 \cdot 333667 & 37 \\
+(4,35,14,216) & -4 \cdot 37 \cdot 333667 & \mbox{ none }\\
+(5,6,9,6) & -4 \cdot 3^4 \cdot 37 & \mbox{ none } \\ 
+(5,7,19,51) & -4 \cdot 333667 & 37  \\
+ (5,14,19,54) &  -4 \cdot 333667 & 37\\
+ (6,18,168,323) & -4 \cdot 3^4 \cdot 333667 & 37\\
+ (6,27,42,356) & -4 \cdot 3^4 \cdot 333667 & 37 \\
+ (6,54,-48,115) & -4 \cdot 3^4 \cdot 333667 & 37\\
+ (10,18,96,229) &  -4 \cdot 3^4 \cdot 333667 & 37\\
+ (26,9,102,4) & -4 \cdot 3^4 \cdot 333667 & \mbox{ none }\\
+  (27,7,70,32) & -4 \cdot 37 \cdot 333667 & \mbox{ none }\\
+  (31,9,87,-25) & -4 \cdot 3^4 \cdot 333667 & \mbox{ none } \\
+ (49,51,63,55) & -4 \cdot 3^4 \cdot 333667  & \mbox{ none } \\
+(52,55,72,37) & -4 \cdot 37 \cdot 333667 & \mbox{ none }\\
 \end{array}
 $$
 Once again, we list primes $p$ for which a local obstruction exists modulo $p$ to finding coprime integers  $u$ and $v$ satisfying (\ref{term3}). There are thus $8$ Thue-Mahler equations left to solve.
@@ -1386,7 +1382,8 @@ $$
 $$
 The imprimitive forms we need consider correspond to primitive
 forms $F$ with either $\nu_2 (D_F) = 0$ or $\nu_3 (D_F) \in \{ 0, 1 \}$. We find precisely $95$ irreducible, primitive cubic forms of the desired discriminants.
-\newpage
+
+\begin{landscape}
 $$
 \begin{array}{cc|cc|cc} 
 (\omega_0,\omega_1,\omega_2,\omega_3) & D_F & (\omega_0,\omega_1,\omega_2,\omega_3)  & D_F & (\omega_0,\omega_1,\omega_2,\omega_3)  & D_F \\ \hline
@@ -1404,7 +1401,12 @@ $$
 (1,3,-3,-2) & 3^3\cdot 23 & (2, 9, 0, -4) & 2^4 \cdot 3^3 \cdot 23 & (6, 3, 12, -7) & -2^3 \cdot 3^3 \cdot 23^2 \\
 (1,3,-6,-2) & 2^3 \cdot 3^5 & (2,9,48,185) & -2^4 \cdot 3^5 \cdot 23^2 & (6, 3, 12, 16) & -2^4 \cdot 3^3 \cdot 23^2 \\
 (1,3,3,3) & -2^2 \cdot 3^3 & (2, 12, 24, 85) & -2^2 \cdot 3^5 \cdot 23^2 & (6, 6, 9, 13) & -2^3 \cdot 3^3 \cdot 23^2 \\
-(1,3,3,5) & -2^4 \cdot 3^3 & (2, 18, -15, 31) & -2^3 \cdot 3^5 \cdot 23^2 & (6, 9, 12, 23) & -2^3 \cdot 3^4 \cdot 23^2 \\
+(1,3,3,5) & -2^4 \cdot 3^3 & (2, 18, -15, 31) & -2^3 \cdot 3^5 \cdot 23^2 & (6, 9, 12, 23) & -2^3 \cdot 3^4 \cdot 23^2 
+\end{array}
+$$
+$$
+\begin{array}{cc|cc|cc} 
+(\omega_0,\omega_1,\omega_2,\omega_3) & D_F & (\omega_0,\omega_1,\omega_2,\omega_3)  & D_F & (\omega_0,\omega_1,\omega_2,\omega_3)  & D_F \\ \hline
 (1,3,3,7) & -2^2 \cdot 3^5 & (3, 0, 3, 2) & -2^4 \cdot 3^4 & (6, 18, 18, 29) & -2^2 \cdot 3^5 \cdot 23^2 \\
 (1,3,3,13) & -2^4 \cdot 3^5 & (3, 4, 12, 12) & -2^4 \cdot 3 \cdot 23^2 & (7, 6, 9, 4) & -2^3 \cdot 3^4 \cdot 23 \\
 (1, 3, 18, 50) & -2^3 \cdot 3^5 \cdot 23 & (3, 6, 4, 6) & -2^2 \cdot 3 \cdot 23^2  & (7, 15, 3, 17) & -2^2 \cdot 3^5 \cdot 23^2 \\
@@ -1424,6 +1426,7 @@ $$
 (2, 0, 3, 2) & -2^3 \cdot 3^4 & (4, 6, 3, 12) & -2^2 \cdot 3^3 \cdot 23^2 & & \\
 \end{array}
 $$
+\end{landscape}
 
 In each case, we solve the corresponding Thue-Mahler equation specified by Theorem \ref{fisk}. For example, if $D_F = \pm 2^4 \cdot 3^t \cdot 23^2$, with $t \geq 3$, then we actually need only solve the (eight) Thue equations of the shape
 $$
@@ -1475,7 +1478,7 @@ where details on the resulting Thue-Mahler computation may also be found. Confir
 \section{Good reduction outside a single prime} \label{primes}
 %------------------------------------------------------------------------------------
 
-For the remainder of this paper, we will focus our attention on the case of elliptic curves with bad reduction at a single prime, i.e. curves of conductor $p$ or $p^2$, for $p$ prime.
+For the remainder of this chapter, we will focus our attention on the case of elliptic curves with bad reduction at a single prime, i.e. curves of conductor $p$ or $p^2$, for $p$ prime.
 In this case, our approach simplifies considerably and 
 rather than being required to solve Thue-Mahler equations, the problem reduces to one of solving \emph{Thue} equations, i.e. equations of the shape $F(x,y)=m$, where $F$ is a form and $m$ is a fixed integer. While, once again, we do not have a detailed computational complexity analysis of either algorithms for solving Thue equations or more general algorithms for solving Thue-Mahler equations, computations to date strongly support the contention that the former is, usually, much, much faster than the latter, particularly if the set of primes $S$ considered for the Thue-Mahler equations is anything other than tiny. Since none of these conductors are divisible by $9$, we may always suppose that $j_E \neq 0$. We note that the data we have produced in these cases totals several terabytes. As a result, we have not yet determined how best to make it publicly available; interested readers should contact the authors for further details.
 
@@ -1528,9 +1531,8 @@ $(\nu_p (c_4(E)),  \nu_p (c_6(E)), \nu_p (\Delta_E) )$ is one of
 $$
 (\geq 1, 1, 2),   (1, \geq 2, 3),   (\geq 2, 2,4),
 (\geq 2, \geq 3, 6),  (2,3,\geq 7),  (\geq 3, 4, 8), 
-(3, \geq 5, 9 ), (\geq 4, 5, 10).
-$$
-In each case with $\nu_p (c_6(E)) \geq 3$, denote by $E_1$ the quadratic twist of $E$ by $(-1)^{(p-1)/2} p$. For curves $E$ with 
+(3, \geq 5, 9 ), $$
+or $(\geq 4, 5, 10).$ In each case with $\nu_p (c_6(E)) \geq 3$, denote by $E_1$ the quadratic twist of $E$ by $(-1)^{(p-1)/2} p$. For curves $E$ with 
 $$
 (\nu_p (c_4(E)),  \nu_p (c_6(E)), \nu_p (\Delta_E) )=(\geq 2, \geq 3, 6), 
 $$
@@ -1766,7 +1768,7 @@ has discriminant $-4 p$, and the equation $F(x,y)=8p$ has solutions
 and hence we again find  (one parameter) families  of primes corresponding to either $r\in \{ 1,2 \}$ or $s\in \{1,2 \}$:
 \begin{align*}
 (p,x,y)= & (r^4-9r^2+27,-2r^2+6,2r), (r^4-36 r^2 + 432,-r^2+12,2r), \\
- &\phantom{=+} (27 s^4-9 s^2+1,6s,-18s^2+2), (27s^4-36s^2+16,6s,-9s^2+4).
+ &\quad (27 s^4-9 s^2+1,6s,-18s^2+2), (27s^4-36s^2+16,6s,-9s^2+4).
 \end{align*}
 We expect that each of the quartic families described here attains infinitely many prime values, but proving this is 
 beyond current technology.
@@ -1816,9 +1818,9 @@ G_{r,s}(x,y) &= a_0 x^3 + b_0 x^2 y + c_0 x y^2 + d_0 y^3 =8,
 where
 $$
 a_0 = s p^2, \; \; b_0 = (3 u s+r) p, \; \; 
-c_0 = 3 u^2 s+2 r u - 9s \;  \; \mbox{ and } \; \; d_0 = (u^3 s+r u^2 - 9 u s - r)/p.
+c_0 = 3 u^2 s+2 r u - 9s
 $$
-A little algebra confirms that 
+and $d_0 = (u^3 s+r u^2 - 9 u s - r)/p$. A little algebra confirms that 
 \begin{align*}
 \Delta_{G_{r,s}} = 4 p^4.
 \end{align*}
@@ -1895,9 +1897,9 @@ where
 $$
 a_0 = s p^2, \; \; 
 b_0 = (3 u s+r) p, \; \;
-c_0 = 3 u^2 s+2 r u + 9s \; \; \mbox{ and } \; \; 
-d_0 = (u^3 s+r u^2 + 9 u s + r)/p.
+c_0 = 3 u^2 s+2 r u + 9s
 $$
+and $d_0 = (u^3 s+r u^2 + 9 u s + r)/p$.
 
 Note that, in contrast to the case where $p =r^2 + 27s^2$, here $p$ is represented by an indefinite quadratic form and so the presence of infinitely many units in $\mathbb{Q}(\sqrt{3})$ implies that a given representation is not unique. 
 If, however, we have two solutions to the equation $|r^2-27s^2|=p$, say $(r_1,s_1)$ and $(r_2,s_2)$, then the corresponding forms
@@ -2023,7 +2025,7 @@ data for positive and negative discriminants, respectively.
 %---------------------------------------------
 Once one has a tuple $(a,b,c,d,x,y)$, one then computes $G_F(x,y)$ and $H_F(x,y)$, appeals to Theorem \ref{fisk} and 
 checks twists. This leaves us with a list of pairs $(c_4,c_6)$ corresponding to elliptic curves. It is now 
-straightforward to derive $a_1,a_2,a_3,a_4$ and $a_6$ for a corresponding elliptic curve in minimal form (see e.g. 
+straightforward to derive $a_1,a_2$, $a_3,a_4$ and $a_6$ for a corresponding elliptic curve in minimal form (see e.g. 
 Cremona \cite{Cre2}).  For each curve, we saved a tuple $p,a_1,a_2,a_3,a_4,a_6,\pm1$ with the last entry being the sign 
 of the discriminant of the form used to generate the curve (which coincides with the sign of the discriminant of the 
 curve). We then merged the curves with positive and negative discriminants and added the curves with prime conductor 
@@ -2095,6 +2097,7 @@ By this approach, they were able to find $311243$ curves of prime conductor $p <
 
 By way of comparison, we found the following numbers of isomorphism classes of
 elliptic curves\index{elliptic curves}  over $\mathbb{Q}$ with prime conductor $p \leq X$:
+\begin{landscape}
  $$
  \begin{array}{|c|c|c|c|c|c|c|} \hline
  X    & \Delta_E > 0  &   \Delta_E < 0 & \mbox{Ratio}^2 &  \mbox{Total}  & \mbox{Expected} & \mbox{Total / Expected} \\ 
@@ -2116,7 +2119,7 @@ elliptic curves\index{elliptic curves}  over $\mathbb{Q}$ with prime conductor $
 \hline
 \end{array}
 $$
-
+\end{landscape}
 
 The data above the line is rigorous; for positive discriminant, we actually have a rigorous 
 result to $10^{10}$. For the positive forms this took about one week of real time using 80 cores. 
@@ -2255,12 +2258,15 @@ there are $13$ curves of conductor $61263451$. Up to $p < 10^{12}$, the largest 
 with $20$ isogeny classes, corresponding to $(a_1,a_2,a_3,a_4,a_6)$ as follows :
  $$
  \begin{array}{l}
- \left( 0, -1, 1, -1003, 37465 \right), \left( 0, -1, 1, -1775, 45957 \right), \left( 0, -1, 1, -38939, 2970729 \right),  \\
- \left( 0, -1, 1, -659, -35439 \right), \left(0, -1, 1, 2011, 4311\right), \left(0, -2, 1, -27597, -1746656\right), \\
-\left( 0, -2, 1, 57, 35020\right),  \left(1, -1, 0, -13337473,18751485796\right),\left(0, 0, 1, -13921, 633170\right), \\
-\left( 0, 0, 1, -30292,-2029574\right),\left(0, 0, 1, -6721, -214958\right), \left(0, 0, 1, -845710, -299350726\right), \\
-\left( 0, 0, 1, -86411851, 309177638530\right),  \left(0,0, 1, -10717, 428466\right), \left(1, -1, 0, -5632177, 5146137924\right), \\
- \left( 1, -1, 0, 878,33379\right),  \left(1, -1, 1, 1080, 32014\right), \left(1, -2, 1, -8117, -278943\right), \\
+ \left( 0, -1, 1, -1003, 37465 \right), \left( 0, -1, 1, -1775, 45957 \right), \\
+ \left( 0, -1, 1, -38939, 2970729 \right), \left( 0, -1, 1, -659, -35439 \right), \\
+ \left(0, -1, 1, 2011, 4311\right), \left(0, -2, 1, -27597, -1746656\right),\\
+\left( 0, -2, 1, 57, 35020\right),  \left(1, -1, 0, -13337473,18751485796\right),\\
+\left(0, 0, 1, -13921, 633170\right), \left( 0, 0, 1, -30292,-2029574\right),\\
+\left(0, 0, 1, -6721, -214958\right), \left(0, 0, 1, -845710, -299350726\right), \\
+\left( 0, 0, 1, -86411851, 309177638530\right),  \left(0,0, 1, -10717, 428466\right), \\
+\left(1, -1, 0, -5632177, 5146137924\right), \left( 1, -1, 0, 878,33379\right),  \\
+ \left(1, -1, 1, 1080, 32014\right), \left(1, -2, 1, -8117, -278943\right), \\
 \left(1, -3, 0, -2879, 71732\right), \left(1, -3, 0, -30415, -2014316\right). \\
 \end{array}
 $$
@@ -2312,7 +2318,7 @@ $$
 $$
 
 \vskip2ex
-Here, the curves listed above the line are proven to be those of smallest conductor with the given rank. Those listed below the line have the smallest known conductor for the corresponding rank. It is our belief that the techniques of this paper should enable one to determine whether the  curve listed here of rank $5$ has the smallest conductor of any curve with this property.
+Here, the curves listed above the line are proven to be those of smallest conductor with the given rank. Those listed below the line have the smallest known conductor for the corresponding rank. It is our belief that the techniques of this chapter should enable one to determine whether the  curve listed here of rank $5$ has the smallest conductor of any curve with this property.
 
 
 %---------------------------------------------------
@@ -2411,9 +2417,10 @@ D_F \geq  (\omega_1^2-3\omega_0 \omega_2) (\omega_2^2 - 3 \omega_1 \omega_3) \ge
 
 Since (\ref{bleep}) and $D_F > 0$ imply that $\omega_1^2-3\omega_0 \omega_2 \neq 0$,
 we may write
-$$
-\frac{H_F (\alpha_1,1)}{ \omega_1^2-3\omega_0 \omega_2} =  \left(\alpha_1 -  \frac{9 \omega_0 \omega_3 - \omega_1 \omega_2 + \sqrt{-3 D_F}}{2 (\omega_1^2-3\omega_0 \omega_2)} \right) \left(\alpha_1 -  \frac{9 \omega_0 \omega_3 - \omega_1 \omega_2 - \sqrt{-3 D_F}}{2 (\omega_1^2-3\omega_0 \omega_2)} \right).
-$$
+\begin{align*}
+& \frac{H_F (\alpha_1,1)}{ \omega_1^2-3\omega_0 \omega_2} \\
+& \quad=  \left(\alpha_1 -  \frac{9 \omega_0 \omega_3 - \omega_1 \omega_2 + \sqrt{-3 D_F}}{2 (\omega_1^2-3\omega_0 \omega_2)} \right) \left(\alpha_1 -  \frac{9 \omega_0 \omega_3 - \omega_1 \omega_2 - \sqrt{-3 D_F}}{2 (\omega_1^2-3\omega_0 \omega_2)} \right).
+\end{align*}
 Defining
 $$
 \Gamma_1 = \alpha_1 -  \frac{9 \omega_0 \omega_3 - \omega_1 \omega_2 }{2 (\omega_1^2-3\omega_0 \omega_2)} \; \; \mbox{ and } \; \; 
@@ -2448,7 +2455,7 @@ Since $|v| \geq 1$ and $D_F =4p > 8 \times 10^9$, we thus have that
 \left| \alpha_1 - \frac{u}{v} \right| < 0.12.
 \end{equation}
 
-We may suppose that $F$ is reduced, whereby, crudely, from Lemma \ref{fisher},
+We may suppose that $F$ is reduced,
 $$
 |\omega_0| \leq \frac{2D_F^{1/4}}{3 \sqrt{3}} \; \mbox{ and } \; |\omega_1| \leq  \frac{3\omega_0}{2}+  \left( \sqrt{D_F}-\frac{27\omega_0^2}{4} \right)^{1/2}
 < \left( 1 + \frac{1}{\sqrt{3}} \right) D_F^{1/4}.
