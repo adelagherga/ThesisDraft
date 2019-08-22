@@ -109,11 +109,11 @@
 \contentsline {section}{\numberline {5.10}Concluding remarks}{189}{section.5.10}
 \contentsline {chapter}{\numberline {6}Towards Efficient Resolution of Thue-Mahler Equations}{190}{chapter.6}
 \contentsline {section}{\numberline {6.1}Decomposition of the Weil height}{191}{section.6.1}
-\contentsline {section}{\numberline {6.2}Initial height bounds}{197}{section.6.2}
-\contentsline {section}{\numberline {6.3}Coverings of $\Sigma $}{199}{section.6.3}
-\contentsline {section}{\numberline {6.4}Construction of the ellipsoids}{201}{section.6.4}
-\contentsline {subsection}{\numberline {6.4.1}The Archimedean ellipsoid: the real case}{210}{subsection.6.4.1}
-\contentsline {subsection}{\numberline {6.4.2}The non-Archimedean ellipsoid}{220}{subsection.6.4.2}
-\contentsline {section}{\numberline {6.5}The Archimedean sieve: the real case}{221}{section.6.5}
-\contentsline {section}{\numberline {6.6}The non-Archimedean Sieve}{224}{section.6.6}
-\contentsline {chapter}{Bibliography}{234}{chapter*.32}
+\contentsline {section}{\numberline {6.2}Initial height bounds}{198}{section.6.2}
+\contentsline {section}{\numberline {6.3}Coverings of $\Sigma $}{201}{section.6.3}
+\contentsline {section}{\numberline {6.4}Construction of the ellipsoids}{202}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}The Archimedean ellipsoid: the real case}{212}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}The non-Archimedean ellipsoid}{221}{subsection.6.4.2}
+\contentsline {section}{\numberline {6.5}The Archimedean sieve: the real case}{222}{section.6.5}
+\contentsline {section}{\numberline {6.6}The non-Archimedean Sieve}{225}{section.6.6}
+\contentsline {chapter}{Bibliography}{235}{chapter*.32}

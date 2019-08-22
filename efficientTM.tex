@@ -104,6 +104,15 @@ The height $h\left(\frac{\delta_2}{\lambda}\right)$ admits a decomposition
 \begin{equation} \label{eq:hdecomp}
 h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.
 \end{equation}
+In particular, 
+\[\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} = 
+b\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\]
+where
+\[b =
+\begin{cases}
+2 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
+1 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
+\end{cases}\]
 \end{proposition}
 For ease of notation, let $S^* = S \cup \{v : L \to \mathbb{C}\}$ and write 
 \[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{v \in S^*}h_{v}\left(\frac{\delta_2}{\lambda}\right).\]
@@ -159,7 +168,31 @@ and so
 
 Lastly, if $w = \mathfrak{P}$ such that $\mathfrak{P} \neq \mathfrak{P}^{(i_0)},  \mathfrak{P}^{(j)}$, we have
 \[\log \max \{ \|z\|_{w}, 1\} = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{\ord_{\mathfrak{P}}(z)}} \right), 0\right\}=0.\]
-Putting this all together, we obtain the desired result. 
+Putting this all together yields the first result \eqref{eq:hdecomp}. 
+
+To prove the second statement, let $z = d^{(j)}/d^{(i_0)} \in L$. The orbit of $z$ is
+\[\begin{cases}
+\left\{\frac{d^{(j)}}{d^{(i_0)}}, \frac{d^{(k)}}{d^{(j)}}, \frac{d^{(i_0)}}{d^{(k)}}, \frac{d^{(j)}}{d^{(k)}}, \frac{d^{(k)}}{d^{(i_0)}}, \frac{d^{(i_0)}}{d^{(j)}} \right\} & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
+\left\{\frac{d^{(j)}}{d^{(i_0)}}, \frac{d^{(k)}}{d^{(j)}}, \frac{d^{(i_0)}}{d^{(k)}}\right\} & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
+\end{cases}\]
+Choose $a,b,c\in\{i_0,j,k\}$ such that 
+\[|d^{(a)}| \geq |d^{(b)}| \geq |d^{(c)}|.\]
+Now, if $\Gal(L/\mathbb{Q}) \cong S_3$, we obtain
+\begin{align*}
+& \sum_{w :L \to \mathbb{C}} \log \max \{ |w(z)|, 1\} \\
+	& = \log \max \left\{ \left|\frac{d^{(a)}}{d^{(b)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(b)}}{d^{(c)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(c)}}{d^{(a)}}\right|, 1\right\} \\
+	& \quad +  \log \max \left\{ \left|\frac{d^{(a)}}{d^{(c)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(a)}}{d^{(c)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(c)}}{d^{(b)}}\right|, 1\right\}\\
+	& = \log \left|\frac{d^{(a)}}{d^{(b)}}\right| + \log \left|\frac{d^{(b)}}{d^{(c)}}\right| + \log \left|\frac{d^{(a)}}{d^{(c)}}\right| \\
+	& = 2\log \left|\frac{d^{(a)}}{d^{(c)}}\right|.
+\end{align*}
+Alternatively, if $\Gal(L/\mathbb{Q}) \cong A_3$, it follows that
+\begin{align*}
+& \sum_{w :L \to \mathbb{C}} \log \max \{ |w(z)|, 1\} \\
+	& = \log \max \left\{ \left|\frac{d^{(a)}}{d^{(b)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(b)}}{d^{(c)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(c)}}{d^{(a)}}\right|, 1\right\} \\
+	& = \log \left|\frac{d^{(a)}}{d^{(b)}}\right| + \log \left|\frac{d^{(b)}}{d^{(c)}}\right| \\
+	& = \log \left|\frac{d^{(a)}}{d^{(c)}}\right|.
+\end{align*}
+The proposition now follows by setting $z = \frac{\delta_2}{\lambda}$. 
 \end{proof}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
@@ -196,7 +229,7 @@ To translate this result for use with our logarithmic Weil height \eqref{eq:hdec
 \begin{lemma} \label{lem:TMinitialheight}
 Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}}$ be any solution of \eqref{eq:EfficientSunit} and let 
 \begin{equation} \label{eq:Omegaprime}
-\Omega' = 2h(\alpha) + 4\Omega + 2h(\theta) + 2\log(2).
+\Omega' = [K:\mathbb{Q}](2h(\alpha) + 4\Omega + 2h(\theta) + 2\log(2)).
 \end{equation}
 If $\mathbf{h} \in\mathbb{R}^{\nu + m}$ with $\mathbf{h} = (\Omega')$, then $\mathbf{m}\in \Sigma(h)$.
 \end{lemma}
@@ -220,11 +253,11 @@ Now,
 meaning that $\tilde{x}$ may be written as
 \[\tilde{x} =\frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot \frac{\alpha^{(j)}\zeta^{(j)}}{\alpha^{(i_0)}\zeta^{(i_0)}}.\]
 Hence, 
-\[h(\tilde{x})	 = 2h(\beta) + 2h(\alpha) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha) = \Omega'.\]
+\[h(\tilde{x})	 = 2h(\beta) + 2h(\alpha) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha).\]
 Finally, we observer that 
-\[h(z) = h(1/\tilde{x}) \leq \Omega'.\]
-Together with $\displaystyle h_v\left(\frac{\delta_2}{\lambda}\right) \leq h\left(\frac{\delta_2}{\lambda}\right)$, this implies
-\[h_v\left(\frac{\delta_2}{\lambda}\right) \leq \Omega'.\]
+\[h(z) = h(1/\tilde{x}) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha).\]
+Together with $\displaystyle \frac{1}{[K:\mathbb{Q}]}h_v\left(\frac{\delta_2}{\lambda}\right) \leq h\left(\frac{\delta_2}{\lambda}\right)$, this implies
+\[h_v\left(\frac{\delta_2}{\lambda}\right) \leq [K:\mathbb{Q}]\left(4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha)\right) = \Omega'.\]
 Of course, by definition, we have $h_v\left(\frac{\delta_2}{\lambda}\right) \geq 0$, so that $(\tilde{x},\tilde{y}) \in \Sigma(h)$ as required. 
 \end{proof}
 
@@ -408,7 +441,7 @@ Taking absolute values and logarithms,
 so that
 \[-\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota}\right| = -\log\left|\iota \left(\frac{\delta_2}{\lambda}\right)\right| = \sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|.\]
 
-Therefore,
+Consider
 \begin{align*}
 |a_l| 	& = \left|\overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma l k}\right|\\
 	& \leq |\overline{r}_{l1}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + |\overline{r}_{l2}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
@@ -422,6 +455,14 @@ Suppose $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| \geq 0
 	& \quad \quad +\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\log\max\left\{\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
 	&  \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
 \end{align*}
+By Proposition \ref{prop:heightdecomp}, we obtain
+\[|a_l| \leq b\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} +  \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\]
+where
+\[b =
+\begin{cases}
+2 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
+1 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
+\end{cases}\]
 
 Alternatively, suppose that both $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| < 0$ and $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| < 0$. In this case,
 
@@ -431,9 +472,17 @@ Alternatively, suppose that both $\log\left|\left(\frac{\delta_2}{\lambda}\right
 	& \quad \quad + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}| \\
 	& \leq \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right| +\\
 	& \quad \quad +\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\left(-\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right) + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
-	& \leq \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\sum_{\shortstack{\footnotesize $w: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1, \iota_2$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|  + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
+	& = \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\sum_{\shortstack{\footnotesize $w: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1, \iota_2$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|  + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
 	&  \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
 \end{align*}
+Again, by Proposition \ref{prop:heightdecomp}, this becomes
+\[|a_l| \leq b\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} +  \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\]
+where
+\[b =
+\begin{cases}
+2 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
+1 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
+\end{cases}\]
 
 Lastly, if, without loss of generality, we have $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| < 0$ and $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| \geq 0$, then
 \begin{align*}
@@ -441,46 +490,69 @@ Lastly, if, without loss of generality, we have $\log\left|\left(\frac{\delta_2}
 	& = |\overline{r}_{l1}|\sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|+ |\overline{r}_{l2}|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
 	& \leq \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\sum_{w: L \to \mathbb{C}} \log \max \left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} +  |\overline{r}_{l2}|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| \\
 	&\quad \quad +\sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}| \\
-	& = \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}  \\
-	& \quad\quad + |\overline{r}_{l1}|\log\max\left\{\left|\iota_1\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}+ |\overline{r}_{l2}|\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}\\
-	&\quad\quad + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
+	& \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}  \\
+	& \quad\quad + \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
 \end{align*}
-In all three cases, it follows that
+Applying Proposition \ref{prop:heightdecomp} yields
 \begin{align*}
-|a_l|	& \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} \\
-	&\quad\quad + |\overline{r}_{l1}|\log\max\left\{\left|\iota_1\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + |\overline{r}_{l2}|\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}\\
-	&\quad\quad+ \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|
+|a_l| & \leq b\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\\
+	& \quad \quad + \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}| \\
+	& \leq \tilde{b} \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|
 \end{align*}
 where
-\[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma l 1} + \cdots + \overline{a}_{\nu k}\beta_{\gamma l \nu}\]
+\[\tilde{b} =
+\begin{cases}
+3 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
+2 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
+\end{cases}\]
+
+In all three cases, it follows that
+\begin{align*}
+|a_l| & \leq \tilde{b} \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|
+\end{align*}
+%|a_l|	& \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} \\
+%	&\quad\quad + |\overline{r}_{l1}|\log\max\left\{\left|\iota_1\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + |\overline{r}_{l2}|\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}\\
+%	&\quad\quad+ \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|
+%\end{align*}
+where
+\[\tilde{b} =
+\begin{cases}
+3 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
+2 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3,
+\end{cases}\]
+\[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma l 1} + \cdots + \overline{a}_{\nu k}\beta_{\gamma l \nu},\]
 and
 \[\beta_{\gamma l k} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
 for $k = 1, \dots, \nu$.
 
 Hence for $l = 1,2$, we write
 \begin{align} \label{eq:albound}
-|a_l|	&\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	&\quad\quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|,
+%|a_l|	&\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+%	&\quad\quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|,
+|a_l|	& \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+	& \quad\quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k l}\log(p_k)|u_k - r_k|,
 \end{align}
 where
 \begin{equation} \label{eq:welsigma}
-w_{\varepsilon l \sigma} = 
-\begin{cases}
-\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}[L:\mathbb{Q}] & \text{ for } \sigma \notin I\\
-\left(\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\} + |\overline{r}_{li}|\right)[L:\mathbb{Q}] & \text{ for } \sigma = \iota_i \in I\\
-\end{cases}
+w_{\varepsilon l} = \frac{\overline{b}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}[L:\mathbb{Q}]}{b}
+%w_{\varepsilon l \sigma} = 
+%\begin{cases}
+%\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}[L:\mathbb{Q}] & \text{ for } \sigma \notin I\\
+%\left(\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\} + |\overline{r}_{li}|\right)[L:\mathbb{Q}] & \text{ for } \sigma = \iota_i \in I\\
+%\end{cases}
 \end{equation}
 and 
 \begin{equation} \label{eq:wgammalk}
-w_{\gamma l k} = |\alpha_{\gamma l k}|\frac{[K:\mathbb{Q}]}{\log(p_k)}.
+w_{\gamma_k l} = |\alpha_{\gamma l k}|\frac{[K:\mathbb{Q}]}{\log(p_k)}.
 \end{equation}
 
 To summarize, we have proven the following lemma.
 \begin{lemma}\label{lem:mepsbound}
 For any solution $(x,y,a_1, \dots, a_r, n_1, \dots, n_{\nu})$ of \eqref{eq:EfficientSunit}, for $l =1,2$
 \begin{align*}
-|a_l| &\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|.
+|a_l| & \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+%&\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k l}\log(p_k)|u_k - r_k|.
 \end{align*}
 \end{lemma}
 
@@ -582,17 +654,23 @@ Since $[ \ \cdot \ ]$ denotes the nearest integer function, it is clear that $|[
 \end{align*}
 By Lemma~\ref{lem:mepsbound}, 
 \begin{align*}
-|a_l| &\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|
+|a_l| & \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k l}\log(p_k)|u_k - r_k|.
+%|a_l| &\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+%	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|
 \end{align*}
 for $l = 1,2$. Applying this result to $|\alpha-c\Lambda_\tau|$, we obtain
 \begin{align*}
 |\alpha-c\Lambda_\tau| 
 	& \leq \frac{1}{2} + \frac{1}{2}|u_1-r_1|\sum_{i=1}^{\nu}|\overline{a}_{i1}| + \cdots + \frac{1}{2}|u_{\nu} - r_{\nu}| \sum_{i=1}^{\nu}|\overline{a}_{i\nu}| + \\
-	& \quad + \frac{1}{2}\left(\frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon_1 \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
-	&\quad\quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_1 k}\log(p_k)|u_k - r_k| \right) + \\
-	&\quad + \frac{1}{2}\left(\frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon_2 \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
-	&\quad\quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_2 k}\log(p_k)|u_k - r_k| \right) \\
+	& \quad + \frac{1}{2}\left(w_{\varepsilon 1} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\right. \\
+	& \quad \quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k 1}\log(p_k)|u_k - r_k|\right) + \\
+%	& \quad + \frac{1}{2}\left(\frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon_1 \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
+%	&\quad\quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_1 k}\log(p_k)|u_k - r_k| \right) + \\
+	& \quad + \frac{1}{2}\left(w_{\varepsilon 2} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\right. \\
+	& \quad \quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k 2}\log(p_k)|u_k - r_k|\right) \\
+%	&\quad + \frac{1}{2}\left(\frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon_2 \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
+%	&\quad\quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_2 k}\log(p_k)|u_k - r_k| \right) \\
 	& = \frac{1}{2} + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} \frac{(w_{\varepsilon_1 \sigma} + w_{\varepsilon_2 \sigma})}{2}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \\
 	& \quad + |u_1 - r_1|\left( \frac{(w_{\gamma_1 1} + w_{\gamma_2 1})}{2[K:\mathbb{Q}]}\log(p_1) + \frac{1}{2}\sum_{i=1}^{\nu}|\overline{a}_{i1}|\right) + \cdots \\
 	& \quad + |u_{\nu} - r_{\nu}|\left( \frac{(w_{\gamma_1 {\nu}} + w_{\gamma_2 {\nu}})}{2[K:\mathbb{Q}]}\log(p_{\nu}) + \frac{1}{2}\sum_{i=1}^{\nu}|\overline{a}_{i{\nu}}|\right). 
