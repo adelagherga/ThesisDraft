@@ -104,7 +104,7 @@ The height $h\left(\frac{\delta_2}{\lambda}\right)$ admits a decomposition
 \begin{equation} \label{eq:hdecomp}
 h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.
 \end{equation}
-In particular, 
+In particular, when $\deg(g(t)) = 3$, 
 \[\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} = 
 b\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\]
 where
@@ -413,10 +413,10 @@ a_l	& = \overline{r}_{l1}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_
 	\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right|\\
 	& = \overline{r}_{l1}\left( \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota_1 \ n_i}\right|\right) + \\ 
 	& \quad \quad + \overline{r}_{l2}\left( \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota_2 \ n_i}\right|\right)\\
-	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - n_1\beta_{\gamma l 1} - \dots - n_{\nu}\beta_{\gamma l \nu},
+	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - n_1\beta_{\gamma_1 l} - \dots - n_{\nu}\beta_{\gamma_{\nu} l},
 \end{align*}
 where
-\[\beta_{\gamma l k} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
+\[\beta_{\gamma_k l} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
 for $k = 1, \dots, \nu$. Recall that $\mathbf{n} = A^{-1}(\mathbf{u} - \mathbf{r})$ and suppose $A^{-1} = (\overline{a}_{nm})$. We have
 \begin{align*}
 \mathbf{n}  = A^{-1}(\mathbf{u} - \mathbf{r})
@@ -425,13 +425,13 @@ for $k = 1, \dots, \nu$. Recall that $\mathbf{n} = A^{-1}(\mathbf{u} - \mathbf{r
 
 Now, 
 \begin{align*}
-a_l 	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - n_1\beta_{\gamma l 1} - \dots - n_{\nu}\beta_{\gamma l \nu}\\
+a_l 	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - n_1\beta_{\gamma_1 l} - \dots - n_{\nu}\beta_{\gamma_{\nu} l}\\
 	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma l k},
 \end{align*}
 where
-\[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma l 1} + \cdots + \overline{a}_{\nu k}\beta_{\gamma l \nu}\]
+\[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma_1 l} + \cdots + \overline{a}_{\nu k}\beta_{\gamma_{\nu} l}\]
 and
-\[\beta_{\gamma l k} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
+\[\beta_{\gamma_k l} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
 for $k = 1, \dots, \nu$.
 
 Since $\frac{\delta_2}{\lambda}$ is a quotient of elements which are conjugate to one another, by taking the norm on $L$ of $\frac{\delta_2}{\lambda}$, we obtain $N\left(\frac{\delta_2}{\lambda}\right) = 1.$ On the other hand, by definition, we have 
@@ -520,9 +520,9 @@ where
 3 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
 2 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3,
 \end{cases}\]
-\[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma l 1} + \cdots + \overline{a}_{\nu k}\beta_{\gamma l \nu},\]
+\[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma_1 l} + \cdots + \overline{a}_{\nu k}\beta_{\gamma_{\nu} l},\]
 and
-\[\beta_{\gamma l k} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
+\[\beta_{\gamma_k l} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
 for $k = 1, \dots, \nu$.
 
 Hence for $l = 1,2$, we write
@@ -530,7 +530,7 @@ Hence for $l = 1,2$, we write
 %|a_l|	&\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
 %	&\quad\quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|,
 |a_l|	& \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad\quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k l}\log(p_k)|u_k - r_k|,
+	& \quad\quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|,
 \end{align}
 where
 \begin{equation} \label{eq:welsigma}
@@ -543,7 +543,7 @@ w_{\varepsilon l} = \frac{\overline{b}\max\{|\overline{r}_{l1}|, |\overline{r}_{
 \end{equation}
 and 
 \begin{equation} \label{eq:wgammalk}
-w_{\gamma_k l} = |\alpha_{\gamma l k}|\frac{[K:\mathbb{Q}]}{\log(p_k)}.
+w_{\gamma l k} = |\alpha_{\gamma l k}|\frac{[K:\mathbb{Q}]}{\log(p_k)}.
 \end{equation}
 
 To summarize, we have proven the following lemma.
@@ -552,7 +552,7 @@ For any solution $(x,y,a_1, \dots, a_r, n_1, \dots, n_{\nu})$ of \eqref{eq:Effic
 \begin{align*}
 |a_l| & \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
 %&\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k l}\log(p_k)|u_k - r_k|.
+	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|.
 \end{align*}
 \end{lemma}
 
@@ -573,9 +573,9 @@ Here, $[ \ \cdot\  ]$ denotes the nearest integer function.
 
 Let
 \begin{equation} \label{eq:wsigma}
-w_{\sigma} = (w_{\varepsilon 1 \sigma} + w_{\varepsilon 2 \sigma}), \quad \quad w_k = (w_{\gamma 1 k} + w_{\gamma 2 k}) + \frac{[K:\mathbb{Q}]}{\log(p_k)}\sum_{i=1}^{\nu}|\overline{a}_{ik}|
+w_{\varepsilon} = (w_{\varepsilon 1} + w_{\varepsilon 2}), \quad \quad w_k = (w_{\gamma 1 k} + w_{\gamma 2 k}) + \frac{[K:\mathbb{Q}]}{\log(p_k)}\sum_{i=1}^{\nu}|\overline{a}_{ik}|
 \end{equation}
-for $\sigma: L \to \mathbb{C}$ and $k = 1, \dots, \nu$. Here $w_{\eps 1 \sigma}, w_{\eps 3 \sigma}$ and $w_{\gamma 1 k}, w_{\gamma 3 k}$ are the coefficients \eqref{eq:welsigma} and \eqref{eq:wgammalk}, respectively. Let $\kappa_{\tau} = 3/2$ and 
+for $k = 1, \dots, \nu$. Here $w_{\eps 1}, w_{\eps 2}$ and $w_{\gamma 1 k}, w_{\gamma 2 k}$ are the coefficients \eqref{eq:welsigma} and \eqref{eq:wgammalk}, respectively. Let $\kappa_{\tau} = 3/2$ and 
 \[h_{\tau}\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[L:K]}\log \max \left\{ \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\},\]
 the local height at $\tau$ in the decomposition of $h\left(\frac{\delta_2}{\lambda}\right)$.
 
@@ -583,7 +583,7 @@ the local height at $\tau$ in the decomposition of $h\left(\frac{\delta_2}{\lamb
 Suppose $(x,y, n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ is a solution of \eqref{eq:EfficientSunit}. If ${h_{\tau} \left(\frac{\delta_2}{\lambda}\right) > c_{\tau}}$, then  
 \begin{align*}
 & \left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right| \\
-	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}\log^+ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right| \right)\\
+	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{b}{[L:\mathbb{Q}]}w_{\varepsilon}\max_{\sigma :L \to \mathbb{C}} \log^+ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right| \right)\\
 	&\quad\quad + \left(\frac{1}{2} + c\kappa_{\tau}e^{-h_{\tau}\left(\frac{\delta_2}{\lambda}\right)}\right).
 \end{align*} 
 \end{lemma}
@@ -655,7 +655,7 @@ Since $[ \ \cdot \ ]$ denotes the nearest integer function, it is clear that $|[
 By Lemma~\ref{lem:mepsbound}, 
 \begin{align*}
 |a_l| & \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k l}\log(p_k)|u_k - r_k|.
+	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|.
 %|a_l| &\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
 %	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|
 \end{align*}
@@ -664,27 +664,27 @@ for $l = 1,2$. Applying this result to $|\alpha-c\Lambda_\tau|$, we obtain
 |\alpha-c\Lambda_\tau| 
 	& \leq \frac{1}{2} + \frac{1}{2}|u_1-r_1|\sum_{i=1}^{\nu}|\overline{a}_{i1}| + \cdots + \frac{1}{2}|u_{\nu} - r_{\nu}| \sum_{i=1}^{\nu}|\overline{a}_{i\nu}| + \\
 	& \quad + \frac{1}{2}\left(w_{\varepsilon 1} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\right. \\
-	& \quad \quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k 1}\log(p_k)|u_k - r_k|\right) + \\
+	& \quad \quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma 1 k}\log(p_k)|u_k - r_k|\right) + \\
 %	& \quad + \frac{1}{2}\left(\frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon_1 \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
 %	&\quad\quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_1 k}\log(p_k)|u_k - r_k| \right) + \\
 	& \quad + \frac{1}{2}\left(w_{\varepsilon 2} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\right. \\
-	& \quad \quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_k 2}\log(p_k)|u_k - r_k|\right) \\
+	& \quad \quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma 2 k}\log(p_k)|u_k - r_k|\right) \\
 %	&\quad + \frac{1}{2}\left(\frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon_2 \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
 %	&\quad\quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_2 k}\log(p_k)|u_k - r_k| \right) \\
-	& = \frac{1}{2} + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} \frac{(w_{\varepsilon_1 \sigma} + w_{\varepsilon_2 \sigma})}{2}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \\
-	& \quad + |u_1 - r_1|\left( \frac{(w_{\gamma_1 1} + w_{\gamma_2 1})}{2[K:\mathbb{Q}]}\log(p_1) + \frac{1}{2}\sum_{i=1}^{\nu}|\overline{a}_{i1}|\right) + \cdots \\
-	& \quad + |u_{\nu} - r_{\nu}|\left( \frac{(w_{\gamma_1 {\nu}} + w_{\gamma_2 {\nu}})}{2[K:\mathbb{Q}]}\log(p_{\nu}) + \frac{1}{2}\sum_{i=1}^{\nu}|\overline{a}_{i{\nu}}|\right). 
+	& = \frac{1}{2} + (w_{\varepsilon 1} + w_{\varepsilon_2})\frac{b}{2[L:\mathbb{Q}]}\max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \\
+	& \quad + |u_1 - r_1|\left( \frac{(w_{\gamma 1 1} + w_{\gamma 2 1})}{2[K:\mathbb{Q}]}\log(p_1) + \frac{1}{2}\sum_{i=1}^{\nu}|\overline{a}_{i1}|\right) + \cdots \\
+	& \quad + |u_{\nu} - r_{\nu}|\left( \frac{(w_{\gamma 1 {\nu}} + w_{\gamma 2 {\nu}})}{2[K:\mathbb{Q}]}\log(p_{\nu}) + \frac{1}{2}\sum_{i=1}^{\nu}|\overline{a}_{i{\nu}}|\right). 
 \end{align*}
 Altogether, we have
 \begin{align*}
 & |\alpha-c\Lambda_\tau| \\
-	& \quad \leq \frac{1}{2} + \frac{1}{2[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} (w_{\varepsilon_1 \sigma} + w_{\varepsilon_2 \sigma})\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad \quad+ \frac{1}{2[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} \log(p_k)|u_k - r_k|\left( (w_{\gamma_1 k} + w_{\gamma_2 k}) + \frac{[K:\mathbb{Q}]}{\log(p_k)}\sum_{i=1}^{\nu}|\overline{a}_{ik}|\right).
+	& \quad \leq \frac{1}{2} + \frac{b}{2[L:\mathbb{Q}]}(w_{\varepsilon 1} + w_{\varepsilon 2})\max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+	& \quad \quad+ \frac{1}{2[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} \log(p_k)|u_k - r_k|\left( (w_{\gamma 1 k} + w_{\gamma 2 k}) + \frac{[K:\mathbb{Q}]}{\log(p_k)}\sum_{i=1}^{\nu}|\overline{a}_{ik}|\right).
 \end{align*}
 Finally, using the notation of \eqref{eq:wsigma}, this inequality reduces to
 \begin{align*}
 |\alpha-c\Lambda_\tau|
-	& \leq \frac{1}{2} + \frac{1}{2[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+	& \leq \frac{1}{2} + \frac{b}{2[L:\mathbb{Q}]} w_{\varepsilon}\max_{\sigma :L \to \mathbb{C}}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
 	&\quad\quad + \frac{1}{2[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l|.
 \end{align*}
 
@@ -712,7 +712,7 @@ The constant $\kappa_\tau$ depends on $N$ which can be taken arbitrarily as long
 Finally, we now have
 \begin{align*}
 & \left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right| \\
-	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}\log^+ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right| \right)\\
+	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{b}{[L:\mathbb{Q}]}w_{\varepsilon}\max_{\sigma :L \to \mathbb{C}} \log^+ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right| \right)\\
 	&\quad\quad + \left(\frac{1}{2} + c\kappa_{\tau}e^{-h_{\tau}\left(\frac{\delta_2}{\lambda}\right)}\right).
 \end{align*} 
 
@@ -740,22 +740,22 @@ To summarize the results of this section, let $\mathbf{m} = (n_1, \dots, n_{\nu}
 \end{equation}
 For $l = 1, 2$, Lemma~\ref{lem:mepsbound} gives us
 \begin{align}\label{def:bepsbound}
-|a_l|^2 &\leq \left(\frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
+|a_l|^2 &\leq \left(\frac{b}{[L:\mathbb{Q}]}w_{\varepsilon l}\max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
 	& \quad \quad+ \left. \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|\right)^2\\
-	&\leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}h_k + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma:L\to \mathbb{C}} w_{\varepsilon l \sigma}h_{\sigma}\right)^2 =: b_{\eps_l}.
+	&\leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}h_k + \frac{b}{[K:\mathbb{Q}]}w_{\varepsilon l}\max_{\sigma:L\to \mathbb{C}} h_{\sigma}\right)^2 =: b_{\eps_l}.
 \end{align}
 Finally, suppose in addition that
 \[h_{\tau}\left(\frac{\delta_2}{\lambda}\right) \geq l_{\tau} > c_{\tau}.\]
 Then by Lemma~\ref{lem:archellest}, we obtain
 \begin{align*}
 & \left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right| \\
-	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}\log^+ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right| \right)\\
+	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{b}{[L:\mathbb{Q}]}w_{\varepsilon}\max_{\sigma :L \to \mathbb{C}} \log^+ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right| \right)\\
 	&\quad\quad + \left(\frac{1}{2} + c\kappa_{\tau}e^{-h_{\tau}\left(\frac{\delta_2}{\lambda}\right)}\right)\\
-	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}, 
+	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{b}{[K:\mathbb{Q}]}w_{\eps}\max_{\sigma :L \to \mathbb{C}}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}, 
 \end{align*} 
 and we set
 \begin{equation} \label{def:bepstarbound}
-b_{\eps_l^*}:= \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\sigma}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}.
+b_{\eps_l^*}:= \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{b}{[K:\mathbb{Q}]}w_{\varepsilon}\sum_{\sigma :L \to \mathbb{C}} h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}.
 \end{equation}
 
 It is of particular importance to note that the assumptions $h_{\tau}(z) \geq l_{\tau}$ and  $h_v(z)\leq h_v$ for all $v\in S^*$ are not arbitrary. Indeed, for the vectors $\mathbf{l}, \mathbf{h}$, these conditions imply precisely that $(\tilde{x},\tilde{y}) \in \Sigma_{\tau}(\mathbf{l}, \mathbf{h})$, where $(\tilde{x},\tilde{y})$ are solutions to \eqref{eq:EfficientSunit} corresponding to $\mathbf{m}$.
