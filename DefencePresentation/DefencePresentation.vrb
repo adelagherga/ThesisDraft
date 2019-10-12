@@ -1,0 +1,7 @@
+\frametitle{Our next steps}
+
+\begin{itemize}
+\item<1-> Refine and optimize the Thue-Mahler solver at each $S$-unit equation
+\item<2-> Compute all elliptic curves of conductor $N < 10^6$
+\item<3-> Generalize the Thue-Mahler solver over number fields
+\end{itemize}
