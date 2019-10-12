@@ -33,9 +33,9 @@ In this section, we describe new techniques to solve equation~\eqref{eq:Efficien
 
 The sieves of \cite{TW3} involve logarithms which are of local nature. To obtain a global sieve, we work instead with the global logarithmic Weil height. This height is invariant under conjugation and admits a decomposition into local heights which can be related to complex and $p$-adic logarithms. 
 
-Let $n_1, \dots, n_{\nu}, a_1, \dots, a_r$ be a solution to \eqref{eq:EfficientSunit} and consider the Weil height of
-\[\frac{\delta_2}{\lambda}= \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i}.\]
-Given the global Weil height of $\delta_2/\lambda$, or all the local heights of $\delta_2/\lambda$, we will construct several ellipsoids `containing' $n_1, \dots, n_{\nu}, a_1, \dots, a_r$ such that the volume of the ellipsoids are as small as possible. We begin by computing the height of $\delta_2/\lambda$. 
+Let $n_1, \dots, n_{\nu}, a_1, \dots, a_r$ be a solution to \eqref{eq:EfficientSunit} and set $z = \frac{\delta_2}{\lambda}$, where
+\[z = \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i}.\]
+Given the global Weil height of $z$, or all the local heights of $z$, we will construct several ellipsoids `containing' $n_1, \dots, n_{\nu}, a_1, \dots, a_r$ such that the volume of the ellipsoids are as small as possible. We begin by computing the height of $z$. 
 
 Let $L$ be the splitting field of $K$. Recall that for cubic extensions $K$, the Galois group $\Gal(L/\mathbb{Q})$ is isomorphic to either the alternating group $A_3$ or the symmetric group $S_3$. 
 
@@ -100,13 +100,12 @@ It follows that
 Let $\log^+(\cdot)$ denote the real valued function $\max(\log(\cdot), 0)$ on $\mathbb{R}_{\geq 0}$. 
 
 \begin{proposition}\label{prop:heightdecomp}
-The height $h\left(\frac{\delta_2}{\lambda}\right)$ admits a decomposition 
+The height $h(z)$ admits a decomposition 
 \begin{equation} \label{eq:hdecomp}
-h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.
+h(z) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log^+|w(z)|.
 \end{equation}
 In particular, when $\deg(g(t)) = 3$, 
-\[\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} = 
-b\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\]
+\[\sum_{w :L \to \mathbb{C}} \log^+|w(z)| =  b\max_{w:L\to \mathbb{C}} \log^+|w(z)|\]
 where
 \[b =
 \begin{cases}
@@ -114,105 +113,77 @@ where
 1 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
 \end{cases}\]
 \end{proposition}
-For ease of notation, let $S^* = S \cup \{v : L \to \mathbb{C}\}$ and write 
-\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{v \in S^*}h_{v}\left(\frac{\delta_2}{\lambda}\right).\]
+For ease of notation, let $S^* = S \cup \{w : L \to \mathbb{C}\}$ and write 
+\[h(z) = \frac{1}{[K:\mathbb{Q}]}\sum_{v \in S^*}h_{v}(z).\]
 By Proposition~\ref{prop:heightdecomp}, when $v = p_l$ is a finite place, 
-\[h_{v}\left(\frac{\delta_2}{\lambda}\right) = \log(p_l)|u_l - r_l|,\]
+\[h_{v}(z) = \log(p_l)|u_l - r_l|,\]
 whereas we write
-\[h_{v}\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[L:K]} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\]
-for all infinite places $v = w$. Finally, let $m$ denote the number of embeddings of $L$ into $\mathbb{C}$,  $m = \# \{v : L \to \mathbb{C}\}$. 
+\[h_{v}(z) = \frac{1}{[L:K]} \log^+|w(z)|\]
+for all infinite places $v = w:L \to \mathbb{C}$.
 
-\begin{proof}[Proof of Proposition~\ref{prop:heightdecomp}]Since $\frac{\delta_2}{\lambda} \in L$, the definition of the absolute logarithmic Weil height gives
-\[h\left(\frac{\delta_2}{\lambda}\right)=\frac{1}{[L:\mathbb{Q}]}\sum_{w \in M_L} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}\]
-where $||z||_w$ is the usual norms and $M_L$ is a set of inequivalent absolute values on $L$. In particular, if $w: L \to \mathbb{C}$ is an infinite place, we obtain
-\[ \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\} = \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
-Writing $z = \frac{\delta_2}{\lambda}$ and $w = \mathfrak{P}$ a finite place, we have
-\[ \log \max \{ \|z\|_{w}, 1\} = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{\ord_{\mathfrak{P}}(z)}} \right), 0\right\}. \]
-By Lemma~\ref{lem:ordpz}, 
-\[\ord_{\mathfrak{P}}\left( \frac{\delta_2}{\lambda}\right)=
-\begin{cases}
-(u_l - r_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})	
-	& \textnormal{ if } \mathfrak{P}^{(j)} \mid p_l , \ p_l \in \{p_1,\dots, p_{\nu}\}\\
-(r_l - u_l)e(\mathfrak{P}^{(i_0)}|\mathfrak{p}_l^{(i_0)})
-	& \textnormal{ if } \mathfrak{P}^{(i_0)}\mid p_l, \ p_l \in \{p_1,\dots, p_{\nu}\}\\
-0 	& \textnormal{ otherwise}.
-\end{cases}\]
-That is, for $\mathfrak{P}^{(j)}\mid p_l$ where $p_l \in \{p_1, \dots, p_{\nu}\}$, we have
+\begin{proof}[Proof of Proposition~\ref{prop:heightdecomp}]Since $z \in L$, the definition of the absolute logarithmic Weil height gives
+\[h(z) = \frac{1}{[L:\mathbb{Q}]}\sum_{w \in M_L} \log^+ \|z\|_w\]
+where $||z||_w$ and $M_L$ are the usual norms and set of inequivalent absolute values on $L$, respectively. In particular, if $w: L \to \mathbb{C}$ is an infinite place, 
+\[ \log^+ \|z\|_{w} = \log^+|w(z)|.\]
+If $w = \mathfrak{P}$ is a finite place, we have
+\[ \log^+ \|z\|_{w} = \log^+ \left(\frac{1}{N(\mathfrak{P})^{\ord_{\mathfrak{P}}(z)}} \right). \]
+Let $p_l \in S$ and $\mathfrak{P}^{(j)}\mid p_l$. Applying Lemma~\ref{lem:ordpz}, we obtain
 \begin{align*}
- \log \max \{ ||z||_{w}, 1\}	
- 	& = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{\ord_{\mathfrak{P}}(z)}} \right), 0\right\}\\
-	& = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{(u_l - r_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})}} \right), 0\right\}\\
-	& = \max \left\{ -(u_l - r_l)f(\mathfrak{P}^{(j)}\mid p_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})\log(p_l), 0\right\}.
+\log^+ \|z\|_{w}	
+ 	& = \log^+ \left(\frac{1}{N(\mathfrak{P})^{(u_l - r_l)e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_l^{(j)})}} \right)\\
+	& = \max \left\{ -(u_l - r_l)f(\mathfrak{P}^{(j)}\mid p_l)e(\mathfrak{P}^{(j)}\mid\mathfrak{p}_l^{(j)})\log(p_l), 0\right\}.
 \end{align*}
-Moreover, for $p_l \in \{p_1, \dots, p_{\nu}\}$, there is one unique prime ideal $\mathfrak{p}_l$ in the ideal equation \eqref{eq:TMfactored} lying above $p_l$ in $K$. Hence, each $\mathfrak{P}$ lying over $p_l$ must also lie over $\mathfrak{p}_l$. Now, 
+For each $p_l \in S$, there is only one unique prime ideal $\mathfrak{p}_l \in \mathcal{O}_K$ in the ideal equation \eqref{eq:TMfactored} lying above $p_l$. Hence, each $\mathfrak{P}$ lying over $p_l$ must also lie over $\mathfrak{p}_l$. Now, for $w = \mathfrak{P}^{(j)}$ lying over $p_l$,  
 \begin{align*}
-& \sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\} \\
-	& \quad = \sum_{\mathfrak{P}^{(j)} \mid \mathfrak{p}_l^{(j)}} \max \left\{ -(u_l - r_l)f(\mathfrak{P}^{(j)}\mid p_l)e(\mathfrak{P}^{(j)}|\mathfrak{p}_l^{(j)})\log(p_l), 0\right\}\\
-	& \quad = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:\mathbb{Q}(\theta^{(j)})]\\
-	& \quad = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:K],
+\sum_{w \mid \mathfrak{p}_l^{(j)}} \log^+ \|z\|_{w}
+	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:\mathbb{Q}(\theta^{(j)})]\\
+	& = \max \left\{ (r_l - u_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(j)}\mid p_l)[L:K],
 \end{align*}
 where the last inequality follows from $K = \mathbb{Q}(\theta) \cong \mathbb{Q}(\theta^{(j)})$.
 
-Similarly, for $\mathfrak{P}^{(i_0)}\mid p_l$ where $p_l \in \{p_1, \dots, p_{\nu}\}$, we have
-\begin{align*}
- \log \max \{ \|z\|_{w}, 1\}	
- 	& = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{\ord_{\mathfrak{P}}(z)}} \right), 0\right\}\\
-	& = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{(r_l - u_l)e(\mathfrak{P}^{(i_0)}|\mathfrak{p}_l^{(i_0)})}} \right), 0\right\}\\
-	& = \max \left\{ -(r_l - u_l)f(\mathfrak{P}^{(i_0)}\mid p_l)e(\mathfrak{P}^{(i_0)}|\mathfrak{p}_l^{(i_0)})\log(p_l), 0\right\},
-\end{align*}
-and so
-\begin{align*}
-\sum_{\mathfrak{P}^{(i_0)} \mid \mathfrak{p}_l^{(i_0)}} \log \max \left\{ \left\|\frac{\delta_2}{\lambda}\right\|_{w}, 1\right\}
-	& = \max \left\{ (u_l - r_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(i_0)}\mid p_l)[L:K].
-\end{align*}
+Similarly, applying Lemma~\ref{lem:ordpz} to all $w = \mathfrak{P}^{(i_0)}$ lying over $p_l \in S$, we obtain
+\[\sum_{w \mid \mathfrak{p}_l^{(i_0)}} \log^+\|z\|_w = \max \left\{ (u_l - r_l)\log(p_l), 0\right\}f(\mathfrak{p}_l^{(i_0)}\mid p_l)[L:K].\]
 
-Lastly, if $w = \mathfrak{P}$ such that $\mathfrak{P} \neq \mathfrak{P}^{(i_0)},  \mathfrak{P}^{(j)}$, we have
-\[\log \max \{ \|z\|_{w}, 1\} = \max \left\{ \log\left(\frac{1}{N(\mathfrak{P})^{\ord_{\mathfrak{P}}(z)}} \right), 0\right\}=0.\]
-Putting this all together yields the first result \eqref{eq:hdecomp}. 
+Lastly, if $w = \mathfrak{P}$ such that $\mathfrak{P} \neq \mathfrak{P}^{(i_0)},  \mathfrak{P}^{(j)}$, we have $\log^+\|z\|_w = 0$. Putting this all together yields the first result \eqref{eq:hdecomp}. 
 
-To prove the second statement, let $z = d^{(j)}/d^{(i_0)} \in L$. The orbit of $z$ is
+To prove the second statement, write $z$ as the quotient $z = d^{(j)}/d^{(i_0)} \in L$. The orbit of $z$ is
 \[\begin{cases}
 \left\{\frac{d^{(j)}}{d^{(i_0)}}, \frac{d^{(k)}}{d^{(j)}}, \frac{d^{(i_0)}}{d^{(k)}}, \frac{d^{(j)}}{d^{(k)}}, \frac{d^{(k)}}{d^{(i_0)}}, \frac{d^{(i_0)}}{d^{(j)}} \right\} & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
 \left\{\frac{d^{(j)}}{d^{(i_0)}}, \frac{d^{(k)}}{d^{(j)}}, \frac{d^{(i_0)}}{d^{(k)}}\right\} & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
 \end{cases}\]
 Choose $a,b,c\in\{i_0,j,k\}$ such that 
 \[|d^{(a)}| \geq |d^{(b)}| \geq |d^{(c)}|.\]
-Now, if $\Gal(L/\mathbb{Q}) \cong S_3$, we obtain
+If $\Gal(L/\mathbb{Q}) \cong S_3$, 
 \begin{align*}
-& \sum_{w :L \to \mathbb{C}} \log \max \{ |w(z)|, 1\} \\
-	& = \log \max \left\{ \left|\frac{d^{(a)}}{d^{(b)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(b)}}{d^{(c)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(c)}}{d^{(a)}}\right|, 1\right\} \\
-	& \quad +  \log \max \left\{ \left|\frac{d^{(a)}}{d^{(c)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(a)}}{d^{(c)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(c)}}{d^{(b)}}\right|, 1\right\}\\
+\sum_{w:L \to \mathbb{C}} \log^+|w(z)|
+	& = \log^+\left|\frac{d^{(a)}}{d^{(b)}}\right| + \log^+\left|\frac{d^{(b)}}{d^{(c)}}\right| + \log^+\left|\frac{d^{(c)}}{d^{(a)}}\right| \\
+	& \quad +  \log^+\left|\frac{d^{(a)}}{d^{(c)}}\right| + \log^+\left|\frac{d^{(a)}}{d^{(c)}}\right| + \log^+\left|\frac{d^{(c)}}{d^{(b)}}\right|\\
 	& = \log \left|\frac{d^{(a)}}{d^{(b)}}\right| + \log \left|\frac{d^{(b)}}{d^{(c)}}\right| + \log \left|\frac{d^{(a)}}{d^{(c)}}\right| \\
 	& = 2\log \left|\frac{d^{(a)}}{d^{(c)}}\right|.
 \end{align*}
-Alternatively, if $\Gal(L/\mathbb{Q}) \cong A_3$, it follows that
+Alternatively, if $\Gal(L/\mathbb{Q}) \cong A_3$,
 \begin{align*}
-& \sum_{w :L \to \mathbb{C}} \log \max \{ |w(z)|, 1\} \\
-	& = \log \max \left\{ \left|\frac{d^{(a)}}{d^{(b)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(b)}}{d^{(c)}}\right|, 1\right\} + \log \max \left\{ \left|\frac{d^{(c)}}{d^{(a)}}\right|, 1\right\} \\
+\sum_{w:L \to \mathbb{C}} \log^+|w(z)|
+	& = \log^+\left|\frac{d^{(a)}}{d^{(b)}}\right| + \log^+\left|\frac{d^{(b)}}{d^{(c)}}\right| + \log^+\left|\frac{d^{(c)}}{d^{(a)}}\right| \\
 	& = \log \left|\frac{d^{(a)}}{d^{(b)}}\right| + \log \left|\frac{d^{(b)}}{d^{(c)}}\right| \\
 	& = \log \left|\frac{d^{(a)}}{d^{(c)}}\right|.
 \end{align*}
-The proposition now follows by setting $z = \frac{\delta_2}{\lambda}$. 
 \end{proof}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 \section{Initial height bounds}
 \label{sec:InitialHeightBounds}
 
-We seek solutions to equaition~\eqref{eq:EfficientSunit}. We recall this equation presently, 
-\begin{equation*}
-\lambda = \delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i} - 1 = \delta_2 \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}.
-\end{equation*}
-To simplify notation, we write
+Let 
 \[\tilde{y} =  \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}, \quad 
 \tilde{x} = \prod_{i = 1}^{r}\left( \frac{\varepsilon_i^{(i_0)}}{\varepsilon_i^{(j)}}\right)^{a_i} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{n_i}\]
-so that equation~\eqref{eq:EfficientSunit} becomes
+and recall that we seek to compute all solutions to equaition~\eqref{eq:EfficientSunit}. In our present notation, this equation is 
 \begin{equation} \label{eq:TrueSunit}
 \delta_1\tilde{y} - \delta_2\tilde{x} = 1.
 \end{equation}
-Let $z= \frac{1}{\tilde{x}} = \frac{\delta_2}{\lambda}$ and denote by $\Sigma$ the set of pairs $(\tilde{x},\tilde{y})$ satisfying \eqref{eq:TrueSunit}. That is, $\Sigma$ denotes the set of tuples $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ corresponding to $(\tilde{x},\tilde{y})$ which satisfy \eqref{eq:TrueSunit}.
+Let $\Sigma$ denote the set of all pairs $(\tilde{x},\tilde{y})$ satisfying \eqref{eq:TrueSunit}. That is, $\Sigma$ denotes the set of all tuples $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ corresponding to $(\tilde{x},\tilde{y})$ which satisfy \eqref{eq:TrueSunit}.
 
-Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. Then we define $\Sigma(\mathbf{l},\mathbf{h})$ as the set of all $(\tilde{x},\tilde{y}) \in \Sigma$ such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq \mathbf{h}$ and such that $\left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\nleq \mathbf{l}$, and write $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})$ if $\mathbf{l}=\mathbf{0}$. Additionally, for each place $w$, we denote by $\Sigma_w(\mathbf{l},\mathbf{h})$ the set of all $(\tilde{x},\tilde{y})\in\Sigma(\mathbf{h})$ such that $h_w(z)>l_w$. 
+Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. Then we define $\Sigma(\mathbf{l},\mathbf{h})$ as the set of all $(\tilde{x},\tilde{y}) \in \Sigma$ such that $(h_v(z))\leq \mathbf{h}$ and such that $(h_v(z))\nleq \mathbf{l}$, and write $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})$ if $\mathbf{l}=\mathbf{0}$. Additionally, for each place $w$, we denote by $\Sigma_w(\mathbf{l},\mathbf{h})$ the set of all $(\tilde{x},\tilde{y})\in\Sigma(\mathbf{h})$ such that $h_w(z)>l_w$. 
 
 Recall the minimal polynomial $g(t)$ of $K$, \eqref{eq:Efficientg}, derived from 
 \[f(x,y) = x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 = cp_1^{z_1}\cdots p_v^{z_v}.\]
@@ -235,8 +206,8 @@ If $\mathbf{h} \in\mathbb{R}^{\nu + m}$ with $\mathbf{h} = (\Omega')$, then $\ma
 \end{lemma}
 
 \begin{proof}
-Let $(\tilde{x},\tilde{y}) \in \Sigma$. We show that the corresponding value $z = \frac{1}{\tilde{x}} = \frac{\delta_2}{\lambda}$ arising from this choice of $\tilde{x},\tilde{y}$ satisfies
-\[\mathbf{0} < \left(h_v\left(\frac{\delta_2}{\lambda}\right)\right)\leq \mathbf{h}.\]
+Let $(\tilde{x},\tilde{y}) \in \Sigma$. We show that the corresponding value $z$ arising from this choice of $\tilde{x},\tilde{y}$ satisfies
+\[\mathbf{0} < (h_v(z)) \leq \mathbf{h}.\]
 
 As stated earlier, any solution $x,y$ of $f(x,y) = c p_1^{z_1}\cdots p_v^{z_v}$ satisfies
 \[\max(h(x),h(y)) \leq \Omega.\]
@@ -256,9 +227,9 @@ Hence,
 \[h(\tilde{x})	 = 2h(\beta) + 2h(\alpha) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha).\]
 Finally, we observer that 
 \[h(z) = h(1/\tilde{x}) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha).\]
-Together with $\displaystyle \frac{1}{[K:\mathbb{Q}]}h_v\left(\frac{\delta_2}{\lambda}\right) \leq h\left(\frac{\delta_2}{\lambda}\right)$, this implies
-\[h_v\left(\frac{\delta_2}{\lambda}\right) \leq [K:\mathbb{Q}]\left(4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha)\right) = \Omega'.\]
-Of course, by definition, we have $h_v\left(\frac{\delta_2}{\lambda}\right) \geq 0$, so that $(\tilde{x},\tilde{y}) \in \Sigma(h)$ as required. 
+Together with $\displaystyle \frac{1}{[K:\mathbb{Q}]}h_v(z) \leq h(z)$, this implies
+\[h_v(z) \leq [K:\mathbb{Q}]\left(4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha)\right) = \Omega'.\]
+Of course, by definition, we have $h_v(z) \geq 0$, so that $(\tilde{x},\tilde{y}) \in \Sigma(h)$ as required. 
 \end{proof}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
@@ -295,8 +266,8 @@ In \autoref{sec:CoveringsofSigma}, we establish that for a suitable pair of vect
 We begin with the quadratic form $q_f=A^TD^2A$ on $\mathbb{Z}^{\nu}$, where $D^2$ is a $\nu \times \nu$ diagonal matrix with diagonal entries $\lfloor\frac{\log(p_i)^2}{\log(2)^2}\rfloor$ for $p_i \in S$. Recall that $A$ is the matrix generated in either \autoref{subsec:FactorizationTMwithoutOK} or \autoref{subsec:FactorizationTMwithoutOK}. As $A$ is invertible, our choice of entries in $D$ guarantees that this quadratic form is positive definite. This will become very important later in the sieve when we will need to apply many instances of the Fincke-Pohst algorithm. 
 
 \begin{lemma} \label{lem:boundqf}
-For any solution $(x,y, n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ of \eqref{eq:EfficientSunit} with $\mathbf{n} = (n_1, \dots, n_{\nu})$, we have 
-\[\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n}) < \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2.\] 
+Consider any solution $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ of \eqref{eq:EfficientSunit}. Setting $\mathbf{n} = (n_1, \dots, n_{\nu})$, we have 
+\[\log(2)^2 q_f(\mathbf{n}) < \sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2.\] 
 \end{lemma}
 
 \begin{proof}
@@ -309,13 +280,13 @@ q_f(\mathbf{n})
 	 = (\mathbf{u} - \mathbf{r})^{\text{T}}D^2(\mathbf{u} - \mathbf{r})
 	 = \sum_{l = 1}^{\nu}\left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l-r_l|^2.
 \end{align*}
-Multiplication by $\frac{\log(2)^2}{[K:\mathbb{Q}]}$ then gives
+Multiplication by $\log(2)^2$ then gives
 \begin{align*}
-\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n})  
-	& = \frac{\log(2)^2}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l -r_l|^2 \\
- 	& \leq \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2,
+\log(2)^2q_f(\mathbf{n})  
+	& = \log(2)^2\sum_{l = 1}^{\nu} \left\lfloor\frac{\log(p_l)^2}{\log(2)^2}\right\rfloor|u_l -r_l|^2 \\
+ 	& \leq \sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2,
 \end{align*}
-where all terms in the summand are positive. 
+where all terms in the summand are clearly positive. 
 
 If $2 \in S$, we have
 \begin{align*}
@@ -325,15 +296,15 @@ q_f(\mathbf{n})
 \end{align*}
 It follows that
 \begin{align*}
-\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n}) 
-	& \leq \frac{\log(2)^2}{[K:\mathbb{Q}]}\left( |u_1 - r_1|^2 + \sum_{l = 2}^{\nu} \frac{\log(p_l)^2}{\log(2)^2}|u_l -r_l|^2\right) \\
-	& = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2.
+\log(2)^2q_f(\mathbf{n}) 
+	& \leq \log(2)^2\left( |u_1 - r_1|^2 + \sum_{l = 2}^{\nu} \frac{\log(p_l)^2}{\log(2)^2}|u_l -r_l|^2\right) \\
+	& = \sum_{l = 1}^{\nu}\log(p_l)^2|u_l -r_l|^2.
 \end{align*}
 \end{proof}
 
-We now briefly re-examine the decomposition of $h\left(\frac{\delta_2}{\lambda}\right)$ into local heights, 
-\[h\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}.\]
-In particular, for every finite place $v$, Lemma~\ref{lem:boundqf} tells us that any bound $h_v$ on $h_v\left(\frac{\delta_2}{\lambda}\right)$ yields a bound on $\frac{\log(2)^2}{[K:\mathbb{Q}]}q_f(\mathbf{n})$. In the remainder of this section, we build analogous bounds on the exponents $a_1, \dots, a_r$ of the fundamental units. 
+We now briefly re-examine the decomposition of $h(z)$ into local heights, 
+\[h(z) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log^+|w(z)|.\]
+For every finite place $v$, Lemma~\ref{lem:boundqf} tells us that any set of bounds $\{h_v\}_{v \in S}$ on the set $\{h_v(z)\}_{v \in S}$ yields a bound on $\log(2)^2q_f(\mathbf{n})$. In the remainder of this section, we build analogous bounds on the exponents $a_1, \dots, a_r$ of the fundamental units. 
 
 Recall $r = 1$ or $r = 2$ for the degree $3$ Thue-Mahler equation~\eqref{eq:Efficientpoly} in question. Choose a set $I$ of embeddings $L \rightarrow \mathbb{C}$ of cardinality $r$. For $r = 1$, this is simply
 \[R = \begin{pmatrix}
@@ -394,16 +365,16 @@ giving
 for $l = 1,2$. 
 
 To estimate $|a_l|$, we begin to estimate the sum on the right hand side. For this, we consider
-\[\frac{\delta_2}{\lambda}= \left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{a_2}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i}.\]
+\[z = \left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{a_2}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{n_i}.\]
 For any embedding $\iota: L \to \mathbb{C}$, we have 
-\[\left(\frac{\delta_2}{\lambda}\right)^{\iota} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i} =  \left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota \ a_2}.\] 
+\[(z)^{\iota} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i} =  \left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota \ a_2}.\] 
 
-Taking absolute values, we obtain
-\[\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i}\right| = \left|\left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota \ a_2}\right|,\]
+In particular
+\[\left|(z)^{\iota} \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(i_0)}}{\gamma_i^{(j)}}\right)^{\iota \ n_i}\right| = \left|\left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota \ a_2}\right|,\]
 so that
 \begin{align*}
 \log\left|\left( \frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota \ a_1}\left( \frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota \ a_2}\right|
-	& = \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota \ n_i}\right|. 
+	& = \log|\iota(z)| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota \ n_i}\right|. 
 \end{align*}
 
 Hence, for $l =1,2$,
@@ -411,149 +382,72 @@ Hence, for $l =1,2$,
 a_l	& = \overline{r}_{l1}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1 \ a_1} 		\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1 \ a_2}\right| + 
 	\overline{r}_{l2}\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_2\ a_1}
 	\cdot \left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_2 \ a_2}\right|\\
-	& = \overline{r}_{l1}\left( \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota_1 \ n_i}\right|\right) + \\ 
-	& \quad \quad + \overline{r}_{l2}\left( \log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota_2 \ n_i}\right|\right)\\
-	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - n_1\beta_{\gamma_1 l} - \dots - n_{\nu}\beta_{\gamma_{\nu} l},
+	& = \overline{r}_{l1}\left( \log|\iota_1(z)| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota_1 \ n_i}\right|\right) + \\ 
+	& \quad \quad + \overline{r}_{l2}\left( \log|\iota_2(z)| - \log\left| \prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(j)}}{\gamma_i^{(i_0)}}\right)^{\iota_2 \ n_i}\right|\right)\\
+	& = \overline{r}_{l1}\log|\iota_1(z)| + \overline{r}_{l2}\log|\iota_2(z)| - n_1\beta_{\gamma_1 l} - \dots - n_{\nu}\beta_{\gamma_{\nu} l},
 \end{align*}
 where
-\[\beta_{\gamma_k l} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
+\[\beta_{\gamma_k l} = \left(\overline{r}_{l1} \log\left| \iota_1\left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)\right|+ \overline{r}_{l2}\log\left| \iota_2\left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)\right|\right)\]
 for $k = 1, \dots, \nu$. Recall that $\mathbf{n} = A^{-1}(\mathbf{u} - \mathbf{r})$ and suppose $A^{-1} = (\overline{a}_{nm})$. We have
-\begin{align*}
-\mathbf{n}  = A^{-1}(\mathbf{u} - \mathbf{r})
-	 = \begin{pmatrix} \sum_{k=1}^{\nu} \overline{a}_{1k}(u_k-r_k)\\  \vdots \\ \sum_{k=1}^{\nu} \overline{a}_{\nu k}(u_k-r_k) \end{pmatrix}.
-\end{align*}
-
-Now, 
-\begin{align*}
-a_l 	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - n_1\beta_{\gamma_1 l} - \dots - n_{\nu}\beta_{\gamma_{\nu} l}\\
-	& = \overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma l k},
-\end{align*}
+\[\mathbf{n}  = A^{-1}(\mathbf{u} - \mathbf{r})
+	 = \begin{pmatrix} \sum_{k=1}^{\nu} \overline{a}_{1k}(u_k-r_k)\\  \vdots \\ \sum_{k=1}^{\nu} \overline{a}_{\nu k}(u_k-r_k) \end{pmatrix},\]
+so that we may rewrite each $a_l$ as 
+\[a_l = \overline{r}_{l1}\log|\iota_1(z)| + \overline{r}_{l2}\log|\iota_2(z)| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma l k},\]
 where
-\[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma_1 l} + \cdots + \overline{a}_{\nu k}\beta_{\gamma_{\nu} l}\]
-and
-\[\beta_{\gamma_k l} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
-for $k = 1, \dots, \nu$.
+\[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma_1 l} + \cdots + \overline{a}_{\nu k}\beta_{\gamma_{\nu} l}.\]
 
-Since $\frac{\delta_2}{\lambda}$ is a quotient of elements which are conjugate to one another, by taking the norm on $L$ of $\frac{\delta_2}{\lambda}$, we obtain $N\left(\frac{\delta_2}{\lambda}\right) = 1.$ On the other hand, by definition, we have 
-\[1 = N\left(\frac{\delta_2}{\lambda}\right) = \prod_{\sigma: L \to \mathbb{C}} \sigma \left(\frac{\delta_2}{\lambda}\right).\]
-Taking absolute values and logarithms, 
-\[0 = \sum_{\sigma: L \to \mathbb{C}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|\]
-so that
-\[-\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota}\right| = -\log\left|\iota \left(\frac{\delta_2}{\lambda}\right)\right| = \sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|.\]
-
-Consider
+Taking absolute values, we obtain
+\[|a_l| \leq |\overline{r}_{l1}||\log|\iota_1(z)|| + |\overline{r}_{l2}||\log|\iota_2(z)|| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.\]
+Suppose $\log|\iota_1(z)| \geq 0$ and $\log|\iota_2(z)| \geq 0$. Then 
 \begin{align*}
-|a_l| 	& = \left|\overline{r}_{l1}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + \overline{r}_{l2}\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| - \sum_{k=1}^{\nu}(u_k-r_k)\alpha_{\gamma l k}\right|\\
-	& \leq |\overline{r}_{l1}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + |\overline{r}_{l2}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
-\end{align*}
-
-Suppose $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| \geq 0$ and $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| \geq 0$. Then, 
-\begin{align*}
-|a_l| 	& \leq |\overline{r}_{l1}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + |\overline{r}_{l2}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
-	& = |\overline{r}_{l1}|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| + |\overline{r}_{l2}|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
-	& \leq \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|,1\right\} + \\
-	& \quad \quad +\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\log\max\left\{\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
-	&  \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
-\end{align*}
-By Proposition \ref{prop:heightdecomp}, we obtain
-\[|a_l| \leq b\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} +  \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\]
-where
-\[b =
-\begin{cases}
-2 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
-1 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
-\end{cases}\]
-
-Alternatively, suppose that both $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| < 0$ and $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| < 0$. In this case,
-
-\begin{align*}
-|a_l| 	& \leq |\overline{r}_{l1}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + |\overline{r}_{l2}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
-	& = |\overline{r}_{l1}|\sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|+ |\overline{r}_{l2}|\left(-\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right) \\
-	& \quad \quad + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}| \\
-	& \leq \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right| +\\
-	& \quad \quad +\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\left(-\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right) + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
-	& = \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\sum_{\shortstack{\footnotesize $w: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1, \iota_2$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|  + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
-	&  \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
-\end{align*}
-Again, by Proposition \ref{prop:heightdecomp}, this becomes
-\[|a_l| \leq b\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} +  \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\]
-where
-\[b =
-\begin{cases}
-2 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
-1 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
-\end{cases}\]
-
-Lastly, if, without loss of generality, we have $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right| < 0$ and $\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| \geq 0$, then
-\begin{align*}
-|a_l| 	& \leq |\overline{r}_{l1}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_1}\right|\right| + |\overline{r}_{l2}|\left|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right|\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
-	& = |\overline{r}_{l1}|\sum_{\shortstack{\footnotesize $\sigma: L \to \mathbb{C} $\\ \footnotesize $ \sigma \neq \iota_1$}} \log\left|\sigma \left(\frac{\delta_2}{\lambda}\right)\right|+ |\overline{r}_{l2}|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
-	& \leq \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\sum_{w: L \to \mathbb{C}} \log \max \left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} +  |\overline{r}_{l2}|\log\left|\left(\frac{\delta_2}{\lambda}\right)^{\iota_2}\right| \\
-	&\quad \quad +\sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}| \\
-	& \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}  \\
-	& \quad\quad + \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
+|a_l| 	& \leq |\overline{r}_{l1}|\log|\iota_1(z)| + |\overline{r}_{l2}|\log|\iota_2(z)| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
+	&  \leq \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\sum_{w: L \to \mathbb{C}}\log^+|w(z)| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
 \end{align*}
 Applying Proposition \ref{prop:heightdecomp} yields
-\begin{align*}
-|a_l| & \leq b\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\\
-	& \quad \quad + \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}| \\
-	& \leq \tilde{b} \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|
-\end{align*}
+\[|a_l| \leq b\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log^+|w(z)| +  \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\]
 where
-\[\tilde{b} =
+\[b =
 \begin{cases}
-3 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
-2 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
+2 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
+1 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3.
 \end{cases}\]
 
-In all three cases, it follows that
+Alternatively, suppose that both $\log|\iota_1(z)| < 0$ and $\log|\iota_2(z)| < 0$. We recall that $z$ is a quotient of elements which are conjugate to one another. By taking the norm of $z$ in $L$, we obtain $N(z) = 1.$ On the other hand, by definition, we have 
+\[1 = N(z) = \prod_{w : L \to \mathbb{C}}w(z).\]
+Taking absolute values and logarithms, 
+\[0 = \sum_{w: L \to \mathbb{C}} \log|w(z)|\]
+so that
+\[ -\log|\iota(z)| = \sum_{\shortstack{\footnotesize $w: L \to \mathbb{C} $\\ \footnotesize $ w\neq \iota$}} \log|w(z)|.\]
+In our present case, we use this equivalence to obtain a bound on $|a_l|$ as follows. 
 \begin{align*}
-|a_l| & \leq \tilde{b} \max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w:L\to \mathbb{C}} \log \max \left\{ \left|w\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|
+|a_l| 	& \leq |\overline{r}_{l1}|\sum_{\shortstack{\footnotesize $w: L \to \mathbb{C} $\\ \footnotesize $w \neq \iota_1$}} \log|w(z)| - |\overline{r}_{l2}|\log|\iota_2(z)| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
+	& \leq b\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w: L \to \mathbb{C}} \log^+|w(z)|  + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
 \end{align*}
-%|a_l|	& \leq \sum_{w: L \to \mathbb{C}}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}|\log\max\left\{\left|w\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} \\
-%	&\quad\quad + |\overline{r}_{l1}|\log\max\left\{\left|\iota_1\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\} + |\overline{r}_{l2}|\log\max\left\{\left|\iota_2\left(\frac{\delta_2}{\lambda}\right)\right|,1\right\}\\
-%	&\quad\quad+ \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|
-%\end{align*}
+Here, the second inequality follows again by Proposition \ref{prop:heightdecomp}. Lastly, if, without loss of generality, we have $\log|\iota_1(z)| < 0$ and $\log|\iota_2(z)| \geq 0$, then
+\begin{align*}
+|a_l| 	& \leq |\overline{r}_{l1}|\sum_{\shortstack{\footnotesize $w: L \to \mathbb{C} $\\ \footnotesize $w \neq \iota_1$}} \log|w(z)| + |\overline{r}_{l2}|\log|\iota_2(z)| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|\\
+	& \leq (b+1)\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}\max_{w: L \to \mathbb{C}} \log^+|w(z)| + \sum_{k=1}^{\nu}|u_k-r_k||\alpha_{\gamma l k}|.
+\end{align*}
+
+Now, let 
+\begin{equation} \label{eq:wepslk}
+w_{\eps l} = (b+1)\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\},
+\end{equation}
+and
+\begin{equation} \label{eq:wgammalk}
+w_{\gamma l k} = \frac{|\alpha_{\gamma l k}|}{\log(p_k)},
+\end{equation}
 where
-\[\tilde{b} =
-\begin{cases}
-3 & \text{ if } \Gal(L/\mathbb{Q}) \cong S_3\\
-2 & \text{ if } \Gal(L/\mathbb{Q}) \cong A_3,
-\end{cases}\]
 \[\alpha_{\gamma l k} = \overline{a}_{1k}\beta_{\gamma_1 l} + \cdots + \overline{a}_{\nu k}\beta_{\gamma_{\nu} l},\]
 and
 \[\beta_{\gamma_k l} = \left(\overline{r}_{l1} \log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_1}\right|+ \overline{r}_{l2}\log\left| \left( \frac{\gamma_k^{(j)}}{\gamma_k^{(i_0)}}\right)^{\iota_2}\right|\right)\]
-for $k = 1, \dots, \nu$.
-
-Hence for $l = 1,2$, we write
-\begin{align} \label{eq:albound}
-%|a_l|	&\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-%	&\quad\quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|,
-|a_l|	& \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad\quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|,
-\end{align}
-where
-\begin{equation} \label{eq:welsigma}
-w_{\varepsilon l} = \frac{\overline{b}\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}[L:\mathbb{Q}]}{b}
-%w_{\varepsilon l \sigma} = 
-%\begin{cases}
-%\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\}[L:\mathbb{Q}] & \text{ for } \sigma \notin I\\
-%\left(\max\{|\overline{r}_{l1}|, |\overline{r}_{l2}|\} + |\overline{r}_{li}|\right)[L:\mathbb{Q}] & \text{ for } \sigma = \iota_i \in I\\
-%\end{cases}
-\end{equation}
-and 
-\begin{equation} \label{eq:wgammalk}
-w_{\gamma l k} = |\alpha_{\gamma l k}|\frac{[K:\mathbb{Q}]}{\log(p_k)}.
-\end{equation}
-
-To summarize, we have proven the following lemma.
+for $k = 1, \dots, \nu$. We have proven the following lemma. 
 \begin{lemma}\label{lem:mepsbound}
-For any solution $(x,y,a_1, \dots, a_r, n_1, \dots, n_{\nu})$ of \eqref{eq:EfficientSunit}, for $l =1,2$
-\begin{align*}
-|a_l| & \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-%&\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|.
-\end{align*}
+For any solution $(n_1, \dots, n_{\nu},a_1, \dots, a_r)$ of \eqref{eq:EfficientSunit}, for $l =1,2$, we have
+\[|a_l| \leq w_{\eps l}\max_{w:L \to \mathbb{C}} \log^+|w(z)| + \sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|.\]
+%|a_l| & \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+%%&\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
+%	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|.
 \end{lemma}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
@@ -561,7 +455,7 @@ For any solution $(x,y,a_1, \dots, a_r, n_1, \dots, n_{\nu})$ of \eqref{eq:Effic
 \subsection{The Archimedean ellipsoid: the real case}
 \label{subsec:ArchEllipsoid}
 
-Let $\tau:L\to\mathbb{R} \subset \mathbb{C}$ be an embedding and let $l_\tau\geq c_\tau$ and $c>0$ be given real numbers for $c_\tau=\log^+(2|\tau(\delta_2)|)= \log \max\{2|\tau(\delta_2)|,1\}$. We define 
+Let $\tau:L\to\mathbb{R} \subset \mathbb{C}$ be an embedding and let $l_\tau\geq c_\tau$ and $c>0$ be given real numbers for $c_\tau=\log^+(2|\tau(\delta_2)|)$. We define 
 \begin{equation} \label{eq:alpha0eps}
 \alpha_0 = [c\log|\tau(\delta_1)|], \;  \; \alpha_{\varepsilon 1} =  \left[c\log\left|\tau\left(\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}\right)\right|\right],\ \  \alpha_{\varepsilon 2} =  \left[c\log\left|\tau\left(\frac{\varepsilon_2^{(k)}}{\varepsilon_2^{(j)}}\right)\right|\right].
 \end{equation}
@@ -573,120 +467,70 @@ Here, $[ \ \cdot\  ]$ denotes the nearest integer function.
 
 Let
 \begin{equation} \label{eq:wsigma}
-w_{\varepsilon} = (w_{\varepsilon 1} + w_{\varepsilon 2}), \quad \quad w_k = (w_{\gamma 1 k} + w_{\gamma 2 k}) + \frac{[K:\mathbb{Q}]}{\log(p_k)}\sum_{i=1}^{\nu}|\overline{a}_{ik}|
+w_{\varepsilon} = \frac{w_{\varepsilon 1} + w_{\varepsilon 2}}{2}, \quad \quad w_{\gamma k} = \frac{w_{\gamma 1 k} + w_{\gamma 2 k}}{2} + \frac{1}{2\log(p_k)}\sum_{i=1}^{\nu}|\overline{a}_{ik}|
 \end{equation}
-for $k = 1, \dots, \nu$. Here $w_{\eps 1}, w_{\eps 2}$ and $w_{\gamma 1 k}, w_{\gamma 2 k}$ are the coefficients \eqref{eq:welsigma} and \eqref{eq:wgammalk}, respectively. Let $\kappa_{\tau} = 3/2$ and 
-\[h_{\tau}\left(\frac{\delta_2}{\lambda}\right) = \frac{1}{[L:K]}\log \max \left\{ \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\},\]
-the local height at $\tau$ in the decomposition of $h\left(\frac{\delta_2}{\lambda}\right)$.
+for $k = 1, \dots, \nu$. Here $w_{\eps 1}, w_{\eps 2}$ and $w_{\gamma 1 k}, w_{\gamma 2 k}$ are the coefficients \eqref{eq:wepslk} and \eqref{eq:wgammalk}, respectively. Let $\kappa_{\tau} = 3/2$ and recall  that 
+\[h_{\tau}(z) = \frac{1}{[L:K]}\log^+|\tau(z)|\]
+denotes the local height of $z$ at $\tau$ in the decomposition of $h(z)$.
 
 \begin{lemma}\label{lem:archellest}
-Suppose $(x,y, n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ is a solution of \eqref{eq:EfficientSunit}. If ${h_{\tau} \left(\frac{\delta_2}{\lambda}\right) > c_{\tau}}$, then  
+Let $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ be any solution of \eqref{eq:EfficientSunit}. If $h_{\tau}(z) > c_{\tau}$, then  
 \begin{align*}
 & \left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right| \\
-	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{b}{[L:\mathbb{Q}]}w_{\varepsilon}\max_{\sigma :L \to \mathbb{C}} \log^+ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right| \right)\\
-	&\quad\quad + \left(\frac{1}{2} + c\kappa_{\tau}e^{-h_{\tau}\left(\frac{\delta_2}{\lambda}\right)}\right).
+	& \quad \quad \leq \frac{1}{2} + w_{\eps} \max_{w :L \to \mathbb{C}}\log^+|w(z)| + \sum_{l = 1}^{\nu}w_{\gamma l} \log(p_l)|u_l - r_l| + c\kappa_{\tau}e^{-h_{\tau}(z)}
 \end{align*} 
 \end{lemma}
 
 \begin{proof}
 Let 
-\begin{align*}
-\alpha	
-	& = \alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\\
-	& = [c\log|\tau(\delta_1)|] +\sum_{i = 1}^r a_i \left[c\log\left|\tau\left(\frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)\right|\right] + \sum_{i = 1}^{\nu} n_i \left[c\log\left|\tau\left(\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)\right|\right]
-\end{align*}
+\[\alpha_{\tau} = \alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\]
 and
-\begin{align*}
-\Lambda_{\tau} &= \log\left|\tau\left(\delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}\right)\right|\\
-&= \log\left(\tau\left(\delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}\right)\right)
-\end{align*}
-where the above equality follows from 
+\[\Lambda_{\tau} = \log\left|\tau\left(\delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}\right)\right|.\]
+We claim that 
 \[\tau\left(\delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}\right) > 0.\]
-Indeed, by assumption,
-\[ h_{\tau}\left(\frac{\delta_2}{\lambda}\right) > c_\tau = \log \max\{2|\tau(\delta_2)|,1\},\]
-so that 
-\begin{align*}
-\exp\left(h_{\tau}\left(\frac{\delta_2}{\lambda}\right)\right)	& > \exp(c_{\tau}) \\
-\exp\left(\log \max \left\{ \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\right) & > \exp \left(\log \max\{2|\tau(\delta_2)|,1\}\right)\\
-\max \left\{ \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} & > \max\{2|\tau(\delta_2)|,1\}.
-\end{align*}
-From this last inequality, we must have that 
-\[\max \left\{ \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} = \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|.\]
-In this case, 
-\[\max\{2|\tau(\delta_2)|,1\} < \max \left\{ \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} = \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|.\]
-It follows that
-\[2|\tau(\delta_2)| \leq \max\{2|\tau(\delta_2)|,1\} < \max \left\{ \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} = \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right|\]
-and therefore
-\[2|\tau(\delta_2)| < \left|\tau\left(\frac{\delta_2}{\lambda}\right)\right| = \frac{|\tau(\delta_2)|}{|\tau(\lambda)|} \implies |\tau(\lambda)| < \frac{1}{2}.\]
-Recall that $\delta_1\tilde{y} - \delta_2\tilde{x} = 1$. This is equation \eqref{eq:TrueSunit} defined earlier. In particular, observe that $\lambda = \delta_2\tilde{x}$, so that applying $\tau$, we obtain
+Indeed, $h_{\tau}(z) > c_\tau$ by assumption, hence 
+\[\max \left\{|\tau(z)|, 1\right\}  > \max\{2|\tau(\delta_2)|,1\}.\]
+From this inequality, we must have that $\max \{|\tau(z)|,1\} = |\tau(z)|$ and so
+\[2|\tau(\delta_2)| < |\tau(z)| = \frac{|\tau(\delta_2)|}{|\tau(\lambda)|} \implies |\tau(\lambda)| < \frac{1}{2}.\]
+Recall that $\delta_1\tilde{y} - \delta_2\tilde{x} = 1$. This is the equation \eqref{eq:TrueSunit} defined earlier. In particular, observe that $\lambda = \delta_2\tilde{x}$ so that applying $\tau$ gives
 \[\tau(\lambda) = \tau(\delta_2\tilde{x}) = \tau(\delta_1\tilde{y}) - 1.\]
 Thus
 \[|\tau(\lambda)| < \frac{1}{2} \implies \tau(\delta_1\tilde{y}) = \tau(\lambda) + 1 > 0.\]
-This proves that
+This proves our claim
 \[\tau(\delta_1\tilde{y}) = \tau\left(\delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}\right) > 0.\]
-Having established this, we write, 
-\begin{align*}
-\Lambda_{\tau} &= \log\left|\tau\left(\delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}\right)\right|\\
-&= \log\left(\tau\left(\delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}\right)\right)
-\end{align*}
-or equivalently, 
-\begin{align*}
-\Lambda_{\tau}	
-	& = \log\left(\tau\left(\delta_1\right)\right) + \sum_{i=1}^r a_i\log\left(\tau\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right) \right) + \sum_{i=1}^{\nu}n_i\log \left(\tau\left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)\right).
-\end{align*}
+Having established this, we may now write
+\[\Lambda_{\tau} = \log\left(\tau\left(\delta_1\right)\right) + \sum_{i=1}^r a_i\log\left(\tau\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right) \right) + \sum_{i=1}^{\nu}n_i\log \left(\tau\left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)\right).\]
 By the triangle inequality, 
-\[|\alpha| \leq |\alpha - c\Lambda_{\tau}| + c|\Lambda_{\tau}|,\]
+\[|\alpha_{\tau}| \leq |\alpha_{\tau} - c\Lambda_{\tau}| + c|\Lambda_{\tau}|,\]
 where
 \begin{align*}
-|\alpha-c\Lambda_\tau|
-	& = \left|[c\log(\tau(\delta_1))] +\sum_{i = 1}^r a_i \left[c\log\left(\tau\left(\frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)\right)\right] \right.\\
-	& \quad \quad \left. + \sum_{i = 1}^{\nu} n_i \left[c\log\left(\tau\left(\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)\right)\right] \right. \\
-	&\quad\quad \left.- c \log\left(\tau\left(\delta_1 \prod_{i = 1}^r\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)^{a_i}\prod_{i = 1}^{\nu} \left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)^{n_i}\right)\right)\right|\\
+|\alpha_{\tau}-c\Lambda_\tau|
 	& \leq \left| [c\log(\tau(\delta_1))] - c\log\left(\tau\left(\delta_1\right)\right)\right| \\
 	& \quad \quad  + \sum_{i = 1}^r |a_i|\left| \left[c\log\left(\tau\left(\frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right)\right)\right] - c\log\left(\tau\left( \frac{\varepsilon_i^{(k)}}{\varepsilon_i^{(j)}}\right) \right)\right|\\
 	& \quad \quad +  \sum_{i = 1}^{\nu} |n_i|\left| \left[c\log\left(\tau\left(\frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)\right)\right] - c\log \left(\tau\left( \frac{\gamma_i^{(k)}}{\gamma_i^{(j)}}\right)\right)\right|.
 \end{align*}
 Since $[ \ \cdot \ ]$ denotes the nearest integer function, it is clear that $|[ \ c \ ] - c| \leq 1/2$ for any integer $c$, 
 \begin{align*}
-|\alpha-c\Lambda_\tau|
+|\alpha_{\tau}-c\Lambda_\tau|
 	& \leq \frac{1}{2} + \frac{1}{2}\sum_{i = 1}^r |a_i| + \frac{1}{2}\sum_{i = 1}^{\nu} |n_i|\\
 	& \leq \frac{1}{2}\left(1 + \sum_{i = 1}^r |a_i| + |u_1-r_1|\sum_{i=1}^{\nu}|\overline{a}_{i1}| + \cdots + |u_{\nu} - r_{\nu}| \sum_{i=1}^{\nu}|\overline{a}_{i\nu}|\right).
 \end{align*}
-By Lemma~\ref{lem:mepsbound}, 
+Applying Lemma~\ref{lem:mepsbound}, this becomes
 \begin{align*}
-|a_l| & \leq  w_{\varepsilon l} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|.
-%|a_l| &\leq \frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon l \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-%	& \quad \quad+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|
-\end{align*}
-for $l = 1,2$. Applying this result to $|\alpha-c\Lambda_\tau|$, we obtain
-\begin{align*}
-|\alpha-c\Lambda_\tau| 
-	& \leq \frac{1}{2} + \frac{1}{2}|u_1-r_1|\sum_{i=1}^{\nu}|\overline{a}_{i1}| + \cdots + \frac{1}{2}|u_{\nu} - r_{\nu}| \sum_{i=1}^{\nu}|\overline{a}_{i\nu}| + \\
-	& \quad + \frac{1}{2}\left(w_{\varepsilon 1} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\right. \\
-	& \quad \quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma 1 k}\log(p_k)|u_k - r_k|\right) + \\
+|\alpha_{\tau}-c\Lambda_\tau| 
+%	& \leq \frac{1}{2}\left(1 + |u_1-r_1|\sum_{i=1}^{\nu}|\overline{a}_{i1}| + \cdots + |u_{\nu} - r_{\nu}| \sum_{i=1}^{\nu}|\overline{a}_{i\nu}|\right) + \\
+%	& \quad + \frac{1}{2}\left((w_{\eps 1} + w_{\eps 2})\max_{w:L \to \mathbb{C}} \log^+|w(z)|\right) +\\
+%	& \quad + \frac{1}{2}\left(\sum_{k = 1}^{\nu} (w_{\gamma 1 k} + w_{\gamma 2 k})\log(p_k)|u_k - r_k|\right) \\
 %	& \quad + \frac{1}{2}\left(\frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon_1 \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
 %	&\quad\quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_1 k}\log(p_k)|u_k - r_k| \right) + \\
-	& \quad + \frac{1}{2}\left(w_{\varepsilon 2} \frac{b}{[L:\mathbb{Q}]} \max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\}\right. \\
-	& \quad \quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma 2 k}\log(p_k)|u_k - r_k|\right) \\
 %	&\quad + \frac{1}{2}\left(\frac{1}{[L:\mathbb{Q}]}\sum_{\sigma :L \to \mathbb{C}} w_{\varepsilon_2 \sigma}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
 %	&\quad\quad \left.+ \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma_2 k}\log(p_k)|u_k - r_k| \right) \\
-	& = \frac{1}{2} + (w_{\varepsilon 1} + w_{\varepsilon_2})\frac{b}{2[L:\mathbb{Q}]}\max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} + \\
-	& \quad + |u_1 - r_1|\left( \frac{(w_{\gamma 1 1} + w_{\gamma 2 1})}{2[K:\mathbb{Q}]}\log(p_1) + \frac{1}{2}\sum_{i=1}^{\nu}|\overline{a}_{i1}|\right) + \cdots \\
-	& \quad + |u_{\nu} - r_{\nu}|\left( \frac{(w_{\gamma 1 {\nu}} + w_{\gamma 2 {\nu}})}{2[K:\mathbb{Q}]}\log(p_{\nu}) + \frac{1}{2}\sum_{i=1}^{\nu}|\overline{a}_{i{\nu}}|\right). 
+	& \leq \frac{1}{2} + \frac{(w_{\varepsilon 1} + w_{\varepsilon_2})}{2}\max_{w :L \to \mathbb{C}} \log^+|w(z)| + \\
+	& \quad + \log(p_1)|u_1 - r_1|\left( \frac{(w_{\gamma 1 1} + w_{\gamma 2 1})}{2} + \frac{1}{2\log(p_1)}\sum_{i=1}^{\nu}|\overline{a}_{i1}|\right) + \cdots \\
+	& \quad + \log(p_{\nu})|u_{\nu} - r_{\nu}|\left( \frac{(w_{\gamma 1 {\nu}} + w_{\gamma 2 {\nu}})}{2} + \frac{1}{2\log(p_{\nu})}\sum_{i=1}^{\nu}|\overline{a}_{i{\nu}}|\right). 
 \end{align*}
-Altogether, we have
-\begin{align*}
-& |\alpha-c\Lambda_\tau| \\
-	& \quad \leq \frac{1}{2} + \frac{b}{2[L:\mathbb{Q}]}(w_{\varepsilon 1} + w_{\varepsilon 2})\max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	& \quad \quad+ \frac{1}{2[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} \log(p_k)|u_k - r_k|\left( (w_{\gamma 1 k} + w_{\gamma 2 k}) + \frac{[K:\mathbb{Q}]}{\log(p_k)}\sum_{i=1}^{\nu}|\overline{a}_{ik}|\right).
-\end{align*}
-Finally, using the notation of \eqref{eq:wsigma}, this inequality reduces to
-\begin{align*}
-|\alpha-c\Lambda_\tau|
-	& \leq \frac{1}{2} + \frac{b}{2[L:\mathbb{Q}]} w_{\varepsilon}\max_{\sigma :L \to \mathbb{C}}\log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \\
-	&\quad\quad + \frac{1}{2[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l|.
-\end{align*}
+In the notation of \eqref{eq:wsigma}, this inequality reduces to
+\[|\alpha_{\tau}-c\Lambda_\tau| \leq \frac{1}{2} + w_{\eps} \max_{w :L \to \mathbb{C}}\log^+|w(z)| + \sum_{l = 1}^{\nu}w_{\gamma l} \log(p_l)|u_l - r_l|.\]
 
 Now the following upper bound for $|\Lambda_\tau|$ implies the statement. On using power series definition of exponential function, we obtain $$\Lambda_\tau(1+\sum_{n\geq 2} (\Lambda_\tau)^{n-1}/n!)=\Lambda_\tau+\sum_{n\geq 2} (\Lambda_\tau)^n/n!=e^{\Lambda_\tau}-1=\tau(\lambda).$$
 If $\Lambda_\tau\geq 0$ then $1+\sum_{n\geq 2} (\Lambda_\tau)^{n-1}/n!>1$ which implies that $|\Lambda_\tau|\leq |\tau(\lambda)|.$ Suppose now that $\Lambda_\tau<0$. Our assumption $h_{\tau}(z)\geq \log^+ (2|\lambda_0|)$ means that $|\tau(\lambda)|\leq 1/2$ and thus $|\Lambda_\tau|=-\log (\tau(\lambda)+1)\leq -\log(1/2)=\log 2.$ Therefore, the absolute value of $\sum_{n\geq 2} (\Lambda_\tau)^{n-1}/n!$ is at most $$\sum_{n\geq 2} |\Lambda_\tau|^{n-1}/n!=\sum_{n\geq 1} |\Lambda_\tau|^{n}/(n+1)!\leq \tfrac{1}{2}\sum_{n\geq 1} |\Lambda_\tau|^{n}/n!\leq
@@ -709,12 +553,8 @@ and thus
 $$|\Lambda_\tau|\leq \kappa_\tau|\tau(x)|, \quad \kappa_\tau=\tfrac{1}{1-k_N}|\tau(\lambda_0)|,  \quad c_\tau=\log^+(2|\lambda_0|).$$
 The constant $\kappa_\tau$ depends on $N$ which can be taken arbitrarily as long as $N\geq 2$ is even. Further, the value $k_N$ can be slightly improved when one finds the maximum of the functions $x^{n-1}(\tfrac{x}{n+1}-1)$ on the interval $[0,\log 2]$ for each even $n\geq 2$. This is our reason for taking $\kappa_{\tau} = \frac{3}{2}$. Currently this is not the optimal choice of $\kappa_{\tau}$, but it suffices for our present case. 
 
-Finally, we now have
-\begin{align*}
-& \left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right| \\
-	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{b}{[L:\mathbb{Q}]}w_{\varepsilon}\max_{\sigma :L \to \mathbb{C}} \log^+ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right| \right)\\
-	&\quad\quad + \left(\frac{1}{2} + c\kappa_{\tau}e^{-h_{\tau}\left(\frac{\delta_2}{\lambda}\right)}\right).
-\end{align*} 
+Finally, we have
+\[|\alpha_{\tau}| \leq \frac{1}{2} + w_{\eps} \max_{w :L \to \mathbb{C}}\log^+|w(z)| + \sum_{l = 1}^{\nu}w_{\gamma l} \log(p_l)|u_l - r_l| + c\kappa_{\tau}e^{-h_{\tau}(z)}.\]
 
 %
 %If $v=p$ then Lemma~\ref{} gives optimal $c_v$ and $\kappa_v$. In the real case, if $v=\tau:L\to \mathbb{C}$ then we can take $\kappa_\tau$ as defined in \eqref{} and $c_v=\log 2$.
@@ -736,27 +576,22 @@ Finally, we now have
 
 To summarize the results of this section, let $\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}$ be any solution of \eqref{eq:EfficientSunit} with corresponding vector $\mathbf{n} = (n_1, \dots, n_{\nu})$. Take $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu+m}$ such that $\mathbf{0} \leq \mathbf{l} \leq \mathbf{h}$ and suppose $h_v(z)\leq h_v$ for all $v\in S^*$. By Lemma~\ref{lem:boundqf}, we deduce
 \begin{equation} \label{def:bbound}
-\log(2)^2q_f(\mathbf{n}) \leq \sum_{k = 1}^{\nu} \log(p_k)^2|u_k -r_k|^2 \leq \sum_{k = 1}^{\nu} h_k^2=:b.
+q_f(\mathbf{n}) \leq \frac{1}{\log(2)^2}\sum_{k = 1}^{\nu} \log(p_k)^2|u_k -r_k|^2 \leq \frac{1}{\log(2)^2}\sum_{k = 1}^{\nu} h_k^2=:b_{\gamma}.
 \end{equation}
+
 For $l = 1, 2$, Lemma~\ref{lem:mepsbound} gives us
 \begin{align}\label{def:bepsbound}
-|a_l|^2 &\leq \left(\frac{b}{[L:\mathbb{Q}]}w_{\varepsilon l}\max_{\sigma :L \to \mathbb{C}} \log \max \left\{ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right|, 1\right\} \right.\\
-	& \quad \quad+ \left. \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|\right)^2\\
-	&\leq \left( \frac{1}{[K:\mathbb{Q}]}\sum_{k = 1}^{\nu} w_{\gamma l k}h_k + \frac{b}{[K:\mathbb{Q}]}w_{\varepsilon l}\max_{\sigma:L\to \mathbb{C}} h_{\sigma}\right)^2 =: b_{\eps_l}.
+|a_l|^2 &\leq \left(w_{\eps l}\max_{w:L \to \mathbb{C}} \log^+|w(z)| + \sum_{k = 1}^{\nu} w_{\gamma l k}\log(p_k)|u_k - r_k|\right)^2\\
+	&\leq \left([L:K]w_{\eps l}\max_{w:L \to \mathbb{C}} h_w + \sum_{k = 1}^{\nu} w_{\gamma l k}h_k\right)^2 =: b_{\eps_l}.
 \end{align}
 Finally, suppose in addition that
-\[h_{\tau}\left(\frac{\delta_2}{\lambda}\right) \geq l_{\tau} > c_{\tau}.\]
+\[h_{\tau}(z) \geq l_{\tau} > c_{\tau}.\]
 Then by Lemma~\ref{lem:archellest}, we obtain
-\begin{align*}
-& \left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right| \\
-	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l \log(p_l)|u_l - r_l| + \frac{b}{[L:\mathbb{Q}]}w_{\varepsilon}\max_{\sigma :L \to \mathbb{C}} \log^+ \left|\sigma\left(\frac{\delta_2}{\lambda}\right)\right| \right)\\
-	&\quad\quad + \left(\frac{1}{2} + c\kappa_{\tau}e^{-h_{\tau}\left(\frac{\delta_2}{\lambda}\right)}\right)\\
-	& \quad \leq \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{b}{[K:\mathbb{Q}]}w_{\eps}\max_{\sigma :L \to \mathbb{C}}h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}, 
-\end{align*} 
-and we set
-\begin{equation} \label{def:bepstarbound}
-b_{\eps_l^*}:= \frac{1}{2}\left(\frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu}w_l h_l + \frac{b}{[K:\mathbb{Q}]}w_{\varepsilon}\sum_{\sigma :L \to \mathbb{C}} h_{\sigma} \right) + \frac{1}{2} + c\kappa_{\tau}e^{-l_{\tau}}.
-\end{equation}
+\begin{align} \label{def:bepstarbound}
+& \left|\alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right|^2 \\
+	& \quad \leq \left(\frac{1}{2} + w_{\eps} \max_{w :L \to \mathbb{C}}\log^+|w(z)| + \sum_{k = 1}^{\nu}w_{\gamma k} \log(p_k)|u_k - r_k| + c\kappa_{\tau}e^{-h_{\tau}(z)}\right)^2\\
+	& \quad \leq \left(\frac{1}{2} + [L:K]w_{\eps} \max_{w :L \to \mathbb{C}}h_w + \sum_{k = 1}^{\nu}w_{\gamma k} h_k + c\kappa_{\tau}e^{-l_{\tau}}\right)^2 =:b_{\eps_l^*}.
+\end{align} 
 
 It is of particular importance to note that the assumptions $h_{\tau}(z) \geq l_{\tau}$ and  $h_v(z)\leq h_v$ for all $v\in S^*$ are not arbitrary. Indeed, for the vectors $\mathbf{l}, \mathbf{h}$, these conditions imply precisely that $(\tilde{x},\tilde{y}) \in \Sigma_{\tau}(\mathbf{l}, \mathbf{h})$, where $(\tilde{x},\tilde{y})$ are solutions to \eqref{eq:EfficientSunit} corresponding to $\mathbf{m}$.
 
@@ -800,9 +635,9 @@ Let
 \[\mathbf{x} = (x_1, \dots, x_{\nu}, x_{\varepsilon_1}, \dots, x_{\varepsilon_{r}}) \in \mathbb{R}^{\nu + r}.\]
 Then we define the ellipsoid $\mathcal{E_\tau}\subseteq \mathbb{R}^{r+\nu}$ by
 \begin{align}\label{def:ellreal}
-& \mathcal{E_\tau}=\{q_\tau(\mathbf{x})\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}); \ \mathbf{x}\in\mathbb{R}^{r+\nu}\}\end{align}
+& \mathcal{E_\tau}=\{q_\tau(\mathbf{x})\leq (1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r}); \ \mathbf{x}\in\mathbb{R}^{r+\nu}\}\end{align}
 where
-\[q_{\tau}(\mathbf{x})= (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\]
+\[q_{\tau}(\mathbf{x})= (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^r\frac{b_{\gamma}}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\]
 and
 \[q_f(\mathbf{y}) = (A\mathbf{y})^{\text{T}}D^2A\mathbf{y}.\]
 
@@ -810,20 +645,20 @@ We associate to this ellipsoid a matrix. More precisely, we let $M=M_\tau$ be th
 \begin{align*}
 M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
 	DA & 0 & \dots & 0 & 0\\
-	0 & \sqrt{\frac{b}{b_{\varepsilon 1}}} & \dots & 0 & 0\\
-	0 & 0  & \sqrt{\frac{b}{b_{\varepsilon 2}}} & \dots & 0\\
+	0 & \sqrt{\frac{b_{\gamma}}{b_{\varepsilon 1}}} & \dots & 0 & 0\\
+	0 & 0  & \sqrt{\frac{b_{\gamma}}{b_{\varepsilon 2}}} & \dots & 0\\
 	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & \sqrt{\frac{b}{b_{\varepsilon^*}}} \\
+	0 & 0 & \dots & \dots & \sqrt{\frac{b_{\gamma}}{b_{\varepsilon^*}}} \\
 	\end{pmatrix}.
 \end{align*}	
 Note that we never need to compute $M$, but rather $M^TM$ so that we only ever work with integral matrices. In this case, 
 \begin{align*}
 M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
 	A^TD^2A & 0 & \dots & 0 & 0\\
-	0 & \frac{b}{b_{\varepsilon 1}} & \dots & 0 & 0\\
-	0 & 0  & \frac{b}{b_{\varepsilon 2}} & \dots & 0\\
+	0 & \frac{b_{\gamma}}{b_{\varepsilon 1}} & \dots & 0 & 0\\
+	0 & 0  & \frac{b_{\gamma}}{b_{\varepsilon 2}} & \dots & 0\\
 	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & \frac{b}{b_{\varepsilon^*}} \\
+	0 & 0 & \dots & \dots & \frac{b_{\gamma}}{b_{\varepsilon^*}} \\
 	\end{pmatrix}.
 \end{align*}	
 
@@ -835,13 +670,13 @@ M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
 
 We now restrict our attention to those $p_v \in \{p_1, \dots, p_{\nu}\}$ and define the corresponding ellipsoid. As before, let $\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \nu}$ be any solution of \eqref{eq:EfficientSunit} with corresponding vector $\mathbf{n} = (n_1, \dots, n_{\nu})$. Take $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu+m}$ such that $\mathbf{0} \leq \mathbf{l} \leq \mathbf{h}$ and suppose $h_v(z)\leq h_v$ for all $v\in S^*$. 
 
-Now, Lemma~\ref{lem:boundqf} and Lemma~\ref{lem:mepsbound} still hold here. In particular, we let $b$, $b_{\eps_l}$ be defined as in \eqref{def:bbound} and \eqref{def:bepsbound}, respectively, where $l = 1, \dots, r$. We do not distinguish any $\varepsilon_l^*$. Instead, we will see later that the condition $h_{v}(z) \geq l_{v}$ corresponding to the set $\Sigma_v(\mathbf{l}, \mathbf{h})$ will be used elsewhere. 
+Now, Lemma~\ref{lem:boundqf} and Lemma~\ref{lem:mepsbound} still hold here. In particular, we let $b_{\gamma}$, $b_{\eps_l}$ be defined as in \eqref{def:bbound} and \eqref{def:bepsbound}, respectively, where $l = 1, \dots, r$. We do not distinguish any $\varepsilon_l^*$. Instead, we will see later that the condition $h_{v}(z) \geq l_{v}$ corresponding to the set $\Sigma_v(\mathbf{l}, \mathbf{h})$ will be used elsewhere. 
 
 We define the ellipsoid $\mathcal{E}_v \subseteq \mathbb{R}^{\nu + r}$ by 
 \begin{align}\label{def:ellp}
-& \mathcal{E}_v=\{q_l(\mathbf{x})\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}); \ \mathbf{x}\in\mathbb{R}^{r+\nu}\},\end{align}
+& \mathcal{E}_v=\{q_v(\mathbf{x})\leq (1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r}); \ \mathbf{x}\in\mathbb{R}^{r+\nu}\},\end{align}
 where
-\[q_v(\mathbf{x})= (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\]
+\[q_v(\mathbf{x})= (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(x_1, \dots, x_{\nu}) + \sum_{i = 1}^r\frac{b_{\gamma}}{b_{\varepsilon_i}}x_{\varepsilon_i}^2\right)\]
 and
 \[q_f(\mathbf{y}) = (A\mathbf{y})^{\text{T}}D^2A\mathbf{y}.\]
 
@@ -849,20 +684,20 @@ Similar to the Archimedean case, we let $M=M_v$ be the matrix defining the ellip
 \begin{align*}
 M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
 	DA & 0 & \dots & 0 & 0\\
-	0 & \sqrt{\frac{b}{b_{\varepsilon 1}}} & \dots & 0 & 0\\
-	0 & 0  & \sqrt{\frac{b}{b_{\varepsilon 2}}} & \dots & 0\\
+	0 & \sqrt{\frac{b_{\gamma}}{b_{\varepsilon 1}}} & \dots & 0 & 0\\
+	0 & 0  & \sqrt{\frac{b_{\gamma}}{b_{\varepsilon 2}}} & \dots & 0\\
 	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & \sqrt{\frac{b}{b_{\varepsilon}}} \\
+	0 & 0 & \dots & \dots & \sqrt{\frac{b_{\gamma}}{b_{\varepsilon}}} \\
 	\end{pmatrix}.
 \end{align*}	
 As before, we never need to compute $M$, but rather $M^TM$ so that we only ever work with integral matrices. In this case, 
 \begin{align*}
 M^TM &= b_{\varepsilon_1}\cdots b_{\varepsilon_r}\begin{pmatrix}
 	A^TD^2A & 0 & \dots & 0 & 0\\
-	0 & \frac{b}{b_{\varepsilon 1}} & \dots & 0 & 0\\
-	0 & 0  & \frac{b}{b_{\varepsilon 2}} & \dots & 0\\
+	0 & \frac{b_{\gamma}}{b_{\varepsilon 1}} & \dots & 0 & 0\\
+	0 & 0  & \frac{b_{\gamma}}{b_{\varepsilon 2}} & \dots & 0\\
 	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & \frac{b}{b_{\varepsilon}} \\
+	0 & 0 & \dots & \dots & \frac{b_{\gamma}}{b_{\varepsilon}} \\
 	\end{pmatrix}.
 \end{align*}	
 
@@ -898,14 +733,14 @@ Let ${\mathbf{m} = (n_1, \dots, n_{\nu}, a_1, \dots, a_r) \in \mathbb{R}^{r + \n
 \begin{proof}
 Let 
 \[\mathbf{y} = \left(n_1, \dots, n_{\nu}, a_1, \dots, a_{r-1}, \alpha_0+\sum_{i = 1}^r a_i \alpha_{\varepsilon i} + \sum_{i = 1}^{\nu} n_i \alpha_{\gamma i}\right).\]
-Then $\mathbf{y} \in \Gamma_\tau$ and \eqref{def:bepstarbound} implies that $y_{\eps_l^*}^2\leq b_{\eps_l^*}$. Further $q_f(y_1, \dots, y_{\nu})\leq b$ by \eqref{def:bbound} and \eqref{def:bepsbound} provides that $y_{\eps_l}^2\leq b_{\eps_l}$ for $l = 1, \dots, r$ with $\eps_l \neq \eps_l^*$. It follows that 
-\[q_\tau(\mathbf{y}) = (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(y_1, \dots, y_{\nu}) + \sum_{i = 1}^r\frac{b}{b_{\varepsilon_i}}y_{\varepsilon_i}^2\right) \leq (1+r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+Then $\mathbf{y} \in \Gamma_\tau$ and \eqref{def:bepstarbound} implies that $y_{\eps_l^*}^2\leq b_{\eps_l^*}$. Further $q_f(y_1, \dots, y_{\nu})\leq b_{\gamma}$ by \eqref{def:bbound} and \eqref{def:bepsbound} provides that $y_{\eps_l}^2\leq b_{\eps_l}$ for $l = 1, \dots, r$ with $\eps_l \neq \eps_l^*$. It follows that 
+\[q_\tau(\mathbf{y}) = (b_{\varepsilon_1}\cdots b_{\varepsilon_r})\left( q_f(y_1, \dots, y_{\nu}) + \sum_{i = 1}^r\frac{b_{\gamma}}{b_{\varepsilon_i}}y_{\varepsilon_i}^2\right) \leq (1+r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
 This proves that $\mathbf{y}\in\mathcal E_\tau$ and hence the statement follows.
 \end{proof}
 %
 We now explicitly determine $ \Gamma_\tau\cap \mathcal E_\tau$. Suppose that $\mathbf{y}\in \Gamma_\tau\cap \mathcal E_\tau$. Let $M=M_\tau$ be the matrix defining the ellipsoid $\mathcal{E}_{\tau}$. 	
-Since $\mathbf{y}\in \Gamma_\tau\cap \mathcal E_\tau$, there exists $\mathbf{x}\in \mathbb{R}^{r + \nu}$ such that $\mathbf{y}= A_\tau \mathbf{x}+\mathbf{w}$ and ${\mathbf{y}^tM^tM\mathbf{y}\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})}$. We thus have
-\[(A_\tau \mathbf{x}+\mathbf{w})^tM^tM(A_\tau \mathbf{x}+\mathbf{w}) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+Since $\mathbf{y}\in \Gamma_\tau\cap \mathcal E_\tau$, there exists $\mathbf{x}\in \mathbb{R}^{r + \nu}$ such that $\mathbf{y}= A_\tau \mathbf{x}+\mathbf{w}$ and ${\mathbf{y}^tM^tM\mathbf{y}\leq (1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r})}$. We thus have
+\[(A_\tau \mathbf{x}+\mathbf{w})^tM^tM(A_\tau \mathbf{x}+\mathbf{w}) \leq (1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
 As $A_{\tau}$ is clearly invertible, with matrix inverse
 \[A_{\tau}^{-1} = \begin{pmatrix}
 	1 & 0 & \dots &  \dots & 0 & 0\\ 
@@ -920,14 +755,14 @@ we can find a vector $\mathbf{c}$ such that $A_{\tau}\mathbf{c} = -\mathbf{w}$. 
 \end{pmatrix}.\]
 Now, 
 \begin{align*}
-(1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})
+(1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r})
 	& \geq (A_\tau \mathbf{x}+\mathbf{w})^tM^tM(A_\tau \mathbf{x}+\mathbf{w}) \\
 	& = (A_\tau (\mathbf{x}-\mathbf{c}))^TM^TM(A_\tau (\mathbf{x}-\mathbf{c}))\\
 	& = (\mathbf{x}-\mathbf{c})^T(MA_{\tau})^TMA_\tau(\mathbf{x}-\mathbf{c})\\
 	& = (\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c})
 \end{align*}
 where $B = MA_\tau$. That is, we are left to solve
-\[(\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c}) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+\[(\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c}) \leq (1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
 Now, finding all vectors satisfying this inequality amounts to computing all solutions to \eqref{eq:EfficientSunit} contained in $\Sigma_{\tau}(\mathbf{l}, \mathbf{h})$. The set of vectors $\mathbf{x}$ can be found using the Fincke-Pohst algorithm outlined in \autoref{subsec:FinckePohst}. 
 %Here we observe that the vector $c$ is likely not an integral vector; that is, $-\frac{\alpha_0}{\alpha_{\varepsilon r}} \notin \mathbb{Z}$. To amend this, we modify the bound as follows
 %\begin{align*}
@@ -937,6 +772,14 @@ Now, finding all vectors satisfying this inequality amounts to computing all sol
 %\end{align*}
 %where $d = (0 \dots 0 -\alpha_0)$ and $z = \alpha_{\varepsilon r}x$. 
 %Is this necessary? Our thing should work over the rationals regardless
+
+
+%\subsection{Computational Remark}
+%\textcolor{blue}{We only need to do 3 automorphisms in the sieve because the other ones cancel out NEED TO ADD DETAILS HERE
+%\begin{itemize}
+%\item also need to match notation of non-archimedean case to archimedean
+%\end{itemize}
+%}
 
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
@@ -1169,14 +1012,12 @@ is equivalent to showing that
 Of course, this latter inequality is true by assumption. Thus $\lambda \in \mathbb{Z}$. 
 
 Then, computing $A_{v}\mathbf{x} + \mathbf{w}$ yields
-\begin{align*}
- A_{v}\mathbf{x} + \mathbf{w} &
-& = \begin{pmatrix}
+\[A_{v}\mathbf{x} + \mathbf{w} 
+ = \begin{pmatrix}
 b_2 \\ \vdots \\ b_{\hat{i} -1} \\ 
  b^* \\
 b_{\hat{i} +1} \\ \vdots \\ b_{\nu+r+1} \\
-\end{pmatrix},
-\end{align*}
+\end{pmatrix},\]
 where 
 \[b^* =b_2\beta_2^{\{\mu\}} + \cdots + b_{\hat{i} - 1}\beta_{\hat{i} - 1}^{\{\mu\}} + \lambda p_l^{\mu} + b_{\hat{i} + 1}\beta_{\hat{i} + 1}^{\{\mu\}} + \cdots + b_{\nu+r+ 1}\beta_{1+\nu+r}^{\{\mu\}} + \beta_1^{\{\mu\}}.\]
 Now, 
@@ -1328,14 +1169,14 @@ Finally, suppose that $\mathbf{y}\in \Gamma_v\cap \mathcal E_v$. Let $M=M_v$ be 
 \begin{align*}
 M &=\sqrt{b_{\varepsilon_1}\cdots b_{\varepsilon_r}}\begin{pmatrix}
 	DA & 0 & \dots & 0 & 0\\
-	0 & \sqrt{\frac{b}{b_{\varepsilon 1}}} & \dots & 0 & 0\\
-	0 & 0  & \sqrt{\frac{b}{b_{\varepsilon 2}}} & \dots & 0\\
+	0 & \sqrt{\frac{b_{\gamma}}{b_{\varepsilon 1}}} & \dots & 0 & 0\\
+	0 & 0  & \sqrt{\frac{b_{\gamma}}{b_{\varepsilon 2}}} & \dots & 0\\
 	\vdots & \vdots &0 &  \ddots & \vdots\\ 
-	0 & 0 & \dots & \dots & \sqrt{\frac{b}{b_{\varepsilon}}} \\
+	0 & 0 & \dots & \dots & \sqrt{\frac{b_{\gamma}}{b_{\varepsilon}}} \\
 	\end{pmatrix}.
 \end{align*}	
-Recall that $A_{v}\mathbf{x} + \mathbf{w}$ defines the lattice $\Gamma_v$. In particular, since $\mathbf{y}\in \Gamma_v\cap \mathcal E_v$, there exists $\mathbf{x}\in \mathbb{R}^{r + \nu}$ such that $\mathbf{y}=A_v \mathbf{x}+\mathbf{w}$ and ${\mathbf{y}^TM^TM\mathbf{y}\leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})}$. We thus have
-\[(A_v \mathbf{x}+\mathbf{w})^TM^TM(A_v \mathbf{x}+\mathbf{w}) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+Recall that $A_{v}\mathbf{x} + \mathbf{w}$ defines the lattice $\Gamma_v$. In particular, since $\mathbf{y}\in \Gamma_v\cap \mathcal E_v$, there exists $\mathbf{x}\in \mathbb{R}^{r + \nu}$ such that $\mathbf{y}=A_v \mathbf{x}+\mathbf{w}$ and ${\mathbf{y}^TM^TM\mathbf{y}\leq (1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r})}$. We thus have
+\[(A_v \mathbf{x}+\mathbf{w})^TM^TM(A_v \mathbf{x}+\mathbf{w}) \leq (1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
 As $A_{v}$ is clearly invertible, with matrix inverse
 \[A_{v}^{-1} = \begin{pmatrix}
 1	& 		&		&		&		&		&	\\
@@ -1352,14 +1193,14 @@ we can find a vector $\mathbf{c}$ such that $A_{v}\mathbf{c} = -\mathbf{w}$. Ind
 \end{pmatrix}.\]
 Now, 
 \begin{align*}
-(1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r})
+(1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r})
 	& \geq (A_v \mathbf{x}+\mathbf{w})^TM^TM(A_v \mathbf{x}+\mathbf{w}) \\
 	& = (A_v \mathbf{x}-A_v\mathbf{c})^TM^TM(A_v \mathbf{x}-A_v\mathbf{c})\\
 	& = (\mathbf{x}-\mathbf{c})^T(MA_v)^TMA_v(\mathbf{x}-\mathbf{c})\\
 	& = (\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c})
 \end{align*}
 where $B = MA_v$. That is, we are left to solve
-\[(\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c}) \leq (1 + r)(bb_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
+\[(\mathbf{x}-\mathbf{c})^TB^TB(\mathbf{x}-\mathbf{c}) \leq (1 + r)(b_{\gamma}b_{\varepsilon_1}\cdots b_{\varepsilon_r}).\]
 As in \autoref{sec:archsieve} finding all vectors satisfying this inequality amounts to computing all solutions to \eqref{eq:EfficientSunit} contained in $\Sigma_{v}(\mathbf{l}, \mathbf{h})$. The set of vectors $\mathbf{x}$ can be found using the Fincke-Pohst algorithm outlined in \autoref{subsec:FinckePohst}. 
  
 %---------------------------------------------------------------------------------------------------------------------------------------------%
