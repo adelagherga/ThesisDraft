@@ -1,7 +1,7 @@
 \beamer@sectionintoc {1}{Thue-Mahler equations}{2}{0}{1}
-\beamer@sectionintoc {2}{Elliptic Curves}{18}{0}{2}
-\beamer@sectionintoc {3}{Computing Elliptic Curves}{28}{0}{3}
-\beamer@sectionintoc {4}{Applying the Thue-Mahler solver}{49}{0}{4}
+\beamer@sectionintoc {2}{Elliptic Curves}{21}{0}{2}
+\beamer@sectionintoc {3}{Computing Elliptic Curves}{31}{0}{3}
+\beamer@sectionintoc {4}{Applying the Thue-Mahler solver}{52}{0}{4}
 \beamer@sectionintoc {5}{Algorithms for solving Thue-Mahler equations}{55}{0}{5}
-\beamer@sectionintoc {6}{Refined algorithms for solving Thue-Mahler equations}{93}{0}{6}
-\beamer@sectionintoc {7}{Current Ideas and Future Work}{115}{0}{7}
+\beamer@sectionintoc {6}{Refined algorithms for solving Thue-Mahler equations}{89}{0}{6}
+\beamer@sectionintoc {7}{Current Ideas and Future Work}{112}{0}{7}

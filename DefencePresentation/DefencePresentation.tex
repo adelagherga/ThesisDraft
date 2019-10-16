@@ -108,11 +108,15 @@
 \begin{frame}[fragile]{A definition}
 
 \begin{itemize}
-\item<1-2> Let $S = \{p_1, \dots, p_v\}$ be a set of rational primes
-\item<2-2> A \textit{Thue-Mahler equation} is a Diophantine equations of the form
-\[F(x,y) = c_0x^n + c_1x^{n-1}y + \dots + c_{n-1}xy^{n-1} + c_ny^n = u,\]
-where $u$ is an \textit{$S$-unit} 
-
+\item<1-> Let $S = \{p_1, \dots, p_v\}$ be a set of prime numbers
+\item<2-> A \textit{Thue-Mahler equation} is a Diophantine equations of the form
+\[F(x,y) = ap_1^{z_1}\cdots p_v^{z_v}\]
+where
+\begin{itemize}
+\item<3-> $F(x,y) = c_0x^n + c_1x^{n-1}y + \dots + c_{n-1}xy^{n-1} + c_ny^n$
+\item<4-> $a$ is a fixed integer
+\item<5-> $x,y,z_1, \dots, z_v$ are unknown integers
+\end{itemize}
 % where F is a given binary form of degree at least $3$ and $u$ is an \textit{$S$-unit} 
 % that is, an integer whose prime factors all lie in S
 
@@ -127,7 +131,7 @@ where $u$ is an \textit{$S$-unit}
 \begin{frame}[fragile]{Our main objective}
 
 \centering
-Given $S$ and $F$, find all solutions $(x,y)$ satisfying $F(x,y) = u$
+Given $S,F$ and $a$, find all solutions $(x,y,z_1, \dots, z_v)$ satisfying $F(x,y) = ap_1^{z_1}\cdots p_v^{z_v}$
 
 \end{frame}
 
@@ -139,7 +143,7 @@ Why?
 \pause
 
 \begin{itemize}
-\item<2-> Compute elliptic curves over $\mathbb{Q}$ 
+\item<2-> Compute elliptic curves
 \item<3-> Solve other Diophantine equations
 \item<4-> At least $4$ people heard about this project and emailed me asking for solutions to very specific Thue-Mahler equations
 \end{itemize}
@@ -165,11 +169,28 @@ Is this even possible?
 % meaning that it provides no means to find the solutions to a TM equation
 \item<4-> \textbf{Sprind\u zuk, Vinogradov, Coates (1968/1969)}:  An effective method exists to bound the number of solutions
 % In 1968, a method was introduced by Baker to bound the number of solutions of a Thue equation. Generalizing Baker's ground-breaking result, Sprind\u zuk and Vinogradov \cite{SpVi} and Coates \cite{Coa} proved that the solutions could, at least in principal, be effectively determined
-\item<5-> \textbf{ Tzanakis, de Weger (1989)}: A practical method for solving the general Thue-Mahler equation
+\item<5-> \textbf{Tzanakis, de Weger (1989)}: A practical method for solving the general Thue-Mahler equation
 % The first practical method for solving the general Thue-Mahler equation over $\mathbb{Z}$ is attributed to Tzanakis and de Weger 
 \item<6-> \textbf{Hambrook (2011)}: Implementation of a Thue-Mahler solver
 \end{itemize}
 \end{frame}
+
+%%---------------------------------------------------------------------------------------------------------------------------------------------%
+%
+%\begin{frame}[fragile]{Our main result}
+%
+%Improved runtime!
+%\pause
+%
+%\[F(x,y) = x^3 + 23x^2y + 17xy^2 + 2y^3 = 2^{z_1}\cdot3^{z_2}\cdot5^{z_3}\cdot7^{z_4}\cdot41^{z_5}\]
+%\begin{itemize}
+%
+%\item <3-> \textbf{Tzanakis, de Weger: } 100 hours
+%\item <3-> \textbf{Hambrook: } 687 seconds
+%\item <4-> \textbf{Our new time: } 161 seconds*
+%
+%\end{itemize}
+%\end{frame}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
@@ -178,7 +199,7 @@ Is this even possible?
 Why?
 
 \begin{itemize}
-\item<1-2> Compute elliptic curves over $\mathbb{Q}$ 
+\item<1-2> Compute elliptic curves
 \item<1> Solve other Diophantine equations
 \item<1> At least $4$ people heard about this project and emailed me asking for solutions to very specific Thue-Mahler equations
 \end{itemize}
@@ -199,8 +220,8 @@ Why?
 \item<1-> An \textit{elliptic curve} is a nonsingular curve defined by
 \[E: y^2 = x^3 + ax + b\]
 \item<2-> A curve is nonsingular $\iff \Delta_E = 4a^3 + 27b^2 \neq 0$. 
-\item<3-> Together with the point ``at infinity'', the set of points on $E$ form a group
-\[E = \{ (x,y) \ : y^2 = x^3 + ax + b\} \cup \{\mathcal{O}\}.\]
+%\item<3-> Together with the point ``at infinity'', the set of points on $E$ form a group
+%\[E = \{ (x,y) \ : y^2 = x^3 + ax + b\} \cup \{\infty\}.\]
 \end{itemize}
 
 % if we consider only those points of E for which x,y in Q we obtain a subgroup of E
@@ -212,6 +233,7 @@ Why?
 
 \begin{frame}[fragile]{Visualizing subgroups of $E$}
 
+\pause
 \begin{center}
 \pgfplotsset{ticks=none}
 \begin{tikzpicture}[onslide=<1->]
@@ -288,7 +310,7 @@ Why?
 \frametitle{Good and bad reduction}
 
 \begin{itemize}
-\item Reducing the coefficients of $E$ modulo $p$ yields a cubic $\tilde{E}$ over $\mathbb{F}_p$
+\item Reducing the coefficients of $E$ modulo $p$ yields a cubic $\tilde{E}$
 \item<2-> If $\Delta_{\tilde{E}} \neq 0$ then we say that $E$ has \textit{good reduction} at $p$
 % If $\tilde{E}$ is nonsingular, then it is an elliptic curve over $\mathbf{F}_p$
 \item<3-> If $\Delta_{\tilde{E}} = 0$ then we say that $E$ has \textit{bad reduction} at $p$
@@ -308,11 +330,32 @@ Why?
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
-\begin{frame}[fragile]{Shafarevich's theorem}
+\begin{frame}[fragile]{Some history}
 
 \begin{itemize}
-\item<1-> Let $S$ be a finite set of rational primes
-\item<2-> \textbf{Shafarevich (1963)}: There are at most finitely many elliptic curves over $\mathbb{Q}$ having good reduction outside $S$
+\item<1-> \textbf{Shafarevich (1963)}: There are at most finitely many elliptic curves having good reduction outside $S = \{p_1, \dots, p_v\}$
+\item<2-> \textbf{Taniyama, Weil (1950s, 1960's)}: A conjecture about elliptic curves of conductor $N$
+
+% in the 1950’s and 1960’s, Taniyama and Weil asked whether all elliptic curves over Q of a given conductor N are related to modular functions.
+
+% While this conjecture is now known as the Modularity Theorem, until its proof in 2001, attempts to verify it sparked a large effort to tabulate all elliptic curves over Q of given conductor N.
+
+\begin{itemize}
+\item <3->$S = \{2\}$: Ogg ($1966$) 
+%determined all elliptic curves defined over $\mathbb{Q}$ with conductor of the form $2^a$. 
+
+\item <3->$S = \{2,3\}$: Coghlan ($1967$)
+%in his dissertation \cite{Coghlan}, studied the curves of conductor $2^a3^b$ independently of Ogg, 
+
+\item <3->$S = \{p\}$ for certain small primes $p$: Setzer ($1975$)
+%while Setzer \cite{Setzer} computed all $\mathbb{Q}$-isomorphism classes of elliptic curves of conductor $p$ for certain small primes $p$. 
+
+\item <3->$S = \{11\}$: Agrawal, Coates, Hunt, and van der Poorten ($1980$)
+%determined all elliptic curves of conductor $11$ defined over $\mathbb{Q}$ to verify the (then) conjecture of Taniyama-Weil for $N= 11$.
+
+\end{itemize}
+
+
 \end{itemize}
 
 \end{frame}
@@ -321,49 +364,54 @@ Why?
 
 % In $1963$ Shafarevich proved that there are at most finitely many $K$-isomorphism classes of elliptic curves defined over $K$ having good reduction outside $S$.
 
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile]{Our motivation}
-
-\centering
-Given $S$, find all such curves explicitly!
-
-% This is the question that ultimately leads us back to our primary objective of solving Thue-Mahler equations
-% Before we go into the details of how this is done and what the connection is to Thue-Mahler equations, let's ask the obvious question again: why?
-% Before we go into the details of how this is to be done, look at some historical data
-
-\end{frame}
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile]{Some history}
-
-\begin{itemize}
-\item <1-> Taniyama, Weil (1950s, 1960's): Are all $E/\mathbb{Q}$ of a given conductor $N$ related to modular functions?
-
-% in the 1950’s and 1960’s, Taniyama and Weil asked whether all elliptic curves over Q of a given conductor N are related to modular functions.
-
-% While this conjecture is now known as the Modularity Theorem, until its proof in 2001, attempts to verify it sparked a large effort to tabulate all elliptic curves over Q of given conductor N.
-
-\begin{itemize}
-\item <2->$S = \{2\}$: Ogg ($1966$) 
-%determined all elliptic curves defined over $\mathbb{Q}$ with conductor of the form $2^a$. 
-
-\item <2->$S = \{2,3\}$: Coghlan ($1967$)
-%in his dissertation \cite{Coghlan}, studied the curves of conductor $2^a3^b$ independently of Ogg, 
-
-\item <2->$S = \{p\}$ for certain small primes $p$: Setzer ($1975$)
-%while Setzer \cite{Setzer} computed all $\mathbb{Q}$-isomorphism classes of elliptic curves of conductor $p$ for certain small primes $p$. 
-
-\item <2->$S = \{11\}$: Agrawal, Coates, Hunt, and van der Poorten ($1980$)
-%determined all elliptic curves of conductor $11$ defined over $\mathbb{Q}$ to verify the (then) conjecture of Taniyama-Weil for $N= 11$.
-
-\end{itemize}
-\end{itemize}
 
 % All of these early attempts have much in common in that they often reduce the problem to one of solving a number of certain integral binary forms called Thue-Mahler equations. 
 
-\end{frame}
+
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%
+%\begin{frame}[fragile]{Our motivation}
+%
+%\centering
+%Given $S$, find all such curves explicitly!
+%
+%% This is the question that ultimately leads us back to our primary objective of solving Thue-Mahler equations
+%% Before we go into the details of how this is done and what the connection is to Thue-Mahler equations, let's ask the obvious question again: why?
+%% Before we go into the details of how this is to be done, look at some historical data
+%
+%\end{frame}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%
+%\begin{frame}[fragile]{Some history}
+%
+%\begin{itemize}
+%\item <1-> Taniyama, Weil (1950s, 1960's): Are all $E/\mathbb{Q}$ of a given conductor $N$ related to modular functions?
+%
+%% in the 1950’s and 1960’s, Taniyama and Weil asked whether all elliptic curves over Q of a given conductor N are related to modular functions.
+%
+%% While this conjecture is now known as the Modularity Theorem, until its proof in 2001, attempts to verify it sparked a large effort to tabulate all elliptic curves over Q of given conductor N.
+%
+%\begin{itemize}
+%\item <2->$S = \{2\}$: Ogg ($1966$) 
+%%determined all elliptic curves defined over $\mathbb{Q}$ with conductor of the form $2^a$. 
+%
+%\item <2->$S = \{2,3\}$: Coghlan ($1967$)
+%%in his dissertation \cite{Coghlan}, studied the curves of conductor $2^a3^b$ independently of Ogg, 
+%
+%\item <2->$S = \{p\}$ for certain small primes $p$: Setzer ($1975$)
+%%while Setzer \cite{Setzer} computed all $\mathbb{Q}$-isomorphism classes of elliptic curves of conductor $p$ for certain small primes $p$. 
+%
+%\item <2->$S = \{11\}$: Agrawal, Coates, Hunt, and van der Poorten ($1980$)
+%%determined all elliptic curves of conductor $11$ defined over $\mathbb{Q}$ to verify the (then) conjecture of Taniyama-Weil for $N= 11$.
+%
+%\end{itemize}
+%\end{itemize}
+%
+%% All of these early attempts have much in common in that they often reduce the problem to one of solving a number of certain integral binary forms called Thue-Mahler equations. 
+%
+%\end{frame}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
@@ -379,7 +427,7 @@ Given $S$, find all such curves explicitly!
 
 \begin{itemize}
 \item<1-> Subsequent methods rely on the Modularity Theorem
-\item<2-> All $E/\mathbb{Q}$ of conductor $N$ have been determined for
+\item<2-> All elliptic curves of conductor $N$ have been determined for
 
 \begin{itemize} \itemsep0em
 \item<3-> Antwerp IV ($1972$): $N \leq 200$
@@ -398,7 +446,7 @@ Given $S$, find all such curves explicitly!
 
 \begin{itemize}
 % More precisely, fix K and S
-\item<1-> Let $S = \{p_1, \dots, p_v\}$ be a set of rational primes 
+%\item<1-> Let $S = \{p_1, \dots, p_v\}$ be a set of prime numbers
 
 % In the 1970's, Coates provided the first effective proof of Shafaravich’s Theorem, for the the special case K = Q and S = {2, 3}
 
@@ -406,9 +454,8 @@ Given $S$, find all such curves explicitly!
 
 % in that they often reduce the problem to one of solving a number of Thue-Mahler equations.
 
-\item<2-> Reduce problem to solving a number of Thue-Mahler equations 
-\[F(x,y) = c_0x^3 + c_1x^2y + c_2xy^2 + c_3y^3 = u\]
-
+\item<1-> Reduce problem to solving a number of Thue-Mahler equations 
+\[F(x,y) = c_0x^3 + c_1x^2y + c_2xy^2 + c_3y^3 = ap_1^{z_1}\cdots p_v^{z_v}\]
 
 % where F is a given binary form of degree at least $3$ and $u$ is an \textit{$S$-unit} 
 % that is, an integer whose prime factors all lie in S
@@ -419,8 +466,8 @@ Given $S$, find all such curves explicitly!
 %\item<3-> Implementation of a TM equation solver based on Tzanakis, de Weger
 %\end{itemize}
 
-\item<3> Goal: compute all curves over $\mathbb{Q}$ having conductor $N \leq 10^6$
-\item<4-> Ideal Goal: $N \leq 10^8$
+\item<2> Goal: compute all curves having conductor $N \leq 10^6$
+\item<3-> Ideal Goal: $N \leq 10^8$
 \end{itemize}
 
 % In our research, we have implemented a computer program which generates all elliptic curves over $K$ having good reduction outside $S$ and bounded conductor. 
@@ -573,11 +620,6 @@ and
 \end{frame}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\section{Applying the Thue-Mahler solver}
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
 
 \begin{frame}[fragile]{Representative forms: an example}
 
@@ -604,6 +646,11 @@ and
 % this might be worrisome, but how bad is it?
 
 \end{frame}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+%---------------------------------------------------------------------------------------------------------------------------------------------%
+
+\section{Applying the Thue-Mahler solver}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
 
@@ -763,15 +810,17 @@ and
 
 \begin{itemize}
 % practical method for solving a Thue-Mahler equation over Z
-\item<1-> Put $g(t) = F(t,1) = t^3 + c_1 t^{2} + c_2 t + c_3$ 
+\item<1-> Generate a number field $K$
+%Put $g(t) = F(t,1) = t^3 + c_1 t^{2} + c_2 t + c_3$ 
 %and note that $g(t)$ is irreducible in $\mathbb{Z}[t]$. 
-\item<2-> Let $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$
-\item<3-> Solving $F(x,y) = a p_1^{z_1} \cdots p_v^{z_v}$ is equivalent to solving 
-\[(x-y\theta)\mathcal{O}_K = \mathfrak{a} \prod_{j = 1}^{m_1} \mathfrak{p}_{1j}^{z_{1j}}\cdots \prod_{j = 1}^{m_v} \mathfrak{p}_{vj}^{z_{vj}},\]
+%\item<2-> Let $K = \mathbb{Q}(\theta)$ with $g(\theta) = 0$
+\item<3-> Solving $F(x,y) = a p_1^{z_1} \cdots p_v^{z_v}$ is equivalent to solving  a set of \textit{ideal equations}
+\[(x-y\theta)\mathcal{O}_K = \mathfrak{a}\mathfrak{p}_{1}^{u_{1}}\cdots \mathfrak{p}_{\nu}^{u_{\nu}}\]
+
 where
 \begin{itemize}
-\item<4->$\mathfrak{a}$ is an ideal with norm $|a|$
-\item<5->$z_{ij}$ are unknown non-negative integers to be solved for
+\item<4->$\mathfrak{a}, \mathfrak{p}_{i} $ are determined by $a, p_i$
+\item<5->$x,y,u_i$ are unknown non-negative integers to be solved for
 \end{itemize}
 \end{itemize}
 
@@ -779,22 +828,22 @@ where
 \end{frame}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}
-\frametitle{The prime ideal removing lemma}
-
-\begin{itemize}
-\item Applying the PIRL, we are left with a set of \textit{ideal equations}
-\[(x-y\theta)\mathcal{O}_K = \mathfrak{a}\mathfrak{p}_{1}^{u_{1}}\cdots \mathfrak{p}_{\nu}^{u_{\nu}}\]
-
-% in integer variables $X,u_1, \dots, u_v$ with $u_i \geq 0$ for $i = 1, \dots, v$. Here
-% basterdizing notation hard here
-\begin{itemize}
-\item<2-> $\mathfrak{p}_i$ are ideals determined by $p_i$
-\item<3-> $u_i $ are unknown non-negative integers to be solved for
-\end{itemize}
-\end{itemize}
-\end{frame}
+%
+%\begin{frame}
+%\frametitle{The prime ideal removing lemma}
+%
+%\begin{itemize}
+%\item Applying the PIRL, we are left with a set of \textit{ideal equations}
+%\[(x-y\theta)\mathcal{O}_K = \mathfrak{a}\mathfrak{p}_{1}^{u_{1}}\cdots \mathfrak{p}_{\nu}^{u_{\nu}}\]
+%
+%% in integer variables $X,u_1, \dots, u_v$ with $u_i \geq 0$ for $i = 1, \dots, v$. Here
+%% basterdizing notation hard here
+%\begin{itemize}
+%\item<2-> $\mathfrak{a}, \mathfrak{p}_i$ are ideals determined by $a, p_i$
+%\item<3-> $x,y,u_i $ are unknown non-negative integers to be solved for
+%\end{itemize}
+%\end{itemize}
+%\end{frame}
 
 % There are further refinements here so that we can reduce some of these equations further
 %ADD MORE DETAIL HERE
@@ -839,7 +888,7 @@ where
 \[x-y\theta = \alpha \varepsilon_1^{a_1}\cdots \varepsilon_r^{a_r}\gamma_1^{n_1} \cdots \gamma_{\nu}^{n_{\nu}}\]
 \begin{itemize}
 \item<2->$ \alpha, \varepsilon_i, \gamma_i$ are computed directly from the ideal equation
-\item<3-> $a_i, n_i$ are unknown
+\item<3-> $x,y,a_i, n_i$ are unknown
 \end{itemize}
 \end{itemize}
 
@@ -852,29 +901,10 @@ where
 \againframe<10>{overview}
 
 %---------------------------------------------------------------------------------------------------------------------------------------------%
-
 \begin{frame}[fragile]{Example: the number of $S$-unit equations}
 
 \begin{itemize}
 \item A nice example
-\[5x^3 + 6xy^2 -17xy^2 -8y^3 = 2^{z_1}\cdot 37^{z_2}\cdot 1657^{z_3}\]
-\only<1->{\textbf{Number of ideal equations}: 16} 
-
-\only<1->{\textbf{Number of principalization tests}: 96} 
-
-\only<1->{\textbf{Number of $S$-unit equations}: 96} % 1second 
-
-\only<1->{\textbf{Total time}: 1.25 second} 
-
-\end{itemize}
-\end{frame}
-
-%---------------------------------------------------------------------------------------------------------------------------------------------%
-
-\begin{frame}[fragile]{Example: the number of $S$-unit equations}
-
-\begin{itemize}
-\item A less nice example
 \[7x^3 + 12xy^2 +14y^3 = 7^{z_1}\cdot 11^{z_2}\cdot 37^{z_3}\]
 \only<1->{\textbf{Number of ideal equations}: 16} 
 
@@ -893,7 +923,7 @@ where
 \begin{frame}[fragile]{Example: the number of $S$-unit equations}
 
 \begin{itemize}
-\item A really bad example
+\item A less nice example
 \only
 \[2x^3 + 20x^2y - 14xy^2 + 37y^3 = 2^{z_1}\cdot 3^{z_2}\cdot 5^{z_3}\cdot 11^{z_4} \cdot 13^{z_5} \cdot 17^{z_6}\]
 \only<1->{\textbf{Number of ideal equations}: 448} 
@@ -915,7 +945,7 @@ where
 \item A really, really bad example
 \[14x^3 + 20x^2y + 24xy^2 + 15y^3 = 2^{z_1}\cdot 3^{z_2}\cdot 17^{z_3}\cdot 37^{z_4} \cdot 53^{z_5}\]
 
-\only<1->{\textbf{Number of ideal equations}: 48} 
+\only<1->{\textbf{Number of ideal equations}: 64} 
 
 \only<1->{\textbf{Number of principalization tests}: 113,848,416} 
 
@@ -938,8 +968,11 @@ where
 \frametitle{For each $S$-unit equation...}
 
 \begin{itemize}
-\item Generate a very large upper bound on the solutions using the theory of linear forms in logarithms
-\item Reduce this bound via Diophantine approximation computations
+\item Generate a very large upper bound on the solutions
+\item Reduce this bound 
+\begin{itemize}
+\item Compute all short vectors in a lattice
+\end{itemize}
 \item Search below this reduced bound 
 \end{itemize}
 % maybe mention FP, short vectors processes 
@@ -971,12 +1004,13 @@ where
 \begin{frame}[fragile]{Our refinements}
 
 \begin{itemize}
-\item<1-> \textbf{Improved PIRL}: reduces the number of ideal equations
-\item<2-> \textbf{Improved principalization test}: reduces the number of $S$-unit equations
+\item<1-> Fewer ideal equations
+\item<2-> Fewer $S$-unit equations
 \begin{itemize}
 \item<3-> Reduced test run-time
 \item<4-> Yields only 1 $S$-unit equation for each ideal equation
 \end{itemize}
+\item<5-> Faster bound reduction for each $S$-unit equation
 \end{itemize}
 
 \end{frame}
@@ -1051,7 +1085,7 @@ where
 \begin{frame}[fragile]{Example: The number of $S$-unit equations}
 
 \begin{itemize}
-\item A less nice example
+\item A nice example
 \[7x^3 + 12xy^2 +14y^3 = 7^{z_1}\cdot 11^{z_2}\cdot 37^{z_3}\]
 \only<1->{\textbf{Number of ideal equations}: 16}
  
@@ -1079,7 +1113,7 @@ where
 \begin{frame}[fragile]{Example: The number of $S$-unit equations}
 
 \begin{itemize}
-\item A really bad example
+\item A less nice example
 \only
 \[2x^3 + 20x^2y - 14xy^2 + 37y^3 = 2^{z_1}\cdot 3^{z_2}\cdot 5^{z_3}\cdot 11^{z_4} \cdot 13^{z_5} \cdot 17^{z_6}\]
 \only<1->{\textbf{Number of ideal equations}: 448} 
@@ -1109,7 +1143,7 @@ where
 \item This god-forsaken example
 \[14x^3 + 20x^2y + 24xy^2 + 15y^3 = 2^{z_1}\cdot 3^{z_2}\cdot 17^{z_3}\cdot 37^{z_4} \cdot 53^{z_5}\]
 
-\only<1->{\textbf{Number of ideal equations}: 48} 
+\only<1->{\textbf{Number of ideal equations}: 64} 
 
 \only<2->{{\color{red}\textbf{Now}: 64}}
 
