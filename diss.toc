@@ -7,7 +7,7 @@
 \contentsline {section}{\numberline {1.1}Statement of the results}{7}{section.1.1}
 \contentsline {chapter}{\numberline {2}Preliminaries}{10}{chapter.2}
 \contentsline {section}{\numberline {2.1}Algebraic number theory}{10}{section.2.1}
-\contentsline {section}{\numberline {2.2}$p$-adic valuations}{12}{section.2.2}
+\contentsline {section}{\numberline {2.2}$p$-adic valuations}{13}{section.2.2}
 \contentsline {section}{\numberline {2.3}$p$-adic logarithms}{16}{section.2.3}
 \contentsline {section}{\numberline {2.4}The Weil height}{18}{section.2.4}
 \contentsline {section}{\numberline {2.5}Elliptic curves}{19}{section.2.5}
@@ -16,15 +16,15 @@
 \contentsline {chapter}{\numberline {3}Algorithms for Thue-Mahler Equations}{24}{chapter.3}
 \contentsline {section}{\numberline {3.1}First steps}{24}{section.3.1}
 \contentsline {section}{\numberline {3.2}The relevant algebraic number field}{27}{section.3.2}
-\contentsline {section}{\numberline {3.3}The prime ideal removing lemma}{29}{section.3.3}
+\contentsline {section}{\numberline {3.3}The prime ideal removing lemma}{28}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Computational remarks and refinements}{34}{subsection.3.3.1}
 \contentsline {section}{\numberline {3.4}Factorization of the Thue-Mahler equation}{35}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Avoiding the class group $\Cl (K)$}{36}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Using the class group $\Cl (K)$}{37}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.1}Avoiding the class group $\Cl (K)$}{35}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Using the class group $\Cl (K)$}{36}{subsection.3.4.2}
 \contentsline {subsection}{\numberline {3.4.3}The $S$-unit equation}{38}{subsection.3.4.3}
-\contentsline {subsection}{\numberline {3.4.4}Computational remarks and comparisons}{40}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.4}Computational remarks and comparisons}{39}{subsection.3.4.4}
 \contentsline {section}{\numberline {3.5}A small upper bound for $u_l$ in a special case}{41}{section.3.5}
-\contentsline {section}{\numberline {3.6}Lattice-Based Reduction}{47}{section.3.6}
+\contentsline {section}{\numberline {3.6}Lattice-Based Reduction}{46}{section.3.6}
 \contentsline {subsection}{\numberline {3.6.1}The $L^3$-lattice basis reduction algorithm}{47}{subsection.3.6.1}
 \contentsline {subsection}{\numberline {3.6.2}The Fincke-Pohst algorithm}{49}{subsection.3.6.2}
 \contentsline {subsection}{\numberline {3.6.3}Computational remarks and translated lattices}{51}{subsection.3.6.3}
@@ -54,19 +54,19 @@
 \contentsline {chapter}{\numberline {5}Computing Elliptic Curves over $\mathbb {Q}$}{107}{chapter.5}
 \contentsline {section}{\numberline {5.1}Elliptic curves}{108}{section.5.1}
 \contentsline {section}{\numberline {5.2}Cubic forms : the main theorem and algorithm}{110}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Remarks}{114}{subsection.5.2.1}
-\contentsline {subsubsection}{Historical comments}{114}{subsubsection*.10}
+\contentsline {subsection}{\numberline {5.2.1}Remarks}{113}{subsection.5.2.1}
+\contentsline {subsubsection}{Historical comments}{113}{subsubsection*.10}
 \contentsline {subsubsection}{$2$-division fields and reducible forms}{114}{subsubsection*.11}
-\contentsline {subsubsection}{Imprimitive forms}{115}{subsubsection*.12}
+\contentsline {subsubsection}{Imprimitive forms}{114}{subsubsection*.12}
 \contentsline {subsubsection}{Possible twists}{115}{subsubsection*.13}
-\contentsline {subsubsection}{Necessity, but not sufficiency}{116}{subsubsection*.14}
+\contentsline {subsubsection}{Necessity, but not sufficiency}{115}{subsubsection*.14}
 \contentsline {subsubsection}{Special binary cubic forms}{116}{subsubsection*.15}
 \contentsline {subsubsection}{The case $j_E = 0$}{117}{subsubsection*.16}
 \contentsline {subsection}{\numberline {5.2.2}The algorithm}{117}{subsection.5.2.2}
 \contentsline {section}{\numberline {5.3}Proof of Theorem \ref {fisk}}{119}{section.5.3}
-\contentsline {section}{\numberline {5.4}Finding representative forms}{129}{section.5.4}
+\contentsline {section}{\numberline {5.4}Finding representative forms}{128}{section.5.4}
 \contentsline {subsection}{\numberline {5.4.1}Irreducible Forms}{129}{subsection.5.4.1}
-\contentsline {subsection}{\numberline {5.4.2}Reducible forms}{130}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.2}Reducible forms}{129}{subsection.5.4.2}
 \contentsline {subsection}{\numberline {5.4.3}Computing forms of fixed discriminant}{131}{subsection.5.4.3}
 \contentsline {subsection}{\numberline {5.4.4}$\unhbox \voidb@x \hbox {GL}_2(\mathbb {Z})$ vs $\unhbox \voidb@x \hbox {SL}_2(\mathbb {Z})$}{132}{subsection.5.4.4}
 \contentsline {section}{\numberline {5.5}Examples}{132}{section.5.5}

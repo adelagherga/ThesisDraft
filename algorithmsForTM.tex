@@ -20,11 +20,14 @@ F(X,Y) = c p_1^{Z_1}\cdots p_v^{Z_v}
 \end{equation}
 for unknowns $X,Y, Z_1, \dots, Z_v$ with $\gcd(X,Y) = 1$ and $Z_i \geq 0$ for $i = 1,\dots, v$. To do so, we first reduce \eqref{eq:ThueMahler} to the special case where $c_0 = 1$ and $\gcd(c,p_i) = 1$ for $i = 1, \dots, v$, loosely following \cite{Ham}. 
 
-As $F$ is irreducible by assumption, at least one of the coefficients $c_0$ and $c_n$ is nonzero. Hence, we may transform the given Thue--Mahler equation to one with $c_0 \neq 0$ by interchanging $X$ and $Y$ and by renaming the coefficients $c_i$ appropriately. In particular, solving \eqref{eq:ThueMahler} is equivalent to solving 
-\[ c_0' \overline{X}^n + c_1' \overline{X}^{n-1}\overline{Y} + \cdots + c_{n-1}'\overline{X}\overline{Y}^{n-1} + c_n'\overline{Y}^n = c p_1^{Z_1}\cdots p_v^{Z_v},\]
-where $c_i' = c_{n-1}$ for $i = 0, \dots, n$, $\overline{X} = Y$, and $\overline{Y} = X$. 
+Let $\mathcal{D}$ be the set of all positive integers $m$ dividing $c_0$ such that ${\ord_p(m)\leq \ord_p(c)}$ for each rational prime $p\notin S$.
 
-Let $\mathcal{D}$ be the set of all positive integers $m$ dividing $c_0$ such that ${\ord_p(m)\leq \ord_p(c)}$ for each rational prime $p\notin S$. Equivalently, $\mathcal{D}$ is precisely the set of all possible integers $d$ such that $d = \gcd(c_0,Y)$. To see this, let $q_1, \dots, q_{w}$ denote the distinct prime divisors of $a$ not contained in $S$. Then 
+\begin{lemma}
+$\mathcal{D}$ is precisely the set of all $d \in \mathbb{Z}_{>0}$ such that $d = \gcd(c_0,Y)$.
+\end{lemma}
+
+\begin{proof}
+To see this, let $q_1, \dots, q_{w}$ denote the distinct prime divisors of $c$ not contained in $S$. Then 
 \[c = \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(c)}\]
 for some integers $b_i >0$. If $(X,Y,Z_1, \dots, Z_v)$ is a solution of the Thue-Mahler equation in question, it follows that
 \[F(X,Y) = cp_1^{Z_1}\dots p_v^{Z_v} =  \prod_{i=1}^w q_i^{b_i}\cdot \prod_{i=1}^v p_i^{\ord_{p_i}(c) + Z_i}.\]
@@ -45,13 +48,14 @@ is non-trivial only at the primes $\{q_1, \dots, q_w\}$. In particular,
 for non-negative integers $s_1, \dots, s_w, t_1, \dots, t_v$ such that 
 \[s_i \leq \min\{\ord_{q_i}(c), \ord_{q_i}(c_0)\} \quad \text{ and } \quad 
 	t_i \leq \ord_{p_i}(c_0).\] 
-It follows that $d = \gcd(c_0,Y)$ for some solution $(X,Y,Z_1, \dots, Z_v)$ of equation~\eqref{eq:ThueMahler}. 
+It follows that $d = \gcd(c_0,Y)$.
+\end{proof}
 
 For any $d\in \mathcal{D}$, we define the rational numbers 
 \[u_d = c_0^{n-1}/d^n \quad \textnormal{and}\quad c_d = \sgn(u_dc)\prod_{p\notin S} p^{\ord_p(u_dc)}.\]
-On using that $d\in \mathcal{D}$, we see that the rational number $c_d$ is in fact an integer coprime to $S$. 
+On using that $d\in \mathcal{D}$, we see that the rational number $c_d$ is in fact an integer coprime to $S$. That is, $\gcd(c_d,p_i) = 1$ for all $p_i \in S$. 
 
-Suppose $(X,Y,Z_1, \dots, Z_v)$ is a solution of \eqref{eq:ThueMahler} with ${\gcd(X,Y) = 1}$ and $d = \gcd(c_0,Y)$. Define the homogeneous polynomial $f(x,y) \in \mathbb{Z}[x,y]$ of degree $n$ by
+Suppose $(X,Y,Z_1, \dots, Z_v)$ is a solution of \eqref{eq:ThueMahler} with ${\gcd(X,Y) = 1}$ and $d \in \mathcal{D}$. Define the homogeneous polynomial $f(x,y) \in \mathbb{Z}[x,y]$ of degree $n$ by
 \[f(x,y) = x^n + C_1 x^{n-1}y + \dots + C_{n-1}xy^{n-1} + C_ny^n,\]
 where
 \[x=\tfrac{c_0X}{d},\quad y=\tfrac{Y}{d} \quad \text{ and } \quad C_i = c_ic_0^{i-1} \quad \text{ for } i = 1, \dots, n.\]
@@ -66,7 +70,7 @@ where $\gcd(x,y) = 1$ and $\gcd(c_d,p_i) = 1$ for all $i = 1, \dots, v$.
 Since there are only finitely many choices for $d = \gcd(c_0, Y)$, there are only finitely many choices for $\{c_d,u_d,d\}$. Then, solving \eqref{eq:ThueMahler} is equivalent to solving the finitely many Thue-Mahler equations \eqref{eq:ThueMahler2} for each choice of $\{c_d,u_d,d\}$.  For each such choice, the solution $\{x,y,z_1, \dots, z_v\}$ is related to $\{X,Y, Z_1, \dots, Z_v\}$ via
 \[X = \frac{dx}{c_0},\quad Y=dy \quad \text{ and } \quad Z_i = z_i - \ord_p(u_dc).\]
 
-Lastly, we observe that the polynomial $f(x,y)$ of \eqref{eq:ThueMahler2} remains the same for any choice of $\{c_d,u_d,d\}$. Thus, to solve the family of equations \eqref{eq:ThueMahler2}, we need only to enumerate over every possible $c_d$. Now, if $\mathcal{C}$ denotes the set of all $\{c_d,u_d,d\}$ and $d_1, d_2 \in \mathcal{D}$, we may have $\{c_{d_1},u_{d_1}, d_1\}, \{c_{d_2},u_{d_2}, d_2\} \in \mathcal{C}$ where $c_{d_1} = c_{d_2}$. That is, $d_1, d_2$ may yield the same value of $c_d$, reiterating that we need only solve \eqref{eq:ThueMahler2} for each distinct $c_d$. 
+Lastly, we observe that the polynomial $f(x,y)$ of \eqref{eq:ThueMahler2} remains the same for any choice of $\{c_d,u_d,d\}$. Thus, to solve the family of equations \eqref{eq:ThueMahler2}, we need only to enumerate over every possible $c_d$. Now, if $\mathcal{C}$ denotes the set of all $\{c_d,u_d,d\}$ and $d_1, d_2 \in \mathcal{D}$, we may have $\{c_{d_1},u_{d_1}, d_1\}, \{c_{d_2},u_{d_2}, d_2\} \in \mathcal{C}$ where $c_{d_1} = c_{d_2}$. In other words, $d_1, d_2$ may yield the same value of $c_d$, reiterating that we need only solve \eqref{eq:ThueMahler2} for each distinct $c_d$. 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
@@ -108,7 +112,7 @@ Our first task is to cut down the number of variables appearing in \eqref{eq:ide
 In this section, we establish some key results that will allow us to cut down the number of prime ideals that can appear to a large power in the factorization of $(x-y\theta)\mathcal{O}_K$. It is of particular importance to note that we do not appeal to the Prime Ideal Removing Lemma of Tzanakis and de Weger (\cite{TW3}) here and instead apply the following results of \cite{GhKaMaSi}. 
 
 Let $p \in \{p_1, \dots, p_v\}$. We will produce the following two finite lists $L_p$ and $M_p$. The list $L_p$ will
-consist of certain ideals $\mathfrak{b}$ of $\mathcal{O}_K$ supported at the prime ideals above $p$. The list $M_p$ will consist of certain pairs $(\mathfrak{b},\mathfrak{p})$ where $\mathfrak{b}$ is supported at the prime ideals above $p$ and $\mathfrak{p}$ is a prime ideal lying over $p$ satisfying $e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1$. These lists will satisfy the following property: if $(x,y,z_1,\dots,z_v)$ is a solution to the Thue-Mahler equation \eqref{eq:ThueMahler3} then
+consist of certain ideals $\mathfrak{b}$ of $\mathcal{O}_K$ supported at the prime ideals above $p$. The list $M_p$ will consist of certain pairs $(\mathfrak{b},\mathfrak{p})$ where $\mathfrak{b}$ is supported at the prime ideals above $p$ and $\mathfrak{p}$ is a prime ideal lying over $p$ such that $e(\mathfrak{p}|p) =1$ and $f(\mathfrak{p}|p)=1$. These lists will satisfy the following property: if $(x,y,z_1,\dots,z_v)$ is a solution to the Thue-Mahler equation \eqref{eq:ThueMahler3} then
 \begin{enumerate}[(i)]
 \item either there is some $\mathfrak{b} \in L_p$
 such that
@@ -206,7 +210,7 @@ be the initial values for $t$ and $\mathcal{U}$ in the algorithm. Then $x/y \equ
 
 Suppose first that the hypothesis of (i) is satisfied: $\mathcal{P}_u = \emptyset$. The algorithm adds $\mathfrak{b}_u$ to the set $\mathcal{L}_p$, with the above remarks ensuring that \eqref{eq:Lp} is satisfied.
 
-Suppose next that the hypothesis of (ii) is satisfied: $\mathcal{P}_u=\{\mathfrak{p}\}$ where ${e(\mathfrak{p}|p)=f(\mathfrak{p}|p)=1}$ and there is a unique $\mathbb{Z}_p$ root $\alpha$ of $g(t)$ such that $\alpha \equiv u \mod{p^t}$. The algorithm adds $(\mathfrak{b}_u,\mathfrak{p})$ to the set $\mathcal{M}_p$. By the above, $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is an integral ideal, not divisible by any prime ideal $\mathfrak{q} \neq \mathfrak{p}$ lying over $p$. Thus there is some positive integer $v_p \geq 0$ such that \eqref{eq:Mp} is satisfied, concluding the proof. 
+Suppose next that the hypothesis of (ii) is satisfied: $\mathcal{P}_u=\{\mathfrak{p}\}$ where $e(\mathfrak{p}|p)= 1$, $f(\mathfrak{p}|p)=1$, and there is a unique $\mathbb{Z}_p$ root $\alpha$ of $g(t)$ such that $\alpha \equiv u \mod{p^t}$. The algorithm adds $(\mathfrak{b}_u,\mathfrak{p})$ to the set $\mathcal{M}_p$. By the above, $(x-y\theta)\mathcal{O}_K/\mathfrak{b}_u$ is an integral ideal, not divisible by any prime ideal $\mathfrak{q} \neq \mathfrak{p}$ lying over $p$. Thus there is some positive integer $v_p \geq 0$ such that \eqref{eq:Mp} is satisfied, concluding the proof. 
 \end{proof}
 
 Having computed the lists arising from the affine patch $p \nmid y$, we initialize $L_p$ and $M_p$ as $\mathcal{L}_p$ and $\mathcal{M}_p$, respectively, and append to these lists the elements from the second patch, $p \mid y$, using the following algorithm.  
@@ -305,7 +309,7 @@ in integer variables $x,y,u_1, \dots, u_{\nu}$ with $u_i \geq 0$ for $i = 1, \do
 $u_i + t_i =  z_i$. 
 \end{itemize}
 
-For each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_{\nu}$, we reduce equation~\eqref{eq:TMfactored} to a number of so-called ``$S$-unit equations''. We present two different algorithms for doing so and outline the advantages and disadvantages of each. In practicality, we do not know a priori which of these two options is more efficient. Instead, we implement and use both algorithms simultaneously and selecting the most computationally efficient option as it appear. 
+For each choice of $\mathfrak{a}$ and prime ideals $\mathfrak{p}_1, \dots, \mathfrak{p}_{\nu}$, we reduce equation~\eqref{eq:TMfactored} to a number of so-called ``$S$-unit equations''. We present two different algorithms for doing so and outline the advantages and disadvantages of each. In practice, we do not know a priori which of these two options is more efficient. Instead, we implement and use both algorithms simultaneously, selecting the most computationally efficient option as it appears. 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
@@ -324,9 +328,9 @@ for all $i \in \{1, \dots, {\nu}\}$.
 Thus, we can write \eqref{eq:TMfactored} as
 \[ (x-y\theta) \mathcal{O}_K = \mathfrak{a} \tilde{\mathfrak{p}}^{\mathbf{u}}  = (\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}) \cdot \mathfrak{c}_1^{n_1}\cdots \mathfrak{c}_{\nu}^{n_{\nu}}.\]
 
-By definition of $h_i$, each $i \in \{1, \dots, {\nu}\}$ yields an element $\gamma_i \in K^*$ such that 
+By definition of $h_i$, each $i \in \{1, \dots, {\nu}\}$ yields an element $\gamma_i \in K^{\times}$ such that 
 \[\mathfrak{c}_i = (\gamma_i) \mathcal{O}_K.\]
-Furthermore, if $\mathbf{u}$ is a solution of \eqref{eq:TMfactored} with corresponding vectors $\mathbf{n}, \mathbf{r}$, there exists some $\alpha \in K^*$ such that 
+Furthermore, if $\mathbf{u}$ is a solution of \eqref{eq:TMfactored} with corresponding vectors $\mathbf{n}, \mathbf{r}$, there exists some $\alpha \in K^{\times}$ such that 
 \[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}= (\alpha)\mathcal{O}_K.\]
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
@@ -358,25 +362,25 @@ Consider the ideal equivalence class of $(\mathfrak{a} \cdot \tilde{\mathfrak{p}
 	= [\mathfrak{a}]\cdot \phi(r_1,\dotsc,r_{\nu})=[1]\]
 as $\phi(r_1,\dotsc,r_{\nu})=[\mathfrak{a}]^{-1}$ by construction. This means 
 \[\mathfrak{a} \cdot \tilde{\mathfrak{p}}^\mathbf{r}= (\alpha) \mathcal{O}_K\]
-for some $\alpha \in K^*$. Furthermore, 
+for some $\alpha \in K^{\times}$. Furthermore, 
 \[[\mathfrak{c}_i] = [\tilde{\mathfrak{p}}^{\mathbf{a}_i}] = \phi(\mathbf{a}_i) = [1] \quad \text{ for } i = 1, \dots, \nu,\]
 as the $\mathbf{a}_i$ are a basis for the kernel of $\phi$. For all $i \in \{1, \dots, {\nu}\}$, we therefore have
 \[\mathfrak{c}_i= (\gamma_i) \mathcal{O}_K\]
-for some $\gamma_i \in K^*$.
+for some $\gamma_i \in K^{\times}$.
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 
 \subsection{The $S$-unit equation}
 \label{subsec:SUnitEquation}
 
-\autoref{subsec:FactorizationTMwithoutOK} and  \autoref{subsec:FactorizationTMwithOK} outline two different algorithms to reduce the ideal equation~\eqref{eq:TMfactored} to a number of certain ``$S$-unit equations'', which we define shortly. Regardless of which method we use, under both algorithms outlined above, equation~\eqref{eq:TMfactored} becomes
+\autoref{subsec:FactorizationTMwithoutOK} and  \autoref{subsec:FactorizationTMwithOK} outline two different algorithms which will allow us to reduce the ideal equation~\eqref{eq:TMfactored} to a number of certain ``$S$-unit equations''. Regardless of which method we use, under both algorithms outlined above, equation~\eqref{eq:TMfactored} becomes
 \begin{equation} \label{eq:TMprincipal}
 (x-y\theta) \mathcal{O}_K= (\alpha \cdot \gamma_1^{n_1} \cdots \gamma_{\nu}^{n_{\nu}}) \mathcal{O}_K
 \end{equation}
 for some vector $\mathbf{n} = (n_1, \dots, n_{\nu}) \in \mathbb{Z}^{\nu}$. The ideal generated by $\alpha$ in $K$ has norm 
 \[|c|\cdot p_1^{t_1 + r_1} \cdots p_{\nu}^{t_{\nu} + r_{\nu}}p_{\nu +1}^{t_{\nu +1}} \cdots p_v^{t_v}\]
 and the $n_i$ are related to the $z_i$ via
-\[z_i = u_i + t_i = \sum_{j = 1}^{\nu}n_ja_{ij} + r_i + t_i \quad \text{ for } i =1, \dots, v.\]
+\[z_i = u_i + t_i = \sum_{j = 1}^{\nu}n_ja_{ij} + r_i + t_i \quad \text{ for } i =1, \dots, v,\]
 where $u_i = r_i = 0$ for all $i \in \{\nu + 1, \dots, v\}$. 
 
 Fix a complete set of fundamental units $\{\eps_1, \dots, \eps_r\}$ of $\mathcal{O}_K$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. Then, under either method, equation~\eqref{eq:TMfactored} reduces to a finite number of equations in $K$ of the form
@@ -410,7 +414,7 @@ In contrast, the method in \autoref{subsec:FactorizationTMwithOK} reduces \eqref
 
 However, when generating the vectors $\mathbf{r} = (r_1, \dots, r_{\nu})$ using the class group, we observe that some of the integers $r_i$ may be negative, so we do not expect $\alpha$ to be an algebraic integer in general. This can be problematic later in the algorithm when we compute the embedding of $K$ into our $p$-adic fields. In those instances, the precision on our $p$-adic fields may not be high enough, and as a result, some non-zero elements of $K$ may be erroneously mapped to $0$. To avoid this, we force the $r_i$ to be positive by adding sufficiently many multiples of the class number. 
 
-In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is far more efficient than that of \autoref{subsec:FactorizationTMwithoutOK}. However, computing the class group may be a very costly computation. Indeed, for some Thue-Mahler equations, this may be the bottle-neck of the algorithm. In this case, it may happen that computing the class group will take longer than directly checking each potential $S$-unit equation arising from the alternative method. Unfortunately, we cannot know a priori how long computing $\Cl(K)$ will take in so much that we cannot know a priori how long solving all $S$-unit equations from the other algorithm will take. In practicality, generating the class group in Magma is a process which cannot be terminated without exiting the program. For this reason, we cannot simply apply a timeout in Magma if computing $\Cl(K)$ is exceeding what we deem a reasonable amount of time. Adding to this, Magma does not support parallelization, so we cannot implement both algorithms simultaneously. Our compromise to solve a single Thue-Mahler equation is to run two separate instances of Magma in parallel, each generating the $S$-unit equations using the two aforementioned algorithms. When one of these instances finishes, the other is forced to terminate. In this way, though far from ideal, we are able to select the most computationally efficient option. 
+In most cases, the method described in \autoref{subsec:FactorizationTMwithOK} is far more efficient than that of \autoref{subsec:FactorizationTMwithoutOK}. However, computing the class group may be a very costly computation. Indeed, for some Thue-Mahler equations, this may be the bottle-neck of the algorithm. In this case, it may happen that computing the class group will take longer than directly checking each potential $S$-unit equation arising from the alternative method. Unfortunately, we cannot know a priori how long computing $\Cl(K)$ will take in so much that we cannot know a priori how long solving all $S$-unit equations from the other algorithm will take. In practice, generating the class group in Magma is a process which cannot be terminated without exiting the program. For this reason, we cannot simply apply a timeout in Magma if computing $\Cl(K)$ is exceeding what we deem a reasonable amount of time. Adding to this, Magma does not support parallelization, so we cannot implement both algorithms simultaneously. Our compromise to solve a single Thue-Mahler equation is to run two separate instances of Magma in parallel, each generating the $S$-unit equations using the two aforementioned algorithms. When one of these instances finishes, the other is forced to terminate. Though this method is far from ideal, in this way, we are able to select the most computationally efficient option. 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------%
 %--------------------------------------------------------------------------------------------------------------------------------------------%
@@ -422,7 +426,7 @@ We now restrict our attention to those $p \in \{p_1, \dots, p_{\nu}\}$ and study
 
 Fix a rational prime $p_l \in \{p_1, \dots, p_{\nu}\}$ and recall that $z \in \mathbb{C}_{p_l}$ having $\ord_{p_l}(z) = 0$ is called a $p_l$-adic unit. Part (i) of the Corollary of Lemma 7.2 of \cite{TW3} tells us that $\frac{\eps_1^{(i_0)}}{\varepsilon_1^{(j)}}, \dots, \frac{\eps_r^{(i_0)}}{\varepsilon_r^{(j)}}$ and $\frac{\varepsilon_1^{(k)}}{\varepsilon_1^{(j)}}, \dots, \frac{\varepsilon_r^{(k)}}{\varepsilon_r^{(j)}}$ are $p_l$-adic units. 
 
-Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l(t)) = 1$. We now choose $i_0 \in \{1, \dots, 4\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. We fix this choice of index $i_0$ for the remainder of this chapter. The indices of $j,k$ are fixed, but arbitrary. 
+Let $g_l(t)$ be the irreducible factor of $g(t)$ in $\mathbb{Q}_{p_l}[t]$ corresponding to the prime ideal $\mathfrak{p}_l$. Since $\mathfrak{p}_l$ has ramification index and residue degree equal to $1$, $\deg(g_l(t)) = 1$. We now choose $i_0 \in \{1, \dots, n\}$ so that $\theta^{(i_0)}$ is the root of $g_l(t)$. We fix this choice of index $i_0$ for the remainder of this chapter. The indices of $j,k$ are fixed, but arbitrary. 
 
 \begin{lemma} \label{lem:SunitUnits} \
 \begin{enumerate}
@@ -548,10 +552,11 @@ Let
 \item For all $h \in \{1, \dots, s\}$, if $\ord_{p_l}(\alpha_{1h}) < \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{ih})$, then
 \[\sum_{i = 1}^{\nu} n_i a_{li} \leq \max \left\{w_l, \bigg \lceil \displaystyle \min_{2 \leq i \leq 1+\nu+r} \ord_{p_l}(\alpha_{ih})- \ord_{p_l}(\delta_2) + d_l \bigg \rceil - 1\right\},\]
 where 
-\[d_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))).\]
+\[d_l = \frac{1}{2}\ord_{p_l}(\text{Disc}(G(t))). \]
 \end{enumerate}
 \end{lemma}
 
+\newpage
 \begin{proof} \
 \begin{enumerate}[(i)]
 \item We prove the contrapositive. Suppose
@@ -610,7 +615,7 @@ where $\mu_{ij} \in \mathbb{R}$ for $1\leq j < i \leq n$. This is the usual Gram
 where $| \cdot |$ is the usual Euclidean norm in $\mathbb{R}^n$, 
 \[|\mathbf{v}| = \Phi(\mathbf{v},\mathbf{v}) = \mathbf{v}^{T}\mathbf{v}.\]
 
-These properties imply that an LLL-reduced basis is approximately orthogonal, and that, generically, its constituent vectors are roughly of the same length. Every $n$-dimensional lattice has an LLL-reduced basis and such a basis can be computed very quickly using the so-called LLL algorithm (\cite{LLL}). This algorithm takes as input an arbitrary basis for a lattice and outputs an LLL-reduced basis. The algorithm is typically modified to additionally output a unimodular matrix $U$ such that $A = BU$, where $B$ is the matrix whose column-vectors are the input basis and $A$ is the matrix whose column-vectors are the LLL-reduced output basis. Several versions of this algorithm are implemented in Magma, including de Weger's exact integer version. (\cite{Weg0}).
+These properties imply that an LLL-reduced basis is approximately orthogonal, and that, generically, its constituent vectors are roughly of the same length. Every $n$-dimensional lattice has an LLL-reduced basis and such a basis can be computed very quickly using the LLL algorithm \cite{LLL}. This algorithm takes as input an arbitrary basis for a lattice and outputs an LLL-reduced basis. The algorithm is typically modified to additionally output a unimodular matrix $U$ such that $A = BU$, where $B$ is the matrix whose column-vectors are the input basis and $A$ is the matrix whose column-vectors are the LLL-reduced output basis. Several versions of this algorithm are implemented in Magma, including de Weger's exact integer version \cite{Weg0}.
 
 We remark that a lattice may have more than one reduced basis, and that the ordering of the basis vectors is not arbitrary. The properties of reduced bases that are of most interest to us are the following. Let $\mathbf{v}$ a vector in $\mathbb{R}^n$ and denote by $l(\Gamma,\mathbf{v})$ the distance from $\mathbf{v}$ to the nearest point in the lattice $\Gamma$, viz.
 \[l(\Gamma,\mathbf{v}) = \min_{\mathbf{u} \in \Gamma \backslash\{\mathbf{v}\}} |\mathbf{u} - \mathbf{v}|.\]

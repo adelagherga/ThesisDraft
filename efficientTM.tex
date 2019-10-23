@@ -4,9 +4,9 @@
 \chapter{Towards Efficient Resolution of Thue-Mahler Equations}
 \label{ch:EfficientTMSolver}
 
-Let $a$ denote a nonzero integer and let $S=\{p_1,\dotsc,p_v\}$ be a set of rational primes. In this section, we specialize the results of \autoref{ch:AlgorithmsForTM} to the degree $3$ Thue--Mahler equation
+Let $c$ denote a nonzero integer and let $S=\{p_1,\dotsc,p_v\}$ be a set of rational primes. In this section, we specialize the results of \autoref{ch:AlgorithmsForTM} to the degree $3$ Thue--Mahler equation
 \begin{equation} \label{Eq:TM1}
-F(X,Y) = c_0 X^3 + c_1 X^{2}Y + c_2XY^2 + c_3Y^3 = a p_1^{Z_1}\cdots p_v^{Z_v},
+F(X,Y) = c_0 X^3 + c_1 X^{2}Y + c_2XY^2 + c_3Y^3 = c p_1^{Z_1}\cdots p_v^{Z_v},
 \end{equation}
 where $(X,Y) \in \mathbb{Z}^2$, $\gcd(X,Y)=1$, and $Z_i \geq 0$ for $i = 1, \dots, v$. In particular, to enumerate the set of solutions $\{X,Y, Z_1, \dots, Z_v\}$ to this equation, we follow \autoref{sec:FactorizationTM} to reduce the problem of solving \eqref{Eq:TM1} to solving finitely many so-called ``$S$-unit'' equations
 \begin{equation} \label{eq:EfficientSunit}
@@ -183,9 +183,9 @@ and recall that we seek to compute all solutions to equaition~\eqref{eq:Efficien
 \end{equation}
 Let $\Sigma$ denote the set of all pairs $(\tilde{x},\tilde{y})$ satisfying \eqref{eq:TrueSunit}. That is, $\Sigma$ denotes the set of all tuples $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ corresponding to $(\tilde{x},\tilde{y})$ which satisfy \eqref{eq:TrueSunit}.
 
-Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. Then we define $\Sigma(\mathbf{l},\mathbf{h})$ as the set of all $(\tilde{x},\tilde{y}) \in \Sigma$ such that $(h_v(z))\leq \mathbf{h}$ and such that $(h_v(z))\nleq \mathbf{l}$, and write $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})$ if $\mathbf{l}=\mathbf{0}$. Additionally, for each place $w$, we denote by $\Sigma_w(\mathbf{l},\mathbf{h})$ the set of all $(\tilde{x},\tilde{y})\in\Sigma(\mathbf{h})$ such that $h_w(z)>l_w$. 
+Let $\mathbf{l},\mathbf{h}\in\mathbb{R}^{\nu + m}$ with $\mathbf{0}\leq \mathbf{l}\leq \mathbf{h}$. By this we mean that if $\mathbf{l} = (l_1, \dots, l_{\nu+m})$ and $\mathbf{h} = (h_1, \dots, h_{\nu + m})$, then $0 \leq l_i \leq h_i$ for all $i = 1, \dots, \nu+m$. Define $\Sigma(\mathbf{l},\mathbf{h})$ to be the set of all $(\tilde{x},\tilde{y}) \in \Sigma$ such that $(h_v(z))\leq \mathbf{h}$ and such that $(h_v(z))\nleq \mathbf{l}$, and write $\Sigma(\mathbf{h})=\Sigma(\mathbf{l},\mathbf{h})$ if $\mathbf{l}=\mathbf{0}$. Additionally, for each place $w$, we denote by $\Sigma_w(\mathbf{l},\mathbf{h})$ the set of all $(\tilde{x},\tilde{y})\in\Sigma(\mathbf{h})$ such that $h_w(z)>l_w$. 
 
-Recall the minimal polynomial $g(t)$ of $K$, \eqref{eq:Efficientg}, derived from 
+Recall the minimal polynomial $g(t) = f(t,1)$ of $K$, where
 \[f(x,y) = x^3 + C_1 x^{2}y + C_2xy^2 + C_3y^3 = cp_1^{z_1}\cdots p_v^{z_v}.\]
 For $S = \{p_1, \dots, p_v\}$, let $N_S = \prod_{p\in S}p$ and set 
 \[b_S	 = 1728 N_S^2 \prod_{p \notin S} p^{\min(2,\ord_p(b))}\]
@@ -225,7 +225,7 @@ meaning that $\tilde{x}$ may be written as
 \[\tilde{x} =\frac{\beta^{(i_0)}}{\beta^{(j)}}\cdot \frac{\alpha^{(j)}\zeta^{(j)}}{\alpha^{(i_0)}\zeta^{(i_0)}}.\]
 Hence, 
 \[h(\tilde{x})	 = 2h(\beta) + 2h(\alpha) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha).\]
-Finally, we observer that 
+Finally, we observe that 
 \[h(z) = h(1/\tilde{x}) \leq 4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha).\]
 Together with $\displaystyle \frac{1}{[K:\mathbb{Q}]}h_v(z) \leq h(z)$, this implies
 \[h_v(z) \leq [K:\mathbb{Q}]\left(4\Omega + 2h(\theta) + 2\log{2} + 2h(\alpha)\right) = \Omega'.\]
@@ -263,7 +263,7 @@ After choosing a good sequence of lower and upper bounds $\mathbf{l}_n,\mathbf{h
 
 In \autoref{sec:CoveringsofSigma}, we establish that for a suitable pair of vectors $\mathbf{l}, \mathbf{h}$, solving \eqref{eq:EfficientSunit} reduces to computing $\Sigma_v(\mathbf{l},\mathbf{h})$ for each $v \in S^*$. In this section, we construct the ellipsoids associated to each $\Sigma_v(\mathbf{l},\mathbf{h})$, which will subsequently allow us to compute all solutions of $\Sigma_v(\mathbf{l},\mathbf{h})$. 
 
-We begin with the quadratic form $q_f=A^TD^2A$ on $\mathbb{Z}^{\nu}$, where $D^2$ is a $\nu \times \nu$ diagonal matrix with diagonal entries $\lfloor\frac{\log(p_i)^2}{\log(2)^2}\rfloor$ for $p_i \in S$. Recall that $A$ is the matrix generated in either \autoref{subsec:FactorizationTMwithoutOK} or \autoref{subsec:FactorizationTMwithoutOK}. As $A$ is invertible, our choice of entries in $D$ guarantees that this quadratic form is positive definite. This will become very important later in the sieve when we will need to apply many instances of the Fincke-Pohst algorithm. 
+We begin with the quadratic form $q_f=A^TD^2A$ on $\mathbb{Z}^{\nu}$, where $D^2$ is a $\nu \times \nu$ diagonal matrix with diagonal entries $\lfloor\frac{\log(p_i)^2}{\log(2)^2}\rfloor$ for $p_i \in S$. Recall that $A$ is the matrix generated in either \autoref{subsec:FactorizationTMwithoutOK} or \autoref{subsec:FactorizationTMwithOK}. As $A$ is invertible, our choice of entries in $D$ guarantees that this quadratic form is positive definite. This will become very important later in the sieve when we will need to apply many instances of the Fincke-Pohst algorithm. 
 
 \begin{lemma} \label{lem:boundqf}
 Consider any solution $(n_1, \dots, n_{\nu}, a_1, \dots, a_r)$ of \eqref{eq:EfficientSunit}. Setting $\mathbf{n} = (n_1, \dots, n_{\nu})$, we have 
@@ -306,12 +306,12 @@ We now briefly re-examine the decomposition of $h(z)$ into local heights,
 \[h(z) = \frac{1}{[K:\mathbb{Q}]}\sum_{l = 1}^{\nu} \log(p_l)|u_l - r_l| + \frac{1}{[L:\mathbb{Q}]}\sum_{w :L \to \mathbb{C}} \log^+|w(z)|.\]
 For every finite place $v$, Lemma~\ref{lem:boundqf} tells us that any set of bounds $\{h_v\}_{v \in S}$ on the set $\{h_v(z)\}_{v \in S}$ yields a bound on $\log(2)^2q_f(\mathbf{n})$. In the remainder of this section, we build analogous bounds on the exponents $a_1, \dots, a_r$ of the fundamental units. 
 
-Recall $r = 1$ or $r = 2$ for the degree $3$ Thue-Mahler equation~\eqref{eq:Efficientpoly} in question. Choose a set $I$ of embeddings $L \rightarrow \mathbb{C}$ of cardinality $r$. For $r = 1$, this is simply
+Recall $r = 1$ or $r = 2$ for the degree $3$ Thue-Mahler equation~\eqref{eq:Efficientpoly} in question. Choose a set $I$ of embeddings $L \rightarrow \mathbb{C}$ of cardinality $r$. For $r = 1$, consider the matrix
 \[R = \begin{pmatrix}
-	\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \end{pmatrix}.\]
-Clearly, as long as we choose $\iota_1$ such that $\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \neq 0$, this matrix is invertible.
+	\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \end{pmatrix},\]
+where $I = \{\iota_1\}$. Clearly, as long as we choose $\iota_1$ such that $\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| \neq 0$, this matrix is invertible.
 
-When $r = 2$, we let $I$ be the set of embeddings $L \to \mathbb{C}$ of cardinality $2$ such that for any $\alpha \in K$, it holds that $I\alpha^{(i_0)} \cup I\alpha^{(j)} = \Gal(L/\mathbb{Q})\alpha$. Let $R$ be the $2 \times 2$ matrix
+When $r = 2$, we let $I$ be the set of embeddings $L \to \mathbb{C}$ of cardinality $2$ such that for any $\alpha \in K$, it holds that $I\alpha^{(i_0)} \cup I\alpha^{(j)} = \Gal(L/\mathbb{Q})\alpha$. For $I = \{\iota_1, \iota_2\}$, let $R$ be the $2 \times 2$ matrix
 \[R = \begin{pmatrix}
 	\log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota_1}\right| &
 	\log\left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota_1}\right|\\
@@ -327,9 +327,10 @@ When $r = 2$, the matrix $R$ has an inverse,
 \end{lemma}
 	
 \begin{proof}
-Suppose that $\mathbf{m}\in\mathbb{Z}^{r}$ satisfies $R\mathbf{m}=\mathbf{0}$. Then for each $\iota\in I$ it holds that 
-\[\sum_{i=1}^r m_{\eps_i} \log\left|\left(\frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{\iota_1}\right| =0,\] and hence 
-\[\prod_{i=1}^r \left|\left(\frac{\varepsilon_i^{(j)}}{\varepsilon_i^{(i_0)}}\right)^{\iota_1}\right|^{m_{\eps_i}}=1.\] This together with $I(i)\cup I(j)=Gal(L/\mathbb{Q})$ implies that all conjugates of $\alpha=\prod_{i=1}^r \eps_i^{m_{\eps_i}}$ have the same absolute value. Since all $\eps_i$ are units of $\mathcal{O}_K$, it follows that $|\alpha|^{[L:\mathbb{Q}]}=N(\alpha)=1$ and hence $\alpha$ is a root of unity in $K$. On using that  the elements $\eps_i$ are multiplicatively independent, we obtain that $\mathbf{m}=\mathbf{0}$.  Then linear algebra gives $R^{-1}\in\mathbb{R}^{r\times r}$, completing the proof. 
+Suppose that $\mathbf{m}\in\mathbb{Z}^{2}$ satisfies $R\mathbf{m}=\mathbf{0}$. Then for each $\iota\in I$ it holds that 
+\[m_{1} \log\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota}\right| + m_{2} \log\left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota}\right| =0,\] and hence 
+\[\left|\left(\frac{\varepsilon_1^{(j)}}{\varepsilon_1^{(i_0)}}\right)^{\iota}\right|^{m_1}\cdot\left|\left(\frac{\varepsilon_2^{(j)}}{\varepsilon_2^{(i_0)}}\right)^{\iota}\right|^{m_2}=1.\] 
+This together with $I(i)\cup I(j)=Gal(L/\mathbb{Q})$ implies that all conjugates of $\alpha=\eps_1^{m_1}\eps_2^{m_2}$ have the same absolute value. Since all $\eps_i$ are units of $\mathcal{O}_K$, it follows that $|\alpha|^{[L:\mathbb{Q}]}=N(\alpha)=1$ and hence $\alpha$ is a root of unity in $K$. On using that  the elements $\eps_i$ are multiplicatively independent, we obtain that $\mathbf{m}=\mathbf{0}$.  Then linear algebra gives $R^{-1}\in\mathbb{R}^{2\times 2}$, completing the proof. 
 \end{proof}
 
 For the remainder of this chapter, we specialize to the real case, $r = 2$. The setup for $r = 1$ follows closely the work described here, yet poses other difficulties when defining the corresponding sieves. This case is treated in the on-going results of \cite{GhKaMaSi}. 

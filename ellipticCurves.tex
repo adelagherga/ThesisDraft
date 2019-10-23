@@ -25,7 +25,7 @@ guarantee completeness for these extended computations (we will discuss this fur
 %-----------------------------------------------
 
 Our basic problem is to find a model for each isomorphism class of elliptic curves over $\mathbb{Q}$ with a given 
-conductor. Let $S=\{ p_1, p_2, \ldots, p_k \}$ where the $p_i$ are distinct primes, and fix a conductor $N= p_1^{\eta_1} \cdots p_k^{\eta_k}$ for
+conductor. Let $S=\{ p_1, \ldots, p_v \}$ where the $p_i$ are distinct primes, and fix a conductor $N= p_1^{\eta_1} \cdots p_v^{\eta_v}$ for
 $\eta_i \in \mathbb{N}$.  Any curve of conductor $N$ has a minimal 
 model
 \begin{align*}
@@ -33,9 +33,9 @@ E:&\phantom{=} y^2 + a_1 xy + a_3 y = x^3 + a_2 x^2 + a_4 x + a_6
 \end{align*}
 with the $a_i$ integral and discriminant 
 \begin{align*}
-\Delta_E &= (-1)^\delta p_1^{\gamma_1} \cdots p_k^{\gamma_k},
+\Delta_E &= (-1)^\delta p_1^{\gamma_1} \cdots p_v^{\gamma_v},
 \end{align*}
-where the $\gamma_i$ are positive integers satisfying $\gamma_i \geq \eta_i$, for each $i = 1, 2, \ldots, k$, and $\delta \in \{ 0, 1 \}$. 
+where the $\gamma_i$ are positive integers satisfying $\gamma_i \geq \eta_i$, for each $i = 1, 2, \ldots, v$, and $\delta \in \{ 0, 1 \}$. 
 
 Writing
 $$
@@ -58,7 +58,7 @@ In fact, it is equation~\eqref{first} that lies at the heart of our method (see 
 Lingham \cite{CrLi} for an approach to the problem that takes as its starting point equation~\eqref{first}, but 
 subsequently heads in a rather different direction).
 
-Let $\nu_p(x)$ be the largest power of a prime $p$ dividing a nonzero integer $x$. Since our model is minimal, we 
+Let $\nu_p(x) = \ord_p(x)$ be the largest power of a prime $p$ dividing a nonzero integer $x$. Since our model is minimal, we 
 may suppose  (via Tate's algorithm; see, for example, Papadopoulos \cite{Pap}) that 
 $$
 \min \{ 3 \nu_p (c_4), 2 \nu_p (c_6) \} < 12 + 12 \nu_p(2) + 6 \nu_p(3),
@@ -187,7 +187,7 @@ $p\mid \Delta_E$.}
 \section{Cubic forms : the main theorem and algorithm} \label{forms}
 %-----------------------------------------------------------------------------------------
 
-Having introduced the notation we require for elliptic curves, we now turn our attention to cubic forms and our main result. Fix integers $a, b, 
+We now turn our attention to cubic forms and our main result. Fix integers $a, b, 
 c$ and $d$, and consider the binary cubic form 
 \begin{align} \label{form0}
 F(x,y)&=ax^3+bx^2y+cxy^2+dy^3,
@@ -206,18 +206,6 @@ and the Jacobian determinant of $F$ and $H$,  a cubic form $G=G_F$ defined by
 G&=G_F (x,y)=\frac{\partial F}{\partial x}\frac{\partial H}{\partial y}-  \frac{\partial F}{\partial y} \frac{\partial 
 H}{\partial x}.
 \end{align*}
-A quick computation reveals that, explicitly, 
-$$
-H= (b^2-3ac) x^2 + (bc-9ad) xy + (c^2-3bd) y^2  
-$$
-and
-$$
-\arraycolsep=1.4pt\def\arraystretch{1.4}
-\begin{array}{ll}
-G = & (-27 a^2d+9abc-2b^3)  x^3 + (-3b^2c-27 abd+18ac^2) x^2 y \\
-   & + (3bc^2-18b^2d+27acd)  x y^2 + (-9bcd+2c^3+27ad^2) y^3.\\
-\end{array}
-$$
 These satisfy the syzygy
 \begin{align} \label{syz}
 4H(x,y)^3 &= G(x,y)^2+27D_F F(x,y)^2
@@ -382,8 +370,7 @@ $$
  & = x^3 - 3 H_F(1,0) x  + G_F (1,0). \\
 \end{array}
 $$
-Indeed, from (\ref{curvey}), the elliptic curve defined by the equation
-$y^2=x^3 - 3 H_F(1,0) x  + G_F (1,0)$
+Indeed, from (\ref{curvey}), the elliptic curve defined by $y^2=x^3 - 3 H_F(1,0) x  + G_F (1,0)$
 is a quadratic twist of that given by the model $y^2 = x^3 -27 c_4(E) x -54 c_6(E)$, and hence also of $E$ (whereby they have the same $2$-division field).
 
 \subsubsection{Imprimitive forms}
@@ -446,7 +433,7 @@ We note, from Theorem \ref{fisk}, that we will be working exclusively with forms
 
 \subsubsection{The case $j_E = 0$} \label{Mordell}
 This case is treated over a general number field in Proposition 4.1 of Cremona and Lingham \cite{CrLi}.
-The elliptic curves $E/\mathbb{Q}$ with $j_E=0$ and a given conductor $N$ are particularly easy to determine, since a curve with this property is necessarily isomorphic over $\mathbb{Q}$ to a {\it Mordell} curve with a model of the shape $Y^2 = X^3  - 54 c_6$ where $c_6=c_6(E)$. Such a model is minimal except possibly at $2$ and $3$ and has discriminant 
+The elliptic curves $E/\mathbb{Q}$ with $j_E=0$ and a given conductor $N$ are particularly easy to determine. Indeed, a curve with this property is necessarily isomorphic over $\mathbb{Q}$ to a {\it Mordell} curve with a model $Y^2 = X^3  - 54 c_6$ where $c_6=c_6(E)$. Such a model is minimal except possibly at $2$ and $3$ and has discriminant 
 $-2^6 \cdot 3^9 \cdot c_6^2$ (whereby any primes $p > 2$ which divide $c_6$  necessarily also divide $N$). Here, without loss of generality, we may suppose that $c_6$ is sixth-power-free.
 Further, from Tables \ref{tab nu2}, \ref{tab nu3}, and \ref{tab nup}, we have that $\nu_2(N) \in \{ 0, 2, 3, 4, 6 \}$, that $\nu_3 (N) \in \{ 2, 3, 5 \}$, and that $\nu_p(N)=2$ whenever $p \mid N$ for $p > 3$. Given a positive integer $N$ satisfying these constraints, it is therefore a simple matter to check to see if there are elliptic curves $E/\mathbb{Q}$ with conductor $N$ and $j$-invariant $0$. One needs only to compute the conductors of the curves given by $Y^2 = X^3  - 54 c_6$ for each sixth-power-free integer (positive or negative) $c_6$ dividing $64 N^3$.
 
@@ -472,7 +459,7 @@ and all its quadratic twists by squarefree divisors of $6N$. Output those curves
 \end{enumerate}
 The first, second and fourth steps here are straightforward; the first and second can be done efficiently, while the fourth is essentially 
 trivial. The main bottleneck is step~(3). While there is a deterministic procedure for carrying this out (see Tzanakis and de 
-Weger \cite{TW2}, \cite{TW3}), it is both involved and, often, computationally taxing. An earlier  implementation of this method in Magma due to Hambrook \cite{Ham} has subsequently been refined by the second author \cite{GhKaMaSi}; the most up-to-date version of this code (which we will reference here and henceforth as UBC-TM) is available at 
+Weger \cite{TW2}, \cite{TW3}), it is both involved and, often, computationally taxing. Instead, we apply the implementation outlined in \autoref{ch:AlgorithmsForTM} and \autoref{ch:EfficientTMSolver} of this thesis. The version used for this computation (which we will reference here and henceforth as UBC-TM) is available at 
 \begin{center}
 \url{http://www.nt.math.ubc.ca/BeGhRe/Code/UBC-TMCode}
 \end{center}
@@ -1480,7 +1467,7 @@ where details on the resulting Thue-Mahler computation may also be found. Confir
 
 For the remainder of this chapter, we will focus our attention on the case of elliptic curves with bad reduction at a single prime, i.e. curves of conductor $p$ or $p^2$, for $p$ prime.
 In this case, our approach simplifies considerably and 
-rather than being required to solve Thue-Mahler equations, the problem reduces to one of solving \emph{Thue} equations, i.e. equations of the shape $F(x,y)=m$, where $F$ is a form and $m$ is a fixed integer. While, once again, we do not have a detailed computational complexity analysis of either algorithms for solving Thue equations or more general algorithms for solving Thue-Mahler equations, computations to date strongly support the contention that the former is, usually, much, much faster than the latter, particularly if the set of primes $S$ considered for the Thue-Mahler equations is anything other than tiny. Since none of these conductors are divisible by $9$, we may always suppose that $j_E \neq 0$. We note that the data we have produced in these cases totals several terabytes. As a result, we have not yet determined how best to make it publicly available; interested readers should contact the authors for further details.
+rather than being required to solve Thue-Mahler equations, the problem reduces to one of solving \emph{Thue} equations, i.e. equations of the shape $F(x,y)=m$, where $F$ is a form and $m$ is a fixed integer. While, once again, we do not have a detailed computational complexity analysis either of algorithms for solving Thue equations or of more general algorithms for solving Thue-Mahler equations, computations to date strongly support the contention that the former is, usually, much, much faster than the latter, particularly if the set of primes $S$ considered for the Thue-Mahler equations is anything other than tiny. Since none of these conductors are divisible by $9$, we may always suppose that $j_E \neq 0$. We note that the data we have produced in these cases totals several terabytes. As a result, we have not yet determined how best to make it publicly available; interested readers should contact the authors of \cite{BeGhRe} further details.
 
 \subsection{Conductor $N=p$}
 Suppose that $E$ is a curve with conductor $N=p$ prime with invariants $c_4$ and $c_6$. From Tables \ref{tab nu2}, \ref{tab nu3} and \ref{tab nup}, we 
@@ -1499,7 +1486,7 @@ c_6 = - \frac{1}{2} \mathcal{D}^3 G_F (u,v),
 $$
 for $\mathcal{D} \in \{1,2\}$ and $\kappa_p$ a nonnegative integer. Note that, while the smallest absolute discriminant for an irreducible cubic form in $\mathbb{Z}[x,y]$ is $23$, there do exist reducible cubic forms of discriminants $4$ and $-4$ which we must consider.
 
-Appealing to Th\'eor\`eme~2 of Mestre and Oesterl\'e \cite{MO} (and using \cite{BCDT}), we can actually restrict the choices for $n$ dramatically. In fact, we 
+Appealing to Th\'eor\`eme~2 of Mestre and Oesterl\'e \cite{MO} (and using \cite{BCDT}), we can actually restrict the choices for $m$ dramatically. In fact, we 
 have 3 possibilities --  either  $p \in \{ 11, 17, 19, 37 \}$, or $p=t^2+64$ for some integer $t$, or, in all other cases, $\Delta_E = \pm p$. There are precisely $14$ isomorphism classes of $E/\mathbb{Q}$ with conductor in $\{ 11, 17, 19, 37 \}$; one may consult Cremona \cite{Cre1} for details. If we can write $p=t^2+64$ for an integer $t$ (which we may, without loss of generality, assume to satisfy $t \equiv 1\mod{4}$),  then the ($2$-isogenous) curves defined by 
 $$
  y^2 + xy = x^3 + \frac{t-1}{4} \cdot x^2  - x
@@ -1947,9 +1934,7 @@ $a$-value was stored as a tab-delimited text file with one tuple of $p,a,b,c,d$ 
 negative discriminant took about 3 times longer and required about 900 gigabytes of disc space. The distribution of 
 forms is heavily weighted to small values of $a$. To allow us to spread the load across many CPUs we actually split the 
 task into 2 parts. We first ran $a \geq 3$, with the master node distributing $a$-values to the other cores. We then ran 
-$a=1$ and $2$ with the master node distributing $b$-values to the other cores. The total CPU time was about three times longer 
-than for the positive case (there being essentially three times as many forms), but more real-time was required due to 
-these complications. Thus generating all forms took less than 1 week of real time but required about 1.2 terabytes of 
+$a=1$ and $2$ with the master node distributing $b$-values to the other cores. Generating all forms took less than 1 week of real time but required about 1.2 terabytes of 
 disc space. 
 
 These forms were then sorted by discriminant while keeping positive and negative discriminant forms separated. Sorting 
@@ -2088,7 +2073,7 @@ curve was twisted by $\pm p$ to find other curves of conductor $p^2$.
 \subsection{Previous work}
 %------------------------------------------
 The principal prior work on computing table of elliptic curves of prime conductor was carried out in two lengthy computations, by Brumer and McGuinness \cite{BrMc} in the late 1980s and by Stein and Watkins \cite{StWa} slightly more than ten years later. 
-For the first of these computations, the authors  fixed the $a_1, a_2$ and $a_3$ invariants ($12$ possibilities) and looped over $a_4$ and $a_6$ chosen to make the corresponding discriminant small.
+For the first of these computations, the authors fixed the $a_1, a_2$ and $a_3$ invariants ($12$ possibilities) and looped over $a_4$ and $a_6$ chosen to make the corresponding discriminant small.
 By this approach, they were able to find $311243$ curves of prime conductor $p < 10^8$ (representing approximately $99.6 \%$ of such curves). In the latter case, the authors looped instead over $c_4$ and $c_6$, subject to (necessary) local conditions. They obtained a large collection of elliptic curves of general conductor to $10^8$, and $11378912$ of those with prime conductor to $10^{10}$ (which we estimate to be slightly in excess of $99.8 \%$ of such curves).
 
 %--------------------------------------------------
@@ -2325,7 +2310,7 @@ Here, the curves listed above the line are proven to be those of smallest conduc
 \section{Completeness of our data} \label{spartan}
 %--------------------------------------------------
 
-As a final result, we will present something that might, optimistically, be viewed as evidence that our ``heuristic'' approach, in practice, enables us to actually find all elliptic curves of prime conductor $p < 2 \times 10^{13}$.
+As a final result, we will present some information that might, optimistically, be viewed as evidence that our ``heuristic'' approach, in practice, enables us to actually find all elliptic curves of prime conductor $p < 2 \times 10^{13}$.
 
 A conjecture of Hall, admittedly one that without modification is widely disbelieved at present,  is that if $x$ and $y$ are integers for which $x^3-y^2$ is nonzero, then the {\it Hall ratio} 
 $$
@@ -2510,15 +2495,14 @@ $$
 $$
 On the other hand, from Lemma 6.4 of Belabas and Cohen \cite{BeCo}, we have
 \begin{equation} \label{iota}
-\arraycolsep=1.8pt\def\arraystretch{1.8}
-\begin{array}{cc}
-|\omega_0| \leq \frac{2^{3/2} p^{1/4}}{3^{3/4}}, \; 
-|\omega_1| \leq \frac{2^{3/2} p^{1/4}}{3^{1/4}}, \; 
-\max \{ |\omega_0 \omega_2^3|, |\omega_1^3 \omega_3| \} \leq \frac{(11+5 \sqrt{5}) p}{2}, \\
-|\omega_1 \omega_2| \leq \frac{8 p^{1/2}}{3^{1/2}}
+|\omega_0| \leq \frac{2^{3/2} p^{1/4}}{3^{3/4}}, \quad 
+|\omega_1| \leq \frac{2^{3/2} p^{1/4}}{3^{1/4}}, \quad
+|\omega_1 \omega_2| \leq \frac{8 p^{1/2}}{3^{1/2}},
+\end{equation}
+\begin{equation} \label{iota2}
+\max \{ |\omega_0 \omega_2^3|, |\omega_1^3 \omega_3| \} \leq \frac{(11+5 \sqrt{5}) p}{2}, 
  \; \mbox{ and } \;
 |\omega_0 \omega_3| \leq \frac{2 p^{1/2}}{3^{1/2}}, \\
-\end{array}
 \end{equation}
 whereby a short calculation, together with the fact that $p > 2 \times 10^9$, yields a contradiction.
 We may thus suppose that $\omega_1^2-3\omega_0 \omega_2 \neq 0$. We have
@@ -2626,7 +2610,7 @@ so that $|u/v| < 3.1 \times 10^7$ and $|v| > 10^{31}$. One final use of (\ref{fr
 $$
 \left| \alpha_1 - \frac{u}{v} \right| <10^{-59}.
 $$
-Appealing to (\ref{size}), (\ref{general}), (\ref{iota}), and the fact that $|\alpha_1| < 3 \times 10^7$, we thus have, after a little work,
+Appealing to (\ref{size}), (\ref{general}), (\ref{iota}), (\ref{iota2}), and the fact that $|\alpha_1| < 3 \times 10^7$, we thus have, after a little work,
 $$
 \left| H_F (\alpha_1,1) - H_F (u/v,1) \right| < 3.4 \times 10^{-44}.
 $$

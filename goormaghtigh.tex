@@ -6,9 +6,9 @@
 
 Let $m$ and $n$ be integers such that $m > n > 2$, where either $m=n+1$ or
  \begin{equation} \label{condition}
- \gcd (m-1,n-1) = d > 1m
+ \gcd (m-1,n-1) = d > 1
  \end{equation}
- and consider the Goormaghtigh's equation
+ and consider the Goormaghtigh equation
 \begin{equation} \label{eq-main}
 \frac{x^m-1}{x-1} = \frac{y^n-1}{y-1}, \; \; y>x>1, \; m > n > 2.
 \end{equation}
@@ -32,7 +32,7 @@ $$
 $$
 \end{theorem}
 
-Essentially half of the current chapter is concerned with developing Diophantine approximation machinery for the case $n=5$ in Theorem \ref{main-thm2}. Here, ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. The new ideas introduced here are explored more fully in the general setting of {\it Thue-Mahler} equations in the forthcoming paper  \cite{GhKaMaSi}. These are polynomial-exponential equations of the form $F(x,y)=p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ where $F$ is a binary form of degree three or greater and $p_1, \ldots, p_k$ are fixed rational primes. Here, we take this opportunity to specialize these refinements to the case of Ramanujan-Nagell equations, and to introduce some further sharpenings which enable us to complete the proof of Theorem \ref{main-thm2}.
+Essentially half of the current chapter is concerned with developing Diophantine approximation machinery for the case $n=5$ in Theorem \ref{main-thm2}. Here, ``off-the-shelf'' techniques for finding integral points on models of elliptic curves or for solving {\it Ramanujan-Nagell} equations of the shape $F(x)=z^n$ (where $F$ is a polynomial and $z$ a fixed integer) do not apparently permit the full resolution of this problem in a reasonable amount of time. Instead, we specialize the Thue-Mahler solver refinements of Chapter~\ref{ch:AlgorithmsForTM} to the case of Ramanujan-Nagell equations, and to introduce some further sharpenings which enable us to complete the proof of Theorem \ref{main-thm2}.
 
 %--------------------------------------------------------------
 \section{Rational approximations} \label{proof}
@@ -1011,7 +1011,7 @@ Unlike in \cite{TW3} and \cite{GhKaMaSi}, if, after applying Algorithm~\ref{alg:
 We iterate this computation over all $i \in \{1, \dots, v\}$ such that $u_i = 0$ and take the smallest $m$ as our bound. For all of the values of $x$ that we are interested in, this bound on $m$ is small enough that we may go directly to the final brute force search for solutions.
 \end{remark}
 
-Following Remark \ref{rem:uv}, for the remainder of this paper, we assume that $u_i \neq 0$ for all $i = 1, \dots, v$. Fix a complete set of fundamental units $\{\eps_1, \dots, \eps_r\}$ of $\mathcal{O}_K$. Here $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. A quick computation in Maple shows that  
+Following Remark \ref{rem:uv}, for the remainder of this chapter, we assume that $u_i \neq 0$ for all $i = 1, \dots, v$. As in \ref{subsec:SUnitEquation}, we fix a complete set of fundamental units $\{\eps_1, \dots, \eps_r\}$ of $\mathcal{O}_K$. Recall $r = s + t -1$, where $s$ denotes the number of real embeddings of $K$ into $\mathbb{C}$ and $t$ denotes the number of complex conjugate pairs of non-real embeddings of $K$ into $\mathbb{C}$. A quick computation in Maple shows that  
 \[g(t) = t^4 + (x-1)t^3 + (x-1)^2t^2 + (x-1)^3t + x(x-1)^3\]
 has only complex roots for $x \geq 2$. It follows that we have no real embeddings of $K$ into $\mathbb{R}$, two pairs of complex conjugate embeddings, and hence only one fundamental unit, $\varepsilon_1$. 
 
@@ -1278,7 +1278,7 @@ In each step, we let $N_l$ denote the current best upper bound on $\sum_{j = 1}^
 \[b_1 = 1, \quad b_{1+i} = n_i \ \text{ for } i \in \{1, \dots, v\},\]
 and
 \[ b_{v+2} = a_1\]
-of Section \autoref{subsec:FirstStepsSmallBoundsGE} frequently. It will therefore be convenient to let $B_l$ denote the current best upper bound for $|b_l|$ for $l = 1, \dots, v+2$. Then
+of \autoref{subsec:FirstStepsSmallBoundsGE} frequently. It will therefore be convenient to let $B_l$ denote the current best upper bound for $|b_l|$ for $l = 1, \dots, v+2$. Then
 \[B_1 = 1 \quad \text{ and } \quad B_{v+2} = A_0.\]
 For $l = 1, \dots, v$, using that
 \[ \sum_{j = 1}^v n_ja_{lj} < N_l, \quad \text{ for } l = 1, \dots, v,\]
