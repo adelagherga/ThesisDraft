@@ -101,6 +101,7 @@
 %%
 \usepackage{checkend}	% better error messages on left-open environments
 \usepackage{graphicx}	% for incorporating external images
+\usepackage{pdflscape}
 
 %% booktabs: provides some special commands for typesetting tables as used
 %% in excellent journals.  Ignore the examples in the Lamport book!
@@ -311,21 +312,21 @@
 
 \faculty{The Faculty of Graduate and Postdoctoral Studies}
 \department{Mathematics}
-\submissionmonth{July}
+\submissionmonth{October}
 \submissionyear{2019}
 
 % details of your examining committee
-%\examiningcommittee{John Smith, Materials Engineering}{Supervisor}
-%\examiningcommittee{Mary Maker, Materials Engineering}%
-%    {Supervisory Committee Member}
-%\examiningcommittee{Nebulous Name, Department}{Supervisory Committee Member}
-%\examiningcommittee{Magnus Monolith, Other Department}{Additional Examiner}
-%
-%% details of your supervisory committee
-%\supervisorycommittee{Ira Crater, Materials Engineering}%
-%    {Supervisory Committee Member}
-%\supervisorycommittee{Adeline Long, \textsc{CEO} of Aerial Machine
-%    Transportation, Inc.}{Supervisory Committee Member}
+\examiningcommittee{Michael A. Bennett, Mathematics}{Supervisor}
+\examiningcommittee{Andrew D. Rechnitzer, Mathematics}%
+    {Supervisory Committee Member}
+\examiningcommittee{Joel Friedman, Computer Science}%
+    {University Examiner}
+\examiningcommittee{Nicholas Harvey, Computer Science}{University Examiner}
+
+% details of your supervisory committee
+\supervisorycommittee{Greg Martin, Mathematics}{Supervisory Committee Member}
+\supervisorycommittee{John E. Cremona, Mathematics}{External Examiner}
+
 
 %% hyperref package provides support for embedding meta-data in .PDF
 %% files
@@ -360,7 +361,7 @@
 
 %    2. Committee page (mandatory): lists supervisory committee and,
 %    if applicable, the examining committee
-%\makecommitteepage
+\makecommitteepage
 
 %    3. Abstract (mandatory - maximum 350 words)
 \include{abstract}
@@ -371,8 +372,8 @@
 \cleardoublepage
 
 %    5. Preface
-%\include{preface}
-%\cleardoublepage
+\include{preface}
+\cleardoublepage
 
 %    6. Table of contents (mandatory - list all items in the preliminary pages
 %    starting with the abstract, followed by chapter headings and

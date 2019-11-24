@@ -1,8 +1,9 @@
 \select@language {english}
-\contentsline {chapter}{Abstract}{ii}{chapter*.1}
-\contentsline {chapter}{Lay Summary}{iv}{chapter*.2}
-\contentsline {chapter}{Contents}{v}{chapter*.3}
-\contentsline {chapter}{Acknowledgments}{ix}{chapter*.4}
+\contentsline {chapter}{Abstract}{iii}{chapter*.1}
+\contentsline {chapter}{Lay Summary}{v}{chapter*.2}
+\contentsline {chapter}{Preface}{vi}{chapter*.3}
+\contentsline {chapter}{Contents}{vii}{chapter*.4}
+\contentsline {chapter}{Acknowledgments}{xi}{chapter*.5}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Statement of the results}{7}{section.1.1}
 \contentsline {chapter}{\numberline {2}Preliminaries}{10}{chapter.2}
@@ -40,8 +41,8 @@
 \contentsline {subsection}{\numberline {4.4.3}Case (3) : $n=5, \tmspace +\thickmuskip {.2777em} d=2, \tmspace +\thickmuskip {.2777em} n_0=2, \tmspace +\thickmuskip {.2777em} x \geq 720$}{75}{subsection.4.4.3}
 \contentsline {subsection}{\numberline {4.4.4}Case (4) : $n=5, \tmspace +\thickmuskip {.2777em} d=4, \tmspace +\thickmuskip {.2777em} n_0=1, \tmspace +\thickmuskip {.2777em} x \geq 300$}{77}{subsection.4.4.4}
 \contentsline {subsection}{\numberline {4.4.5}Treating the remaining small values of $x$ for $n \in \{ 3, 4 \}$}{79}{subsection.4.4.5}
-\contentsline {subsubsection}{Small values of $x$ for $n=3$}{79}{subsubsection*.5}
-\contentsline {subsubsection}{Small values of $x$ for $n=4$}{80}{subsubsection*.6}
+\contentsline {subsubsection}{Small values of $x$ for $n=3$}{79}{subsubsection*.6}
+\contentsline {subsubsection}{Small values of $x$ for $n=4$}{80}{subsubsection*.7}
 \contentsline {section}{\numberline {4.5}Small values of $x$ for $n=5$}{81}{section.4.5}
 \contentsline {subsection}{\numberline {4.5.1}First steps and small bounds}{82}{subsection.4.5.1}
 \contentsline {subsection}{\numberline {4.5.2}Bounding the $\DOTSB \sum@ \slimits@ _{j = 1}^v n_ja_{ij}$}{89}{subsection.4.5.2}
@@ -55,13 +56,13 @@
 \contentsline {section}{\numberline {5.1}Elliptic curves}{108}{section.5.1}
 \contentsline {section}{\numberline {5.2}Cubic forms : the main theorem and algorithm}{110}{section.5.2}
 \contentsline {subsection}{\numberline {5.2.1}Remarks}{113}{subsection.5.2.1}
-\contentsline {subsubsection}{Historical comments}{113}{subsubsection*.10}
-\contentsline {subsubsection}{$2$-division fields and reducible forms}{114}{subsubsection*.11}
-\contentsline {subsubsection}{Imprimitive forms}{114}{subsubsection*.12}
-\contentsline {subsubsection}{Possible twists}{115}{subsubsection*.13}
-\contentsline {subsubsection}{Necessity, but not sufficiency}{115}{subsubsection*.14}
-\contentsline {subsubsection}{Special binary cubic forms}{116}{subsubsection*.15}
-\contentsline {subsubsection}{The case $j_E = 0$}{117}{subsubsection*.16}
+\contentsline {subsubsection}{Historical comments}{113}{subsubsection*.11}
+\contentsline {subsubsection}{$2$-division fields and reducible forms}{114}{subsubsection*.12}
+\contentsline {subsubsection}{Imprimitive forms}{114}{subsubsection*.13}
+\contentsline {subsubsection}{Possible twists}{115}{subsubsection*.14}
+\contentsline {subsubsection}{Necessity, but not sufficiency}{115}{subsubsection*.15}
+\contentsline {subsubsection}{Special binary cubic forms}{116}{subsubsection*.16}
+\contentsline {subsubsection}{The case $j_E = 0$}{117}{subsubsection*.17}
 \contentsline {subsection}{\numberline {5.2.2}The algorithm}{117}{subsection.5.2.2}
 \contentsline {section}{\numberline {5.3}Proof of Theorem \ref {fisk}}{119}{section.5.3}
 \contentsline {section}{\numberline {5.4}Finding representative forms}{128}{section.5.4}
@@ -71,12 +72,12 @@
 \contentsline {subsection}{\numberline {5.4.4}$\unhbox \voidb@x \hbox {GL}_2(\mathbb {Z})$ vs $\unhbox \voidb@x \hbox {SL}_2(\mathbb {Z})$}{132}{subsection.5.4.4}
 \contentsline {section}{\numberline {5.5}Examples}{132}{section.5.5}
 \contentsline {subsection}{\numberline {5.5.1}Cases without irreducible forms}{133}{subsection.5.5.1}
-\contentsline {subsubsection}{Conductor $2655632887 = 31 \cdot 9007 \cdot 9511$}{134}{subsubsection*.19}
-\contentsline {subsubsection}{Conductor $3305354359 = 41 \cdot 409 \cdot 439 \cdot 449$}{135}{subsubsection*.20}
+\contentsline {subsubsection}{Conductor $2655632887 = 31 \cdot 9007 \cdot 9511$}{134}{subsubsection*.20}
+\contentsline {subsubsection}{Conductor $3305354359 = 41 \cdot 409 \cdot 439 \cdot 449$}{135}{subsubsection*.21}
 \contentsline {subsection}{\numberline {5.5.2}Cases with fixed conductor (and corresponding irreducible forms)}{136}{subsection.5.5.2}
-\contentsline {subsubsection}{Conductor $399993 = 3 \cdot 11 \cdot 17 \cdot 23 \cdot 31$}{136}{subsubsection*.21}
-\contentsline {subsubsection}{Conductor $10^6-1$}{140}{subsubsection*.22}
-\contentsline {subsubsection}{Conductor $10^9-1$}{145}{subsubsection*.23}
+\contentsline {subsubsection}{Conductor $399993 = 3 \cdot 11 \cdot 17 \cdot 23 \cdot 31$}{136}{subsubsection*.22}
+\contentsline {subsubsection}{Conductor $10^6-1$}{140}{subsubsection*.23}
+\contentsline {subsubsection}{Conductor $10^9-1$}{145}{subsubsection*.24}
 \contentsline {subsection}{\numberline {5.5.3}Curves with good reduction outside $\{ 2, 3, 23 \}$ : an example of Koutsianis and of von Kanel and Matchke}{147}{subsection.5.5.3}
 \contentsline {subsection}{\numberline {5.5.4}Curves with good reduction outside $\{ 2, 3, 5, 7, 11 \}$ : an example of von Kanel and Matschke}{151}{subsection.5.5.4}
 \contentsline {section}{\numberline {5.6}Good reduction outside a single prime}{152}{section.5.6}
@@ -85,19 +86,19 @@
 \contentsline {subsection}{\numberline {5.6.3}Reducible forms}{156}{subsection.5.6.3}
 \contentsline {subsection}{\numberline {5.6.4}Irreducible forms : conductor $p$}{157}{subsection.5.6.4}
 \contentsline {subsection}{\numberline {5.6.5}Irreducible forms : conductor $p^2$}{158}{subsection.5.6.5}
-\contentsline {subsubsection}{Elliptic curves of discriminant $\pm p^3$}{158}{subsubsection*.25}
-\contentsline {subsubsection}{A (conjecturally infinite) family of forms and solutions}{159}{subsubsection*.26}
-\contentsline {subsubsection}{Elliptic curves of discriminant $p^2$ and $p^4$}{161}{subsubsection*.27}
-\contentsline {subsubsection}{Elliptic curves of discriminant $-p^2$ and $-p^4$}{163}{subsubsection*.28}
+\contentsline {subsubsection}{Elliptic curves of discriminant $\pm p^3$}{158}{subsubsection*.26}
+\contentsline {subsubsection}{A (conjecturally infinite) family of forms and solutions}{159}{subsubsection*.27}
+\contentsline {subsubsection}{Elliptic curves of discriminant $p^2$ and $p^4$}{161}{subsubsection*.28}
+\contentsline {subsubsection}{Elliptic curves of discriminant $-p^2$ and $-p^4$}{163}{subsubsection*.29}
 \contentsline {section}{\numberline {5.7}Computational details}{165}{section.5.7}
 \contentsline {subsection}{\numberline {5.7.1}Generating the required forms}{165}{subsection.5.7.1}
 \contentsline {subsection}{\numberline {5.7.2}Complete solution of Thue equations : conductor $p$}{167}{subsection.5.7.2}
 \contentsline {subsection}{\numberline {5.7.3}Non-exhaustive, heuristic solution of Thue equations}{168}{subsection.5.7.3}
 \contentsline {subsection}{\numberline {5.7.4}Conversion to curves}{169}{subsection.5.7.4}
 \contentsline {subsection}{\numberline {5.7.5}Conductor $p^2$}{169}{subsection.5.7.5}
-\contentsline {subsubsection}{Twisting conductor $p$}{170}{subsubsection*.29}
-\contentsline {subsubsection}{Solving $F(x,y)=8p$ with $F$ of discriminant $\pm 4p$}{170}{subsubsection*.30}
-\contentsline {subsubsection}{Solving $F(x,y) \in \{ 8, 8p \}$ with $F$ of discriminant $\pm 4p^2$}{171}{subsubsection*.31}
+\contentsline {subsubsection}{Twisting conductor $p$}{170}{subsubsection*.30}
+\contentsline {subsubsection}{Solving $F(x,y)=8p$ with $F$ of discriminant $\pm 4p$}{170}{subsubsection*.31}
+\contentsline {subsubsection}{Solving $F(x,y) \in \{ 8, 8p \}$ with $F$ of discriminant $\pm 4p^2$}{171}{subsubsection*.32}
 \contentsline {section}{\numberline {5.8}Data}{171}{section.5.8}
 \contentsline {subsection}{\numberline {5.8.1}Previous work}{171}{subsection.5.8.1}
 \contentsline {subsection}{\numberline {5.8.2}Counts : conductor $p$}{172}{subsection.5.8.2}
@@ -116,4 +117,4 @@
 \contentsline {subsection}{\numberline {6.4.2}The non-Archimedean ellipsoid}{214}{subsection.6.4.2}
 \contentsline {section}{\numberline {6.5}The Archimedean sieve: the real case}{216}{section.6.5}
 \contentsline {section}{\numberline {6.6}The non-Archimedean Sieve}{218}{section.6.6}
-\contentsline {chapter}{Bibliography}{229}{chapter*.32}
+\contentsline {chapter}{Bibliography}{229}{chapter*.33}
